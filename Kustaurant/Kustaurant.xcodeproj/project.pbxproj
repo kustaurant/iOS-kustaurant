@@ -13,6 +13,7 @@
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
 		58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */; };
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
+		CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0D2C42896100E0DE68 /* HTTPMethod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		58D83A6D2C3A785A00511AB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58D83A722C3A785A00511AB9 /* KustaurantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KustaurantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
+		CF54AD0D2C42896100E0DE68 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			children = (
 				58D83A902C3A79C400511AB9 /* Application */,
 				58D83A912C3A7A1C00511AB9 /* Presentation */,
+				CF54AD062C42889500E0DE68 /* Network */,
 				58D83A8F2C3A79B400511AB9 /* Resources */,
 			);
 			path = Kustaurant;
@@ -116,6 +119,14 @@
 				58D83A632C3A785800511AB9 /* ViewController.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CF54AD062C42889500E0DE68 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CF54AD0D2C42896100E0DE68 /* HTTPMethod.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58D83A642C3A785800511AB9 /* ViewController.swift in Sources */,
+				CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
 				58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */,
 			);
