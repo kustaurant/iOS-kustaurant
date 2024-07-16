@@ -31,7 +31,6 @@
 		584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
-		58D83A642C3A785800511AB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A632C3A785800511AB9 /* ViewController.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
 		58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */; };
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
@@ -83,7 +82,6 @@
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		58D83A632C3A785800511AB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		58D83A682C3A785A00511AB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58D83A6B2C3A785A00511AB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58D83A6D2C3A785A00511AB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -170,12 +168,12 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		584173372C46663B001EC132 /* recommend */ = {
+		584173372C46663B001EC132 /* Recommend */ = {
 			isa = PBXGroup;
 			children = (
 				584173382C46664E001EC132 /* RecommendViewController.swift */,
 			);
-			path = recommend;
+			path = Recommend;
 			sourceTree = "<group>";
 		};
 		5841733E2C467BCF001EC132 /* Enums */ = {
@@ -273,10 +271,9 @@
 		58D83A912C3A7A1C00511AB9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				58D83A632C3A785800511AB9 /* ViewController.swift */,
 				584173252C464FEC001EC132 /* Flows */,
 				5841731E2C46467B001EC132 /* Home */,
-				584173372C46663B001EC132 /* recommend */,
+				584173372C46663B001EC132 /* Recommend */,
 				584173432C467EA9001EC132 /* Tier */,
 				5841734B2C468293001EC132 /* Community */,
 				584173502C4683D5001EC132 /* MyPage */,
@@ -418,7 +415,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58D83A642C3A785800511AB9 /* ViewController.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
 				CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */,
