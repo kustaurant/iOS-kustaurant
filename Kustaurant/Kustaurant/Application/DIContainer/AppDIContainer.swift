@@ -18,5 +18,9 @@ final class AppDIContainer {
     func makeRecommendSceneDIContainer() -> RecommendSceneDIContainer {
         RecommendSceneDIContainer()
     }
+    
+    func makeTierSceneDIContainer() -> TierSceneDIContainer {
+        TierSceneDIContainer()
+    }
 }
 

@@ -27,7 +27,10 @@ extension TabBarFlowCoordinator {
     }
     
     func setupTabs(with coordinators: [Coordinator]) {
-        let viewControllers = coordinators.map({ $0.navigationController })
+        let viewControllers = coordinators.enumerated().map { (index, coordinator) -> UINavigationController in
+            coordinator.start()
+            return coordinator.navigationController
+        }
         tabBarController.setViewControllers(viewControllers, animated: false)
     }
     
