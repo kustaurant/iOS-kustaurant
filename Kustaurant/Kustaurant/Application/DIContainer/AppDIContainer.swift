@@ -14,4 +14,9 @@ final class AppDIContainer {
     func makeHomeSceneDIContainer() -> HomeSceneDIContainer {
         HomeSceneDIContainer()
     }
+    
+    func makeRecommendSceneDIContainer() -> RecommendSceneDIContainer {
+        RecommendSceneDIContainer()
+    }
 }
+

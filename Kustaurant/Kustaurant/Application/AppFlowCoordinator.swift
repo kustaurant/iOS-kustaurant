@@ -39,6 +39,12 @@ extension AppFlowCoordinator {
             navigationController: UINavigationController()
         )
         
+        let recommendDIContainer = appDIContainer.makeRecommendSceneDIContainer()
+        let recommendFlow = recommendDIContainer.makeRecommendFlowCoordinator(
+            navigationController: UINavigationController()
+        )
+        
+        tabBarFlowCoordinator.setupTabs(with: [homeFlow, recommendFlow])
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }

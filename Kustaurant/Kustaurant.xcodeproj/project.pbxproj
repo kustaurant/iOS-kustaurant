@@ -15,6 +15,9 @@
 		584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173302C465E96001EC132 /* HomeFlowCoordinator.swift */; };
 		584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173322C465F1C001EC132 /* HomeSceneDIContainer.swift */; };
 		584173362C4661B5001EC132 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173352C4661B5001EC132 /* Coordinator.swift */; };
+		584173392C46664E001EC132 /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173382C46664E001EC132 /* RecommendViewController.swift */; };
+		5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733A2C467972001EC132 /* RecommendFlowCoordinator.swift */; };
+		5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733C2C4679FE001EC132 /* RecommendSceneDIContainer.swift */; };
 		584173402C467BDD001EC132 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733F2C467BDD001EC132 /* TabBarPage.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
@@ -52,6 +55,9 @@
 		584173302C465E96001EC132 /* HomeFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFlowCoordinator.swift; sourceTree = "<group>"; };
 		584173322C465F1C001EC132 /* HomeSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneDIContainer.swift; sourceTree = "<group>"; };
 		584173352C4661B5001EC132 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		584173382C46664E001EC132 /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
+		5841733A2C467972001EC132 /* RecommendFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendFlowCoordinator.swift; sourceTree = "<group>"; };
+		5841733C2C4679FE001EC132 /* RecommendSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendSceneDIContainer.swift; sourceTree = "<group>"; };
 		5841733F2C467BDD001EC132 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +119,7 @@
 			children = (
 				584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */,
 				584173302C465E96001EC132 /* HomeFlowCoordinator.swift */,
+				5841733A2C467972001EC132 /* RecommendFlowCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -122,6 +129,7 @@
 			children = (
 				5841732E2C465A9D001EC132 /* AppDIContainer.swift */,
 				584173322C465F1C001EC132 /* HomeSceneDIContainer.swift */,
+				5841733C2C4679FE001EC132 /* RecommendSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -132,6 +140,14 @@
 				584173352C4661B5001EC132 /* Coordinator.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		584173372C46663B001EC132 /* recommend */ = {
+			isa = PBXGroup;
+			children = (
+				584173382C46664E001EC132 /* RecommendViewController.swift */,
+			);
+			path = recommend;
 			sourceTree = "<group>";
 		};
 		5841733E2C467BCF001EC132 /* Enums */ = {
@@ -207,6 +223,7 @@
 				58D83A632C3A785800511AB9 /* ViewController.swift */,
 				584173252C464FEC001EC132 /* Flows */,
 				5841731E2C46467B001EC132 /* Home */,
+				584173372C46663B001EC132 /* recommend */,
 				584173222C464E27001EC132 /* Utils */,
 			);
 			path = Presentation;
@@ -332,6 +349,7 @@
 				CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */,
 				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
 				CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */,
+				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
@@ -349,6 +367,8 @@
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
+				5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */,
+				584173392C46664E001EC132 /* RecommendViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
