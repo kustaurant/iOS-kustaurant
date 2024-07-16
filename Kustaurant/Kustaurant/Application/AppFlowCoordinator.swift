@@ -22,5 +22,21 @@ final class AppFlowCoordinator {
 
 extension AppFlowCoordinator {
     func start() {
+        showTab()
     }
+}
+
+extension AppFlowCoordinator {
+    private func showTab() {
+        let tabBarController = UITabBarController()
+        let tabBarFlowCoordinator = TabBarFlowCoordinator(
+            navigationController: navigationController,
+            tabBarController: tabBarController
+        )
+        
+        tabBarFlowCoordinator.configureTabBar()
+        tabBarFlowCoordinator.start()
+    }
+    
+    
 }

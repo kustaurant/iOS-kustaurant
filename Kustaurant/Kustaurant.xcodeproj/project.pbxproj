@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
 		5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173292C465598001EC132 /* AppConfiguration.swift */; };
 		5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841732B2C465A35001EC132 /* AppFlowCoordinator.swift */; };
 		5841732F2C465A9D001EC132 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841732E2C465A9D001EC132 /* AppDIContainer.swift */; };
+		584173362C4661B5001EC132 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173352C4661B5001EC132 /* Coordinator.swift */; };
+		584173402C467BDD001EC132 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733F2C467BDD001EC132 /* TabBarPage.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A642C3A785800511AB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A632C3A785800511AB9 /* ViewController.swift */; };
@@ -38,9 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
 		584173292C465598001EC132 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		5841732B2C465A35001EC132 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		5841732E2C465A9D001EC132 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		584173352C4661B5001EC132 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		5841733F2C467BDD001EC132 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,12 +85,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		584173222C464E27001EC132 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5841733E2C467BCF001EC132 /* Enums */,
+				584173342C4661AC001EC132 /* Protocols */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		584173252C464FEC001EC132 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
 		5841732D2C465A92001EC132 /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
 				5841732E2C465A9D001EC132 /* AppDIContainer.swift */,
 			);
 			path = DIContainer;
+			sourceTree = "<group>";
+		};
+		584173342C4661AC001EC132 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				584173352C4661B5001EC132 /* Coordinator.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5841733E2C467BCF001EC132 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				5841733F2C467BDD001EC132 /* TabBarPage.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		58D83A532C3A785800511AB9 = {
@@ -150,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				58D83A632C3A785800511AB9 /* ViewController.swift */,
+				584173252C464FEC001EC132 /* Flows */,
+				584173222C464E27001EC132 /* Utils */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -275,11 +316,14 @@
 				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
 				CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
+				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
+				584173402C467BDD001EC132 /* TabBarPage.swift in Sources */,
 				CF54AD122C4289A900E0DE68 /* Response.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
+				584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */,
 				5841732F2C465A9D001EC132 /* AppDIContainer.swift in Sources */,
 				58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */,
 				5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */,
