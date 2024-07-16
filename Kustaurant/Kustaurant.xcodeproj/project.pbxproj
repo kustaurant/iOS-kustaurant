@@ -13,6 +13,15 @@
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
 		58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */; };
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
+		CF54AD082C4288F900E0DE68 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD072C4288F900E0DE68 /* Request.swift */; };
+		CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */; };
+		CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */; };
+		CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0D2C42896100E0DE68 /* HTTPMethod.swift */; };
+		CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0F2C42898400E0DE68 /* NetworkError.swift */; };
+		CF54AD122C4289A900E0DE68 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD112C4289A900E0DE68 /* Response.swift */; };
+		CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD132C4289B800E0DE68 /* DownloadResponse.swift */; };
+		CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD152C4289C900E0DE68 /* DownloadRequest.swift */; };
+		CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +44,15 @@
 		58D83A6D2C3A785A00511AB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58D83A722C3A785A00511AB9 /* KustaurantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KustaurantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
+		CF54AD072C4288F900E0DE68 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
+		CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRetrier.swift; sourceTree = "<group>"; };
+		CF54AD0D2C42896100E0DE68 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		CF54AD0F2C42898400E0DE68 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		CF54AD112C4289A900E0DE68 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		CF54AD132C4289B800E0DE68 /* DownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadResponse.swift; sourceTree = "<group>"; };
+		CF54AD152C4289C900E0DE68 /* DownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRequest.swift; sourceTree = "<group>"; };
+		CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +96,7 @@
 			children = (
 				58D83A902C3A79C400511AB9 /* Application */,
 				58D83A912C3A7A1C00511AB9 /* Presentation */,
+				CF54AD062C42889500E0DE68 /* Network */,
 				58D83A8F2C3A79B400511AB9 /* Resources */,
 			);
 			path = Kustaurant;
@@ -116,6 +135,22 @@
 				58D83A632C3A785800511AB9 /* ViewController.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CF54AD062C42889500E0DE68 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CF54AD0D2C42896100E0DE68 /* HTTPMethod.swift */,
+				CF54AD0F2C42898400E0DE68 /* NetworkError.swift */,
+				CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */,
+				CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */,
+				CF54AD072C4288F900E0DE68 /* Request.swift */,
+				CF54AD152C4289C900E0DE68 /* DownloadRequest.swift */,
+				CF54AD112C4289A900E0DE68 /* Response.swift */,
+				CF54AD132C4289B800E0DE68 /* DownloadResponse.swift */,
+				CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,8 +254,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				58D83A642C3A785800511AB9 /* ViewController.swift in Sources */,
+				CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */,
+				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
+				CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */,
+				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
+				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
+				CF54AD122C4289A900E0DE68 /* Response.swift in Sources */,
+				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
 				58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */,
+				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
+				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
