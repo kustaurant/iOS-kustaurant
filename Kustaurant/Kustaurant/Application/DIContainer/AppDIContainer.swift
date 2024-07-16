@@ -26,5 +26,9 @@ final class AppDIContainer {
     func makeCommunitySceneDIContainer() -> CommunitySceneDIContainer {
         CommunitySceneDIContainer()
     }
+    
+    func makeMyPageSceneDIContainer() -> MyPageSceneDIContainer {
+        MyPageSceneDIContainer()
+    }
 }
 

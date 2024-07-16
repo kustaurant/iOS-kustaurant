@@ -53,8 +53,13 @@ extension AppFlowCoordinator {
         let communityFlow = communityDIContainer.makeCommunityFlowCoordinator(
             navigationController: UINavigationController()
         )
+        
+        let myPageDIContainer = appDIContainer.makeMyPageSceneDIContainer()
+        let myPageFlow = myPageDIContainer.makeMyPageFlowCoordinator(
+            navigationController: UINavigationController()
+        )
 
-        tabBarFlowCoordinator.setupTabs(with: [homeFlow, recommendFlow, tierFlow, communityFlow])
+        tabBarFlowCoordinator.setupTabs(with: [homeFlow, recommendFlow, tierFlow, communityFlow, myPageFlow])
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }

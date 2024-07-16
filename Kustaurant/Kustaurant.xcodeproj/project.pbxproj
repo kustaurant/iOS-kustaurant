@@ -25,6 +25,9 @@
 		584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173482C468250001EC132 /* CommunityFlowCoordinator.swift */; };
 		5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841734C2C46829D001EC132 /* CommunityViewController.swift */; };
 		5841734F2C4682C8001EC132 /* CommunitySceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841734E2C4682C8001EC132 /* CommunitySceneDIContainer.swift */; };
+		584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173512C4683E3001EC132 /* MyPageViewController.swift */; };
+		584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173532C468410001EC132 /* MyPageFlowCoordinator.swift */; };
+		584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A642C3A785800511AB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A632C3A785800511AB9 /* ViewController.swift */; };
@@ -71,6 +74,9 @@
 		584173482C468250001EC132 /* CommunityFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFlowCoordinator.swift; sourceTree = "<group>"; };
 		5841734C2C46829D001EC132 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		5841734E2C4682C8001EC132 /* CommunitySceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitySceneDIContainer.swift; sourceTree = "<group>"; };
+		584173512C4683E3001EC132 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		584173532C468410001EC132 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
+		584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSceneDIContainer.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +140,7 @@
 				5841733A2C467972001EC132 /* RecommendFlowCoordinator.swift */,
 				584173412C467E72001EC132 /* TierFlowCoordinator.swift */,
 				584173482C468250001EC132 /* CommunityFlowCoordinator.swift */,
+				584173532C468410001EC132 /* MyPageFlowCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -146,6 +153,7 @@
 				5841733C2C4679FE001EC132 /* RecommendSceneDIContainer.swift */,
 				584173462C467F5B001EC132 /* TierSceneDIContainer.swift */,
 				5841734E2C4682C8001EC132 /* CommunitySceneDIContainer.swift */,
+				584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -188,6 +196,14 @@
 				5841734C2C46829D001EC132 /* CommunityViewController.swift */,
 			);
 			path = Community;
+			sourceTree = "<group>";
+		};
+		584173502C4683D5001EC132 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				584173512C4683E3001EC132 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		58D83A532C3A785800511AB9 = {
@@ -258,6 +274,7 @@
 				584173372C46663B001EC132 /* recommend */,
 				584173432C467EA9001EC132 /* Tier */,
 				5841734B2C468293001EC132 /* Community */,
+				584173502C4683D5001EC132 /* MyPage */,
 				584173222C464E27001EC132 /* Utils */,
 			);
 			path = Presentation;
@@ -392,6 +409,7 @@
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
 				584173402C467BDD001EC132 /* TabBarPage.swift in Sources */,
+				584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */,
 				CF54AD122C4289A900E0DE68 /* Response.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
@@ -404,7 +422,9 @@
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
+				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
 				5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */,
+				584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */,
 				584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */,
 				5841734F2C4682C8001EC132 /* CommunitySceneDIContainer.swift in Sources */,
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
