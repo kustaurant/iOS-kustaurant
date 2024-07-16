@@ -22,5 +22,9 @@ final class AppDIContainer {
     func makeTierSceneDIContainer() -> TierSceneDIContainer {
         TierSceneDIContainer()
     }
+    
+    func makeCommunitySceneDIContainer() -> CommunitySceneDIContainer {
+        CommunitySceneDIContainer()
+    }
 }
 

@@ -48,8 +48,13 @@ extension AppFlowCoordinator {
         let tierFlow = tierDIContainer.makeTierFlowCoordinator(
             navigationController: UINavigationController()
         )
+        
+        let communityDIContainer = appDIContainer.makeCommunitySceneDIContainer()
+        let communityFlow = communityDIContainer.makeCommunityFlowCoordinator(
+            navigationController: UINavigationController()
+        )
 
-        tabBarFlowCoordinator.setupTabs(with: [homeFlow, recommendFlow, tierFlow])
+        tabBarFlowCoordinator.setupTabs(with: [homeFlow, recommendFlow, tierFlow, communityFlow])
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }
