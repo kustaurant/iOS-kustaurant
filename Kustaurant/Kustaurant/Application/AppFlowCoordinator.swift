@@ -34,6 +34,11 @@ extension AppFlowCoordinator {
             tabBarController: tabBarController
         )
         
+        let homeDIContainer = appDIContainer.makeHomeSceneDIContainer()
+        let homeFlow = homeDIContainer.makeHomeFlowCoordinator(
+            navigationController: UINavigationController()
+        )
+        
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }
