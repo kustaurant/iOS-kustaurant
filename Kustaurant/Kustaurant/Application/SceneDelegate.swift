@@ -21,7 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let navigationController = UINavigationController()
+        navigationController.setNavigationBarHidden(true, animated: false)
         window?.rootViewController = navigationController
+        window?.rootViewController?.view.backgroundColor = .white
         
         appFlowCoordinator = AppFlowCoordinator(
             navigationController: navigationController,
