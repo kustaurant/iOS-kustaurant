@@ -29,6 +29,17 @@
 		584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173512C4683E3001EC132 /* MyPageViewController.swift */; };
 		584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173532C468410001EC132 /* MyPageFlowCoordinator.swift */; };
 		584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */; };
+		5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173592C46C95F001EC132 /* HomeViewModel.swift */; };
+		584173642C4791B0001EC132 /* HomeMainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173632C4791AF001EC132 /* HomeMainCollectionViewCell.swift */; };
+		584173662C47A964001EC132 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173652C47A964001EC132 /* HomeView.swift */; };
+		584173682C47AB1A001EC132 /* HomeCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173672C47AB1A001EC132 /* HomeCollectionViewHandler.swift */; };
+		5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841736A2C47B845001EC132 /* UIImage+Resize.swift */; };
+		5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841736E2C47C172001EC132 /* HomeUseCases.swift */; };
+		584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173722C47C2BA001EC132 /* HomeRepository.swift */; };
+		584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173752C47C311001EC132 /* DefaultHomeRepository.swift */; };
+		5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841737C2C47D3F9001EC132 /* NetworkService.swift */; };
+		584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173802C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift */; };
+		584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173822C48CAE0001EC132 /* ReusableCell.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
@@ -79,6 +90,17 @@
 		584173512C4683E3001EC132 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		584173532C468410001EC132 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
 		584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSceneDIContainer.swift; sourceTree = "<group>"; };
+		584173592C46C95F001EC132 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		584173632C4791AF001EC132 /* HomeMainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainCollectionViewCell.swift; sourceTree = "<group>"; };
+		584173652C47A964001EC132 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		584173672C47AB1A001EC132 /* HomeCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHandler.swift; sourceTree = "<group>"; };
+		5841736A2C47B845001EC132 /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		5841736E2C47C172001EC132 /* HomeUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCases.swift; sourceTree = "<group>"; };
+		584173722C47C2BA001EC132 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
+		584173752C47C311001EC132 /* DefaultHomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeRepository.swift; sourceTree = "<group>"; };
+		5841737C2C47D3F9001EC132 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		584173802C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantListsCollectionViewCell.swift; sourceTree = "<group>"; };
+		584173822C48CAE0001EC132 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				5841731F2C464695001EC132 /* HomeViewController.swift */,
+				5841735B2C46CB11001EC132 /* ViewModel */,
+				5841735C2C46CB1D001EC132 /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -128,6 +152,7 @@
 		584173222C464E27001EC132 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				584173692C47B7CD001EC132 /* Extensions */,
 				5841733E2C467BCF001EC132 /* Enums */,
 				584173342C4661AC001EC132 /* Protocols */,
 			);
@@ -164,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				584173352C4661B5001EC132 /* Coordinator.swift */,
+				584173822C48CAE0001EC132 /* ReusableCell.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -208,6 +234,89 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
+		5841735B2C46CB11001EC132 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				584173592C46C95F001EC132 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5841735C2C46CB1D001EC132 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				584173652C47A964001EC132 /* HomeView.swift */,
+				5841735D2C46CD78001EC132 /* HomeCollectionView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5841735D2C46CD78001EC132 /* HomeCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				584173672C47AB1A001EC132 /* HomeCollectionViewHandler.swift */,
+				584173602C46CE2A001EC132 /* Cells */,
+			);
+			path = HomeCollectionView;
+			sourceTree = "<group>";
+		};
+		584173602C46CE2A001EC132 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				584173632C4791AF001EC132 /* HomeMainCollectionViewCell.swift */,
+				584173802C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		584173692C47B7CD001EC132 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5841736A2C47B845001EC132 /* UIImage+Resize.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5841736C2C47BD16001EC132 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				584173742C47C2FE001EC132 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		5841736D2C47BFD5001EC132 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				5841736E2C47C172001EC132 /* HomeUseCases.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		584173702C47C1D5001EC132 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				584173712C47C2A9001EC132 /* Repositories */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		584173712C47C2A9001EC132 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				584173722C47C2BA001EC132 /* HomeRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		584173742C47C2FE001EC132 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				584173752C47C311001EC132 /* DefaultHomeRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		58D83A532C3A785800511AB9 = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +341,7 @@
 				58D83A902C3A79C400511AB9 /* Application */,
 				58D83A912C3A7A1C00511AB9 /* Presentation */,
 				58D83AFA2C463AB100511AB9 /* Domain */,
+				5841736C2C47BD16001EC132 /* Data */,
 				CF54AD062C42889500E0DE68 /* Network */,
 				58D83A8F2C3A79B400511AB9 /* Resources */,
 			);
@@ -286,6 +396,8 @@
 			isa = PBXGroup;
 			children = (
 				58D83AFB2C463AC300511AB9 /* Entities */,
+				5841736D2C47BFD5001EC132 /* UseCases */,
+				584173702C47C1D5001EC132 /* Interfaces */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -302,6 +414,7 @@
 		CF54AD062C42889500E0DE68 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				5841737C2C47D3F9001EC132 /* NetworkService.swift */,
 				CF54AD0D2C42896100E0DE68 /* HTTPMethod.swift */,
 				CF54AD0F2C42898400E0DE68 /* NetworkError.swift */,
 				CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */,
@@ -415,12 +528,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				584173682C47AB1A001EC132 /* HomeCollectionViewHandler.swift in Sources */,
+				584173642C4791B0001EC132 /* HomeMainCollectionViewCell.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
 				CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */,
 				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
 				584173472C467F5B001EC132 /* TierSceneDIContainer.swift in Sources */,
 				CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */,
+				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				584173452C467EB8001EC132 /* TierViewController.swift in Sources */,
@@ -432,13 +548,21 @@
 				584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */,
 				CF54AD122C4289A900E0DE68 /* Response.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
+				584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
+				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
+				5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */,
+				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
 				584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */,
 				5841732F2C465A9D001EC132 /* AppDIContainer.swift in Sources */,
+				584173662C47A964001EC132 /* HomeView.swift in Sources */,
 				584173202C464695001EC132 /* HomeViewController.swift in Sources */,
+				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
+				584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */,
 				58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */,
 				5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */,
+				5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */,
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
