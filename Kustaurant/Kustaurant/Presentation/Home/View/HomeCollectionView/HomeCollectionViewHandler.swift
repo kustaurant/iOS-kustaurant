@@ -41,20 +41,14 @@ extension HomeCollectionViewHandler {
     }
     
     func reloadData() async {
-        await withCheckedContinuation { continuation in
-            DispatchQueue.main.async {
-                self.view.mainCollectionView.reloadData()
-                continuation.resume()
-            }
+        await MainActor.run {
+            view.mainCollectionView.reloadData()
         }
     }
 
     func reloadSections(_ sections: IndexSet) async {
-        await withCheckedContinuation { continuation in
-            DispatchQueue.main.async {
-                self.view.mainCollectionView.reloadSections(sections)
-                continuation.resume()
-            }
+        await MainActor.run {
+            view.mainCollectionView.reloadSections(sections)
         }
     }
 }

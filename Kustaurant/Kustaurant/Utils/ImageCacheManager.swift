@@ -22,7 +22,7 @@ public class ImageCacheManager {
         }
         
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            guard let self = self,
+            guard let self,
                   let data = data,
                   let image = UIImage(data: data),
                   error == nil else {
