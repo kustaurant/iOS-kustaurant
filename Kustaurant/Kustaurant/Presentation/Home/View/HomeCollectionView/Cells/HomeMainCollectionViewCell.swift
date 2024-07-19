@@ -50,7 +50,7 @@ extension HomeMainCollectionViewCell {
             subTitleLabel.text = "가장 높은 평가를 받은 맛집을 알려드립니다."
         case .forMeRestaurants:
             titleLable.text = "나를 위한 건대 맛집"
-            subTitleLabel.text = "즐겨찾기를 바탕으로 다른 맛집을 추천해 드립니다"
+            subTitleLabel.text = "즐겨찾기를 바탕으로 다른 맛집을 추천해 드립니다."
         default: return
         }
     }
@@ -58,8 +58,6 @@ extension HomeMainCollectionViewCell {
 
 extension HomeMainCollectionViewCell {
     private func setupUI() {
-        layer.borderColor = UIColor.purple.cgColor
-        layer.borderWidth = 1.0
         addSubviews()
         setupConstraint()
         setupLabels()
@@ -78,9 +76,8 @@ extension HomeMainCollectionViewCell {
             titleLable.topAnchor.constraint(equalTo: contentView.topAnchor),
             titleLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             titleLable.heightAnchor.constraint(equalToConstant: 34),
-            moreButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            moreButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             moreButton.centerYAnchor.constraint(equalTo: titleLable.centerYAnchor),
-            moreButton.heightAnchor.constraint(equalToConstant: 20),
             subTitleLabel.topAnchor.constraint(equalTo: titleLable.bottomAnchor),
             subTitleLabel.leadingAnchor.constraint(equalTo: titleLable.leadingAnchor),
             subTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -94,11 +91,19 @@ extension HomeMainCollectionViewCell {
     
     private func setupLabels() {
         titleLable.textColor = .textBlack
+        titleLable.font = .pretendard(size: 20, weight: .bold)
         subTitleLabel.textColor = .textLightGray
+        subTitleLabel.font = .pretendard(size: 13, weight: .regular)
     }
     
     private func setupButton() {
-        moreButton.setTitleColor(.textDarkGray, for: .normal)
-        moreButton.setTitle("더보기", for: .normal)
+        var config = UIButton.Configuration.plain()
+        let attributedString = NSAttributedString(string: "더보기", attributes: [
+            .font: UIFont.pretendard(size: 11, weight: .medium),
+            .foregroundColor: UIColor.textDarkGray
+        ])
+        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+        moreButton.configuration = config
+        moreButton.setAttributedTitle(attributedString, for: .normal)
     }
 }

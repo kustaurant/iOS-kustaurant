@@ -110,11 +110,15 @@ extension HomeCollectionViewHandler: UICollectionViewDataSource {
             
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRestaurantListsCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeRestaurantListsCollectionViewCell else { return UICollectionViewCell() }
-
-            if let sectionType = HomeSection(rawValue: indexPath.section) {
-                cell.updateCell(section: sectionType)
-            }
             
+            if let parentCell = collectionView.superview?.superview as? HomeMainCollectionViewCell,
+               let sectionType = parentCell.sectionType {
+                switch sectionType {
+                case .topRestaurants: cell.updateContent(viewModel.topRestaurants[indexPath.row])
+                case .forMeRestaurants: cell.updateContent(viewModel.forMeRestaurants[indexPath.row])
+                default: break
+                }
+            }
             return cell
             
         }
