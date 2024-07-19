@@ -36,7 +36,9 @@ extension AppFlowCoordinator {
         
         let homeDIContainer = appDIContainer.makeHomeSceneDIContainer()
         let homeFlow = homeDIContainer.makeHomeFlowCoordinator(
-            navigationController: UINavigationController()
+            appDIContainer: appDIContainer,
+            navigationController: UINavigationController(),
+            rootNavigationControler: navigationController
         )
         
         let recommendDIContainer = appDIContainer.makeRecommendSceneDIContainer()

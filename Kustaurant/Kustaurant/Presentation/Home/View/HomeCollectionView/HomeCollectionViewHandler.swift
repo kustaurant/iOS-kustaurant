@@ -58,10 +58,30 @@ extension HomeCollectionViewHandler {
     private func restaurantListsMoreButtonTapped(type: HomeSection) {
         print("\(type.rawValue)")
     }
+    
+    private func restaurantlistsDidSelect(
+        _ sectionType: HomeSection,
+        indexPath: IndexPath
+    ) {
+        let restaurant = (sectionType == .topRestaurants) ? viewModel.topRestaurants[indexPath.row] : viewModel.forMeRestaurants[indexPath.row]
+        viewModel.restaurantlistsDidSelect(restaurant: restaurant)
+    }
 }
 
 // MARK: - UICollectionViewDelegate
 extension HomeCollectionViewHandler: UICollectionViewDelegate {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        if !isMainCollectionView(collectionView) {
+            if let parentCell = collectionView.superview?.superview as? HomeMainCollectionViewCell,
+               let sectionType = parentCell.sectionType {
+                restaurantlistsDidSelect(sectionType, indexPath: indexPath)
+            }
+        }
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if collectionView == view.mainCollectionView {
             return viewModel.mainSections.count
@@ -74,7 +94,7 @@ extension HomeCollectionViewHandler: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        if collectionView == view.mainCollectionView {
+        if isMainCollectionView(collectionView) {
             return 1
         } else {
             guard let cell = collectionView.superview?.superview as? HomeMainCollectionViewCell,
@@ -104,6 +124,7 @@ extension HomeCollectionViewHandler: UICollectionViewDataSource {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeMainCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeMainCollectionViewCell else { return UICollectionViewCell() }
                 cell.collectionView.delegate = self
                 cell.collectionView.dataSource = self
+                cell.collectionView.allowsSelection = true
                 cell.moreButton.addAction( UIAction { [weak self] _ in self?.restaurantListsMoreButtonTapped(type: sectionType)}, for: .touchUpInside)
                 cell.updateAndReload(section: sectionType)
                 return cell
@@ -119,8 +140,10 @@ extension HomeCollectionViewHandler: UICollectionViewDataSource {
             if let parentCell = collectionView.superview?.superview as? HomeMainCollectionViewCell,
                let sectionType = parentCell.sectionType {
                 switch sectionType {
-                case .topRestaurants: cell.updateContent(viewModel.topRestaurants[indexPath.row])
-                case .forMeRestaurants: cell.updateContent(viewModel.forMeRestaurants[indexPath.row])
+                case .topRestaurants:
+                    cell.updateContent(viewModel.topRestaurants[indexPath.row])
+                case .forMeRestaurants:
+                    cell.updateContent(viewModel.forMeRestaurants[indexPath.row])
                 default: break
                 }
             }
