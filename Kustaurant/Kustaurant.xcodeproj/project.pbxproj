@@ -52,6 +52,7 @@
 		584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */; };
 		5841739A2C4A1040001EC132 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173992C4A1040001EC132 /* UILabel+Extension.swift */; };
 		5841739C2C4A29C6001EC132 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841739B2C4A29C6001EC132 /* Tier.swift */; };
+		5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
@@ -125,6 +126,7 @@
 		584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Pretendard.swift"; sourceTree = "<group>"; };
 		584173992C4A1040001EC132 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		5841739B2C4A29C6001EC132 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
+		5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				584173692C47B7CD001EC132 /* Extensions */,
 				5841733E2C467BCF001EC132 /* Enums */,
 				584173342C4661AC001EC132 /* Protocols */,
+				5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				58D83AFA2C463AB100511AB9 /* Domain */,
 				5841736C2C47BD16001EC132 /* Data */,
 				CF54AD062C42889500E0DE68 /* Network */,
+				584173222C464E27001EC132 /* Utils */,
 				58D83A8F2C3A79B400511AB9 /* Resources */,
 			);
 			path = Kustaurant;
@@ -431,7 +435,6 @@
 				584173432C467EA9001EC132 /* Tier */,
 				5841734B2C468293001EC132 /* Community */,
 				584173502C4683D5001EC132 /* MyPage */,
-				584173222C464E27001EC132 /* Utils */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				584173452C467EB8001EC132 /* TierViewController.swift in Sources */,
+				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
