@@ -35,23 +35,21 @@ extension TabBarFlowCoordinator {
     }
     
     func configureTabBar() {
-        tabBarController.tabBar.backgroundColor = .tabBarBackground
-        
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .tabBarBackground
         let normalAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 10),
+            .font: UIFont.pretendard(size: 10, weight: .regular),
             .foregroundColor: UIColor.tabBarTitle
         ]
-
         let selectedAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.boldSystemFont(ofSize: 10),
+            .font: UIFont.pretendard(size: 10, weight: .bold),
             .foregroundColor: UIColor.mainGreen
         ]
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = normalAttributes
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = selectedAttributes
+        tabBarController.tabBar.standardAppearance = appearance
+        tabBarController.tabBar.scrollEdgeAppearance = appearance
 
-        if let items = tabBarController.tabBar.items {
-            for item in items {
-                item.setTitleTextAttributes(normalAttributes, for: .normal)
-                item.setTitleTextAttributes(selectedAttributes, for: .selected)
-            }
-        }
     }
 }

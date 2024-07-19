@@ -14,7 +14,7 @@ protocol HomeViewModelInput {
 }
 
 protocol HomeViewModelOutput {
-    var mainSections: [HomeSection] { get set }
+    var mainSections: [HomeSection] { get }
     var restaurantLists: PassthroughSubject<HomeRestaurantLists, Never> { get }
 }
 
