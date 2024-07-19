@@ -48,8 +48,8 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController {
     private func setupNavigationBar() {
-        let image = UIImage(named: "logo_home")
-        let logoImageView = UIImageView(image: image?.resized(to: CGSize(width: 126, height: 33)))
+        let image = UIImage(named: "logo_home")?.resized(to: CGSize(width: 126, height: 33))
+        let logoImageView = UIImageView(image: image)
         let button = UIBarButtonItem(customView: logoImageView)
         navigationItem.leftBarButtonItem = button
     }

@@ -39,6 +39,15 @@ extension HomeRestaurantListsCollectionViewCell {
         restaurantCuisineAndPositionLabel.text = [data.restaurantCuisine, data.restaurantPosition].compactMap { $0 }.joined(separator: "  |  ")
         partnershipInfoLabel.text = (data.partnershipInfo == nil) ? "제휴 해당사항 없음" : "제휴 : \(data.partnershipInfo!)"
         ratingLabel.text = "4.5"
+        
+        if let urlString = data.restaurantImgUrl,
+           let url = URL(string: urlString) {
+            ImageCacheManager.shared.loadImage(from: url, targetWidth: bounds.width) { image in
+                DispatchQueue.main.async {
+                    self.restaurantImageView.image = image ?? UIImage(named: "img_dummy")
+                }
+            }
+        }
     }
 }
 
@@ -91,7 +100,9 @@ extension HomeRestaurantListsCollectionViewCell {
     }
     
     private func setupImageView() {
-        restaurantImageView.backgroundColor = .mainGreen
+        restaurantImageView.layer.cornerRadius = 11
+        restaurantImageView.clipsToBounds = true
+        
         ratingImageView.image = UIImage(named: "icon_star_rating")
     }
     
