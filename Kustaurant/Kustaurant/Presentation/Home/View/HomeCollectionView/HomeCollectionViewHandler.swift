@@ -40,9 +40,22 @@ extension HomeCollectionViewHandler {
         collectionView == view.mainCollectionView
     }
     
-    func updateAndReloadSection(_ section: HomeSection) {
-        let indexSet = IndexSet(integer: section.rawValue)
-        view.mainCollectionView.reloadSections(indexSet)
+    func reloadData() async {
+        await withCheckedContinuation { continuation in
+            DispatchQueue.main.async {
+                self.view.mainCollectionView.reloadData()
+                continuation.resume()
+            }
+        }
+    }
+
+    func reloadSections(_ sections: IndexSet) async {
+        await withCheckedContinuation { continuation in
+            DispatchQueue.main.async {
+                self.view.mainCollectionView.reloadSections(sections)
+                continuation.resume()
+            }
+        }
     }
 }
 
@@ -91,11 +104,7 @@ extension HomeCollectionViewHandler: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         if isMainCollectionView(collectionView) {
-            let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Default", for: indexPath)
-            defaultCell.backgroundColor = .systemPink
-            
-            guard let sectionType = HomeSection(rawValue: indexPath.section) else { return defaultCell }
-
+            guard let sectionType = HomeSection(rawValue: indexPath.section) else { return UICollectionViewCell() }
             switch sectionType {
             case .topRestaurants, .forMeRestaurants:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeMainCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeMainCollectionViewCell else { return UICollectionViewCell() }
@@ -105,6 +114,8 @@ extension HomeCollectionViewHandler: UICollectionViewDataSource {
                 cell.updateAndReload(section: sectionType)
                 return cell
             default:
+                let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Default", for: indexPath)
+                defaultCell.backgroundColor = .systemPink
                 return defaultCell
             }
             
@@ -154,13 +165,15 @@ extension HomeCollectionViewHandler: UICollectionViewDelegateFlowLayout {
     ) -> CGSize {
         if isMainCollectionView(collectionView) {
             guard let section = HomeSection(rawValue: indexPath.section) else {
-                return CGSize(width: collectionView.bounds.width, height: 0)
+                return CGSize(width: collectionView.bounds.width, height: 0.1)
             }
             switch section {
-            case .banner: return CGSize(width: collectionView.bounds.width, height: 100)
-            case .categories: return CGSize(width: collectionView.bounds.width, height: 100)
-            case .topRestaurants: return CGSize(width: collectionView.bounds.width, height: 261)
-            case .forMeRestaurants: return CGSize(width: collectionView.bounds.width, height: 261)
+            case .banner: return CGSize(width: collectionView.bounds.width, height: 55)
+            case .categories: return CGSize(width: collectionView.bounds.width, height: 55)
+            case .topRestaurants:
+                return CGSize(width: collectionView.bounds.width, height: viewModel.topRestaurants.isEmpty ? 0 : 261)
+            case .forMeRestaurants: 
+                return CGSize(width: collectionView.bounds.width, height: viewModel.forMeRestaurants.isEmpty ? 0 : 261)
             }
         } else {
             return CGSize(width: 191, height: 196)
