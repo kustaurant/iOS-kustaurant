@@ -9,7 +9,13 @@ import UIKit
 
 final class HomeMainCollectionViewCell: UICollectionViewCell, ReusableCell {
     static let reuseIdentifier = String(describing: HomeMainCollectionViewCell.self)
-    var sectionType: HomeSection?
+    var sectionType: HomeSection? {
+        didSet { updateContent() }
+    }
+    private let titleLable = UILabel()
+    private let subTitleLabel = UILabel()
+    let moreButton = UIButton()
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -31,15 +37,37 @@ final class HomeMainCollectionViewCell: UICollectionViewCell, ReusableCell {
     }
 }
 
+extension HomeMainCollectionViewCell {
+    func updateAndReload(section: HomeSection) {
+        sectionType = section
+        collectionView.reloadData()
+    }
+    
+    private func updateContent() {
+        switch sectionType {
+        case .topRestaurants:
+            titleLable.text = "인증된 건대 TOP 맛집"
+            subTitleLabel.text = "가장 높은 평가를 받은 맛집을 알려드립니다."
+        case .forMeRestaurants:
+            titleLable.text = "나를 위한 건대 맛집"
+            subTitleLabel.text = "즐겨찾기를 바탕으로 다른 맛집을 추천해 드립니다"
+        default: return
+        }
+    }
+}
 
 extension HomeMainCollectionViewCell {
     private func setupUI() {
+        layer.borderColor = UIColor.purple.cgColor
+        layer.borderWidth = 1.0
         addSubviews()
         setupConstraint()
+        setupLabels()
+        setupButton()
     }
     
     private func addSubviews() {
-        [collectionView].forEach({
+        [titleLable, subTitleLabel, moreButton, collectionView].forEach({
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         })
@@ -47,10 +75,30 @@ extension HomeMainCollectionViewCell {
     
     private func setupConstraint() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleLable.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            titleLable.heightAnchor.constraint(equalToConstant: 34),
+            moreButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            moreButton.centerYAnchor.constraint(equalTo: titleLable.centerYAnchor),
+            moreButton.heightAnchor.constraint(equalToConstant: 20),
+            subTitleLabel.topAnchor.constraint(equalTo: titleLable.bottomAnchor),
+            subTitleLabel.leadingAnchor.constraint(equalTo: titleLable.leadingAnchor),
+            subTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            subTitleLabel.heightAnchor.constraint(equalToConstant: 16),
+            collectionView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
+    }
+    
+    private func setupLabels() {
+        titleLable.textColor = .textBlack
+        subTitleLabel.textColor = .textLightGray
+    }
+    
+    private func setupButton() {
+        moreButton.setTitleColor(.textDarkGray, for: .normal)
+        moreButton.setTitle("더보기", for: .normal)
     }
 }

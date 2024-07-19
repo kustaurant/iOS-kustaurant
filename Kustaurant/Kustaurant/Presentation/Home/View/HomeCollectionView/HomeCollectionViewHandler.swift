@@ -46,6 +46,13 @@ extension HomeCollectionViewHandler {
     }
 }
 
+// MARK: - Actions
+extension HomeCollectionViewHandler {
+    private func restaurantListsMoreButtonTapped(type: HomeSection) {
+        print("\(type.rawValue)")
+    }
+}
+
 // MARK: - UICollectionViewDelegate
 extension HomeCollectionViewHandler: UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -79,29 +86,23 @@ extension HomeCollectionViewHandler: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 extension HomeCollectionViewHandler: UICollectionViewDataSource {
-    
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         if isMainCollectionView(collectionView) {
             let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Default", for: indexPath)
-            defaultCell.layer.borderColor = UIColor.red.cgColor
-            defaultCell.layer.borderWidth = 1.0
-
+            defaultCell.backgroundColor = .systemPink
+            
             guard let sectionType = HomeSection(rawValue: indexPath.section) else { return defaultCell }
+
             switch sectionType {
             case .topRestaurants, .forMeRestaurants:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeMainCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeMainCollectionViewCell else { return UICollectionViewCell() }
-                cell.layer.borderColor = UIColor.purple.cgColor
-                cell.layer.borderWidth = 1.0
-                
                 cell.collectionView.delegate = self
                 cell.collectionView.dataSource = self
-
-                cell.sectionType = sectionType
-                cell.collectionView.reloadData()
-                
+                cell.moreButton.addAction( UIAction { [weak self] _ in self?.restaurantListsMoreButtonTapped(type: sectionType)}, for: .touchUpInside)
+                cell.updateAndReload(section: sectionType)
                 return cell
             default:
                 return defaultCell
@@ -109,8 +110,11 @@ extension HomeCollectionViewHandler: UICollectionViewDataSource {
             
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRestaurantListsCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeRestaurantListsCollectionViewCell else { return UICollectionViewCell() }
-            cell.layer.borderColor = UIColor.green.cgColor
-            cell.layer.borderWidth = 1.0
+
+            if let sectionType = HomeSection(rawValue: indexPath.section) {
+                cell.updateCell(section: sectionType)
+            }
+            
             return cell
             
         }
@@ -127,8 +131,16 @@ extension HomeCollectionViewHandler: UICollectionViewDelegateFlowLayout {
         if isMainCollectionView(collectionView) {
             UIEdgeInsets(top: 0, left: 0, bottom: 53, right: 0)
         } else {
-            UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+            UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         }
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        isMainCollectionView(collectionView) ? 0 : 10
     }
     
     func collectionView(
@@ -140,14 +152,12 @@ extension HomeCollectionViewHandler: UICollectionViewDelegateFlowLayout {
             guard let section = HomeSection(rawValue: indexPath.section) else {
                 return CGSize(width: collectionView.bounds.width, height: 0)
             }
-            
             switch section {
             case .banner: return CGSize(width: collectionView.bounds.width, height: 100)
             case .categories: return CGSize(width: collectionView.bounds.width, height: 100)
             case .topRestaurants: return CGSize(width: collectionView.bounds.width, height: 261)
             case .forMeRestaurants: return CGSize(width: collectionView.bounds.width, height: 261)
             }
-            
         } else {
             return CGSize(width: 191, height: 196)
         }
