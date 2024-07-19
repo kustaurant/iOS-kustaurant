@@ -40,6 +40,16 @@
 		5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841737C2C47D3F9001EC132 /* NetworkService.swift */; };
 		584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173802C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift */; };
 		584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173822C48CAE0001EC132 /* ReusableCell.swift */; };
+		5841738E2C4A070B001EC132 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 584173852C4A070B001EC132 /* Pretendard-Bold.otf */; };
+		5841738F2C4A070B001EC132 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 584173862C4A070B001EC132 /* Pretendard-Black.otf */; };
+		584173902C4A070B001EC132 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 584173872C4A070B001EC132 /* Pretendard-Light.otf */; };
+		584173912C4A070B001EC132 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 584173882C4A070B001EC132 /* Pretendard-ExtraBold.otf */; };
+		584173922C4A070B001EC132 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 584173892C4A070B001EC132 /* Pretendard-ExtraLight.otf */; };
+		584173932C4A070B001EC132 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5841738A2C4A070B001EC132 /* Pretendard-SemiBold.otf */; };
+		584173942C4A070B001EC132 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5841738B2C4A070B001EC132 /* Pretendard-Regular.otf */; };
+		584173952C4A070B001EC132 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5841738C2C4A070B001EC132 /* Pretendard-Thin.otf */; };
+		584173962C4A070B001EC132 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5841738D2C4A070B001EC132 /* Pretendard-Medium.otf */; };
+		584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
@@ -101,6 +111,16 @@
 		5841737C2C47D3F9001EC132 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		584173802C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantListsCollectionViewCell.swift; sourceTree = "<group>"; };
 		584173822C48CAE0001EC132 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
+		584173852C4A070B001EC132 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		584173862C4A070B001EC132 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		584173872C4A070B001EC132 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		584173882C4A070B001EC132 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		584173892C4A070B001EC132 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		5841738A2C4A070B001EC132 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		5841738B2C4A070B001EC132 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		5841738C2C4A070B001EC132 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		5841738D2C4A070B001EC132 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Pretendard.swift"; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -273,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				5841736A2C47B845001EC132 /* UIImage+Resize.swift */,
+				584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -317,6 +338,22 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		584173842C4A06C6001EC132 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				584173862C4A070B001EC132 /* Pretendard-Black.otf */,
+				584173852C4A070B001EC132 /* Pretendard-Bold.otf */,
+				584173882C4A070B001EC132 /* Pretendard-ExtraBold.otf */,
+				584173892C4A070B001EC132 /* Pretendard-ExtraLight.otf */,
+				584173872C4A070B001EC132 /* Pretendard-Light.otf */,
+				5841738D2C4A070B001EC132 /* Pretendard-Medium.otf */,
+				5841738B2C4A070B001EC132 /* Pretendard-Regular.otf */,
+				5841738A2C4A070B001EC132 /* Pretendard-SemiBold.otf */,
+				5841738C2C4A070B001EC132 /* Pretendard-Thin.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		58D83A532C3A785800511AB9 = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +396,7 @@
 		58D83A8F2C3A79B400511AB9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				584173842C4A06C6001EC132 /* Fonts */,
 				58D83A682C3A785A00511AB9 /* Assets.xcassets */,
 				58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */,
 				58D83A6D2C3A785A00511AB9 /* Info.plist */,
@@ -509,8 +547,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				584173922C4A070B001EC132 /* Pretendard-ExtraLight.otf in Resources */,
+				584173952C4A070B001EC132 /* Pretendard-Thin.otf in Resources */,
 				58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */,
+				5841738E2C4A070B001EC132 /* Pretendard-Bold.otf in Resources */,
+				584173932C4A070B001EC132 /* Pretendard-SemiBold.otf in Resources */,
+				584173942C4A070B001EC132 /* Pretendard-Regular.otf in Resources */,
+				584173912C4A070B001EC132 /* Pretendard-ExtraBold.otf in Resources */,
+				5841738F2C4A070B001EC132 /* Pretendard-Black.otf in Resources */,
+				584173902C4A070B001EC132 /* Pretendard-Light.otf in Resources */,
 				58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */,
+				584173962C4A070B001EC132 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +577,7 @@
 			files = (
 				584173682C47AB1A001EC132 /* HomeCollectionViewHandler.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeMainCollectionViewCell.swift in Sources */,
+				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
 				CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */,
