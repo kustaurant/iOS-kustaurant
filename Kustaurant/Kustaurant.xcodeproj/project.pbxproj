@@ -16,6 +16,7 @@
 		58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CAE2C4FB98500889C92 /* TierListTableViewHandler.swift */; };
 		58067CB22C4FBA9800889C92 /* TierListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CB12C4FBA9800889C92 /* TierListTableViewCell.swift */; };
 		58067CBB2C4FCAA400889C92 /* Cuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CBA2C4FCAA400889C92 /* Cuisine.swift */; };
+		58067CBD2C4FCC2100889C92 /* Situation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CBC2C4FCC2100889C92 /* Situation.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
 		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
@@ -98,6 +99,7 @@
 		58067CAE2C4FB98500889C92 /* TierListTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListTableViewHandler.swift; sourceTree = "<group>"; };
 		58067CB12C4FBA9800889C92 /* TierListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListTableViewCell.swift; sourceTree = "<group>"; };
 		58067CBA2C4FCAA400889C92 /* Cuisine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuisine.swift; sourceTree = "<group>"; };
+		58067CBC2C4FCC2100889C92 /* Situation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Situation.swift; sourceTree = "<group>"; };
 		5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantLists.swift; sourceTree = "<group>"; };
 		5841731F2C464695001EC132 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				5841733F2C467BDD001EC132 /* TabBarPage.swift */,
 				5841739B2C4A29C6001EC132 /* Tier.swift */,
 				58067CBA2C4FCAA400889C92 /* Cuisine.swift */,
+				58067CBC2C4FCC2100889C92 /* Situation.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
 				584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */,
+				58067CBD2C4FCC2100889C92 /* Situation.swift in Sources */,
 				58067CBB2C4FCAA400889C92 /* Cuisine.swift in Sources */,
 				5841732F2C465A9D001EC132 /* AppDIContainer.swift in Sources */,
 				58067CA62C4F4FE200889C92 /* TierMapViewController.swift in Sources */,
