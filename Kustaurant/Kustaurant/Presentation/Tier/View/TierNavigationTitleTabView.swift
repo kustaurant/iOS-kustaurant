@@ -7,13 +7,22 @@
 
 import UIKit
 
+struct TierTab {
+    var title: String
+}
+
+protocol TierNavigationTitleTabViewDelegate: AnyObject {
+    func tabView(_ tabView: TierNavigationTitleTabView, didSelectTabAt index: Int)
+}
+
 final class TierNavigationTitleTabView: UIView {
-    let stackView = UIStackView()
-    let tabModels: [TierTab] = [
+    private let stackView = UIStackView()
+    private let tabModels: [TierTab] = [
         TierTab(title: "티어표"),
         TierTab(title: "지도")
     ]
     private var buttons: [UIButton] = []
+    weak var delegate: TierNavigationTitleTabViewDelegate?
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -31,9 +40,10 @@ extension TierNavigationTitleTabView {
     private func tabButtonTouched(_ tab: TierTab) {
         guard let index = tabModels.firstIndex(where: { $0.title == tab.title }) else { return }
         updateTabSelection(selectedIndex: index)
+        delegate?.tabView(self, didSelectTabAt: index)
     }
 
-    private func updateTabSelection(selectedIndex: Int) {
+    func updateTabSelection(selectedIndex: Int) {
         buttons.enumerated().forEach { (index, button) in
             button.isSelected = index == selectedIndex
         }
@@ -66,16 +76,19 @@ extension TierNavigationTitleTabView {
         ])
     }
     
-    private func createTab(_ tab: TierTab, tag: Int) -> UIButton {
+    private func createTab(
+        _ tab: TierTab,
+        tag: Int
+    ) -> UIButton {
         let button = UIButton()
         button.tag = tag
         var config = UIButton.Configuration.plain()
         config.background.backgroundColor = UIColor.clear
-        let attributedStringSelected = NSAttributedString(string: (tab.title ?? ""), attributes: [
+        let attributedStringSelected = NSAttributedString(string: (tab.title), attributes: [
             .font: UIFont.pretendard(size: 17, weight: .semibold),
             .foregroundColor: UIColor.textBlack
         ])
-        let attributedStringNormal = NSAttributedString(string: (tab.title ?? ""), attributes: [
+        let attributedStringNormal = NSAttributedString(string: (tab.title), attributes: [
             .font: UIFont.pretendard(size: 17, weight: .semibold),
             .foregroundColor: UIColor.textLightGray
         ])
