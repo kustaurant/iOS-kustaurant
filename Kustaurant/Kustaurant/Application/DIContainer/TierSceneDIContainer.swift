@@ -8,8 +8,13 @@
 import UIKit
 
 final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
+    func makeTierViewModel() -> TierViewModel {
+        DefaultTierViewModel()
+    }
     func makeTierViewController() -> TierViewController {
-        TierViewController()
+        TierViewController(
+            viewModel: makeTierViewModel()
+        )
     }
     
     func makeTierFlowCoordinator(navigationController: UINavigationController) -> TierFlowCoordinator {
