@@ -8,10 +8,6 @@
 import UIKit
 
 final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
-    func makeTierViewModel() -> TierViewModel {
-        DefaultTierViewModel()
-    }
-    
     func makeTierListViewModel() -> TierListViewModel {
         DefaultTierListViewModel()
     }

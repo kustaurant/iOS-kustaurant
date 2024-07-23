@@ -9,19 +9,25 @@ import UIKit
 
 final class TierListViewController: UIViewController {
     private var viewModel: TierListViewModel
+    private var tierListTableViewHandler: TierListTableViewHandler?
+    private var tierListView = TierListView()
     
     // MARK: - Initialization
     init(viewModel: TierListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        tierListTableViewHandler = TierListTableViewHandler(
+            view: tierListView,
+            viewModel: viewModel
+        )
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemPink
+    // MARK: - Life Cycle
+    override func loadView() {
+        view = tierListView
     }
 }
