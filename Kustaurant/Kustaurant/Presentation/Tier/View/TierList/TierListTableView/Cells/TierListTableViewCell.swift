@@ -22,22 +22,32 @@ final class TierListTableViewCell: UITableViewCell, ReusableCell {
     
     private var evaluatedTrailingConstraint: NSLayoutConstraint!
     private var favoriteTrailingConstraint: NSLayoutConstraint!
+    private var evaluatedLeadingConstraint: NSLayoutConstraint!
     
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.red.cgColor
         setupUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK:
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0))
+    }
 }
 
 extension TierListTableViewCell {
     private func setupUI() {
         addSubviews()
-        setupConstraint()
+        setupConstraints()
         setupLabels()
         setupImageView()
     }
@@ -49,7 +59,7 @@ extension TierListTableViewCell {
         }
     }
     
-    private func setupConstraint() {
+    private func setupConstraints() {
         setupImageViewConstraints()
         setupLabelConstraints()
         setupIconConstraints()
@@ -101,15 +111,14 @@ extension TierListTableViewCell {
     private func setupIconConstraints() {
         favoriteTrailingConstraint = favoriteImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -13)
         evaluatedTrailingConstraint = evaluatedImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -13)
+        evaluatedLeadingConstraint = evaluatedImageView.trailingAnchor.constraint(equalTo: favoriteImageView.leadingAnchor, constant: -3)
         
         NSLayoutConstraint.activate([
             favoriteImageView.centerYAnchor.constraint(equalTo: indexLabel.centerYAnchor),
-            favoriteTrailingConstraint,
             favoriteImageView.widthAnchor.constraint(equalToConstant: 19),
             favoriteImageView.heightAnchor.constraint(equalToConstant: 19),
             
             evaluatedImageView.centerYAnchor.constraint(equalTo: favoriteImageView.centerYAnchor),
-            evaluatedTrailingConstraint,
             evaluatedImageView.widthAnchor.constraint(equalToConstant: 19),
             evaluatedImageView.heightAnchor.constraint(equalToConstant: 19)
         ])
@@ -139,12 +148,11 @@ extension TierListTableViewCell {
         evaluatedImageView.isHidden = !isEvaluated
         
         if isFavorite {
-            favoriteTrailingConstraint.isActive = true
-            evaluatedTrailingConstraint.isActive = false
-            evaluatedImageView.trailingAnchor.constraint(equalTo: favoriteImageView.leadingAnchor, constant: -3).isActive = true
+            NSLayoutConstraint.deactivate([evaluatedTrailingConstraint])
+            NSLayoutConstraint.activate([favoriteTrailingConstraint, evaluatedLeadingConstraint])
         } else {
-            favoriteTrailingConstraint.isActive = false
-            evaluatedTrailingConstraint.isActive = true
+            NSLayoutConstraint.deactivate([favoriteTrailingConstraint, evaluatedLeadingConstraint])
+            NSLayoutConstraint.activate([evaluatedTrailingConstraint])
         }
     }
     
