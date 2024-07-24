@@ -41,11 +41,12 @@ final class TierViewController: UIPageViewController {
 
 extension TierViewController {
     private func setupNavigationBar() {
-        let backImage = UIImage(systemName: "arrow.backward")
-        let backButton = UIBarButtonItem(image: backImage, style: .plain, target: nil, action: nil)
-        navigationItem.leftBarButtonItem = backButton
+        /*
+         let backImage = UIImage(systemName: "arrow.backward")
+         let backButton = UIBarButtonItem(image: backImage, style: .plain, target: nil, action: nil)
+         navigationItem.leftBarButtonItem = backButton
+         */
         navigationItem.titleView = tierNaviationTitleTabView
-        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         navigationController?.navigationBar.standardAppearance = appearance
