@@ -15,8 +15,12 @@
 		58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CAB2C4FB72C00889C92 /* TierListView.swift */; };
 		58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CAE2C4FB98500889C92 /* TierListTableViewHandler.swift */; };
 		58067CB22C4FBA9800889C92 /* TierListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CB12C4FBA9800889C92 /* TierListTableViewCell.swift */; };
+		58067CB52C4FBF9200889C92 /* TierUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CB42C4FBF9200889C92 /* TierUseCases.swift */; };
+		58067CB72C4FBFB900889C92 /* TierRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CB62C4FBFB900889C92 /* TierRepository.swift */; };
+		58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CB82C4FC1A200889C92 /* DefaultTierRepository.swift */; };
 		58067CBB2C4FCAA400889C92 /* Cuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CBA2C4FCAA400889C92 /* Cuisine.swift */; };
 		58067CBD2C4FCC2100889C92 /* Situation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CBC2C4FCC2100889C92 /* Situation.swift */; };
+		58067CBF2C4FCCC100889C92 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CBE2C4FCCC100889C92 /* Location.swift */; };
 		58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CC12C509FEA00889C92 /* CustomIconImageView.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
@@ -99,6 +103,9 @@
 		58067CAB2C4FB72C00889C92 /* TierListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListView.swift; sourceTree = "<group>"; };
 		58067CAE2C4FB98500889C92 /* TierListTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListTableViewHandler.swift; sourceTree = "<group>"; };
 		58067CB12C4FBA9800889C92 /* TierListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListTableViewCell.swift; sourceTree = "<group>"; };
+		58067CB42C4FBF9200889C92 /* TierUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierUseCases.swift; sourceTree = "<group>"; };
+		58067CB62C4FBFB900889C92 /* TierRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierRepository.swift; sourceTree = "<group>"; };
+		58067CB82C4FC1A200889C92 /* DefaultTierRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTierRepository.swift; sourceTree = "<group>"; };
 		58067CBA2C4FCAA400889C92 /* Cuisine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuisine.swift; sourceTree = "<group>"; };
 		58067CBC2C4FCC2100889C92 /* Situation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Situation.swift; sourceTree = "<group>"; };
 		58067CBE2C4FCCC100889C92 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -198,8 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				58067CA02C4F425900889C92 /* TierNavigationTitleTabView.swift */,
-				58067CAB2C4FB72C00889C92 /* TierListView.swift */,
-				58067CAD2C4FB95C00889C92 /* TierListTableView */,
+				58067CB32C4FBEE400889C92 /* TierList */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -219,6 +225,15 @@
 				58067CB12C4FBA9800889C92 /* TierListTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		58067CB32C4FBEE400889C92 /* TierList */ = {
+			isa = PBXGroup;
+			children = (
+				58067CAB2C4FB72C00889C92 /* TierListView.swift */,
+				58067CAD2C4FB95C00889C92 /* TierListTableView */,
+			);
+			path = TierList;
 			sourceTree = "<group>";
 		};
 		58067CC02C509FCA00889C92 /* UIComponents */ = {
@@ -391,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				5841736E2C47C172001EC132 /* HomeUseCases.swift */,
+				58067CB42C4FBF9200889C92 /* TierUseCases.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -407,6 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				584173722C47C2BA001EC132 /* HomeRepository.swift */,
+				58067CB62C4FBFB900889C92 /* TierRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -415,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				584173752C47C311001EC132 /* DefaultHomeRepository.swift */,
+				58067CB82C4FC1A200889C92 /* DefaultTierRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -688,6 +706,7 @@
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
 				5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */,
+				58067CB52C4FBF9200889C92 /* TierUseCases.swift in Sources */,
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
@@ -700,10 +719,12 @@
 				584173202C464695001EC132 /* HomeViewController.swift in Sources */,
 				58067CA82C4F512100889C92 /* TierPageViewController.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
+				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */,
 				58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */,
 				5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */,
 				58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */,
+				58067CB72C4FBFB900889C92 /* TierRepository.swift in Sources */,
 				5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */,
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,

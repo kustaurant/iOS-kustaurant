@@ -19,6 +19,7 @@ final class TierListTableViewCell: UITableViewCell, ReusableCell {
     private var restaurantInfoLabel = UILabel()
     private var evaluatedImageView = CustomIconImageView(type: .check, size: CGSize(width: 19, height: 19))
     private var favoriteImageView = CustomIconImageView(type: .favorite, size: CGSize(width: 19, height: 19))
+    private var line = UIView()
     
     private var evaluatedTrailingConstraint: NSLayoutConstraint!
     private var favoriteTrailingConstraint: NSLayoutConstraint!
@@ -28,8 +29,6 @@ final class TierListTableViewCell: UITableViewCell, ReusableCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        layer.borderWidth = 1.0
-        layer.borderColor = UIColor.red.cgColor
         setupUI()
     }
     
@@ -50,10 +49,11 @@ extension TierListTableViewCell {
         setupConstraints()
         setupLabels()
         setupImageView()
+        setupLine()
     }
     
     private func addSubviews() {
-        [restaurantImageView, tierLabel, indexLabel, restaurantNameLabel, restaurantInfoLabel, favoriteImageView, evaluatedImageView].forEach {
+        [restaurantImageView, tierLabel, indexLabel, restaurantNameLabel, restaurantInfoLabel, favoriteImageView, evaluatedImageView, line].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -63,6 +63,7 @@ extension TierListTableViewCell {
         setupImageViewConstraints()
         setupLabelConstraints()
         setupIconConstraints()
+        setupLineConstraint()
     }
     
     private func setupImageView() {
@@ -77,6 +78,10 @@ extension TierListTableViewCell {
         restaurantNameLabel.textColor = .textBlack
         restaurantInfoLabel.font = .pretendard(size: 12, weight: .regular)
         restaurantInfoLabel.textColor = .textDarkGray
+    }
+    
+    private func setupLine() {
+        line.backgroundColor = .lineGray
     }
     
     private func setupImageViewConstraints() {
@@ -121,6 +126,15 @@ extension TierListTableViewCell {
             evaluatedImageView.centerYAnchor.constraint(equalTo: favoriteImageView.centerYAnchor),
             evaluatedImageView.widthAnchor.constraint(equalToConstant: 19),
             evaluatedImageView.heightAnchor.constraint(equalToConstant: 19)
+        ])
+    }
+    
+    private func setupLineConstraint() {
+        NSLayoutConstraint.activate([
+            line.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -7),
+            line.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 90),
+            line.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            line.heightAnchor.constraint(equalToConstant: 0.3)
         ])
     }
 }

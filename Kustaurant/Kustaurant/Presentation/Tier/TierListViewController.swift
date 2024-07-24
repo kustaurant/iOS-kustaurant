@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 final class TierListViewController: UIViewController {
     private var viewModel: TierListViewModel
     private var tierListTableViewHandler: TierListTableViewHandler?
     private var tierListView = TierListView()
+    
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
     init(viewModel: TierListViewModel) {
@@ -29,5 +32,22 @@ final class TierListViewController: UIViewController {
     // MARK: - Life Cycle
     override func loadView() {
         view = tierListView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.fetchTierLists()
+        setupBindings()
+    }
+}
+
+extension TierListViewController {
+    private func setupBindings() {
+        viewModel.tierRestaurantsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tierListTableViewHandler?.reloadData()
+            }
+            .store(in: &cancellables)
     }
 }

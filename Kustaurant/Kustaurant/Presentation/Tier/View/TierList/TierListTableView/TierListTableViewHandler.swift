@@ -29,27 +29,41 @@ extension TierListTableViewHandler {
         view.tableView.delegate = self
         view.tableView.dataSource = self
         view.tableView.register(TierListTableViewCell.self, forCellReuseIdentifier: TierListTableViewCell.reuseIdentifier)
+        view.tableView.separatorStyle = .none
+    }
+    
+    func reloadData() {
+        view.tableView.reloadData()
     }
 }
 
+// MARK: - UITableViewDelegate
 extension TierListTableViewHandler: UITableViewDelegate {
-    
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
+        66
+    }
 }
 
+// MARK: - UITableViewDataSource
 extension TierListTableViewHandler: UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        10
+        viewModel.tierRestaurants.count
     }
     
     func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TierListTableViewCell.reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = "Row \(indexPath.row + 1)"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TierListTableViewCell.reuseIdentifier, for: indexPath) as? TierListTableViewCell else { return UITableViewCell() }
+        var model = viewModel.tierRestaurants[indexPath.row]
+        model.index = indexPath.row + 1
+        cell.model = model
         return cell
     }
 }

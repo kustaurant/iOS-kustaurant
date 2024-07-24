@@ -18,4 +18,8 @@ enum Situation: String {
     case seven = "친구 초대"
     case eight = "데이트"
     case nine = "소개팅"
+    
+    var code: String {
+        return String(describing: self).uppercased()
+    }
 }

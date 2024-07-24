@@ -8,7 +8,7 @@
 import Foundation
 
 /// 음식 종류
-enum Cuisine: String {
+enum Cuisine: String{
     case all = "전체"
     case ko = "한식"
     case ja = "일식"
@@ -25,4 +25,8 @@ enum Cuisine: String {
     case ba = "베이커리"
     case sa = "샐러드"
     case jh = "제휴업체"
+    
+    var code: String {
+        return String(describing: self).uppercased()
+    }
 }
