@@ -22,6 +22,7 @@
 		58067CBD2C4FCC2100889C92 /* Situation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CBC2C4FCC2100889C92 /* Situation.swift */; };
 		58067CBF2C4FCCC100889C92 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CBE2C4FCCC100889C92 /* Location.swift */; };
 		58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CC12C509FEA00889C92 /* CustomIconImageView.swift */; };
+		58067CCC2C51552700889C92 /* CategoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CCB2C51552700889C92 /* CategoryProtocol.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
 		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
@@ -110,6 +111,7 @@
 		58067CBC2C4FCC2100889C92 /* Situation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Situation.swift; sourceTree = "<group>"; };
 		58067CBE2C4FCCC100889C92 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		58067CC12C509FEA00889C92 /* CustomIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIconImageView.swift; sourceTree = "<group>"; };
+		58067CCB2C51552700889C92 /* CategoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProtocol.swift; sourceTree = "<group>"; };
 		5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantLists.swift; sourceTree = "<group>"; };
 		5841731F2C464695001EC132 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			children = (
 				584173352C4661B5001EC132 /* Coordinator.swift */,
 				584173822C48CAE0001EC132 /* ReusableCell.swift */,
+				58067CCB2C51552700889C92 /* CategoryProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -737,6 +740,7 @@
 				5841734F2C4682C8001EC132 /* CommunitySceneDIContainer.swift in Sources */,
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
 				584173392C46664E001EC132 /* RecommendViewController.swift in Sources */,
+				58067CCC2C51552700889C92 /* CategoryProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
