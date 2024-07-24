@@ -82,20 +82,43 @@ extension TierNavigationTitleTabView {
     ) -> UIButton {
         let button = UIButton()
         button.tag = tag
-        var config = UIButton.Configuration.plain()
-        config.background.backgroundColor = UIColor.clear
-        let attributedStringSelected = NSAttributedString(string: (tab.title), attributes: [
-            .font: UIFont.pretendard(size: 17, weight: .semibold),
-            .foregroundColor: UIColor.textBlack
-        ])
-        let attributedStringNormal = NSAttributedString(string: (tab.title), attributes: [
-            .font: UIFont.pretendard(size: 17, weight: .semibold),
-            .foregroundColor: UIColor.textLightGray
-        ])
-        button.configuration = config
-        button.addAction(UIAction { [weak self] _ in self?.tabButtonTouched(tab)}, for: .touchUpInside)
-        button.setAttributedTitle(attributedStringSelected, for: .selected)
-        button.setAttributedTitle(attributedStringNormal, for: .normal)
+        configureButtonAppearance(button, with: tab)
+        addButtonAction(button, for: tab)
         return button
+    }
+
+    private func configureButtonAppearance(
+        _ button: UIButton,
+        with tab: TierTab
+    ) {
+        var config = UIButton.Configuration.plain()
+        config.background.backgroundColor = .clear
+        
+        button.configuration = config
+        button.setAttributedTitle(createAttributedString(for: tab.title, selected: true), for: .selected)
+        button.setAttributedTitle(createAttributedString(for: tab.title, selected: false), for: .normal)
+    }
+
+    private func addButtonAction(
+        _ button: UIButton,
+        for tab: TierTab
+    ) {
+        button.addAction(UIAction { [weak self] _ in
+            self?.tabButtonTouched(tab)
+        }, for: .touchUpInside)
+    }
+
+    private func createAttributedString(
+        for title: String,
+        selected: Bool
+    ) -> NSAttributedString {
+        let color: UIColor = selected ? .textBlack : .textLightGray
+        return NSAttributedString(
+            string: title,
+            attributes: [
+                .font: UIFont.pretendard(size: 17, weight: .semibold),
+                .foregroundColor: color
+            ]
+        )
     }
 }

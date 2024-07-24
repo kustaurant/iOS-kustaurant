@@ -7,31 +7,26 @@
 
 import UIKit
 
-protocol TierPageViewControllerDelegate: AnyObject {
-    func pageViewController(_ pageViewController: TierPageViewController, didSelectPageAt index: Int)
-}
-
-final class TierPageViewController: UIPageViewController {
-    private var pages: [UIViewController] = [
-        TierListViewController(),
-        TierMapViewController()
-    ]
+final class TierViewController: UIPageViewController {
+    private var tierNaviationTitleTabView = TierNavigationTitleTabView()
+    private var pages: [UIViewController]
     private var currentIndex: Int {
         guard let viewController = viewControllers?.first else { return 0 }
         return pages.firstIndex(of: viewController) ?? 0
     }
-    
-    weak var pageDelegate: TierPageViewControllerDelegate?
-    
+
     // MARK: - Initialization
-    override init(
-        transitionStyle style: UIPageViewController.TransitionStyle,
-        navigationOrientation: UIPageViewController.NavigationOrientation,
-        options: [UIPageViewController.OptionsKey : Any]? = nil
+    init(
+        tierListViewController: TierListViewController,
+        TierMapViewController: TierMapViewController
     ) {
+        pages = [tierListViewController, TierMapViewController]
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        delegate = self
+        dataSource = self
+        tierNaviationTitleTabView.delegate = self
     }
-        
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -39,19 +34,30 @@ final class TierPageViewController: UIPageViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource = self
-        delegate = self
+        setupNavigationBar()
+        setViewControllersInPageVC()
     }
 }
 
-extension TierPageViewController {
-    private func setViewControllersInPageVC() {
-        if let firstVC = pages.first {
-            setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
-        }
+extension TierViewController {
+    private func setupNavigationBar() {
+        let backImage = UIImage(systemName: "arrow.backward")
+        let backButton = UIBarButtonItem(image: backImage, style: .plain, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = backButton
+        navigationItem.titleView = tierNaviationTitleTabView
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
-    func setPage(index: Int) {
+    private func setViewControllersInPageVC() {
+        setPage(index: 0)
+        tierNaviationTitleTabView.updateTabSelection(selectedIndex: 0)
+    }
+    
+    private func setPage(index: Int) {
         guard index >= 0 && index < pages.count else { return }
         let direction: UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
         setViewControllers([pages[index]], direction: direction, animated: true, completion: nil)
@@ -59,7 +65,7 @@ extension TierPageViewController {
 }
 
 // MARK: - UIPageViewControllerDataSource
-extension TierPageViewController: UIPageViewControllerDataSource {
+extension TierViewController: UIPageViewControllerDataSource {
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
@@ -86,7 +92,7 @@ extension TierPageViewController: UIPageViewControllerDataSource {
 }
 
 // MARK: - UIPageViewControllerDelegate
-extension TierPageViewController: UIPageViewControllerDelegate {
+extension TierViewController: UIPageViewControllerDelegate {
     func pageViewController(
         _ pageViewController: UIPageViewController,
         didFinishAnimating finished: Bool,
@@ -97,6 +103,16 @@ extension TierPageViewController: UIPageViewControllerDelegate {
               let currentVC = viewControllers?.first,
               let index = pages.firstIndex(of: currentVC)
         else { return }
-        pageDelegate?.pageViewController(self, didSelectPageAt: index)
+        tierNaviationTitleTabView.updateTabSelection(selectedIndex: index)
+    }
+}
+
+// MARK: - TierNavigationTitleTabViewDelegate
+extension TierViewController: TierNavigationTitleTabViewDelegate {
+    func tabView(
+        _ tabView: TierNavigationTitleTabView,
+        didSelectTabAt index: Int
+    ) {
+        setPage(index: index)
     }
 }

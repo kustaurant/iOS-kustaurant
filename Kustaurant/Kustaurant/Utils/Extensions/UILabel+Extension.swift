@@ -10,6 +10,7 @@ import UIKit
 extension UILabel {
     @discardableResult
     func setTierLabel(tier: Tier) -> Self {
+        guard tier != .unowned else { return self }
         font = .pretendard(size: 16, weight: .bold)
         text = "\(tier.rawValue)"
         textAlignment = .center
