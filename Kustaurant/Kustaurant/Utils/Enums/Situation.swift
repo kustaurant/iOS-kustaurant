@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Situation: String, CaseIterable, CategoryProtocol {
+enum Situation: String, CaseIterable {
     case all = "전체"
     case one = "혼밥"
     case two = "2~4인"
@@ -19,11 +19,7 @@ enum Situation: String, CaseIterable, CategoryProtocol {
     case eight = "데이트"
     case nine = "소개팅"
     
-    var displayName: String {
-        rawValue
-    }
-    
-    var code: String {
-        String(describing: self).uppercased()
+    var category: Category {
+        Category(displayName: rawValue, code: String(describing: self).uppercased(), isSelect: false)
     }
 }

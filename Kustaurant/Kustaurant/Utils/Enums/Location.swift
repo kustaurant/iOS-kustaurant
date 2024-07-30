@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Location: String, CaseIterable, CategoryProtocol {
+enum Location: String, CaseIterable {
     case all = "전체"
     case l1 = "건입~중문"
     case l2 = "중문~어대"
@@ -15,11 +15,7 @@ enum Location: String, CaseIterable, CategoryProtocol {
     case l4 = "정문"
     case l5 = "구의역"
     
-    var displayName: String {
-        rawValue
-    }
-    
-    var code: String {
-        String(describing: self).uppercased()
+    var category: Category {
+        Category(displayName: rawValue, code: String(describing: self).uppercased(), isSelect: false)
     }
 }

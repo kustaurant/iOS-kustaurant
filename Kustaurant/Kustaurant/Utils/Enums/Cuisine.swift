@@ -8,7 +8,7 @@
 import Foundation
 
 /// 음식 종류
-enum Cuisine: String, CaseIterable, CategoryProtocol {
+enum Cuisine: String, CaseIterable {
     case all = "전체"
     case ko = "한식"
     case ja = "일식"
@@ -26,11 +26,7 @@ enum Cuisine: String, CaseIterable, CategoryProtocol {
     case sa = "샐러드"
     case jh = "제휴업체"
     
-    var displayName: String {
-        rawValue
-    }
-    
-    var code: String {
-        String(describing: self).uppercased()
+    var category: Category {
+        Category(displayName: rawValue, code: String(describing: self).uppercased(), isSelect: false)
     }
 }

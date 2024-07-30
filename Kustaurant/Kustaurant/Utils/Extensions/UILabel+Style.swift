@@ -22,13 +22,18 @@ extension UILabel {
     }
     
     @discardableResult
-    func setCategoryStyle(textInsets: UIEdgeInsets? = nil) -> Self {
+    func setCategoryStyle(
+        _ category: Category,
+        textInsets: UIEdgeInsets? = nil
+    ) -> Self {
         font = .pretendard(size: 14, weight: .regular)
+        text = category.displayName
         textAlignment = .center
-        layer.borderColor = UIColor.mainGreen.cgColor
+        textColor = category.isSelect ? .mainGreen : .categoryOff
+        layer.borderColor = category.isSelect ? UIColor.mainGreen.cgColor : UIColor.categoryOff.cgColor
         layer.borderWidth = 0.7
         layer.cornerRadius = 16
-        backgroundColor = .categoryOn
+        backgroundColor = category.isSelect ? .categoryOn : .clear
         clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalToConstant: 32).isActive = true
