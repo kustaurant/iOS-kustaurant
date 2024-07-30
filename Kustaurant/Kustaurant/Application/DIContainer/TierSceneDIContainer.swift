@@ -8,6 +8,7 @@
 import UIKit
 
 final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
+    
     struct Dependencies {
         let networkService: NetworkService
     }
@@ -16,6 +17,16 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
+    }
+    
+    func makeTierCategoryViewModel() -> TierCategoryViewModel {
+        DefaultTierCategoryViewModel()
+    }
+    
+    func makeTierCategoryViewController() -> TierCategoryViewController {
+        TierCategoryViewController(
+            viewModel: makeTierCategoryViewModel()
+        )
     }
     
     func makeTierRepository() -> TierRepository {
@@ -30,15 +41,16 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         )
     }
     
-    func makeTierListViewModel() -> TierListViewModel {
+    func makeTierListViewModel(actions: TierListViewModelActions) -> TierListViewModel {
         DefaultTierListViewModel(
-            tierUseCase: makeTierUseCase()
+            tierUseCase: makeTierUseCase(),
+            actions: actions
         )
     }
     
-    func makeTierListViewController() -> TierListViewController {
+    func makeTierListViewController(actions: TierListViewModelActions) -> TierListViewController {
         TierListViewController(
-            viewModel: makeTierListViewModel()
+            viewModel: makeTierListViewModel(actions: actions)
         )
     }
     
@@ -46,9 +58,9 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         TierMapViewController()
     }
     
-    func makeTierViewController() -> TierViewController {
+    func makeTierViewController(actions: TierListViewModelActions) -> TierViewController {
         TierViewController(
-            tierListViewController: makeTierListViewController(),
+            tierListViewController: makeTierListViewController(actions: actions),
             TierMapViewController: makeTierMapViewController()
         )
     }

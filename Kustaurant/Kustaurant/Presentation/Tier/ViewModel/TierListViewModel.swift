@@ -7,8 +7,13 @@
 
 import Combine
 
+struct TierListViewModelActions {
+    let showTierCategory: () -> Void
+}
+
 protocol TierListViewModelInput {
     func fetchTierLists()
+    func categoryButtonTapped()
 }
 
 protocol TierListViewModelOutput {
@@ -21,6 +26,7 @@ typealias TierListViewModel = TierListViewModelInput & TierListViewModelOutput
 
 final class DefaultTierListViewModel: TierListViewModel {
     private let tierUseCase: TierUseCases
+    private let actions: TierListViewModelActions
     
     // MARK: - Output
     var categories: [Category] = [Cuisine.all.category, Situation.eight.category, Location.l3.category, Location.l2.category, Location.l1.category, Location.l4.category]
@@ -28,8 +34,12 @@ final class DefaultTierListViewModel: TierListViewModel {
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { $tierRestaurants }
     
     // MARK: - Initialization
-    init(tierUseCase: TierUseCases) {
+    init(
+        tierUseCase: TierUseCases,
+        actions: TierListViewModelActions
+    ) {
         self.tierUseCase = tierUseCase
+        self.actions = actions
     }
 }
 
@@ -45,5 +55,9 @@ extension DefaultTierListViewModel {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func categoryButtonTapped() {
+        actions.showTierCategory()
     }
 }

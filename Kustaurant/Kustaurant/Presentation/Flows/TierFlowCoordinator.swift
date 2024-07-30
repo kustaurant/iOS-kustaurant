@@ -8,7 +8,8 @@
 import UIKit
 
 protocol TierFlowCoordinatorDependencies {
-    func makeTierViewController() -> TierViewController
+    func makeTierViewController(actions: TierListViewModelActions) -> TierViewController
+    func makeTierCategoryViewController() -> TierCategoryViewController
 }
 
 final class TierFlowCoordinator: Coordinator {
@@ -26,9 +27,17 @@ final class TierFlowCoordinator: Coordinator {
 
 extension TierFlowCoordinator {
     func start() {
-        let viewController = dependencies.makeTierViewController()
+        let actions = TierListViewModelActions(
+            showTierCategory: showTierCategory
+        )
+        let viewController = dependencies.makeTierViewController(actions: actions)
         let image = UIImage(named: TabBarPage.tier.pageImageName())?.withRenderingMode(.alwaysOriginal)
         viewController.tabBarItem = UITabBarItem(title: TabBarPage.tier.pageTitleValue(), image: image, selectedImage: image)
         navigationController.pushViewController(viewController, animated: false)
+    }
+    
+    func showTierCategory() {
+        let viewController = dependencies.makeTierCategoryViewController()
+        navigationController.pushViewController(viewController, animated: true)
     }
 }
