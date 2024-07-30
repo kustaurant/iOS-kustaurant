@@ -23,9 +23,9 @@ extension DefaultTierRepository: TierRepository {
         ranking: Int,
         limit: Int
     ) async -> Result<[Restaurant], NetworkError> {
-        let cuisineCodes = cuisines.map { $0.code }.joined(separator: ",")
-        let situationCodes = situations.map({ $0.code }).joined(separator: ",")
-        let locationCodes = locations.map({ $0.code }).joined(separator: ",")
+        let cuisineCodes = cuisines.map { $0.category.code }.joined(separator: ",")
+        let situationCodes = situations.map({ $0.category.code }).joined(separator: ",")
+        let locationCodes = locations.map({ $0.category.code }).joined(separator: ",")
         var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/tier")
         urlBuilder.addQuery(parameter: [
             "cuisines": cuisineCodes,

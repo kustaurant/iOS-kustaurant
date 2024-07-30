@@ -12,6 +12,7 @@ protocol TierListViewModelInput {
 }
 
 protocol TierListViewModelOutput {
+    var categories: [Category] { get }
     var tierRestaurants: [Restaurant] { get }
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
 }
@@ -22,6 +23,7 @@ final class DefaultTierListViewModel: TierListViewModel {
     private let tierUseCase: TierUseCases
     
     // MARK: - Output
+    var categories: [Category] = [Cuisine.all.category, Situation.eight.category, Location.l3.category, Location.l2.category, Location.l1.category, Location.l4.category]
     @Published private(set) var tierRestaurants: [Restaurant] = []
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { $tierRestaurants }
     
