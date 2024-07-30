@@ -36,27 +36,27 @@ extension AppFlowCoordinator {
         
         let homeDIContainer = appDIContainer.makeHomeSceneDIContainer()
         let homeFlow = homeDIContainer.makeHomeFlowCoordinator(
-            navigationController: UINavigationController()
+            navigationController: CustomUINavigationController()
         )
         
         let recommendDIContainer = appDIContainer.makeRecommendSceneDIContainer()
         let recommendFlow = recommendDIContainer.makeRecommendFlowCoordinator(
-            navigationController: UINavigationController()
+            navigationController: CustomUINavigationController()
         )
         
         let tierDIContainer = appDIContainer.makeTierSceneDIContainer()
         let tierFlow = tierDIContainer.makeTierFlowCoordinator(
-            navigationController: UINavigationController()
+            navigationController: CustomUINavigationController()
         )
         
         let communityDIContainer = appDIContainer.makeCommunitySceneDIContainer()
         let communityFlow = communityDIContainer.makeCommunityFlowCoordinator(
-            navigationController: UINavigationController()
+            navigationController: CustomUINavigationController()
         )
         
         let myPageDIContainer = appDIContainer.makeMyPageSceneDIContainer()
         let myPageFlow = myPageDIContainer.makeMyPageFlowCoordinator(
-            navigationController: UINavigationController()
+            navigationController: CustomUINavigationController()
         )
 
         tabBarFlowCoordinator.setupTabs(with: [homeFlow, recommendFlow, tierFlow, communityFlow, myPageFlow])

@@ -47,10 +47,6 @@ extension TierViewController {
          navigationItem.leftBarButtonItem = backButton
          */
         navigationItem.titleView = tierNaviationTitleTabView
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     private func setViewControllersInPageVC() {
