@@ -19,7 +19,7 @@ final class CustomUINavigationController: UINavigationController {
         let font = UIFont.pretendard(size: 17, weight: .semibold)
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,
-            .foregroundColor: UIColor.mainGreen
+            .foregroundColor: UIColor.textBlack
         ]
         appearance.titleTextAttributes = attributes
         navigationBar.standardAppearance = appearance
