@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PaddedLabel: UILabel {
+final class PaddedLabel: UILabel {
     var textInsets = UIEdgeInsets.zero { didSet { setNeedsDisplay() } }
 
     override func drawText(in rect: CGRect) {

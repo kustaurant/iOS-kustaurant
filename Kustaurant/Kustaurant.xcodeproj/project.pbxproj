@@ -22,6 +22,8 @@
 		58067CBD2C4FCC2100889C92 /* Situation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CBC2C4FCC2100889C92 /* Situation.swift */; };
 		58067CBF2C4FCCC100889C92 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CBE2C4FCCC100889C92 /* Location.swift */; };
 		58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CC12C509FEA00889C92 /* CustomIconImageView.swift */; };
+		58067CC72C514FCD00889C92 /* TierListCategoriesCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CC62C514FCD00889C92 /* TierListCategoriesCollectionViewHandler.swift */; };
+		58067CCA2C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CC92C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift */; };
 		58067CCC2C51552700889C92 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CCB2C51552700889C92 /* Category.swift */; };
 		58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D362C58B00800889C92 /* PaddedLabel.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
@@ -112,7 +114,10 @@
 		58067CBC2C4FCC2100889C92 /* Situation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Situation.swift; sourceTree = "<group>"; };
 		58067CBE2C4FCCC100889C92 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		58067CC12C509FEA00889C92 /* CustomIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIconImageView.swift; sourceTree = "<group>"; };
+		58067CC62C514FCD00889C92 /* TierListCategoriesCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListCategoriesCollectionViewHandler.swift; sourceTree = "<group>"; };
+		58067CC92C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		58067CCB2C51552700889C92 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		58067D362C58B00800889C92 /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantLists.swift; sourceTree = "<group>"; };
 		5841731F2C464695001EC132 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -234,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				58067CAB2C4FB72C00889C92 /* TierListView.swift */,
+				58067CC52C514FAD00889C92 /* TierListCategoriesCollectionView */,
 				58067CAD2C4FB95C00889C92 /* TierListTableView */,
 			);
 			path = TierList;
@@ -246,6 +252,23 @@
 				58067D362C58B00800889C92 /* PaddedLabel.swift */,
 			);
 			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		58067CC52C514FAD00889C92 /* TierListCategoriesCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				58067CC62C514FCD00889C92 /* TierListCategoriesCollectionViewHandler.swift */,
+				58067CC82C514FD200889C92 /* Cells */,
+			);
+			path = TierListCategoriesCollectionView;
+			sourceTree = "<group>";
+		};
+		58067CC82C514FD200889C92 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				58067CC92C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		5841731E2C46467B001EC132 /* Home */ = {
@@ -723,12 +746,14 @@
 				58067CA62C4F4FE200889C92 /* TierMapViewController.swift in Sources */,
 				584173662C47A964001EC132 /* HomeView.swift in Sources */,
 				584173202C464695001EC132 /* HomeViewController.swift in Sources */,
+				58067CC72C514FCD00889C92 /* TierListCategoriesCollectionViewHandler.swift in Sources */,
 				58067CA82C4F512100889C92 /* TierPageViewController.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */,
 				58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */,
 				5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */,
+				58067CCA2C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift in Sources */,
 				58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */,
 				58067CB72C4FBFB900889C92 /* TierRepository.swift in Sources */,
 				5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */,

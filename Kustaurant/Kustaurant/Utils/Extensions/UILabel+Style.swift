@@ -36,7 +36,7 @@ extension UILabel {
         backgroundColor = category.isSelect ? .categoryOn : .clear
         clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
-        heightAnchor.constraint(equalToConstant: 32).isActive = true
+        heightAnchor.constraint(equalToConstant: Category.Height).isActive = true
         if let paddedLabel = self as? PaddedLabel,
            let textInsets = textInsets {
             paddedLabel.textInsets = textInsets

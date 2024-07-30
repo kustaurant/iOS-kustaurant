@@ -11,6 +11,7 @@ import Combine
 final class TierListViewController: UIViewController {
     private var viewModel: TierListViewModel
     private var tierListTableViewHandler: TierListTableViewHandler?
+    private var tierListCategoriesCollectionViewHandler: TierListCategoriesCollectionViewHandler?
     private var tierListView = TierListView()
     
     private var cancellables = Set<AnyCancellable>()
@@ -20,6 +21,10 @@ final class TierListViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         tierListTableViewHandler = TierListTableViewHandler(
+            view: tierListView,
+            viewModel: viewModel
+        )
+        tierListCategoriesCollectionViewHandler = TierListCategoriesCollectionViewHandler(
             view: tierListView,
             viewModel: viewModel
         )
