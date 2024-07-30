@@ -148,7 +148,7 @@ extension TierListTableViewCell {
     
     private func bindLabels() {
         if let tier = model?.mainTier {
-            tierLabel.setTierLabel(tier: tier)
+            tierLabel.setTierStyle(tier: tier)
         }
         restaurantNameLabel.text = model?.restaurantName
         restaurantInfoLabel.text = [model?.restaurantCuisine, model?.restaurantPosition].compactMap({ $0 }).joined(separator: " ㅣ ")

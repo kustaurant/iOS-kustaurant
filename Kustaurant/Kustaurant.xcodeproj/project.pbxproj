@@ -23,6 +23,7 @@
 		58067CBF2C4FCCC100889C92 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CBE2C4FCCC100889C92 /* Location.swift */; };
 		58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CC12C509FEA00889C92 /* CustomIconImageView.swift */; };
 		58067CCC2C51552700889C92 /* CategoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CCB2C51552700889C92 /* CategoryProtocol.swift */; };
+		58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D362C58B00800889C92 /* PaddedLabel.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
 		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
@@ -65,7 +66,7 @@
 		584173952C4A070B001EC132 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5841738C2C4A070B001EC132 /* Pretendard-Thin.otf */; };
 		584173962C4A070B001EC132 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5841738D2C4A070B001EC132 /* Pretendard-Medium.otf */; };
 		584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */; };
-		5841739A2C4A1040001EC132 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173992C4A1040001EC132 /* UILabel+Extension.swift */; };
+		5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173992C4A1040001EC132 /* UILabel+Style.swift */; };
 		5841739C2C4A29C6001EC132 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841739B2C4A29C6001EC132 /* Tier.swift */; };
 		5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
@@ -154,7 +155,7 @@
 		5841738C2C4A070B001EC132 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		5841738D2C4A070B001EC132 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Pretendard.swift"; sourceTree = "<group>"; };
-		584173992C4A1040001EC132 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		584173992C4A1040001EC132 /* UILabel+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		5841739B2C4A29C6001EC132 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
 		5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				58067CC12C509FEA00889C92 /* CustomIconImageView.swift */,
+				58067D362C58B00800889C92 /* PaddedLabel.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -392,7 +394,7 @@
 			children = (
 				5841736A2C47B845001EC132 /* UIImage+Resize.swift */,
 				584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */,
-				584173992C4A1040001EC132 /* UILabel+Extension.swift */,
+				584173992C4A1040001EC132 /* UILabel+Style.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -689,7 +691,7 @@
 				5841739C2C4A29C6001EC132 /* Tier.swift in Sources */,
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
-				5841739A2C4A1040001EC132 /* UILabel+Extension.swift in Sources */,
+				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
@@ -703,6 +705,7 @@
 				58067CAA2C4FAE2A00889C92 /* TierListViewModel.swift in Sources */,
 				584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */,
 				CF54AD122C4289A900E0DE68 /* Response.swift in Sources */,
+				58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */,
 				58067CB22C4FBA9800889C92 /* TierListTableViewCell.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
 				584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */,

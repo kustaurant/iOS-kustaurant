@@ -33,7 +33,7 @@ final class HomeRestaurantListsCollectionViewCell: UICollectionViewCell, Reusabl
 extension HomeRestaurantListsCollectionViewCell {
     func updateContent(_ data: Restaurant) {
         if let tier = data.mainTier {
-            tierLabel.setTierLabel(tier: tier)
+            tierLabel.setTierStyle(tier: tier)
         }
         restaurantNameLabel.text = data.restaurantName
         restaurantCuisineAndPositionLabel.text = [data.restaurantCuisine, data.restaurantPosition].compactMap { $0 }.joined(separator: "  |  ")
