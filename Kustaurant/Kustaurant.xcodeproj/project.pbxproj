@@ -31,6 +31,7 @@
 		58067D3F2C58E35800889C92 /* CustomUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D3E2C58E35800889C92 /* CustomUINavigationController.swift */; };
 		58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D442C59FA6700889C92 /* TierCategoryView.swift */; };
 		58067D482C5A027000889C92 /* TierCategoryCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D472C5A027000889C92 /* TierCategoryCollectionViewHandler.swift */; };
+		58067D4A2C5A1D6200889C92 /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D492C5A1D6200889C92 /* CategoryType.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
 		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
@@ -128,6 +129,7 @@
 		58067D3E2C58E35800889C92 /* CustomUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUINavigationController.swift; sourceTree = "<group>"; };
 		58067D442C59FA6700889C92 /* TierCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierCategoryView.swift; sourceTree = "<group>"; };
 		58067D472C5A027000889C92 /* TierCategoryCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierCategoryCollectionViewHandler.swift; sourceTree = "<group>"; };
+		58067D492C5A1D6200889C92 /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
 		5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantLists.swift; sourceTree = "<group>"; };
 		5841731F2C464695001EC132 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 				58067CBA2C4FCAA400889C92 /* Cuisine.swift */,
 				58067CBC2C4FCC2100889C92 /* Situation.swift */,
 				58067CBE2C4FCCC100889C92 /* Location.swift */,
+				58067D492C5A1D6200889C92 /* CategoryType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -766,6 +769,7 @@
 				58067D3D2C58D73C00889C92 /* TierCategoryViewModel.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
 				584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */,
+				58067D4A2C5A1D6200889C92 /* CategoryType.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
 				5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */,

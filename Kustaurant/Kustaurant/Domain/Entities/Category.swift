@@ -13,6 +13,7 @@ struct Category: Equatable {
     var code: String
     var isSelect: Bool
     var origin: Origin
+    var type: CategoryType
     
     enum Origin: Equatable {
         case cuisine(Cuisine)

@@ -16,6 +16,6 @@ enum Location: String, CaseIterable {
     case l5 = "구의역"
     
     var category: Category {
-        Category(displayName: rawValue, code: String(describing: self).uppercased(), isSelect: false, origin: .location(self))
+        Category(displayName: rawValue, code: String(describing: self).uppercased(), isSelect: false, origin: .location(self), type: .location)
     }
 }

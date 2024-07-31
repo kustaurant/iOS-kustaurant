@@ -29,6 +29,17 @@ extension TierCategoryCollectionViewHandler {
         view.categoriesCollectionView.dataSource = self
     }
     
+    private func getCategory(for indexPath: IndexPath) -> Category {
+        switch CategoryType.allCases[indexPath.section] {
+        case .cuisine:
+            return viewModel.cuisines[indexPath.item]
+        case .situation:
+            return viewModel.situations[indexPath.item]
+        case .location:
+            return viewModel.locations[indexPath.item]
+        }
+    }
+    
     func reloadSection(indexSet: IndexSet) {
         Task {
             await MainActor.run {
@@ -44,16 +55,7 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        
-        var category: Category?
-        switch indexPath.section {
-        case 0: category = viewModel.cuisines[indexPath.row]
-        case 1: category = viewModel.situations[indexPath.row]
-        case 2: category = viewModel.locations[indexPath.row]
-        default: return
-        }
-        
-        guard let category = category else { return }
+        let category = getCategory(for: indexPath)
         viewModel.selectCategories(categories: [category])
     }
 }
@@ -62,7 +64,7 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDelegate {
 extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        3
+        CategoryType.allCases.count
     }
     
     func collectionView(
@@ -71,13 +73,8 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeaderView", for: indexPath) as? SectionHeaderView else { return UICollectionReusableView() }
-
-        switch indexPath.section {
-        case 0: header.label.text = "음식"
-        case 1: header.label.text = "상황"
-        case 2: header.label.text = "위치"
-        default: break
-        }
+        let categoryType = CategoryType.allCases[indexPath.section]
+        header.model = categoryType
         return header
     }
     
@@ -93,11 +90,13 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        switch section {
-        case 0: viewModel.cuisines.count
-        case 1: viewModel.situations.count
-        case 2: viewModel.locations.count
-        default: 0
+        switch CategoryType.allCases[section] {
+        case .cuisine:
+            return viewModel.cuisines.count
+        case .situation:
+            return viewModel.situations.count
+        case .location:
+            return viewModel.locations.count
         }
     }
     
@@ -106,20 +105,10 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TierListCategoryCollectionViewCell.reuseIdentifier, for: indexPath) as? TierListCategoryCollectionViewCell else { return UICollectionViewCell() }
-
-        var model: Category?
-        switch indexPath.section {
-        case 0: model = viewModel.cuisines[indexPath.row]
-        case 1: model = viewModel.situations[indexPath.row]
-        case 2: model = viewModel.locations[indexPath.row]
-        default: model = nil
-        }
-        cell.model = model
-        
+        let category = getCategory(for: indexPath)
+        cell.model = category
         return cell
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -130,17 +119,9 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDelegateFlowLayout 
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        var category: Category?
-        
-        switch indexPath.section {
-        case 0: category = viewModel.cuisines[indexPath.row]
-        case 1: category = viewModel.situations[indexPath.row]
-        case 2: category = viewModel.locations[indexPath.row]
-        default: category = nil
-        }
-
+        let category = getCategory(for: indexPath)
         let label = UILabel()
-        label.text = category?.displayName
+        label.text = category.displayName
         label.font = .pretendard(size: 14, weight: .regular)
         let size = label.intrinsicContentSize
         return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.Height)
