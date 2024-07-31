@@ -7,10 +7,15 @@
 
 import Combine
 
+struct HomeViewModelActions {
+    let showRestaurantDetail: (Restaurant) -> Void
+}
+
 protocol HomeViewModelInput {
     var topRestaurants: [Restaurant] { get set }
     var forMeRestaurants: [Restaurant] { get set }
     func fetchRestaurantLists()
+    func restaurantlistsDidSelect(restaurant: Restaurant)
 }
 
 protocol HomeViewModelOutput {
@@ -22,6 +27,7 @@ typealias HomeViewModel = HomeViewModelInput & HomeViewModelOutput
 
 final class DefaultHomeViewModel: HomeViewModel {
     private let homeUseCase: HomeUseCases
+    private let actions: HomeViewModelActions
     
     // MARK: - Input
     var topRestaurants: [Restaurant] = []
@@ -32,8 +38,12 @@ final class DefaultHomeViewModel: HomeViewModel {
     var mainSections: [HomeSection] = [.banner, .categories, .topRestaurants, .forMeRestaurants]
     
     // MARK: - Initialization
-    init(homeUseCase: HomeUseCases) {
+    init(
+        homeUseCase: HomeUseCases,
+        actions: HomeViewModelActions
+    ) {
         self.homeUseCase = homeUseCase
+        self.actions = actions
     }
 }
 
@@ -49,5 +59,9 @@ extension DefaultHomeViewModel {
                 restaurantLists.send(data)
             }
         }
+    }
+    
+    func restaurantlistsDidSelect(restaurant: Restaurant) {
+        actions.showRestaurantDetail(restaurant)
     }
 }
