@@ -25,7 +25,12 @@ final class AppDIContainer {
     }
     
     func makeTierSceneDIContainer() -> TierSceneDIContainer {
-        TierSceneDIContainer()
+        let dependecies = TierSceneDIContainer.Dependencies(
+            networkService: networkService
+        )
+        return TierSceneDIContainer(
+            dependencies: dependecies
+        )
     }
     
     func makeCommunitySceneDIContainer() -> CommunitySceneDIContainer {

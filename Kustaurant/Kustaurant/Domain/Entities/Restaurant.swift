@@ -9,6 +9,7 @@ import Foundation
 
 struct Restaurant: Codable {
     var restaurantId: Int?
+    var restaurantRanking: Int?
     var restaurantName: String?
     var restaurantImgUrl: String?
     var mainTier: Tier?
@@ -24,15 +25,20 @@ struct Restaurant: Codable {
     var restaurantScore: String?
     var isEvaluated: Bool?
     var isFavorite: Bool?
+    var x: String?
+    var y: String?
     var restaurantMenuList: [RestaurantMenu?]?
     
+    var index: Int?
+    
     enum CodingKeys: CodingKey {
-        case restaurantId, restaurantName, restaurantImgUrl, mainTier, restaurantCuisine, restaurantPosition, restaurantAddress, isOpen, businessHours, naverMapUrl, situationList, partnershipInfo, evaluationCount, restaurantScore, isEvaluated, isFavorite, restaurantMenuList
+        case restaurantId, restaurantRanking, restaurantName, restaurantImgUrl, mainTier, restaurantCuisine, restaurantPosition, restaurantAddress, isOpen, businessHours, naverMapUrl, situationList, partnershipInfo, evaluationCount, restaurantScore, isEvaluated, isFavorite, x, y, restaurantMenuList
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         restaurantId = try? container.decodeIfPresent(Int.self, forKey: .restaurantId)
+        restaurantRanking = try? container.decodeIfPresent(Int.self, forKey: .restaurantRanking)
         restaurantName = try? container.decodeIfPresent(String.self, forKey: .restaurantName)
         restaurantImgUrl = try? container.decodeIfPresent(String.self, forKey: .restaurantImgUrl)
         mainTier = try? container.decodeIfPresent(Tier.self, forKey: .mainTier)
@@ -48,6 +54,8 @@ struct Restaurant: Codable {
         restaurantScore = try? container.decodeIfPresent(String.self, forKey: .restaurantScore)
         isEvaluated = try? container.decodeIfPresent(Bool.self, forKey: .isEvaluated)
         isFavorite = try? container.decodeIfPresent(Bool.self, forKey: .isFavorite)
+        x = try? container.decodeIfPresent(String.self, forKey: .x)
+        y = try? container.decodeIfPresent(String.self, forKey: .y)
         restaurantMenuList = try? container.decodeIfPresent([RestaurantMenu].self, forKey: .isFavorite)
     }
 }

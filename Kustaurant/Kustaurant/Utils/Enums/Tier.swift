@@ -8,6 +8,7 @@
 import UIKit
 
 enum Tier: Int, Codable {
+    case unowned = -1
     case first = 1
     case second = 2
     case third = 3
@@ -23,6 +24,8 @@ enum Tier: Int, Codable {
             return .tierThird
         case .fourth:
             return .tierFourth
+        case .unowned:
+            return .clear
         }
     }
 }
