@@ -62,7 +62,6 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
-
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         CategoryType.allCases.count
     }
@@ -76,14 +75,6 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
         let categoryType = CategoryType.allCases[indexPath.section]
         header.model = categoryType
         return header
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        referenceSizeForHeaderInSection section: Int
-    ) -> CGSize {
-        CGSize(width: collectionView.frame.width, height: 44)
     }
     
     func collectionView(
@@ -113,6 +104,13 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension TierCategoryCollectionViewHandler: UICollectionViewDelegateFlowLayout {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int
+    ) -> CGSize {
+        CGSize(width: collectionView.frame.width, height: 44)
+    }
     
     func collectionView(
         _ collectionView: UICollectionView,
@@ -126,5 +124,4 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDelegateFlowLayout 
         let size = label.intrinsicContentSize
         return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.Height)
     }
-
 }

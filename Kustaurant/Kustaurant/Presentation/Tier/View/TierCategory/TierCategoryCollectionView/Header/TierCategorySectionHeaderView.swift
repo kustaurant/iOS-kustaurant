@@ -44,8 +44,8 @@ extension TierCategorySectionHeaderView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            title.leadingAnchor.constraint(equalTo: leadingAnchor),
-            title.topAnchor.constraint(equalTo: topAnchor)
+            title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            title.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     
