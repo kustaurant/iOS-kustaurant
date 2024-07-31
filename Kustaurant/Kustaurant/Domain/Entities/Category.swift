@@ -21,3 +21,13 @@ struct Category: Equatable {
         case location(Location)
     }
 }
+
+extension Category.Origin {
+    func value() -> Any {
+        switch self {
+        case .cuisine(let value): return value
+        case .situation(let value): return value
+        case .location(let value): return value
+        }
+    }
+}

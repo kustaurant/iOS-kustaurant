@@ -41,17 +41,28 @@ extension DefaultTierCategoryViewModel {
         for category in categories {
             switch category.origin {
             case .cuisine(let cuisine):
-                if let index = cuisines.firstIndex(where: { $0.origin == .cuisine(cuisine) }) {
-                    cuisines[index].isSelect = true
-                }
+                updateCategorySelection(for: &cuisines, selected: cuisine, allCase: .all)
             case .situation(let situation):
-                if let index = situations.firstIndex(where: { $0.origin == .situation(situation) }) {
-                    situations[index].isSelect = true
-                }
+                updateCategorySelection(for: &situations, selected: situation, allCase: .all)
             case .location(let location):
-                if let index = locations.firstIndex(where: { $0.origin == .location(location) }) {
-                    locations[index].isSelect = true
-                }
+                updateCategorySelection(for: &locations, selected: location, allCase: .all)
+            }
+        }
+    }
+    
+    private func updateCategorySelection<T: Equatable>(for categories: inout [Category], selected: T, allCase: T) {
+        if selected == allCase {
+            // "all" 버튼을 클릭한 경우
+            for i in 0..<categories.count {
+                categories[i].isSelect = (categories[i].origin.value() as? T == allCase)
+            }
+        } else {
+            // "all"이 아닌 버튼을 클릭한 경우
+            if let allIndex = categories.firstIndex(where: { ($0.origin.value() as? T) == allCase }) {
+                categories[allIndex].isSelect = false
+            }
+            if let index = categories.firstIndex(where: { ($0.origin.value() as? T) == selected }) {
+                categories[index].isSelect.toggle()
             }
         }
     }
