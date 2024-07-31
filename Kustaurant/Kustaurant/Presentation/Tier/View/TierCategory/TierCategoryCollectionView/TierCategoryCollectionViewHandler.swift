@@ -43,7 +43,11 @@ extension TierCategoryCollectionViewHandler {
     func reloadSection(indexSet: IndexSet) {
         Task {
             await MainActor.run {
-                view.categoriesCollectionView.reloadSections(indexSet)
+                UIView.performWithoutAnimation {
+                    view.categoriesCollectionView.performBatchUpdates({
+                        view.categoriesCollectionView.reloadSections(indexSet)
+                    }, completion: nil)
+                }
             }
         }
     }
