@@ -29,6 +29,13 @@ extension TierCategoryCollectionViewHandler {
         view.categoriesCollectionView.dataSource = self
     }
     
+    func reloadSection(indexSet: IndexSet) {
+        Task {
+            await MainActor.run {
+                view.categoriesCollectionView.reloadSections(indexSet)
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate

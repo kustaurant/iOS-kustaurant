@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 final class TierCategoryViewController: UIViewController {
     private var viewModel: TierCategoryViewModel
     private var tierCategoryCollectionViewHandler: TierCategoryCollectionViewHandler?
     private var tierCategoryView = TierCategoryView()
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
     init(viewModel: TierCategoryViewModel) {
@@ -34,6 +36,7 @@ final class TierCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupBinding()
     }
 }
 
@@ -41,6 +44,36 @@ final class TierCategoryViewController: UIViewController {
 extension TierCategoryViewController {
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - Bind
+extension TierCategoryViewController {
+    private func setupBinding() {
+        bindCategories()
+    }
+    
+    private func bindCategories() {
+        viewModel.cuisinesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tierCategoryCollectionViewHandler?.reloadSection(indexSet: IndexSet(integer: 0))
+            }
+            .store(in: &cancellables)
+
+        viewModel.situationsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tierCategoryCollectionViewHandler?.reloadSection(indexSet: IndexSet(integer: 1))
+            }
+            .store(in: &cancellables)
+
+        viewModel.locationsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tierCategoryCollectionViewHandler?.reloadSection(indexSet: IndexSet(integer: 2))
+            }
+            .store(in: &cancellables)
     }
 }
 
