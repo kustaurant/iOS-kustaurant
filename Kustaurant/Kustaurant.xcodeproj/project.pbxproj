@@ -446,10 +446,10 @@
 			children = (
 				5841736A2C47B845001EC132 /* UIImage+Resize.swift */,
 				584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */,
-				CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */,
 				CFE204572C5A121D00BCA87C /* UIView+.swift */,
 				584173992C4A1040001EC132 /* UILabel+Style.swift */,
 				BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */,
+				CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -754,6 +754,7 @@
 				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				CFE204582C5A121D00BCA87C /* UIView+.swift in Sources */,
+				584173452C467EB8001EC132 /* TierViewController.swift in Sources */,
 				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
