@@ -72,7 +72,7 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
         viewForSupplementaryElementOfKind kind: String,
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeaderView", for: indexPath) as? SectionHeaderView else { return UICollectionReusableView() }
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: TierCategorySectionHeaderView.reuseIdentifier, for: indexPath) as? TierCategorySectionHeaderView else { return UICollectionReusableView() }
         let categoryType = CategoryType.allCases[indexPath.section]
         header.model = categoryType
         return header
@@ -127,27 +127,4 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDelegateFlowLayout 
         return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.Height)
     }
 
-}
-
-class SectionHeaderView: UICollectionReusableView {
-    let label: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            label.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
