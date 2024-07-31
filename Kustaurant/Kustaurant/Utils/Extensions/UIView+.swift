@@ -35,6 +35,11 @@ extension UIView: Ku {
         case fillY(CGFloat)
         case fill(CGFloat)
     }
+    
+    enum SizeLayout {
+        case width(CGFloat)
+        case height(CGFloat)
+    }
 }
 
 extension Ku where Self: UIView {
@@ -82,6 +87,16 @@ extension Ku where Self: UIView {
                 view.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: constant),
                 view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: constant)
             ]
+            }
+        }).flatMap { $0 }
+        NSLayoutConstraint.activate(layouts)
+    }
+    
+    func autolayout(_ layout: [SizeLayout]) {
+        let layouts = layout.map({ layout in
+            switch layout {
+            case .width(let constant): [self.widthAnchor.constraint(equalToConstant: constant)]
+            case .height(let constant): [self.heightAnchor.constraint(equalToConstant: constant)]
             }
         }).flatMap { $0 }
         NSLayoutConstraint.activate(layouts)
