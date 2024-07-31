@@ -19,13 +19,15 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
-    func makeTierCategoryViewModel() -> TierCategoryViewModel {
-        DefaultTierCategoryViewModel()
+    func makeTierCategoryViewModel(categories: [Category]) -> TierCategoryViewModel {
+        DefaultTierCategoryViewModel(
+            categories: categories
+        )
     }
     
-    func makeTierCategoryViewController() -> TierCategoryViewController {
+    func makeTierCategoryViewController(categories: [Category]) -> TierCategoryViewController {
         TierCategoryViewController(
-            viewModel: makeTierCategoryViewModel()
+            viewModel: makeTierCategoryViewModel(categories: categories)
         )
     }
     

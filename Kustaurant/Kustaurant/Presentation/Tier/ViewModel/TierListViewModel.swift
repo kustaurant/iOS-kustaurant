@@ -8,7 +8,7 @@
 import Combine
 
 struct TierListViewModelActions {
-    let showTierCategory: () -> Void
+    let showTierCategory: ([Category]) -> Void
 }
 
 protocol TierListViewModelInput {
@@ -29,7 +29,7 @@ final class DefaultTierListViewModel: TierListViewModel {
     private let actions: TierListViewModelActions
     
     // MARK: - Output
-    var categories: [Category] = [Cuisine.all.category, Situation.eight.category, Location.l3.category, Location.l2.category, Location.l1.category, Location.l4.category]
+    var categories: [Category] = [Cuisine.all.category, Situation.all.category, Location.all.category]
     @Published private(set) var tierRestaurants: [Restaurant] = []
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { $tierRestaurants }
     
@@ -58,6 +58,6 @@ extension DefaultTierListViewModel {
     }
     
     func categoryButtonTapped() {
-        actions.showTierCategory()
+        actions.showTierCategory(categories)
     }
 }

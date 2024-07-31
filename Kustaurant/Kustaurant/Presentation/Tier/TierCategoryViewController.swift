@@ -9,11 +9,17 @@ import UIKit
 
 final class TierCategoryViewController: UIViewController {
     private var viewModel: TierCategoryViewModel
+    private var tierCategoryCollectionViewHandler: TierCategoryCollectionViewHandler?
+    private var tierCategoryView = TierCategoryView()
     
     // MARK: - Initialization
     init(viewModel: TierCategoryViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        tierCategoryCollectionViewHandler = TierCategoryCollectionViewHandler(
+            view: tierCategoryView,
+            viewModel: viewModel
+        )
     }
     
     required init?(coder: NSCoder) {
@@ -21,9 +27,12 @@ final class TierCategoryViewController: UIViewController {
     }
     
     // MARK: - Life Cycle
+    override func loadView() {
+        view = tierCategoryView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         setupUI()
     }
 }

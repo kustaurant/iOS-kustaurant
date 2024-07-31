@@ -9,7 +9,7 @@ import UIKit
 
 protocol TierFlowCoordinatorDependencies {
     func makeTierViewController(actions: TierListViewModelActions) -> TierViewController
-    func makeTierCategoryViewController() -> TierCategoryViewController
+    func makeTierCategoryViewController(categories: [Category]) -> TierCategoryViewController
 }
 
 final class TierFlowCoordinator: Coordinator {
@@ -36,8 +36,8 @@ extension TierFlowCoordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
     
-    func showTierCategory() {
-        let viewController = dependencies.makeTierCategoryViewController()
+    func showTierCategory(categories: [Category]) {
+        let viewController = dependencies.makeTierCategoryViewController(categories: categories)
         navigationController.pushViewController(viewController, animated: true)
     }
 }
