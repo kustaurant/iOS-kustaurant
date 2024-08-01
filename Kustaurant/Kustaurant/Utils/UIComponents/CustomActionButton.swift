@@ -31,7 +31,7 @@ final class CustomActionButton: UIButton {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setup()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setup() {
@@ -47,16 +47,10 @@ final class CustomActionButton: UIButton {
         configuration?.attributedTitle = AttributedString(buttonTitle, attributes: AttributeContainer(
             [.font: UIFont.pretendard(size: 18, weight: .semibold)]
         ))
-        switch buttonState {
-        case .on:
-            configuration?.baseBackgroundColor = .mainGreen
-            configuration?.baseForegroundColor = .white
-            isEnabled = true
-        case .off:
-            configuration?.baseBackgroundColor = .actionButtonBackgroundOff
-            configuration?.baseForegroundColor = .actionButtonTextOff
-            isEnabled = false
-        }
+        let isOn = buttonState == .on
+        configuration?.baseBackgroundColor = isOn ? .mainGreen : .actionButtonBackgroundOff
+        configuration?.baseForegroundColor = isOn ? .white : .actionButtonTextOff
+        isEnabled = isOn
         self.configuration = configuration
     }
 }

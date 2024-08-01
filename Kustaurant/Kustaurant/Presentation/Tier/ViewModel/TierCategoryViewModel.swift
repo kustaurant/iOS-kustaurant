@@ -12,6 +12,7 @@ protocol TierCategoryViewModelInput {
 }
 
 protocol TierCategoryViewModelOutput {
+    var initialCategories: [Category] { get }
     var cuisines: [Category] { get }
     var situations: [Category] { get }
     var locations: [Category] { get }
@@ -23,16 +24,18 @@ protocol TierCategoryViewModelOutput {
 typealias TierCategoryViewModel = TierCategoryViewModelInput & TierCategoryViewModelOutput
 
 final class DefaultTierCategoryViewModel: TierCategoryViewModel {
+    var initialCategories: [Category] = []
     @Published var cuisines: [Category] = Cuisine.allCases.map({ $0.category })
     @Published var situations: [Category] = Situation.allCases.map({ $0.category})
     @Published var locations: [Category] = Location.allCases.map({ $0.category })
-    
+
     var cuisinesPublisher: Published<[Category]>.Publisher { $cuisines }
     var situationsPublisher: Published<[Category]>.Publisher { $situations }
     var locationsPublisher: Published<[Category]>.Publisher { $locations }
     
     init(categories: [Category]) {
         selectCategories(categories: categories)
+        initialCategories = cuisines + situations + locations
     }
 }
 

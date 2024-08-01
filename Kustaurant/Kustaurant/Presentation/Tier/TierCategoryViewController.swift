@@ -45,35 +45,57 @@ extension TierCategoryViewController {
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
+    
+    private func doneButtonTouched() {
+        
+    }
 }
 
 // MARK: - Bind
 extension TierCategoryViewController {
     private func setupBinding() {
         bindCategories()
+        bindButtons()
     }
     
     private func bindCategories() {
         viewModel.cuisinesPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.tierCategoryCollectionViewHandler?.reloadSection(indexSet: IndexSet(integer: 0))
+                self?.reloadSectionAndButtonState(0)
             }
             .store(in: &cancellables)
 
         viewModel.situationsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.tierCategoryCollectionViewHandler?.reloadSection(indexSet: IndexSet(integer: 1))
+                self?.reloadSectionAndButtonState(1)
             }
             .store(in: &cancellables)
 
         viewModel.locationsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.tierCategoryCollectionViewHandler?.reloadSection(indexSet: IndexSet(integer: 2))
+                self?.reloadSectionAndButtonState(2)
             }
             .store(in: &cancellables)
+    }
+    
+    private func bindButtons() {
+        tierCategoryView.actionButton.addAction(UIAction { [weak self] _ in self?.doneButtonTouched() }, for: .touchUpInside)
+    }
+}
+
+extension TierCategoryViewController {
+    private func reloadSectionAndButtonState(_ index: Int) {
+        self.tierCategoryCollectionViewHandler?.reloadSection(indexSet: IndexSet(integer: index))
+        checkIfStateChanged()
+    }
+    
+    private func checkIfStateChanged() {
+        let currentCategories = viewModel.cuisines + viewModel.situations + viewModel.locations
+        let isChanged = viewModel.initialCategories != currentCategories
+        tierCategoryView.actionButton.buttonState = isChanged ? .on : .off
     }
 }
 
@@ -86,7 +108,6 @@ extension TierCategoryViewController {
         let icon = UIImage(named: "icon_back")?.withRenderingMode(.alwaysOriginal)
         let backButton = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem = backButton
-        
         navigationItem.title = "카테고리"
     }
 }
