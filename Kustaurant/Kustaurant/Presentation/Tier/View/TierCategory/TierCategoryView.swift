@@ -22,6 +22,7 @@ final class TierCategoryView: UIView {
         collectionView.register(TierListCategoryCollectionViewCell.self, forCellWithReuseIdentifier: TierListCategoryCollectionViewCell.reuseIdentifier)
         return collectionView
     }()
+    let actionButton = CustomActionButton()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -38,10 +39,11 @@ extension TierCategoryView {
     private func setupUI() {
         addSubviews()
         setupConstraint()
+        setupActionButton()
     }
     
     private func addSubviews() {
-        [categoriesCollectionView].forEach {
+        [categoriesCollectionView, actionButton].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -49,11 +51,19 @@ extension TierCategoryView {
     
     private func setupConstraint() {
         NSLayoutConstraint.activate([
+            actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            actionButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            actionButton.heightAnchor.constraint(equalToConstant: 52),
             categoriesCollectionView.topAnchor.constraint(equalTo: topAnchor),
             categoriesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             categoriesCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            categoriesCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            categoriesCollectionView.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: 10)
         ])
+    }
+    
+    private func setupActionButton() {
+        actionButton.buttonTitle = "적용하기"
     }
 
 }

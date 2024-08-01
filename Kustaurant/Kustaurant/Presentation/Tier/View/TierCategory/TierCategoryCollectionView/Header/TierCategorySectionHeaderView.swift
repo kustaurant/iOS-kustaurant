@@ -9,6 +9,7 @@ import UIKit
 
 final class TierCategorySectionHeaderView: UICollectionReusableView {
     static var reuseIdentifier: String = String(describing: TierCategorySectionHeaderView.self)
+    static var height: CGFloat = 44
     private let title = UILabel()
     var model: CategoryType? { didSet { bind() }}
     
