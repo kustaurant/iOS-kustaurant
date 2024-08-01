@@ -9,7 +9,7 @@ import UIKit
 
 final class TierViewController: UIPageViewController {
     private var tierNaviationTitleTabView = TierNavigationTitleTabView()
-    private var pages: [UIViewController]
+    var pages: [UIViewController]
     private var currentIndex: Int {
         guard let viewController = viewControllers?.first else { return 0 }
         return pages.firstIndex(of: viewController) ?? 0

@@ -47,6 +47,13 @@ final class TierListViewController: UIViewController {
 }
 
 extension TierListViewController {
+    func receiveTierCategories(categories: [Category]) {
+        viewModel.updateCategories(categories: categories)
+        tierListCategoriesCollectionViewHandler?.reloadData()
+    }
+}
+
+extension TierListViewController {
     private func setupBindings() {
         bindtierRestaurants()
         bindCategoryButton()

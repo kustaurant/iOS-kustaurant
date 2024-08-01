@@ -7,8 +7,13 @@
 
 import Foundation
 
+struct TierCategoryViewModelActions {
+    let receiveTierCategories: (_ categories: [Category]) -> Void
+}
+
 protocol TierCategoryViewModelInput {
     func selectCategories(categories: [Category])
+    func updateTierCategories()
 }
 
 protocol TierCategoryViewModelOutput {
@@ -24,22 +29,34 @@ protocol TierCategoryViewModelOutput {
 typealias TierCategoryViewModel = TierCategoryViewModelInput & TierCategoryViewModelOutput
 
 final class DefaultTierCategoryViewModel: TierCategoryViewModel {
+    private let actions: TierCategoryViewModelActions
+    
+    // MARK: Output
     var initialCategories: [Category] = []
     @Published var cuisines: [Category] = Cuisine.allCases.map({ $0.category })
     @Published var situations: [Category] = Situation.allCases.map({ $0.category})
     @Published var locations: [Category] = Location.allCases.map({ $0.category })
-
     var cuisinesPublisher: Published<[Category]>.Publisher { $cuisines }
     var situationsPublisher: Published<[Category]>.Publisher { $situations }
     var locationsPublisher: Published<[Category]>.Publisher { $locations }
     
-    init(categories: [Category]) {
+    init(
+        actions: TierCategoryViewModelActions,
+        categories: [Category]
+    ) {
+        self.actions = actions
         selectCategories(categories: categories)
         initialCategories = cuisines + situations + locations
     }
 }
 
+// MARK: - Input
 extension DefaultTierCategoryViewModel {
+    func updateTierCategories() {
+        let categories = (cuisines + situations + locations).filter({ $0.isSelect })
+        actions.receiveTierCategories(categories)
+    }
+    
     func selectCategories(categories: [Category]) {
         for category in categories {
             switch category.origin {

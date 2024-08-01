@@ -9,12 +9,14 @@ import UIKit
 
 protocol TierFlowCoordinatorDependencies {
     func makeTierViewController(actions: TierListViewModelActions) -> TierViewController
-    func makeTierCategoryViewController(categories: [Category]) -> TierCategoryViewController
+    func makeTierCategoryViewController(actions: TierCategoryViewModelActions, categories: [Category]) -> TierCategoryViewController
 }
 
 final class TierFlowCoordinator: Coordinator {
     private let dependencies: TierFlowCoordinatorDependencies
     var navigationController: UINavigationController
+    
+    private weak var tierListViewController: TierListViewController?
     
     init(
         dependencies: TierFlowCoordinatorDependencies,
@@ -34,10 +36,18 @@ extension TierFlowCoordinator {
         let image = UIImage(named: TabBarPage.tier.pageImageName())?.withRenderingMode(.alwaysOriginal)
         viewController.tabBarItem = UITabBarItem(title: TabBarPage.tier.pageTitleValue(), image: image, selectedImage: image)
         navigationController.pushViewController(viewController, animated: false)
+        tierListViewController = viewController.pages.first as? TierListViewController
     }
     
     func showTierCategory(categories: [Category]) {
-        let viewController = dependencies.makeTierCategoryViewController(categories: categories)
+        let actions = TierCategoryViewModelActions(
+            receiveTierCategories: receiveTierCategories
+        )
+        let viewController = dependencies.makeTierCategoryViewController(actions: actions, categories: categories)
         navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func receiveTierCategories(categories: [Category]) {
+        tierListViewController?.receiveTierCategories(categories: categories)
     }
 }

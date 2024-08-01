@@ -47,7 +47,8 @@ extension TierCategoryViewController {
     }
     
     private func doneButtonTouched() {
-        
+        viewModel.updateTierCategories()
+        navigationController?.popViewController(animated: true)
     }
 }
 

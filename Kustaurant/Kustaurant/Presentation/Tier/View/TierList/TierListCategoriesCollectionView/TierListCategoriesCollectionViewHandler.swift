@@ -28,6 +28,14 @@ extension TierListCategoriesCollectionViewHandler {
         view.categoriesCollectionView.delegate = self
         view.categoriesCollectionView.dataSource = self
     }
+    
+    func reloadData() {
+        Task {
+            await MainActor.run {
+                view.categoriesCollectionView.reloadData()
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -56,8 +64,6 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDataSource {
         
         return cell
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

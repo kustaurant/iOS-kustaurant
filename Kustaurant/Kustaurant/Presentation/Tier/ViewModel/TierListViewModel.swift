@@ -14,10 +14,11 @@ struct TierListViewModelActions {
 protocol TierListViewModelInput {
     func fetchTierLists()
     func categoryButtonTapped()
+    func updateCategories(categories: [Category])
 }
 
 protocol TierListViewModelOutput {
-    var categories: [Category] { get }
+    var categories: [Category] { get set }
     var tierRestaurants: [Restaurant] { get }
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
 }
@@ -59,5 +60,9 @@ extension DefaultTierListViewModel {
     
     func categoryButtonTapped() {
         actions.showTierCategory(categories)
+    }
+    
+    func updateCategories(categories: [Category]) {
+        self.categories = categories
     }
 }
