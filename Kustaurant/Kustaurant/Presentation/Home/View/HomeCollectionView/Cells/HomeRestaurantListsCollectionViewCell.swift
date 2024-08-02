@@ -107,16 +107,16 @@ extension HomeRestaurantListsCollectionViewCell {
     }
     
     private func setupLabels() {
-        restaurantCuisineAndPositionLabel.font = .pretendard(size: 12, weight: .regular)
+        restaurantCuisineAndPositionLabel.font = .Pretendard.regular12
         restaurantCuisineAndPositionLabel.textColor = .textBlack
         
-        ratingLabel.font = .pretendard(size: 12, weight: .regular)
+        ratingLabel.font = .Pretendard.regular12
         ratingLabel.textColor = .ratingText
         
-        restaurantNameLabel.font = .pretendard(size: 15, weight: .medium)
+        restaurantNameLabel.font = .Pretendard.medium15
         restaurantNameLabel.textColor = .textBlack
         
-        partnershipInfoLabel.font = .pretendard(size: 13, weight: .regular)
+        partnershipInfoLabel.font = .Pretendard.regular13
         partnershipInfoLabel.textColor = .textLightGray
     }
 }

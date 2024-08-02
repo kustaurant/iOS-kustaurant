@@ -11,7 +11,7 @@ extension UILabel {
     @discardableResult
     func setTierStyle(tier: Tier) -> Self {
         guard tier != .unowned else { return self }
-        font = .pretendard(size: 16, weight: .bold)
+        font = .Pretendard.bold16
         text = "\(tier.rawValue)"
         textAlignment = .center
         backgroundColor = tier.backgroundColor()
@@ -26,7 +26,7 @@ extension UILabel {
         _ category: Category,
         textInsets: UIEdgeInsets? = nil
     ) -> Self {
-        font = .pretendard(size: 14, weight: .regular)
+        font = .Pretendard.regular14
         text = category.displayName
         textAlignment = .center
         textColor = category.isSelect ? .mainGreen : .categoryOff
