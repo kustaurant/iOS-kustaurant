@@ -221,6 +221,8 @@
 				58067C8C2C4A815000889C92 /* RestaurantDetailViewController.swift */,
 			);
 			path = RestaurantDetail;
+            sourceTree = "<group>";
+        };
 		58067C962C4EAE6E00889C92 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
