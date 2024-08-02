@@ -116,7 +116,7 @@ extension TierNavigationTitleTabView {
         return NSAttributedString(
             string: title,
             attributes: [
-                .font: UIFont.pretendard(size: 17, weight: .semibold),
+                .font: UIFont.Pretendard.semiBold17,
                 .foregroundColor: color
             ]
         )

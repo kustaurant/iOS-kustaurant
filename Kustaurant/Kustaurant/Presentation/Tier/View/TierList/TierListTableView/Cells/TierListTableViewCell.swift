@@ -72,11 +72,11 @@ extension TierListTableViewCell {
     }
     
     private func setupLabels() {
-        indexLabel.font = .pretendard(size: 16, weight: .semibold)
+        indexLabel.font = .Pretendard.semiBold16
         indexLabel.textColor = .textGreen
-        restaurantNameLabel.font = .pretendard(size: 16, weight: .medium)
+        restaurantNameLabel.font = .Pretendard.medium16
         restaurantNameLabel.textColor = .textBlack
-        restaurantInfoLabel.font = .pretendard(size: 12, weight: .regular)
+        restaurantInfoLabel.font = .Pretendard.regular12
         restaurantInfoLabel.textColor = .textDarkGray
     }
     
