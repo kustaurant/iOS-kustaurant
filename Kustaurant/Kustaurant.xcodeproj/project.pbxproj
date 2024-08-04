@@ -31,6 +31,7 @@
 		58067CCC2C51552700889C92 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CCB2C51552700889C92 /* Category.swift */; };
 		58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D362C58B00800889C92 /* PaddedLabel.swift */; };
 		58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D782C5F99FB00889C92 /* HomeSection.swift */; };
+		58067C932C4AA91D00889C92 /* NavigationBarHideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067C922C4AA91D00889C92 /* NavigationBarHideable.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
 		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
@@ -93,8 +94,15 @@
 		CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD152C4289C900E0DE68 /* DownloadRequest.swift */; };
 		CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */; };
 		CFE204522C5A0D7900BCA87C /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */; };
-		CFE204582C5A121D00BCA87C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204572C5A121D00BCA87C /* UIView+.swift */; };
+		CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204572C5A121D00BCA87C /* UIView+AutoLayout.swift */; };
 		CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204592C5A129500BCA87C /* Ku.swift */; };
+		CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2045F2C5A706D00BCA87C /* UITableView+.swift */; };
+		CFE204672C5BC8AC00BCA87C /* KuTabBarPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204662C5BC8AC00BCA87C /* KuTabBarPageController.swift */; };
+		CFE204692C5D03C400BCA87C /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204682C5D03C400BCA87C /* Collection+.swift */; };
+		CFE2046B2C5D0A4000BCA87C /* UIView+parentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2046A2C5D0A4000BCA87C /* UIView+parentViewController.swift */; };
+		CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2046D2C5E68C500BCA87C /* KuTabBarCollectionView.swift */; };
+		CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2046F2C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift */; };
+		CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204712C5E690200BCA87C /* KuTabBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +140,7 @@
 		58067CCB2C51552700889C92 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		58067D362C58B00800889C92 /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		58067D782C5F99FB00889C92 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
+		58067C922C4AA91D00889C92 /* NavigationBarHideable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarHideable.swift; sourceTree = "<group>"; };
 		5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantLists.swift; sourceTree = "<group>"; };
 		5841731F2C464695001EC132 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -197,8 +206,15 @@
 		CF54AD152C4289C900E0DE68 /* DownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRequest.swift; sourceTree = "<group>"; };
 		CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
-		CFE204572C5A121D00BCA87C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		CFE204572C5A121D00BCA87C /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		CFE204592C5A129500BCA87C /* Ku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ku.swift; sourceTree = "<group>"; };
+		CFE2045F2C5A706D00BCA87C /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
+		CFE204662C5BC8AC00BCA87C /* KuTabBarPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuTabBarPageController.swift; sourceTree = "<group>"; };
+		CFE204682C5D03C400BCA87C /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
+		CFE2046A2C5D0A4000BCA87C /* UIView+parentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+parentViewController.swift"; sourceTree = "<group>"; };
+		CFE2046D2C5E68C500BCA87C /* KuTabBarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuTabBarCollectionView.swift; sourceTree = "<group>"; };
+		CFE2046F2C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuTabBarCollectionViewCell.swift; sourceTree = "<group>"; };
+		CFE204712C5E690200BCA87C /* KuTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuTabBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,10 +464,14 @@
 			children = (
 				5841736A2C47B845001EC132 /* UIImage+Resize.swift */,
 				584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */,
-				CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */,
 				CFE204572C5A121D00BCA87C /* UIView+.swift */,
 				584173992C4A1040001EC132 /* UILabel+Style.swift */,
 				BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */,
+				CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */,
+				CFE2045F2C5A706D00BCA87C /* UITableView+.swift */,
+				CFE2046A2C5D0A4000BCA87C /* UIView+parentViewController.swift */,
+				CFE204682C5D03C400BCA87C /* Collection+.swift */,
+				CFE204572C5A121D00BCA87C /* UIView+AutoLayout.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -581,6 +601,7 @@
 		58D83A912C3A7A1C00511AB9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				CFE204652C5BC46700BCA87C /* Common */,
 				584173252C464FEC001EC132 /* Flows */,
 				5841731E2C46467B001EC132 /* Home */,
 				584173372C46663B001EC132 /* Recommend */,
@@ -627,6 +648,25 @@
 				CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		CFE204652C5BC46700BCA87C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CFE2046C2C5E68B400BCA87C /* KuTabBar */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		CFE2046C2C5E68B400BCA87C /* KuTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				CFE2046D2C5E68C500BCA87C /* KuTabBarCollectionView.swift */,
+				CFE2046F2C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift */,
+				CFE204712C5E690200BCA87C /* KuTabBarView.swift */,
+				CFE204662C5BC8AC00BCA87C /* KuTabBarPageController.swift */,
+			);
+			path = KuTabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -751,11 +791,13 @@
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
+				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
 				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
-				CFE204582C5A121D00BCA87C /* UIView+.swift in Sources */,
+				CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */,
+				584173452C467EB8001EC132 /* TierViewController.swift in Sources */,
 				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
@@ -772,11 +814,14 @@
 				58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */,
 				58067CB22C4FBA9800889C92 /* TierListTableViewCell.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
+				CFE2046B2C5D0A4000BCA87C /* UIView+parentViewController.swift in Sources */,
 				584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
+				CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */,
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
 				5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */,
 				58067CB52C4FBF9200889C92 /* TierUseCases.swift in Sources */,
+				CFE204672C5BC8AC00BCA87C /* KuTabBarPageController.swift in Sources */,
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
@@ -793,6 +838,8 @@
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsListCell.swift in Sources */,
+				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
+				584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */,
 				CFE204522C5A0D7900BCA87C /* UICollectionView+.swift in Sources */,
 				58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */,
 				5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */,
@@ -805,8 +852,10 @@
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
 				58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */,
+				CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */,
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
 				5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */,
+				CFE204692C5D03C400BCA87C /* Collection+.swift in Sources */,
 				584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */,
 				584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */,
 				58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */,
