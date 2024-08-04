@@ -29,4 +29,8 @@ enum Cuisine: String, CaseIterable {
     var category: Category {
         Category(displayName: rawValue, code: String(describing: self).uppercased(), isSelect: false)
     }
+    
+    var iconName: String {
+        "icon_cuisine_\(String(describing: self))"
+    }
 }
