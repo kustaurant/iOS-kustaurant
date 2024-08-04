@@ -34,6 +34,7 @@ final class KuTabBarPageController: UIView {
         setupStyle()
         setupLayout()
         setupParentViewController()
+        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -50,7 +51,7 @@ extension KuTabBarPageController {
     
     private func setupLayout() {
         addSubview(tabBarView, autoLayout: [.top(0), .fillX(0), .height(50)])
-        addSubview(pageViewController.view, autoLayout: [.topNext(to: tabBarView, constant: 0), .fillX(0), .bottom(0)])
+        addSubview(pageViewController.view, autoLayout: [.topNext(to: tabBarView, constant: 2), .fillX(0), .bottom(0)])
     }
     
     private func setupParentViewController() {
