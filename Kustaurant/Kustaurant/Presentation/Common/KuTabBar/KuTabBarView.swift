@@ -85,8 +85,8 @@ extension KuTabBarView {
     
     private func setupLayout() {
         addSubview(collectionView, autoLayout: [.fill(0)])
-        addSubview(indicatorBackgroundView, autoLayout: [.topNext(to: collectionView, constant: 0), .fillX(0), .height(2)])
-        addSubview(indicatorView, autoLayout: [.topNext(to: collectionView, constant: 0), .height(2)])
+        addSubview(indicatorBackgroundView, autoLayout: [.topNext(to: collectionView, constant: 0), .fillX(0), .height(KuTabBarPageController.indicatorViewHeight)])
+        addSubview(indicatorView, autoLayout: [.topNext(to: collectionView, constant: 0), .height(KuTabBarPageController.indicatorViewHeight)])
         
         indicatorLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: leadingAnchor)
         indicatorWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: 100) // 초기 너비는 0으로 설정
