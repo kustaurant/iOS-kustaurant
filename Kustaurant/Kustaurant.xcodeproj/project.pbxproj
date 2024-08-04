@@ -30,6 +30,7 @@
 		58067CCA2C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CC92C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift */; };
 		58067CCC2C51552700889C92 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CCB2C51552700889C92 /* Category.swift */; };
 		58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D362C58B00800889C92 /* PaddedLabel.swift */; };
+		58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D782C5F99FB00889C92 /* HomeSection.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
 		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
@@ -130,6 +131,7 @@
 		58067CC92C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		58067CCB2C51552700889C92 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		58067D362C58B00800889C92 /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
+		58067D782C5F99FB00889C92 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
 		5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantLists.swift; sourceTree = "<group>"; };
 		5841731F2C464695001EC132 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 				58067CBA2C4FCAA400889C92 /* Cuisine.swift */,
 				58067CBC2C4FCC2100889C92 /* Situation.swift */,
 				58067CBE2C4FCCC100889C92 /* Location.swift */,
+				58067D782C5F99FB00889C92 /* HomeSection.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				584173652C47A964001EC132 /* HomeView.swift */,
+				58067D752C5F96A500889C92 /* HomeCategories */,
 				58067D742C5F8ED000889C92 /* HomeRestaurants */,
 				5841735D2C46CD78001EC132 /* HomeCollectionView */,
 			);
@@ -800,6 +804,7 @@
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
+				58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */,
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
 				5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */,
 				584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */,

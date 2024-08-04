@@ -7,13 +7,6 @@
 
 import UIKit
 
-enum HomeSection: Int {
-    case banner = 0
-    case categories = 1
-    case topRestaurants = 2
-    case forMeRestaurants = 3
-}
-
 final class HomeCollectionViewHandler: NSObject {
     private var view: HomeView
     private var viewModel: HomeViewModel

@@ -44,15 +44,8 @@ extension HomeRestaurantsCell {
     }
     
     private func updateContent() {
-        switch sectionType {
-        case .topRestaurants:
-            titleLabel.text = "인증된 건대 TOP 맛집"
-            subtitleLabel.text = "가장 높은 평가를 받은 맛집을 알려드립니다."
-        case .forMeRestaurants:
-            titleLabel.text = "나를 위한 건대 맛집"
-            subtitleLabel.text = "즐겨찾기를 바탕으로 다른 맛집을 추천해 드립니다."
-        default: return
-        }
+        titleLabel.text = sectionType?.titleText()
+        subtitleLabel.text = sectionType?.subTitleText()
     }
 }
 
