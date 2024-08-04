@@ -1,5 +1,5 @@
 //
-//  HomeMainCollectionViewCell.swift
+//  HomeRestaurantsCell.swift
 //  Kustaurant
 //
 //  Created by 송우진 on 7/17/24.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class HomeMainCollectionViewCell: UICollectionViewCell, ReusableCell {
-    static let reuseIdentifier = String(describing: HomeMainCollectionViewCell.self)
+final class HomeRestaurantsCell: UICollectionViewCell, ReusableCell {
+    static let reuseIdentifier = String(describing: HomeRestaurantsCell.self)
     var sectionType: HomeSection? {
         didSet { updateContent() }
     }
@@ -22,7 +22,7 @@ final class HomeMainCollectionViewCell: UICollectionViewCell, ReusableCell {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(HomeRestaurantListsCollectionViewCell.self, forCellWithReuseIdentifier: HomeRestaurantListsCollectionViewCell.reuseIdentifier)
+        collectionView.register(HomeRestaurantsListCell.self, forCellWithReuseIdentifier: HomeRestaurantsListCell.reuseIdentifier)
         return collectionView
     }()
 
@@ -37,7 +37,7 @@ final class HomeMainCollectionViewCell: UICollectionViewCell, ReusableCell {
     }
 }
 
-extension HomeMainCollectionViewCell {
+extension HomeRestaurantsCell {
     func updateAndReload(section: HomeSection) {
         sectionType = section
         collectionView.reloadData()
@@ -56,7 +56,7 @@ extension HomeMainCollectionViewCell {
     }
 }
 
-extension HomeMainCollectionViewCell {
+extension HomeRestaurantsCell {
     private func setupUI() {
         addSubviews()
         setupConstraint()

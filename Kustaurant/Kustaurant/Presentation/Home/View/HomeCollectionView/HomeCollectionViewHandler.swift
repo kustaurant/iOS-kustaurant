@@ -75,7 +75,7 @@ extension HomeCollectionViewHandler: UICollectionViewDelegate {
         didSelectItemAt indexPath: IndexPath
     ) {
         if !isMainCollectionView(collectionView) {
-            if let parentCell = collectionView.superview?.superview as? HomeMainCollectionViewCell,
+            if let parentCell = collectionView.superview?.superview as? HomeRestaurantsCell,
                let sectionType = parentCell.sectionType {
                 restaurantlistsDidSelect(sectionType, indexPath: indexPath)
             }
@@ -97,7 +97,7 @@ extension HomeCollectionViewHandler: UICollectionViewDelegate {
         if isMainCollectionView(collectionView) {
             return 1
         } else {
-            guard let cell = collectionView.superview?.superview as? HomeMainCollectionViewCell,
+            guard let cell = collectionView.superview?.superview as? HomeRestaurantsCell,
                   let sectionType = cell.sectionType else { return 0 }
             switch sectionType {
             case .topRestaurants:
@@ -121,7 +121,7 @@ extension HomeCollectionViewHandler: UICollectionViewDataSource {
             guard let sectionType = HomeSection(rawValue: indexPath.section) else { return UICollectionViewCell() }
             switch sectionType {
             case .topRestaurants, .forMeRestaurants:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeMainCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeMainCollectionViewCell else { return UICollectionViewCell() }
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRestaurantsCell.reuseIdentifier, for: indexPath) as? HomeRestaurantsCell else { return UICollectionViewCell() }
                 cell.collectionView.delegate = self
                 cell.collectionView.dataSource = self
                 cell.collectionView.allowsSelection = true
@@ -135,15 +135,15 @@ extension HomeCollectionViewHandler: UICollectionViewDataSource {
             }
             
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRestaurantListsCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeRestaurantListsCollectionViewCell else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRestaurantsListCell.reuseIdentifier, for: indexPath) as? HomeRestaurantsListCell else { return UICollectionViewCell() }
             
-            if let parentCell = collectionView.superview?.superview as? HomeMainCollectionViewCell,
+            if let parentCell = collectionView.superview?.superview as? HomeRestaurantsCell,
                let sectionType = parentCell.sectionType {
                 switch sectionType {
                 case .topRestaurants:
-                    cell.updateContent(viewModel.topRestaurants[indexPath.row])
+                    cell.model = viewModel.topRestaurants[indexPath.row]
                 case .forMeRestaurants:
-                    cell.updateContent(viewModel.forMeRestaurants[indexPath.row])
+                    cell.model = viewModel.forMeRestaurants[indexPath.row]
                 default: break
                 }
             }

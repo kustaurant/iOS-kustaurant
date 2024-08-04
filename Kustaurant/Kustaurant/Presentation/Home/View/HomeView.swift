@@ -13,7 +13,7 @@ final class HomeView: UIView {
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
-        collectionView.register(HomeMainCollectionViewCell.self, forCellWithReuseIdentifier: HomeMainCollectionViewCell.reuseIdentifier)
+        collectionView.register(HomeRestaurantsCell.self, forCellWithReuseIdentifier: HomeRestaurantsCell.reuseIdentifier)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Default")
         return collectionView
     }()

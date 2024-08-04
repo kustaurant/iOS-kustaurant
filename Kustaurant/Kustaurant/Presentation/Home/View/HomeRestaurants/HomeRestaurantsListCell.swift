@@ -1,5 +1,5 @@
 //
-//  HomeRestaurantListsCollectionViewCell.swift
+//  HomeRestaurantsListCell.swift
 //  Kustaurant
 //
 //  Created by 송우진 on 7/18/24.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class HomeRestaurantListsCollectionViewCell: UICollectionViewCell, ReusableCell {
-    static var reuseIdentifier: String = String(describing: HomeRestaurantListsCollectionViewCell.self)
-    
+final class HomeRestaurantsListCell: UICollectionViewCell, ReusableCell {
+    static var reuseIdentifier: String = String(describing: HomeRestaurantsListCell.self)
+    var model: Restaurant? { didSet { bind() }}
     private var restaurantImageView = UIImageView()
     private var tierLabel = UILabel()
     private var restaurantNameLabel = UILabel()
@@ -30,17 +30,18 @@ final class HomeRestaurantListsCollectionViewCell: UICollectionViewCell, Reusabl
     }
 }
 
-extension HomeRestaurantListsCollectionViewCell {
-    func updateContent(_ data: Restaurant) {
-        if let tier = data.mainTier {
+extension HomeRestaurantsListCell {
+    private func bind() {
+        guard let restaurant = model else { return }
+        if let tier = restaurant.mainTier {
             tierLabel.setTierStyle(tier: tier)
         }
-        restaurantNameLabel.text = data.restaurantName
-        restaurantCuisineAndPositionLabel.text = [data.restaurantCuisine, data.restaurantPosition].compactMap { $0 }.joined(separator: "  |  ")
-        partnershipInfoLabel.text = (data.partnershipInfo == nil) ? "제휴 해당사항 없음" : "제휴 : \(data.partnershipInfo!)"
-        ratingLabel.text = "4.5"
+        restaurantNameLabel.text = restaurant.restaurantName
+        restaurantCuisineAndPositionLabel.text = [restaurant.restaurantCuisine, restaurant.restaurantPosition].compactMap { $0 }.joined(separator: "  |  ")
+        partnershipInfoLabel.text = (restaurant.partnershipInfo == nil) ? "제휴 해당사항 없음" : "제휴 : \(restaurant.partnershipInfo!)"
+        ratingLabel.text = String(describing: restaurant.restaurantScore ?? 0)
         
-        if let urlString = data.restaurantImgUrl,
+        if let urlString = restaurant.restaurantImgUrl,
            let url = URL(string: urlString) {
             ImageCacheManager.shared.loadImage(from: url, targetWidth: bounds.width) { image in
                 DispatchQueue.main.async {
@@ -51,7 +52,7 @@ extension HomeRestaurantListsCollectionViewCell {
     }
 }
 
-extension HomeRestaurantListsCollectionViewCell {
+extension HomeRestaurantsListCell {
     private func setupUI() {
         addSubviews()
         setupConstraint()
@@ -107,6 +108,7 @@ extension HomeRestaurantListsCollectionViewCell {
     }
     
     private func setupLabels() {
+        
         restaurantCuisineAndPositionLabel.font = .Pretendard.regular12
         restaurantCuisineAndPositionLabel.textColor = .textBlack
         
