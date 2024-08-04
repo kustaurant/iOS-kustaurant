@@ -17,7 +17,6 @@ class KuTabBarCollectionViewCell: UICollectionViewCell, KuTabBarCollectionViewCe
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupStyle()
         setupLayout()
     }
@@ -28,6 +27,7 @@ class KuTabBarCollectionViewCell: UICollectionViewCell, KuTabBarCollectionViewCe
     
     func configure(title: String, isSelected: Bool) {
         titleLabel.text = title
+        titleLabel.font = .Pretendard.regular14
     }
     
     private func setupStyle() {
