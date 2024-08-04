@@ -40,5 +40,9 @@ final class AppDIContainer {
     func makeMyPageSceneDIContainer() -> MyPageSceneDIContainer {
         MyPageSceneDIContainer()
     }
+    
+    func makeRestaurantDetailSceneDIContainer() -> RestaurantDetailSceneDIContainer {
+        RestaurantDetailSceneDIContainer()
+    }
 }
 

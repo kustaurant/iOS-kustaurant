@@ -76,7 +76,7 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDelegateFlowL
         let category = viewModel.categories[indexPath.row]
         let label = UILabel()
         label.text = category.displayName
-        label.font = .pretendard(size: 14, weight: .regular)
+        label.font = .Pretendard.regular14
         let size = label.intrinsicContentSize
         return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.Height)
     }

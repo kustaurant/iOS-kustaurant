@@ -16,7 +16,7 @@ final class CustomUINavigationController: UINavigationController {
     private func setupNavigationBarAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        let font = UIFont.pretendard(size: 17, weight: .semibold)
+        let font = UIFont.Pretendard.semiBold17
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,
             .foregroundColor: UIColor.textBlack

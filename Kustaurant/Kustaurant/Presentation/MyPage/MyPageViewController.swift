@@ -10,6 +10,6 @@ import UIKit
 final class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .Signature.green100
     }
 }

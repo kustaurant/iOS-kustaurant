@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58067C8D2C4A815000889C92 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067C8C2C4A815000889C92 /* RestaurantDetailViewController.swift */; };
+		58067C8F2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067C8E2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift */; };
+		58067C912C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067C902C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift */; };
+		58067C932C4AA91D00889C92 /* NavigationBarHideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067C922C4AA91D00889C92 /* NavigationBarHideable.swift */; };
 		58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CA02C4F425900889C92 /* TierNavigationTitleTabView.swift */; };
 		58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CA32C4F4FBA00889C92 /* TierListViewController.swift */; };
 		58067CA62C4F4FE200889C92 /* TierMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067CA52C4F4FE200889C92 /* TierMapViewController.swift */; };
@@ -86,6 +90,7 @@
 		58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */; };
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
+		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
 		CF54AD082C4288F900E0DE68 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD072C4288F900E0DE68 /* Request.swift */; };
 		CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */; };
 		CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */; };
@@ -95,6 +100,9 @@
 		CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD132C4289B800E0DE68 /* DownloadResponse.swift */; };
 		CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD152C4289C900E0DE68 /* DownloadRequest.swift */; };
 		CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */; };
+		CFE204522C5A0D7900BCA87C /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */; };
+		CFE204582C5A121D00BCA87C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204572C5A121D00BCA87C /* UIView+.swift */; };
+		CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204592C5A129500BCA87C /* Ku.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +116,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		58067C8C2C4A815000889C92 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
+		58067C8E2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailSceneDIContainer.swift; sourceTree = "<group>"; };
+		58067C902C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailFlowCoordinator.swift; sourceTree = "<group>"; };
+		58067C922C4AA91D00889C92 /* NavigationBarHideable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarHideable.swift; sourceTree = "<group>"; };
 		58067CA02C4F425900889C92 /* TierNavigationTitleTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierNavigationTitleTabView.swift; sourceTree = "<group>"; };
 		58067CA32C4F4FBA00889C92 /* TierListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListViewController.swift; sourceTree = "<group>"; };
 		58067CA52C4F4FE200889C92 /* TierMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +202,7 @@
 		58D83A722C3A785A00511AB9 /* KustaurantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KustaurantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		CF54AD072C4288F900E0DE68 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRetrier.swift; sourceTree = "<group>"; };
@@ -199,6 +212,9 @@
 		CF54AD132C4289B800E0DE68 /* DownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadResponse.swift; sourceTree = "<group>"; };
 		CF54AD152C4289C900E0DE68 /* DownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRequest.swift; sourceTree = "<group>"; };
 		CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
+		CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
+		CFE204572C5A121D00BCA87C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		CFE204592C5A129500BCA87C /* Ku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ku.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +235,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58067C8B2C4A809800889C92 /* RestaurantDetail */ = {
+			isa = PBXGroup;
+			children = (
+				58067C8C2C4A815000889C92 /* RestaurantDetailViewController.swift */,
+			);
+			path = RestaurantDetail;
+			sourceTree = "<group>";
+		};
 		58067C962C4EAE6E00889C92 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +362,7 @@
 				584173342C4661AC001EC132 /* Protocols */,
 				5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */,
 				58067D4E2C5A347F00889C92 /* CollectionViewLeftAlignFlowLayout.swift */,
+				CFE204592C5A129500BCA87C /* Ku.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -351,6 +376,7 @@
 				584173412C467E72001EC132 /* TierFlowCoordinator.swift */,
 				584173482C468250001EC132 /* CommunityFlowCoordinator.swift */,
 				584173532C468410001EC132 /* MyPageFlowCoordinator.swift */,
+				58067C902C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -364,6 +390,7 @@
 				584173462C467F5B001EC132 /* TierSceneDIContainer.swift */,
 				5841734E2C4682C8001EC132 /* CommunitySceneDIContainer.swift */,
 				584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */,
+				58067C8E2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -373,6 +400,7 @@
 			children = (
 				584173352C4661B5001EC132 /* Coordinator.swift */,
 				584173822C48CAE0001EC132 /* ReusableCell.swift */,
+				58067C922C4AA91D00889C92 /* NavigationBarHideable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -467,7 +495,10 @@
 			children = (
 				5841736A2C47B845001EC132 /* UIImage+Resize.swift */,
 				584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */,
+				CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */,
+				CFE204572C5A121D00BCA87C /* UIView+.swift */,
 				584173992C4A1040001EC132 /* UILabel+Style.swift */,
+				BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -603,6 +634,7 @@
 				584173432C467EA9001EC132 /* Tier */,
 				5841734B2C468293001EC132 /* Community */,
 				584173502C4683D5001EC132 /* MyPage */,
+				58067C8B2C4A809800889C92 /* RestaurantDetail */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -768,8 +800,10 @@
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
+				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
 				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
+				CFE204582C5A121D00BCA87C /* UIView+.swift in Sources */,
 				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
@@ -780,7 +814,10 @@
 				58067CAA2C4FAE2A00889C92 /* TierListViewModel.swift in Sources */,
 				58067D3B2C58D6EC00889C92 /* TierCategoryViewController.swift in Sources */,
 				584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */,
+				58067C8D2C4A815000889C92 /* RestaurantDetailViewController.swift in Sources */,
+				58067C8F2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift in Sources */,
 				CF54AD122C4289A900E0DE68 /* Response.swift in Sources */,
+				58067C932C4AA91D00889C92 /* NavigationBarHideable.swift in Sources */,
 				58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */,
 				58067CB22C4FBA9800889C92 /* TierListTableViewCell.swift in Sources */,
 				58067D3D2C58D73C00889C92 /* TierCategoryViewModel.swift in Sources */,
@@ -795,6 +832,7 @@
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
+				58067C912C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift in Sources */,
 				584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */,
 				58067CBD2C4FCC2100889C92 /* Situation.swift in Sources */,
 				58067CBB2C4FCAA400889C92 /* Cuisine.swift in Sources */,
@@ -811,6 +849,7 @@
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */,
+				CFE204522C5A0D7900BCA87C /* UICollectionView+.swift in Sources */,
 				58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */,
 				5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */,
 				58067CCA2C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift in Sources */,
@@ -818,6 +857,7 @@
 				58067CB72C4FBFB900889C92 /* TierRepository.swift in Sources */,
 				5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */,
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
+				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,

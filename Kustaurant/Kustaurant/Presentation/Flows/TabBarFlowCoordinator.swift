@@ -39,11 +39,11 @@ extension TabBarFlowCoordinator {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .tabBarBackground
         let normalAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.pretendard(size: 10, weight: .regular),
+            .font: UIFont.Pretendard.regular10,
             .foregroundColor: UIColor.tabBarTitle
         ]
         let selectedAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.pretendard(size: 10, weight: .bold),
+            .font: UIFont.Pretendard.bold10,
             .foregroundColor: UIColor.mainGreen
         ]
         appearance.stackedLayoutAppearance.normal.titleTextAttributes = normalAttributes

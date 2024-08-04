@@ -8,27 +8,44 @@
 import UIKit
 
 protocol HomeFlowCoordinatorDependencies {
-    func makeHomeViewController() -> HomeViewController
+    func makeHomeViewController(actions: HomeViewModelActions) -> HomeViewController
 }
 
 final class HomeFlowCoordinator: Coordinator {
     private let dependencies: HomeFlowCoordinatorDependencies
+    private let appDIContainer: AppDIContainer
     var navigationController: UINavigationController
+    var rootNavigationController: UINavigationController
     
     init(
         dependencies: HomeFlowCoordinatorDependencies,
-        navigationController: UINavigationController
+        appDIContainer: AppDIContainer,
+        navigationController: UINavigationController,
+        rootNavigationController: UINavigationController
     ) {
         self.dependencies = dependencies
+        self.appDIContainer = appDIContainer
         self.navigationController = navigationController
+        self.rootNavigationController = rootNavigationController
     }
 }
 
 extension HomeFlowCoordinator {
     func start() {
-        let viewController = dependencies.makeHomeViewController()
+        let actions = HomeViewModelActions(
+            showRestaurantDetail: showRestaurantDetail
+        )
+        let viewController = dependencies.makeHomeViewController(actions: actions)
         let image = UIImage(named: TabBarPage.home.pageImageName())?.withRenderingMode(.alwaysOriginal)
         viewController.tabBarItem = UITabBarItem(title: TabBarPage.home.pageTitleValue(), image: image, selectedImage: image)
         navigationController.pushViewController(viewController, animated: false)
+    }
+    
+    private func showRestaurantDetail(restaurant: Restaurant) {
+        let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
+        let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
+            navigationController: rootNavigationController
+        )
+        flow.start()
     }
 }

@@ -18,15 +18,16 @@ final class HomeSceneDIContainer: HomeFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
-    func makeHomeViewController() -> HomeViewController {
+    func makeHomeViewController(actions: HomeViewModelActions) -> HomeViewController {
         HomeViewController(
-            viewModel: makeHomeViewModel()
+            viewModel: makeHomeViewModel(actions: actions)
         )
     }
     
-    func makeHomeViewModel() -> HomeViewModel {
+    func makeHomeViewModel(actions: HomeViewModelActions) -> HomeViewModel {
         DefaultHomeViewModel(
-            homeUseCase: makeHomeUseCase()
+            homeUseCase: makeHomeUseCase(), 
+            actions: actions
         )
     }
     
@@ -42,10 +43,16 @@ final class HomeSceneDIContainer: HomeFlowCoordinatorDependencies {
         )
     }
     
-    func makeHomeFlowCoordinator(navigationController: UINavigationController) -> HomeFlowCoordinator {
+    func makeHomeFlowCoordinator(
+        appDIContainer: AppDIContainer,
+        navigationController: UINavigationController,
+        rootNavigationControler: UINavigationController
+    ) -> HomeFlowCoordinator {
         HomeFlowCoordinator(
             dependencies: self,
-            navigationController: navigationController
+            appDIContainer: appDIContainer,
+            navigationController: navigationController,
+            rootNavigationController: rootNavigationControler
         )
     }
 }

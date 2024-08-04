@@ -52,6 +52,6 @@ extension TierCategorySectionHeaderView {
     
     private func setupTitle() {
         title.textColor = .textBlack
-        title.font = .pretendard(size: 17, weight: .semibold)
+        title.font = UIFont.Pretendard.semiBold17
     }
 }

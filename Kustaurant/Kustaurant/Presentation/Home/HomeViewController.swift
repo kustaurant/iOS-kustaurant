@@ -38,10 +38,6 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupBindings()
         setupNavigationBar()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         viewModel.fetchRestaurantLists()
     }
 }

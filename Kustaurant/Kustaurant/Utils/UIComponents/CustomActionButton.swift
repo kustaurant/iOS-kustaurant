@@ -45,7 +45,7 @@ final class CustomActionButton: UIButton {
         var configuration = self.configuration
         configuration?.title = buttonTitle
         configuration?.attributedTitle = AttributedString(buttonTitle, attributes: AttributeContainer(
-            [.font: UIFont.pretendard(size: 18, weight: .semibold)]
+            [.font: UIFont.Pretendard.semiBold18]
         ))
         let isOn = buttonState == .on
         configuration?.baseBackgroundColor = isOn ? .mainGreen : .actionButtonBackgroundOff
