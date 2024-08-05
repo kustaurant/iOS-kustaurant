@@ -20,6 +20,6 @@ enum Situation: String, CaseIterable {
     case nine = "소개팅"
     
     var category: Category {
-        Category(displayName: rawValue, code: String(describing: self).uppercased(), isSelect: false)
+        Category(displayName: rawValue, code: String(describing: self).uppercased(), isSelect: false, origin: .situation(self), type: .situation)
     }
 }

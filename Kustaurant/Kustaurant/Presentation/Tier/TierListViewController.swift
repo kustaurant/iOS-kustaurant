@@ -47,12 +47,30 @@ final class TierListViewController: UIViewController {
 }
 
 extension TierListViewController {
+    func receiveTierCategories(categories: [Category]) {
+        viewModel.updateCategories(categories: categories)
+        tierListCategoriesCollectionViewHandler?.reloadData()
+    }
+}
+
+extension TierListViewController {
     private func setupBindings() {
+        bindtierRestaurants()
+        bindCategoryButton()
+    }
+    
+    private func bindtierRestaurants() {
         viewModel.tierRestaurantsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.tierListTableViewHandler?.reloadData()
             }
             .store(in: &cancellables)
+    }
+    
+    private func bindCategoryButton() {
+        tierListView.categoryButton.addAction(UIAction { [weak self] _ in
+            self?.viewModel.categoryButtonTapped()
+        }, for: .touchUpInside)
     }
 }
