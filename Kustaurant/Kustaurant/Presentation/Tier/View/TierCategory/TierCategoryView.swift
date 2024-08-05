@@ -37,6 +37,7 @@ final class TierCategoryView: UIView {
 
 extension TierCategoryView {
     private func setupUI() {
+        backgroundColor = .white
         addSubviews()
         setupConstraint()
         setupActionButton()
