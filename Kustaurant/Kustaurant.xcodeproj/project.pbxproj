@@ -38,8 +38,7 @@
 		58067D4A2C5A1D6200889C92 /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D492C5A1D6200889C92 /* CategoryType.swift */; };
 		58067D4D2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D4C2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift */; };
 		58067D4F2C5A347F00889C92 /* CollectionViewLeftAlignFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D4E2C5A347F00889C92 /* CollectionViewLeftAlignFlowLayout.swift */; };
-		58067D512C5B379800889C92 /* CustomActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D502C5B379800889C92 /* CustomActionButton.swift */; };
-		58067C932C4AA91D00889C92 /* NavigationBarHideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067C922C4AA91D00889C92 /* NavigationBarHideable.swift */; };
+		58067D512C5B379800889C92 /* KuSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D502C5B379800889C92 /* KuSubmitButton.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
 		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
@@ -155,8 +154,7 @@
 		58067D492C5A1D6200889C92 /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
 		58067D4C2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierCategorySectionHeaderView.swift; sourceTree = "<group>"; };
 		58067D4E2C5A347F00889C92 /* CollectionViewLeftAlignFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLeftAlignFlowLayout.swift; sourceTree = "<group>"; };
-		58067D502C5B379800889C92 /* CustomActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionButton.swift; sourceTree = "<group>"; };
-		58067C922C4AA91D00889C92 /* NavigationBarHideable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarHideable.swift; sourceTree = "<group>"; };
+		58067D502C5B379800889C92 /* KuSubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuSubmitButton.swift; sourceTree = "<group>"; };
 		5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantLists.swift; sourceTree = "<group>"; };
 		5841731F2C464695001EC132 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -311,7 +309,7 @@
 				58067CC12C509FEA00889C92 /* CustomIconImageView.swift */,
 				58067D362C58B00800889C92 /* PaddedLabel.swift */,
 				58067D3E2C58E35800889C92 /* CustomUINavigationController.swift */,
-				58067D502C5B379800889C92 /* CustomActionButton.swift */,
+				58067D502C5B379800889C92 /* KuSubmitButton.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -511,7 +509,6 @@
 			children = (
 				5841736A2C47B845001EC132 /* UIImage+Resize.swift */,
 				584173972C4A07DC001EC132 /* UIFont+Pretendard.swift */,
-				CFE204572C5A121D00BCA87C /* UIView+.swift */,
 				584173992C4A1040001EC132 /* UILabel+Style.swift */,
 				BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */,
 				CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */,
@@ -845,7 +842,6 @@
 				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */,
-				584173452C467EB8001EC132 /* TierViewController.swift in Sources */,
 				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
@@ -870,7 +866,7 @@
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
 				CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */,
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
-				58067D512C5B379800889C92 /* CustomActionButton.swift in Sources */,
+				58067D512C5B379800889C92 /* KuSubmitButton.swift in Sources */,
 				5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */,
 				58067CB52C4FBF9200889C92 /* TierUseCases.swift in Sources */,
 				CFE204672C5BC8AC00BCA87C /* KuTabBarPageController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  CustomActionButton.swift
+//  KuSubmitButton.swift
 //  Kustaurant
 //
 //  Created by 송우진 on 8/1/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CustomActionButton: UIButton {
+final class KuSubmitButton: UIButton {
     enum ButtonState {
         case on, off
     }

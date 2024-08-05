@@ -22,7 +22,7 @@ final class TierCategoryView: UIView {
         collectionView.register(TierListCategoryCollectionViewCell.self, forCellWithReuseIdentifier: TierListCategoryCollectionViewCell.reuseIdentifier)
         return collectionView
     }()
-    let actionButton = CustomActionButton()
+    let actionButton = KuSubmitButton()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
