@@ -10,7 +10,7 @@ import Combine
 
 final class HomeViewController: UIViewController {
     private var viewModel: HomeViewModel
-    private var homeMainCollectionViewHandler: HomeCollectionViewHandler?
+    private var homeLayoutTableViewHandler: HomeLayoutTableViewHandler?
     private var homeView = HomeView()
     
     private var cancellables: Set<AnyCancellable> = []
@@ -19,7 +19,7 @@ final class HomeViewController: UIViewController {
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        homeMainCollectionViewHandler = HomeCollectionViewHandler(
+        homeLayoutTableViewHandler = HomeLayoutTableViewHandler(
             view: homeView,
             viewModel: viewModel
         )
@@ -58,37 +58,16 @@ extension HomeViewController {
     }
     
     private func bindRestaurantLists() {
-        viewModel.restaurantLists
+        viewModel.topRestaurantsPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] lists in
-                self?.processUpdates(with: lists)
+            .sink { [weak self] _ in
+                self?.homeLayoutTableViewHandler?.reloadSection(.topRestaurants)
             }.store(in: &cancellables)
-    }
-    
-    private func processUpdates(with lists: HomeRestaurantLists) {
-        let sectionsToUpdate = updateModel(with: lists)
-        reloadData(sectionsToUpdate: sectionsToUpdate)
-    }
-    
-    private func updateModel(with lists: HomeRestaurantLists) -> IndexSet {
-        var sectionsToUpdate = IndexSet()
-        if let topRestaurants = lists.topRestaurantsByRating, !topRestaurants.isEmpty {
-            viewModel.topRestaurants = topRestaurants.compactMap({ $0 })
-            let sectionIndex = HomeSection.topRestaurants.rawValue
-            sectionsToUpdate.insert(sectionIndex)
-        }
-        if let forMeRestaurants = lists.restaurantsForMe, !forMeRestaurants.isEmpty {
-            viewModel.forMeRestaurants = forMeRestaurants.compactMap({ $0 })
-            let sectionIndex = HomeSection.forMeRestaurants.rawValue
-            sectionsToUpdate.insert(sectionIndex)
-        }
-        return sectionsToUpdate
-    }
-    
-    private func reloadData(sectionsToUpdate: IndexSet) {
-        Task {
-            await homeMainCollectionViewHandler?.reloadData()
-            await homeMainCollectionViewHandler?.reloadSections(sectionsToUpdate)
-        }
+        
+        viewModel.forMeRestaurantsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.homeLayoutTableViewHandler?.reloadSection(.forMeRestaurants)
+            }.store(in: &cancellables)
     }
 }

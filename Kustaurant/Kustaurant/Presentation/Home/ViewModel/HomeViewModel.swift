@@ -12,15 +12,17 @@ struct HomeViewModelActions {
 }
 
 protocol HomeViewModelInput {
-    var topRestaurants: [Restaurant] { get set }
-    var forMeRestaurants: [Restaurant] { get set }
     func fetchRestaurantLists()
-    func restaurantlistsDidSelect(restaurant: Restaurant)
+    func restaurantListsDidSelect(restaurant: Restaurant)
 }
 
 protocol HomeViewModelOutput {
+    var topRestaurants: [Restaurant] { get }
+    var forMeRestaurants: [Restaurant] { get }
+    var topRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
+    var forMeRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
     var mainSections: [HomeSection] { get }
-    var restaurantLists: PassthroughSubject<HomeRestaurantLists, Never> { get }
+    
 }
 
 typealias HomeViewModel = HomeViewModelInput & HomeViewModelOutput
@@ -29,12 +31,11 @@ final class DefaultHomeViewModel: HomeViewModel {
     private let homeUseCase: HomeUseCases
     private let actions: HomeViewModelActions
     
-    // MARK: - Input
-    var topRestaurants: [Restaurant] = []
-    var forMeRestaurants: [Restaurant] = []
-    
     // MARK: - Output
-    var restaurantLists = PassthroughSubject<HomeRestaurantLists, Never>()
+    @Published private(set) var topRestaurants: [Restaurant] = []
+    @Published private(set) var forMeRestaurants: [Restaurant] = []
+    var topRestaurantsPublisher: Published<[Restaurant]>.Publisher { $topRestaurants }
+    var forMeRestaurantsPublisher: Published<[Restaurant]>.Publisher { $forMeRestaurants }
     var mainSections: [HomeSection] = [.banner, .categories, .topRestaurants, .forMeRestaurants]
     
     // MARK: - Initialization
@@ -56,12 +57,13 @@ extension DefaultHomeViewModel {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let data):
-                restaurantLists.send(data)
+                topRestaurants = data.topRestaurantsByRating?.compactMap({$0}) ?? []
+                forMeRestaurants = data.restaurantsForMe?.compactMap({$0}) ?? []
             }
         }
     }
     
-    func restaurantlistsDidSelect(restaurant: Restaurant) {
+    func restaurantListsDidSelect(restaurant: Restaurant) {
         actions.showRestaurantDetail(restaurant)
     }
 }

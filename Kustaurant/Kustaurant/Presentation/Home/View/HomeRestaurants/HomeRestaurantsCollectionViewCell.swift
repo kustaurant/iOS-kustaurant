@@ -1,5 +1,5 @@
 //
-//  HomeRestaurantsListCell.swift
+//  HomeRestaurantsCollectionViewCell.swift
 //  Kustaurant
 //
 //  Created by 송우진 on 7/18/24.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class HomeRestaurantsListCell: UICollectionViewCell, ReusableCell {
-    static var reuseIdentifier: String = String(describing: HomeRestaurantsListCell.self)
+final class HomeRestaurantsCollectionViewCell: UICollectionViewCell, ReusableCell {
+    static var reuseIdentifier: String = String(describing: HomeRestaurantsCollectionViewCell.self)
     var model: Restaurant? { didSet { bind() }}
     private var restaurantImageView = UIImageView()
     private var tierLabel = UILabel()
@@ -30,7 +30,7 @@ final class HomeRestaurantsListCell: UICollectionViewCell, ReusableCell {
     }
 }
 
-extension HomeRestaurantsListCell {
+extension HomeRestaurantsCollectionViewCell {
     private func bind() {
         guard let restaurant = model else { return }
         if let tier = restaurant.mainTier {
@@ -52,7 +52,7 @@ extension HomeRestaurantsListCell {
     }
 }
 
-extension HomeRestaurantsListCell {
+extension HomeRestaurantsCollectionViewCell {
     private func setupUI() {
         addSubviews()
         setupConstraint()

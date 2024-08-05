@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HomeSection: Int {
+enum HomeSection: Int, CaseIterable {
     case banner = 0
     case categories = 1
     case topRestaurants = 2
