@@ -19,6 +19,7 @@ extension UIFont {
         static let semiBold17 = UIFont(name: "Pretendard-SemiBold", size: 17)!
         static let semiBold16 = UIFont(name: "Pretendard-SemiBold", size: 16)!
         
+        static let medium20 = UIFont(name: "Pretendard-Medium", size: 20)!
         static let medium18 = UIFont(name: "Pretendard-Medium", size: 18)!
         static let medium16 = UIFont(name: "Pretendard-Medium", size: 16)!
         static let medium15 = UIFont(name: "Pretendard-Medium", size: 15)!
