@@ -10,6 +10,7 @@ import UIKit
 final class HomeLayoutTableViewHandler: NSObject {
     private var view: HomeView
     private var viewModel: HomeViewModel
+    private var categoriesHandler: HomeCategoriesCollectionViewHandler?
     private var restaurantsHandlerDic: [HomeSection : HomeRestaurantsCollectionViewHandler?] = [
         .topRestaurants : nil,
         .forMeRestaurants : nil
@@ -57,7 +58,12 @@ extension HomeLayoutTableViewHandler: UITableViewDelegate {
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
         switch sectionType(indexPath: indexPath) {
-        case .forMeRestaurants, .topRestaurants: return HomeRestaurantsSection.sectionHeight + HomeRestaurantsSection.sectionBottomInset
+        case .categories:
+            return HomeCategoriesSection.sectionHeight + HomeCategoriesSection.sectionBottomInset
+            
+        case .forMeRestaurants, .topRestaurants:
+            return HomeRestaurantsSection.sectionHeight + HomeRestaurantsSection.sectionBottomInset
+            
         default: return 100
         }
     }
@@ -77,11 +83,16 @@ extension HomeLayoutTableViewHandler: UITableViewDataSource {
     ) -> UITableViewCell {
         let section = sectionType(indexPath: indexPath)
         switch section {
+        case .categories:
+            let sectionCell = tableView.dequeueReusableCell(withReuseIdentifier: HomeCategoriesSection.reuseIdentifier) as HomeCategoriesSection
+            categoriesHandler = HomeCategoriesCollectionViewHandler(view: sectionCell, viewModel: viewModel)
+            return sectionCell
+            
         case .topRestaurants, .forMeRestaurants:
-            let cell = tableView.dequeueReusableCell(withReuseIdentifier: HomeRestaurantsSection.reuseIdentifier) as HomeRestaurantsSection
-            cell.sectionType = section
-            restaurantsHandlerDic[section!] = HomeRestaurantsCollectionViewHandler(view: cell, viewModel: viewModel)
-            return cell
+            let sectionCell = tableView.dequeueReusableCell(withReuseIdentifier: HomeRestaurantsSection.reuseIdentifier) as HomeRestaurantsSection
+            sectionCell.sectionType = section
+            restaurantsHandlerDic[section!] = HomeRestaurantsCollectionViewHandler(view: sectionCell, viewModel: viewModel)
+            return sectionCell
         
         default:
             let cell = tableView.dequeueReusableCell(withReuseIdentifier: "Default")

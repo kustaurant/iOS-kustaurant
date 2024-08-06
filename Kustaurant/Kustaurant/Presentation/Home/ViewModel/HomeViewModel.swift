@@ -22,6 +22,7 @@ protocol HomeViewModelOutput {
     var topRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
     var forMeRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
     var mainSections: [HomeSection] { get }
+    var cuisines: [Cuisine] { get }
     
 }
 
@@ -37,6 +38,7 @@ final class DefaultHomeViewModel: HomeViewModel {
     var topRestaurantsPublisher: Published<[Restaurant]>.Publisher { $topRestaurants }
     var forMeRestaurantsPublisher: Published<[Restaurant]>.Publisher { $forMeRestaurants }
     var mainSections: [HomeSection] = [.banner, .categories, .topRestaurants, .forMeRestaurants]
+    var cuisines: [Cuisine] = Cuisine.allCases
     
     // MARK: - Initialization
     init(
