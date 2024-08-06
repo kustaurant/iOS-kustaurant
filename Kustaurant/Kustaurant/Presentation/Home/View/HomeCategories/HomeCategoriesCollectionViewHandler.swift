@@ -30,7 +30,13 @@ extension HomeCategoriesCollectionViewHandler {
 }
 
 extension HomeCategoriesCollectionViewHandler: UICollectionViewDelegate {
-
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        let cuisine = viewModel.cuisines[indexPath.row]
+        viewModel.categoryCellDidSelect(cuisine)
+    }
 }
 
 extension HomeCategoriesCollectionViewHandler: UICollectionViewDataSource {

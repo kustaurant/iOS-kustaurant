@@ -30,17 +30,19 @@ final class DefaultTierListViewModel: TierListViewModel {
     private let actions: TierListViewModelActions
     
     // MARK: - Output
-    var categories: [Category] = [Cuisine.all.category, Situation.all.category, Location.all.category]
+    var categories: [Category]
     @Published private(set) var tierRestaurants: [Restaurant] = []
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { $tierRestaurants }
     
     // MARK: - Initialization
     init(
         tierUseCase: TierUseCases,
-        actions: TierListViewModelActions
+        actions: TierListViewModelActions,
+        initialCategories: [Category]
     ) {
         self.tierUseCase = tierUseCase
         self.actions = actions
+        self.categories = initialCategories
     }
 }
 
@@ -48,7 +50,16 @@ final class DefaultTierListViewModel: TierListViewModel {
 extension DefaultTierListViewModel {
     func fetchTierLists() {
         Task {
-            let result = await tierUseCase.fetchTierLists(cuisines: [.as], situations: [.all], locations: [.l1])
+            let cuisines = extractCuisines(from: categories)
+            let situations = extractSituations(from: categories)
+            let locations = extractLocations(from: categories)
+            
+            let result = await tierUseCase.fetchTierLists(
+                cuisines: cuisines,
+                situations: situations,
+                locations: locations
+            )
+            
             switch result {
             case .success(let data):
                 tierRestaurants += data
@@ -64,5 +75,34 @@ extension DefaultTierListViewModel {
     
     func updateCategories(categories: [Category]) {
         self.categories = categories
+    }
+}
+
+extension DefaultTierListViewModel {
+    private func extractCuisines(from categories: [Category]) -> [Cuisine] {
+        categories.compactMap {
+            if case let .cuisine(cuisine) = $0.origin {
+                return cuisine
+            }
+            return nil
+        }
+    }
+    
+    private func extractSituations(from categories: [Category]) -> [Situation] {
+        categories.compactMap {
+            if case let .situation(situation) = $0.origin {
+                return situation
+            }
+            return nil
+        }
+    }
+    
+    private func extractLocations(from categories: [Category]) -> [Location] {
+        categories.compactMap {
+            if case let .location(location) = $0.origin {
+                return location
+            }
+            return nil
+        }
     }
 }

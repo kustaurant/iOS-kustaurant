@@ -35,6 +35,7 @@ final class TierListView: UIView {
 
 extension TierListView {
     private func setupUI() {
+        backgroundColor = .white
         addSubviews()
         setupConstraint()
         setupCategoryButton()

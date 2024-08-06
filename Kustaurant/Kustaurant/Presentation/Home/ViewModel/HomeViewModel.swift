@@ -9,11 +9,13 @@ import Combine
 
 struct HomeViewModelActions {
     let showRestaurantDetail: (Restaurant) -> Void
+    let showTierScene: (Cuisine) -> Void
 }
 
 protocol HomeViewModelInput {
     func fetchRestaurantLists()
     func restaurantListsDidSelect(restaurant: Restaurant)
+    func categoryCellDidSelect(_ cuisineCategory: Cuisine)
 }
 
 protocol HomeViewModelOutput {
@@ -52,6 +54,10 @@ final class DefaultHomeViewModel: HomeViewModel {
 
 // MARK: - Input
 extension DefaultHomeViewModel {
+    func categoryCellDidSelect(_ cuisineCategory: Cuisine) {
+        actions.showTierScene(cuisineCategory)
+    }
+    
     func fetchRestaurantLists() {
         Task {
             let result = await homeUseCase.fetchRestaurantLists()
