@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol AppFlowCoordinatorDelegate: AnyObject {
+    func showTab()
+}
+
 final class AppFlowCoordinator {
     private var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
@@ -22,12 +26,23 @@ final class AppFlowCoordinator {
 
 extension AppFlowCoordinator {
     func start() {
-        showTab()
+        showSplashScreen()
     }
 }
 
+// MARK: Splash Screen
 extension AppFlowCoordinator {
-    private func showTab() {
+    private func showSplashScreen() {
+        let onboardingDIContainer = appDIContainer.makeOnboardingDIContainer()
+        let onboardingFlow = onboardingDIContainer.makeOnboardingFlowCoordinator(navigationController: navigationController)
+        onboardingFlow.delegate = self
+        onboardingFlow.start()
+    }
+}
+
+// MARK: Tabbar
+extension AppFlowCoordinator: AppFlowCoordinatorDelegate {
+    func showTab() {
         let tabBarController = UITabBarController()
         let tabBarFlowCoordinator = TabBarFlowCoordinator(
             navigationController: navigationController,

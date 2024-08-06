@@ -91,6 +91,11 @@
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
+		BA8EEF612C61D96600FE6ABF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF602C61D96600FE6ABF /* SplashViewController.swift */; };
+		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
+		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
+		BA8EEF682C61F25200FE6ABF /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF672C61F25200FE6ABF /* SplashViewModel.swift */; };
+		BA8EEF6B2C62118600FE6ABF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF6A2C62118600FE6ABF /* SplashView.swift */; };
 		CF54AD082C4288F900E0DE68 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD072C4288F900E0DE68 /* Request.swift */; };
 		CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */; };
 		CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */; };
@@ -210,6 +215,11 @@
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		BA8EEF602C61D96600FE6ABF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
+		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
+		BA8EEF672C61F25200FE6ABF /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		BA8EEF6A2C62118600FE6ABF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		CF54AD072C4288F900E0DE68 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRetrier.swift; sourceTree = "<group>"; };
@@ -391,6 +401,7 @@
 				584173482C468250001EC132 /* CommunityFlowCoordinator.swift */,
 				584173532C468410001EC132 /* MyPageFlowCoordinator.swift */,
 				58067C902C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift */,
+				BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -405,6 +416,7 @@
 				5841734E2C4682C8001EC132 /* CommunitySceneDIContainer.swift */,
 				584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */,
 				58067C8E2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift */,
+				BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -648,6 +660,7 @@
 				CFE204652C5BC46700BCA87C /* Common */,
 				584173252C464FEC001EC132 /* Flows */,
 				5841731E2C46467B001EC132 /* Home */,
+				BA8EEF5F2C61D93200FE6ABF /* Onboarding */,
 				584173372C46663B001EC132 /* Recommend */,
 				584173432C467EA9001EC132 /* Tier */,
 				5841734B2C468293001EC132 /* Community */,
@@ -675,6 +688,32 @@
 				58067CCB2C51552700889C92 /* Category.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		BA8EEF5F2C61D93200FE6ABF /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				BA8EEF602C61D96600FE6ABF /* SplashViewController.swift */,
+				BA8EEF692C62117A00FE6ABF /* View */,
+				BA8EEF662C61F24900FE6ABF /* ViewModel */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		BA8EEF662C61F24900FE6ABF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BA8EEF672C61F25200FE6ABF /* SplashViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BA8EEF692C62117A00FE6ABF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BA8EEF6A2C62118600FE6ABF /* SplashView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		CF54AD062C42889500E0DE68 /* Network */ = {
@@ -839,9 +878,11 @@
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
+				BA8EEF6B2C62118600FE6ABF /* SplashView.swift in Sources */,
 				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */,
+				BA8EEF682C61F25200FE6ABF /* SplashViewModel.swift in Sources */,
 				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
@@ -868,11 +909,13 @@
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
 				58067D512C5B379800889C92 /* KuSubmitButton.swift in Sources */,
 				5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */,
+				BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */,
 				58067CB52C4FBF9200889C92 /* TierUseCases.swift in Sources */,
 				CFE204672C5BC8AC00BCA87C /* KuTabBarPageController.swift in Sources */,
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
+				BA8EEF612C61D96600FE6ABF /* SplashViewController.swift in Sources */,
 				58067C912C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift in Sources */,
 				584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */,
 				58067CBD2C4FCC2100889C92 /* Situation.swift in Sources */,
@@ -896,6 +939,7 @@
 				5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */,
 				58067CCA2C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift in Sources */,
 				58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */,
+				BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */,
 				58067CB72C4FBFB900889C92 /* TierRepository.swift in Sources */,
 				5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */,
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
