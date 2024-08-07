@@ -6,11 +6,46 @@
 //
 
 import UIKit
+import Combine
 
 class OnboardingViewController: UIViewController {
-
+    
+    private var viewModel: OnboardingViewModel
+    private let onboardingView = OnboardingView()
+    private var onboardingCollectionViewHandler: OnboardingCollectionViewHandler?
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: OnboardingViewModel) {
+        self.viewModel = viewModel
+        onboardingCollectionViewHandler = OnboardingCollectionViewHandler(
+            view: onboardingView,
+            viewModel: viewModel
+        )
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        onboardingCollectionViewHandler?.setupCollectionView()
+        onboardingCollectionViewHandler?.setupPageControl()
+        bindViews()
+    }
+    
+    override func loadView() {
+        view = onboardingView
+    }
+}
+
+extension OnboardingViewController {
+    private func bindViews() {
+        viewModel.currentOnboardingPagePublisher.sink { [weak self] page in
+            self?.onboardingView.pageControl.currentPage = page
+        }
+        .store(in: &cancellables)
     }
 }
