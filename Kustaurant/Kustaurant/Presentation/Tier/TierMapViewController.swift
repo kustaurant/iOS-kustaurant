@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import NMapsMap
+ 
 
 final class TierMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .cyan
+        
+        let mapView = NMFMapView(frame: view.bounds)
+        view.addSubview(mapView)
     }
 }
