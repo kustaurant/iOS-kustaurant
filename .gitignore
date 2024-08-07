@@ -37,6 +37,7 @@ Temporary Items
 ## User settings
 xcuserdata/
 *.xcuserstate
+*.xcconfig
 
 ### Xcode Patch ###
 *.xcodeproj/*
