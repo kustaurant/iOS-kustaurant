@@ -8,12 +8,10 @@
 import UIKit
 
 protocol OnboardingFlowCoordinatorDependencies {
-    func makeSplashViewController(actions: SplashViewModelActions) -> SplashViewController
+    func makeOnboardingViewController() -> OnboardingViewController
 }
 
 final class OnboardingFlowCoordinator: Coordinator {
-    
-    weak var delegate: AppFlowCoordinatorDelegate?
     
     private let dependencies: OnboardingFlowCoordinatorDependencies
     var navigationController: UINavigationController
@@ -30,17 +28,7 @@ final class OnboardingFlowCoordinator: Coordinator {
 extension OnboardingFlowCoordinator {
     
     func start() {
-        let viewController = dependencies.makeSplashViewController(
-            actions: SplashViewModelActions(showLoginPage: showLoginPage, showTabs: showTabs)
-        )
+        let viewController = dependencies.makeOnboardingViewController()
         navigationController.pushViewController(viewController, animated: false)
-    }
-    
-    func showLoginPage() {
-    }
-    
-    func showTabs() {
-        navigationController.popToRootViewController(animated: false)
-        delegate?.showTab()
     }
 }

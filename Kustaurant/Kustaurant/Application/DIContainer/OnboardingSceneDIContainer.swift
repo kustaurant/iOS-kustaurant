@@ -26,13 +26,7 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
         )
     }
     
-    // MARK: Splash
-    func makeSplashViewController(actions: SplashViewModelActions) -> SplashViewController {
-        SplashViewController(viewModel: makeSplashViewModel(actions: actions))
-    }
-    
-    
-    func makeSplashViewModel(actions: SplashViewModelActions) -> SplashViewModel {
-        SplashViewModel(actions: actions)
+    func makeOnboardingViewController() -> OnboardingViewController {
+        OnboardingViewController()
     }
 }

@@ -91,11 +91,9 @@
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
-		BA8EEF612C61D96600FE6ABF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF602C61D96600FE6ABF /* SplashViewController.swift */; };
 		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
 		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
-		BA8EEF682C61F25200FE6ABF /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF672C61F25200FE6ABF /* SplashViewModel.swift */; };
-		BA8EEF6B2C62118600FE6ABF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF6A2C62118600FE6ABF /* SplashView.swift */; };
+		BA8EEF812C630FF900FE6ABF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF802C630FF900FE6ABF /* OnboardingViewController.swift */; };
 		CF54AD082C4288F900E0DE68 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD072C4288F900E0DE68 /* Request.swift */; };
 		CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */; };
 		CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */; };
@@ -215,11 +213,9 @@
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
-		BA8EEF602C61D96600FE6ABF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
 		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
-		BA8EEF672C61F25200FE6ABF /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
-		BA8EEF6A2C62118600FE6ABF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		BA8EEF802C630FF900FE6ABF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		CF54AD072C4288F900E0DE68 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRetrier.swift; sourceTree = "<group>"; };
@@ -693,7 +689,7 @@
 		BA8EEF5F2C61D93200FE6ABF /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				BA8EEF602C61D96600FE6ABF /* SplashViewController.swift */,
+				BA8EEF802C630FF900FE6ABF /* OnboardingViewController.swift */,
 				BA8EEF692C62117A00FE6ABF /* View */,
 				BA8EEF662C61F24900FE6ABF /* ViewModel */,
 			);
@@ -703,7 +699,6 @@
 		BA8EEF662C61F24900FE6ABF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				BA8EEF672C61F25200FE6ABF /* SplashViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -711,7 +706,6 @@
 		BA8EEF692C62117A00FE6ABF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BA8EEF6A2C62118600FE6ABF /* SplashView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -878,11 +872,9 @@
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
-				BA8EEF6B2C62118600FE6ABF /* SplashView.swift in Sources */,
 				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */,
-				BA8EEF682C61F25200FE6ABF /* SplashViewModel.swift in Sources */,
 				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
@@ -905,6 +897,7 @@
 				584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */,
 				58067D4A2C5A1D6200889C92 /* CategoryType.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
+				BA8EEF812C630FF900FE6ABF /* OnboardingViewController.swift in Sources */,
 				CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */,
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
 				58067D512C5B379800889C92 /* KuSubmitButton.swift in Sources */,
@@ -915,7 +908,6 @@
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
-				BA8EEF612C61D96600FE6ABF /* SplashViewController.swift in Sources */,
 				58067C912C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift in Sources */,
 				584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */,
 				58067CBD2C4FCC2100889C92 /* Situation.swift in Sources */,
