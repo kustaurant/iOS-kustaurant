@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TierMapRestaurants: Codable {
+extension TierMapRestaurants {
     struct NonTieredRestaurants: Codable {
         var zoom: Int?
         var restaurants: [Restaurant?]?
@@ -17,12 +17,17 @@ struct TierMapRestaurants: Codable {
         var x: CGFloat?
         var y: CGFloat?
     }
-    
+}
+
+struct TierMapRestaurants: Codable {
     var minZoom: Int?
     var favoriteRestaurants: [Restaurant?]?
     var tieredRestaurants: [Restaurant?]?
     var nonTieredRestaurants: [NonTieredRestaurants]?
-    var solidPolygonCoordsList: [Coords?]?
-    var dashedPolygonCoordsList: [Coords?]?
-    var visibleBounds: [Int?]?
+    var solidPolygonCoordsList: [[Coords?]?]?
+    var dashedPolygonCoordsList: [[Coords?]?]?
+    var visibleBounds: [CGFloat?]?
 }
+
+
+

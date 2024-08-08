@@ -7,7 +7,9 @@
 
 import Foundation
 
-protocol TierMapViewModelInput {}
+protocol TierMapViewModelInput {
+    func fetchTierMap()
+}
 
 protocol TierMapViewModelOutput {}
 
@@ -24,5 +26,21 @@ final class DefaultTierMapViewModel: TierMapViewModel {
     ) {
         self.tierUseCase = tierUseCase
         self.tierMapUseCase = tierMapUseCase
+    }
+}
+
+// MARK: - Input
+extension DefaultTierMapViewModel {
+    func fetchTierMap() {
+        Task {
+            let result = await tierUseCase.fetchTierMap(cuisines: [.all], situations: [.all], locations: [.all])
+            switch result {
+            case .success(let data):
+                print(data)
+
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

@@ -7,7 +7,6 @@
 
 import UIKit
  
-
 final class TierMapViewController: UIViewController {
     private var viewModel: TierMapViewModel
     private var tierMapView = TierMapView()
@@ -29,5 +28,7 @@ final class TierMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.fetchTierMap()
     }
 }
