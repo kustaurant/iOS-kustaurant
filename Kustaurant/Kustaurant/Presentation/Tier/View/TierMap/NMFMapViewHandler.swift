@@ -11,6 +11,11 @@ final class NMFMapViewHandler: NSObject {
     private var view: TierMapView
     private var viewModel: TierMapViewModel
     
+    enum Polygon {
+        case solid
+        case dashed
+    }
+    
     // MARK: - Initialization
     init(
         view: TierMapView,
@@ -21,6 +26,51 @@ final class NMFMapViewHandler: NSObject {
         super.init()
         
         view.naverMapView.mapView.touchDelegate = self
+    }
+}
+
+extension NMFMapViewHandler {
+    func addMapOverlay(_ data: TierMapRestaurants?) {
+        guard let mapData = data else { return }
+        addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
+        addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
+    }
+    
+    private func addPolygonOverlay(
+        type: Polygon,
+        _ polygonCoordsList: [[Coords?]?]?
+    ) {
+        guard let polygonCoordsList = polygonCoordsList else { return }
+                
+        for coordsList in polygonCoordsList {
+            guard let coordsList = coordsList else { continue }
+            let coords = coordsList.compactMap { $0 }
+            guard !coords.isEmpty else { continue }
+            
+            let nmgLatLngs = coords.map({$0.nmgLatLng})
+
+            let polygonOverlay = NMFPolygonOverlay(nmgLatLngs)
+            polygonOverlay?.fillColor = (type == .solid) ? .mapSolidBackground : .mapDashedBackground
+            
+            switch type {
+            case .solid:
+                polygonOverlay?.outlineColor = .mapOutline
+                polygonOverlay?.outlineWidth = 2
+            case .dashed:
+                addDashedPolylineOverlay(coords: nmgLatLngs)
+            }
+            
+            polygonOverlay?.mapView = view.naverMapView.mapView
+        }
+    }
+    
+    private func addDashedPolylineOverlay(coords: [NMGLatLng]) {
+        let polylineOverlay = NMFPolylineOverlay(coords + [coords.first!]) // 닫힌 다각형
+        polylineOverlay?.pattern = [5, 5]
+        polylineOverlay?.color = .mapOutline
+        polylineOverlay?.capType = .butt
+        polylineOverlay?.width = 2
+        polylineOverlay?.mapView = view.naverMapView.mapView
     }
 }
 

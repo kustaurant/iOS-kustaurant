@@ -12,7 +12,7 @@ protocol TierMapViewModelInput {
 }
 
 protocol TierMapViewModelOutput {
-    var mapRestaurants: TierMapRestaurants? { get }
+    var mapRestaurantsPublisher: Published<TierMapRestaurants?>.Publisher { get }
 }
 
 typealias TierMapViewModel = TierMapViewModelInput & TierMapViewModelOutput
@@ -22,10 +22,10 @@ final class DefaultTierMapViewModel: TierMapViewModel {
     private let tierMapUseCase: TierMapUseCases
     
     var categories: [Category] = [Cuisine.all.category, Situation.all.category, Location.all.category]
+    @Published var mapRestaurants: TierMapRestaurants?
     
     // MARK: Output
-    var mapRestaurants: TierMapRestaurants?
-    
+    var mapRestaurantsPublisher: Published<TierMapRestaurants?>.Publisher { $mapRestaurants }
     
     // MARK: - Initialization
     init(

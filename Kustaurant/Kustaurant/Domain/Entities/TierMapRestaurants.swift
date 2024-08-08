@@ -12,11 +12,6 @@ extension TierMapRestaurants {
         var zoom: Int?
         var restaurants: [Restaurant?]?
     }
-    
-    struct Coords: Codable {
-        var x: CGFloat?
-        var y: CGFloat?
-    }
 }
 
 struct TierMapRestaurants: Codable {
@@ -28,6 +23,4 @@ struct TierMapRestaurants: Codable {
     var dashedPolygonCoordsList: [[Coords?]?]?
     var visibleBounds: [CGFloat?]?
 }
-
-
 

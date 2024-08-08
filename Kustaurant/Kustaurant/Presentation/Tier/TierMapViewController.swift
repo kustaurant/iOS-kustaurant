@@ -7,12 +7,15 @@
 
 import UIKit
 import CoreLocation
+import Combine
  
 final class TierMapViewController: UIViewController {
     private var viewModel: TierMapViewModel
     private var tierMapView = TierMapView()
     private var mapHandler: NMFMapViewHandler?
     private let locationManager = CLLocationManager()
+    
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
     init(viewModel: TierMapViewModel) {
@@ -37,6 +40,21 @@ final class TierMapViewController: UIViewController {
         super.viewDidLoad()
         viewModel.fetchTierMap()
         setupLocationManager()
+        setupBindings()
+    }
+}
+
+extension TierMapViewController {
+    private func setupBindings() {
+        bindmapRestaurants()
+    }
+    
+    private func bindmapRestaurants() {
+        viewModel.mapRestaurantsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] data in
+                self?.mapHandler?.addMapOverlay(data)
+            }.store(in: &cancellables)
     }
 }
 

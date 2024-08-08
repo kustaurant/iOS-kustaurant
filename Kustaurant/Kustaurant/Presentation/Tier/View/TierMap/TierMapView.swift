@@ -25,7 +25,6 @@ final class TierMapView: UIView {
 extension TierMapView {
     private func setup() {
         addSubview(naverMapView, autoLayout: [.fill(0)])
-        
         configureNaverMap()
     }
     
@@ -35,10 +34,9 @@ extension TierMapView {
         naverMapView.mapView.positionMode = .direction // 위치 추적 모드를 나타내는 열거형.
 
         // 초기 위치 및 줌 레벨 설정 (건국대학교 좌표 및 줌 레벨 14)
-        let cameraUpdate = NMFCameraUpdate(scrollTo: Coords.kku, zoomTo: 14.0)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: KuCoords.kku, zoomTo: 14.0)
         cameraUpdate.animation = .fly
         cameraUpdate.animationDuration = 1.5
         naverMapView.mapView.moveCamera(cameraUpdate)
-
     }
 }
