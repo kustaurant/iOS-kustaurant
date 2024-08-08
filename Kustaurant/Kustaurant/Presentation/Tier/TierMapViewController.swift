@@ -10,11 +10,16 @@ import UIKit
 final class TierMapViewController: UIViewController {
     private var viewModel: TierMapViewModel
     private var tierMapView = TierMapView()
+    private var mapHandler: NMFMapViewHandler?
     
     // MARK: - Initialization
     init(viewModel: TierMapViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        mapHandler = NMFMapViewHandler(
+            view: tierMapView,
+            viewModel: viewModel
+        )
     }
     
     required init?(coder: NSCoder) {

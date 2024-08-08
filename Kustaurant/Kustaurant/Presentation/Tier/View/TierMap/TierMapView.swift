@@ -25,5 +25,11 @@ final class TierMapView: UIView {
 extension TierMapView {
     private func setup() {
         addSubview(naverMapView, autoLayout: [.fill(0)])
+        
+        configureNaverMap()
+    }
+    
+    private func configureNaverMap() {
+        naverMapView.isIndoorMapEnabled = true // 실내지도를 활성화
     }
 }

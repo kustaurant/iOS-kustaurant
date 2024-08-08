@@ -11,13 +11,21 @@ protocol TierMapViewModelInput {
     func fetchTierMap()
 }
 
-protocol TierMapViewModelOutput {}
+protocol TierMapViewModelOutput {
+    var mapRestaurants: TierMapRestaurants? { get }
+}
 
 typealias TierMapViewModel = TierMapViewModelInput & TierMapViewModelOutput
 
 final class DefaultTierMapViewModel: TierMapViewModel {
     private let tierUseCase: TierUseCases
     private let tierMapUseCase: TierMapUseCases
+    
+    var categories: [Category] = [Cuisine.all.category, Situation.all.category, Location.all.category]
+    
+    // MARK: Output
+    var mapRestaurants: TierMapRestaurants?
+    
     
     // MARK: - Initialization
     init(
@@ -33,11 +41,14 @@ final class DefaultTierMapViewModel: TierMapViewModel {
 extension DefaultTierMapViewModel {
     func fetchTierMap() {
         Task {
-            let result = await tierUseCase.fetchTierMap(cuisines: [.all], situations: [.all], locations: [.all])
+            let result = await tierUseCase.fetchTierMap(
+                cuisines: Category.extractCuisines(from: categories),
+                situations: Category.extractSituations(from: categories),
+                locations: Category.extractLocations(from: categories)
+            )
             switch result {
             case .success(let data):
-                print(data)
-
+                mapRestaurants = data
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -99,6 +99,7 @@
 		584FA4CB2C6475C7008DDC19 /* TierMapRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4CA2C6475C7008DDC19 /* TierMapRepository.swift */; };
 		584FA4CD2C6475DA008DDC19 /* TierMapUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4CC2C6475DA008DDC19 /* TierMapUseCases.swift */; };
 		584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4CE2C6476A7008DDC19 /* DefaultTierMapRepository.swift */; };
+		584FA4D22C6487C4008DDC19 /* NMFMapViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4D12C6487C4008DDC19 /* NMFMapViewHandler.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
@@ -233,6 +234,7 @@
 		584FA4CA2C6475C7008DDC19 /* TierMapRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapRepository.swift; sourceTree = "<group>"; };
 		584FA4CC2C6475DA008DDC19 /* TierMapUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapUseCases.swift; sourceTree = "<group>"; };
 		584FA4CE2C6476A7008DDC19 /* DefaultTierMapRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTierMapRepository.swift; sourceTree = "<group>"; };
+		584FA4D12C6487C4008DDC19 /* NMFMapViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMFMapViewHandler.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 			isa = PBXGroup;
 			children = (
 				584FA4C82C647442008DDC19 /* TierMapView.swift */,
+				584FA4D12C6487C4008DDC19 /* NMFMapViewHandler.swift */,
 			);
 			path = TierMap;
 			sourceTree = "<group>";
@@ -1035,6 +1038,7 @@
 				58067CB52C4FBF9200889C92 /* TierUseCases.swift in Sources */,
 				CFE204672C5BC8AC00BCA87C /* KuTabBarPageController.swift in Sources */,
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
+				584FA4D22C6487C4008DDC19 /* NMFMapViewHandler.swift in Sources */,
 				584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */,
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
