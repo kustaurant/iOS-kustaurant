@@ -20,10 +20,10 @@ struct OnboardingContent {
     
     static func all() -> [OnboardingContent] {
         [
-            OnboardingContent(image: UIImage(named: "onboarding_1")!, text: "건대생들이 선정한 건대맛집,\n티어 시스템으로 빠르게 확인!", highlightedText: "티어 시스템"),
-            OnboardingContent(image: UIImage(named: "onboarding_2")!, text: "신입생도 파악하기 쉽게,\n건대생 지도를 통한 맛집 확인!", highlightedText: "건대생 지도"),
-            OnboardingContent(image: UIImage(named: "onboarding_3")!, text: "건국대학교 제휴식당을 한눈에!\n티어별로 확인해 보세요", highlightedText: "제휴식당"),
-            OnboardingContent(image: UIImage(named: "onboarding_4")!, text: "건대생의 메뉴추천,\n쿠스토랑 뽑기로 정해 보세요!", highlightedText: "쿠스토랑 뽑기")
+            OnboardingContent(image: UIImage(named: "img_onboarding_1")!, text: "건대생들이 선정한 건대맛집,\n티어 시스템으로 빠르게 확인!", highlightedText: "티어 시스템"),
+            OnboardingContent(image: UIImage(named: "img_onboarding_2")!, text: "신입생도 파악하기 쉽게,\n건대생 지도를 통한 맛집 확인!", highlightedText: "건대생 지도"),
+            OnboardingContent(image: UIImage(named: "img_onboarding_3")!, text: "건국대학교 제휴식당을 한눈에!\n티어별로 확인해 보세요", highlightedText: "제휴식당"),
+            OnboardingContent(image: UIImage(named: "img_onboarding_4")!, text: "건대생의 메뉴추천,\n쿠스토랑 뽑기로 정해 보세요!", highlightedText: "쿠스토랑 뽑기")
         ]
     }
 }
