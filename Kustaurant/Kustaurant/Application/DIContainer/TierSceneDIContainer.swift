@@ -44,9 +44,21 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         )
     }
     
+    func makeTierMapRepository() -> TierMapRepository {
+        DefaultTierMapRepository(
+            networkService: dependencies.networkService
+        )
+    }
+    
     func makeTierUseCase() -> TierUseCases {
         DefaultTierUseCases(
             tierRepository: makeTierRepository()
+        )
+    }
+    
+    func makeTierMapUseCase() -> TierMapUseCases {
+        DefaultTierMapUseCases(
+            tierMapRepository: makeTierMapRepository()
         )
     }
     
@@ -63,8 +75,17 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         )
     }
     
+    func makeTierMpaViewModel() -> TierMapViewModel {
+        DefaultTierMapViewModel(
+            tierUseCase: makeTierUseCase(),
+            tierMapUseCase: makeTierMapUseCase()
+        )
+    }
+    
     func makeTierMapViewController() -> TierMapViewController {
-        TierMapViewController()
+        TierMapViewController(
+            viewModel: makeTierMpaViewModel()
+        )
     }
     
     func makeTierViewController(actions: TierListViewModelActions) -> TierViewController {
