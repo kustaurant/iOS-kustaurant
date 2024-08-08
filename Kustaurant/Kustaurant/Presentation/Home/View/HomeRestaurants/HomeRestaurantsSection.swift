@@ -1,5 +1,5 @@
 //
-//  HomeMainCollectionViewCell.swift
+//  HomeRestaurantsSection.swift
 //  Kustaurant
 //
 //  Created by 송우진 on 7/17/24.
@@ -7,28 +7,25 @@
 
 import UIKit
 
-final class HomeMainCollectionViewCell: UICollectionViewCell, ReusableCell {
-    static let reuseIdentifier = String(describing: HomeMainCollectionViewCell.self)
+final class HomeRestaurantsSection: UITableViewCell, ReusableCell {
+    static let reuseIdentifier = String(describing: HomeRestaurantsSection.self)
+    static let sectionHeight: CGFloat = 261.0
+    static let sectionBottomInset: CGFloat = 53.0
     var sectionType: HomeSection? {
-        didSet { updateContent() }
+        didSet { bind() }
     }
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
     let moreButton = UIButton()
-    
-    lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(HomeRestaurantListsCollectionViewCell.self, forCellWithReuseIdentifier: HomeRestaurantListsCollectionViewCell.reuseIdentifier)
-        return collectionView
-    }()
+    let collectionView = HomeRestaurantsCollectionView()
 
     // MARK: - Initialization
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(
+        style: UITableViewCell.CellStyle,
+        reuseIdentifier: String?
+    ) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
         setupUI()
     }
     
@@ -37,26 +34,14 @@ final class HomeMainCollectionViewCell: UICollectionViewCell, ReusableCell {
     }
 }
 
-extension HomeMainCollectionViewCell {
-    func updateAndReload(section: HomeSection) {
-        sectionType = section
-        collectionView.reloadData()
-    }
-    
-    private func updateContent() {
-        switch sectionType {
-        case .topRestaurants:
-            titleLabel.text = "인증된 건대 TOP 맛집"
-            subtitleLabel.text = "가장 높은 평가를 받은 맛집을 알려드립니다."
-        case .forMeRestaurants:
-            titleLabel.text = "나를 위한 건대 맛집"
-            subtitleLabel.text = "즐겨찾기를 바탕으로 다른 맛집을 추천해 드립니다."
-        default: return
-        }
+extension HomeRestaurantsSection {
+    private func bind() {
+        titleLabel.text = sectionType?.titleText()
+        subtitleLabel.text = sectionType?.subTitleText()
     }
 }
 
-extension HomeMainCollectionViewCell {
+extension HomeRestaurantsSection {
     private func setupUI() {
         addSubviews()
         setupConstraint()
