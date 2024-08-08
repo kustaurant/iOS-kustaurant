@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		378E97E820AB523C956FE628 /* Pods_Kustaurant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */; };
 		58067C8D2C4A815000889C92 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067C8C2C4A815000889C92 /* RestaurantDetailViewController.swift */; };
 		58067C8F2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067C8E2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift */; };
 		58067C912C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067C902C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift */; };
@@ -39,6 +40,15 @@
 		58067D4D2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D4C2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift */; };
 		58067D4F2C5A347F00889C92 /* CollectionViewLeftAlignFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D4E2C5A347F00889C92 /* CollectionViewLeftAlignFlowLayout.swift */; };
 		58067D512C5B379800889C92 /* KuSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D502C5B379800889C92 /* KuSubmitButton.swift */; };
+		58067D772C5F96BB00889C92 /* HomeCategoriesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D762C5F96BB00889C92 /* HomeCategoriesSection.swift */; };
+		58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D782C5F99FB00889C92 /* HomeSection.swift */; };
+		58067D7B2C5FA70300889C92 /* HomeCategoriesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D7A2C5FA70300889C92 /* HomeCategoriesCollectionView.swift */; };
+		58067D7D2C5FA75A00889C92 /* HomeCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D7C2C5FA75A00889C92 /* HomeCategoriesCollectionViewCell.swift */; };
+		58067D812C5FC07A00889C92 /* HomeLayoutTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D802C5FC07A00889C92 /* HomeLayoutTableView.swift */; };
+		58067D842C5FD67700889C92 /* HomeLayoutTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D832C5FD67700889C92 /* HomeLayoutTableViewHandler.swift */; };
+		58067D862C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D852C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift */; };
+		58067D882C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D872C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift */; };
+		58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D962C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
 		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
@@ -61,15 +71,14 @@
 		584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173532C468410001EC132 /* MyPageFlowCoordinator.swift */; };
 		584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */; };
 		5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173592C46C95F001EC132 /* HomeViewModel.swift */; };
-		584173642C4791B0001EC132 /* HomeMainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173632C4791AF001EC132 /* HomeMainCollectionViewCell.swift */; };
+		584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173632C4791AF001EC132 /* HomeRestaurantsSection.swift */; };
 		584173662C47A964001EC132 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173652C47A964001EC132 /* HomeView.swift */; };
-		584173682C47AB1A001EC132 /* HomeCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173672C47AB1A001EC132 /* HomeCollectionViewHandler.swift */; };
 		5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841736A2C47B845001EC132 /* UIImage+Resize.swift */; };
 		5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841736E2C47C172001EC132 /* HomeUseCases.swift */; };
 		584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173722C47C2BA001EC132 /* HomeRepository.swift */; };
 		584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173752C47C311001EC132 /* DefaultHomeRepository.swift */; };
 		5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841737C2C47D3F9001EC132 /* NetworkService.swift */; };
-		584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173802C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift */; };
+		584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173802C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift */; };
 		584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173822C48CAE0001EC132 /* ReusableCell.swift */; };
 		5841738E2C4A070B001EC132 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 584173852C4A070B001EC132 /* Pretendard-Bold.otf */; };
 		5841738F2C4A070B001EC132 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 584173862C4A070B001EC132 /* Pretendard-Black.otf */; };
@@ -90,6 +99,7 @@
 		58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */; };
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
+		816A02DA220B296E2DE3721E /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
 		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
 		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
@@ -134,6 +144,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AA722CB3B316DE7628F8FFC /* Pods-KustaurantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KustaurantTests.release.xcconfig"; path = "Target Support Files/Pods-KustaurantTests/Pods-KustaurantTests.release.xcconfig"; sourceTree = "<group>"; };
+		3BA34C8D06FC4838BF2DA624 /* Pods-Kustaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.release.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.release.xcconfig"; sourceTree = "<group>"; };
 		58067C8C2C4A815000889C92 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		58067C8E2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailSceneDIContainer.swift; sourceTree = "<group>"; };
 		58067C902C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -166,6 +178,15 @@
 		58067D4C2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierCategorySectionHeaderView.swift; sourceTree = "<group>"; };
 		58067D4E2C5A347F00889C92 /* CollectionViewLeftAlignFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLeftAlignFlowLayout.swift; sourceTree = "<group>"; };
 		58067D502C5B379800889C92 /* KuSubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuSubmitButton.swift; sourceTree = "<group>"; };
+		58067D762C5F96BB00889C92 /* HomeCategoriesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoriesSection.swift; sourceTree = "<group>"; };
+		58067D782C5F99FB00889C92 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
+		58067D7A2C5FA70300889C92 /* HomeCategoriesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoriesCollectionView.swift; sourceTree = "<group>"; };
+		58067D7C2C5FA75A00889C92 /* HomeCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
+		58067D802C5FC07A00889C92 /* HomeLayoutTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLayoutTableView.swift; sourceTree = "<group>"; };
+		58067D832C5FD67700889C92 /* HomeLayoutTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLayoutTableViewHandler.swift; sourceTree = "<group>"; };
+		58067D852C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantsCollectionViewHandler.swift; sourceTree = "<group>"; };
+		58067D872C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantsCollectionView.swift; sourceTree = "<group>"; };
+		58067D962C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoriesCollectionViewHandler.swift; sourceTree = "<group>"; };
 		5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantLists.swift; sourceTree = "<group>"; };
 		5841731F2C464695001EC132 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -188,15 +209,14 @@
 		584173532C468410001EC132 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
 		584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSceneDIContainer.swift; sourceTree = "<group>"; };
 		584173592C46C95F001EC132 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		584173632C4791AF001EC132 /* HomeMainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainCollectionViewCell.swift; sourceTree = "<group>"; };
+		584173632C4791AF001EC132 /* HomeRestaurantsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantsSection.swift; sourceTree = "<group>"; };
 		584173652C47A964001EC132 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		584173672C47AB1A001EC132 /* HomeCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHandler.swift; sourceTree = "<group>"; };
 		5841736A2C47B845001EC132 /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		5841736E2C47C172001EC132 /* HomeUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCases.swift; sourceTree = "<group>"; };
 		584173722C47C2BA001EC132 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		584173752C47C311001EC132 /* DefaultHomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeRepository.swift; sourceTree = "<group>"; };
 		5841737C2C47D3F9001EC132 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		584173802C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantListsCollectionViewCell.swift; sourceTree = "<group>"; };
+		584173802C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantsCollectionViewCell.swift; sourceTree = "<group>"; };
 		584173822C48CAE0001EC132 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
 		584173852C4A070B001EC132 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		584173862C4A070B001EC132 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
@@ -211,6 +231,7 @@
 		584173992C4A1040001EC132 /* UILabel+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		5841739B2C4A29C6001EC132 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
 		5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -220,6 +241,8 @@
 		58D83A722C3A785A00511AB9 /* KustaurantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KustaurantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.debug.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.debug.xcconfig"; sourceTree = "<group>"; };
+		ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
 		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -251,6 +274,8 @@
 		CFE2046D2C5E68C500BCA87C /* KuTabBarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuTabBarCollectionView.swift; sourceTree = "<group>"; };
 		CFE2046F2C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuTabBarCollectionViewCell.swift; sourceTree = "<group>"; };
 		CFE204712C5E690200BCA87C /* KuTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuTabBarView.swift; sourceTree = "<group>"; };
+		EF36305B343960EC6AD97AC7 /* Pods-KustaurantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KustaurantTests.debug.xcconfig"; path = "Target Support Files/Pods-KustaurantTests/Pods-KustaurantTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KustaurantTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +283,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				378E97E820AB523C956FE628 /* Pods_Kustaurant.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,12 +291,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				816A02DA220B296E2DE3721E /* Pods_KustaurantTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		160A3CF5E49B517ADA8EFD72 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */,
+				F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		58067C8B2C4A809800889C92 /* RestaurantDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +415,37 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		58067D742C5F8ED000889C92 /* HomeRestaurants */ = {
+			isa = PBXGroup;
+			children = (
+				584173632C4791AF001EC132 /* HomeRestaurantsSection.swift */,
+				58067D872C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift */,
+				584173802C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift */,
+				58067D852C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift */,
+			);
+			path = HomeRestaurants;
+			sourceTree = "<group>";
+		};
+		58067D752C5F96A500889C92 /* HomeCategories */ = {
+			isa = PBXGroup;
+			children = (
+				58067D762C5F96BB00889C92 /* HomeCategoriesSection.swift */,
+				58067D7A2C5FA70300889C92 /* HomeCategoriesCollectionView.swift */,
+				58067D7C2C5FA75A00889C92 /* HomeCategoriesCollectionViewCell.swift */,
+				58067D962C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift */,
+			);
+			path = HomeCategories;
+			sourceTree = "<group>";
+		};
+		58067D822C5FD66300889C92 /* HomeLayout */ = {
+			isa = PBXGroup;
+			children = (
+				58067D802C5FC07A00889C92 /* HomeLayoutTableView.swift */,
+				58067D832C5FD67700889C92 /* HomeLayoutTableViewHandler.swift */,
+			);
+			path = HomeLayout;
+			sourceTree = "<group>";
+		};
 		5841731E2C46467B001EC132 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -459,6 +526,7 @@
 				58067CBA2C4FCAA400889C92 /* Cuisine.swift */,
 				58067CBC2C4FCC2100889C92 /* Situation.swift */,
 				58067CBE2C4FCCC100889C92 /* Location.swift */,
+				58067D782C5F99FB00889C92 /* HomeSection.swift */,
 				58067D492C5A1D6200889C92 /* CategoryType.swift */,
 			);
 			path = Enums;
@@ -505,27 +573,11 @@
 			isa = PBXGroup;
 			children = (
 				584173652C47A964001EC132 /* HomeView.swift */,
-				5841735D2C46CD78001EC132 /* HomeCollectionView */,
+				58067D822C5FD66300889C92 /* HomeLayout */,
+				58067D752C5F96A500889C92 /* HomeCategories */,
+				58067D742C5F8ED000889C92 /* HomeRestaurants */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		5841735D2C46CD78001EC132 /* HomeCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				584173672C47AB1A001EC132 /* HomeCollectionViewHandler.swift */,
-				584173602C46CE2A001EC132 /* Cells */,
-			);
-			path = HomeCollectionView;
-			sourceTree = "<group>";
-		};
-		584173602C46CE2A001EC132 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				584173632C4791AF001EC132 /* HomeMainCollectionViewCell.swift */,
-				584173802C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		584173692C47B7CD001EC132 /* Extensions */ = {
@@ -609,6 +661,8 @@
 				58D83A5E2C3A785800511AB9 /* Kustaurant */,
 				58D83A752C3A785A00511AB9 /* KustaurantTests */,
 				58D83A5D2C3A785800511AB9 /* Products */,
+				5EE0E5DCFB0F2A34E78E8A40 /* Pods */,
+				160A3CF5E49B517ADA8EFD72 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -650,6 +704,7 @@
 				58D83A682C3A785A00511AB9 /* Assets.xcassets */,
 				58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */,
 				58D83A6D2C3A785A00511AB9 /* Info.plist */,
+				584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -757,6 +812,17 @@
 			path = SocialLogin;
 			sourceTree = "<group>";
 		};
+		5EE0E5DCFB0F2A34E78E8A40 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */,
+				3BA34C8D06FC4838BF2DA624 /* Pods-Kustaurant.release.xcconfig */,
+				EF36305B343960EC6AD97AC7 /* Pods-KustaurantTests.debug.xcconfig */,
+				0AA722CB3B316DE7628F8FFC /* Pods-KustaurantTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CF54AD062C42889500E0DE68 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,9 +867,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58D83A862C3A785A00511AB9 /* Build configuration list for PBXNativeTarget "Kustaurant" */;
 			buildPhases = (
+				7ECC81DDA24C6377A762CC53 /* [CP] Check Pods Manifest.lock */,
 				58D83A582C3A785800511AB9 /* Sources */,
 				58D83A592C3A785800511AB9 /* Frameworks */,
 				58D83A5A2C3A785800511AB9 /* Resources */,
+				9DE7D12BFBB2293639E97661 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -818,6 +886,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58D83A892C3A785A00511AB9 /* Build configuration list for PBXNativeTarget "KustaurantTests" */;
 			buildPhases = (
+				46F242C4EDBA9C78C89EC4F3 /* [CP] Check Pods Manifest.lock */,
 				58D83A6E2C3A785A00511AB9 /* Sources */,
 				58D83A6F2C3A785A00511AB9 /* Frameworks */,
 				58D83A702C3A785A00511AB9 /* Resources */,
@@ -898,18 +967,84 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		46F242C4EDBA9C78C89EC4F3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KustaurantTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7ECC81DDA24C6377A762CC53 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kustaurant-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9DE7D12BFBB2293639E97661 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kustaurant/Pods-Kustaurant-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kustaurant/Pods-Kustaurant-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kustaurant/Pods-Kustaurant-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		58D83A582C3A785800511AB9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				584173682C47AB1A001EC132 /* HomeCollectionViewHandler.swift in Sources */,
+				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				58067D482C5A027000889C92 /* TierCategoryCollectionViewHandler.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeMainCollectionViewCell.swift in Sources */,
 				BA8EEF8D2C6351D800FE6ABF /* KuPageControl.swift in Sources */,
+				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
+				58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */,
 				CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */,
 				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
 				584173472C467F5B001EC132 /* TierSceneDIContainer.swift in Sources */,
@@ -922,6 +1057,7 @@
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
 				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
+				58067D882C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */,
 				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,
@@ -931,6 +1067,7 @@
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
 				584173402C467BDD001EC132 /* TabBarPage.swift in Sources */,
 				58067CBF2C4FCCC100889C92 /* Location.swift in Sources */,
+				58067D862C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift in Sources */,
 				58067CAA2C4FAE2A00889C92 /* TierListViewModel.swift in Sources */,
 				58067D3B2C58D6EC00889C92 /* TierCategoryViewController.swift in Sources */,
 				584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */,
@@ -969,11 +1106,13 @@
 				58067CA62C4F4FE200889C92 /* TierMapViewController.swift in Sources */,
 				BA8EEF8A2C634C4B00FE6ABF /* OnboardingCollectionViewCell.swift in Sources */,
 				58067D4D2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift in Sources */,
+				58067D7D2C5FA75A00889C92 /* HomeCategoriesCollectionViewCell.swift in Sources */,
 				584173662C47A964001EC132 /* HomeView.swift in Sources */,
 				584173202C464695001EC132 /* HomeViewController.swift in Sources */,
 				58067CC72C514FCD00889C92 /* TierListCategoriesCollectionViewHandler.swift in Sources */,
 				58067CA82C4F512100889C92 /* TierPageViewController.swift in Sources */,
 				BA8EEF872C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift in Sources */,
+				58067D842C5FD67700889C92 /* HomeLayoutTableViewHandler.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
 				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
@@ -982,9 +1121,14 @@
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
+				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
+				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
+				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				CFE204522C5A0D7900BCA87C /* UICollectionView+.swift in Sources */,
 				58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */,
 				5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */,
+				58067D772C5F96BB00889C92 /* HomeCategoriesSection.swift in Sources */,
 				58067CCA2C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift in Sources */,
 				58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */,
 				BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */,
@@ -994,9 +1138,11 @@
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
+				58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */,
 				CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */,
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
 				5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */,
+				58067D812C5FC07A00889C92 /* HomeLayoutTableView.swift in Sources */,
 				CFE204692C5D03C400BCA87C /* Collection+.swift in Sources */,
 				584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */,
 				584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */,
@@ -1005,6 +1151,7 @@
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
 				584173392C46664E001EC132 /* RecommendViewController.swift in Sources */,
 				58067CCC2C51552700889C92 /* Category.swift in Sources */,
+				58067D7B2C5FA70300889C92 /* HomeCategoriesCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1040,6 +1187,7 @@
 /* Begin XCBuildConfiguration section */
 		58D83A842C3A785A00511AB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1075,7 +1223,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1103,6 +1251,7 @@
 		};
 		58D83A852C3A785A00511AB9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1138,7 +1287,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1159,6 +1308,7 @@
 		};
 		58D83A872C3A785A00511AB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */;
 			buildSettings = {
 				API_BASE_URL = "http://3.35.154.191:8080";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1193,6 +1343,7 @@
 		};
 		58D83A882C3A785A00511AB9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BA34C8D06FC4838BF2DA624 /* Pods-Kustaurant.release.xcconfig */;
 			buildSettings = {
 				API_BASE_URL = "http://3.35.154.191:8080";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1227,6 +1378,7 @@
 		};
 		58D83A8A2C3A785A00511AB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF36305B343960EC6AD97AC7 /* Pods-KustaurantTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1247,6 +1399,7 @@
 		};
 		58D83A8B2C3A785A00511AB9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AA722CB3B316DE7628F8FFC /* Pods-KustaurantTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
