@@ -100,6 +100,7 @@
 		584FA4CD2C6475DA008DDC19 /* TierMapUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4CC2C6475DA008DDC19 /* TierMapUseCases.swift */; };
 		584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4CE2C6476A7008DDC19 /* DefaultTierMapRepository.swift */; };
 		584FA4D22C6487C4008DDC19 /* NMFMapViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4D12C6487C4008DDC19 /* NMFMapViewHandler.swift */; };
+		584FA4D42C649F85008DDC19 /* Coords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4D32C649F85008DDC19 /* Coords.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
@@ -235,6 +236,7 @@
 		584FA4CC2C6475DA008DDC19 /* TierMapUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapUseCases.swift; sourceTree = "<group>"; };
 		584FA4CE2C6476A7008DDC19 /* DefaultTierMapRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTierMapRepository.swift; sourceTree = "<group>"; };
 		584FA4D12C6487C4008DDC19 /* NMFMapViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMFMapViewHandler.swift; sourceTree = "<group>"; };
+		584FA4D32C649F85008DDC19 /* Coords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coords.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 				58067CBE2C4FCCC100889C92 /* Location.swift */,
 				58067D782C5F99FB00889C92 /* HomeSection.swift */,
 				58067D492C5A1D6200889C92 /* CategoryType.swift */,
+				584FA4D32C649F85008DDC19 /* Coords.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1012,6 +1015,7 @@
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
 				584173402C467BDD001EC132 /* TabBarPage.swift in Sources */,
+				584FA4D42C649F85008DDC19 /* Coords.swift in Sources */,
 				58067CBF2C4FCCC100889C92 /* Location.swift in Sources */,
 				58067D862C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift in Sources */,
 				58067CAA2C4FAE2A00889C92 /* TierListViewModel.swift in Sources */,

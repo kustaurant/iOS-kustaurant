@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import CoreLocation
  
 final class TierMapViewController: UIViewController {
     private var viewModel: TierMapViewModel
     private var tierMapView = TierMapView()
     private var mapHandler: NMFMapViewHandler?
+    private let locationManager = CLLocationManager()
     
     // MARK: - Initialization
     init(viewModel: TierMapViewModel) {
@@ -33,7 +35,13 @@ final class TierMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         viewModel.fetchTierMap()
+        setupLocationManager()
+    }
+}
+
+extension TierMapViewController {
+    private func setupLocationManager() {
+        locationManager.requestWhenInUseAuthorization()
     }
 }

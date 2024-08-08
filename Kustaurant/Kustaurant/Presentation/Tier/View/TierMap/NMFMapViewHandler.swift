@@ -20,9 +20,10 @@ final class NMFMapViewHandler: NSObject {
         self.viewModel = viewModel
         super.init()
         
-        view.naverMapView.touchDelegate = self
+        view.naverMapView.mapView.touchDelegate = self
     }
 }
+
 
 // MARK: - NMFMapViewTouchDelegate
 extension NMFMapViewHandler: NMFMapViewTouchDelegate {
