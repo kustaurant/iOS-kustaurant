@@ -9,6 +9,7 @@ import UIKit
 
 protocol OnboardingFlowCoordinatorDependencies {
     func makeOnboardingViewController() -> OnboardingViewController
+    func makeLoginViewController() -> LoginViewController
 }
 
 final class OnboardingFlowCoordinator: Coordinator {
@@ -29,6 +30,11 @@ extension OnboardingFlowCoordinator {
     
     func start() {
         let viewController = dependencies.makeOnboardingViewController()
+        navigationController.pushViewController(viewController, animated: false)
+    }
+    
+    func showLogin() {
+        let viewController = dependencies.makeLoginViewController()
         navigationController.pushViewController(viewController, animated: false)
     }
 }

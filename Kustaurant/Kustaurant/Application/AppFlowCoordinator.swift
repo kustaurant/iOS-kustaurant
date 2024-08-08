@@ -33,7 +33,14 @@ extension AppFlowCoordinator {
         let onboardingCoordinator = onboardingDIContainer.makeOnboardingFlowCoordinator(
             navigationController: navigationController
         )
-        onboardingCoordinator.start()
+        
+        let initialLaunch = false
+        
+        if initialLaunch {
+            onboardingCoordinator.start()
+        } else {
+            onboardingCoordinator.showLogin()
+        }
     }
 }
 
