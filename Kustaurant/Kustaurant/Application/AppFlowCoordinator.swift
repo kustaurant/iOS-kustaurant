@@ -26,8 +26,9 @@ extension AppFlowCoordinator {
     }
 }
 
+// MARK: Tabbar
 extension AppFlowCoordinator {
-    private func showTab() {
+    func showTab() {
         let tabBarController = UITabBarController()
         let tabBarFlowCoordinator = TabBarFlowCoordinator(
             navigationController: navigationController,
@@ -65,6 +66,4 @@ extension AppFlowCoordinator {
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }
-    
-    
 }
