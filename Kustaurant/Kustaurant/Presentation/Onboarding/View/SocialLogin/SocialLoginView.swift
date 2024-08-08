@@ -7,13 +7,13 @@
 
 import UIKit
 
-enum LoginViewTheme {
+enum SocialLoginViewTheme {
     case light, dark
 }
 
-class LoginView: UIView {
+class SocialLoginView: UIView {
     
-    private var theme: LoginViewTheme?
+    private var theme: SocialLoginViewTheme?
     
     private let dividerView: UIView = {
         let view = UIView()
@@ -76,7 +76,7 @@ class LoginView: UIView {
         commonInit()
     }
     
-    init(_ theme: LoginViewTheme = .light) {
+    init(_ theme: SocialLoginViewTheme = .light) {
         super.init(frame: .zero)
         self.theme = theme
         commonInit()
@@ -93,7 +93,7 @@ class LoginView: UIView {
     }
 }
 
-extension LoginView {
+extension SocialLoginView {
     
     private func setupDivider() {
         addSubview(dividerView, autoLayout: [.top(0), .leading(0), .trailing(0)])

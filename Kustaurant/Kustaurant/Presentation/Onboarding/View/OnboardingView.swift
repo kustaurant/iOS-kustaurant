@@ -50,8 +50,8 @@ class OnboardingView: UIView {
         return pageControl
     }()
     
-    private var loginView: LoginView = {
-        let view = LoginView()
+    private var socialLoginView: SocialLoginView = {
+        let view = SocialLoginView()
         return view
     }()
     
@@ -72,6 +72,6 @@ extension OnboardingView {
         addSubview(logoImageView, autoLayout: [.topSafeArea(constant: 20), .leading(20)])
         addSubview(onboardingCollectionView, autoLayout: [.topNext(to: logoImageView, constant: 20), .leading(0), .trailing(0), .height(UIScreen.main.bounds.height * 0.56)])
         addSubview(pageControl, autoLayout: [.topNext(to: onboardingCollectionView, constant: 12), .leading(124), .trailing(124), .height(36)])
-        addSubview(loginView, autoLayout: [.topNext(to: pageControl, constant: 24), .leading(32), .trailing(32), .bottom(28)])
+        addSubview(socialLoginView, autoLayout: [.topNext(to: pageControl, constant: 24), .leading(32), .trailing(32), .bottom(28)])
     }
 }
