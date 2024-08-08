@@ -22,25 +22,7 @@ final class AppFlowCoordinator {
 
 extension AppFlowCoordinator {
     func start() {
-        showOnboarding()
-    }
-}
-
-// MARK: Onboarding
-extension AppFlowCoordinator {
-    func showOnboarding() {
-        let onboardingDIContainer = appDIContainer.makeOnboardingDIContainer()
-        let onboardingCoordinator = onboardingDIContainer.makeOnboardingFlowCoordinator(
-            navigationController: navigationController
-        )
-        
-        let initialLaunch = false
-        
-        if initialLaunch {
-            onboardingCoordinator.start()
-        } else {
-            onboardingCoordinator.showLogin()
-        }
+        showTab()
     }
 }
 
