@@ -30,10 +30,27 @@ final class NMFMapViewHandler: NSObject {
 }
 
 extension NMFMapViewHandler {
-    func addMapOverlay(_ data: TierMapRestaurants?) {
+    func updateMap(_ data: TierMapRestaurants?) {
         guard let mapData = data else { return }
+        cameraUpdate(mapData.visibleBounds)
         addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
         addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
+    }
+    
+    private func cameraUpdate(_ bounds: [CGFloat?]?) {
+        guard 
+            let bounds = bounds?.compactMap({ $0 }).map({ Double($0 )}),
+            bounds.count >= 4
+        else { return }
+        let visibleBounds = NMGLatLngBounds(
+            southWestLat: bounds[2],
+            southWestLng: bounds[0],
+            northEastLat: bounds[3],
+            northEastLng: bounds[1]
+        )
+        let cameraUpdate = NMFCameraUpdate(fit: visibleBounds, padding: 0)
+        cameraUpdate.animation = .fly
+        view.naverMapView.mapView.moveCamera(cameraUpdate)
     }
     
     private func addPolygonOverlay(

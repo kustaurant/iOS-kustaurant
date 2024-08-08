@@ -53,7 +53,7 @@ extension TierMapViewController {
         viewModel.mapRestaurantsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] data in
-                self?.mapHandler?.addMapOverlay(data)
+                self?.mapHandler?.updateMap(data)
             }.store(in: &cancellables)
     }
 }
