@@ -44,4 +44,12 @@ extension UILabel {
         return self
     }
     
+    @discardableResult
+    func setAttributedText(text: String, highlightedText: String, highlightColor: UIColor) -> Self {
+        let attributedString = NSMutableAttributedString(string: text)
+        let range = (text as NSString).range(of: highlightedText)
+        attributedString.addAttribute(.foregroundColor, value: highlightColor, range: range)
+        self.attributedText = attributedString
+        return self
+    }
 }

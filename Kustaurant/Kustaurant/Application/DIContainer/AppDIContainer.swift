@@ -44,5 +44,10 @@ final class AppDIContainer {
     func makeRestaurantDetailSceneDIContainer() -> RestaurantDetailSceneDIContainer {
         RestaurantDetailSceneDIContainer()
     }
+    
+    func makeOnboardingDIContainer() -> OnboardingSceneDIContainer {
+        let dependencies = OnboardingSceneDIContainer.Dependencies(networkService: networkService)
+        return OnboardingSceneDIContainer(dependencies: dependencies)
+    }
 }
 

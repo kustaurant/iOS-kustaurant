@@ -101,6 +101,17 @@
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		816A02DA220B296E2DE3721E /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
+		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
+		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
+		BA8EEF812C630FF900FE6ABF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF802C630FF900FE6ABF /* OnboardingViewController.swift */; };
+		BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF822C631ED300FE6ABF /* OnboardingView.swift */; };
+		BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF842C633E1A00FE6ABF /* OnboardingViewModel.swift */; };
+		BA8EEF872C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF862C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift */; };
+		BA8EEF8A2C634C4B00FE6ABF /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF892C634C4B00FE6ABF /* OnboardingCollectionViewCell.swift */; };
+		BA8EEF8D2C6351D800FE6ABF /* KuPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF8C2C6351D800FE6ABF /* KuPageControl.swift */; };
+		BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */; };
+		BA8EEF972C64981100FE6ABF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF962C64981100FE6ABF /* LoginViewController.swift */; };
+		BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF982C64994F00FE6ABF /* LoginView.swift */; };
 		CF54AD082C4288F900E0DE68 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD072C4288F900E0DE68 /* Request.swift */; };
 		CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */; };
 		CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */; };
@@ -233,6 +244,17 @@
 		686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.debug.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.debug.xcconfig"; sourceTree = "<group>"; };
 		ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
+		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
+		BA8EEF802C630FF900FE6ABF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		BA8EEF822C631ED300FE6ABF /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		BA8EEF842C633E1A00FE6ABF /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		BA8EEF862C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewHandler.swift; sourceTree = "<group>"; };
+		BA8EEF892C634C4B00FE6ABF /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA8EEF8C2C6351D800FE6ABF /* KuPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuPageControl.swift; sourceTree = "<group>"; };
+		BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
+		BA8EEF962C64981100FE6ABF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BA8EEF982C64994F00FE6ABF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CF54AD072C4288F900E0DE68 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRetrier.swift; sourceTree = "<group>"; };
@@ -458,6 +480,7 @@
 				584173482C468250001EC132 /* CommunityFlowCoordinator.swift */,
 				584173532C468410001EC132 /* MyPageFlowCoordinator.swift */,
 				58067C902C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift */,
+				BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -472,6 +495,7 @@
 				5841734E2C4682C8001EC132 /* CommunitySceneDIContainer.swift */,
 				584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */,
 				58067C8E2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift */,
+				BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -703,6 +727,7 @@
 				CFE204652C5BC46700BCA87C /* Common */,
 				584173252C464FEC001EC132 /* Flows */,
 				5841731E2C46467B001EC132 /* Home */,
+				BA8EEF5F2C61D93200FE6ABF /* Onboarding */,
 				584173372C46663B001EC132 /* Recommend */,
 				584173432C467EA9001EC132 /* Tier */,
 				5841734B2C468293001EC132 /* Community */,
@@ -730,6 +755,61 @@
 				58067CCB2C51552700889C92 /* Category.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		BA8EEF5F2C61D93200FE6ABF /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				BA8EEF802C630FF900FE6ABF /* OnboardingViewController.swift */,
+				BA8EEF962C64981100FE6ABF /* LoginViewController.swift */,
+				BA8EEF692C62117A00FE6ABF /* View */,
+				BA8EEF662C61F24900FE6ABF /* ViewModel */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		BA8EEF662C61F24900FE6ABF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BA8EEF842C633E1A00FE6ABF /* OnboardingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BA8EEF692C62117A00FE6ABF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BA8EEF822C631ED300FE6ABF /* OnboardingView.swift */,
+				BA8EEF982C64994F00FE6ABF /* LoginView.swift */,
+				BA8EEF8E2C644EB000FE6ABF /* OnboardingCollectionView */,
+				BA8EEF8F2C644EC700FE6ABF /* SocialLogin */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BA8EEF8B2C6351CD00FE6ABF /* KuPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				BA8EEF8C2C6351D800FE6ABF /* KuPageControl.swift */,
+			);
+			path = KuPageControl;
+			sourceTree = "<group>";
+		};
+		BA8EEF8E2C644EB000FE6ABF /* OnboardingCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				BA8EEF862C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift */,
+				BA8EEF892C634C4B00FE6ABF /* OnboardingCollectionViewCell.swift */,
+			);
+			path = OnboardingCollectionView;
+			sourceTree = "<group>";
+		};
+		BA8EEF8F2C644EC700FE6ABF /* SocialLogin */ = {
+			isa = PBXGroup;
+			children = (
+				BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */,
+			);
+			path = SocialLogin;
 			sourceTree = "<group>";
 		};
 		5EE0E5DCFB0F2A34E78E8A40 /* Pods */ = {
@@ -763,6 +843,7 @@
 		CFE204652C5BC46700BCA87C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BA8EEF8B2C6351CD00FE6ABF /* KuPageControl */,
 				CFE2046C2C5E68B400BCA87C /* KuTabBar */,
 			);
 			path = Common;
@@ -957,6 +1038,8 @@
 			files = (
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				58067D482C5A027000889C92 /* TierCategoryCollectionViewHandler.swift in Sources */,
+				584173642C4791B0001EC132 /* HomeMainCollectionViewCell.swift in Sources */,
+				BA8EEF8D2C6351D800FE6ABF /* KuPageControl.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
@@ -995,15 +1078,19 @@
 				58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */,
 				58067CB22C4FBA9800889C92 /* TierListTableViewCell.swift in Sources */,
 				58067D3D2C58D73C00889C92 /* TierCategoryViewModel.swift in Sources */,
+				BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
 				CFE2046B2C5D0A4000BCA87C /* UIView+parentViewController.swift in Sources */,
 				584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */,
 				58067D4A2C5A1D6200889C92 /* CategoryType.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
+				BA8EEF812C630FF900FE6ABF /* OnboardingViewController.swift in Sources */,
 				CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */,
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
 				58067D512C5B379800889C92 /* KuSubmitButton.swift in Sources */,
 				5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */,
+				BA8EEF972C64981100FE6ABF /* LoginViewController.swift in Sources */,
+				BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */,
 				58067CB52C4FBF9200889C92 /* TierUseCases.swift in Sources */,
 				CFE204672C5BC8AC00BCA87C /* KuTabBarPageController.swift in Sources */,
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
@@ -1017,15 +1104,29 @@
 				58067D3F2C58E35800889C92 /* CustomUINavigationController.swift in Sources */,
 				5841732F2C465A9D001EC132 /* AppDIContainer.swift in Sources */,
 				58067CA62C4F4FE200889C92 /* TierMapViewController.swift in Sources */,
+				BA8EEF8A2C634C4B00FE6ABF /* OnboardingCollectionViewCell.swift in Sources */,
 				58067D4D2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift in Sources */,
 				58067D7D2C5FA75A00889C92 /* HomeCategoriesCollectionViewCell.swift in Sources */,
 				584173662C47A964001EC132 /* HomeView.swift in Sources */,
 				584173202C464695001EC132 /* HomeViewController.swift in Sources */,
 				58067CC72C514FCD00889C92 /* TierListCategoriesCollectionViewHandler.swift in Sources */,
 				58067CA82C4F512100889C92 /* TierPageViewController.swift in Sources */,
+				BA8EEF872C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift in Sources */,
 				58067D842C5FD67700889C92 /* HomeLayoutTableViewHandler.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
+				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
+				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
+				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
+				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
+				584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */,
+				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
+				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
+				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
+				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
+				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
@@ -1036,6 +1137,7 @@
 				58067D772C5F96BB00889C92 /* HomeCategoriesSection.swift in Sources */,
 				58067CCA2C514FEF00889C92 /* TierListCategoryCollectionViewCell.swift in Sources */,
 				58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */,
+				BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */,
 				58067CB72C4FBFB900889C92 /* TierRepository.swift in Sources */,
 				5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */,
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
