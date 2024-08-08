@@ -14,21 +14,21 @@ enum SocialLoginViewTheme {
 class SocialLoginView: UIView {
     
     private var theme: SocialLoginViewTheme?
-    
+
     private let dividerView: UIView = {
         let view = UIView()
         return view
     }()
     
-    private let leftDivider: UIView = {
+    private lazy var leftDivider: UIView = {
         let view = UIView()
-        view.backgroundColor = .Sementic.gray200
+        view.backgroundColor = theme == .light ? .Sementic.gray200 : .Sementic.gray600
         return view
     }()
     
-    private let rightDivider: UIView = {
+    private lazy var rightDivider: UIView = {
         let view = UIView()
-        view.backgroundColor = .Sementic.gray200
+        view.backgroundColor = theme == .light ? .Sementic.gray200 : .Sementic.gray600
         return view
     }()
     
@@ -60,14 +60,15 @@ class SocialLoginView: UIView {
         return button
     }()
     
-    private let skipButton: UIButton = {
+    private lazy var skipButton: UIButton = {
         let button = UIButton()
         let underlineAttriString1 = NSAttributedString(
             string: "건너뛰기",
             attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        let titleColor: UIColor? = theme == .light ? .Sementic.gray600 : .Sementic.gray300
         button.setAttributedTitle(underlineAttriString1, for: .normal)
-        button.tintColor = .Sementic.gray600
         button.titleLabel?.font = .Pretendard.regular12
+        button.setTitleColor(titleColor, for: .normal)
         return button
     }()
     
@@ -107,7 +108,7 @@ extension SocialLoginView {
         addSubview(
             loginButtonsView,
             autoLayout: [
-                .topNext(to: dividerView, constant: 24),
+                .topNext(to: dividerView, constant: 16),
                 .leading(88),
                 .trailing(88),
                 .centerY(0),
