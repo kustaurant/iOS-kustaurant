@@ -34,8 +34,20 @@ typealias DrawViewModel = DrawViewModelInput & DrawViewModelOutput
 
 final class DefaultDrawViewModel: DrawViewModel {
     
-    @Published var cuisines: [SelectableCuisine] = Cuisine.allCases.map { SelectableCuisine(cuisine: $0, isSelected: false) }
-    @Published var locations: [SelectableLocation] = Location.allCases.map { SelectableLocation(location: $0, isSelected: false) }
+    @Published var cuisines: [SelectableCuisine] = Cuisine.allCases.map {
+        if $0 == .all {
+            return SelectableCuisine(cuisine: $0, isSelected: true)
+        } else {
+            return SelectableCuisine(cuisine: $0, isSelected: false)
+        }
+    }
+    @Published var locations: [SelectableLocation] = Location.allCases.map {
+        if $0 == .all {
+            return SelectableLocation(location: $0, isSelected: true)
+        } else {
+            return SelectableLocation(location: $0, isSelected: false)
+        }
+    }
     @Published var collectionViewSections: [DrawCollectionViewSection] = []
     var collectionViewSectionsPublisher: AnyPublisher<[DrawCollectionViewSection], Never> {
         $collectionViewSections
