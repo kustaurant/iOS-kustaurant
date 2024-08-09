@@ -6,11 +6,35 @@
 //
 
 import UIKit
+import Combine
 
 final class DrawViewController: UIViewController {
+    
+    private var viewModel: DrawViewModel
+    private let drawView = DrawView()
+    
+    private var collectionViewHandler: DrawCollectionViewHandler?
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: DrawViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        self.collectionViewHandler = DrawCollectionViewHandler(view: drawView, viewModel: viewModel)
+        self.collectionViewHandler?.setupCollectionView()
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        bind()
+    }
+    
+    override func loadView() {
+        view = drawView
     }
 }
 
@@ -27,5 +51,13 @@ extension DrawViewController {
         space.width = 16.0
         navigationItem.title = "랜덤 맛집 뽑기"
         navigationItem.rightBarButtonItems = [searchButton, space, notificationButton]
+    }
+    
+    private func bind() {
+        viewModel.collectionViewSectionsPublisher
+            .sink { [weak self] sectionModels in
+                self?.collectionViewHandler?.applySnapshot(sectionModels: sectionModels)
+            }
+            .store(in: &cancellables)
     }
 }

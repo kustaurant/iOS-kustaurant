@@ -100,6 +100,12 @@
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		816A02DA220B296E2DE3721E /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */; };
+		BA37E0702C65E0B60092115B /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E06F2C65E0B60092115B /* DrawView.swift */; };
+		BA37E0722C65E0BF0092115B /* DrawViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0712C65E0BF0092115B /* DrawViewModel.swift */; };
+		BA37E0742C65E43F0092115B /* DrawCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */; };
+		BA37E0772C65E5850092115B /* DrawLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0762C65E5850092115B /* DrawLocationCollectionViewCell.swift */; };
+		BA37E07B2C65E5F10092115B /* DrawCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E07A2C65E5F10092115B /* DrawCollectionViewSection.swift */; };
+		BA37E07D2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E07C2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
 		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
 		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
@@ -243,6 +249,12 @@
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.debug.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.debug.xcconfig"; sourceTree = "<group>"; };
 		ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA37E06F2C65E0B60092115B /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
+		BA37E0712C65E0BF0092115B /* DrawViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewModel.swift; sourceTree = "<group>"; };
+		BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCollectionViewHandler.swift; sourceTree = "<group>"; };
+		BA37E0762C65E5850092115B /* DrawLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLocationCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA37E07A2C65E5F10092115B /* DrawCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCollectionViewSection.swift; sourceTree = "<group>"; };
+		BA37E07C2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCuisineCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
 		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -513,6 +525,8 @@
 		584173372C46663B001EC132 /* Draw */ = {
 			isa = PBXGroup;
 			children = (
+				BA37E06E2C65E0AA0092115B /* ViewModel */,
+				BA37E06D2C65E0A60092115B /* View */,
 				584173382C46664E001EC132 /* DrawViewController.swift */,
 			);
 			path = Draw;
@@ -766,6 +780,42 @@
 				0AA722CB3B316DE7628F8FFC /* Pods-KustaurantTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BA37E06D2C65E0A60092115B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BA37E0782C65E5D70092115B /* CollectionView */,
+				BA37E06F2C65E0B60092115B /* DrawView.swift */,
+				BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BA37E06E2C65E0AA0092115B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BA37E0712C65E0BF0092115B /* DrawViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BA37E0752C65E5650092115B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BA37E0762C65E5850092115B /* DrawLocationCollectionViewCell.swift */,
+				BA37E07C2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		BA37E0782C65E5D70092115B /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				BA37E0752C65E5650092115B /* Cells */,
+				BA37E07A2C65E5F10092115B /* DrawCollectionViewSection.swift */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		BA8EEF5F2C61D93200FE6ABF /* Onboarding */ = {
@@ -1036,6 +1086,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA37E0722C65E0BF0092115B /* DrawViewModel.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				58067D482C5A027000889C92 /* TierCategoryCollectionViewHandler.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
@@ -1045,6 +1096,7 @@
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
 				58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */,
+				BA37E07B2C65E5F10092115B /* DrawCollectionViewSection.swift in Sources */,
 				CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */,
 				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
 				584173472C467F5B001EC132 /* TierSceneDIContainer.swift in Sources */,
@@ -1058,10 +1110,13 @@
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
 				5841733B2C467972001EC132 /* DrawFlowCoordinator.swift in Sources */,
 				58067D882C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift in Sources */,
+				BA37E0742C65E43F0092115B /* DrawCollectionViewHandler.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */,
+				BA37E07D2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift in Sources */,
 				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
+				BA37E0702C65E0B60092115B /* DrawView.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
@@ -1080,6 +1135,7 @@
 				58067D3D2C58D73C00889C92 /* TierCategoryViewModel.swift in Sources */,
 				BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
+				BA37E0772C65E5850092115B /* DrawLocationCollectionViewCell.swift in Sources */,
 				CFE2046B2C5D0A4000BCA87C /* UIView+parentViewController.swift in Sources */,
 				584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */,
 				58067D4A2C5A1D6200889C92 /* CategoryType.swift in Sources */,
