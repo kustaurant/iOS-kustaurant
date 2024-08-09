@@ -13,8 +13,6 @@ enum Tier: Int, Codable {
     case second = 2
     case third = 3
     case fourth = 4
-    
-    
 }
 
 extension Tier {
@@ -35,5 +33,20 @@ extension Tier {
     
     var iconImageName: String {
         "icon_tier_\(String(describing: self))"
+    }
+    
+    var zIndex: Int {
+        switch self {
+        case .first:
+            return 4
+        case .second:
+            return 3
+        case .third:
+            return 2
+        case .fourth:
+            return 1
+        case .unowned:
+            return 0
+        }
     }
 }

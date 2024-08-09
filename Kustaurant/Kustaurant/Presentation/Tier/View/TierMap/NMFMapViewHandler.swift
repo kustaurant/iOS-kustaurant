@@ -36,107 +36,72 @@ extension NMFMapViewHandler {
         cameraUpdate(mapData.visibleBounds)
         addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
         addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
-        addMarkerWithTieredRestaurants(mapData.tieredRestaurants)
-        addMarkerWithNonTieredRestaurants(mapData.nonTieredRestaurants)
+        addMarkersForRestaurants(tieredRestaurants: mapData.tieredRestaurants, nonTieredRestaurants: mapData.nonTieredRestaurants)
     }
-    
-    private func addMarkerWithNonTieredRestaurants(_ restaurants: [TierMapRestaurants.NonTieredRestaurants?]?) {
-        guard let nonTieredRestaurants = restaurants?.compactMap({ $0 }) else { return }
+
+    // MARK: 마커
+    private func addMarkersForRestaurants(
+        tieredRestaurants: [Restaurant?]?,
+        nonTieredRestaurants: [TierMapRestaurants.NonTieredRestaurants?]?
+    ) {
+        if let tieredRestaurants = tieredRestaurants?.compactMap({ $0 }) {
+            for restaurant in tieredRestaurants {
+                addMarker(for: restaurant, isFavorite: restaurant.isFavorite ?? false, zoom: nil)
+            }
+        }
         
-        for nonRestaurants in nonTieredRestaurants {
-            guard let restaurants = nonRestaurants.restaurants?.compactMap({ $0 }) else { continue }
-            let zoom = nonRestaurants.zoom ?? 0
-            
-            for restaurant in restaurants {
-                let coords = NMGLatLng(lat: Double(restaurant.y ?? "") ?? 0, lng: Double(restaurant.x ?? "") ?? 0)
-                let marker = NMFMarker(position: coords)
-                
-                var iconSize: CGSize = CGSize(width: 30, height: 30)
-                
-                if restaurant.isFavorite ?? false {
-                    iconSize = CGSize(width: 19, height: 19)
-                    if let markerIcon = UIImage(named: "icon_favorite")?.resized(to: iconSize) {
-                        marker.iconImage = NMFOverlayImage(image: markerIcon)
-                    }
-                    marker.zIndex = 100
-                    
-                } else {
-                    
-                    marker.isMinZoomInclusive = true
-                    marker.minZoom = Double(zoom)
-                    
-                    if restaurant.mainTier == .unowned {
-                        iconSize = CGSize(width: 12, height: 16)
-                    }
-                    
-                    if let markerIcon = UIImage(named: restaurant.mainTier?.iconImageName ?? "")?.resized(to: iconSize) {
-                        marker.iconImage = NMFOverlayImage(image: markerIcon)
-                    }
-                    
-                    switch restaurant.mainTier {
-                    case .first:
-                        marker.zIndex = 4
-                    case .second:
-                        marker.zIndex = 3
-                    case .third:
-                        marker.zIndex = 2
-                    case .fourth:
-                        marker.zIndex = 1
-                    default:
-                        marker.zIndex = 0
-                    }
+        if let nonTieredRestaurants = nonTieredRestaurants?.compactMap({ $0 }) {
+            for nonRestaurants in nonTieredRestaurants {
+                guard let restaurants = nonRestaurants.restaurants?.compactMap({ $0 }) else { continue }
+                let zoom = nonRestaurants.zoom
+                for restaurant in restaurants {
+                    addMarker(for: restaurant, isFavorite: restaurant.isFavorite ?? false, zoom: zoom)
                 }
-                
-                
-                marker.mapView = view.naverMapView.mapView
             }
         }
     }
     
-    private func addMarkerWithTieredRestaurants(_ restaurants: [Restaurant?]?) {
-        guard let tieredRestaurants = restaurants?.compactMap({ $0 }) else { return }
+    private func addMarker(
+        for restaurant: Restaurant,
+        isFavorite: Bool,
+        zoom: Int?
+    ) {
+        guard 
+            let lat = Double(restaurant.y ?? ""),
+            let lng = Double(restaurant.x ?? "")
+        else { return }
+
+        let coords = NMGLatLng(lat: lat, lng: lng)
+        let marker = NMFMarker(position: coords)
+        var iconSize: CGSize = CGSize(width: 30, height: 30)
         
-        for restaurant in tieredRestaurants {
-            let coords = NMGLatLng(lat: Double(restaurant.y ?? "") ?? 0, lng: Double(restaurant.x ?? "") ?? 0)
-            let marker = NMFMarker(position: coords)
+        if isFavorite {
+            iconSize = CGSize(width: 19, height: 19)
+            if let markerIcon = UIImage(named: "icon_favorite")?.resized(to: iconSize) {
+                marker.iconImage = NMFOverlayImage(image: markerIcon)
+            }
+            marker.zIndex = 100
             
-            var iconSize: CGSize = CGSize(width: 30, height: 30)
-            
-            if restaurant.isFavorite ?? false {
-                iconSize = CGSize(width: 19, height: 19)
-                if let markerIcon = UIImage(named: "icon_favorite")?.resized(to: iconSize) {
-                    marker.iconImage = NMFOverlayImage(image: markerIcon)
-                }
-                marker.zIndex = 100
-                
-            } else {
-                if restaurant.mainTier == .unowned {
+        } else {
+            if let zoom = zoom {
+                marker.isMinZoomInclusive = true
+                marker.minZoom = Double(zoom)
+            }
+
+            if let tier = restaurant.mainTier {
+                if tier == .unowned {
                     iconSize = CGSize(width: 12, height: 16)
                 }
                 if let markerIcon = UIImage(named: restaurant.mainTier?.iconImageName ?? "")?.resized(to: iconSize) {
                     marker.iconImage = NMFOverlayImage(image: markerIcon)
                 }
-                
-                switch restaurant.mainTier {
-                case .first:
-                    marker.zIndex = 4
-                case .second:
-                    marker.zIndex = 3
-                case .third:
-                    marker.zIndex = 2
-                case .fourth:
-                    marker.zIndex = 1
-                default:
-                    marker.zIndex = 0
-                }
+                marker.zIndex = tier.zIndex
             }
-            
-
-            
-            marker.mapView = view.naverMapView.mapView
         }
+        marker.mapView = view.naverMapView.mapView
     }
-    
+
+    // MARK: 카메라
     private func cameraUpdate(_ bounds: [CGFloat?]?) {
         guard
             let bounds = bounds?.compactMap({ $0 }).map({ Double($0 )}),
@@ -153,6 +118,7 @@ extension NMFMapViewHandler {
         view.naverMapView.mapView.moveCamera(cameraUpdate)
     }
     
+    // MARK: 영역
     private func addPolygonOverlay(
         type: Polygon,
         _ polygonCoordsList: [[Coords?]?]?
