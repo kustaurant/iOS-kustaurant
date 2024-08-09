@@ -58,9 +58,9 @@
 		584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173302C465E96001EC132 /* HomeFlowCoordinator.swift */; };
 		584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173322C465F1C001EC132 /* HomeSceneDIContainer.swift */; };
 		584173362C4661B5001EC132 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173352C4661B5001EC132 /* Coordinator.swift */; };
-		584173392C46664E001EC132 /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173382C46664E001EC132 /* RecommendViewController.swift */; };
-		5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733A2C467972001EC132 /* RecommendFlowCoordinator.swift */; };
-		5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733C2C4679FE001EC132 /* RecommendSceneDIContainer.swift */; };
+		584173392C46664E001EC132 /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173382C46664E001EC132 /* DrawViewController.swift */; };
+		5841733B2C467972001EC132 /* DrawFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733A2C467972001EC132 /* DrawFlowCoordinator.swift */; };
+		5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733C2C4679FE001EC132 /* DrawSceneDIContainer.swift */; };
 		584173402C467BDD001EC132 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733F2C467BDD001EC132 /* TabBarPage.swift */; };
 		584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173412C467E72001EC132 /* TierFlowCoordinator.swift */; };
 		584173472C467F5B001EC132 /* TierSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173462C467F5B001EC132 /* TierSceneDIContainer.swift */; };
@@ -196,9 +196,9 @@
 		584173302C465E96001EC132 /* HomeFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFlowCoordinator.swift; sourceTree = "<group>"; };
 		584173322C465F1C001EC132 /* HomeSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneDIContainer.swift; sourceTree = "<group>"; };
 		584173352C4661B5001EC132 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		584173382C46664E001EC132 /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
-		5841733A2C467972001EC132 /* RecommendFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendFlowCoordinator.swift; sourceTree = "<group>"; };
-		5841733C2C4679FE001EC132 /* RecommendSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendSceneDIContainer.swift; sourceTree = "<group>"; };
+		584173382C46664E001EC132 /* DrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewController.swift; sourceTree = "<group>"; };
+		5841733A2C467972001EC132 /* DrawFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawFlowCoordinator.swift; sourceTree = "<group>"; };
+		5841733C2C4679FE001EC132 /* DrawSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawSceneDIContainer.swift; sourceTree = "<group>"; };
 		5841733F2C467BDD001EC132 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		584173412C467E72001EC132 /* TierFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierFlowCoordinator.swift; sourceTree = "<group>"; };
 		584173462C467F5B001EC132 /* TierSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -475,7 +475,7 @@
 			children = (
 				584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */,
 				584173302C465E96001EC132 /* HomeFlowCoordinator.swift */,
-				5841733A2C467972001EC132 /* RecommendFlowCoordinator.swift */,
+				5841733A2C467972001EC132 /* DrawFlowCoordinator.swift */,
 				584173412C467E72001EC132 /* TierFlowCoordinator.swift */,
 				584173482C468250001EC132 /* CommunityFlowCoordinator.swift */,
 				584173532C468410001EC132 /* MyPageFlowCoordinator.swift */,
@@ -490,7 +490,7 @@
 			children = (
 				5841732E2C465A9D001EC132 /* AppDIContainer.swift */,
 				584173322C465F1C001EC132 /* HomeSceneDIContainer.swift */,
-				5841733C2C4679FE001EC132 /* RecommendSceneDIContainer.swift */,
+				5841733C2C4679FE001EC132 /* DrawSceneDIContainer.swift */,
 				584173462C467F5B001EC132 /* TierSceneDIContainer.swift */,
 				5841734E2C4682C8001EC132 /* CommunitySceneDIContainer.swift */,
 				584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */,
@@ -510,12 +510,12 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		584173372C46663B001EC132 /* Recommend */ = {
+		584173372C46663B001EC132 /* Draw */ = {
 			isa = PBXGroup;
 			children = (
-				584173382C46664E001EC132 /* RecommendViewController.swift */,
+				584173382C46664E001EC132 /* DrawViewController.swift */,
 			);
-			path = Recommend;
+			path = Draw;
 			sourceTree = "<group>";
 		};
 		5841733E2C467BCF001EC132 /* Enums */ = {
@@ -728,7 +728,7 @@
 				584173252C464FEC001EC132 /* Flows */,
 				5841731E2C46467B001EC132 /* Home */,
 				BA8EEF5F2C61D93200FE6ABF /* Onboarding */,
-				584173372C46663B001EC132 /* Recommend */,
+				584173372C46663B001EC132 /* Draw */,
 				584173432C467EA9001EC132 /* Tier */,
 				5841734B2C468293001EC132 /* Community */,
 				584173502C4683D5001EC132 /* MyPage */,
@@ -755,6 +755,17 @@
 				58067CCB2C51552700889C92 /* Category.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		5EE0E5DCFB0F2A34E78E8A40 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */,
+				3BA34C8D06FC4838BF2DA624 /* Pods-Kustaurant.release.xcconfig */,
+				EF36305B343960EC6AD97AC7 /* Pods-KustaurantTests.debug.xcconfig */,
+				0AA722CB3B316DE7628F8FFC /* Pods-KustaurantTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		BA8EEF5F2C61D93200FE6ABF /* Onboarding */ = {
@@ -810,17 +821,6 @@
 				BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */,
 			);
 			path = SocialLogin;
-			sourceTree = "<group>";
-		};
-		5EE0E5DCFB0F2A34E78E8A40 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */,
-				3BA34C8D06FC4838BF2DA624 /* Pods-Kustaurant.release.xcconfig */,
-				EF36305B343960EC6AD97AC7 /* Pods-KustaurantTests.debug.xcconfig */,
-				0AA722CB3B316DE7628F8FFC /* Pods-KustaurantTests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		CF54AD062C42889500E0DE68 /* Network */ = {
@@ -1038,7 +1038,7 @@
 			files = (
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				58067D482C5A027000889C92 /* TierCategoryCollectionViewHandler.swift in Sources */,
-				584173642C4791B0001EC132 /* HomeMainCollectionViewCell.swift in Sources */,
+				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				BA8EEF8D2C6351D800FE6ABF /* KuPageControl.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
@@ -1056,7 +1056,7 @@
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
-				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
+				5841733B2C467972001EC132 /* DrawFlowCoordinator.swift in Sources */,
 				58067D882C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */,
@@ -1119,7 +1119,7 @@
 				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
-				584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */,
+				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
@@ -1147,7 +1147,7 @@
 				58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */,
 				CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */,
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
-				5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */,
+				5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */,
 				58067D812C5FC07A00889C92 /* HomeLayoutTableView.swift in Sources */,
 				CFE204692C5D03C400BCA87C /* Collection+.swift in Sources */,
 				584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */,
@@ -1155,7 +1155,7 @@
 				58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */,
 				5841734F2C4682C8001EC132 /* CommunitySceneDIContainer.swift in Sources */,
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
-				584173392C46664E001EC132 /* RecommendViewController.swift in Sources */,
+				584173392C46664E001EC132 /* DrawViewController.swift in Sources */,
 				58067CCC2C51552700889C92 /* Category.swift in Sources */,
 				58067D7B2C5FA70300889C92 /* HomeCategoriesCollectionView.swift in Sources */,
 			);
