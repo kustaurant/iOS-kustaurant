@@ -93,7 +93,6 @@ extension KuTabBarView {
     }
     
     private func didSelect(at index: Int) {
-        actionSubject.send(.didSelect(at: index))
         tabs = tabs.enumerated().map { i, tab in
                 .init(title: tab.title, isSelcted: i == index)
         }
@@ -122,6 +121,7 @@ extension KuTabBarView: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
+        actionSubject.send(.didSelect(at: indexPath.row))
         didSelect(at: indexPath.row)
     }
     
