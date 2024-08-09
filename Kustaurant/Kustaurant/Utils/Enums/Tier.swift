@@ -14,6 +14,10 @@ enum Tier: Int, Codable {
     case third = 3
     case fourth = 4
     
+    
+}
+
+extension Tier {
     func backgroundColor() -> UIColor {
         switch self {
         case .first:
@@ -27,5 +31,9 @@ enum Tier: Int, Codable {
         case .unowned:
             return .clear
         }
+    }
+    
+    var iconImageName: String {
+        "icon_tier_\(String(describing: self))"
     }
 }

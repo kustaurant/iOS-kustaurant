@@ -33,6 +33,7 @@ extension TierMapView {
         naverMapView.mapView.isIndoorMapEnabled = true // 실내지도를 활성화
         naverMapView.mapView.positionMode = .direction // 위치 추적 모드를 나타내는 열거형.
         
+        // 첫 지도 위치를 건국대학교로 지정
         let bounds = NMGLatLngBounds(southWestLat: 37.5358341, southWestLng: 127.062852, northEastLat: 37.5482696, northEastLng: 127.0876883)
         let cameraUpdate = NMFCameraUpdate(fit: bounds, padding: 0)
         naverMapView.mapView.moveCamera(cameraUpdate)
