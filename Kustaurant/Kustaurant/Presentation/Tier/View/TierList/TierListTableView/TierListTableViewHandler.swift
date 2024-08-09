@@ -33,7 +33,18 @@ extension TierListTableViewHandler {
     }
     
     func reloadData() {
-        view.tableView.reloadData()
+        let currentCount = view.tableView.numberOfRows(inSection: 0)
+        let newCount = viewModel.tierRestaurants.count
+        
+        if newCount > currentCount {
+            let indexPaths = (currentCount..<newCount).map { IndexPath(row: $0, section: 0) }
+            view.tableView.beginUpdates()
+            view.tableView.insertRows(at: indexPaths, with: .fade)
+            view.tableView.endUpdates()
+        } else {
+            view.tableView.reloadData()
+        }
+        
     }
 }
 
@@ -44,6 +55,13 @@ extension TierListTableViewHandler: UITableViewDelegate {
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
         66
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // 마지막 셀에 도달했는지 확인
+        if indexPath.row == viewModel.tierRestaurants.count - 1 {
+            viewModel.fetchTierLists()
+        }
     }
 }
 

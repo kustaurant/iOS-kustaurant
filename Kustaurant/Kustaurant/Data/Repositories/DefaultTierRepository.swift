@@ -20,7 +20,7 @@ extension DefaultTierRepository: TierRepository {
         cuisines: [Cuisine],
         situations: [Situation],
         locations: [Location],
-        ranking: Int,
+        page: Int,
         limit: Int
     ) async -> Result<[Restaurant], NetworkError> {
         let cuisineCodes = cuisines.map { $0.category.code }.joined(separator: ",")
@@ -31,7 +31,7 @@ extension DefaultTierRepository: TierRepository {
             "cuisines": cuisineCodes,
             "situations": situationCodes,
             "locations": locationCodes,
-            "ranking": "\(ranking)",
+            "page": "\(page)",
             "limit": "\(limit)"
         ])
         let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
