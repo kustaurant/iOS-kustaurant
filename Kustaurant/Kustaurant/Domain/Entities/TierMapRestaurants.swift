@@ -18,7 +18,7 @@ struct TierMapRestaurants: Codable {
     var minZoom: Int?
     var favoriteRestaurants: [Restaurant?]?
     var tieredRestaurants: [Restaurant?]?
-    var nonTieredRestaurants: [NonTieredRestaurants]?
+    var nonTieredRestaurants: [NonTieredRestaurants?]?
     var solidPolygonCoordsList: [[Coords?]?]?
     var dashedPolygonCoordsList: [[Coords?]?]?
     var visibleBounds: [CGFloat?]?

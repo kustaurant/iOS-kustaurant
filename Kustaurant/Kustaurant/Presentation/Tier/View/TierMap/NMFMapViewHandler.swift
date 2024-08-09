@@ -37,6 +37,47 @@ extension NMFMapViewHandler {
         addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
         addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
         addMarkerWithTieredRestaurants(mapData.tieredRestaurants)
+        addMarkerWithNonTieredRestaurants(mapData.nonTieredRestaurants)
+    }
+    
+    private func addMarkerWithNonTieredRestaurants(_ restaurants: [TierMapRestaurants.NonTieredRestaurants?]?) {
+        guard let nonTieredRestaurants = restaurants?.compactMap({ $0 }) else { return }
+        
+        for nonRestaurants in nonTieredRestaurants {
+            guard let restaurants = nonRestaurants.restaurants?.compactMap({ $0 }) else { continue }
+            let zoom = nonRestaurants.zoom ?? 0
+            
+            for restaurant in restaurants {
+                let coords = NMGLatLng(lat: Double(restaurant.y ?? "") ?? 0, lng: Double(restaurant.x ?? "") ?? 0)
+                let marker = NMFMarker(position: coords)
+                
+                marker.minZoom = Double(zoom)
+                
+                var iconSize: CGSize = CGSize(width: 30, height: 30)
+                if restaurant.mainTier == .unowned {
+                    iconSize = CGSize(width: 12, height: 16)
+                }
+                
+                if let markerIcon = UIImage(named: restaurant.mainTier?.iconImageName ?? "")?.resized(to: iconSize) {
+                    marker.iconImage = NMFOverlayImage(image: markerIcon)
+                }
+                
+                switch restaurant.mainTier {
+                case .first:
+                    marker.zIndex = 4
+                case .second:
+                    marker.zIndex = 3
+                case .third:
+                    marker.zIndex = 2
+                case .fourth:
+                    marker.zIndex = 1
+                default:
+                    marker.zIndex = 0
+                }
+                
+                marker.mapView = view.naverMapView.mapView
+            }
+        }
     }
     
     private func addMarkerWithTieredRestaurants(_ restaurants: [Restaurant?]?) {
