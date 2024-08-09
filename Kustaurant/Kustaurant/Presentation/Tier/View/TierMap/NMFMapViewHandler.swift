@@ -51,13 +51,68 @@ extension NMFMapViewHandler {
                 let coords = NMGLatLng(lat: Double(restaurant.y ?? "") ?? 0, lng: Double(restaurant.x ?? "") ?? 0)
                 let marker = NMFMarker(position: coords)
                 
-                marker.minZoom = Double(zoom)
-                
                 var iconSize: CGSize = CGSize(width: 30, height: 30)
+                
+                if restaurant.isFavorite ?? false {
+                    iconSize = CGSize(width: 19, height: 19)
+                    if let markerIcon = UIImage(named: "icon_favorite")?.resized(to: iconSize) {
+                        marker.iconImage = NMFOverlayImage(image: markerIcon)
+                    }
+                    marker.zIndex = 100
+                    
+                } else {
+                    
+                    marker.isMinZoomInclusive = true
+                    marker.minZoom = Double(zoom)
+                    
+                    if restaurant.mainTier == .unowned {
+                        iconSize = CGSize(width: 12, height: 16)
+                    }
+                    
+                    if let markerIcon = UIImage(named: restaurant.mainTier?.iconImageName ?? "")?.resized(to: iconSize) {
+                        marker.iconImage = NMFOverlayImage(image: markerIcon)
+                    }
+                    
+                    switch restaurant.mainTier {
+                    case .first:
+                        marker.zIndex = 4
+                    case .second:
+                        marker.zIndex = 3
+                    case .third:
+                        marker.zIndex = 2
+                    case .fourth:
+                        marker.zIndex = 1
+                    default:
+                        marker.zIndex = 0
+                    }
+                }
+                
+                
+                marker.mapView = view.naverMapView.mapView
+            }
+        }
+    }
+    
+    private func addMarkerWithTieredRestaurants(_ restaurants: [Restaurant?]?) {
+        guard let tieredRestaurants = restaurants?.compactMap({ $0 }) else { return }
+        
+        for restaurant in tieredRestaurants {
+            let coords = NMGLatLng(lat: Double(restaurant.y ?? "") ?? 0, lng: Double(restaurant.x ?? "") ?? 0)
+            let marker = NMFMarker(position: coords)
+            
+            var iconSize: CGSize = CGSize(width: 30, height: 30)
+            
+            if restaurant.isFavorite ?? false {
+                iconSize = CGSize(width: 19, height: 19)
+                if let markerIcon = UIImage(named: "icon_favorite")?.resized(to: iconSize) {
+                    marker.iconImage = NMFOverlayImage(image: markerIcon)
+                }
+                marker.zIndex = 100
+                
+            } else {
                 if restaurant.mainTier == .unowned {
                     iconSize = CGSize(width: 12, height: 16)
                 }
-                
                 if let markerIcon = UIImage(named: restaurant.mainTier?.iconImageName ?? "")?.resized(to: iconSize) {
                     marker.iconImage = NMFOverlayImage(image: markerIcon)
                 }
@@ -74,39 +129,9 @@ extension NMFMapViewHandler {
                 default:
                     marker.zIndex = 0
                 }
-                
-                marker.mapView = view.naverMapView.mapView
-            }
-        }
-    }
-    
-    private func addMarkerWithTieredRestaurants(_ restaurants: [Restaurant?]?) {
-        guard let tieredRestaurants = restaurants?.compactMap({ $0 }) else { return }
-        
-        for restaurant in tieredRestaurants {
-            let coords = NMGLatLng(lat: Double(restaurant.y ?? "") ?? 0, lng: Double(restaurant.x ?? "") ?? 0)
-            let marker = NMFMarker(position: coords)
-            
-            var iconSize: CGSize = CGSize(width: 30, height: 30)
-            if restaurant.mainTier == .unowned {
-                iconSize = CGSize(width: 12, height: 16)
-            }
-            if let markerIcon = UIImage(named: restaurant.mainTier?.iconImageName ?? "")?.resized(to: iconSize) {
-                marker.iconImage = NMFOverlayImage(image: markerIcon)
             }
             
-            switch restaurant.mainTier {
-            case .first:
-                marker.zIndex = 4
-            case .second:
-                marker.zIndex = 3
-            case .third:
-                marker.zIndex = 2
-            case .fourth:
-                marker.zIndex = 1
-            default:
-                marker.zIndex = 0
-            }
+
             
             marker.mapView = view.naverMapView.mapView
         }
