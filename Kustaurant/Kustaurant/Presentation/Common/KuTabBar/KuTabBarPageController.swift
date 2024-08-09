@@ -10,8 +10,6 @@ import Combine
 
 extension KuTabBarPageController {
     
-    static let indicatorViewHeight: CGFloat = 2.0
-    
     struct Tab {
         let title: String
         let viewController: UIViewController
@@ -53,8 +51,8 @@ extension KuTabBarPageController {
     }
     
     private func setupLayout() {
-        addSubview(tabBarView, autoLayout: [.top(0), .fillX(0), .height(50)])
-        addSubview(pageViewController.view, autoLayout: [.topNext(to: tabBarView, constant: KuTabBarPageController.indicatorViewHeight), .fillX(0), .bottom(0)])
+        addSubview(tabBarView, autoLayout: [.top(0), .fillX(0), .height(60.33)])
+        addSubview(pageViewController.view, autoLayout: [.topNext(to: tabBarView, constant: 0), .fillX(0), .bottom(0)])
     }
     
     private func setupParentViewController() {
