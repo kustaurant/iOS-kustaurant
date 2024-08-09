@@ -8,6 +8,7 @@
 import Foundation
 
 protocol TierUseCases {
+    func fetchTierMap(cuisines: [Cuisine], situations: [Situation], locations: [Location]) async -> Result<TierMapRestaurants, NetworkError>
     func fetchTierLists(cuisines: [Cuisine], situations: [Situation], locations: [Location]) async -> Result<[Restaurant], NetworkError>
 }
 
@@ -20,6 +21,14 @@ final class DefaultTierUseCases {
 }
 
 extension DefaultTierUseCases: TierUseCases {
+    func fetchTierMap(
+        cuisines: [Cuisine],
+        situations: [Situation],
+        locations: [Location]
+    ) async -> Result<TierMapRestaurants, NetworkError> {
+        await tierRepository.fetchTierMap(cuisines: cuisines, situations: situations, locations: locations)
+    }
+    
     func fetchTierLists(
         cuisines: [Cuisine],
         situations: [Situation],
