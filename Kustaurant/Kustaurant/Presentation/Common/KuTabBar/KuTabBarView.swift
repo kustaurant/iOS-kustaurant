@@ -22,11 +22,6 @@ final class KuTabBarView: UIView {
     
     let style: Style
     
-    private let indicatorBackgroundView: UIView = .init()
-    private let indicatorView: UIView = .init()
-    private var indicatorLeadingConstraint: NSLayoutConstraint?
-    private var indicatorWidthConstraint: NSLayoutConstraint?
-    
     var isScrollEnabled: Bool = false {
         didSet {
             collectionView.isScrollEnabled = isScrollEnabled
@@ -79,22 +74,10 @@ extension KuTabBarView {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isPagingEnabled = true
-        indicatorBackgroundView.backgroundColor = .Sementic.gray200
-        indicatorView.backgroundColor = .Signature.green100
     }
     
     private func setupLayout() {
         addSubview(collectionView, autoLayout: [.fill(0)])
-        addSubview(indicatorBackgroundView, autoLayout: [.topNext(to: collectionView, constant: 0), .fillX(0), .height(KuTabBarPageController.indicatorViewHeight)])
-        addSubview(indicatorView, autoLayout: [.topNext(to: collectionView, constant: 0), .height(KuTabBarPageController.indicatorViewHeight)])
-        
-        indicatorLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        indicatorWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: 100) // 초기 너비는 0으로 설정
-        
-        NSLayoutConstraint.activate([
-            indicatorLeadingConstraint!,
-            indicatorWidthConstraint!
-        ])
     }
     
     private func bind() {
@@ -114,24 +97,7 @@ extension KuTabBarView {
         tabs = tabs.enumerated().map { i, tab in
                 .init(title: tab.title, isSelcted: i == index)
         }
-        updateIndicatorView(at: index, animated: true)
         collectionView.reloadData()
-    }
-    
-    private func updateIndicatorView(at index: Int, animated: Bool) {
-        let xPosition = calculateIndicatorViewXPosition(at: index)
-        let width = calculateIndicatorViewWidth(at: index)
-        
-        indicatorLeadingConstraint?.constant = xPosition
-        indicatorWidthConstraint?.constant = width
-        
-        if animated {
-            UIView.animate(withDuration: 0.3) {
-                self.layoutIfNeeded()
-            }
-        } else {
-            self.layoutIfNeeded()
-        }
     }
 }
 
@@ -147,20 +113,6 @@ extension KuTabBarView {
             withHorizontalFittingPriority: .required,
             verticalFittingPriority: .fittingSizeLevel
         )
-    }
-    
-    private func calculateIndicatorViewWidth(at index: Int) -> CGFloat {
-        guard index == tabs.count - 1 else {
-            return calculateIndicatorViewXPosition(at: index + 1) - calculateIndicatorViewXPosition(at: index)
-        }
-        
-        return collectionView.frame.width - calculateIndicatorViewXPosition(at: index)
-    }
-    
-    private func calculateIndicatorViewXPosition(at index: Int) -> CGFloat {
-        let indexPath = IndexPath(item: index, section: 0)
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return 0 }
-        return cell.frame.origin.x - collectionView.contentOffset.x
     }
 }
 
