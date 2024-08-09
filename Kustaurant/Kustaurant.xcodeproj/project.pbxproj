@@ -757,6 +757,17 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		5EE0E5DCFB0F2A34E78E8A40 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */,
+				3BA34C8D06FC4838BF2DA624 /* Pods-Kustaurant.release.xcconfig */,
+				EF36305B343960EC6AD97AC7 /* Pods-KustaurantTests.debug.xcconfig */,
+				0AA722CB3B316DE7628F8FFC /* Pods-KustaurantTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BA8EEF5F2C61D93200FE6ABF /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -810,17 +821,6 @@
 				BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */,
 			);
 			path = SocialLogin;
-			sourceTree = "<group>";
-		};
-		5EE0E5DCFB0F2A34E78E8A40 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */,
-				3BA34C8D06FC4838BF2DA624 /* Pods-Kustaurant.release.xcconfig */,
-				EF36305B343960EC6AD97AC7 /* Pods-KustaurantTests.debug.xcconfig */,
-				0AA722CB3B316DE7628F8FFC /* Pods-KustaurantTests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		CF54AD062C42889500E0DE68 /* Network */ = {
@@ -1038,7 +1038,7 @@
 			files = (
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				58067D482C5A027000889C92 /* TierCategoryCollectionViewHandler.swift in Sources */,
-				584173642C4791B0001EC132 /* HomeMainCollectionViewCell.swift in Sources */,
+				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				BA8EEF8D2C6351D800FE6ABF /* KuPageControl.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
@@ -1119,7 +1119,7 @@
 				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
-				584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */,
+				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
@@ -1324,6 +1324,7 @@
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kustaurant/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "쿠스토랑";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -1359,6 +1360,7 @@
 				DEVELOPMENT_TEAM = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kustaurant/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "쿠스토랑";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
