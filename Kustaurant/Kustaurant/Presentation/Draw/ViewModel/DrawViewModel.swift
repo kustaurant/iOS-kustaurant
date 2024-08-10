@@ -73,15 +73,29 @@ final class DefaultDrawViewModel: DrawViewModel {
 }
 
 extension DefaultDrawViewModel {
-    func toggleSelectable(location: SelectableLocation) {
-        if let index = locations.firstIndex(where: { $0.location == location.location }) {
-            locations[index].isSelected.toggle()
+    func toggleSelectable(location selectable: SelectableLocation) {
+        if selectable.location == .all {
+            for i in 0..<locations.count {
+                locations[i].isSelected = (i == 0)
+            }
+        } else {
+            locations[0].isSelected = false
+            if let index = locations.firstIndex(where: { $0.location == selectable.location }) {
+                locations[index].isSelected.toggle()
+            }
         }
     }
     
-    func toggleSelectable(cuisine: SelectableCuisine) {
-        if let index = cuisines.firstIndex(where: { $0.cuisine == cuisine.cuisine }) {
-            cuisines[index].isSelected.toggle()
+    func toggleSelectable(cuisine selectable: SelectableCuisine) {
+        if selectable.cuisine == .all {
+            for i in 0..<cuisines.count {
+                cuisines[i].isSelected = (i == 0)
+            }
+        } else {
+            cuisines[0].isSelected = false
+            if let index = cuisines.firstIndex(where: { $0.cuisine == selectable.cuisine }) {
+                cuisines[index].isSelected.toggle()
+            }
         }
     }
 }
