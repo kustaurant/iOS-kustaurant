@@ -8,18 +8,27 @@
 import UIKit
 
 final class DrawSceneDIContainer: DrawFlowCoordinatorDependencies {
-    func makeDrawViewController() -> DrawViewController {
-        DrawViewController(viewModel: makeDrawViewModel())
-    }
-    
-    func makeDrawViewModel() -> DrawViewModel {
-        DefaultDrawViewModel()
-    }
     
     func makeDrawFlowCoordinator(navigationController: UINavigationController) -> DrawFlowCoordinator {
         DrawFlowCoordinator(
             dependencies: self,
             navigationController: navigationController
         )
+    }
+    
+    func makeDrawViewController(actions: DrawViewModelActions) -> DrawViewController {
+        DrawViewController(viewModel: makeDrawViewModel(actions: actions))
+    }
+    
+    func makeDrawViewModel(actions: DrawViewModelActions) -> DrawViewModel {
+        DefaultDrawViewModel(actions: actions)
+    }
+    
+    func makeDrawResultViewController() -> DrawResultViewController {
+        DrawResultViewController(viewModel: makeDrawResultViewModel())
+    }
+    
+    func makeDrawResultViewModel() -> DrawResultViewModel {
+        return DefaultDrawResultViewModel()
     }
 }

@@ -23,7 +23,7 @@ final class DrawView: UIView {
         return cv
     }()
     
-    private let submitButton: KuSubmitButton = {
+    let submitButton: KuSubmitButton = {
         let button = KuSubmitButton()
         button.buttonTitle = "랜덤 뽑기"
         button.buttonState = .on

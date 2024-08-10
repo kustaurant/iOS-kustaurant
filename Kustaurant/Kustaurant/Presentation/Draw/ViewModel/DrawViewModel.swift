@@ -18,9 +18,14 @@ struct SelectableCuisine: Hashable {
     var isSelected: Bool
 }
 
+struct DrawViewModelActions {
+    let didTapDrawButton: (Location, Cuisine) -> Void
+}
+
 protocol DrawViewModelInput {
     func toggleSelectable(location: SelectableLocation) -> Void
     func toggleSelectable(cuisine: SelectableCuisine) -> Void
+    func didTapDrawButton() -> Void
 }
 
 protocol DrawViewModelOutput {
@@ -33,6 +38,8 @@ protocol DrawViewModelOutput {
 typealias DrawViewModel = DrawViewModelInput & DrawViewModelOutput
 
 final class DefaultDrawViewModel: DrawViewModel {
+    
+    private var actions: DrawViewModelActions
     
     @Published var cuisines: [SelectableCuisine] = Cuisine.allCases.map {
         if $0 == .all {
@@ -54,7 +61,9 @@ final class DefaultDrawViewModel: DrawViewModel {
             .eraseToAnyPublisher()
     }
     
-    init() {
+    init(actions: DrawViewModelActions) {
+        self.actions = actions
+        
         Publishers.CombineLatest($locations, $cuisines)
             .map { locations, cuisines in
                 [
@@ -97,5 +106,9 @@ extension DefaultDrawViewModel {
                 cuisines[index].isSelected.toggle()
             }
         }
+    }
+    
+    func didTapDrawButton() {
+        actions.didTapDrawButton(Location.all, Cuisine.all)
     }
 }

@@ -59,5 +59,10 @@ extension DrawViewController {
                 self?.collectionViewHandler?.applySnapshot(sectionModels: sectionModels)
             }
             .store(in: &cancellables)
+        
+        drawView.submitButton.tapPublisher().sink { [weak self] in
+            self?.viewModel.didTapDrawButton()
+        }
+        .store(in: &cancellables)
     }
 }

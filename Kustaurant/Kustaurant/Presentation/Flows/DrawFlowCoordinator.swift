@@ -8,7 +8,8 @@
 import UIKit
 
 protocol DrawFlowCoordinatorDependencies {
-    func makeDrawViewController() -> DrawViewController
+    func makeDrawViewController(actions: DrawViewModelActions) -> DrawViewController
+    func makeDrawResultViewController() -> DrawResultViewController
 }
 
 final class DrawFlowCoordinator: Coordinator {
@@ -26,9 +27,15 @@ final class DrawFlowCoordinator: Coordinator {
 
 extension DrawFlowCoordinator {
     func start() {
-        let viewController = dependencies.makeDrawViewController()
+        let actions = DrawViewModelActions(didTapDrawButton: didTapDrawButton)
+        let viewController = dependencies.makeDrawViewController(actions: actions)
         let image = UIImage(named: TabBarPage.draw.pageImageName())?.withRenderingMode(.alwaysOriginal)
         viewController.tabBarItem = UITabBarItem(title: TabBarPage.draw.pageTitleValue(), image: image, selectedImage: image)
         navigationController.pushViewController(viewController, animated: false)
+    }
+    
+    func didTapDrawButton(loction: Location, cuisine: Cuisine) {
+        let viewController = dependencies.makeDrawResultViewController()
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

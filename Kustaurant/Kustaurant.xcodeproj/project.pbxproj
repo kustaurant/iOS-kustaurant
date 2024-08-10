@@ -106,6 +106,9 @@
 		BA37E0772C65E5850092115B /* DrawLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0762C65E5850092115B /* DrawLocationCollectionViewCell.swift */; };
 		BA37E07B2C65E5F10092115B /* DrawCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E07A2C65E5F10092115B /* DrawCollectionViewSection.swift */; };
 		BA37E07D2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E07C2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift */; };
+		BA37E07F2C6742EF0092115B /* DrawResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E07E2C6742EF0092115B /* DrawResultViewController.swift */; };
+		BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0802C6743300092115B /* DrawResultViewModel.swift */; };
+		BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0822C674BE40092115B /* UIButton+Publisher.swift */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
 		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
 		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
@@ -255,6 +258,9 @@
 		BA37E0762C65E5850092115B /* DrawLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA37E07A2C65E5F10092115B /* DrawCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCollectionViewSection.swift; sourceTree = "<group>"; };
 		BA37E07C2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCuisineCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA37E07E2C6742EF0092115B /* DrawResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultViewController.swift; sourceTree = "<group>"; };
+		BA37E0802C6743300092115B /* DrawResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultViewModel.swift; sourceTree = "<group>"; };
+		BA37E0822C674BE40092115B /* UIButton+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Publisher.swift"; sourceTree = "<group>"; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
 		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -525,9 +531,10 @@
 		584173372C46663B001EC132 /* Draw */ = {
 			isa = PBXGroup;
 			children = (
+				584173382C46664E001EC132 /* DrawViewController.swift */,
+				BA37E07E2C6742EF0092115B /* DrawResultViewController.swift */,
 				BA37E06E2C65E0AA0092115B /* ViewModel */,
 				BA37E06D2C65E0A60092115B /* View */,
-				584173382C46664E001EC132 /* DrawViewController.swift */,
 			);
 			path = Draw;
 			sourceTree = "<group>";
@@ -606,6 +613,7 @@
 				CFE2046A2C5D0A4000BCA87C /* UIView+parentViewController.swift */,
 				CFE204682C5D03C400BCA87C /* Collection+.swift */,
 				CFE204572C5A121D00BCA87C /* UIView+AutoLayout.swift */,
+				BA37E0822C674BE40092115B /* UIButton+Publisher.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -796,6 +804,7 @@
 			isa = PBXGroup;
 			children = (
 				BA37E0712C65E0BF0092115B /* DrawViewModel.swift */,
+				BA37E0802C6743300092115B /* DrawResultViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1105,6 +1114,7 @@
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
+				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
@@ -1196,6 +1206,7 @@
 				BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */,
 				58067CB72C4FBFB900889C92 /* TierRepository.swift in Sources */,
 				5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */,
+				BA37E07F2C6742EF0092115B /* DrawResultViewController.swift in Sources */,
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
@@ -1203,6 +1214,7 @@
 				58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */,
 				CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */,
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
+				BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */,
 				5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */,
 				58067D812C5FC07A00889C92 /* HomeLayoutTableView.swift in Sources */,
 				CFE204692C5D03C400BCA87C /* Collection+.swift in Sources */,
