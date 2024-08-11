@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RestaurantDetailViewController: UIViewController, NavigationBarHideable {
+final class RestaurantDetailViewController: UIViewController, NavigationBarHideable {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .orange
