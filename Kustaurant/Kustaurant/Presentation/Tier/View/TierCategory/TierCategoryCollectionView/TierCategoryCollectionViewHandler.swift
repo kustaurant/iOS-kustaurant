@@ -126,6 +126,6 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDelegateFlowLayout 
         label.text = category.displayName
         label.font = UIFont.Pretendard.regular14
         let size = label.intrinsicContentSize
-        return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.Height)
+        return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.height)
     }
 }
