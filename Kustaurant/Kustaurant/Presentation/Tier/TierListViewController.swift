@@ -41,7 +41,6 @@ final class TierListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchTierLists()
         setupBindings()
     }
 }
@@ -49,14 +48,23 @@ final class TierListViewController: UIViewController {
 extension TierListViewController {
     func receiveTierCategories(categories: [Category]) {
         viewModel.updateCategories(categories: categories)
-        tierListCategoriesCollectionViewHandler?.reloadData()
     }
 }
 
 extension TierListViewController {
     private func setupBindings() {
         bindtierRestaurants()
+        bindCategories()
         bindCategoryButton()
+    }
+    
+    private func bindCategories() {
+        viewModel.categoriesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tierListCategoriesCollectionViewHandler?.reloadData()
+                self?.viewModel.fetchTierLists()
+            }.store(in: &cancellables)
     }
     
     private func bindtierRestaurants() {

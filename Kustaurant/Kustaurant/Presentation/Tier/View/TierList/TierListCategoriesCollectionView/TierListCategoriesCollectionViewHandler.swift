@@ -49,7 +49,7 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        viewModel.categories.count
+        viewModel.filteredCategories.count
     }
     
     func collectionView(
@@ -58,7 +58,7 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TierListCategoryCollectionViewCell.reuseIdentifier, for: indexPath) as? TierListCategoryCollectionViewCell else { return UICollectionViewCell() }
 
-        var model = viewModel.categories[indexPath.row]
+        var model = viewModel.filteredCategories[indexPath.row]
         model.isSelect = true
         cell.model = model
         

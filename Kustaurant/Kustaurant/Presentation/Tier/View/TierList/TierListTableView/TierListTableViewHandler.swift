@@ -33,18 +33,21 @@ extension TierListTableViewHandler {
     }
     
     func reloadData() {
-        let currentCount = view.tableView.numberOfRows(inSection: 0)
-        let newCount = viewModel.tierRestaurants.count
-        
-        if newCount > currentCount {
-            let indexPaths = (currentCount..<newCount).map { IndexPath(row: $0, section: 0) }
-            view.tableView.beginUpdates()
-            view.tableView.insertRows(at: indexPaths, with: .fade)
-            view.tableView.endUpdates()
-        } else {
-            view.tableView.reloadData()
+        Task {
+            await MainActor.run {
+                let currentCount = view.tableView.numberOfRows(inSection: 0)
+                let newCount = viewModel.tierRestaurants.count
+                
+                if newCount > currentCount {
+                    let indexPaths = (currentCount..<newCount).map { IndexPath(row: $0, section: 0) }
+                    view.tableView.beginUpdates()
+                    view.tableView.insertRows(at: indexPaths, with: .fade)
+                    view.tableView.endUpdates()
+                } else {
+                    view.tableView.reloadData()
+                }
+            }
         }
-        
     }
 }
 
