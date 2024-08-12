@@ -73,7 +73,7 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDelegateFlowL
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let category = viewModel.categories[indexPath.row]
+        let category = viewModel.filteredCategories[indexPath.row]
         let label = UILabel()
         label.text = category.displayName
         label.font = .Pretendard.regular14

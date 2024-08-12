@@ -18,7 +18,6 @@ protocol TierListViewModelInput {
 }
 
 protocol TierListViewModelOutput {
-    var categories: [Category] { get set }
     var categoriesPublisher: Published<[Category]>.Publisher { get }
     var filteredCategories: [Category] { get }
     var tierRestaurants: [Restaurant] { get }
@@ -31,11 +30,11 @@ final class DefaultTierListViewModel: TierListViewModel {
     private let tierUseCase: TierUseCases
     private let actions: TierListViewModelActions
     
+    @Published private var categories: [Category]
     private var listPage = 1
     private var hasMoreData = true
     
     // MARK: - Output
-    @Published var categories: [Category]
     var categoriesPublisher: Published<[Category]>.Publisher { $categories }
     var filteredCategories: [Category] {
         // 모든 카테고리가 "전체"인 경우, "전체"만 반환
