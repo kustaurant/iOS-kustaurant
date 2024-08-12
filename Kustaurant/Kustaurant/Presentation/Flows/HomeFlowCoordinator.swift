@@ -55,6 +55,10 @@ extension HomeFlowCoordinator {
         let tierFlow = tierDIContainer.makeTierFlowCoordinator(
             navigationController: navigationController
         )
-        tierFlow.start(initialCategories: [cuisine.category])
+        tierFlow.start(initialCategories: [
+            cuisine.category,
+            Situation.all.category,
+            Location.all.category
+        ])
     }
 }
