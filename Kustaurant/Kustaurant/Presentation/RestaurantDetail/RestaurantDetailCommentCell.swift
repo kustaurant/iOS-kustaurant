@@ -25,11 +25,11 @@ final class RestaurantDetailCommentCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(item: RestaurantDetailCellItem, hasComments: Bool) {
+    func update(item: RestaurantDetailCellItem) {
         guard let item = item as? RestaurantDetailReview else { return }
         
         reviewView.update(item: item)
-        lineView.isHidden = !hasComments
+        lineView.isHidden = !item.hasComments
     }
     
     private func setupStyle() {

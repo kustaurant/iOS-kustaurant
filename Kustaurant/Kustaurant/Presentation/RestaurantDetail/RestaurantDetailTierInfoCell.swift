@@ -24,8 +24,10 @@ final class RestaurantDetailTierInfoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(item: [RestaurantDetailCellItem]) {
-        self.tiers = item.compactMap { $0 as? RestaurantDetailTierInfo }
+    func update(item: RestaurantDetailCellItem) {
+        guard let item = item as? RestaurantDetailTiers else { return }
+        
+        self.tiers = item.tiers
         
         Task {
             await MainActor.run {

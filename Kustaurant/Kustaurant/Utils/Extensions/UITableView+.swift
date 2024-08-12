@@ -18,11 +18,12 @@ extension Ku where Self: UITableView {
     }
     
     func dequeueReusableCell<T: UITableViewCell>(
-        withReuseIdentifier identifier: String? = nil
+        withReuseIdentifier identifier: String? = nil,
+        for indexPath: IndexPath
     ) -> T {
         let reuseIdentifier = identifier ?? String(describing: T.self)
         
-        guard let cell = self.dequeueReusableCell(withIdentifier: reuseIdentifier) as? T
+        guard let cell = self.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? T
         else { return .init() }
         
         return cell

@@ -39,7 +39,7 @@ final class RestaurantDetailTierCell: UICollectionViewCell {
         stackView.alignment = .center
         stackView.spacing = 4
         
-        addSubview(stackView, autoLayout: [.fillX(10), .fillY(6)])
+        contentView.addSubview(stackView, autoLayout: [.fillX(10), .fillY(6)])
         iconImageView.autolayout([.width(29), .height(27)])
     }
 }

@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct RestaurantDetailTierInfo: RestaurantDetailCellItem {
+struct RestaurantDetailTiers: RestaurantDetailCellItem {
+    let tiers: [RestaurantDetailTierInfo]
+}
+
+struct RestaurantDetailTierInfo {
     
     let iconImageURLString: String
     let title: String

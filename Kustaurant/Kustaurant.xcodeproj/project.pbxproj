@@ -158,6 +158,8 @@
 		CFE2048B2C6A1BB100BCA87C /* RestaurantDetailMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2048A2C6A1BB100BCA87C /* RestaurantDetailMenu.swift */; };
 		CFE2048D2C6A1BE400BCA87C /* RestaurantDetailReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2048C2C6A1BE400BCA87C /* RestaurantDetailReview.swift */; };
 		CFE2048F2C6A1C7500BCA87C /* RestaurantDetailRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2048E2C6A1C7500BCA87C /* RestaurantDetailRating.swift */; };
+		CFEC6EEA2C6A285900B4DAAB /* RestaurantDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC6EE92C6A285900B4DAAB /* RestaurantDetailViewModel.swift */; };
+		CFEC6EEC2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC6EEB2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -330,6 +332,8 @@
 		CFE2048A2C6A1BB100BCA87C /* RestaurantDetailMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailMenu.swift; sourceTree = "<group>"; };
 		CFE2048C2C6A1BE400BCA87C /* RestaurantDetailReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailReview.swift; sourceTree = "<group>"; };
 		CFE2048E2C6A1C7500BCA87C /* RestaurantDetailRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailRating.swift; sourceTree = "<group>"; };
+		CFEC6EE92C6A285900B4DAAB /* RestaurantDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewModel.swift; sourceTree = "<group>"; };
+		CFEC6EEB2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTabSectionHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,6 +371,7 @@
 				58067C8C2C4A815000889C92 /* RestaurantDetailViewController.swift */,
 				CFE204552C5A0FF100BCA87C /* RestaurantDetailTitleSectionHeaderView.swift */,
 				CFE2045D2C5A6E1F00BCA87C /* RestaurantDetailInfoSectionHeaderView.swift */,
+				CFEC6EEB2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift */,
 				CFE2047D2C68E76B00BCA87C /* RestaurantDetailAffiliateInfoCell.swift */,
 				CFE2047B2C68AD4C00BCA87C /* RestaurantDetailTierInfoCell.swift */,
 				CFE204532C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift */,
@@ -376,6 +381,7 @@
 				CFE204752C5F58C700BCA87C /* RestaurantDetailReviewCell.swift */,
 				CFE204792C68A3B700BCA87C /* RestaurantDetailCommentCell.swift */,
 				CFE204772C67379100BCA87C /* RestaurantDetailReviewView.swift */,
+				CFEC6EE92C6A285900B4DAAB /* RestaurantDetailViewModel.swift */,
 			);
 			path = RestaurantDetail;
 			sourceTree = "<group>";
@@ -1139,6 +1145,7 @@
 				BA8EEF8D2C6351D800FE6ABF /* KuPageControl.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
+				CFEC6EEC2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
 				58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */,
@@ -1235,6 +1242,7 @@
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				CFEC6EEA2C6A285900B4DAAB /* RestaurantDetailViewModel.swift in Sources */,
 				CFE2048D2C6A1BE400BCA87C /* RestaurantDetailReview.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,

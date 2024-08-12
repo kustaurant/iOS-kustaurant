@@ -16,4 +16,5 @@ struct RestaurantDetailReview: RestaurantDetailCellItem {
     let review: String
     let rating: Double
     let isComment: Bool
+    let hasComments: Bool
 }
