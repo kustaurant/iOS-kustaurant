@@ -61,25 +61,31 @@ extension DefaultTierCategoryViewModel {
         for category in categories {
             switch category.origin {
             case .cuisine(let cuisine):
-                updateCategorySelection(for: &cuisines, selected: cuisine, allCase: .all)
+                updateCategorySelection(for: &cuisines, selected: cuisine, exclusiveCases: [.all, .jh])
             case .situation(let situation):
-                updateCategorySelection(for: &situations, selected: situation, allCase: .all)
+                updateCategorySelection(for: &situations, selected: situation, exclusiveCases: [.all])
             case .location(let location):
-                updateCategorySelection(for: &locations, selected: location, allCase: .all)
+                updateCategorySelection(for: &locations, selected: location, exclusiveCases: [.all])
             }
         }
     }
     
-    private func updateCategorySelection<T: Equatable>(for categories: inout [Category], selected: T, allCase: T) {
-        if selected == allCase {
-            // "all" 버튼을 클릭한 경우
+    private func updateCategorySelection<T: Equatable>(
+        for categories: inout [Category],
+        selected: T,
+        exclusiveCases: [T]
+    ) {
+        if exclusiveCases.contains(selected) {
+            // "all" 또는 "jh" 버튼을 클릭한 경우
             for i in 0..<categories.count {
-                categories[i].isSelect = (categories[i].origin.value() as? T == allCase)
+                categories[i].isSelect = (categories[i].origin.value() as? T == selected)
             }
         } else {
-            // "all"이 아닌 버튼을 클릭한 경우
-            if let allIndex = categories.firstIndex(where: { ($0.origin.value() as? T) == allCase }) {
-                categories[allIndex].isSelect = false
+            // "all"이나 "jh"가 아닌 버튼을 클릭한 경우
+            for exclusiveCase in exclusiveCases {
+                if let exclusiveIndex = categories.firstIndex(where: { ($0.origin.value() as? T) == exclusiveCase }) {
+                    categories[exclusiveIndex].isSelect = false
+                }
             }
             if let index = categories.firstIndex(where: { ($0.origin.value() as? T) == selected }) {
                 categories[index].isSelect.toggle()
