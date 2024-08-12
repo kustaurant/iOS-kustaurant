@@ -8,5 +8,6 @@
 import Foundation
 
 protocol TierRepository {
+    func fetchTierMap(cuisines: [Cuisine], situations: [Situation], locations: [Location]) async -> Result<TierMapRestaurants, NetworkError>
     func fetchTierLists(cuisines: [Cuisine], situations: [Situation], locations: [Location], page: Int, limit: Int) async -> Result<[Restaurant], NetworkError>
 }

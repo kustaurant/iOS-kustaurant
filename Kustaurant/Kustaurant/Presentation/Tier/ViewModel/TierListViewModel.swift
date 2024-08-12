@@ -55,9 +55,9 @@ extension DefaultTierListViewModel {
         guard hasMoreData else { return }
         
         Task {
-            let cuisines = extractCuisines(from: categories)
-            let situations = extractSituations(from: categories)
-            let locations = extractLocations(from: categories)
+            let cuisines = Category.extractCuisines(from: categories)
+            let situations = Category.extractSituations(from: categories)
+            let locations = Category.extractLocations(from: categories)
             
             let result = await tierUseCase.fetchTierLists(
                 cuisines: cuisines,
@@ -86,34 +86,5 @@ extension DefaultTierListViewModel {
     
     func updateCategories(categories: [Category]) {
         self.categories = categories
-    }
-}
-
-extension DefaultTierListViewModel {
-    private func extractCuisines(from categories: [Category]) -> [Cuisine] {
-        categories.compactMap {
-            if case let .cuisine(cuisine) = $0.origin {
-                return cuisine
-            }
-            return nil
-        }
-    }
-    
-    private func extractSituations(from categories: [Category]) -> [Situation] {
-        categories.compactMap {
-            if case let .situation(situation) = $0.origin {
-                return situation
-            }
-            return nil
-        }
-    }
-    
-    private func extractLocations(from categories: [Category]) -> [Location] {
-        categories.compactMap {
-            if case let .location(location) = $0.origin {
-                return location
-            }
-            return nil
-        }
     }
 }
