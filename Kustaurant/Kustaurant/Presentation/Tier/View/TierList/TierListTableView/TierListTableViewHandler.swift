@@ -61,8 +61,8 @@ extension TierListTableViewHandler: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // 마지막 셀에 도달했는지 확인
-        if indexPath.row == viewModel.tierRestaurants.count - 1 {
+        let thresholdIndex = viewModel.tierRestaurants.count - 30
+        if indexPath.row == thresholdIndex {
             viewModel.fetchTierLists()
         }
     }

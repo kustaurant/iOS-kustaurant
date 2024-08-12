@@ -69,7 +69,7 @@ extension TierListViewController {
     
     private func bindtierRestaurants() {
         viewModel.tierRestaurantsPublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.tierListTableViewHandler?.reloadData()
             }
