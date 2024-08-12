@@ -76,19 +76,30 @@ extension DefaultTierCategoryViewModel {
         exclusiveCases: [T]
     ) {
         if exclusiveCases.contains(selected) {
-            // "all" 또는 "jh" 버튼을 클릭한 경우
+            // "all" 또는 "jh" 버튼을 클릭한 경우: 다른 모든 선택 해제
             for i in 0..<categories.count {
                 categories[i].isSelect = (categories[i].origin.value() as? T == selected)
             }
         } else {
             // "all"이나 "jh"가 아닌 버튼을 클릭한 경우
-            for exclusiveCase in exclusiveCases {
-                if let exclusiveIndex = categories.firstIndex(where: { ($0.origin.value() as? T) == exclusiveCase }) {
-                    categories[exclusiveIndex].isSelect = false
-                }
-            }
             if let index = categories.firstIndex(where: { ($0.origin.value() as? T) == selected }) {
-                categories[index].isSelect.toggle()
+                // 해당 카테고리가 이미 선택된 상태라면, 해제할 때 최소 하나의 선택이 남아있는지 확인
+                if categories[index].isSelect {
+                    let selectedCount = categories.filter { $0.isSelect }.count
+                    if selectedCount > 1 {
+                        // 현재 선택된 상태를 해제
+                        categories[index].isSelect.toggle()
+                    }
+                } else {
+                    // 선택되지 않은 상태라면 그냥 선택
+                    categories[index].isSelect.toggle()
+                    // "all"이나 "jh"가 선택된 상태에서 다른 항목이 선택되면 해제
+                    for exclusiveCase in exclusiveCases {
+                        if let exclusiveIndex = categories.firstIndex(where: { ($0.origin.value() as? T) == exclusiveCase }) {
+                            categories[exclusiveIndex].isSelect = false
+                        }
+                    }
+                }
             }
         }
     }
