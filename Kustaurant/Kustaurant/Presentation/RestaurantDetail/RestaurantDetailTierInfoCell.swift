@@ -1,5 +1,5 @@
 //
-//  RestuarantDetailTierInfoCell.swift
+//  RestaurantDetailTierInfoCell.swift
 //  Kustaurant
 //
 //  Created by 류연수 on 8/11/24.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class RestuarantDetailTierInfoCell: UITableViewCell {
+final class RestaurantDetailTierInfoCell: UITableViewCell {
     
     private let collectionView: RestaurantDetailTierCollectionView = .init()
     
-    private var tiers: [RestaurantDetailTierCell.Tier] = []
+    private var tiers: [RestaurantDetailTierInfo] = []
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,8 +24,8 @@ final class RestuarantDetailTierInfoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(tiers: [RestaurantDetailTierCell.Tier]) {
-        self.tiers = tiers
+    func update(item: [RestaurantDetailCellItem]) {
+        self.tiers = item.compactMap { $0 as? RestaurantDetailTierInfo }
         
         Task {
             await MainActor.run {
@@ -44,11 +44,11 @@ final class RestuarantDetailTierInfoCell: UITableViewCell {
     }
 }
 
-extension RestuarantDetailTierInfoCell: UICollectionViewDelegateFlowLayout {
+extension RestaurantDetailTierInfoCell: UICollectionViewDelegateFlowLayout {
     
 }
 
-extension RestuarantDetailTierInfoCell: UICollectionViewDataSource {
+extension RestaurantDetailTierInfoCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         tiers.count
@@ -57,7 +57,7 @@ extension RestuarantDetailTierInfoCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath) as RestaurantDetailTierCell
         guard let tier = tiers[safe: indexPath.row] else { return cell }
-        cell.update(tier: tier)
+        cell.update(item: tier)
         
         return cell
     }

@@ -22,8 +22,10 @@ final class RestaurantDetailInfoSectionHeaderView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(text: String) {
-        label.text = text
+    func update(item: RestaurantDetailHeaderItem) {
+        guard let item = item as? RestaurantDetailInfo else { return }
+        
+        label.text = item.title
     }
 }
 

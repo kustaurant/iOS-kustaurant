@@ -7,19 +7,6 @@
 
 import UIKit
 
-extension RestaurantDetailReviewCell {
-    
-    struct Review {
-        let profileImageName: String
-        let nickname: String
-        let time: String
-        let photoImageName: String
-        let review: String
-        let rating: Double
-        let isComment: Bool
-    }
-}
-
 final class RestaurantDetailReviewCell: UITableViewCell {
     
     private let starsRatingStackView: StarsRatingStackView = .init()
@@ -37,9 +24,11 @@ final class RestaurantDetailReviewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(review: Review, hasComments: Bool) {
-        starsRatingStackView.update(rating: review.rating)
-        reviewView.update(with: review)
+    func update(item: RestaurantDetailCellItem, hasComments: Bool) {
+        guard let item = item as? RestaurantDetailReview else { return }
+        
+        starsRatingStackView.update(rating: item.rating)
+        reviewView.update(item: item)
         lineView.isHidden = !hasComments
     }
     

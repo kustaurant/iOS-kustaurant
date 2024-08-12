@@ -22,8 +22,10 @@ final class RestaurantDetailAffiliateInfoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(text: String) {
-        label.text = text
+    func update(item: RestaurantDetailCellItem) {
+        guard let item = item as? RestaurantDetailAffiliateInfo else { return }
+        
+        label.text = item.text
     }
 }
 

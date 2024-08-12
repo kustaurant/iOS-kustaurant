@@ -23,9 +23,11 @@ final class RestaurantDetailRatingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(count: Int, score: Double) {
-        ratingCountView.update(title: "평가수", rating: "\(count)개")
-        ratingScoreView.update(title: "평점", rating: "\(score)")
+    func update(item: RestaurantDetailCellItem) {
+        guard let item = item as? RestaurantDetailRating else { return }
+        
+        ratingCountView.update(title: "평가수", rating: "\(item.count)개")
+        ratingScoreView.update(title: "평점", rating: "\(item.score)")
     }
     
     private func setupStyle() { }

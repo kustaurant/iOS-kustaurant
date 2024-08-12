@@ -28,12 +28,14 @@ final class RestaurantDetailTitleSectionHeaderView: UITableViewHeaderFooterView 
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(cuisineType: String, title: String, isReviewCompleted: Bool, address: String, openingHours: String, mapURL: URL?) {
-        cuisineTypeLabel.text = cuisineType
-        titleLabel.text = title
-        reviewCompleteIconImageView.isHidden = !isReviewCompleted
-        addressInfoView.text = address
-        openingHoursInfoView.text = openingHours
+    func update(item: RestaurantDetailHeaderItem) {
+        guard let item = item as? RestaurantDetailTitle else { return }
+        
+        cuisineTypeLabel.text = item.cuisineType
+        titleLabel.text = item.title
+        reviewCompleteIconImageView.isHidden = !item.isReviewCompleted
+        addressInfoView.text = item.address
+        openingHoursInfoView.text = item.openingHours
     }
 }
 

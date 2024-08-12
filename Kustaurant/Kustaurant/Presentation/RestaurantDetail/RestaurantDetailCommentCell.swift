@@ -25,8 +25,10 @@ final class RestaurantDetailCommentCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(review: RestaurantDetailReviewCell.Review, hasComments: Bool) {
-        reviewView.update(with: review)
+    func update(item: RestaurantDetailCellItem, hasComments: Bool) {
+        guard let item = item as? RestaurantDetailReview else { return }
+        
+        reviewView.update(item: item)
         lineView.isHidden = !hasComments
     }
     

@@ -24,10 +24,12 @@ final class RestaurantDetailMenuCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(image: UIImage, title: String, price: String) {
-        menuImageView.image = image
-        titleLabel.text = title
-        priceLabel.text = price
+    func update(item: RestaurantDetailCellItem) {
+        guard let item = item as? RestaurantDetailMenu else { return }
+        
+        menuImageView.image = UIImage(named: item.imageURLString)
+        titleLabel.text = item.title
+        priceLabel.text = item.price
     }
 }
 

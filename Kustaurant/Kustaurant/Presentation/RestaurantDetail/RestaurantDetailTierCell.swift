@@ -7,15 +7,6 @@
 
 import UIKit
 
-extension RestaurantDetailTierCell {
-    
-    struct Tier {
-        let iconImage: UIImage?
-        let title: String
-        let backgroundHexColor: String
-    }
-}
-
 final class RestaurantDetailTierCell: UICollectionViewCell {
     
     private let iconImageView: UIImageView = .init()
@@ -32,10 +23,10 @@ final class RestaurantDetailTierCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(tier: Tier) {
-        iconImageView.image = tier.iconImage
-        label.text = tier.title
-        contentView.backgroundColor = .init(named: tier.backgroundHexColor)
+    func update(item: RestaurantDetailTierInfo) {
+        iconImageView.image = .init(named: item.iconImageURLString)
+        label.text = item.title
+        contentView.backgroundColor = .init(named: item.backgroundHexColor)
     }
     
     private func setupStyle() {

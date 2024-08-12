@@ -33,14 +33,14 @@ final class RestaurantDetailReviewView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(with model: RestaurantDetailReviewCell.Review) {
-        profileImageView.image = UIImage(named: model.profileImageName)
-        nicknameLabel.text = model.nickname
+    func update(item: RestaurantDetailReview) {
+        profileImageView.image = UIImage(named: item.profileImageName)
+        nicknameLabel.text = item.nickname
         barView.backgroundColor = .gray100
-        timeLabel.text = model.time
-        photoImageView.image = UIImage(named: model.photoImageName)
-        reviewLabel.text = model.review
-        commentsIconButton.isHidden = model.isComment
+        timeLabel.text = item.time
+        photoImageView.image = UIImage(named: item.photoImageURLString)
+        reviewLabel.text = item.review
+        commentsIconButton.isHidden = item.isComment
     }
     
     private func setupStyle() {
