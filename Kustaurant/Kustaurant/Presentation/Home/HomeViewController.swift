@@ -54,20 +54,48 @@ extension HomeViewController {
 // MARK: - Bindings
 extension HomeViewController {
     private func setupBindings() {
-        bindRestaurantLists()
+        bindMainSection()
+        bindTopRestaurants()
+        bindForMeRestaurants()
     }
     
-    private func bindRestaurantLists() {
+    private func bindMainSection() {
+        viewModel.mainSectionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.homeLayoutTableViewHandler?.reloadTable()
+            }.store(in: &cancellables)
+    }
+    
+    private func bindTopRestaurants() {
         viewModel.topRestaurantsPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.homeLayoutTableViewHandler?.reloadSection(.topRestaurants)
+            .sink { [weak self] data in
+                guard !data.isEmpty else {
+                    self?.viewModel.mainSections.removeAll(where: { $0 == .topRestaurants })
+                    return
+                }
+                if !(self?.viewModel.mainSections.contains(where: { $0 == .topRestaurants }) ?? false) {
+                    self?.viewModel.mainSections.append(.topRestaurants)
+                } else {
+                    self?.homeLayoutTableViewHandler?.reloadSection(.topRestaurants)
+                }
             }.store(in: &cancellables)
-        
+    }
+    
+    private func bindForMeRestaurants() {
         viewModel.forMeRestaurantsPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.homeLayoutTableViewHandler?.reloadSection(.forMeRestaurants)
+            .sink { [weak self] data in
+                guard !data.isEmpty else {
+                    self?.viewModel.mainSections.removeAll(where: { $0 == .forMeRestaurants })
+                    return
+                }
+                if !(self?.viewModel.mainSections.contains(where: { $0 == .forMeRestaurants }) ?? false) {
+                    self?.viewModel.mainSections.append(.forMeRestaurants)
+                } else {
+                    self?.homeLayoutTableViewHandler?.reloadSection(.forMeRestaurants)
+                }
             }.store(in: &cancellables)
     }
 }

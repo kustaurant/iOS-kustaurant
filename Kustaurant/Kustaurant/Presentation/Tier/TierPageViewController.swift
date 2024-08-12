@@ -39,10 +39,28 @@ final class TierViewController: UIPageViewController {
     }
 }
 
+// MARK: - Actions
+extension TierViewController {
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+}
+
 extension TierViewController {
     private func setupNavigationBar() {
         navigationItem.titleView = tierNaviationTitleTabView
+        configureBackButtonIfNeeded()
     }
+    
+    private func configureBackButtonIfNeeded() {
+        // 네비게이션 스택에 현재 뷰컨트롤러가 루트가 아닌 경우에만 백 버튼을 추가
+        if navigationController?.viewControllers.count ?? 0 > 1 {
+            let icon = UIImage(named: "icon_back")?.withRenderingMode(.alwaysOriginal)
+            let backButton = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(backButtonTapped))
+            navigationItem.leftBarButtonItem = backButton
+        }
+    }
+    
     
     private func setViewControllersInPageVC() {
         setPage(index: 0)
