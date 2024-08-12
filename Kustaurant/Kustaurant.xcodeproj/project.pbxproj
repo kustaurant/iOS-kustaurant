@@ -369,19 +369,8 @@
 			isa = PBXGroup;
 			children = (
 				58067C8C2C4A815000889C92 /* RestaurantDetailViewController.swift */,
-				CFE204552C5A0FF100BCA87C /* RestaurantDetailTitleSectionHeaderView.swift */,
-				CFE2045D2C5A6E1F00BCA87C /* RestaurantDetailInfoSectionHeaderView.swift */,
-				CFEC6EEB2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift */,
-				CFE2047D2C68E76B00BCA87C /* RestaurantDetailAffiliateInfoCell.swift */,
-				CFE2047B2C68AD4C00BCA87C /* RestaurantDetailTierInfoCell.swift */,
-				CFE204532C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift */,
-				CFE2045B2C5A399300BCA87C /* RestaurantDetailTierCell.swift */,
-				CFE204612C5A764100BCA87C /* RestaurantDetailRatingCell.swift */,
-				CFE204632C5BA3E500BCA87C /* RestaurantDetailMenuCell.swift */,
-				CFE204752C5F58C700BCA87C /* RestaurantDetailReviewCell.swift */,
-				CFE204792C68A3B700BCA87C /* RestaurantDetailCommentCell.swift */,
-				CFE204772C67379100BCA87C /* RestaurantDetailReviewView.swift */,
-				CFEC6EE92C6A285900B4DAAB /* RestaurantDetailViewModel.swift */,
+				CFEC6EED2C6A544C00B4DAAB /* View */,
+				CFEC6EEE2C6A545F00B4DAAB /* ViewModel */,
 			);
 			path = RestaurantDetail;
 			sourceTree = "<group>";
@@ -961,6 +950,33 @@
 				CFE2048C2C6A1BE400BCA87C /* RestaurantDetailReview.swift */,
 			);
 			path = ResraurantDetail;
+			sourceTree = "<group>";
+		};
+		CFEC6EED2C6A544C00B4DAAB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CFE204552C5A0FF100BCA87C /* RestaurantDetailTitleSectionHeaderView.swift */,
+				CFE2045D2C5A6E1F00BCA87C /* RestaurantDetailInfoSectionHeaderView.swift */,
+				CFEC6EEB2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift */,
+				CFE2047D2C68E76B00BCA87C /* RestaurantDetailAffiliateInfoCell.swift */,
+				CFE2047B2C68AD4C00BCA87C /* RestaurantDetailTierInfoCell.swift */,
+				CFE204532C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift */,
+				CFE2045B2C5A399300BCA87C /* RestaurantDetailTierCell.swift */,
+				CFE204612C5A764100BCA87C /* RestaurantDetailRatingCell.swift */,
+				CFE204632C5BA3E500BCA87C /* RestaurantDetailMenuCell.swift */,
+				CFE204752C5F58C700BCA87C /* RestaurantDetailReviewCell.swift */,
+				CFE204792C68A3B700BCA87C /* RestaurantDetailCommentCell.swift */,
+				CFE204772C67379100BCA87C /* RestaurantDetailReviewView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CFEC6EEE2C6A545F00B4DAAB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CFEC6EE92C6A285900B4DAAB /* RestaurantDetailViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
