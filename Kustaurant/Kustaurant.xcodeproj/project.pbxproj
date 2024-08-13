@@ -109,6 +109,9 @@
 		BA37E07F2C6742EF0092115B /* DrawResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E07E2C6742EF0092115B /* DrawResultViewController.swift */; };
 		BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0802C6743300092115B /* DrawResultViewModel.swift */; };
 		BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0822C674BE40092115B /* UIButton+Publisher.swift */; };
+		BA37E0852C674E760092115B /* DrawResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0842C674E760092115B /* DrawResultView.swift */; };
+		BA37E0872C675FF40092115B /* UIStackView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */; };
+		BA37E0B32C6A0CBF0092115B /* DrawResultRouletteHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B22C6A0CBF0092115B /* DrawResultRouletteHandler.swift */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
 		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
 		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
@@ -261,6 +264,9 @@
 		BA37E07E2C6742EF0092115B /* DrawResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultViewController.swift; sourceTree = "<group>"; };
 		BA37E0802C6743300092115B /* DrawResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultViewModel.swift; sourceTree = "<group>"; };
 		BA37E0822C674BE40092115B /* UIButton+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Publisher.swift"; sourceTree = "<group>"; };
+		BA37E0842C674E760092115B /* DrawResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultView.swift; sourceTree = "<group>"; };
+		BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+AutoLayout.swift"; sourceTree = "<group>"; };
+		BA37E0B22C6A0CBF0092115B /* DrawResultRouletteHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultRouletteHandler.swift; sourceTree = "<group>"; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
 		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -614,6 +620,7 @@
 				CFE204682C5D03C400BCA87C /* Collection+.swift */,
 				CFE204572C5A121D00BCA87C /* UIView+AutoLayout.swift */,
 				BA37E0822C674BE40092115B /* UIButton+Publisher.swift */,
+				BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -795,7 +802,8 @@
 			children = (
 				BA37E0782C65E5D70092115B /* CollectionView */,
 				BA37E06F2C65E0B60092115B /* DrawView.swift */,
-				BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */,
+				BA37E0842C674E760092115B /* DrawResultView.swift */,
+				BA37E0B22C6A0CBF0092115B /* DrawResultRouletteHandler.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -823,6 +831,7 @@
 			children = (
 				BA37E0752C65E5650092115B /* Cells */,
 				BA37E07A2C65E5F10092115B /* DrawCollectionViewSection.swift */,
+				BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -1105,6 +1114,7 @@
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
 				58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */,
+				BA37E0872C675FF40092115B /* UIStackView+AutoLayout.swift in Sources */,
 				BA37E07B2C65E5F10092115B /* DrawCollectionViewSection.swift in Sources */,
 				CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */,
 				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
@@ -1137,6 +1147,7 @@
 				58067D3B2C58D6EC00889C92 /* TierCategoryViewController.swift in Sources */,
 				584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */,
 				58067C8D2C4A815000889C92 /* RestaurantDetailViewController.swift in Sources */,
+				BA37E0B32C6A0CBF0092115B /* DrawResultRouletteHandler.swift in Sources */,
 				58067C8F2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift in Sources */,
 				CF54AD122C4289A900E0DE68 /* Response.swift in Sources */,
 				58067C932C4AA91D00889C92 /* NavigationBarHideable.swift in Sources */,
@@ -1206,6 +1217,7 @@
 				BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */,
 				58067CB72C4FBFB900889C92 /* TierRepository.swift in Sources */,
 				5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */,
+				BA37E0852C674E760092115B /* DrawResultView.swift in Sources */,
 				BA37E07F2C6742EF0092115B /* DrawResultViewController.swift in Sources */,
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,

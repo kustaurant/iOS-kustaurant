@@ -24,11 +24,11 @@ final class DrawSceneDIContainer: DrawFlowCoordinatorDependencies {
         DefaultDrawViewModel(actions: actions)
     }
     
-    func makeDrawResultViewController() -> DrawResultViewController {
-        DrawResultViewController(viewModel: makeDrawResultViewModel())
+    func makeDrawResultViewController(actions: DrawResultViewModelActions) -> DrawResultViewController {
+        DrawResultViewController(viewModel: makeDrawResultViewModel(actions: actions))
     }
     
-    func makeDrawResultViewModel() -> DrawResultViewModel {
-        return DefaultDrawResultViewModel()
+    func makeDrawResultViewModel(actions: DrawResultViewModelActions) -> DrawResultViewModel {
+        return DefaultDrawResultViewModel(actions: actions)
     }
 }
