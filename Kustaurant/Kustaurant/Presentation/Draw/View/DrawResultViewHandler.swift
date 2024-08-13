@@ -73,7 +73,11 @@ extension DrawResultViewHandler {
             
             // TODO: restuarntImgUrl이 no_img 인 경우 예외처리
             if restaurant.restaurantImgUrl == "no_img" {
-                iv.image = UIImage(named: "icon_ku")
+                let defaultImage = UIImage(named: "icon_ku")
+                iv.image = defaultImage
+                if idx == DrawResultViewHandler.rouletteCount - 1 {
+                    self.view.drawedRestaurantImageView.image = defaultImage
+                }
                 return
             }
             

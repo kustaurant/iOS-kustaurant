@@ -93,9 +93,9 @@ extension DrawCollectionViewHandler {
     }
     
     private func createLocationSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .estimated(Category.Height))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .estimated(Category.height))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .estimated(Category.Height))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .estimated(Category.height))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: Array(repeating: item, count: viewModel.locations.count))
         group.interItemSpacing = .fixed(8)
         let section = NSCollectionLayoutSection(group: group)
