@@ -29,6 +29,12 @@ final class DrawView: UIView {
         button.buttonState = .on
         return button
     }()
+    
+    let buttonLoadingIndicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,5 +59,6 @@ extension DrawView {
                     .height(52),
                     .bottomSafeArea(constant: 28)
                     ])
+        submitButton.addSubview(buttonLoadingIndicatorView, autoLayout: [.fill(0)])
     }
 }

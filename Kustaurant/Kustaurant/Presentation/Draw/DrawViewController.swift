@@ -60,9 +60,41 @@ extension DrawViewController {
             }
             .store(in: &cancellables)
         
+        viewModel.isFetchingRestaurantsPublisher
+            .sink { [weak self] isFetchingRestaurants in
+                if isFetchingRestaurants {
+                    self?.drawView.submitButton.buttonTitle = ""
+                    self?.drawView.buttonLoadingIndicatorView.startAnimating()
+                } else {
+                    self?.drawView.submitButton.buttonTitle = "랜덤 뽑기"
+                    self?.drawView.buttonLoadingIndicatorView.stopAnimating()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.showAlertPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] showAlert in
+                if showAlert {
+                    self?.presentAlert()
+                }
+            }
+            .store(in: &cancellables)
+        
         drawView.submitButton.tapPublisher().sink { [weak self] in
             self?.viewModel.didTapDrawButton()
         }
         .store(in: &cancellables)
+    }
+}
+
+extension DrawViewController {
+                    
+    private func presentAlert() {
+        let alert = UIAlertController(title: "해당 조건에 맞는 식당이 없습니다.", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+            self?.viewModel.didTapOkInAlert()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }

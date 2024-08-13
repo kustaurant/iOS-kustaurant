@@ -26,6 +26,7 @@ protocol DrawViewModelInput {
     func toggleSelectable(location: SelectableLocation) -> Void
     func toggleSelectable(cuisine: SelectableCuisine) -> Void
     func didTapDrawButton() -> Void
+    func didTapOkInAlert() -> Void
 }
 
 protocol DrawViewModelOutput {
@@ -33,11 +34,19 @@ protocol DrawViewModelOutput {
     var locations: [SelectableLocation] { get }
     var collectionViewSectionsPublisher: AnyPublisher<[DrawCollectionViewSection], Never> { get }
     var collectionViewSections: [DrawCollectionViewSection] { get }
+    var isFetchingRestaurants: Bool { get }
+    var isFetchingRestaurantsPublisher: Published<Bool>.Publisher { get }
+    var showAlert: Bool { get }
+    var showAlertPublisher: Published<Bool>.Publisher { get }
 }
 
 typealias DrawViewModel = DrawViewModelInput & DrawViewModelOutput
 
 final class DefaultDrawViewModel: DrawViewModel {
+    @Published var isFetchingRestaurants = false
+    var isFetchingRestaurantsPublisher: Published<Bool>.Publisher { $isFetchingRestaurants }
+    @Published var showAlert = false
+    var showAlertPublisher: Published<Bool>.Publisher { $showAlert }
     
     private var actions: DrawViewModelActions
     private var drawUseCases: DrawUseCases
@@ -111,19 +120,26 @@ extension DefaultDrawViewModel {
     }
     
     func didTapDrawButton() {
+        isFetchingRestaurants = true
         let selectedCuisines = cuisines.filter({ $0.isSelected }).map { $0.cuisine }
         let selectedLocations = locations.filter({ $0.isSelected }).map { $0.location }
         Task {
             let result = await drawUseCases.getRestaurantsBy(locations: selectedLocations, cuisines: selectedCuisines)
             
             DispatchQueue.main.async { [weak self] in
+                defer { self?.isFetchingRestaurants = false }
                 switch result {
                 case .success(let data):
                     self?.actions.didTapDrawButton(data)
                 case .failure(let error):
                     print(error.localizedDescription)
+                    self?.showAlert = true
                 }
             }
         }
+    }
+    
+    func didTapOkInAlert() {
+        showAlert = false
     }
 }
