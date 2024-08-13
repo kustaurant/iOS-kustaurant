@@ -1288,6 +1288,7 @@
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
 				584173392C46664E001EC132 /* DrawViewController.swift in Sources */,
 				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,
+				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,
 				58067CCC2C51552700889C92 /* Category.swift in Sources */,
 				58067D7B2C5FA70300889C92 /* HomeCategoriesCollectionView.swift in Sources */,
 			);
