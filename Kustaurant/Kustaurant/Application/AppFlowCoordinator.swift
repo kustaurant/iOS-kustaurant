@@ -62,7 +62,7 @@ extension AppFlowCoordinator {
             navigationController: CustomUINavigationController()
         )
 
-        tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow, communityFlow, myPageFlow])
+        tabBarFlowCoordinator.setupTabs(with: [drawFlow, homeFlow, tierFlow, communityFlow, myPageFlow])
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }
