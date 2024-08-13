@@ -20,8 +20,11 @@ final class AppDIContainer {
         )
     }
     
-    func makeRecommendSceneDIContainer() -> RecommendSceneDIContainer {
-        RecommendSceneDIContainer()
+    func makeDrawSceneDIContainer() -> DrawSceneDIContainer {
+        let dependencies = DrawSceneDIContainer.Dependencies(
+            networkService: networkService
+        )
+        return DrawSceneDIContainer(dependencies: dependencies)
     }
     
     func makeTierSceneDIContainer() -> TierSceneDIContainer {
