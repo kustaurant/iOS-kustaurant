@@ -15,10 +15,7 @@ struct DrawResultViewModelActions {
 
 protocol DrawResultViewModelInput {
     func didTapBackButton() -> Void
-    func fetchDrawedRestaurants()
     func didTapReDrawButton() -> Void
-    var locations: [Location] { get }
-    var cuisines: [Cuisine] { get }
 }
 
 protocol DrawResultViewModelOutput {
@@ -31,10 +28,6 @@ protocol DrawResultViewModelOutput {
 typealias DrawResultViewModel = DrawResultViewModelInput & DrawResultViewModelOutput
 
 final class DefaultDrawResultViewModel: DrawResultViewModel {
-    var locations: [Location]
-    var cuisines: [Cuisine]
-    
-    private let drawUseCases: DrawUseCases
     private let actions: DrawResultViewModelActions
     @Published var restaurants: [Restaurant] = []
     var restaurantsPublisher: Published<[Restaurant]>.Publisher { $restaurants }
@@ -42,15 +35,11 @@ final class DefaultDrawResultViewModel: DrawResultViewModel {
     var isDrawingPublisher: Published<Bool>.Publisher { $isDrawing }
     
     init(
-        drawUseCases: DrawUseCases,
         actions: DrawResultViewModelActions,
-        locations: [Location],
-        cuisines: [Cuisine]
+        restaurants: [Restaurant]
     ) {
-        self.drawUseCases = drawUseCases
         self.actions = actions
-        self.locations = locations
-        self.cuisines = cuisines
+        self.restaurants = restaurants
     }
 }
 
@@ -58,21 +47,6 @@ extension DefaultDrawResultViewModel {
     
     func didTapBackButton() {
         actions.didTapBackButton()
-    }
-    
-    func fetchDrawedRestaurants() {
-        isDrawing = true
-        Task {
-            let result = await drawUseCases.getRestaurantsBy(locations: locations, cuisines: cuisines)
-            switch result {
-            case .failure(let error):
-                print(#file, #function, error.localizedDescription)
-            case .success(let data):
-                restaurants = makeRepeatingRestaurantsUpto30(restaurants: data)
-                try? await Task.sleep(nanoseconds: UInt64((DrawResultViewHandler.rouletteAnimationDurationSeconds) * 1_000_000_000))
-                isDrawing = false
-            }
-        }
     }
     
     func makeRepeatingRestaurantsUpto30(restaurants: [Restaurant]) -> [Restaurant] {

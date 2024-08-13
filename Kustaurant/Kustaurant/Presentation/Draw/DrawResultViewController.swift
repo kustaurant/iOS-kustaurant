@@ -19,7 +19,6 @@ class DrawResultViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         bind()
-        viewModel.fetchDrawedRestaurants()
     }
     
     override func viewDidAppear(_ animated: Bool) {

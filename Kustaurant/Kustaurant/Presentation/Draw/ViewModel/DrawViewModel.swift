@@ -19,7 +19,7 @@ struct SelectableCuisine: Hashable {
 }
 
 struct DrawViewModelActions {
-    let didTapDrawButton: ([Location], [Cuisine]) -> Void
+    let didTapDrawButton: ([Restaurant]) -> Void
 }
 
 protocol DrawViewModelInput {
@@ -40,6 +40,7 @@ typealias DrawViewModel = DrawViewModelInput & DrawViewModelOutput
 final class DefaultDrawViewModel: DrawViewModel {
     
     private var actions: DrawViewModelActions
+    private var drawUseCases: DrawUseCases
     
     @Published var cuisines: [SelectableCuisine] = Cuisine.allCases.map {
         if $0 == .all {
@@ -61,8 +62,9 @@ final class DefaultDrawViewModel: DrawViewModel {
             .eraseToAnyPublisher()
     }
     
-    init(actions: DrawViewModelActions) {
+    init(actions: DrawViewModelActions, drawUseCases: DrawUseCases) {
         self.actions = actions
+        self.drawUseCases = drawUseCases
         
         Publishers.CombineLatest($locations, $cuisines)
             .map { locations, cuisines in
@@ -111,6 +113,17 @@ extension DefaultDrawViewModel {
     func didTapDrawButton() {
         let selectedCuisines = cuisines.filter({ $0.isSelected }).map { $0.cuisine }
         let selectedLocations = locations.filter({ $0.isSelected }).map { $0.location }
-        actions.didTapDrawButton(selectedLocations, selectedCuisines)
+        Task {
+            let result = await drawUseCases.getRestaurantsBy(locations: selectedLocations, cuisines: selectedCuisines)
+            
+            DispatchQueue.main.async { [weak self] in
+                switch result {
+                case .success(let data):
+                    self?.actions.didTapDrawButton(data)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
