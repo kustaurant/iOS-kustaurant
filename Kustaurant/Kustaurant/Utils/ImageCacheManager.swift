@@ -13,7 +13,7 @@ public class ImageCacheManager {
 
     private init() {}
 
-    public func loadImage(from url: URL, targetWidth: CGFloat, completion: @escaping (UIImage?) -> Void) {
+    public func loadImage(from url: URL, targetWidth: CGFloat, defaultImage: UIImage? = nil, completion: @escaping (UIImage?) -> Void) {
         let cacheKey = url.absoluteString as NSString
         
         if let cachedImage = cache.object(forKey: cacheKey) {
@@ -28,13 +28,12 @@ public class ImageCacheManager {
                   error == nil else {
                 DispatchQueue.main.async {
                     print(#file, #function, "❗️ Fail To Load Image URL \(url.absoluteString)")
-                    completion(nil)
+                    completion(defaultImage)
                 }
                 return
             }
             
             let resizedImage = image.resized(to: targetWidth)
-            
             
             if let resizedImage = resizedImage {
                 self.cache.setObject(resizedImage, forKey: cacheKey)
