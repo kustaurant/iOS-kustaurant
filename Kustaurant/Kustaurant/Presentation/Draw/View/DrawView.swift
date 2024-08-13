@@ -43,6 +43,7 @@ final class DrawView: UIView {
 extension DrawView {
     
     private func setupUI() {
+        backgroundColor = .white
         addSubview(headerLabel, autoLayout: [.topSafeArea(constant: 20), .fillX(0)])
         addSubview(collectionView, autoLayout: [.topNext(to: headerLabel, constant: 13), .fillX(0)])
         addSubview(submitButton,

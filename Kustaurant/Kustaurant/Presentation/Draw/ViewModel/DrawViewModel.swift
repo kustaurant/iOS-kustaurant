@@ -19,7 +19,7 @@ struct SelectableCuisine: Hashable {
 }
 
 struct DrawViewModelActions {
-    let didTapDrawButton: (Location, Cuisine) -> Void
+    let didTapDrawButton: ([Location], [Cuisine]) -> Void
 }
 
 protocol DrawViewModelInput {
@@ -109,6 +109,8 @@ extension DefaultDrawViewModel {
     }
     
     func didTapDrawButton() {
-        actions.didTapDrawButton(Location.all, Cuisine.all)
+        let selectedCuisines = cuisines.filter({ $0.isSelected }).map { $0.cuisine }
+        let selectedLocations = locations.filter({ $0.isSelected }).map { $0.location }
+        actions.didTapDrawButton(selectedLocations, selectedCuisines)
     }
 }

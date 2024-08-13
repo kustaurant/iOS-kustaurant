@@ -34,14 +34,16 @@ final class DrawSceneDIContainer: DrawFlowCoordinatorDependencies {
         DefaultDrawViewModel(actions: actions)
     }
     
-    func makeDrawResultViewController(actions: DrawResultViewModelActions) -> DrawResultViewController {
-        DrawResultViewController(viewModel: makeDrawResultViewModel(actions: actions))
+    func makeDrawResultViewController(actions: DrawResultViewModelActions, locations: [Location], cuisines: [Cuisine]) -> DrawResultViewController {
+        DrawResultViewController(viewModel: makeDrawResultViewModel(actions: actions, locations: locations, cuisines: cuisines))
     }
     
-    func makeDrawResultViewModel(actions: DrawResultViewModelActions) -> DrawResultViewModel {
+    func makeDrawResultViewModel(actions: DrawResultViewModelActions, locations: [Location], cuisines: [Cuisine]) -> DrawResultViewModel {
         return DefaultDrawResultViewModel(
             drawUseCases: makeDrawUseCases(),
-            actions: actions
+            actions: actions,
+            locations: locations,
+            cuisines: cuisines
         )
     }
     

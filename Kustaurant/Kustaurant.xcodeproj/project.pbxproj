@@ -111,7 +111,10 @@
 		BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0822C674BE40092115B /* UIButton+Publisher.swift */; };
 		BA37E0852C674E760092115B /* DrawResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0842C674E760092115B /* DrawResultView.swift */; };
 		BA37E0872C675FF40092115B /* UIStackView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */; };
-		BA37E0B32C6A0CBF0092115B /* DrawResultRouletteHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B22C6A0CBF0092115B /* DrawResultRouletteHandler.swift */; };
+		BA37E0B32C6A0CBF0092115B /* DrawResultViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B22C6A0CBF0092115B /* DrawResultViewHandler.swift */; };
+		BA37E0B52C6B0A710092115B /* DefaultDrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */; };
+		BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B62C6B0A870092115B /* DrawRepository.swift */; };
+		BA37E0B92C6B0DA80092115B /* DrawUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
 		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
 		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
@@ -266,7 +269,10 @@
 		BA37E0822C674BE40092115B /* UIButton+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Publisher.swift"; sourceTree = "<group>"; };
 		BA37E0842C674E760092115B /* DrawResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultView.swift; sourceTree = "<group>"; };
 		BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+AutoLayout.swift"; sourceTree = "<group>"; };
-		BA37E0B22C6A0CBF0092115B /* DrawResultRouletteHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultRouletteHandler.swift; sourceTree = "<group>"; };
+		BA37E0B22C6A0CBF0092115B /* DrawResultViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultViewHandler.swift; sourceTree = "<group>"; };
+		BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDrawRepository.swift; sourceTree = "<group>"; };
+		BA37E0B62C6B0A870092115B /* DrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRepository.swift; sourceTree = "<group>"; };
+		BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawUseCases.swift; sourceTree = "<group>"; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
 		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -638,6 +644,7 @@
 			children = (
 				5841736E2C47C172001EC132 /* HomeUseCases.swift */,
 				58067CB42C4FBF9200889C92 /* TierUseCases.swift */,
+				BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -655,6 +662,7 @@
 			children = (
 				584173722C47C2BA001EC132 /* HomeRepository.swift */,
 				58067CB62C4FBFB900889C92 /* TierRepository.swift */,
+				BA37E0B62C6B0A870092115B /* DrawRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -664,6 +672,7 @@
 			children = (
 				584173752C47C311001EC132 /* DefaultHomeRepository.swift */,
 				58067CB82C4FC1A200889C92 /* DefaultTierRepository.swift */,
+				BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -803,7 +812,7 @@
 				BA37E0782C65E5D70092115B /* CollectionView */,
 				BA37E06F2C65E0B60092115B /* DrawView.swift */,
 				BA37E0842C674E760092115B /* DrawResultView.swift */,
-				BA37E0B22C6A0CBF0092115B /* DrawResultRouletteHandler.swift */,
+				BA37E0B22C6A0CBF0092115B /* DrawResultViewHandler.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1147,7 +1156,7 @@
 				58067D3B2C58D6EC00889C92 /* TierCategoryViewController.swift in Sources */,
 				584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */,
 				58067C8D2C4A815000889C92 /* RestaurantDetailViewController.swift in Sources */,
-				BA37E0B32C6A0CBF0092115B /* DrawResultRouletteHandler.swift in Sources */,
+				BA37E0B32C6A0CBF0092115B /* DrawResultViewHandler.swift in Sources */,
 				58067C8F2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift in Sources */,
 				CF54AD122C4289A900E0DE68 /* Response.swift in Sources */,
 				58067C932C4AA91D00889C92 /* NavigationBarHideable.swift in Sources */,
@@ -1189,6 +1198,7 @@
 				58067CC72C514FCD00889C92 /* TierListCategoriesCollectionViewHandler.swift in Sources */,
 				58067CA82C4F512100889C92 /* TierPageViewController.swift in Sources */,
 				BA8EEF872C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift in Sources */,
+				BA37E0B92C6B0DA80092115B /* DrawUseCases.swift in Sources */,
 				58067D842C5FD67700889C92 /* HomeLayoutTableViewHandler.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
 				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
@@ -1197,6 +1207,7 @@
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
@@ -1222,6 +1233,7 @@
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
+				BA37E0B52C6B0A710092115B /* DefaultDrawRepository.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
 				58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */,
 				CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */,

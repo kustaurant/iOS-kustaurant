@@ -13,25 +13,23 @@ class DrawResultViewController: UIViewController {
     private var viewModel: DrawResultViewModel
     private let drawResultView = DrawResultView()
     private var cancellables = Set<AnyCancellable>()
-    private var drawResultViewRouletteHandler: DrawResultRouletteHandler?
+    private var drawResultViewHandler: DrawResultViewHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         bind()
         viewModel.fetchDrawedRestaurants()
-        drawResultViewRouletteHandler?.updateRestaurantRouletteView(restaurants: viewModel.restaurants)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        drawResultViewRouletteHandler?.scrollToLastRestaurant()
-        bindViews()
+        drawResultViewHandler?.scrollToLastRestaurant()
     }
     
     init(viewModel: DrawResultViewModel) {
         self.viewModel = viewModel
-        self.drawResultViewRouletteHandler = DrawResultRouletteHandler(view: drawResultView, viewModel: viewModel)
+        self.drawResultViewHandler = DrawResultViewHandler(view: drawResultView, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -76,20 +74,40 @@ extension DrawResultViewController {
             }
             .store(in: &cancellables)
         
-        drawResultView.redrawButton.tapPublisher()
-            .sink { [weak self] in
-                self?.drawResultViewRouletteHandler?.resetRoulettes()
-                self?.viewModel.didTapReDrawButton()
-                self?.drawResultViewRouletteHandler?.scrollToLastRestaurant()
+        viewModel.isDrawingPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isDrawing in
+                if isDrawing {
+                    self?.drawResultViewHandler?.showLoadingIndicator()
+                } else {
+                    self?.drawResultViewHandler?.hideLoadingIndicator()
+                }
             }
             .store(in: &cancellables)
-    }
-    
-    private func bindViews() {
-        viewModel.restaurantsPublisher.sink { [weak self] restaurants in
-            self?.drawResultViewRouletteHandler?.updateRestaurantRouletteView(restaurants: restaurants)
-        }
-        .store(in: &cancellables)
+        
+        drawResultView.redrawButton.tapPublisher()
+            .sink { [weak self] in
+                self?.drawResultViewHandler?.resetRoulettes()
+                self?.viewModel.didTapReDrawButton()
+                self?.drawResultViewHandler?.scrollToLastRestaurant()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.restaurantsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] restaurants in
+                self?.drawResultViewHandler?.updateRestaurantRouletteView(restaurants: restaurants)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.restaurantsPublisher
+            .delay(for: .seconds(DrawResultViewHandler.rouletteAnimationDurationSeconds), scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] restaurants in
+                let drawedRestaurant = restaurants.last
+                self?.drawResultViewHandler?.configureRestaurantLabels(with: drawedRestaurant)
+            }
+            .store(in: &cancellables)
     }
     
     @objc private func backButtonTapped() {

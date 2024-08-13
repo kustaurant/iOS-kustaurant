@@ -9,12 +9,16 @@ import UIKit
 
 class DrawResultView: UIView {
     
-    static let roulettesCount = 30
-    
     private let containerView: UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
         return sv
+    }()
+    
+    let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        return indicator
     }()
     
     private let rouletteContainerView: UIView = {
@@ -41,51 +45,48 @@ class DrawResultView: UIView {
         iv.layer.shadowOpacity = 0.4
         iv.layer.shadowOffset = CGSize(width: 0, height: 4)
         iv.layer.shadowRadius = 4
-        iv.layer.masksToBounds = false
+        iv.layer.masksToBounds = true
+        iv.contentMode = .scaleAspectFill
         iv.alpha = 0
         return iv
     }()
     
     let rouletteStackView: UIStackView = {
         let sv = UIStackView()
-        sv.backgroundColor = .red
         sv.distribution = .fillEqually
         sv.axis = .horizontal
         return sv
     }()
     
-    private let labelContainerView: UIView = {
+    let labelContainerView: UIView = {
         let view = UIView()
         return view
     }()
     
-    private let categoryLabel: UILabel = {
+    let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "일식"
         label.font = .Pretendard.regular14
         label.textColor = .black
         label.textAlignment = .center
         return label
     }()
     
-    private let restaurantNameLabel: UILabel = {
+    let restaurantNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "호야초밥 참치본점"
         label.font = .Pretendard.bold20
         label.textColor = .black
         label.textAlignment = .center
         return label
     }()
     
-    private let ratingsView: UIView = {
+    let ratingsView: UIView = {
         let view = UIView()
         view.backgroundColor = .yellow
         return view
     }()
     
-    private let partinerShipLabel: UILabel = {
+    let partinerShipLabel: UILabel = {
         let label = UILabel()
-        label.text = "이과대학 학생증 제시 시 10퍼센트 할인적용"
         label.font = .Pretendard.regular18
         label.textColor = .gray700
         label.textAlignment = .center
@@ -142,7 +143,9 @@ class DrawResultView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         setupContainerView()
+        setupLoadingIndicator()
         setupRouletteView()
         setupLabelsView()
         setupButtonsView()
@@ -162,13 +165,19 @@ extension DrawResultView {
         containerView.addArrangedSubview(buttonContainerView, proportion: 0.2)
     }
     
+    private func setupLoadingIndicator() {
+        labelContainerView.addSubview(loadingIndicator, autoLayout: [.fill(0)])
+    }
+    
     private func setupRouletteView() {
         rouletteContainerView.addSubview(rouletteScrollView, autoLayout: [.fillX(0), .fillY(16)])
         rouletteContainerView.addSubview(drawedRestaurantImageView, autoLayout: [.fillX(32), .fillY(0)])
         rouletteScrollView.addSubview(rouletteStackView, autoLayout: [.fillX(0), .fillY(24)])
         rouletteStackView.heightAnchor.constraint(equalTo: rouletteScrollView.heightAnchor).isActive = true
-        for _ in 0..<DrawResultView.roulettesCount {
+        for _ in 0..<DrawResultViewHandler.rouletteCount {
             let iv = UIImageView()
+            iv.contentMode = .scaleAspectFill
+            iv.clipsToBounds = true
             rouletteStackView.addArrangedSubview(iv)
             iv.widthAnchor.constraint(equalTo: rouletteScrollView.widthAnchor).isActive = true
         }
