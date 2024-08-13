@@ -91,7 +91,7 @@ extension DrawViewController {
 extension DrawViewController {
                     
     private func presentAlert() {
-        let alert = UIAlertController(title: "해당 조건에 맞는 식당이 없습니다.", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "해당 조건에 맞는 맛집이 존재하지 않습니다.", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
             self?.viewModel.didTapOkInAlert()
         }))
