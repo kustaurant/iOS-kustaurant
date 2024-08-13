@@ -11,7 +11,7 @@ protocol RestaurantDetailHeaderItem { }
 
 protocol RestaurantDetailCellItem { }
 
-enum RestaurantDetailSection: Equatable, CaseIterable {
+enum RestaurantDetailSection: CaseIterable {
     case title
     case tier
     case affiliate

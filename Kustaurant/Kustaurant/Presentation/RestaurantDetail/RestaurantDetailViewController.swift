@@ -6,12 +6,28 @@
 //
 
 import UIKit
+import Combine
 
 final class RestaurantDetailViewController: UIViewController, NavigationBarHideable {
     
     private let tableView: UITableView = .init()
     
-    private let viewModel: RestaurantDetailViewModel = .init()
+    private let viewModel: RestaurantDetailViewModel
+    private var tabCancellable: AnyCancellable?
+    private var cancellables: Set<AnyCancellable> = .init()
+    
+    init(viewModel: RestaurantDetailViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+        
+        viewModel.state = .fetch(id: 0)
+        bind()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +41,20 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         hideNavigationBar(animated: false)
+    }
+}
+
+extension RestaurantDetailViewController {
+    
+    private func bind() {
+        viewModel.actionPublisher
+            .sink { [weak self] action in
+                switch action {
+                case .didChangeTabType:
+                    self?.tableView.reloadSections(.init(integer: RestaurantDetailSection.tab.index), with: .none)
+                }
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -62,6 +92,11 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             return headerView
         case .tab:
             let headerView: RestaurantDetailTabSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
+            tabCancellable = headerView.actionPublisher
+                .sink { [weak self] type in
+                    guard let type else { return }
+                    self?.viewModel.state = .didTab(at: type)
+                }
             return headerView
         default: return nil
         }

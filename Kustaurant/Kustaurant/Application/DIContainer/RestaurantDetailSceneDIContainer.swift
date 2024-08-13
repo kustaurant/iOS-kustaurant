@@ -9,7 +9,7 @@ import UIKit
 
 final class RestaurantDetailSceneDIContainer: RestaurantDetailFlowCoordinatorDependencies {
     func makeRestaurantDetailViewController() -> RestaurantDetailViewController {
-        RestaurantDetailViewController()
+        RestaurantDetailViewController(viewModel: .init())
     }
 
     func makeRestaurantDetailFlowCoordinator(navigationController: UINavigationController) -> RestaurantDetailFlowCoordinator {

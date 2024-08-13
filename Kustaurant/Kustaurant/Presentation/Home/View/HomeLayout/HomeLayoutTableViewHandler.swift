@@ -84,18 +84,18 @@ extension HomeLayoutTableViewHandler: UITableViewDataSource {
         let section = sectionType(indexPath: indexPath)
         switch section {
         case .categories:
-            let sectionCell = tableView.dequeueReusableCell(withReuseIdentifier: HomeCategoriesSection.reuseIdentifier) as HomeCategoriesSection
+            let sectionCell = tableView.dequeueReusableCell(withReuseIdentifier: HomeCategoriesSection.reuseIdentifier, for: indexPath) as HomeCategoriesSection
             categoriesHandler = HomeCategoriesCollectionViewHandler(view: sectionCell, viewModel: viewModel)
             return sectionCell
             
         case .topRestaurants, .forMeRestaurants:
-            let sectionCell = tableView.dequeueReusableCell(withReuseIdentifier: HomeRestaurantsSection.reuseIdentifier) as HomeRestaurantsSection
+            let sectionCell = tableView.dequeueReusableCell(withReuseIdentifier: HomeRestaurantsSection.reuseIdentifier, for: indexPath) as HomeRestaurantsSection
             sectionCell.sectionType = section
             restaurantsHandlerDic[section!] = HomeRestaurantsCollectionViewHandler(view: sectionCell, viewModel: viewModel)
             return sectionCell
         
         default:
-            let cell = tableView.dequeueReusableCell(withReuseIdentifier: "Default")
+            let cell = tableView.dequeueReusableCell(withReuseIdentifier: "Default", for: indexPath)
             cell.backgroundColor = .purple
             cell.layer.borderWidth = 1.0
             return cell
