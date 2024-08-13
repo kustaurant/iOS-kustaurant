@@ -38,6 +38,10 @@ extension HomeLayoutTableViewHandler {
         HomeSection(rawValue: indexPath.row)
     }
     
+    func reloadTable() {
+        view.homeLayoutTableView.reloadData()
+    }
+    
     func reloadSection(_ section: HomeSection) {
         switch section {
         case .banner:
