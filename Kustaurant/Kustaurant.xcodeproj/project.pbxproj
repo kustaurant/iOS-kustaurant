@@ -135,6 +135,7 @@
 		BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */; };
 		BA8EEF972C64981100FE6ABF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF962C64981100FE6ABF /* LoginViewController.swift */; };
 		BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF982C64994F00FE6ABF /* LoginView.swift */; };
+		BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */; };
 		CF54AD082C4288F900E0DE68 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD072C4288F900E0DE68 /* Request.swift */; };
 		CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */; };
 		CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */; };
@@ -254,7 +255,6 @@
 		584173992C4A1040001EC132 /* UILabel+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		5841739B2C4A29C6001EC132 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
 		5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
-		584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapRestaurants.swift; sourceTree = "<group>"; };
 		584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapViewModel.swift; sourceTree = "<group>"; };
 		584FA4C82C647442008DDC19 /* TierMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapView.swift; sourceTree = "<group>"; };
@@ -301,6 +301,7 @@
 		BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
 		BA8EEF962C64981100FE6ABF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BA8EEF982C64994F00FE6ABF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		CF54AD072C4288F900E0DE68 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRetrier.swift; sourceTree = "<group>"; };
@@ -772,7 +773,7 @@
 				58D83A682C3A785A00511AB9 /* Assets.xcassets */,
 				58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */,
 				58D83A6D2C3A785A00511AB9 /* Info.plist */,
-				584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */,
+				BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1061,6 +1062,7 @@
 				584173942C4A070B001EC132 /* Pretendard-Regular.otf in Resources */,
 				584173912C4A070B001EC132 /* Pretendard-ExtraBold.otf in Resources */,
 				5841738F2C4A070B001EC132 /* Pretendard-Black.otf in Resources */,
+				BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */,
 				584173902C4A070B001EC132 /* Pretendard-Light.otf in Resources */,
 				58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */,
 				584173962C4A070B001EC132 /* Pretendard-Medium.otf in Resources */,
@@ -1326,7 +1328,6 @@
 /* Begin XCBuildConfiguration section */
 		58D83A842C3A785A00511AB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1390,7 +1391,6 @@
 		};
 		58D83A852C3A785A00511AB9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
