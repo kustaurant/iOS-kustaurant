@@ -99,7 +99,7 @@ extension DefaultDrawViewModel {
         if selectable.location == .all || (selectable.isSelected && locations.filter({ $0.isSelected == true}).count == 1) {
             resetLocationsFor(location: .all)
         } else {
-            locations[0].isSelected = false
+            deselectDesignatedLocations()
             if let index = locations.firstIndex(where: { $0.location == selectable.location }) {
                 locations[index].isSelected.toggle()
             }
@@ -109,10 +109,10 @@ extension DefaultDrawViewModel {
     func toggleSelectable(cuisine selectable: SelectableCuisine) {
         if selectable.cuisine == .all || (selectable.isSelected && cuisines.filter({ $0.isSelected == true}).count == 1) {
             resetCuisinesFor(cuisine: .all)
-        } else if selectable.cuisine == .jh {
+        } else if selectable.cuisine == .jh || (selectable.isSelected && cuisines.filter({ $0.isSelected == true}).count == 1)  {
             resetCuisinesFor(cuisine: .jh)
         } else {
-            cuisines[0].isSelected = false
+            deselectDesignatedCuisines()
             if let index = cuisines.firstIndex(where: { $0.cuisine == selectable.cuisine }) {
                 cuisines[index].isSelected.toggle()
             }
@@ -128,6 +128,22 @@ extension DefaultDrawViewModel {
     private func resetLocationsFor(location: Location) {
         for i in 0..<locations.count {
             locations[i].isSelected = (locations[i].location == location)
+        }
+    }
+    
+    private func deselectDesignatedCuisines() {
+        for index in 0..<cuisines.count {
+            if cuisines[index].cuisine == .all || cuisines[index].cuisine == .jh {
+                cuisines[index].isSelected = false
+            }
+        }
+    }
+    
+    private func deselectDesignatedLocations() {
+        for index in 0..<locations.count {
+            if locations[index].location == .all {
+                locations[index].isSelected = false
+            }
         }
     }
 }
