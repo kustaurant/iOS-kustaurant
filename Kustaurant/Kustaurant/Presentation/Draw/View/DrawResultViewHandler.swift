@@ -31,12 +31,14 @@ extension DrawResultViewHandler {
         view.categoryLabel.text = restaurant?.restaurantCuisine
         view.restaurantNameLabel.text = restaurant?.restaurantName
         view.partinerShipLabel.text = restaurant?.partnershipInfo
+        view.ratingsView.isHidden = false
     }
     
     func resetRestaurantLabels() {
         view.categoryLabel.text = ""
         view.restaurantNameLabel.text = ""
         view.partinerShipLabel.text = ""
+        view.ratingsView.isHidden = true
     }
     
     func startRestaurantNameAnimation(with restaurants: [Restaurant]) {
