@@ -74,6 +74,7 @@ extension DrawResultViewController {
             .store(in: &cancellables)
         
         drawResultView.redrawButton.tapPublisher()
+            .debounce(for: 0.1, scheduler: DispatchQueue.main)
             .sink { [weak self] in
                 self?.viewModel.shuffleRestaurants()
             }
@@ -82,9 +83,11 @@ extension DrawResultViewController {
         viewModel.restaurantsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] restaurants in
+                self?.drawResultViewHandler?.resetRestaurantLabels()
                 self?.drawResultViewHandler?.resetRoulettes()
                 self?.drawResultViewHandler?.makeRoulettes(with: restaurants)
                 self?.drawResultViewHandler?.startRouletteScrollAnimation()
+                self?.drawResultViewHandler?.startRestaurantNameAnimation(with: restaurants)
                 DispatchQueue.main.asyncAfter(deadline: .now() + DrawResultViewHandler.rouletteAnimationDurationSeconds) { [weak self] in
                     self?.drawResultViewHandler?.showDrawedRestaurantImage()
                 }
