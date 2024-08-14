@@ -43,6 +43,8 @@ protocol DrawViewModelOutput {
 typealias DrawViewModel = DrawViewModelInput & DrawViewModelOutput
 
 final class DefaultDrawViewModel: DrawViewModel {
+    
+    
     @Published var isFetchingRestaurants = false
     var isFetchingRestaurantsPublisher: Published<Bool>.Publisher { $isFetchingRestaurants }
     @Published var showAlert = false
@@ -94,10 +96,8 @@ final class DefaultDrawViewModel: DrawViewModel {
 
 extension DefaultDrawViewModel {
     func toggleSelectable(location selectable: SelectableLocation) {
-        if selectable.location == .all {
-            for i in 0..<locations.count {
-                locations[i].isSelected = (i == 0)
-            }
+        if selectable.location == .all || (selectable.isSelected && locations.filter({ $0.isSelected == true}).count == 1) {
+            resetLocationsFor(location: .all)
         } else {
             locations[0].isSelected = false
             if let index = locations.firstIndex(where: { $0.location == selectable.location }) {
@@ -107,10 +107,10 @@ extension DefaultDrawViewModel {
     }
     
     func toggleSelectable(cuisine selectable: SelectableCuisine) {
-        if selectable.cuisine == .all {
-            for i in 0..<cuisines.count {
-                cuisines[i].isSelected = (i == 0)
-            }
+        if selectable.cuisine == .all || (selectable.isSelected && cuisines.filter({ $0.isSelected == true}).count == 1) {
+            resetCuisinesFor(cuisine: .all)
+        } else if selectable.cuisine == .jh {
+            resetCuisinesFor(cuisine: .jh)
         } else {
             cuisines[0].isSelected = false
             if let index = cuisines.firstIndex(where: { $0.cuisine == selectable.cuisine }) {
@@ -118,6 +118,21 @@ extension DefaultDrawViewModel {
             }
         }
     }
+    
+    private func resetCuisinesFor(cuisine: Cuisine) {
+        for i in 0..<cuisines.count {
+            cuisines[i].isSelected = (cuisines[i].cuisine == cuisine)
+        }
+    }
+    
+    private func resetLocationsFor(location: Location) {
+        for i in 0..<locations.count {
+            locations[i].isSelected = (locations[i].location == location)
+        }
+    }
+}
+
+extension DefaultDrawViewModel {
     
     func didTapDrawButton() {
         isFetchingRestaurants = true
