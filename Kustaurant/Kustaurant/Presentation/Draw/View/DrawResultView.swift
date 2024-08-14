@@ -15,12 +15,6 @@ class DrawResultView: UIView {
         return sv
     }()
     
-    let loadingIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
-    
     private let rouletteContainerView: UIView = {
         let view = UIView()
         return view
@@ -145,7 +139,6 @@ class DrawResultView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         setupContainerView()
-        setupLoadingIndicator()
         setupRouletteView()
         setupLabelsView()
         setupButtonsView()
@@ -163,10 +156,6 @@ extension DrawResultView {
         containerView.addArrangedSubview(rouletteContainerView, proportion: 0.5)
         containerView.addArrangedSubview(labelContainerView, proportion: 0.3)
         containerView.addArrangedSubview(buttonContainerView, proportion: 0.2)
-    }
-    
-    private func setupLoadingIndicator() {
-        labelContainerView.addSubview(loadingIndicator, autoLayout: [.fill(0)])
     }
     
     private func setupRouletteView() {

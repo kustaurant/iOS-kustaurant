@@ -35,11 +35,9 @@ extension DrawResultViewHandler {
         view.restaurantNameLabel.isHidden = true
         view.ratingsView.isHidden = true
         view.partinerShipLabel.isHidden = true
-        view.loadingIndicator.startAnimating()
     }
     
     func hideLoadingIndicator() {
-        view.loadingIndicator.stopAnimating()
         view.categoryLabel.isHidden = false
         view.restaurantNameLabel.isHidden = false
         view.ratingsView.isHidden = false
@@ -52,13 +50,10 @@ extension DrawResultViewHandler {
     
     func resetRoulettes() {
         view.drawedRestaurantImageView.alpha = 0
-        view.rouletteStackView.arrangedSubviews.forEach {
-            $0.backgroundColor = .clear
-        }
         view.rouletteScrollView.contentOffset.x = 0
     }
     
-    func updateRestaurantRouletteView(restaurants: [Restaurant]) {
+    func makeRoulettes(with restaurants: [Restaurant]) {
         guard restaurants.count > 0 else { return }
         view.rouletteStackView.arrangedSubviews.enumerated().forEach { (idx, view) in
             let restaurant = restaurants[idx]
@@ -82,14 +77,16 @@ extension DrawResultViewHandler {
         }
     }
     
-    func scrollToLastRestaurant() {
+    func startRouletteScrollAnimation() {
         guard let lastViewX = view.rouletteStackView.arrangedSubviews.last?.frame.origin.x else { return }
         UIView.animate(withDuration: Self.rouletteAnimationDurationSeconds, delay: 0, options: [.curveEaseOut], animations: {
             self.view.rouletteScrollView.contentOffset.x = lastViewX
-        }, completion: { [weak self] _ in
-            UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseOut]) { [weak self] in
-                self?.view.drawedRestaurantImageView.alpha = 1
-            }
         })
+    }
+    
+    func showDrawedRestaurantImage() {
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseOut]) { [weak self] in
+            self?.view.drawedRestaurantImageView.alpha = 1
+        }
     }
 }

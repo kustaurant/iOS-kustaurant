@@ -15,12 +15,10 @@ struct DrawResultViewModelActions {
 
 protocol DrawResultViewModelInput {
     func didTapBackButton() -> Void
-    func didTapReDrawButton() -> Void
+    func shuffleRestaurants() -> Void
 }
 
 protocol DrawResultViewModelOutput {
-    var isDrawing: Bool { get }
-    var isDrawingPublisher: Published<Bool>.Publisher { get }
     var restaurants: [Restaurant] { get }
     var restaurantsPublisher: Published<[Restaurant]>.Publisher { get }
 }
@@ -31,8 +29,6 @@ final class DefaultDrawResultViewModel: DrawResultViewModel {
     private let actions: DrawResultViewModelActions
     @Published var restaurants: [Restaurant] = []
     var restaurantsPublisher: Published<[Restaurant]>.Publisher { $restaurants }
-    @Published var isDrawing: Bool = false
-    var isDrawingPublisher: Published<Bool>.Publisher { $isDrawing }
     
     init(
         actions: DrawResultViewModelActions,
@@ -49,21 +45,13 @@ extension DefaultDrawResultViewModel {
         actions.didTapBackButton()
     }
     
-    func makeRepeatingRestaurantsUpto30(restaurants: [Restaurant]) -> [Restaurant] {
+    func shuffleRestaurants() {
         var currentRestaurants = restaurants.shuffled()
         
         while currentRestaurants.count < 30 {
             currentRestaurants.append(contentsOf: restaurants)
         }
         
-        return Array(currentRestaurants.prefix(30))
-    }
-    
-    func didTapReDrawButton() {
-        isDrawing = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + DrawResultViewHandler.rouletteAnimationDurationSeconds) { [weak self] in
-            self?.isDrawing = false
-        }
-        restaurants = makeRepeatingRestaurantsUpto30(restaurants: restaurants)
+        restaurants = Array(currentRestaurants.prefix(30))
     }
 }

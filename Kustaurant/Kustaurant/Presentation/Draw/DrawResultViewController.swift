@@ -23,7 +23,7 @@ class DrawResultViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        drawResultViewHandler?.scrollToLastRestaurant()
+        drawResultViewHandler?.startRouletteScrollAnimation()
     }
     
     init(viewModel: DrawResultViewModel) {
@@ -73,38 +73,21 @@ extension DrawResultViewController {
             }
             .store(in: &cancellables)
         
-        viewModel.isDrawingPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] isDrawing in
-                if isDrawing {
-                    self?.drawResultViewHandler?.showLoadingIndicator()
-                } else {
-                    self?.drawResultViewHandler?.hideLoadingIndicator()
-                }
-            }
-            .store(in: &cancellables)
-        
         drawResultView.redrawButton.tapPublisher()
             .sink { [weak self] in
+                self?.viewModel.shuffleRestaurants()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.restaurantsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] restaurants in
                 self?.drawResultViewHandler?.resetRoulettes()
-                self?.viewModel.didTapReDrawButton()
-                self?.drawResultViewHandler?.scrollToLastRestaurant()
-            }
-            .store(in: &cancellables)
-        
-        viewModel.restaurantsPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] restaurants in
-                self?.drawResultViewHandler?.updateRestaurantRouletteView(restaurants: restaurants)
-            }
-            .store(in: &cancellables)
-        
-        viewModel.restaurantsPublisher
-            .delay(for: .seconds(DrawResultViewHandler.rouletteAnimationDurationSeconds), scheduler: DispatchQueue.main)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] restaurants in
-                let drawedRestaurant = restaurants.last
-                self?.drawResultViewHandler?.configureRestaurantLabels(with: drawedRestaurant)
+                self?.drawResultViewHandler?.makeRoulettes(with: restaurants)
+                self?.drawResultViewHandler?.startRouletteScrollAnimation()
+                DispatchQueue.main.asyncAfter(deadline: .now() + DrawResultViewHandler.rouletteAnimationDurationSeconds) { [weak self] in
+                    self?.drawResultViewHandler?.showDrawedRestaurantImage()
+                }
             }
             .store(in: &cancellables)
     }
