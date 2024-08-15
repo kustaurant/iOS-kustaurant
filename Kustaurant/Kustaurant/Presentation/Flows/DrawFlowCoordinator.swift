@@ -9,7 +9,7 @@ import UIKit
 
 protocol DrawFlowCoordinatorDependencies {
     func makeDrawViewController(actions: DrawViewModelActions) -> DrawViewController
-    func makeDrawResultViewController(actions: DrawResultViewModelActions, locations: [Location], cuisines: [Cuisine]) -> DrawResultViewController
+    func makeDrawResultViewController(actions: DrawResultViewModelActions, restaurants: [Restaurant]) -> DrawResultViewController
 }
 
 final class DrawFlowCoordinator: Coordinator {
@@ -34,12 +34,11 @@ extension DrawFlowCoordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
     
-    func didTapDrawButton(locations: [Location], cuisines: [Cuisine]) {
+    func didTapDrawButton(restaurants: [Restaurant]) {
         let actions = DrawResultViewModelActions(didTapBackButton: popAnimated)
         let viewController = dependencies.makeDrawResultViewController(
             actions: actions,
-            locations: locations,
-            cuisines: cuisines
+            restaurants: restaurants
         )
         navigationController.pushViewController(viewController, animated: true)
     }
