@@ -15,12 +15,6 @@ class DrawResultView: UIView {
         return sv
     }()
     
-    let loadingIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
-    
     private let rouletteContainerView: UIView = {
         let view = UIView()
         return view
@@ -107,7 +101,7 @@ class DrawResultView: UIView {
         button.backgroundColor = .white
         button.setTitle("카테고리 재설정", for: .normal)
         button.setTitleColor(.Signature.green100, for: .normal)
-        button.titleLabel?.font = .Pretendard.semiBold14
+        button.titleLabel?.font = .Pretendard.semiBold18
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.4
         button.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -116,23 +110,14 @@ class DrawResultView: UIView {
         return button
     }()
     
-    let redrawButton: UIButton = {
-        let button = UIButton()
+    let redrawButton: KuSubmitButton = {
+        let button = KuSubmitButton()
         let buttonImage = UIImage(named: "icon_arrow_counterclockwise")
-        button.layer.cornerRadius = 20
-        button.clipsToBounds = true
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.Signature.green100?.cgColor
-        button.backgroundColor = .Signature.green100
-        var config = UIButton.Configuration.plain()
-        var titleAttributedString = AttributedString.init("다시 뽑기")
-        titleAttributedString.font = UIFont.Pretendard.semiBold14
-        config.image = buttonImage
-        config.imagePadding = 10
-        config.imagePlacement = .leading
-        config.baseForegroundColor = .white
-        config.attributedTitle = titleAttributedString
-        button.configuration = config
+        button.buttonTitle = "다시 뽑기"
+        button.buttonState = .on
+        button.configuration?.image = buttonImage
+        button.configuration?.imagePadding = 8
+        button.configuration?.imagePlacement = .leading
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.4
         button.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -145,7 +130,6 @@ class DrawResultView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         setupContainerView()
-        setupLoadingIndicator()
         setupRouletteView()
         setupLabelsView()
         setupButtonsView()
@@ -163,10 +147,6 @@ extension DrawResultView {
         containerView.addArrangedSubview(rouletteContainerView, proportion: 0.5)
         containerView.addArrangedSubview(labelContainerView, proportion: 0.3)
         containerView.addArrangedSubview(buttonContainerView, proportion: 0.2)
-    }
-    
-    private func setupLoadingIndicator() {
-        labelContainerView.addSubview(loadingIndicator, autoLayout: [.fill(0)])
     }
     
     private func setupRouletteView() {
@@ -191,8 +171,8 @@ extension DrawResultView {
     }
     
     private func setupButtonsView() {
-        buttonContainerView.addSubview(resetCategoryButton, autoLayout: [.top(20), .leading(52), .height(40)])
-        buttonContainerView.addSubview(redrawButton, autoLayout: [.top(20), .trailing(52), .height(40), .leadingNext(to: resetCategoryButton, constant: 12)])
+        buttonContainerView.addSubview(resetCategoryButton, autoLayout: [.top(20), .leading(44), .height(44)])
+        buttonContainerView.addSubview(redrawButton, autoLayout: [.top(20), .trailing(44), .height(44), .leadingNext(to: resetCategoryButton, constant: 12)])
         redrawButton.widthAnchor.constraint(equalTo: resetCategoryButton.widthAnchor).isActive = true
     }
 }

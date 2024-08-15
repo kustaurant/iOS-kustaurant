@@ -19,12 +19,11 @@ class DrawResultViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         bind()
-        viewModel.fetchDrawedRestaurants()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        drawResultViewHandler?.scrollToLastRestaurant()
+        drawResultViewHandler?.startRouletteScrollAnimation()
     }
     
     init(viewModel: DrawResultViewModel) {
@@ -74,38 +73,26 @@ extension DrawResultViewController {
             }
             .store(in: &cancellables)
         
-        viewModel.isDrawingPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] isDrawing in
-                if isDrawing {
-                    self?.drawResultViewHandler?.showLoadingIndicator()
-                } else {
-                    self?.drawResultViewHandler?.hideLoadingIndicator()
-                }
-            }
-            .store(in: &cancellables)
-        
         drawResultView.redrawButton.tapPublisher()
+            .debounce(for: 0.1, scheduler: DispatchQueue.main)
             .sink { [weak self] in
+                self?.viewModel.shuffleRestaurants()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.restaurantsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] restaurants in
+                self?.drawResultView.redrawButton.buttonState = .off
+                self?.drawResultViewHandler?.resetRestaurantLabels()
                 self?.drawResultViewHandler?.resetRoulettes()
-                self?.viewModel.didTapReDrawButton()
-                self?.drawResultViewHandler?.scrollToLastRestaurant()
-            }
-            .store(in: &cancellables)
-        
-        viewModel.restaurantsPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] restaurants in
-                self?.drawResultViewHandler?.updateRestaurantRouletteView(restaurants: restaurants)
-            }
-            .store(in: &cancellables)
-        
-        viewModel.restaurantsPublisher
-            .delay(for: .seconds(DrawResultViewHandler.rouletteAnimationDurationSeconds), scheduler: DispatchQueue.main)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] restaurants in
-                let drawedRestaurant = restaurants.last
-                self?.drawResultViewHandler?.configureRestaurantLabels(with: drawedRestaurant)
+                self?.drawResultViewHandler?.makeRoulettes(with: restaurants)
+                self?.drawResultViewHandler?.startRouletteScrollAnimation()
+                self?.drawResultViewHandler?.startRestaurantNameAnimation(with: restaurants)
+                DispatchQueue.main.asyncAfter(deadline: .now() + DrawResultViewHandler.rouletteAnimationDurationSeconds) { [weak self] in
+                    self?.drawResultViewHandler?.showDrawedRestaurantImage()
+                    self?.drawResultView.redrawButton.buttonState = .on
+                }
             }
             .store(in: &cancellables)
     }
