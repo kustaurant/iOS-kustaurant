@@ -10,5 +10,5 @@ import Foundation
 struct RestaurantDetailRating: RestaurantDetailCellItem {
     
     let count: Int
-    let score: Double
+    let score: Double?
 }

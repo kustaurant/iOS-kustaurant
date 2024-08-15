@@ -14,7 +14,7 @@ struct RestaurantDetailReview: RestaurantDetailCellItem {
     let time: String
     let photoImageURLString: String
     let review: String
-    let rating: Double
+    let rating: Double?
     let isComment: Bool
     let hasComments: Bool
 }

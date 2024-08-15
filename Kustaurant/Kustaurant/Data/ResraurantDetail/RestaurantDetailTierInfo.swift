@@ -5,15 +5,11 @@
 //  Created by 류연수 on 8/12/24.
 //
 
-import Foundation
+import UIKit
 
-struct RestaurantDetailTiers: RestaurantDetailCellItem {
-    let tiers: [RestaurantDetailTierInfo]
-}
-
-struct RestaurantDetailTierInfo {
+struct RestaurantDetailTierInfo: RestaurantDetailCellItem {
     
-    let iconImageURLString: String
+    let iconImageName: String?
     let title: String
-    let backgroundHexColor: String
+    let backgroundColor: UIColor?
 }

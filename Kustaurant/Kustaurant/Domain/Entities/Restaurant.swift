@@ -56,7 +56,7 @@ struct Restaurant: Codable {
         isFavorite = try? container.decodeIfPresent(Bool.self, forKey: .isFavorite)
         x = try? container.decodeIfPresent(String.self, forKey: .x)
         y = try? container.decodeIfPresent(String.self, forKey: .y)
-        restaurantMenuList = try? container.decodeIfPresent([RestaurantMenu].self, forKey: .isFavorite)
+        restaurantMenuList = try? container.decodeIfPresent([RestaurantMenu].self, forKey: .restaurantMenuList)
     }
 }
 

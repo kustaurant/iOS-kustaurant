@@ -24,9 +24,9 @@ final class RestaurantDetailTierCell: UICollectionViewCell {
     }
     
     func update(item: RestaurantDetailTierInfo) {
-        iconImageView.image = .init(named: item.iconImageURLString)
+        iconImageView.image = .init(named: item.iconImageName)
         label.text = item.title
-        contentView.backgroundColor = .init(named: item.backgroundHexColor)
+        contentView.backgroundColor = item.backgroundColor
     }
     
     private func setupStyle() {

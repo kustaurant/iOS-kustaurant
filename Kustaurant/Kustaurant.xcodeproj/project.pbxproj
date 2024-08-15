@@ -160,6 +160,9 @@
 		CFE2048F2C6A1C7500BCA87C /* RestaurantDetailRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2048E2C6A1C7500BCA87C /* RestaurantDetailRating.swift */; };
 		CFEC6EEA2C6A285900B4DAAB /* RestaurantDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC6EE92C6A285900B4DAAB /* RestaurantDetailViewModel.swift */; };
 		CFEC6EEC2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC6EEB2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift */; };
+		CFEC6EF02C6B9FAB00B4DAAB /* RestaurantDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC6EEF2C6B9FAB00B4DAAB /* RestaurantDetailRepository.swift */; };
+		CFEC6EF22C6E113900B4DAAB /* RestaurantDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC6EF12C6E113900B4DAAB /* RestaurantDetail.swift */; };
+		CFEC6EF42C6E496100B4DAAB /* RestaurantComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC6EF32C6E496100B4DAAB /* RestaurantComment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -334,6 +337,9 @@
 		CFE2048E2C6A1C7500BCA87C /* RestaurantDetailRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailRating.swift; sourceTree = "<group>"; };
 		CFEC6EE92C6A285900B4DAAB /* RestaurantDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewModel.swift; sourceTree = "<group>"; };
 		CFEC6EEB2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTabSectionHeaderView.swift; sourceTree = "<group>"; };
+		CFEC6EEF2C6B9FAB00B4DAAB /* RestaurantDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailRepository.swift; sourceTree = "<group>"; };
+		CFEC6EF12C6E113900B4DAAB /* RestaurantDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetail.swift; sourceTree = "<group>"; };
+		CFEC6EF32C6E496100B4DAAB /* RestaurantComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantComment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -691,6 +697,7 @@
 				584173722C47C2BA001EC132 /* HomeRepository.swift */,
 				58067CB62C4FBFB900889C92 /* TierRepository.swift */,
 				584FA4CA2C6475C7008DDC19 /* TierMapRepository.swift */,
+				CFEC6EEF2C6B9FAB00B4DAAB /* RestaurantDetailRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -826,6 +833,8 @@
 			isa = PBXGroup;
 			children = (
 				58D83AFC2C463AE200511AB9 /* Restaurant.swift */,
+				CFEC6EF12C6E113900B4DAAB /* RestaurantDetail.swift */,
+				CFEC6EF32C6E496100B4DAAB /* RestaurantComment.swift */,
 				5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */,
 				58067CCB2C51552700889C92 /* Category.swift */,
 				584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */,
@@ -1229,6 +1238,8 @@
 				584FA4D22C6487C4008DDC19 /* NMFMapViewHandler.swift in Sources */,
 				584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */,
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
+				CFEC6EF42C6E496100B4DAAB /* RestaurantComment.swift in Sources */,
+				CFEC6EF02C6B9FAB00B4DAAB /* RestaurantDetailRepository.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
 				58067C912C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift in Sources */,
 				584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */,
@@ -1304,6 +1315,7 @@
 				CFE204642C5BA3E500BCA87C /* RestaurantDetailMenuCell.swift in Sources */,
 				CFE204542C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift in Sources */,
 				584173392C46664E001EC132 /* RecommendViewController.swift in Sources */,
+				CFEC6EF22C6E113900B4DAAB /* RestaurantDetail.swift in Sources */,
 				58067CCC2C51552700889C92 /* Category.swift in Sources */,
 				CFE2045C2C5A399300BCA87C /* RestaurantDetailTierCell.swift in Sources */,
 				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,

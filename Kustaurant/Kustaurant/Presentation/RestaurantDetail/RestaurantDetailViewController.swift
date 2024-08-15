@@ -23,6 +23,8 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         
         viewModel.state = .fetch(id: 0)
         bind()
+        setupStyle()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -45,6 +47,15 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
 }
 
 extension RestaurantDetailViewController {
+    
+    private func setupStyle() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    private func setupLayout() {
+        view.addSubview(tableView, autoLayout: [.fill(0)])
+    }
     
     private func bind() {
         viewModel.actionPublisher
