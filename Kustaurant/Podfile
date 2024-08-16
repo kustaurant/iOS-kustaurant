@@ -7,6 +7,7 @@ target 'Kustaurant' do
 
   # Pods for Kustaurant
   pod 'NMapsMap'
+  pod 'naveridlogin-sdk-ios'
 
   target 'KustaurantTests' do
     inherit! :search_paths
