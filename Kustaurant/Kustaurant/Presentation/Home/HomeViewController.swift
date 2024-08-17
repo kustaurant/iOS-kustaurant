@@ -55,6 +55,7 @@ extension HomeViewController {
 extension HomeViewController {
     private func setupBindings() {
         bindMainSection()
+        bindBanners()
         bindTopRestaurants()
         bindForMeRestaurants()
     }
@@ -65,6 +66,23 @@ extension HomeViewController {
             .sink { [weak self] _ in
                 self?.homeLayoutTableViewHandler?.reloadTable()
             }.store(in: &cancellables)
+    }
+    
+    private func bindBanners() {
+        viewModel.bannersPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] data in
+                guard !data.isEmpty else {
+                    self?.viewModel.mainSections.removeAll(where: { $0 == .banner })
+                    return
+                }
+                if !(self?.viewModel.mainSections.contains(where: { $0 == .banner }) ?? false) {
+                    self?.viewModel.mainSections.insert(.banner, at: 0)
+                } else {
+                    self?.homeLayoutTableViewHandler?.reloadSection(.banner)
+                }
+            }
+            .store(in: &cancellables)
     }
     
     private func bindTopRestaurants() {
