@@ -8,15 +8,14 @@
 import Foundation
 
 protocol RestaurantDetailRepository {
-    associatedtype Sections
     associatedtype Items
     
-    func fetch() async -> (Sections, Items)
+    func fetch() async -> Items
     func fetchReviews() async -> [RestaurantDetailCellItem]
 }
 
 final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
-    typealias Sections = [RestaurantDetailSection: RestaurantDetailHeaderItem]
+    
     typealias Items = [RestaurantDetailSection: [RestaurantDetailCellItem]]
     
     private let networkService: NetworkService
@@ -27,7 +26,7 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         self.restaurantID = restaurantID
     }
     
-    func fetch() async -> (Sections, Items) {
+    func fetch() async -> Items {
         let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/\(restaurantID)")
         let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
         let response: RestaurantDetail? = await request.responseAsync(with: urlBuilder).decode()
@@ -36,11 +35,11 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         
     }
     
-    private func viewDatas(from response: RestaurantDetail?) -> (Sections, Items) {
-        guard let response else { return ([:], [:]) }
+    private func viewDatas(from response: RestaurantDetail?) -> Items {
+        guard let response else { return [:] }
         
         let null = "NULL"
-        let titleSection: RestaurantDetailTitle = .init(
+        let titleInfo: RestaurantDetailTitle = .init(
             cuisineType: response.restaurantCuisine ?? null,
             title: response.restaurantName ?? null,
             isReviewCompleted: response.isEvaluated ?? false,
@@ -48,9 +47,6 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
             openingHours: response.businessHours ?? null,
             mapURL: .init(string: response.naverMapURLString ?? null)
         )
-        let tierInfoSection: RestaurantDetailInfo = .init(title: "티어 정보")
-        let affiliateInfoSection: RestaurantDetailInfo = .init(title: "제휴 정보")
-        
         let tierInfos: [RestaurantDetailTierInfo] = [.init(
             iconImageName: response.mainTier?.iconImageName,
             title: "\(response.restaurantCuisine ?? null) \(response.mainTier?.rawValue ?? 0)티어",
@@ -64,20 +60,15 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
                 .init(imageURLString: menu.menuImgUrl ?? null, title: menu.menuName ?? null, price: menu.menuPrice ?? null)
         }) ?? []
         
-        let sections: Sections = [
-            .title: titleSection,
-            .tier: tierInfoSection,
-            .affiliate: affiliateInfoSection
-        ]
-        
         let items: Items = [
+            .title: [titleInfo],
             .tier: [RestaurantDetailTiers(tiers: tierInfos)],
             .affiliate: [affiliateInfo],
             .rating: [ratingInfo],
             .tab: menuInfos
         ]
         
-        return (sections, items)
+        return items
     }
     
     func fetchReviews() async -> [RestaurantDetailCellItem] {

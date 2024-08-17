@@ -7,8 +7,6 @@
 
 import Foundation
 
-protocol RestaurantDetailHeaderItem { }
-
 protocol RestaurantDetailCellItem { }
 
 enum RestaurantDetailSection: CaseIterable {

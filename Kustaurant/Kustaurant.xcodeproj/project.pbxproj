@@ -131,11 +131,10 @@
 		CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */; };
 		CFE204522C5A0D7900BCA87C /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */; };
 		CFE204542C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204532C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift */; };
-		CFE204562C5A0FF100BCA87C /* RestaurantDetailTitleSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204552C5A0FF100BCA87C /* RestaurantDetailTitleSectionHeaderView.swift */; };
+		CFE204562C5A0FF100BCA87C /* RestaurantDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204552C5A0FF100BCA87C /* RestaurantDetailTitleCell.swift */; };
 		CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204572C5A121D00BCA87C /* UIView+AutoLayout.swift */; };
 		CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204592C5A129500BCA87C /* Ku.swift */; };
 		CFE2045C2C5A399300BCA87C /* RestaurantDetailTierCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2045B2C5A399300BCA87C /* RestaurantDetailTierCell.swift */; };
-		CFE2045E2C5A6E1F00BCA87C /* RestaurantDetailInfoSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2045D2C5A6E1F00BCA87C /* RestaurantDetailInfoSectionHeaderView.swift */; };
 		CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2045F2C5A706D00BCA87C /* UITableView+.swift */; };
 		CFE204622C5A764100BCA87C /* RestaurantDetailRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204612C5A764100BCA87C /* RestaurantDetailRatingCell.swift */; };
 		CFE204642C5BA3E500BCA87C /* RestaurantDetailMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204632C5BA3E500BCA87C /* RestaurantDetailMenuCell.swift */; };
@@ -152,7 +151,6 @@
 		CFE2047E2C68E76B00BCA87C /* RestaurantDetailAffiliateInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2047D2C68E76B00BCA87C /* RestaurantDetailAffiliateInfoCell.swift */; };
 		CFE204812C6A0FF000BCA87C /* RestaurantDetailSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204802C6A0FF000BCA87C /* RestaurantDetailSection.swift */; };
 		CFE204832C6A105600BCA87C /* RestaurantDetailTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204822C6A105600BCA87C /* RestaurantDetailTitle.swift */; };
-		CFE204852C6A10F000BCA87C /* RestaurantDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204842C6A10F000BCA87C /* RestaurantDetailInfo.swift */; };
 		CFE204872C6A112A00BCA87C /* RestaurantDetailAffiliateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204862C6A112A00BCA87C /* RestaurantDetailAffiliateInfo.swift */; };
 		CFE204892C6A118600BCA87C /* RestaurantDetailTierInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE204882C6A118600BCA87C /* RestaurantDetailTierInfo.swift */; };
 		CFE2048B2C6A1BB100BCA87C /* RestaurantDetailMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2048A2C6A1BB100BCA87C /* RestaurantDetailMenu.swift */; };
@@ -308,11 +306,10 @@
 		CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		CFE204512C5A0D7900BCA87C /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		CFE204532C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTierCollectionView.swift; sourceTree = "<group>"; };
-		CFE204552C5A0FF100BCA87C /* RestaurantDetailTitleSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTitleSectionHeaderView.swift; sourceTree = "<group>"; };
+		CFE204552C5A0FF100BCA87C /* RestaurantDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTitleCell.swift; sourceTree = "<group>"; };
 		CFE204572C5A121D00BCA87C /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		CFE204592C5A129500BCA87C /* Ku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ku.swift; sourceTree = "<group>"; };
 		CFE2045B2C5A399300BCA87C /* RestaurantDetailTierCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTierCell.swift; sourceTree = "<group>"; };
-		CFE2045D2C5A6E1F00BCA87C /* RestaurantDetailInfoSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailInfoSectionHeaderView.swift; sourceTree = "<group>"; };
 		CFE2045F2C5A706D00BCA87C /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		CFE204612C5A764100BCA87C /* RestaurantDetailRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailRatingCell.swift; sourceTree = "<group>"; };
 		CFE204632C5BA3E500BCA87C /* RestaurantDetailMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailMenuCell.swift; sourceTree = "<group>"; };
@@ -329,7 +326,6 @@
 		CFE2047D2C68E76B00BCA87C /* RestaurantDetailAffiliateInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailAffiliateInfoCell.swift; sourceTree = "<group>"; };
 		CFE204802C6A0FF000BCA87C /* RestaurantDetailSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailSection.swift; sourceTree = "<group>"; };
 		CFE204822C6A105600BCA87C /* RestaurantDetailTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTitle.swift; sourceTree = "<group>"; };
-		CFE204842C6A10F000BCA87C /* RestaurantDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailInfo.swift; sourceTree = "<group>"; };
 		CFE204862C6A112A00BCA87C /* RestaurantDetailAffiliateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailAffiliateInfo.swift; sourceTree = "<group>"; };
 		CFE204882C6A118600BCA87C /* RestaurantDetailTierInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTierInfo.swift; sourceTree = "<group>"; };
 		CFE2048A2C6A1BB100BCA87C /* RestaurantDetailMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailMenu.swift; sourceTree = "<group>"; };
@@ -951,7 +947,6 @@
 			children = (
 				CFE204802C6A0FF000BCA87C /* RestaurantDetailSection.swift */,
 				CFE204822C6A105600BCA87C /* RestaurantDetailTitle.swift */,
-				CFE204842C6A10F000BCA87C /* RestaurantDetailInfo.swift */,
 				CFE204862C6A112A00BCA87C /* RestaurantDetailAffiliateInfo.swift */,
 				CFE204882C6A118600BCA87C /* RestaurantDetailTierInfo.swift */,
 				CFE2048E2C6A1C7500BCA87C /* RestaurantDetailRating.swift */,
@@ -964,14 +959,13 @@
 		CFEC6EED2C6A544C00B4DAAB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CFE204552C5A0FF100BCA87C /* RestaurantDetailTitleSectionHeaderView.swift */,
-				CFE2045D2C5A6E1F00BCA87C /* RestaurantDetailInfoSectionHeaderView.swift */,
-				CFEC6EEB2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift */,
+				CFE204552C5A0FF100BCA87C /* RestaurantDetailTitleCell.swift */,
 				CFE2047D2C68E76B00BCA87C /* RestaurantDetailAffiliateInfoCell.swift */,
 				CFE2047B2C68AD4C00BCA87C /* RestaurantDetailTierInfoCell.swift */,
 				CFE204532C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift */,
 				CFE2045B2C5A399300BCA87C /* RestaurantDetailTierCell.swift */,
 				CFE204612C5A764100BCA87C /* RestaurantDetailRatingCell.swift */,
+				CFEC6EEB2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift */,
 				CFE204632C5BA3E500BCA87C /* RestaurantDetailMenuCell.swift */,
 				CFE204752C5F58C700BCA87C /* RestaurantDetailReviewCell.swift */,
 				CFE204792C68A3B700BCA87C /* RestaurantDetailCommentCell.swift */,
@@ -1175,14 +1169,12 @@
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
 				58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */,
 				CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */,
-				CFE204562C5A0FF100BCA87C /* RestaurantDetailTitleSectionHeaderView.swift in Sources */,
-				CFE2045E2C5A6E1F00BCA87C /* RestaurantDetailInfoSectionHeaderView.swift in Sources */,
+				CFE204562C5A0FF100BCA87C /* RestaurantDetailTitleCell.swift in Sources */,
 				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
 				584173472C467F5B001EC132 /* TierSceneDIContainer.swift in Sources */,
 				CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */,
 				5841739C2C4A29C6001EC132 /* Tier.swift in Sources */,
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
-				CFE204852C6A10F000BCA87C /* RestaurantDetailInfo.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
 				CFE2047E2C68E76B00BCA87C /* RestaurantDetailAffiliateInfoCell.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,

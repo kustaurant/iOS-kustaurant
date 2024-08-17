@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RestaurantDetailTitle: RestaurantDetailHeaderItem {
+struct RestaurantDetailTitle: RestaurantDetailCellItem {
     
     let cuisineType: String
     let title: String

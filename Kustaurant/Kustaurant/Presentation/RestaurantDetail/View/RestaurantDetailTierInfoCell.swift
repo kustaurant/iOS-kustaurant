@@ -9,6 +9,7 @@ import UIKit
 
 final class RestaurantDetailTierInfoCell: UITableViewCell {
     
+    private let title: UILabel = .init()
     private let collectionView: RestaurantDetailTierCollectionView = .init()
     
     private var tiers: [RestaurantDetailTierInfo] = []
@@ -37,12 +38,15 @@ final class RestaurantDetailTierInfoCell: UITableViewCell {
     }
     
     private func setupStyle() {
+        title.text = "티어 정보"
+        
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     
     private func setupLayout() {
-        contentView.addSubview(collectionView, autoLayout: [.fillX(20), .top(15), .bottom(31)])
+        contentView.addSubview(title, autoLayout: [.fill(20), .top(0)])
+        contentView.addSubview(collectionView, autoLayout: [.fillX(20), .topNext(to: title, constant: 0), .bottom(31)])
     }
 }
 

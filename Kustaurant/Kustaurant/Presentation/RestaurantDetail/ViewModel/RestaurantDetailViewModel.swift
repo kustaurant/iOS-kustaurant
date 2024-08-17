@@ -41,10 +41,8 @@ extension RestaurantDetailViewModel {
 
 final class RestaurantDetailViewModel {
     
-    typealias Sections = [RestaurantDetailSection: RestaurantDetailHeaderItem]
     typealias Items = [RestaurantDetailSection: [RestaurantDetailCellItem]]
     
-    private(set) var sectionHeaders: Sections = [:]
     private(set) var sectionItems: Items = [:]
     private(set) var tabType: RestaurantDetailTabType = .menu
     private var tabItems: [RestaurantDetailTabType: [RestaurantDetailCellItem]] = [:]
@@ -87,13 +85,10 @@ extension RestaurantDetailViewModel {
     
     private func fetch() {
         Task {
-            let items = await repository.fetch()
-            let reviewItems = await repository.fetchReviews()
+            sectionItems = await repository.fetch() as? Items ?? [:]
             
-            sectionHeaders = items.0 as? Sections ?? [:]
-            sectionItems = items.1 as? Items ?? [:]
             tabItems[.menu] = sectionItems[.tab]
-            tabItems[.review] = reviewItems
+            tabItems[.review] = await repository.fetchReviews()
             
             actionSubject.send(.didfetchItems)
         }

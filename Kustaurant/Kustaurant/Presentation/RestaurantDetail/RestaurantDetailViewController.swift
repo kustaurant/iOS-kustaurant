@@ -52,6 +52,14 @@ extension RestaurantDetailViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.separatorStyle = .none
+        tableView.sectionFooterHeight = 0
+        tableView.sectionHeaderTopPadding = 0
+        
+        tableView.tableHeaderView = nil
+        tableView.tableFooterView = nil
+        
+        tableView.registerCell(ofType: RestaurantDetailTitleCell.self)
         tableView.registerCell(ofType: RestaurantDetailTierInfoCell.self)
         tableView.registerCell(ofType: RestaurantDetailAffiliateInfoCell.self)
         tableView.registerCell(ofType: RestaurantDetailRatingCell.self)
@@ -59,8 +67,6 @@ extension RestaurantDetailViewController {
         tableView.registerCell(ofType: RestaurantDetailCommentCell.self)
         tableView.registerCell(ofType: RestaurantDetailReviewCell.self)
         
-        tableView.registerHeaderFooterView(ofType: RestaurantDetailTitleSectionHeaderView.self)
-        tableView.registerHeaderFooterView(ofType: RestaurantDetailInfoSectionHeaderView.self)
         tableView.registerHeaderFooterView(ofType: RestaurantDetailTabSectionHeaderView.self)
     }
     
@@ -85,7 +91,12 @@ extension RestaurantDetailViewController {
 }
 
 extension RestaurantDetailViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard RestaurantDetailSection(index: section) == .tab
+        else { return .zero }
+        
+        return KuTabBarView.height
+    }
 }
 
 extension RestaurantDetailViewController: UITableViewDataSource {
@@ -103,19 +114,10 @@ extension RestaurantDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let detailSection = RestaurantDetailSection(index: section),
-              let header = viewModel.sectionHeaders[detailSection]
+        guard let detailSection = RestaurantDetailSection(index: section)
         else { return nil }
         
         switch detailSection {
-        case .title:
-            let headerView: RestaurantDetailTitleSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
-            headerView.update(item: header)
-            return headerView
-        case .tier, .affiliate:
-            let headerView: RestaurantDetailInfoSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
-            headerView.update(item: header)
-            return headerView
         case .tab:
             let headerView: RestaurantDetailTabSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
             tabCancellable = headerView.actionPublisher
@@ -128,6 +130,10 @@ extension RestaurantDetailViewController: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let detailSection = RestaurantDetailSection(index: indexPath.section),
               let items = viewModel.sectionItems[detailSection],
@@ -136,7 +142,9 @@ extension RestaurantDetailViewController: UITableViewDataSource {
         
         switch detailSection {
         case .title:
-            return .init()
+            let cell: RestaurantDetailTitleCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.update(item: item)
+            return cell
             
         case .tier:
             let cell: RestaurantDetailTierInfoCell = tableView.dequeueReusableCell(for: indexPath)

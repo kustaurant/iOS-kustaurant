@@ -1,5 +1,5 @@
 //
-//  RestaurantDetailTitleSectionHeaderView.swift
+//  RestaurantDetailTitleCell.swift
 //  Kustaurant
 //
 //  Created by 류연수 on 7/31/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RestaurantDetailTitleSectionHeaderView: UITableViewHeaderFooterView {
+final class RestaurantDetailTitleCell: UITableViewCell {
     
     private let cuisineTypeLabel: UILabel = .init()
     private let titleLabel: UILabel = .init()
@@ -17,8 +17,8 @@ final class RestaurantDetailTitleSectionHeaderView: UITableViewHeaderFooterView 
     private let goToMapNavigationLabel: UILabel = .init()
     private let lineView: UIView = .init()
     
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupStyle()
         setupLayout()
@@ -28,7 +28,7 @@ final class RestaurantDetailTitleSectionHeaderView: UITableViewHeaderFooterView 
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(item: RestaurantDetailHeaderItem) {
+    func update(item: RestaurantDetailCellItem) {
         guard let item = item as? RestaurantDetailTitle else { return }
         
         cuisineTypeLabel.text = item.cuisineType
@@ -39,7 +39,7 @@ final class RestaurantDetailTitleSectionHeaderView: UITableViewHeaderFooterView 
     }
 }
 
-extension RestaurantDetailTitleSectionHeaderView {
+extension RestaurantDetailTitleCell {
     
     private func setupStyle() {
         reviewCompleteIconImageView.image = .init(systemName: "person.fill")
