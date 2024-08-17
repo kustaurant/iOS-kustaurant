@@ -37,12 +37,34 @@ extension HomeBannerSection {
     private func bindCount() {
         guard let bannersCount = bannersCount else { return }
         pageLabel.isHidden = (bannersCount <= 1)
-        updateCurrentIndex(1)
+
+        let pageIndexPath = (bannersCount > 1 ) ? IndexPath(item: 1, section: 0) : IndexPath(item: 0, section: 0)
+        updatePageLabel(for: pageIndexPath)
+        updateCollectionViewScrollToItem()
     }
     
-    func updateCurrentIndex(_ count: Int) {
+
+    func updatePageLabel(for indexPath: IndexPath) {
         guard let bannersCount = bannersCount else { return }
-        pageLabel.text = "\(count)/\(bannersCount)"
+        var currentPage = indexPath.item
+        if currentPage == 0 {
+            currentPage = bannersCount
+        } else if currentPage == bannersCount + 1 {
+            currentPage = 1
+        } else {
+            currentPage -= 1
+        }
+        pageLabel.text = "\(currentPage + 1)/\(bannersCount)"
+    }
+    
+    private func updateCollectionViewScrollToItem() {
+        guard bannersCount ?? 0 > 1 else { return }
+        Task {
+            await MainActor.run {
+                let initialIndexPath = IndexPath(item: 1, section: 0)
+                collectionView.scrollToItem(at: initialIndexPath, at: .centeredHorizontally, animated: false)
+            }
+        }
     }
 }
 

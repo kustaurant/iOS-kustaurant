@@ -35,9 +35,26 @@ extension HomeBannerCollectionViewHandler {
 
 extension HomeBannerCollectionViewHandler: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // 페이징이 끝났을 때 현재 페이지를 계산하여 업데이트
-        let currentIndex = Int(scrollView.contentOffset.x / view.collectionView.frame.width) + 1
-        view.updateCurrentIndex(currentIndex)
+        guard viewModel.banners.count > 1 else { return } // 데이터가 1개면 페이징 처리 없음
+
+        let currentIndex = Int(scrollView.contentOffset.x / view.collectionView.frame.width)
+        let visibleIndexPath = IndexPath(item: currentIndex, section: 0)
+
+        // 첫 번째 더미 셀에서 마지막 아이템으로 이동
+        if visibleIndexPath.item == 0 {
+            let newIndexPath = IndexPath(item: viewModel.banners.count, section: 0)
+            view.collectionView.scrollToItem(at: newIndexPath, at: .centeredHorizontally, animated: false)
+            view.updatePageLabel(for: newIndexPath)
+        }
+
+        // 마지막 더미 셀에서 첫 번째 아이템으로 이동
+        else if visibleIndexPath.item == viewModel.banners.count + 1 {
+            let newIndexPath = IndexPath(item: 1, section: 0)
+            view.collectionView.scrollToItem(at: newIndexPath, at: .centeredHorizontally, animated: false)
+            view.updatePageLabel(for: newIndexPath)
+        } else {
+            view.updatePageLabel(for: visibleIndexPath)
+        }
     }
 }
 
@@ -46,7 +63,7 @@ extension HomeBannerCollectionViewHandler: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        viewModel.banners.count
+        viewModel.banners.count > 1 ? viewModel.banners.count + 2 : viewModel.banners.count
     }
     
     func collectionView(
@@ -54,7 +71,19 @@ extension HomeBannerCollectionViewHandler: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath) as HomeBannerCollectionViewCell
-        cell.banner = viewModel.banners[indexPath.row]
+        
+        var dataIndex = indexPath.item
+        if viewModel.banners.count > 1 {
+            if dataIndex == 0 {
+                dataIndex = viewModel.banners.count - 1 // 첫 번째 더미 셀
+            } else if dataIndex == viewModel.banners.count + 1 {
+                dataIndex = 0 // 마지막 더미 셀
+            } else {
+                dataIndex -= 1
+            }
+        }
+
+        cell.banner = viewModel.banners[dataIndex]
         return cell
     }
     
