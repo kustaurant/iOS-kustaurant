@@ -11,8 +11,8 @@ protocol RestaurantDetailRepository {
     associatedtype Sections
     associatedtype Items
     
-    func fetch(id: Int) async -> (Sections, Items)
-    func fetchReviews(id: Int) async -> [RestaurantDetailCellItem]
+    func fetch() async -> (Sections, Items)
+    func fetchReviews() async -> [RestaurantDetailCellItem]
 }
 
 final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
@@ -20,13 +20,15 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
     typealias Items = [RestaurantDetailSection: [RestaurantDetailCellItem]]
     
     private let networkService: NetworkService
+    private let restaurantID: Int
     
-    init(networkService: NetworkService) {
+    init(networkService: NetworkService, restaurantID: Int) {
         self.networkService = networkService
+        self.restaurantID = restaurantID
     }
     
-    func fetch(id: Int) async -> (Sections, Items) {
-        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/{restaurantId}")
+    func fetch() async -> (Sections, Items) {
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/\(restaurantID)")
         let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
         let response: RestaurantDetail? = await request.responseAsync(with: urlBuilder).decode()
         
@@ -69,7 +71,7 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         ]
         
         let items: Items = [
-            .tier: tierInfos,
+            .tier: [RestaurantDetailTiers(tiers: tierInfos)],
             .affiliate: [affiliateInfo],
             .rating: [ratingInfo],
             .tab: menuInfos
@@ -78,8 +80,8 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         return (sections, items)
     }
     
-    func fetchReviews(id: Int) async -> [RestaurantDetailCellItem] {
-        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/{restaurantId}")
+    func fetchReviews() async -> [RestaurantDetailCellItem] {
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/\(restaurantID)/comments")
         let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
         let response: [RestaurantComment]? = await request.responseAsync(with: urlBuilder).decode()
         
@@ -97,11 +99,11 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
                 hasComments: !(comment.commentReplies?.isEmpty ?? true)
             )] + (comment.commentReplies?.enumerated().map { index, reply in
                 RestaurantDetailReview(
-                    profileImageName: null,
-                    nickname: null,
-                    time: null,
-                    photoImageURLString: null,
-                    review: reply,
+                    profileImageName: reply.commentIconImageURLString ?? null,
+                    nickname: reply.commentNickname ?? null,
+                    time: reply.commentTime ?? null,
+                    photoImageURLString: reply.commentImageURLString ?? null,
+                    review: reply.commentBody ?? null,
                     rating: nil,
                     isComment: true,
                     hasComments: index < (comment.commentReplies?.count ?? 0) - 1

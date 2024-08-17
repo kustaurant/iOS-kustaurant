@@ -29,20 +29,27 @@ extension RestaurantDetailViewModel {
     
     enum State {
         case initial
-        case fetch(id: Int)
+        case fetch
         case didTab(at: RestaurantDetailTabType)
     }
     
     enum Action {
+        case didfetchItems
         case didChangeTabType
     }
 }
 
 final class RestaurantDetailViewModel {
     
-    private(set) var sectionHeaders: [RestaurantDetailSection: RestaurantDetailHeaderItem] = [:]
-    private(set) var sectionItems: [RestaurantDetailSection: [RestaurantDetailCellItem]] = [:]
+    typealias Sections = [RestaurantDetailSection: RestaurantDetailHeaderItem]
+    typealias Items = [RestaurantDetailSection: [RestaurantDetailCellItem]]
+    
+    private(set) var sectionHeaders: Sections = [:]
+    private(set) var sectionItems: Items = [:]
     private(set) var tabType: RestaurantDetailTabType = .menu
+    private var tabItems: [RestaurantDetailTabType: [RestaurantDetailCellItem]] = [:]
+    
+    private let repository: any RestaurantDetailRepository
     
     @Published var state: State = .initial
     private let actionSubject: PassthroughSubject<Action, Never> = .init()
@@ -50,6 +57,12 @@ final class RestaurantDetailViewModel {
     
     var actionPublisher: AnyPublisher<Action, Never> {
         actionSubject.eraseToAnyPublisher()
+    }
+    
+    init(repository: any RestaurantDetailRepository) {
+        self.repository = repository
+        
+        bind()
     }
 
 }
@@ -62,8 +75,8 @@ extension RestaurantDetailViewModel {
                 switch state {
                 case .initial: break
                     
-                case .fetch(let id):
-                    self?.fetch(id: id)
+                case .fetch:
+                    self?.fetch()
                     
                 case .didTab(let type):
                     self?.changeTabType(as: type)
@@ -72,14 +85,26 @@ extension RestaurantDetailViewModel {
             .store(in: &cancellables)
     }
     
-    private func fetch(id: Int) {
-        
+    private func fetch() {
+        Task {
+            let items = await repository.fetch()
+            let reviewItems = await repository.fetchReviews()
+            
+            sectionHeaders = items.0 as? Sections ?? [:]
+            sectionItems = items.1 as? Items ?? [:]
+            tabItems[.menu] = sectionItems[.tab]
+            tabItems[.review] = reviewItems
+            
+            actionSubject.send(.didfetchItems)
+        }
     }
     
     private func changeTabType(as type: RestaurantDetailTabType) {
         guard tabType != type else { return }
         
         tabType = type
+        sectionItems[.tab] = tabItems[tabType]
+        
         actionSubject.send(.didChangeTabType)
     }
 }

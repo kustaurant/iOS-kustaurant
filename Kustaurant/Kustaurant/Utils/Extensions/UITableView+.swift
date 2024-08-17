@@ -30,7 +30,7 @@ extension Ku where Self: UITableView {
     }
     
     func registerHeaderFooterView(
-        ofType viewType: UICollectionReusableView.Type,
+        ofType viewType: UITableViewHeaderFooterView.Type,
         withReuseIdentifier identifier: String? = nil
     ) {
         let reuseIdentifier = identifier ?? String(describing: viewType.self)

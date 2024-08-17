@@ -18,7 +18,7 @@ struct RestaurantComment: Decodable {
     let commentLikeStatus: Int?
     let commentLikeCount: Int?
     let commentDislikeCount: Int?
-    let commentReplies: [String]?
+    let commentReplies: [RestaurantComment]?
     
     enum CodingKeys: String, CodingKey {
         case commentID = "commentId"
@@ -47,6 +47,6 @@ struct RestaurantComment: Decodable {
         commentLikeStatus = try? container.decodeIfPresent(Int.self, forKey: .commentLikeStatus)
         commentLikeCount = try? container.decodeIfPresent(Int.self, forKey: .commentLikeCount)
         commentDislikeCount = try? container.decodeIfPresent(Int.self, forKey: .commentDislikeCount)
-        commentReplies = try? container.decodeIfPresent([String].self, forKey: .commentReplies)
+        commentReplies = try? container.decodeIfPresent([RestaurantComment].self, forKey: .commentReplies)
     }
 }

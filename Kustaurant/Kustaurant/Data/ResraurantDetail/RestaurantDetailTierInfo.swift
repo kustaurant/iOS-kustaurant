@@ -7,7 +7,11 @@
 
 import UIKit
 
-struct RestaurantDetailTierInfo: RestaurantDetailCellItem {
+struct RestaurantDetailTiers: RestaurantDetailCellItem {
+    let tiers: [RestaurantDetailTierInfo]
+}
+
+struct RestaurantDetailTierInfo {
     
     let iconImageName: String?
     let title: String

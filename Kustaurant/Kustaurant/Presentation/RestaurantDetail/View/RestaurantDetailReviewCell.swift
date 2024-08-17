@@ -27,7 +27,7 @@ final class RestaurantDetailReviewCell: UITableViewCell {
     func update(item: RestaurantDetailCellItem) {
         guard let item = item as? RestaurantDetailReview else { return }
         
-        starsRatingStackView.update(rating: item.rating)
+        starsRatingStackView.update(rating: item.rating ?? 0)
         reviewView.update(item: item)
         lineView.isHidden = !item.hasComments
     }

@@ -21,9 +21,9 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         
         super.init(nibName: nil, bundle: nil)
         
-        viewModel.state = .fetch(id: 0)
+        viewModel.state = .fetch
         bind()
-        setupStyle()
+        setupTableView()
         setupLayout()
     }
     
@@ -48,9 +48,20 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
 
 extension RestaurantDetailViewController {
     
-    private func setupStyle() {
+    private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.registerCell(ofType: RestaurantDetailTierInfoCell.self)
+        tableView.registerCell(ofType: RestaurantDetailAffiliateInfoCell.self)
+        tableView.registerCell(ofType: RestaurantDetailRatingCell.self)
+        tableView.registerCell(ofType: RestaurantDetailMenuCell.self)
+        tableView.registerCell(ofType: RestaurantDetailCommentCell.self)
+        tableView.registerCell(ofType: RestaurantDetailReviewCell.self)
+        
+        tableView.registerHeaderFooterView(ofType: RestaurantDetailTitleSectionHeaderView.self)
+        tableView.registerHeaderFooterView(ofType: RestaurantDetailInfoSectionHeaderView.self)
+        tableView.registerHeaderFooterView(ofType: RestaurantDetailTabSectionHeaderView.self)
     }
     
     private func setupLayout() {
@@ -59,8 +70,12 @@ extension RestaurantDetailViewController {
     
     private func bind() {
         viewModel.actionPublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 switch action {
+                case .didfetchItems:
+                    self?.tableView.reloadData()
+                    
                 case .didChangeTabType:
                     self?.tableView.reloadSections(.init(integer: RestaurantDetailSection.tab.index), with: .none)
                 }
