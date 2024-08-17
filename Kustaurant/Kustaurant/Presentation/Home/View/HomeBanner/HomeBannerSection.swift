@@ -11,10 +11,11 @@ final class HomeBannerSection: UITableViewCell, ReusableCell {
     static let reuseIdentifier = String(describing: HomeBannerSection.self)
     static let sectionHeight: CGFloat = 137.0
     static let sectionBottomInset: CGFloat = 16.0
+    static let sectionTopInset: CGFloat = 16.0
     
+    private let pageLabel = UILabel()
+    var bannersCount: Int? { didSet { bindCount() } }
     let collectionView = HomeBannerCollectionView()
-    var timer: Timer?
-    var currentIndex: Int = 0
     
     // MARK: - Initialization
     override init(
@@ -33,7 +34,36 @@ final class HomeBannerSection: UITableViewCell, ReusableCell {
 }
 
 extension HomeBannerSection {
+    private func bindCount() {
+        guard let bannersCount = bannersCount else { return }
+        pageLabel.isHidden = (bannersCount <= 1)
+        updateCurrentIndex(1)
+    }
+    
+    func updateCurrentIndex(_ count: Int) {
+        guard let bannersCount = bannersCount else { return }
+        pageLabel.text = "\(count)/\(bannersCount)"
+    }
+}
+
+extension HomeBannerSection {
     private func setupUI() {
+        addSubviews()
+        configurePageLabel()
+    }
+    
+    private func addSubviews() {
         contentView.addSubview(collectionView, autoLayout: [.fill(0)])
+        contentView.addSubview(pageLabel, autoLayout: [.trailing(11), .bottom(23), .width(43), .height(23)])
+    }
+    
+    private func configurePageLabel() {
+        pageLabel.isHidden = true
+        pageLabel.textColor = .gray300
+        pageLabel.textAlignment = .center
+        pageLabel.backgroundColor = .gray800
+        pageLabel.font = .Pretendard.regular12
+        pageLabel.layer.cornerRadius = 11
+        pageLabel.clipsToBounds = true
     }
 }

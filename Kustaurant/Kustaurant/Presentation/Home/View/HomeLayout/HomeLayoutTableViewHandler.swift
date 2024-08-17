@@ -64,7 +64,7 @@ extension HomeLayoutTableViewHandler: UITableViewDelegate {
     ) -> CGFloat {
         switch sectionType(indexPath: indexPath) {
         case .banner:
-            return HomeBannerSection.sectionHeight + HomeBannerSection.sectionBottomInset
+            return HomeBannerSection.sectionHeight + HomeBannerSection.sectionBottomInset + HomeBannerSection.sectionTopInset
             
         case .categories:
             return HomeCategoriesSection.sectionHeight + HomeCategoriesSection.sectionBottomInset
@@ -94,6 +94,7 @@ extension HomeLayoutTableViewHandler: UITableViewDataSource {
         switch section {
         case .banner:
             let sectionCell = tableView.dequeueReusableCell(withReuseIdentifier: HomeBannerSection.reuseIdentifier) as HomeBannerSection
+            sectionCell.bannersCount = viewModel.banners.count
             bannerHandler = HomeBannerCollectionViewHandler(view: sectionCell, viewModel: viewModel)
             return sectionCell
             
