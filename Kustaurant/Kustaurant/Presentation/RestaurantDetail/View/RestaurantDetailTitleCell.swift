@@ -42,6 +42,8 @@ final class RestaurantDetailTitleCell: UITableViewCell {
 extension RestaurantDetailTitleCell {
     
     private func setupStyle() {
+        selectionStyle = .none
+        
         reviewCompleteIconImageView.image = .init(systemName: "person.fill")
         addressInfoView.image = .init(systemName: "person.fill")
         openingHoursInfoView.image = .init(systemName: "person.fill")

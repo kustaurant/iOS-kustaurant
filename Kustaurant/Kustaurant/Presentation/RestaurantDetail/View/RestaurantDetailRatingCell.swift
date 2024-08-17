@@ -27,17 +27,23 @@ final class RestaurantDetailRatingCell: UITableViewCell {
         guard let item = item as? RestaurantDetailRating else { return }
         
         ratingCountView.update(title: "평가수", rating: "\(item.count)개")
-        ratingScoreView.update(title: "평점", rating: "\(item.score)")
+        ratingScoreView.update(title: "평점", rating: "\(item.score ?? 0)")
     }
     
-    private func setupStyle() { }
+    private func setupStyle() {
+        selectionStyle = .none
+    }
     
     private func setupLayout() {
         let stackView: UIStackView = .init(arrangedSubviews: [ratingCountView, lineView, ratingScoreView])
         stackView.axis = .horizontal
         stackView.alignment = .center
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fillProportionally
+        
         contentView.addSubview(stackView, autoLayout: [.fill(0)])
+        [ratingCountView, ratingScoreView].forEach {
+            $0.autolayout([.width(UIScreen.main.bounds.width / 2 - 1)])
+        }
     }
 }
 
@@ -102,6 +108,6 @@ fileprivate final class LineView: UIView {
     
     private func setupLayout() {
         addSubview(line, autoLayout: [.width(1), .height(32), .centerX(0), .fillY(0)])
-        autolayout([.width(34)])
+        autolayout([.width(1)])
     }
 }

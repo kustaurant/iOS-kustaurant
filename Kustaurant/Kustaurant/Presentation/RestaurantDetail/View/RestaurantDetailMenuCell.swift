@@ -36,7 +36,7 @@ final class RestaurantDetailMenuCell: UITableViewCell {
 extension RestaurantDetailMenuCell {
     
     private func setupStyle() {
-        
+        selectionStyle = .none
     }
     
     private func setupLayout() {
@@ -52,7 +52,7 @@ extension RestaurantDetailMenuCell {
         stackView.distribution = .fill
         stackView.alignment = .center
         
-        contentView.addSubview(stackView, autoLayout: [.fill(0)])
+        contentView.addSubview(stackView, autoLayout: [.fillX(0), .top(0), .bottom(13)])
         menuImageView.autolayout([.width(94), .height(77)])
     }
 }

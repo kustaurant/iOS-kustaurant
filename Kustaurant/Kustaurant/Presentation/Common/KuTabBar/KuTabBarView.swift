@@ -104,7 +104,7 @@ extension KuTabBarView {
 extension KuTabBarView {
     
     static var height: CGFloat {
-        Self.init(tabs: [""], style: .fill).calculateCellSize(of: "").height
+        Self.init(tabs: [""], style: .fill).calculateCellSize(of: "hello").height
     }
     
     private func calculateCellSize(of text: String) -> CGSize {

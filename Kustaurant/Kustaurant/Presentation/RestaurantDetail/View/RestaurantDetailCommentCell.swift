@@ -33,6 +33,8 @@ final class RestaurantDetailCommentCell: UITableViewCell {
     }
     
     private func setupStyle() {
+        selectionStyle = .none
+        
         iconImageView.image = .iconStar
         reviewBackgroundView.backgroundColor = .gray100
         lineView.backgroundColor = .gray100

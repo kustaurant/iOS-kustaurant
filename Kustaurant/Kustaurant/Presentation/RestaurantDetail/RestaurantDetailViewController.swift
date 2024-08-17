@@ -95,7 +95,7 @@ extension RestaurantDetailViewController: UITableViewDelegate {
         guard RestaurantDetailSection(index: section) == .tab
         else { return .zero }
         
-        return KuTabBarView.height
+        return KuTabBarView.height + 26
     }
 }
 
@@ -120,7 +120,7 @@ extension RestaurantDetailViewController: UITableViewDataSource {
         switch detailSection {
         case .tab:
             let headerView: RestaurantDetailTabSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
-            tabCancellable = headerView.actionPublisher
+            tabCancellable = headerView.update(selectedIndex: viewModel.tabType.rawValue)
                 .sink { [weak self] type in
                     guard let type else { return }
                     self?.viewModel.state = .didTab(at: type)

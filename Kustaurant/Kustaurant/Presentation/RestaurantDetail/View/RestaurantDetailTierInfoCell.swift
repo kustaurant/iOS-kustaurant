@@ -38,6 +38,8 @@ final class RestaurantDetailTierInfoCell: UITableViewCell {
     }
     
     private func setupStyle() {
+        selectionStyle = .none
+        
         title.text = "티어 정보"
         
         collectionView.delegate = self

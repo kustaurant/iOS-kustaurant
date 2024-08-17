@@ -33,6 +33,8 @@ final class RestaurantDetailReviewCell: UITableViewCell {
     }
     
     private func setupStyle() { 
+        selectionStyle = .none
+        
         lineView.backgroundColor = .gray100
     }
     
@@ -48,74 +50,79 @@ final class RestaurantDetailReviewCell: UITableViewCell {
     }
 }
 
-extension RestaurantDetailReviewCell {
+final class StarsRatingStackView: UIStackView {
+    private let starsStackView: StarsStackView = .init()
+    private let label: UILabel = .init()
     
-    final class StarsRatingStackView: UIStackView {
-        private let starsStackView: StarsStackView = .init()
-        private let label: UILabel = .init()
+    init() {
+        super.init(frame: .zero)
         
-        init() {
-            super.init(arrangedSubviews: [starsStackView, label])
-            
-            setupStyle()
+        setupStyle()
+        setupLayout()
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func update(rating: Double) {
+        starsStackView.update(rating: rating)
+        label.text = "\(rating)"
+    }
+    
+    private func setupStyle() {
+        axis = .horizontal
+        distribution = .fillProportionally
+        alignment = .center
+        spacing = 7
+    }
+    
+    private func setupLayout() {
+        [starsStackView, label].forEach {
+            addArrangedSubview($0)
         }
-        
-        required init(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
+    }
+}
+
+final class StarsStackView: UIStackView {
+    
+    private let starImageViews: [UIImageView] = {
+        (0..<5).map { _ in
+                .init(image: .init(named: "star_empty"))
         }
+    }()
+    
+    init() {
+        super.init(frame: .zero)
         
-        func update(rating: Double) {
-            starsStackView.update(rating: rating)
-            label.text = "\(rating)"
+        setupStyle()
+        setupLayout()
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func update(rating: Double) {
+        let count = Int(rating)
+        (0..<count).forEach { index in
+            starImageViews[safe: index]?.image = .init(named: "start_fill")
         }
-        
-        private func setupStyle() {
-            axis = .horizontal
-            distribution = .fillProportionally
-            alignment = .center
-            spacing = 7
+        if rating > Double(count) {
+            starImageViews[safe: count + 1]?.image = .init(named: "star_half_fill")
         }
     }
     
-    final class StarsStackView: UIStackView {
-        
-        private let starImageViews: [UIImageView] = {
-            (0..<5).map { _ in
-                    .init(image: .init(named: "star_empty"))
-            }
-        }()
-        
-        init() {
-            super.init(arrangedSubviews: starImageViews)
-            
-            setupStyle()
-            setupLayout()
-        }
-        
-        required init(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-        
-        func update(rating: Double) {
-            let count = Int(rating)
-            (0..<count).forEach { index in
-                starImageViews[safe: index]?.image = .init(named: "start_fill")
-            }
-            if rating > Double(count) {
-                starImageViews[safe: count + 1]?.image = .init(named: "star_half_fill")
-            }
-        }
-        
-        private func setupStyle() {
-            axis = .horizontal
-            distribution = .fillEqually
-            alignment = .center
-        }
-        
-        private func setupLayout() {
-            starImageViews.forEach {
-                $0.autolayout([.width(26), .height(26)])
-            }
+    private func setupStyle() {
+        axis = .horizontal
+        distribution = .fillEqually
+        alignment = .center
+    }
+    
+    private func setupLayout() {
+        starImageViews.forEach {
+            addArrangedSubview($0)
+            $0.autolayout([.width(26), .height(26)])
         }
     }
 }

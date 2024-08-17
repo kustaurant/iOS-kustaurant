@@ -84,7 +84,7 @@ extension Request {
     }
     
     func execute(with urlRequest: URLRequest, attempt: Int) async throws -> Data {
-        var request = interceptor?.intercept(urlRequest) ?? urlRequest
+        let request = interceptor?.intercept(urlRequest) ?? urlRequest
         var attempt = attempt
         
         repeat {

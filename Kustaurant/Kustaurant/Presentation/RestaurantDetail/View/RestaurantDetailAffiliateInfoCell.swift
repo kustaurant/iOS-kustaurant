@@ -33,6 +33,8 @@ final class RestaurantDetailAffiliateInfoCell: UITableViewCell {
 extension RestaurantDetailAffiliateInfoCell {
     
     private func setupStyle() { 
+        selectionStyle = .none
+        
         title.text = "제휴 정보"
         label.numberOfLines = 0
     }
