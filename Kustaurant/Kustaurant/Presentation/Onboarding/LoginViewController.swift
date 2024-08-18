@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class LoginViewController: UIViewController {
     
     private let loginView = LoginView()
     private let viewModel: OnboardingViewModel
+    private var cancellables = Set<AnyCancellable>()
     
     init(viewModel: OnboardingViewModel) {
         self.viewModel = viewModel
@@ -23,9 +25,27 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViews()
     }
     
     override func loadView() {
         view = loginView
+    }
+}
+
+extension LoginViewController {
+    
+    private func bindViews() {
+        
+        loginView.socialLoginView.naverLoginButton.tapPublisher().sink { [weak self] in
+            self?.viewModel.naverLogin()
+        }
+        .store(in: &cancellables)
+        
+        // TODO: Naver Login Test 메소드 연결
+        loginView.socialLoginView.appleLoginButton.tapPublisher().sink { [weak self] in
+            self?.viewModel.naverLogout()
+        }
+        .store(in: &cancellables)
     }
 }
