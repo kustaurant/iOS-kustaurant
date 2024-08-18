@@ -8,5 +8,5 @@
 import Foundation
 
 enum UserDefaultsKey {
-    
+    static let initialLaunch = "initialLaunch"
 }
