@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>naverLoginUrlScheme</key>
-	<string>$(NAVER_LOGIN_URL_SCHEME</string>
+	<string>$(NAVER_LOGIN_URL_SCHEME)</string>
 	<key>naverClientSecret</key>
 	<string>$(NAVER_CLIENT_SECRET)</string>
 	<key>naverClientId</key>
