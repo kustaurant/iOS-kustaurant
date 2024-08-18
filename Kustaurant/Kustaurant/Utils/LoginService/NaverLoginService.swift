@@ -10,11 +10,11 @@ import NaverThirdPartyLogin
 import Combine
 
 
-final class NaverLoginService: NSObject, LoginService {
+final class NaverLoginService: NSObject {
     
     private let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     private let naverLoginRepository: NaverLoginRepository
-    let userPublisher = PassthroughSubject<SocialLoginUser, NetworkError>()
+    let responsePublisher = PassthroughSubject<NaverMeResponse, NetworkError>()
     
     init(networkService: NetworkService) {
         self.naverLoginRepository = NaverLoginRepository(networkService: networkService)
@@ -22,9 +22,9 @@ final class NaverLoginService: NSObject, LoginService {
         naverLoginInstance?.delegate = self
     }
     
-    func attemptLogin() -> AnyPublisher<SocialLoginUser, NetworkError> {
+    func attemptLogin() -> AnyPublisher<NaverMeResponse, NetworkError> {
         naverLoginInstance?.requestThirdPartyLogin()
-        return userPublisher.eraseToAnyPublisher()
+        return responsePublisher.eraseToAnyPublisher()
     }
     
     func attemptLogout() -> Void {
@@ -40,7 +40,7 @@ extension NaverLoginService: NaverThirdPartyLoginConnectionDelegate {
             let result = await naverLoginRepository.me(authorization: tokens.bearerToken)
             switch result {
             case .success(let data):
-                userPublisher.send(SocialLoginUser(id: data.response.id, accessToken: tokens.accessToken, provider: .naver))
+                responsePublisher.send(data)
             case .failure(let error):
                 print(#file, #function, error.localizedDescription)
             }

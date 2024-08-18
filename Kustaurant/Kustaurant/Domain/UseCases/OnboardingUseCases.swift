@@ -28,8 +28,10 @@ extension DefaultOnboardingUseCases {
     
     func naverLogin() -> AnyPublisher<SocialLoginUser, NetworkError> {
         naverLoginService.attemptLogin()
-            .map { [weak self] user in
-                // TODO:  서버 api에 유저 정보 전송
+            .map { [weak self] response in
+                // TODO: 서버 api에 유저 정보 전송 및 액세스 토큰 받아서 SocialLoginUser에 세팅
+                let id = response.response.id
+                let user = SocialLoginUser(id: id, accessToken: "token", provider: .naver)
                 self?.socialLoginUserRepository.setUser(user)
                 return user
             }

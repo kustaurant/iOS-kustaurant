@@ -135,7 +135,6 @@
 		BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */; };
 		BA8EEF972C64981100FE6ABF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF962C64981100FE6ABF /* LoginViewController.swift */; };
 		BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF982C64994F00FE6ABF /* LoginView.swift */; };
-		BAB69ABC2C71DB2A00C20F0B /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69ABB2C71DB2A00C20F0B /* LoginService.swift */; };
 		BAB69ABF2C71DB8C00C20F0B /* KeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69ABE2C71DB8C00C20F0B /* KeyValueStorage.swift */; };
 		BAB69AC12C71DBA500C20F0B /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC02C71DBA500C20F0B /* UserDefaultsStorage.swift */; };
 		BAB69AC32C71DBB500C20F0B /* KeyChainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC22C71DBB500C20F0B /* KeyChainStorage.swift */; };
@@ -313,7 +312,6 @@
 		BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
 		BA8EEF962C64981100FE6ABF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BA8EEF982C64994F00FE6ABF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		BAB69ABB2C71DB2A00C20F0B /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		BAB69ABE2C71DB8C00C20F0B /* KeyValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStorage.swift; sourceTree = "<group>"; };
 		BAB69AC02C71DBA500C20F0B /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
 		BAB69AC22C71DBB500C20F0B /* KeyChainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainStorage.swift; sourceTree = "<group>"; };
@@ -979,7 +977,6 @@
 		BAC55EC02C6F1FCA00B3078F /* LoginService */ = {
 			isa = PBXGroup;
 			children = (
-				BAB69ABB2C71DB2A00C20F0B /* LoginService.swift */,
 				BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */,
 			);
 			path = LoginService;
@@ -1342,7 +1339,6 @@
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
 				BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */,
 				5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */,
-				BAB69ABC2C71DB2A00C20F0B /* LoginService.swift in Sources */,
 				BAB69AC92C71DC5700C20F0B /* SocialLoginUserRepository.swift in Sources */,
 				58067D812C5FC07A00889C92 /* HomeLayoutTableView.swift in Sources */,
 				CFE204692C5D03C400BCA87C /* Collection+.swift in Sources */,
