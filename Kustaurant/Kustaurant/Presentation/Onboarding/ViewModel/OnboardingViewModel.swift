@@ -14,6 +14,7 @@ struct OnboardingViewModelActions {
 protocol OnboardingViewModelInput {
     func naverLogin()
     func naverLogout()
+    func appleLogin()
 }
 
 protocol OnboardingViewModelOutput {
@@ -55,5 +56,14 @@ final class DefaultOnboardingViewModel: OnboardingViewModel {
     
     func naverLogout() {
         onboardingUseCases.naverLogout()
+    }
+    
+    func appleLogin() {
+        onboardingUseCases.appleLogin()
+            .sink { user in
+                // 홈 화면 이동
+                print(user)
+            }
+            .store(in: &cancellables)
     }
 }

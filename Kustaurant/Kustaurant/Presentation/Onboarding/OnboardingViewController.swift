@@ -53,9 +53,8 @@ extension OnboardingViewController {
         }
         .store(in: &cancellables)
         
-        // TODO: Naver Login Test 메소드 연결
         onboardingView.socialLoginView.appleLoginButton.tapPublisher().sink { [weak self] in
-            self?.viewModel.naverLogout()
+            self?.viewModel.appleLogin()
         }
         .store(in: &cancellables)
     }

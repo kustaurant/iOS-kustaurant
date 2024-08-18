@@ -123,6 +123,7 @@
 		BA37E0B52C6B0A710092115B /* DefaultDrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */; };
 		BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B62C6B0A870092115B /* DrawRepository.swift */; };
 		BA37E0B92C6B0DA80092115B /* DrawUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */; };
+		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
 		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
 		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
@@ -300,6 +301,8 @@
 		BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDrawRepository.swift; sourceTree = "<group>"; };
 		BA37E0B62C6B0A870092115B /* DrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRepository.swift; sourceTree = "<group>"; };
 		BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawUseCases.swift; sourceTree = "<group>"; };
+		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
+		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
 		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -775,6 +778,7 @@
 		58D83A5E2C3A785800511AB9 /* Kustaurant */ = {
 			isa = PBXGroup;
 			children = (
+				BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */,
 				58D83A902C3A79C400511AB9 /* Application */,
 				58D83A912C3A7A1C00511AB9 /* Presentation */,
 				58D83AFA2C463AB100511AB9 /* Domain */,
@@ -978,6 +982,7 @@
 			isa = PBXGroup;
 			children = (
 				BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */,
+				BA57C7B52C721A680063F2FA /* AppleLoginService.swift */,
 			);
 			path = LoginService;
 			sourceTree = "<group>";
@@ -1238,6 +1243,7 @@
 				584173402C467BDD001EC132 /* TabBarPage.swift in Sources */,
 				58067CBF2C4FCCC100889C92 /* Location.swift in Sources */,
 				58067D862C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift in Sources */,
+				BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */,
 				BAB69AC32C71DBB500C20F0B /* KeyChainStorage.swift in Sources */,
 				58067CAA2C4FAE2A00889C92 /* TierListViewModel.swift in Sources */,
 				58067D3B2C58D6EC00889C92 /* TierCategoryViewController.swift in Sources */,
@@ -1514,6 +1520,7 @@
 				API_BASE_URL = "http://3.35.154.191:8080";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Kustaurant/Kustaurant.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1557,6 +1564,7 @@
 				API_BASE_URL = "http://3.35.154.191:8080";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Kustaurant/Kustaurant.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
