@@ -77,7 +77,7 @@ extension TierListViewController {
     }
     
     private func bindCategoryButton() {
-        tierListView.categoryButton.addAction(UIAction { [weak self] _ in
+        tierListView.topCategoriesView.categoryButton.addAction(UIAction { [weak self] _ in
             self?.viewModel.categoryButtonTapped()
         }, for: .touchUpInside)
     }

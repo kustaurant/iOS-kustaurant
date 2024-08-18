@@ -23,24 +23,20 @@ final class TierListCategoriesCollectionViewHandler: NSObject {
         setupCollectionView()
     }
 }
+
 extension TierListCategoriesCollectionViewHandler {
     private func setupCollectionView() {
-        view.categoriesCollectionView.delegate = self
-        view.categoriesCollectionView.dataSource = self
+        view.topCategoriesView.categoriesCollectionView.delegate = self
+        view.topCategoriesView.categoriesCollectionView.dataSource = self
     }
     
     func reloadData() {
         Task {
             await MainActor.run {
-                view.categoriesCollectionView.reloadData()
+                view.topCategoriesView.categoriesCollectionView.reloadData()
             }
         }
     }
-}
-
-// MARK: - UICollectionViewDelegate
-extension TierListCategoriesCollectionViewHandler: UICollectionViewDelegate {
-    
 }
 
 // MARK: - UICollectionViewDataSource
@@ -56,7 +52,7 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TierListCategoryCollectionViewCell.reuseIdentifier, for: indexPath) as? TierListCategoryCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TierCategoryCollectionViewCell.reuseIdentifier, for: indexPath) as? TierCategoryCollectionViewCell else { return UICollectionViewCell() }
 
         var model = viewModel.filteredCategories[indexPath.row]
         model.isSelect = true
@@ -78,17 +74,9 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDelegateFlowL
         label.text = category.displayName
         label.font = .Pretendard.regular14
         let size = label.intrinsicContentSize
-        return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.height)
+        return CGSize(width: size.width + (TierCategoryCollectionViewCell.horizontalPadding * 2), height: Category.height)
     }
 
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        7
-    }
-    
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,

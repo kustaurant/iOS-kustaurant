@@ -13,8 +13,7 @@ final class NMFMapViewHandler: NSObject {
     private var viewModel: TierMapViewModel
     
     enum Polygon {
-        case solid
-        case dashed
+        case solid, dashed
     }
     
     // MARK: - Initialization
@@ -25,7 +24,6 @@ final class NMFMapViewHandler: NSObject {
         self.view = view
         self.viewModel = viewModel
         super.init()
-        
         view.naverMapView.mapView.touchDelegate = self
     }
 }

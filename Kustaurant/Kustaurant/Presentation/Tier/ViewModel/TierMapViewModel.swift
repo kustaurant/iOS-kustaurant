@@ -12,6 +12,7 @@ protocol TierMapViewModelInput {
 }
 
 protocol TierMapViewModelOutput {
+    var filteredCategories: [Category] { get }
     var mapRestaurantsPublisher: Published<TierMapRestaurants?>.Publisher { get }
 }
 
@@ -21,19 +22,29 @@ final class DefaultTierMapViewModel: TierMapViewModel {
     private let tierUseCase: TierUseCases
     private let tierMapUseCase: TierMapUseCases
     
-    var categories: [Category] = [Cuisine.all.category, Situation.all.category, Location.all.category]
+    @Published private var categories: [Category]
     @Published var mapRestaurants: TierMapRestaurants?
     
     // MARK: Output
+    var filteredCategories: [Category] {
+        // 모든 카테고리가 "전체"인 경우, "전체"만 반환
+        if categories.allSatisfy({ $0.displayName == "전체" }) && !categories.isEmpty {
+            return [categories.first!]
+        }
+        // 그 외의 경우, "전체"가 아닌 카테고리만 반환
+        return categories.filter { $0.displayName != "전체" }
+    }
     var mapRestaurantsPublisher: Published<TierMapRestaurants?>.Publisher { $mapRestaurants }
     
     // MARK: - Initialization
     init(
         tierUseCase: TierUseCases,
-        tierMapUseCase: TierMapUseCases
+        tierMapUseCase: TierMapUseCases,
+        initialCategories: [Category]
     ) {
         self.tierUseCase = tierUseCase
         self.tierMapUseCase = tierMapUseCase
+        self.categories = initialCategories
     }
 }
 

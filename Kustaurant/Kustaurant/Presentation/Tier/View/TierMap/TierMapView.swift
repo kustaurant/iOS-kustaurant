@@ -10,6 +10,7 @@ import NMapsMap
 
 final class TierMapView: UIView {
     let naverMapView = NMFNaverMapView()
+    let topCategoriesView = TierTopCategoriesView()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -25,6 +26,7 @@ final class TierMapView: UIView {
 extension TierMapView {
     private func setup() {
         addSubview(naverMapView, autoLayout: [.fill(0)])
+        addSubview(topCategoriesView, autoLayout: [.topSafeArea(constant: 18), .fillX(0), .height(Category.height)])
         configureNaverMap()
     }
     
@@ -37,4 +39,5 @@ extension TierMapView {
         let cameraUpdate = NMFCameraUpdate(fit: bounds, padding: 0)
         naverMapView.mapView.moveCamera(cameraUpdate)
     }
+
 }

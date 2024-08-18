@@ -13,6 +13,7 @@ final class TierMapViewController: UIViewController {
     private var viewModel: TierMapViewModel
     private var tierMapView = TierMapView()
     private var mapHandler: NMFMapViewHandler?
+    private var tierMapCategoriesCollectionViewHandler: TierMapCategoriesCollectionViewHandler?
     private let locationManager = CLLocationManager()
     
     private var cancellables = Set<AnyCancellable>()
@@ -22,6 +23,10 @@ final class TierMapViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         mapHandler = NMFMapViewHandler(
+            view: tierMapView,
+            viewModel: viewModel
+        )
+        tierMapCategoriesCollectionViewHandler = TierMapCategoriesCollectionViewHandler(
             view: tierMapView,
             viewModel: viewModel
         )
