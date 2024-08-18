@@ -49,7 +49,9 @@ final class AppDIContainer {
     }
     
     func makeOnboardingDIContainer() -> OnboardingSceneDIContainer {
-        let dependencies = OnboardingSceneDIContainer.Dependencies(networkService: networkService)
+        let dependencies = OnboardingSceneDIContainer.Dependencies(
+            networkService: networkService
+        )
         return OnboardingSceneDIContainer(dependencies: dependencies)
     }
 }

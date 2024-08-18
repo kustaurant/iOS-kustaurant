@@ -50,7 +50,7 @@ class OnboardingView: UIView {
         return pageControl
     }()
     
-    private var socialLoginView: SocialLoginView = {
+    var socialLoginView: SocialLoginView = {
         let view = SocialLoginView()
         return view
     }()

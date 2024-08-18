@@ -67,3 +67,12 @@ extension AppFlowCoordinator {
         tabBarFlowCoordinator.start()
     }
 }
+
+extension AppFlowCoordinator {
+    
+    func showOnboarding() {
+        let onboardingDIConatainer = appDIContainer.makeOnboardingDIContainer()
+        let onboardingFlow = onboardingDIConatainer.makeOnboardingFlowCoordinator(navigationController: navigationController)
+        onboardingFlow.start()
+    }
+}

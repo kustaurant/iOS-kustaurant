@@ -47,5 +47,16 @@ extension OnboardingViewController {
             self?.onboardingView.pageControl.currentPage = page
         }
         .store(in: &cancellables)
+        
+        onboardingView.socialLoginView.naverLoginButton.tapPublisher().sink { [weak self] in
+            self?.viewModel.naverLogin()
+        }
+        .store(in: &cancellables)
+        
+        // TODO: Naver Login Test 메소드 연결
+        onboardingView.socialLoginView.appleLoginButton.tapPublisher().sink { [weak self] in
+            self?.viewModel.naverLogout()
+        }
+        .store(in: &cancellables)
     }
 }

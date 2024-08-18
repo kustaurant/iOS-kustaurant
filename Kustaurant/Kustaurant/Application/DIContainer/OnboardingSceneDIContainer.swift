@@ -35,6 +35,27 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
     }
     
     func makeOnboardingViewModel() -> OnboardingViewModel {
-        DefaultOnboardingViewModel()
+        DefaultOnboardingViewModel(
+            onboardingUseCases: makeOnboardingUseCases()
+        )
+    }
+    
+    func makeOnboardingUseCases() -> OnboardingUseCases {
+        DefaultOnboardingUseCases(
+            naverLoginService: makeNaverLoginService(),
+            socialLoginUserRepository: makeSocialLoginUserRepository()
+        )
+    }
+    
+    func makeNaverLoginService() -> NaverLoginService {
+        NaverLoginService(networkService: dependencies.networkService)
+    }
+    
+    func makeSocialLoginUserRepository() -> SocialLoginUserRepository {
+        DefaultSocialLoginUserRepository(keychainStorage: makeKeychaingStorage())
+    }
+    
+    func makeKeychaingStorage() -> KeychainStorage {
+        KeychainStorage()
     }
 }
