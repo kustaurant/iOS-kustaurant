@@ -22,7 +22,7 @@ extension DefaultSocialLoginUserRepository: SocialLoginUserRepository {
         return user
     }
     
-    func setUser(_ user: SocialLoginUser) {
+    func setUser(_ user: SocialLoginUser? = nil) {
         _ = keychainStorage.setValue(user, forKey: KeychainKey.socialLoginUser)
     }
 }
