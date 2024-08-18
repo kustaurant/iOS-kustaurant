@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TierListView: UIView {
+final class TierListView: UIView, TierBaseView {
     let tableView = UITableView()
     let topCategoriesView = TierTopCategoriesView()
     

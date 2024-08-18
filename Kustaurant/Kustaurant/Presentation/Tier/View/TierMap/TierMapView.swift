@@ -8,7 +8,7 @@
 import UIKit
 import NMapsMap
 
-final class TierMapView: UIView {
+final class TierMapView: UIView, TierBaseView {
     let naverMapView = NMFNaverMapView()
     let topCategoriesView = TierTopCategoriesView()
     

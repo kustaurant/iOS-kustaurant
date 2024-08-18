@@ -1,20 +1,20 @@
 //
-//  TierListCategoriesCollectionViewHandler.swift
+//  TierTopCategoriesCollectionViewHandler.swift
 //  Kustaurant
 //
-//  Created by 송우진 on 7/25/24.
+//  Created by 송우진 on 8/18/24.
 //
 
 import UIKit
 
-final class TierListCategoriesCollectionViewHandler: NSObject {
-    private var view: TierListView
-    private var viewModel: TierListViewModel
+class TierTopCategoriesCollectionViewHandler: NSObject {
+    private var view: TierBaseView
+    private var viewModel: TierBaseViewModel
     
     // MARK: - Initialization
     init(
-        view: TierListView,
-        viewModel: TierListViewModel
+        view: TierBaseView,
+        viewModel: TierBaseViewModel
     ) {
         self.view = view
         self.viewModel = viewModel
@@ -24,7 +24,7 @@ final class TierListCategoriesCollectionViewHandler: NSObject {
     }
 }
 
-extension TierListCategoriesCollectionViewHandler {
+extension TierTopCategoriesCollectionViewHandler {
     private func setupCollectionView() {
         view.topCategoriesView.categoriesCollectionView.delegate = self
         view.topCategoriesView.categoriesCollectionView.dataSource = self
@@ -40,7 +40,7 @@ extension TierListCategoriesCollectionViewHandler {
 }
 
 // MARK: - UICollectionViewDataSource
-extension TierListCategoriesCollectionViewHandler: UICollectionViewDataSource {
+extension TierTopCategoriesCollectionViewHandler: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
@@ -63,7 +63,7 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension TierListCategoriesCollectionViewHandler: UICollectionViewDelegateFlowLayout {
+extension TierTopCategoriesCollectionViewHandler: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
