@@ -46,12 +46,6 @@ final class TierListViewController: UIViewController {
 }
 
 extension TierListViewController {
-    func receiveTierCategories(categories: [Category]) {
-        viewModel.updateCategories(categories: categories)
-    }
-}
-
-extension TierListViewController {
     private func setupBindings() {
         bindtierRestaurants()
         bindCategories()
@@ -80,5 +74,12 @@ extension TierListViewController {
         tierListView.topCategoriesView.categoryButton.addAction(UIAction { [weak self] _ in
             self?.viewModel.categoryButtonTapped()
         }, for: .touchUpInside)
+    }
+}
+
+// MARK: - TierCategoryReceivable
+extension TierListViewController: TierCategoryReceivable {
+    func receiveTierCategories(categories: [Category]) {
+        viewModel.updateCategories(categories: categories)
     }
 }

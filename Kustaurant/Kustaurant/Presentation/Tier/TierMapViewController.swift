@@ -51,20 +51,44 @@ final class TierMapViewController: UIViewController {
 
 extension TierMapViewController {
     private func setupBindings() {
-        bindmapRestaurants()
+        bindMapRestaurants()
+        bindCategories()
+        bindCategoryButton()
     }
     
-    private func bindmapRestaurants() {
+    private func bindMapRestaurants() {
         viewModel.mapRestaurantsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] data in
                 self?.mapHandler?.updateMap(data)
             }.store(in: &cancellables)
     }
+    
+    private func bindCategories() {
+        viewModel.categoriesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.categoriesCollectionViewHandler?.reloadData()
+                self?.viewModel.fetchTierMap()
+            }.store(in: &cancellables)
+    }
+    
+    private func bindCategoryButton() {
+        tierMapView.topCategoriesView.categoryButton.addAction(UIAction { [weak self] _ in
+            self?.viewModel.categoryButtonTapped()
+        }, for: .touchUpInside)
+    }
 }
 
 extension TierMapViewController {
     private func setupLocationManager() {
         locationManager.requestWhenInUseAuthorization()
+    }
+}
+
+// MARK: - TierCategoryReceivable
+extension TierMapViewController: TierCategoryReceivable {
+    func receiveTierCategories(categories: [Category]) {
+        viewModel.updateCategories(categories: categories)
     }
 }

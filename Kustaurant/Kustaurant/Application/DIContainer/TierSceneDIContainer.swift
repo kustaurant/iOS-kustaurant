@@ -84,27 +84,35 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         )
     }
     
-    func makeTierMpaViewModel(initialCategories: [Category]) -> TierMapViewModel {
+    func makeTierMpaViewModel(
+        actions: TierMapViewModelActions,
+        initialCategories: [Category]
+    ) -> TierMapViewModel {
         DefaultTierMapViewModel(
             tierUseCase: makeTierUseCase(),
             tierMapUseCase: makeTierMapUseCase(),
+            actions: actions,
             initialCategories: initialCategories
         )
     }
     
-    func makeTierMapViewController(initialCategories: [Category]) -> TierMapViewController {
+    func makeTierMapViewController(
+        actions: TierMapViewModelActions,
+        initialCategories: [Category]
+    ) -> TierMapViewController {
         TierMapViewController(
-            viewModel: makeTierMpaViewModel(initialCategories: initialCategories)
+            viewModel: makeTierMpaViewModel(actions: actions, initialCategories: initialCategories)
         )
     }
     
     func makeTierViewController(
-        actions: TierListViewModelActions,
+        listActions: TierListViewModelActions,
+        mapActions: TierMapViewModelActions,
         initialCategories: [Category]
     ) -> TierViewController {
         TierViewController(
-            tierListViewController: makeTierListViewController(actions: actions, initialCategories: initialCategories),
-            TierMapViewController: makeTierMapViewController(initialCategories: initialCategories)
+            tierListViewController: makeTierListViewController(actions: listActions, initialCategories: initialCategories),
+            TierMapViewController: makeTierMapViewController(actions: mapActions, initialCategories: initialCategories)
         )
     }
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TierTopCategoriesCollectionViewHandler: NSObject {
+final class TierTopCategoriesCollectionViewHandler: NSObject {
     private var view: TierBaseView
     private var viewModel: TierBaseViewModel
     
