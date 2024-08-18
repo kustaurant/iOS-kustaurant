@@ -26,16 +26,17 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
         )
     }
     
-    func makeOnboardingViewController() -> OnboardingViewController {
-        OnboardingViewController(viewModel: makeOnboardingViewModel())
+    func makeOnboardingViewController(actions: OnboardingViewModelActions) -> OnboardingViewController {
+        OnboardingViewController(viewModel: makeOnboardingViewModel(actions: actions))
     }
     
-    func makeLoginViewController() -> LoginViewController {
-        LoginViewController(viewModel: makeOnboardingViewModel())
+    func makeLoginViewController(actions: OnboardingViewModelActions) -> LoginViewController {
+        LoginViewController(viewModel: makeOnboardingViewModel(actions: actions))
     }
     
-    func makeOnboardingViewModel() -> OnboardingViewModel {
+    func makeOnboardingViewModel(actions: OnboardingViewModelActions) -> OnboardingViewModel {
         DefaultOnboardingViewModel(
+            actions: actions,
             onboardingUseCases: makeOnboardingUseCases()
         )
     }

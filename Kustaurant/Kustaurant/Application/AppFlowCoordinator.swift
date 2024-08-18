@@ -72,17 +72,22 @@ extension AppFlowCoordinator {
     }
 }
 
-extension AppFlowCoordinator {
+extension AppFlowCoordinator: OnboardingSceneDelegate {
     
     func showOnboarding() {
         let onboardingDIConatainer = appDIContainer.makeOnboardingDIContainer()
         let onboardingFlow = onboardingDIConatainer.makeOnboardingFlowCoordinator(navigationController: navigationController)
+        onboardingFlow.delegate = self
         
         if isIntialLaunch() {
             onboardingFlow.start()
         } else {
             onboardingFlow.showLogin()
         }
+    }
+        
+    func onLoginSuccess() {
+        showTab()
     }
 }
 

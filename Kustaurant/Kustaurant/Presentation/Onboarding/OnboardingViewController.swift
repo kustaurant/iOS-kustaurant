@@ -57,5 +57,11 @@ extension OnboardingViewController {
             self?.viewModel.appleLogin()
         }
         .store(in: &cancellables)
+        
+        // MARK: 네이버 로그아웃 테스트 버튼
+        onboardingView.socialLoginView.skipButton.tapPublisher().sink { [weak self] in
+            self?.viewModel.naverLogout()
+        }
+        .store(in: &cancellables)
     }
 }

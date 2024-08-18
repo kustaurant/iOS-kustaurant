@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 struct OnboardingViewModelActions {
+    let initiateTabs: (() -> Void)?
 }
 
 protocol OnboardingViewModelInput {
@@ -32,23 +33,27 @@ final class DefaultOnboardingViewModel: OnboardingViewModel {
     var currentOnboardingPagePublisher: Published<Int>.Publisher { $currentOnboardingPage }
     @Published var isUpdatingPage: Bool = false
     
+    private let actions: OnboardingViewModelActions
     private let onboardingUseCases: OnboardingUseCases
     private var cancellables = Set<AnyCancellable>()
     
-    init(onboardingUseCases: OnboardingUseCases) {
+    init(actions: OnboardingViewModelActions, onboardingUseCases: OnboardingUseCases) {
+        self.actions = actions
         self.onboardingUseCases = onboardingUseCases
     }
     
     func naverLogin() {
-        onboardingUseCases.naverLogin().sink { completion in
+        onboardingUseCases.naverLogin()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
             switch completion {
             case .finished:
                 break
             case .failure(let error):
                 print(#file, #function, error.localizedDescription)
             }
-        } receiveValue: { user in
-            // 홈 화면 이동
+        } receiveValue: { [weak self] user in
+            self?.actions.initiateTabs?()
             print(user)
         }
         .store(in: &cancellables)
@@ -60,8 +65,9 @@ final class DefaultOnboardingViewModel: OnboardingViewModel {
     
     func appleLogin() {
         onboardingUseCases.appleLogin()
-            .sink { user in
-                // 홈 화면 이동
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] user in
+                self?.actions.initiateTabs?()
                 print(user)
             }
             .store(in: &cancellables)

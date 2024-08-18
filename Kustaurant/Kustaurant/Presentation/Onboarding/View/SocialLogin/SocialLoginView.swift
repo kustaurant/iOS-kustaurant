@@ -60,7 +60,7 @@ class SocialLoginView: UIView {
         return button
     }()
     
-    private lazy var skipButton: UIButton = {
+    lazy var skipButton: UIButton = {
         let button = UIButton()
         let underlineAttriString1 = NSAttributedString(
             string: "건너뛰기",
