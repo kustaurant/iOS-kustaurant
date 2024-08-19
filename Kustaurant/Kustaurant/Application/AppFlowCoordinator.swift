@@ -22,7 +22,11 @@ final class AppFlowCoordinator {
 
 extension AppFlowCoordinator {
     func start() {
-        showTab()
+        if isLoggedIn() {
+            showTab()
+        } else {
+            showOnboarding()
+        }
     }
 }
 
@@ -65,5 +69,41 @@ extension AppFlowCoordinator {
         tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow, communityFlow, myPageFlow])
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
+    }
+}
+
+extension AppFlowCoordinator: OnboardingSceneDelegate {
+    
+    func showOnboarding() {
+        let onboardingDIConatainer = appDIContainer.makeOnboardingDIContainer()
+        let onboardingFlow = onboardingDIConatainer.makeOnboardingFlowCoordinator(navigationController: navigationController)
+        onboardingFlow.delegate = self
+        
+        if isIntialLaunch() {
+            onboardingFlow.start()
+        } else {
+            onboardingFlow.showLogin()
+        }
+    }
+        
+    func onLoginSuccess() {
+        showTab()
+    }
+}
+
+extension AppFlowCoordinator {
+    
+    func isIntialLaunch() -> Bool {
+        let userDefaultsStorage = appDIContainer.makeUserDefaultsStorage()
+        guard let isInitialLaunch: Bool = userDefaultsStorage.getValue(forKey: UserDefaultsKey.initialLaunch) else {
+            _ = userDefaultsStorage.setValue(false, forKey: UserDefaultsKey.initialLaunch)
+            return true
+        }
+        return isInitialLaunch
+    }
+    
+    // TODO: 로그인되어 있는지 확인
+    func isLoggedIn() -> Bool {
+        return false
     }
 }

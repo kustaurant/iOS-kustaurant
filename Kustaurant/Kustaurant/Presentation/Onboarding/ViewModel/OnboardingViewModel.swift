@@ -6,11 +6,17 @@
 //
 
 import Foundation
+import Combine
 
 struct OnboardingViewModelActions {
+    let initiateTabs: (() -> Void)?
 }
 
-protocol OnboardingViewModelInput {}
+protocol OnboardingViewModelInput {
+    func naverLogin()
+    func naverLogout()
+    func appleLogin()
+}
 
 protocol OnboardingViewModelOutput {
     var onboardingContents: [OnboardingContent] { get }
@@ -27,5 +33,43 @@ final class DefaultOnboardingViewModel: OnboardingViewModel {
     var currentOnboardingPagePublisher: Published<Int>.Publisher { $currentOnboardingPage }
     @Published var isUpdatingPage: Bool = false
     
-    init() {}
+    private let actions: OnboardingViewModelActions
+    private let onboardingUseCases: OnboardingUseCases
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(actions: OnboardingViewModelActions, onboardingUseCases: OnboardingUseCases) {
+        self.actions = actions
+        self.onboardingUseCases = onboardingUseCases
+    }
+    
+    func naverLogin() {
+        onboardingUseCases.naverLogin()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+            switch completion {
+            case .finished:
+                break
+            case .failure(let error):
+                print(#file, #function, error.localizedDescription)
+            }
+        } receiveValue: { [weak self] user in
+            self?.actions.initiateTabs?()
+            print(user)
+        }
+        .store(in: &cancellables)
+    }
+    
+    func naverLogout() {
+        onboardingUseCases.naverLogout()
+    }
+    
+    func appleLogin() {
+        onboardingUseCases.appleLogin()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] user in
+                self?.actions.initiateTabs?()
+                print(user)
+            }
+            .store(in: &cancellables)
+    }
 }

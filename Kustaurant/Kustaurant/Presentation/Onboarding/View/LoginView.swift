@@ -46,7 +46,7 @@ class LoginView: UIView {
         return label
     }()
     
-    private let socialLoginView: SocialLoginView = {
+    let socialLoginView: SocialLoginView = {
         let view = SocialLoginView(.dark)
         return view
     }()
