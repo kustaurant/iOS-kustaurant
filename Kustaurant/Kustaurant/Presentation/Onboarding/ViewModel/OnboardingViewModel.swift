@@ -14,8 +14,8 @@ struct OnboardingViewModelActions {
 
 protocol OnboardingViewModelInput {
     func naverLogin()
-    func naverLogout()
     func appleLogin()
+    func logout()
 }
 
 protocol OnboardingViewModelOutput {
@@ -54,13 +54,12 @@ final class DefaultOnboardingViewModel: OnboardingViewModel {
             }
         } receiveValue: { [weak self] user in
             self?.actions.initiateTabs?()
-            print(user)
         }
         .store(in: &cancellables)
     }
     
-    func naverLogout() {
-        onboardingUseCases.naverLogout()
+    func logout() {
+        onboardingUseCases.logout()
     }
     
     func appleLogin() {

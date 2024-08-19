@@ -9,5 +9,6 @@ import Foundation
 
 protocol AuthRepository {
     func naverLogin(userId: String, naverAccessToken: String) async -> Result<String, NetworkError>
-    func naverLogout(userId: String) async
+    func appleLogin(authorizationCode: String, identityToken: String) async -> Result<String, NetworkError>
+    func logout(userId: String) async
 }
