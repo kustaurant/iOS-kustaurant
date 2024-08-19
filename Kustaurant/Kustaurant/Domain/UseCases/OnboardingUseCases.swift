@@ -11,7 +11,7 @@ import Combine
 protocol OnboardingUseCases {
     func naverLogin() -> AnyPublisher<SocialLoginUser, NetworkError>
     func appleLogin() -> AnyPublisher<SocialLoginUser, Never>
-    func naverLogout()
+    func logout()
 }
 
 final class DefaultOnboardingUseCases: OnboardingUseCases {
@@ -36,25 +36,21 @@ extension DefaultOnboardingUseCases {
             .flatMap(processNaverLogin)
             .eraseToAnyPublisher()
     }
-    
-    func naverLogout() {
-        socialLoginUserRepository.setUser(nil)
-        naverLoginService.attemptLogout()
-    }
-    
+
     func appleLogin() -> AnyPublisher<SocialLoginUser, Never> {
         appleLoginService.attemptLogin()
-            .map { [weak self] response in
-                let id = response.id
-                let user = SocialLoginUser(id: id, accessToken: "token", provider: .apple)
-                self?.socialLoginUserRepository.setUser(user)
-                return user
-            }
+            .flatMap(processAppleLogin)
             .eraseToAnyPublisher()
     }
-    
-    func appleLogout() {
+        
+    func logout() {
+        if let user = socialLoginUserRepository.getUser() {
+            Task {
+                await authReposiory.logout(userId: user.id)
+            }
+        }
         socialLoginUserRepository.setUser(nil)
+        naverLoginService.attemptLogout()
     }
 }
 
@@ -73,6 +69,25 @@ extension DefaultOnboardingUseCases {
                     promise(.failure(error))
                 case .none:
                     promise(.failure(.unknown))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    private func processAppleLogin(_ response: SignInWithAppleResponse) -> AnyPublisher<SocialLoginUser, Never> {
+        Future { promise in
+            Task { [weak self] in
+                let appleAuthResponse = await self?.authReposiory.appleLogin(authorizationCode: response.authorizationCode, identityToken: response.identityToken)
+                switch appleAuthResponse {
+                case .success(let accessToken):
+                    let user = SocialLoginUser(id: response.id, accessToken: accessToken, provider: .naver)
+                    self?.socialLoginUserRepository.setUser(user)
+                    promise(.success(user))
+                case .failure(let error):
+                    break
+                case .none:
+                    break
                 }
             }
         }

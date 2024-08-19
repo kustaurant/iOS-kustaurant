@@ -17,7 +17,29 @@ final class DefaultAuthRepository {
 }
 
 extension DefaultAuthRepository: AuthRepository {
-    
+    func appleLogin(authorizationCode: String, identityToken: String) async -> Result<String, NetworkError> {
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/apple-login")
+        urlBuilder.addQuery(
+            parameter: [
+                "provider": SocialLoginProvider.apple.rawValue,
+                "authorizationCode": authorizationCode,
+                "identityToken": identityToken
+            ]
+        )
+        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let response = await request.responseAsync(with: urlBuilder)
+        
+        if let error = response.error {
+            return .failure(error)
+        }
+        
+        guard let data: String = response.decodeString() else {
+            return .failure(.decodingFailed)
+        }
+        
+        return .success(data)
+    }
+
     func naverLogin(userId: String, naverAccessToken: String) async -> Result<String, NetworkError> {
         var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/naver-login")
         urlBuilder.addQuery(
@@ -41,9 +63,10 @@ extension DefaultAuthRepository: AuthRepository {
         return .success(data)
     }
     
-    func naverLogout(userId: String) async {
+    func logout(userId: String) async {
         var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/log-out")
-                let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        urlBuilder.addQuery(parameter: ["userId": userId])
+        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
         let response = await request.responseAsync(with: urlBuilder)
         
         if let error = response.error {
