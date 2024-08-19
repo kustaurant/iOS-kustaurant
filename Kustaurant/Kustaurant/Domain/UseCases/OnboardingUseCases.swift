@@ -19,11 +19,13 @@ final class DefaultOnboardingUseCases: OnboardingUseCases {
     private let naverLoginService: NaverLoginService
     private let appleLoginService: AppleLoginService
     private let socialLoginUserRepository: SocialLoginUserRepository
+    private let authReposiory: AuthRepository
     
-    init(naverLoginService: NaverLoginService, appleLoginService: AppleLoginService, socialLoginUserRepository: SocialLoginUserRepository) {
+    init(naverLoginService: NaverLoginService, appleLoginService: AppleLoginService, socialLoginUserRepository: SocialLoginUserRepository, authReposiory: AuthRepository) {
         self.naverLoginService = naverLoginService
         self.appleLoginService = appleLoginService
         self.socialLoginUserRepository = socialLoginUserRepository
+        self.authReposiory = authReposiory
     }
 }
 
@@ -31,13 +33,7 @@ extension DefaultOnboardingUseCases {
     
     func naverLogin() -> AnyPublisher<SocialLoginUser, NetworkError> {
         naverLoginService.attemptLogin()
-            .map { [weak self] response in
-                // TODO: 서버 api에 유저 정보(naverAccessToken) 전송 및 액세스 토큰 받아서 SocialLoginUser에 세팅
-                let id = response.response.id
-                let user = SocialLoginUser(id: id, accessToken: "token", provider: .naver)
-                self?.socialLoginUserRepository.setUser(user)
-                return user
-            }
+            .flatMap(processNaverLogin)
             .eraseToAnyPublisher()
     }
     
@@ -49,7 +45,6 @@ extension DefaultOnboardingUseCases {
     func appleLogin() -> AnyPublisher<SocialLoginUser, Never> {
         appleLoginService.attemptLogin()
             .map { [weak self] response in
-                // TODO: 서버 api에 유저 정보(authcode, idtoken) 전송 및 액세스 토큰 받아서 SocialLoginUser에 세팅
                 let id = response.id
                 let user = SocialLoginUser(id: id, accessToken: "token", provider: .apple)
                 self?.socialLoginUserRepository.setUser(user)
@@ -60,5 +55,27 @@ extension DefaultOnboardingUseCases {
     
     func appleLogout() {
         socialLoginUserRepository.setUser(nil)
+    }
+}
+
+extension DefaultOnboardingUseCases {
+    
+    private func processNaverLogin(_ response: SignInWithNaverResponse) -> AnyPublisher<SocialLoginUser, NetworkError> {
+        Future { promise in
+            Task { [weak self] in
+                let naverAuthResponse = await self?.authReposiory.naverLogin(userId: response.id, naverAccessToken: response.naverAccessToken)
+                switch naverAuthResponse {
+                case .success(let accessToken):
+                    let user = SocialLoginUser(id: response.id, accessToken: accessToken, provider: .naver)
+                    self?.socialLoginUserRepository.setUser(user)
+                    promise(.success(user))
+                case .failure(let error):
+                    promise(.failure(error))
+                case .none:
+                    promise(.failure(.unknown))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
     }
 }
