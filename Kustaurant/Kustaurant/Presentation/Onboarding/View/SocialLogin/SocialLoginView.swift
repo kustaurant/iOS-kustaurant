@@ -46,21 +46,21 @@ class SocialLoginView: UIView {
         return view
     }()
     
-    private let naverLoginButton: UIButton = {
+    let naverLoginButton: UIButton = {
         let button = UIButton()
         let image = UIImage(named: "icon_naver_login")
         button.setImage(image, for: .normal)
         return button
     }()
     
-    private lazy var appleLoginButton: UIButton = {
+    lazy var appleLoginButton: UIButton = {
         let button = UIButton()
         let image = self.theme == .dark ? UIImage(named: "icon_apple_login_white") : UIImage(named: "icon_apple_login_black")
         button.setImage(image, for: .normal)
         return button
     }()
     
-    private lazy var skipButton: UIButton = {
+    lazy var skipButton: UIButton = {
         let button = UIButton()
         let underlineAttriString1 = NSAttributedString(
             string: "건너뛰기",

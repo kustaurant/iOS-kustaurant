@@ -58,9 +58,9 @@
 		584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173302C465E96001EC132 /* HomeFlowCoordinator.swift */; };
 		584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173322C465F1C001EC132 /* HomeSceneDIContainer.swift */; };
 		584173362C4661B5001EC132 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173352C4661B5001EC132 /* Coordinator.swift */; };
-		584173392C46664E001EC132 /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173382C46664E001EC132 /* RecommendViewController.swift */; };
-		5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733A2C467972001EC132 /* RecommendFlowCoordinator.swift */; };
-		5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733C2C4679FE001EC132 /* RecommendSceneDIContainer.swift */; };
+		584173392C46664E001EC132 /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173382C46664E001EC132 /* DrawViewController.swift */; };
+		5841733B2C467972001EC132 /* DrawFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733A2C467972001EC132 /* DrawFlowCoordinator.swift */; };
+		5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733C2C4679FE001EC132 /* DrawSceneDIContainer.swift */; };
 		584173402C467BDD001EC132 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841733F2C467BDD001EC132 /* TabBarPage.swift */; };
 		584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173412C467E72001EC132 /* TierFlowCoordinator.swift */; };
 		584173472C467F5B001EC132 /* TierSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173462C467F5B001EC132 /* TierSceneDIContainer.swift */; };
@@ -93,6 +93,14 @@
 		5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173992C4A1040001EC132 /* UILabel+Style.swift */; };
 		5841739C2C4A29C6001EC132 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841739B2C4A29C6001EC132 /* Tier.swift */; };
 		5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */; };
+		584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */; };
+		584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */; };
+		584FA4C92C647442008DDC19 /* TierMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C82C647442008DDC19 /* TierMapView.swift */; };
+		584FA4CB2C6475C7008DDC19 /* TierMapRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4CA2C6475C7008DDC19 /* TierMapRepository.swift */; };
+		584FA4CD2C6475DA008DDC19 /* TierMapUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4CC2C6475DA008DDC19 /* TierMapUseCases.swift */; };
+		584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4CE2C6476A7008DDC19 /* DefaultTierMapRepository.swift */; };
+		584FA4D22C6487C4008DDC19 /* NMFMapViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4D12C6487C4008DDC19 /* NMFMapViewHandler.swift */; };
+		584FA4D62C64A41D008DDC19 /* Coords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4D52C64A41D008DDC19 /* Coords.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
@@ -100,6 +108,22 @@
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		816A02DA220B296E2DE3721E /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */; };
+		BA37E0702C65E0B60092115B /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E06F2C65E0B60092115B /* DrawView.swift */; };
+		BA37E0722C65E0BF0092115B /* DrawViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0712C65E0BF0092115B /* DrawViewModel.swift */; };
+		BA37E0742C65E43F0092115B /* DrawCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */; };
+		BA37E0772C65E5850092115B /* DrawLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0762C65E5850092115B /* DrawLocationCollectionViewCell.swift */; };
+		BA37E07B2C65E5F10092115B /* DrawCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E07A2C65E5F10092115B /* DrawCollectionViewSection.swift */; };
+		BA37E07D2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E07C2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift */; };
+		BA37E07F2C6742EF0092115B /* DrawResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E07E2C6742EF0092115B /* DrawResultViewController.swift */; };
+		BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0802C6743300092115B /* DrawResultViewModel.swift */; };
+		BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0822C674BE40092115B /* UIButton+Publisher.swift */; };
+		BA37E0852C674E760092115B /* DrawResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0842C674E760092115B /* DrawResultView.swift */; };
+		BA37E0872C675FF40092115B /* UIStackView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */; };
+		BA37E0B32C6A0CBF0092115B /* DrawResultViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B22C6A0CBF0092115B /* DrawResultViewHandler.swift */; };
+		BA37E0B52C6B0A710092115B /* DefaultDrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */; };
+		BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B62C6B0A870092115B /* DrawRepository.swift */; };
+		BA37E0B92C6B0DA80092115B /* DrawUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */; };
+		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
 		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
 		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
@@ -112,6 +136,18 @@
 		BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */; };
 		BA8EEF972C64981100FE6ABF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF962C64981100FE6ABF /* LoginViewController.swift */; };
 		BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF982C64994F00FE6ABF /* LoginView.swift */; };
+		BAB69ABF2C71DB8C00C20F0B /* KeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69ABE2C71DB8C00C20F0B /* KeyValueStorage.swift */; };
+		BAB69AC12C71DBA500C20F0B /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC02C71DBA500C20F0B /* UserDefaultsStorage.swift */; };
+		BAB69AC32C71DBB500C20F0B /* KeyChainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC22C71DBB500C20F0B /* KeyChainStorage.swift */; };
+		BAB69AC52C71DC0B00C20F0B /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC42C71DC0B00C20F0B /* UserDefaultsKey.swift */; };
+		BAB69AC72C71DC1700C20F0B /* KeychainKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC62C71DC1700C20F0B /* KeychainKey.swift */; };
+		BAB69AC92C71DC5700C20F0B /* SocialLoginUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC82C71DC5700C20F0B /* SocialLoginUserRepository.swift */; };
+		BAB69ACB2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69ACA2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift */; };
+		BAC55EC32C6F1FE200B3078F /* NaverLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */; };
+		BAC55EC92C6F351400B3078F /* OnboardingUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC82C6F351400B3078F /* OnboardingUseCases.swift */; };
+		BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */; };
+		BAC55ECD2C6FB2AB00B3078F /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECC2C6FB2AB00B3078F /* SocialLogin.swift */; };
+		BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */; };
 		CF54AD082C4288F900E0DE68 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD072C4288F900E0DE68 /* Request.swift */; };
 		CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */; };
 		CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */; };
@@ -196,9 +232,9 @@
 		584173302C465E96001EC132 /* HomeFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFlowCoordinator.swift; sourceTree = "<group>"; };
 		584173322C465F1C001EC132 /* HomeSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneDIContainer.swift; sourceTree = "<group>"; };
 		584173352C4661B5001EC132 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		584173382C46664E001EC132 /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
-		5841733A2C467972001EC132 /* RecommendFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendFlowCoordinator.swift; sourceTree = "<group>"; };
-		5841733C2C4679FE001EC132 /* RecommendSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendSceneDIContainer.swift; sourceTree = "<group>"; };
+		584173382C46664E001EC132 /* DrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewController.swift; sourceTree = "<group>"; };
+		5841733A2C467972001EC132 /* DrawFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawFlowCoordinator.swift; sourceTree = "<group>"; };
+		5841733C2C4679FE001EC132 /* DrawSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawSceneDIContainer.swift; sourceTree = "<group>"; };
 		5841733F2C467BDD001EC132 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		584173412C467E72001EC132 /* TierFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierFlowCoordinator.swift; sourceTree = "<group>"; };
 		584173462C467F5B001EC132 /* TierSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -231,7 +267,14 @@
 		584173992C4A1040001EC132 /* UILabel+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		5841739B2C4A29C6001EC132 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
 		5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
-		584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapRestaurants.swift; sourceTree = "<group>"; };
+		584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapViewModel.swift; sourceTree = "<group>"; };
+		584FA4C82C647442008DDC19 /* TierMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapView.swift; sourceTree = "<group>"; };
+		584FA4CA2C6475C7008DDC19 /* TierMapRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapRepository.swift; sourceTree = "<group>"; };
+		584FA4CC2C6475DA008DDC19 /* TierMapUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapUseCases.swift; sourceTree = "<group>"; };
+		584FA4CE2C6476A7008DDC19 /* DefaultTierMapRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTierMapRepository.swift; sourceTree = "<group>"; };
+		584FA4D12C6487C4008DDC19 /* NMFMapViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMFMapViewHandler.swift; sourceTree = "<group>"; };
+		584FA4D52C64A41D008DDC19 /* Coords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coords.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -243,6 +286,23 @@
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.debug.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.debug.xcconfig"; sourceTree = "<group>"; };
 		ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA37E06F2C65E0B60092115B /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
+		BA37E0712C65E0BF0092115B /* DrawViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewModel.swift; sourceTree = "<group>"; };
+		BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCollectionViewHandler.swift; sourceTree = "<group>"; };
+		BA37E0762C65E5850092115B /* DrawLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLocationCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA37E07A2C65E5F10092115B /* DrawCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCollectionViewSection.swift; sourceTree = "<group>"; };
+		BA37E07C2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCuisineCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA37E07E2C6742EF0092115B /* DrawResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultViewController.swift; sourceTree = "<group>"; };
+		BA37E0802C6743300092115B /* DrawResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultViewModel.swift; sourceTree = "<group>"; };
+		BA37E0822C674BE40092115B /* UIButton+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Publisher.swift"; sourceTree = "<group>"; };
+		BA37E0842C674E760092115B /* DrawResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultView.swift; sourceTree = "<group>"; };
+		BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+AutoLayout.swift"; sourceTree = "<group>"; };
+		BA37E0B22C6A0CBF0092115B /* DrawResultViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawResultViewHandler.swift; sourceTree = "<group>"; };
+		BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDrawRepository.swift; sourceTree = "<group>"; };
+		BA37E0B62C6B0A870092115B /* DrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRepository.swift; sourceTree = "<group>"; };
+		BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawUseCases.swift; sourceTree = "<group>"; };
+		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
+		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
 		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -255,6 +315,18 @@
 		BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
 		BA8EEF962C64981100FE6ABF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BA8EEF982C64994F00FE6ABF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BAB69ABE2C71DB8C00C20F0B /* KeyValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStorage.swift; sourceTree = "<group>"; };
+		BAB69AC02C71DBA500C20F0B /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
+		BAB69AC22C71DBB500C20F0B /* KeyChainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainStorage.swift; sourceTree = "<group>"; };
+		BAB69AC42C71DC0B00C20F0B /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		BAB69AC62C71DC1700C20F0B /* KeychainKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainKey.swift; sourceTree = "<group>"; };
+		BAB69AC82C71DC5700C20F0B /* SocialLoginUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginUserRepository.swift; sourceTree = "<group>"; };
+		BAB69ACA2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSocialLoginUserRepository.swift; sourceTree = "<group>"; };
+		BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverLoginService.swift; sourceTree = "<group>"; };
+		BAC55EC82C6F351400B3078F /* OnboardingUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUseCases.swift; sourceTree = "<group>"; };
+		BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverLoginRepository.swift; sourceTree = "<group>"; };
+		BAC55ECC2C6FB2AB00B3078F /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
+		BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		CF54AD072C4288F900E0DE68 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRetrier.swift; sourceTree = "<group>"; };
@@ -320,6 +392,7 @@
 			children = (
 				58067CA92C4FAE2A00889C92 /* TierListViewModel.swift */,
 				58067D3C2C58D73C00889C92 /* TierCategoryViewModel.swift */,
+				584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -330,6 +403,7 @@
 				58067CA02C4F425900889C92 /* TierNavigationTitleTabView.swift */,
 				58067D432C59FA4700889C92 /* TierCategory */,
 				58067CB32C4FBEE400889C92 /* TierList */,
+				584FA4C72C64742F008DDC19 /* TierMap */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -459,6 +533,8 @@
 		584173222C464E27001EC132 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BAB69ABD2C71DB8000C20F0B /* InMemoryStorage */,
+				BAC55EC02C6F1FCA00B3078F /* LoginService */,
 				58067CC02C509FCA00889C92 /* UIComponents */,
 				584173692C47B7CD001EC132 /* Extensions */,
 				5841733E2C467BCF001EC132 /* Enums */,
@@ -475,7 +551,7 @@
 			children = (
 				584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */,
 				584173302C465E96001EC132 /* HomeFlowCoordinator.swift */,
-				5841733A2C467972001EC132 /* RecommendFlowCoordinator.swift */,
+				5841733A2C467972001EC132 /* DrawFlowCoordinator.swift */,
 				584173412C467E72001EC132 /* TierFlowCoordinator.swift */,
 				584173482C468250001EC132 /* CommunityFlowCoordinator.swift */,
 				584173532C468410001EC132 /* MyPageFlowCoordinator.swift */,
@@ -490,7 +566,7 @@
 			children = (
 				5841732E2C465A9D001EC132 /* AppDIContainer.swift */,
 				584173322C465F1C001EC132 /* HomeSceneDIContainer.swift */,
-				5841733C2C4679FE001EC132 /* RecommendSceneDIContainer.swift */,
+				5841733C2C4679FE001EC132 /* DrawSceneDIContainer.swift */,
 				584173462C467F5B001EC132 /* TierSceneDIContainer.swift */,
 				5841734E2C4682C8001EC132 /* CommunitySceneDIContainer.swift */,
 				584173552C46844C001EC132 /* MyPageSceneDIContainer.swift */,
@@ -510,12 +586,15 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		584173372C46663B001EC132 /* Recommend */ = {
+		584173372C46663B001EC132 /* Draw */ = {
 			isa = PBXGroup;
 			children = (
-				584173382C46664E001EC132 /* RecommendViewController.swift */,
+				584173382C46664E001EC132 /* DrawViewController.swift */,
+				BA37E07E2C6742EF0092115B /* DrawResultViewController.swift */,
+				BA37E06E2C65E0AA0092115B /* ViewModel */,
+				BA37E06D2C65E0A60092115B /* View */,
 			);
-			path = Recommend;
+			path = Draw;
 			sourceTree = "<group>";
 		};
 		5841733E2C467BCF001EC132 /* Enums */ = {
@@ -592,6 +671,8 @@
 				CFE2046A2C5D0A4000BCA87C /* UIView+parentViewController.swift */,
 				CFE204682C5D03C400BCA87C /* Collection+.swift */,
 				CFE204572C5A121D00BCA87C /* UIView+AutoLayout.swift */,
+				BA37E0822C674BE40092115B /* UIButton+Publisher.swift */,
+				BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -609,6 +690,9 @@
 			children = (
 				5841736E2C47C172001EC132 /* HomeUseCases.swift */,
 				58067CB42C4FBF9200889C92 /* TierUseCases.swift */,
+				BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */,
+				584FA4CC2C6475DA008DDC19 /* TierMapUseCases.swift */,
+				BAC55EC82C6F351400B3078F /* OnboardingUseCases.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -626,6 +710,9 @@
 			children = (
 				584173722C47C2BA001EC132 /* HomeRepository.swift */,
 				58067CB62C4FBFB900889C92 /* TierRepository.swift */,
+				BA37E0B62C6B0A870092115B /* DrawRepository.swift */,
+				584FA4CA2C6475C7008DDC19 /* TierMapRepository.swift */,
+				BAB69AC82C71DC5700C20F0B /* SocialLoginUserRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -633,8 +720,12 @@
 		584173742C47C2FE001EC132 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */,
 				584173752C47C311001EC132 /* DefaultHomeRepository.swift */,
 				58067CB82C4FC1A200889C92 /* DefaultTierRepository.swift */,
+				BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */,
+				584FA4CE2C6476A7008DDC19 /* DefaultTierMapRepository.swift */,
+				BAB69ACA2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -653,6 +744,15 @@
 				5841738C2C4A070B001EC132 /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		584FA4C72C64742F008DDC19 /* TierMap */ = {
+			isa = PBXGroup;
+			children = (
+				584FA4C82C647442008DDC19 /* TierMapView.swift */,
+				584FA4D12C6487C4008DDC19 /* NMFMapViewHandler.swift */,
+			);
+			path = TierMap;
 			sourceTree = "<group>";
 		};
 		58D83A532C3A785800511AB9 = {
@@ -678,6 +778,7 @@
 		58D83A5E2C3A785800511AB9 /* Kustaurant */ = {
 			isa = PBXGroup;
 			children = (
+				BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */,
 				58D83A902C3A79C400511AB9 /* Application */,
 				58D83A912C3A7A1C00511AB9 /* Presentation */,
 				58D83AFA2C463AB100511AB9 /* Domain */,
@@ -704,7 +805,7 @@
 				58D83A682C3A785A00511AB9 /* Assets.xcassets */,
 				58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */,
 				58D83A6D2C3A785A00511AB9 /* Info.plist */,
-				584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */,
+				BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -728,7 +829,7 @@
 				584173252C464FEC001EC132 /* Flows */,
 				5841731E2C46467B001EC132 /* Home */,
 				BA8EEF5F2C61D93200FE6ABF /* Onboarding */,
-				584173372C46663B001EC132 /* Recommend */,
+				584173372C46663B001EC132 /* Draw */,
 				584173432C467EA9001EC132 /* Tier */,
 				5841734B2C468293001EC132 /* Community */,
 				584173502C4683D5001EC132 /* MyPage */,
@@ -753,8 +854,61 @@
 				58D83AFC2C463AE200511AB9 /* Restaurant.swift */,
 				5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */,
 				58067CCB2C51552700889C92 /* Category.swift */,
+				584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */,
+				584FA4D52C64A41D008DDC19 /* Coords.swift */,
+				BAC55ECC2C6FB2AB00B3078F /* SocialLogin.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		5EE0E5DCFB0F2A34E78E8A40 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */,
+				3BA34C8D06FC4838BF2DA624 /* Pods-Kustaurant.release.xcconfig */,
+				EF36305B343960EC6AD97AC7 /* Pods-KustaurantTests.debug.xcconfig */,
+				0AA722CB3B316DE7628F8FFC /* Pods-KustaurantTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BA37E06D2C65E0A60092115B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BA37E0782C65E5D70092115B /* CollectionView */,
+				BA37E06F2C65E0B60092115B /* DrawView.swift */,
+				BA37E0842C674E760092115B /* DrawResultView.swift */,
+				BA37E0B22C6A0CBF0092115B /* DrawResultViewHandler.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BA37E06E2C65E0AA0092115B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BA37E0712C65E0BF0092115B /* DrawViewModel.swift */,
+				BA37E0802C6743300092115B /* DrawResultViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BA37E0752C65E5650092115B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BA37E0762C65E5850092115B /* DrawLocationCollectionViewCell.swift */,
+				BA37E07C2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		BA37E0782C65E5D70092115B /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				BA37E0752C65E5650092115B /* Cells */,
+				BA37E07A2C65E5F10092115B /* DrawCollectionViewSection.swift */,
+				BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		BA8EEF5F2C61D93200FE6ABF /* Onboarding */ = {
@@ -812,15 +966,25 @@
 			path = SocialLogin;
 			sourceTree = "<group>";
 		};
-		5EE0E5DCFB0F2A34E78E8A40 /* Pods */ = {
+		BAB69ABD2C71DB8000C20F0B /* InMemoryStorage */ = {
 			isa = PBXGroup;
 			children = (
-				686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */,
-				3BA34C8D06FC4838BF2DA624 /* Pods-Kustaurant.release.xcconfig */,
-				EF36305B343960EC6AD97AC7 /* Pods-KustaurantTests.debug.xcconfig */,
-				0AA722CB3B316DE7628F8FFC /* Pods-KustaurantTests.release.xcconfig */,
+				BAB69ABE2C71DB8C00C20F0B /* KeyValueStorage.swift */,
+				BAB69AC42C71DC0B00C20F0B /* UserDefaultsKey.swift */,
+				BAB69AC62C71DC1700C20F0B /* KeychainKey.swift */,
+				BAB69AC02C71DBA500C20F0B /* UserDefaultsStorage.swift */,
+				BAB69AC22C71DBB500C20F0B /* KeyChainStorage.swift */,
 			);
-			path = Pods;
+			path = InMemoryStorage;
+			sourceTree = "<group>";
+		};
+		BAC55EC02C6F1FCA00B3078F /* LoginService */ = {
+			isa = PBXGroup;
+			children = (
+				BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */,
+				BA57C7B52C721A680063F2FA /* AppleLoginService.swift */,
+			);
+			path = LoginService;
 			sourceTree = "<group>";
 		};
 		CF54AD062C42889500E0DE68 /* Network */ = {
@@ -952,6 +1116,7 @@
 				584173942C4A070B001EC132 /* Pretendard-Regular.otf in Resources */,
 				584173912C4A070B001EC132 /* Pretendard-ExtraBold.otf in Resources */,
 				5841738F2C4A070B001EC132 /* Pretendard-Black.otf in Resources */,
+				BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */,
 				584173902C4A070B001EC132 /* Pretendard-Light.otf in Resources */,
 				58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */,
 				584173962C4A070B001EC132 /* Pretendard-Medium.otf in Resources */,
@@ -1036,15 +1201,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA37E0722C65E0BF0092115B /* DrawViewModel.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				58067D482C5A027000889C92 /* TierCategoryCollectionViewHandler.swift in Sources */,
-				584173642C4791B0001EC132 /* HomeMainCollectionViewCell.swift in Sources */,
+				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				BA8EEF8D2C6351D800FE6ABF /* KuPageControl.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
+				BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */,
 				58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */,
+				BA37E0872C675FF40092115B /* UIStackView+AutoLayout.swift in Sources */,
+				BA37E07B2C65E5F10092115B /* DrawCollectionViewSection.swift in Sources */,
+				BAB69ACB2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift in Sources */,
 				CF54AD102C42898400E0DE68 /* NetworkError.swift in Sources */,
 				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
 				584173472C467F5B001EC132 /* TierSceneDIContainer.swift in Sources */,
@@ -1053,47 +1223,63 @@
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
+				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
-				5841733B2C467972001EC132 /* RecommendFlowCoordinator.swift in Sources */,
+				BAB69ABF2C71DB8C00C20F0B /* KeyValueStorage.swift in Sources */,
+				5841733B2C467972001EC132 /* DrawFlowCoordinator.swift in Sources */,
 				58067D882C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift in Sources */,
+				BA37E0742C65E43F0092115B /* DrawCollectionViewHandler.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */,
+				BA37E07D2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift in Sources */,
 				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
+				BA37E0702C65E0B60092115B /* DrawView.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
 				584173402C467BDD001EC132 /* TabBarPage.swift in Sources */,
 				58067CBF2C4FCCC100889C92 /* Location.swift in Sources */,
 				58067D862C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift in Sources */,
+				BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */,
+				BAB69AC32C71DBB500C20F0B /* KeyChainStorage.swift in Sources */,
 				58067CAA2C4FAE2A00889C92 /* TierListViewModel.swift in Sources */,
 				58067D3B2C58D6EC00889C92 /* TierCategoryViewController.swift in Sources */,
 				584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */,
+				584FA4CD2C6475DA008DDC19 /* TierMapUseCases.swift in Sources */,
 				58067C8D2C4A815000889C92 /* RestaurantDetailViewController.swift in Sources */,
+				BA37E0B32C6A0CBF0092115B /* DrawResultViewHandler.swift in Sources */,
 				58067C8F2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift in Sources */,
 				CF54AD122C4289A900E0DE68 /* Response.swift in Sources */,
 				58067C932C4AA91D00889C92 /* NavigationBarHideable.swift in Sources */,
 				58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */,
 				58067CB22C4FBA9800889C92 /* TierListTableViewCell.swift in Sources */,
 				58067D3D2C58D73C00889C92 /* TierCategoryViewModel.swift in Sources */,
+				584FA4C92C647442008DDC19 /* TierMapView.swift in Sources */,
 				BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
+				BA37E0772C65E5850092115B /* DrawLocationCollectionViewCell.swift in Sources */,
 				CFE2046B2C5D0A4000BCA87C /* UIView+parentViewController.swift in Sources */,
 				584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */,
 				58067D4A2C5A1D6200889C92 /* CategoryType.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
 				BA8EEF812C630FF900FE6ABF /* OnboardingViewController.swift in Sources */,
 				CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */,
+				BAB69AC52C71DC0B00C20F0B /* UserDefaultsKey.swift in Sources */,
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
 				58067D512C5B379800889C92 /* KuSubmitButton.swift in Sources */,
+				584FA4D62C64A41D008DDC19 /* Coords.swift in Sources */,
 				5841737D2C47D3F9001EC132 /* NetworkService.swift in Sources */,
+				BAB69AC72C71DC1700C20F0B /* KeychainKey.swift in Sources */,
 				BA8EEF972C64981100FE6ABF /* LoginViewController.swift in Sources */,
 				BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */,
 				58067CB52C4FBF9200889C92 /* TierUseCases.swift in Sources */,
 				CFE204672C5BC8AC00BCA87C /* KuTabBarPageController.swift in Sources */,
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
+				584FA4D22C6487C4008DDC19 /* NMFMapViewHandler.swift in Sources */,
+				584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */,
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
 				58067C912C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift in Sources */,
@@ -1104,6 +1290,7 @@
 				58067D3F2C58E35800889C92 /* CustomUINavigationController.swift in Sources */,
 				5841732F2C465A9D001EC132 /* AppDIContainer.swift in Sources */,
 				58067CA62C4F4FE200889C92 /* TierMapViewController.swift in Sources */,
+				BAC55EC92C6F351400B3078F /* OnboardingUseCases.swift in Sources */,
 				BA8EEF8A2C634C4B00FE6ABF /* OnboardingCollectionViewCell.swift in Sources */,
 				58067D4D2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift in Sources */,
 				58067D7D2C5FA75A00889C92 /* HomeCategoriesCollectionViewCell.swift in Sources */,
@@ -1112,6 +1299,8 @@
 				58067CC72C514FCD00889C92 /* TierListCategoriesCollectionViewHandler.swift in Sources */,
 				58067CA82C4F512100889C92 /* TierPageViewController.swift in Sources */,
 				BA8EEF872C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift in Sources */,
+				BA37E0B92C6B0DA80092115B /* DrawUseCases.swift in Sources */,
+				BAC55ECD2C6FB2AB00B3078F /* SocialLogin.swift in Sources */,
 				58067D842C5FD67700889C92 /* HomeLayoutTableViewHandler.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
 				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
@@ -1119,7 +1308,8 @@
 				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
-				584173812C48C967001EC132 /* HomeRestaurantListsCollectionViewCell.swift in Sources */,
+				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
@@ -1140,22 +1330,33 @@
 				BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */,
 				58067CB72C4FBFB900889C92 /* TierRepository.swift in Sources */,
 				5841736B2C47B845001EC132 /* UIImage+Resize.swift in Sources */,
+				BA37E0852C674E760092115B /* DrawResultView.swift in Sources */,
+				BA37E07F2C6742EF0092115B /* DrawResultViewController.swift in Sources */,
+				BAC55EC32C6F1FE200B3078F /* NaverLoginService.swift in Sources */,
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
+				584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
+				BA37E0B52C6B0A710092115B /* DefaultDrawRepository.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
+				BAB69AC12C71DBA500C20F0B /* UserDefaultsStorage.swift in Sources */,
 				58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */,
 				CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */,
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
-				5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */,
+				BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */,
+				5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */,
+				BAB69AC92C71DC5700C20F0B /* SocialLoginUserRepository.swift in Sources */,
 				58067D812C5FC07A00889C92 /* HomeLayoutTableView.swift in Sources */,
 				CFE204692C5D03C400BCA87C /* Collection+.swift in Sources */,
 				584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */,
 				584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */,
+				584FA4CB2C6475C7008DDC19 /* TierMapRepository.swift in Sources */,
 				58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */,
 				5841734F2C4682C8001EC132 /* CommunitySceneDIContainer.swift in Sources */,
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
-				584173392C46664E001EC132 /* RecommendViewController.swift in Sources */,
+				584173392C46664E001EC132 /* DrawViewController.swift in Sources */,
+				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,
+				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,
 				58067CCC2C51552700889C92 /* Category.swift in Sources */,
 				58067D7B2C5FA70300889C92 /* HomeCategoriesCollectionView.swift in Sources */,
 			);
@@ -1193,7 +1394,7 @@
 /* Begin XCBuildConfiguration section */
 		58D83A842C3A785A00511AB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */;
+			baseConfigurationReference = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1257,7 +1458,7 @@
 		};
 		58D83A852C3A785A00511AB9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 584FA4C22C6366A8008DDC19 /* Secrets.xcconfig */;
+			baseConfigurationReference = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1319,16 +1520,23 @@
 				API_BASE_URL = "http://3.35.154.191:8080";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = Kustaurant/Kustaurant.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = E98D6ZNGDP;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kustaurant/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "쿠스토랑";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "앱이 실행되는 동안 사용자의 위치를 사용하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1337,6 +1545,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kustaurant.Kustaurant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ku_development;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1354,16 +1564,23 @@
 				API_BASE_URL = "http://3.35.154.191:8080";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = Kustaurant/Kustaurant.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = E98D6ZNGDP;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kustaurant/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "쿠스토랑";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "앱이 실행되는 동안 사용자의 위치를 사용하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1372,6 +1589,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kustaurant.Kustaurant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ku_development;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

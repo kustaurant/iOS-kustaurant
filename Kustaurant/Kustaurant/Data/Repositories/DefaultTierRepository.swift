@@ -16,11 +16,37 @@ final class DefaultTierRepository {
 }
 
 extension DefaultTierRepository: TierRepository {
+    // 중복 코드 수정 필요
+    func fetchTierMap(
+        cuisines: [Cuisine],
+        situations: [Situation],
+        locations: [Location]
+    ) async -> Result<TierMapRestaurants, NetworkError> {
+        let cuisineCodes = cuisines.map { $0.category.code }.joined(separator: ",")
+        let situationCodes = situations.map({ $0.category.code }).joined(separator: ",")
+        let locationCodes = locations.map({ $0.category.code }).joined(separator: ",")
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/tier/map")
+        urlBuilder.addQuery(parameter: [
+            "cuisines": cuisineCodes,
+            "situations": situationCodes,
+            "locations": locationCodes
+        ])
+        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        guard let data: TierMapRestaurants = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        return .success(data)
+    }
+    
     func fetchTierLists(
         cuisines: [Cuisine],
         situations: [Situation],
         locations: [Location],
-        ranking: Int,
+        page: Int,
         limit: Int
     ) async -> Result<[Restaurant], NetworkError> {
         let cuisineCodes = cuisines.map { $0.category.code }.joined(separator: ",")
@@ -31,7 +57,7 @@ extension DefaultTierRepository: TierRepository {
             "cuisines": cuisineCodes,
             "situations": situationCodes,
             "locations": locationCodes,
-            "ranking": "\(ranking)",
+            "page": "\(page)",
             "limit": "\(limit)"
         ])
         let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)

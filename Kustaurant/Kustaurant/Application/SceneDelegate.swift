@@ -33,4 +33,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appFlowCoordinator?.start()
         window?.makeKeyAndVisible()
     }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        NaverLoginService.configureSceneDelegate(openURLContexts: URLContexts)
+    }
 }

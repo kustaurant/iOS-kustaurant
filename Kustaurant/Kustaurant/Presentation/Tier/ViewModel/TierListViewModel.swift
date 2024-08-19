@@ -18,7 +18,8 @@ protocol TierListViewModelInput {
 }
 
 protocol TierListViewModelOutput {
-    var categories: [Category] { get set }
+    var categoriesPublisher: Published<[Category]>.Publisher { get }
+    var filteredCategories: [Category] { get }
     var tierRestaurants: [Restaurant] { get }
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
 }
@@ -29,8 +30,20 @@ final class DefaultTierListViewModel: TierListViewModel {
     private let tierUseCase: TierUseCases
     private let actions: TierListViewModelActions
     
+    @Published private var categories: [Category]
+    private var listPage = 1
+    private var hasMoreData = true
+    
     // MARK: - Output
-    var categories: [Category]
+    var categoriesPublisher: Published<[Category]>.Publisher { $categories }
+    var filteredCategories: [Category] {
+        // 모든 카테고리가 "전체"인 경우, "전체"만 반환
+        if categories.allSatisfy({ $0.displayName == "전체" }) && !categories.isEmpty {
+            return [categories.first!]
+        }
+        // 그 외의 경우, "전체"가 아닌 카테고리만 반환
+        return categories.filter { $0.displayName != "전체" }
+    }
     @Published private(set) var tierRestaurants: [Restaurant] = []
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { $tierRestaurants }
     
@@ -49,20 +62,28 @@ final class DefaultTierListViewModel: TierListViewModel {
 // MARK: - Input
 extension DefaultTierListViewModel {
     func fetchTierLists() {
+        guard hasMoreData else { return }
+        
         Task {
-            let cuisines = extractCuisines(from: categories)
-            let situations = extractSituations(from: categories)
-            let locations = extractLocations(from: categories)
+            let cuisines = Category.extractCuisines(from: categories)
+            let situations = Category.extractSituations(from: categories)
+            let locations = Category.extractLocations(from: categories)
             
             let result = await tierUseCase.fetchTierLists(
                 cuisines: cuisines,
                 situations: situations,
-                locations: locations
+                locations: locations,
+                page: listPage
             )
             
             switch result {
             case .success(let data):
+                if data.isEmpty {
+                    hasMoreData = false
+                    return
+                }
                 tierRestaurants += data
+                listPage += 1
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -75,34 +96,8 @@ extension DefaultTierListViewModel {
     
     func updateCategories(categories: [Category]) {
         self.categories = categories
-    }
-}
-
-extension DefaultTierListViewModel {
-    private func extractCuisines(from categories: [Category]) -> [Cuisine] {
-        categories.compactMap {
-            if case let .cuisine(cuisine) = $0.origin {
-                return cuisine
-            }
-            return nil
-        }
-    }
-    
-    private func extractSituations(from categories: [Category]) -> [Situation] {
-        categories.compactMap {
-            if case let .situation(situation) = $0.origin {
-                return situation
-            }
-            return nil
-        }
-    }
-    
-    private func extractLocations(from categories: [Category]) -> [Location] {
-        categories.compactMap {
-            if case let .location(location) = $0.origin {
-                return location
-            }
-            return nil
-        }
+        hasMoreData = true
+        listPage = 1
+        tierRestaurants.removeAll()
     }
 }

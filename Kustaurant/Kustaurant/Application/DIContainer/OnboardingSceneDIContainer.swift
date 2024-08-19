@@ -26,15 +26,42 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
         )
     }
     
-    func makeOnboardingViewController() -> OnboardingViewController {
-        OnboardingViewController(viewModel: makeOnboardingViewModel())
+    func makeOnboardingViewController(actions: OnboardingViewModelActions) -> OnboardingViewController {
+        OnboardingViewController(viewModel: makeOnboardingViewModel(actions: actions))
     }
     
-    func makeLoginViewController() -> LoginViewController {
-        LoginViewController(viewModel: makeOnboardingViewModel())
+    func makeLoginViewController(actions: OnboardingViewModelActions) -> LoginViewController {
+        LoginViewController(viewModel: makeOnboardingViewModel(actions: actions))
     }
     
-    func makeOnboardingViewModel() -> OnboardingViewModel {
-        DefaultOnboardingViewModel()
+    func makeOnboardingViewModel(actions: OnboardingViewModelActions) -> OnboardingViewModel {
+        DefaultOnboardingViewModel(
+            actions: actions,
+            onboardingUseCases: makeOnboardingUseCases()
+        )
+    }
+    
+    func makeOnboardingUseCases() -> OnboardingUseCases {
+        DefaultOnboardingUseCases(
+            naverLoginService: makeNaverLoginService(),
+            appleLoginService: makeAppleLoginService(),
+            socialLoginUserRepository: makeSocialLoginUserRepository()
+        )
+    }
+    
+    func makeNaverLoginService() -> NaverLoginService {
+        NaverLoginService(networkService: dependencies.networkService)
+    }
+    
+    func makeSocialLoginUserRepository() -> SocialLoginUserRepository {
+        DefaultSocialLoginUserRepository(keychainStorage: makeKeychaingStorage())
+    }
+    
+    func makeKeychaingStorage() -> KeychainStorage {
+        KeychainStorage()
+    }
+    
+    func makeAppleLoginService() -> AppleLoginService {
+        AppleLoginService()
     }
 }

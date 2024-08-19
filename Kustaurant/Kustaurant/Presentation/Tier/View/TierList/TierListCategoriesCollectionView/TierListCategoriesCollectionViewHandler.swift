@@ -49,7 +49,7 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        viewModel.categories.count
+        viewModel.filteredCategories.count
     }
     
     func collectionView(
@@ -58,7 +58,7 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TierListCategoryCollectionViewCell.reuseIdentifier, for: indexPath) as? TierListCategoryCollectionViewCell else { return UICollectionViewCell() }
 
-        var model = viewModel.categories[indexPath.row]
+        var model = viewModel.filteredCategories[indexPath.row]
         model.isSelect = true
         cell.model = model
         
@@ -73,12 +73,12 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDelegateFlowL
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let category = viewModel.categories[indexPath.row]
+        let category = viewModel.filteredCategories[indexPath.row]
         let label = UILabel()
         label.text = category.displayName
         label.font = .Pretendard.regular14
         let size = label.intrinsicContentSize
-        return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.Height)
+        return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.height)
     }
 
     func collectionView(
