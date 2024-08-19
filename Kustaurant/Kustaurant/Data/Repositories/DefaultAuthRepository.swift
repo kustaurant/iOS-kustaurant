@@ -1,0 +1,53 @@
+//
+//  DefaultAuthRepository.swift
+//  Kustaurant
+//
+//  Created by peppermint100 on 8/19/24.
+//
+
+import Foundation
+
+final class DefaultAuthRepository {
+    
+    private let networkService: NetworkService
+    
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+    }
+}
+
+extension DefaultAuthRepository: AuthRepository {
+    
+    func naverLogin(userId: String, naverAccessToken: String) async -> Result<String, NetworkError> {
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/naver-login")
+        urlBuilder.addQuery(
+            parameter: [
+                "provider": SocialLoginProvider.naver.rawValue,
+                "providerId": userId,
+                "naverAccessToken": naverAccessToken
+            ]
+        )
+        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let response = await request.responseAsync(with: urlBuilder)
+        
+        if let error = response.error {
+            return .failure(error)
+        }
+        
+        guard let data: String = response.decodeString() else {
+            return .failure(.decodingFailed)
+        }
+        
+        return .success(data)
+    }
+    
+    func naverLogout(userId: String) async {
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/log-out")
+                let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let response = await request.responseAsync(with: urlBuilder)
+        
+        if let error = response.error {
+            print(error.localizedDescription)
+        }
+    }
+}

@@ -45,7 +45,8 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
         DefaultOnboardingUseCases(
             naverLoginService: makeNaverLoginService(),
             appleLoginService: makeAppleLoginService(),
-            socialLoginUserRepository: makeSocialLoginUserRepository()
+            socialLoginUserRepository: makeSocialLoginUserRepository(),
+            authReposiory: makeAuthRepository()
         )
     }
     
@@ -63,5 +64,9 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
     
     func makeAppleLoginService() -> AppleLoginService {
         AppleLoginService()
+    }
+    
+    func makeAuthRepository() -> AuthRepository {
+        DefaultAuthRepository(networkService: dependencies.networkService)
     }
 }

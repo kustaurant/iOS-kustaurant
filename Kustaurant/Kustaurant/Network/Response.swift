@@ -23,4 +23,9 @@ extension Response {
         guard let data else { return nil }
         return try? JSONDecoder().decode(T.self, from: data)
     }
+    
+    public func decodeString(encoding: String.Encoding = .utf8) -> String? {
+        guard let data else { return nil }
+        return String(data: data, encoding: encoding)
+    }
 }
