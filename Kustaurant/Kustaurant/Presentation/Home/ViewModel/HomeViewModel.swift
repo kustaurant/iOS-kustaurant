@@ -78,6 +78,6 @@ extension DefaultHomeViewModel {
     }
     
     func restaurantListsDidSelect(restaurant: Restaurant) {
-        actions.showRestaurantDetail(restaurant)
+//        actions.showRestaurantDetail(restaurant)
     }
 }

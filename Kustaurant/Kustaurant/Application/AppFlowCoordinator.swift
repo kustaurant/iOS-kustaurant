@@ -22,11 +22,11 @@ final class AppFlowCoordinator {
 
 extension AppFlowCoordinator {
     func start() {
-        if isLoggedIn() {
+//        if isLoggedIn() {
             showTab()
-        } else {
-            showOnboarding()
-        }
+//        } else {
+//            showOnboarding()
+//        }
     }
 }
 
@@ -66,7 +66,8 @@ extension AppFlowCoordinator {
             navigationController: CustomUINavigationController()
         )
 
-        tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow, communityFlow, myPageFlow])
+//        tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow, communityFlow, myPageFlow])
+        tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow])
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }
