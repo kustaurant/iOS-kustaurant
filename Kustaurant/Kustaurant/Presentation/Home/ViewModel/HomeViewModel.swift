@@ -45,7 +45,6 @@ final class DefaultHomeViewModel: HomeViewModel {
     var topRestaurantsPublisher: Published<[Restaurant]>.Publisher { $topRestaurants }
     var forMeRestaurantsPublisher: Published<[Restaurant]>.Publisher { $forMeRestaurants }
     var mainSectionPublisher: Published<[HomeSection]>.Publisher { $mainSections }
-    @Published var mainSections: [HomeSection] = [.banner, .categories]
     var cuisines: [Cuisine] = Cuisine.allCases
     
     // MARK: - Initialization
