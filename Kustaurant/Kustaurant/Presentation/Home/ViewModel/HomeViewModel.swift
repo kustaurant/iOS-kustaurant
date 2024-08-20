@@ -19,6 +19,8 @@ protocol HomeViewModelInput {
 }
 
 protocol HomeViewModelOutput {
+    var banners: [String] { get }
+    var bannersPublisher: Published<[String]>.Publisher { get }
     var topRestaurants: [Restaurant] { get }
     var forMeRestaurants: [Restaurant] { get }
     var topRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
@@ -26,7 +28,6 @@ protocol HomeViewModelOutput {
     var mainSections: [HomeSection] { get set }
     var mainSectionPublisher: Published<[HomeSection]>.Publisher { get }
     var cuisines: [Cuisine] { get }
-    
 }
 
 typealias HomeViewModel = HomeViewModelInput & HomeViewModelOutput
@@ -36,8 +37,11 @@ final class DefaultHomeViewModel: HomeViewModel {
     private let actions: HomeViewModelActions
     
     // MARK: - Output
+    @Published var mainSections: [HomeSection] = [.categories]
+    @Published private(set) var banners: [String] = []
     @Published private(set) var topRestaurants: [Restaurant] = []
     @Published private(set) var forMeRestaurants: [Restaurant] = []
+    var bannersPublisher: Published<[String]>.Publisher { $banners }
     var topRestaurantsPublisher: Published<[Restaurant]>.Publisher { $topRestaurants }
     var forMeRestaurantsPublisher: Published<[Restaurant]>.Publisher { $forMeRestaurants }
     var mainSectionPublisher: Published<[HomeSection]>.Publisher { $mainSections }
@@ -69,6 +73,7 @@ extension DefaultHomeViewModel {
             case .success(let data):
                 topRestaurants = data.topRestaurantsByRating?.compactMap({$0}) ?? []
                 forMeRestaurants = data.restaurantsForMe?.compactMap({$0}) ?? []
+                banners = data.photoUrls?.compactMap({$0}) ?? []
             }
         }
     }

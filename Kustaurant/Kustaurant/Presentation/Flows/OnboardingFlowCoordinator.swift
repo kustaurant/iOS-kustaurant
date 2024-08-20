@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol OnboardingSceneDelegate: AnyObject {
+    func onLoginSuccess()
+}
+
 protocol OnboardingFlowCoordinatorDependencies {
     func makeOnboardingViewController(actions: OnboardingViewModelActions) -> OnboardingViewController
     func makeLoginViewController(actions: OnboardingViewModelActions) -> LoginViewController

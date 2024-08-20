@@ -10,4 +10,5 @@ import Foundation
 struct HomeRestaurantLists: Codable {
     var topRestaurantsByRating: [Restaurant?]?
     var restaurantsForMe: [Restaurant?]?
+    var photoUrls: [String?]?
 }
