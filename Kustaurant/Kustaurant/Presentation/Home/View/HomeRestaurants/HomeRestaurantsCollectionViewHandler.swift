@@ -26,10 +26,6 @@ extension HomeRestaurantsCollectionViewHandler {
     private func setup() {
         view.collectionView.delegate = self
         view.collectionView.dataSource = self
-
-        if let sectionType = sectionType() {
-            view.moreButton.addAction( UIAction { [weak self] _ in self?.restaurantListsMoreButtonTapped(sectionType)}, for: .touchUpInside)
-        }
     }
 
     func reload() {
@@ -56,11 +52,6 @@ extension HomeRestaurantsCollectionViewHandler {
 extension HomeRestaurantsCollectionViewHandler {
     private func restaurantListsDidSelect(_ restaurant: Restaurant) {
         viewModel.restaurantListsDidSelect(restaurant: restaurant)
-    }
-    
-    private func restaurantListsMoreButtonTapped(_ section: HomeSection?) {
-        guard let section = section else { return }
-        print("\(section)")
     }
 }
 
