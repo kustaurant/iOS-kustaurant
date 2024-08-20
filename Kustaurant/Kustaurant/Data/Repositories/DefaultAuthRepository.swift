@@ -18,7 +18,7 @@ final class DefaultAuthRepository {
 
 extension DefaultAuthRepository: AuthRepository {
     func appleLogin(authorizationCode: String, identityToken: String) async -> Result<String, NetworkError> {
-        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/apple-login")
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/apple-login", method: .post)
         urlBuilder.addQuery(
             parameter: [
                 "provider": SocialLoginProvider.apple.rawValue,
@@ -28,6 +28,7 @@ extension DefaultAuthRepository: AuthRepository {
         )
         let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
         let response = await request.responseAsync(with: urlBuilder)
+        print(response)
         
         if let error = response.error {
             return .failure(error)
@@ -41,7 +42,7 @@ extension DefaultAuthRepository: AuthRepository {
     }
 
     func naverLogin(userId: String, naverAccessToken: String) async -> Result<String, NetworkError> {
-        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/naver-login")
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/naver-login", method: .post)
         urlBuilder.addQuery(
             parameter: [
                 "provider": SocialLoginProvider.naver.rawValue,
