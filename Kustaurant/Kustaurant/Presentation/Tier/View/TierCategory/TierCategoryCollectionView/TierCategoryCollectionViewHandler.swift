@@ -99,7 +99,7 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TierListCategoryCollectionViewCell.reuseIdentifier, for: indexPath) as? TierListCategoryCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TierCategoryCollectionViewCell.reuseIdentifier, for: indexPath) as? TierCategoryCollectionViewCell else { return UICollectionViewCell() }
         let category = getCategory(for: indexPath)
         cell.model = category
         return cell
@@ -126,6 +126,6 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDelegateFlowLayout 
         label.text = category.displayName
         label.font = UIFont.Pretendard.regular14
         let size = label.intrinsicContentSize
-        return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.height)
+        return CGSize(width: size.width + (TierCategoryCollectionViewCell.horizontalPadding * 2), height: Category.height)
     }
 }
