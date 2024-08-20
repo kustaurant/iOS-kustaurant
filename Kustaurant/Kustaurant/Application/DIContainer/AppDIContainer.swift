@@ -41,7 +41,8 @@ final class AppDIContainer {
     }
     
     func makeMyPageSceneDIContainer() -> MyPageSceneDIContainer {
-        MyPageSceneDIContainer()
+        let dependencies = MyPageSceneDIContainer.Dependencies(networkService: networkService)
+        return MyPageSceneDIContainer(dependencies: dependencies)
     }
     
     func makeRestaurantDetailSceneDIContainer() -> RestaurantDetailSceneDIContainer {

@@ -29,10 +29,21 @@ extension Request {
                 return
             }
             
-            guard let httpResponse = urlResponse as? HTTPURLResponse,
-                  httpResponse.statusCode != 401
-            else {
+            guard let httpResponse = urlResponse as? HTTPURLResponse else {
                 completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            let statusCode = httpResponse.statusCode
+            
+            switch statusCode {
+            case 200..<300:
+                break
+            case 401:
+                completionHandler(.failure(.unauthorized))
+                return
+            default:
+                completionHandler(.failure(.serverError(statusCode: statusCode)))
                 return
             }
             

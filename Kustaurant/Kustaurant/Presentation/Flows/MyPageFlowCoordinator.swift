@@ -8,12 +8,13 @@
 import UIKit
 
 protocol MyPageFlowCoordinatorDependencies {
-    func makeMyPageViewController() -> MyPageViewController
+    func makeMyPageViewController(actions: MyPageViewModelActions) -> MyPageViewController
 }
 
 final class MyPageFlowCoordinator: Coordinator {
     private let dependencies: MyPageFlowCoordinatorDependencies
     var navigationController: UINavigationController
+    weak var appFlowNavigating: AppFlowCoordinatorNavigating?
     
     init(
         dependencies: MyPageFlowCoordinatorDependencies,
@@ -26,9 +27,16 @@ final class MyPageFlowCoordinator: Coordinator {
 
 extension MyPageFlowCoordinator {
     func start() {
-        let viewController = dependencies.makeMyPageViewController()
+        let actions = MyPageViewModelActions(
+            showOnboarding: showOnboarding
+        )
+        let viewController = dependencies.makeMyPageViewController(actions: actions)
         let image = UIImage(named: TabBarPage.mypage.pageImageName())?.withRenderingMode(.alwaysOriginal)
         viewController.tabBarItem = UITabBarItem(title: TabBarPage.mypage.pageTitleValue(), image: image, selectedImage: image)
         navigationController.pushViewController(viewController, animated: false)
+    }
+    
+    private func showOnboarding() {
+        appFlowNavigating?.showOnboarding()
     }
 }

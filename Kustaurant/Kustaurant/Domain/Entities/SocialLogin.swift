@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SocialLoginProvider: Codable {
+enum SocialLoginProvider: String, Codable {
     case naver, apple
 }
 

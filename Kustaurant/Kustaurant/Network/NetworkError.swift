@@ -15,6 +15,7 @@ public enum NetworkError: Error {
     case decodingFailed
     case unknown
     case custom(String)
+    case unauthorized
     case serverError(statusCode: Int)
     
     public var localizedDescription: String {
@@ -25,6 +26,8 @@ public enum NetworkError: Error {
             return "Invalid Response"
         case .invalidRequest:
             return "Invalid Request"
+        case .unauthorized:
+            return "Unauthrized API Request, Access Token might be invalid"
         case .noData:
             return "No data received"
         case .decodingFailed:

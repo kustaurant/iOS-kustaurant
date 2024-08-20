@@ -8,8 +8,19 @@
 import UIKit
 
 final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
-    func makeMyPageViewController() -> MyPageViewController {
-        MyPageViewController()
+    
+    struct Dependencies {
+        let networkService: NetworkService
+    }
+    
+    private let dependencies: Dependencies
+    
+    init(dependencies: Dependencies) {
+        self.dependencies = dependencies
+    }
+    
+    func makeMyPageViewController(actions: MyPageViewModelActions) -> MyPageViewController {
+        MyPageViewController(viewModel: makeMyPageViewModel(actions: actions))
     }
     
     func makeMyPageFlowCoordinator(navigationController: UINavigationController) -> MyPageFlowCoordinator {
@@ -17,5 +28,38 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
             dependencies: self,
             navigationController: navigationController
         )
+    }
+    
+    func makeMyPageViewModel(actions: MyPageViewModelActions) -> MyPageViewModel {
+        DefaultMyPageViewModel(actions: actions, authUseCases: makeAuthUseCases())
+    }
+    
+    func makeAuthUseCases() -> AuthUseCases {
+        DefaultAuthUseCases(
+            naverLoginService: makeNaverLoginService(),
+            appleLoginService: makeAppleLoginService(),
+            socialLoginUserRepository: makeSocialLoginUserRepository(),
+            authReposiory: makeAuthRepository()
+        )
+    }
+    
+    func makeNaverLoginService() -> NaverLoginService {
+        NaverLoginService(networkService: dependencies.networkService)
+    }
+    
+    func makeSocialLoginUserRepository() -> SocialLoginUserRepository {
+        DefaultSocialLoginUserRepository(keychainStorage: makeKeychaingStorage())
+    }
+    
+    func makeKeychaingStorage() -> KeychainStorage {
+        KeychainStorage()
+    }
+    
+    func makeAppleLoginService() -> AppleLoginService {
+        AppleLoginService()
+    }
+    
+    func makeAuthRepository() -> AuthRepository {
+        DefaultAuthRepository(networkService: dependencies.networkService)
     }
 }

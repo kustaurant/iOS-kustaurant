@@ -14,8 +14,10 @@ struct OnboardingViewModelActions {
 
 protocol OnboardingViewModelInput {
     func naverLogin()
-    func naverLogout()
     func appleLogin()
+    func logout()
+    func skipLogin()
+    func didTapOkInAlert()
 }
 
 protocol OnboardingViewModelOutput {
@@ -23,53 +25,75 @@ protocol OnboardingViewModelOutput {
     var currentOnboardingPage: Int { get set }
     var currentOnboardingPagePublisher: Published<Int>.Publisher { get }
     var isUpdatingPage: Bool { get set }
+    var showAlert: Bool { get set }
+    var showAlertPublisher: Published<Bool>.Publisher { get }
 }
 
 typealias OnboardingViewModel = OnboardingViewModelInput & OnboardingViewModelOutput
 
-final class DefaultOnboardingViewModel: OnboardingViewModel {
+final class DefaultOnboardingViewModel {
     let onboardingContents = OnboardingContent.all()
     @Published var currentOnboardingPage: Int = 0
     var currentOnboardingPagePublisher: Published<Int>.Publisher { $currentOnboardingPage }
     @Published var isUpdatingPage: Bool = false
+    @Published var showAlert: Bool = false
+    var showAlertPublisher: Published<Bool>.Publisher { $showAlert }
     
     private let actions: OnboardingViewModelActions
-    private let onboardingUseCases: OnboardingUseCases
+    private let authUseCases: AuthUseCases
     private var cancellables = Set<AnyCancellable>()
     
-    init(actions: OnboardingViewModelActions, onboardingUseCases: OnboardingUseCases) {
+    init(actions: OnboardingViewModelActions, onboardingUseCases: AuthUseCases) {
         self.actions = actions
-        self.onboardingUseCases = onboardingUseCases
+        self.authUseCases = onboardingUseCases
     }
+}
+
+extension DefaultOnboardingViewModel: OnboardingViewModel {
     
     func naverLogin() {
-        onboardingUseCases.naverLogin()
+        authUseCases.naverLogin()
             .receive(on: DispatchQueue.main)
-            .sink { completion in
-            switch completion {
-            case .finished:
-                break
-            case .failure(let error):
-                print(#file, #function, error.localizedDescription)
+            .sink { [weak self] completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print(#file, #function, error.localizedDescription)
+                    self?.showAlert = true
+                }
+            } receiveValue: { [weak self] user in
+                self?.actions.initiateTabs?()
             }
-        } receiveValue: { [weak self] user in
-            self?.actions.initiateTabs?()
-            print(user)
-        }
-        .store(in: &cancellables)
+            .store(in: &cancellables)
     }
     
-    func naverLogout() {
-        onboardingUseCases.naverLogout()
+    func logout() {
+        authUseCases.logout()
     }
     
     func appleLogin() {
-        onboardingUseCases.appleLogin()
+        authUseCases.appleLogin()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] user in
+            .sink { [weak self] completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print(#file, #function, error.localizedDescription)
+                    self?.showAlert = true
+                }
+            } receiveValue: { [weak self] user in
                 self?.actions.initiateTabs?()
-                print(user)
             }
             .store(in: &cancellables)
+    }
+    
+    func skipLogin() {
+        actions.initiateTabs?()
+    }
+    
+    func didTapOkInAlert() {
+        showAlert = false
     }
 }

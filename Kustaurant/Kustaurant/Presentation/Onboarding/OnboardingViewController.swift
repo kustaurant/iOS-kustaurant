@@ -33,6 +33,7 @@ class OnboardingViewController: UIViewController {
         super.viewDidLoad()
         onboardingCollectionViewHandler?.setupCollectionView()
         onboardingCollectionViewHandler?.setupPageControl()
+        bind()
         bindViews()
     }
     
@@ -42,6 +43,16 @@ class OnboardingViewController: UIViewController {
 }
 
 extension OnboardingViewController {
+    
+    private func bind() {
+        viewModel.showAlertPublisher.sink { [weak self] showAlert in
+            if showAlert {
+                self?.presentAlert()
+            }
+        }
+        .store(in: &cancellables)
+    }
+    
     private func bindViews() {
         viewModel.currentOnboardingPagePublisher.sink { [weak self] page in
             self?.onboardingView.pageControl.currentPage = page
@@ -58,10 +69,21 @@ extension OnboardingViewController {
         }
         .store(in: &cancellables)
         
-        // MARK: 네이버 로그아웃 테스트 버튼
         onboardingView.socialLoginView.skipButton.tapPublisher().sink { [weak self] in
-            self?.viewModel.naverLogout()
+            self?.viewModel.skipLogin()
         }
         .store(in: &cancellables)
+    }
+}
+
+
+extension OnboardingViewController {
+    
+    private func presentAlert() {
+        let alert = UIAlertController(title: "로그인에 실패했습니다.", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+            self?.viewModel.didTapOkInAlert()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
