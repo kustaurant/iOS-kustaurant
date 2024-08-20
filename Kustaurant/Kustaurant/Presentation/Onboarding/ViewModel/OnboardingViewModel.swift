@@ -34,16 +34,16 @@ final class DefaultOnboardingViewModel: OnboardingViewModel {
     @Published var isUpdatingPage: Bool = false
     
     private let actions: OnboardingViewModelActions
-    private let onboardingUseCases: OnboardingUseCases
+    private let authUseCases: AuthUseCases
     private var cancellables = Set<AnyCancellable>()
     
-    init(actions: OnboardingViewModelActions, onboardingUseCases: OnboardingUseCases) {
+    init(actions: OnboardingViewModelActions, onboardingUseCases: AuthUseCases) {
         self.actions = actions
-        self.onboardingUseCases = onboardingUseCases
+        self.authUseCases = onboardingUseCases
     }
     
     func naverLogin() {
-        onboardingUseCases.naverLogin()
+        authUseCases.naverLogin()
             .receive(on: DispatchQueue.main)
             .sink { completion in
             switch completion {
@@ -59,11 +59,11 @@ final class DefaultOnboardingViewModel: OnboardingViewModel {
     }
     
     func logout() {
-        onboardingUseCases.logout()
+        authUseCases.logout()
     }
     
     func appleLogin() {
-        onboardingUseCases.appleLogin()
+        authUseCases.appleLogin()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] user in
                 self?.actions.initiateTabs?()

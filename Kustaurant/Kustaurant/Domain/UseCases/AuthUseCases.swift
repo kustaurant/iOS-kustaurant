@@ -8,13 +8,13 @@
 import Foundation
 import Combine
 
-protocol OnboardingUseCases {
+protocol AuthUseCases {
     func naverLogin() -> AnyPublisher<SocialLoginUser, NetworkError>
     func appleLogin() -> AnyPublisher<SocialLoginUser, Never>
     func logout()
 }
 
-final class DefaultOnboardingUseCases: OnboardingUseCases {
+final class DefaultAuthUseCases: AuthUseCases {
     
     private let naverLoginService: NaverLoginService
     private let appleLoginService: AppleLoginService
@@ -29,7 +29,7 @@ final class DefaultOnboardingUseCases: OnboardingUseCases {
     }
 }
 
-extension DefaultOnboardingUseCases {
+extension DefaultAuthUseCases {
     
     func naverLogin() -> AnyPublisher<SocialLoginUser, NetworkError> {
         naverLoginService.attemptLogin()
@@ -54,7 +54,7 @@ extension DefaultOnboardingUseCases {
     }
 }
 
-extension DefaultOnboardingUseCases {
+extension DefaultAuthUseCases {
     
     private func processNaverLogin(_ response: SignInWithNaverResponse) -> AnyPublisher<SocialLoginUser, NetworkError> {
         Future { promise in

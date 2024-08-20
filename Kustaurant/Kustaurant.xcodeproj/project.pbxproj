@@ -126,6 +126,7 @@
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
+		BA57C7C12C731F270063F2FA /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7C02C731F270063F2FA /* MyPageViewModel.swift */; };
 		BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */; };
 		BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */; };
 		BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */; };
@@ -146,7 +147,7 @@
 		BAB69AC92C71DC5700C20F0B /* SocialLoginUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC82C71DC5700C20F0B /* SocialLoginUserRepository.swift */; };
 		BAB69ACB2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69ACA2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift */; };
 		BAC55EC32C6F1FE200B3078F /* NaverLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */; };
-		BAC55EC92C6F351400B3078F /* OnboardingUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC82C6F351400B3078F /* OnboardingUseCases.swift */; };
+		BAC55EC92C6F351400B3078F /* AuthUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC82C6F351400B3078F /* AuthUseCases.swift */; };
 		BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */; };
 		BAC55ECD2C6FB2AB00B3078F /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECC2C6FB2AB00B3078F /* SocialLogin.swift */; };
 		BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */; };
@@ -307,6 +308,7 @@
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthRepository.swift; sourceTree = "<group>"; };
+		BA57C7C02C731F270063F2FA /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		BA8EEF3B2C5CAAD400FE6ABF /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		BA8EEF622C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowCoordinator.swift; sourceTree = "<group>"; };
 		BA8EEF642C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -327,7 +329,7 @@
 		BAB69AC82C71DC5700C20F0B /* SocialLoginUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginUserRepository.swift; sourceTree = "<group>"; };
 		BAB69ACA2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSocialLoginUserRepository.swift; sourceTree = "<group>"; };
 		BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverLoginService.swift; sourceTree = "<group>"; };
-		BAC55EC82C6F351400B3078F /* OnboardingUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUseCases.swift; sourceTree = "<group>"; };
+		BAC55EC82C6F351400B3078F /* AuthUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCases.swift; sourceTree = "<group>"; };
 		BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverLoginRepository.swift; sourceTree = "<group>"; };
 		BAC55ECC2C6FB2AB00B3078F /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
 		BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
@@ -640,6 +642,7 @@
 			isa = PBXGroup;
 			children = (
 				584173512C4683E3001EC132 /* MyPageViewController.swift */,
+				BA57C7BF2C731F1B0063F2FA /* ViewModel */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -698,7 +701,7 @@
 				58067CB42C4FBF9200889C92 /* TierUseCases.swift */,
 				BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */,
 				584FA4CC2C6475DA008DDC19 /* TierMapUseCases.swift */,
-				BAC55EC82C6F351400B3078F /* OnboardingUseCases.swift */,
+				BAC55EC82C6F351400B3078F /* AuthUseCases.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -931,6 +934,14 @@
 				BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */,
 			);
 			path = ThirdPartyRepositories;
+			sourceTree = "<group>";
+		};
+		BA57C7BF2C731F1B0063F2FA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BA57C7C02C731F270063F2FA /* MyPageViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		BA8EEF5F2C61D93200FE6ABF /* Onboarding */ = {
@@ -1254,6 +1265,7 @@
 				5841733B2C467972001EC132 /* DrawFlowCoordinator.swift in Sources */,
 				58067D882C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift in Sources */,
 				BA37E0742C65E43F0092115B /* DrawCollectionViewHandler.swift in Sources */,
+				BA57C7C12C731F270063F2FA /* MyPageViewModel.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
 				CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */,
 				BA37E07D2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift in Sources */,
@@ -1313,7 +1325,7 @@
 				58067D3F2C58E35800889C92 /* CustomUINavigationController.swift in Sources */,
 				5841732F2C465A9D001EC132 /* AppDIContainer.swift in Sources */,
 				58067CA62C4F4FE200889C92 /* TierMapViewController.swift in Sources */,
-				BAC55EC92C6F351400B3078F /* OnboardingUseCases.swift in Sources */,
+				BAC55EC92C6F351400B3078F /* AuthUseCases.swift in Sources */,
 				BA8EEF8A2C634C4B00FE6ABF /* OnboardingCollectionViewCell.swift in Sources */,
 				58067D4D2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift in Sources */,
 				58067D7D2C5FA75A00889C92 /* HomeCategoriesCollectionViewCell.swift in Sources */,
