@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TierFlowCoordinatorDependencies {
-    func makeTierViewController(actions: TierListViewModelActions, initialCategories: [Category]) -> TierViewController
+    func makeTierViewController(listActions: TierListViewModelActions, mapActions: TierMapViewModelActions, initialCategories: [Category]) -> TierViewController
     func makeTierCategoryViewController(actions: TierCategoryViewModelActions, categories: [Category]) -> TierCategoryViewController
 }
 
@@ -16,8 +16,8 @@ final class TierFlowCoordinator: Coordinator {
     
     private let dependencies: TierFlowCoordinatorDependencies
     var navigationController: UINavigationController
-    
-    private weak var tierListViewController: TierListViewController?
+
+    private weak var tierViewController: TierViewController?
     
     init(
         dependencies: TierFlowCoordinatorDependencies,
@@ -34,14 +34,21 @@ extension TierFlowCoordinator {
     }
     
     func start(initialCategories: [Category]) {
-        let actions = TierListViewModelActions(
+        let listActions = TierListViewModelActions(
             showTierCategory: showTierCategory
         )
-        let viewController = dependencies.makeTierViewController(actions: actions, initialCategories: initialCategories)
+        let mapActions = TierMapViewModelActions(
+            showTierCategory: showTierCategory
+        )
+        let viewController = dependencies.makeTierViewController(
+            listActions: listActions,
+            mapActions: mapActions,
+            initialCategories: initialCategories
+        )
         let image = UIImage(named: TabBarPage.tier.pageImageName())?.withRenderingMode(.alwaysOriginal)
         viewController.tabBarItem = UITabBarItem(title: TabBarPage.tier.pageTitleValue(), image: image, selectedImage: image)
+        tierViewController = viewController
         navigationController.pushViewController(viewController, animated: true)
-        tierListViewController = viewController.pages.first as? TierListViewController
     }
     
     private func showTierCategory(categories: [Category]) {
@@ -53,6 +60,8 @@ extension TierFlowCoordinator {
     }
     
     private func receiveTierCategories(categories: [Category]) {
-        tierListViewController?.receiveTierCategories(categories: categories)
+        if let currentViewController = tierViewController?.viewControllers?.first as? TierCategoryReceivable {
+            currentViewController.receiveTierCategories(categories: categories)
+        }
     }
 }
