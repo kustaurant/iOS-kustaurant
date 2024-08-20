@@ -47,9 +47,8 @@ extension LoginViewController {
         }
         .store(in: &cancellables)
         
-        // MARK: 네이버 로그아웃 테스트 버튼
         loginView.socialLoginView.skipButton.tapPublisher().sink { [weak self] in
-            self?.viewModel.logout()
+            self?.viewModel.skipLogin()
         }
         .store(in: &cancellables)
     }

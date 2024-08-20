@@ -16,6 +16,7 @@ protocol OnboardingViewModelInput {
     func naverLogin()
     func appleLogin()
     func logout()
+    func skipLogin()
 }
 
 protocol OnboardingViewModelOutput {
@@ -27,7 +28,7 @@ protocol OnboardingViewModelOutput {
 
 typealias OnboardingViewModel = OnboardingViewModelInput & OnboardingViewModelOutput
 
-final class DefaultOnboardingViewModel: OnboardingViewModel {
+final class DefaultOnboardingViewModel {
     let onboardingContents = OnboardingContent.all()
     @Published var currentOnboardingPage: Int = 0
     var currentOnboardingPagePublisher: Published<Int>.Publisher { $currentOnboardingPage }
@@ -41,21 +42,24 @@ final class DefaultOnboardingViewModel: OnboardingViewModel {
         self.actions = actions
         self.authUseCases = onboardingUseCases
     }
+}
+
+extension DefaultOnboardingViewModel: OnboardingViewModel {
     
     func naverLogin() {
         authUseCases.naverLogin()
             .receive(on: DispatchQueue.main)
             .sink { completion in
-            switch completion {
-            case .finished:
-                break
-            case .failure(let error):
-                print(#file, #function, error.localizedDescription)
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print(#file, #function, error.localizedDescription)
+                }
+            } receiveValue: { [weak self] user in
+                self?.actions.initiateTabs?()
             }
-        } receiveValue: { [weak self] user in
-            self?.actions.initiateTabs?()
-        }
-        .store(in: &cancellables)
+            .store(in: &cancellables)
     }
     
     func logout() {
@@ -70,5 +74,9 @@ final class DefaultOnboardingViewModel: OnboardingViewModel {
                 print(user)
             }
             .store(in: &cancellables)
+    }
+    
+    func skipLogin() {
+        actions.initiateTabs?()
     }
 }
