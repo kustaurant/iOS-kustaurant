@@ -19,31 +19,22 @@ protocol TierListViewModelInput {
 
 protocol TierListViewModelOutput {
     var categoriesPublisher: Published<[Category]>.Publisher { get }
-    var filteredCategories: [Category] { get }
     var tierRestaurants: [Restaurant] { get }
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
 }
 
-typealias TierListViewModel = TierListViewModelInput & TierListViewModelOutput
+typealias TierListViewModel = TierListViewModelInput & TierListViewModelOutput & TierBaseViewModel
 
 final class DefaultTierListViewModel: TierListViewModel {
     private let tierUseCase: TierUseCases
     private let actions: TierListViewModelActions
     
-    @Published private var categories: [Category]
+    @Published var categories: [Category]
     private var listPage = 1
     private var hasMoreData = true
     
     // MARK: - Output
     var categoriesPublisher: Published<[Category]>.Publisher { $categories }
-    var filteredCategories: [Category] {
-        // 모든 카테고리가 "전체"인 경우, "전체"만 반환
-        if categories.allSatisfy({ $0.displayName == "전체" }) && !categories.isEmpty {
-            return [categories.first!]
-        }
-        // 그 외의 경우, "전체"가 아닌 카테고리만 반환
-        return categories.filter { $0.displayName != "전체" }
-    }
     @Published private(set) var tierRestaurants: [Restaurant] = []
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { $tierRestaurants }
     

@@ -11,7 +11,7 @@ import Combine
 final class TierListViewController: UIViewController {
     private var viewModel: TierListViewModel
     private var tierListTableViewHandler: TierListTableViewHandler?
-    private var tierListCategoriesCollectionViewHandler: TierListCategoriesCollectionViewHandler?
+    private var categoriesCollectionViewHandler: TierTopCategoriesCollectionViewHandler?
     private var tierListView = TierListView()
     
     private var cancellables = Set<AnyCancellable>()
@@ -24,7 +24,7 @@ final class TierListViewController: UIViewController {
             view: tierListView,
             viewModel: viewModel
         )
-        tierListCategoriesCollectionViewHandler = TierListCategoriesCollectionViewHandler(
+        categoriesCollectionViewHandler = TierTopCategoriesCollectionViewHandler(
             view: tierListView,
             viewModel: viewModel
         )
@@ -46,12 +46,6 @@ final class TierListViewController: UIViewController {
 }
 
 extension TierListViewController {
-    func receiveTierCategories(categories: [Category]) {
-        viewModel.updateCategories(categories: categories)
-    }
-}
-
-extension TierListViewController {
     private func setupBindings() {
         bindtierRestaurants()
         bindCategories()
@@ -62,7 +56,7 @@ extension TierListViewController {
         viewModel.categoriesPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.tierListCategoriesCollectionViewHandler?.reloadData()
+                self?.categoriesCollectionViewHandler?.reloadData()
                 self?.viewModel.fetchTierLists()
             }.store(in: &cancellables)
     }
@@ -77,8 +71,15 @@ extension TierListViewController {
     }
     
     private func bindCategoryButton() {
-        tierListView.categoryButton.addAction(UIAction { [weak self] _ in
+        tierListView.topCategoriesView.categoryButton.addAction(UIAction { [weak self] _ in
             self?.viewModel.categoryButtonTapped()
         }, for: .touchUpInside)
+    }
+}
+
+// MARK: - TierCategoryReceivable
+extension TierListViewController: TierCategoryReceivable {
+    func receiveTierCategories(categories: [Category]) {
+        viewModel.updateCategories(categories: categories)
     }
 }

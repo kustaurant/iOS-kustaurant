@@ -19,7 +19,7 @@ final class TierCategoryView: UIView {
         collectionView.backgroundColor = .white
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(TierCategorySectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TierCategorySectionHeaderView.reuseIdentifier)
-        collectionView.register(TierListCategoryCollectionViewCell.self, forCellWithReuseIdentifier: TierListCategoryCollectionViewCell.reuseIdentifier)
+        collectionView.register(TierCategoryCollectionViewCell.self, forCellWithReuseIdentifier: TierCategoryCollectionViewCell.reuseIdentifier)
         return collectionView
     }()
     let actionButton = KuSubmitButton()

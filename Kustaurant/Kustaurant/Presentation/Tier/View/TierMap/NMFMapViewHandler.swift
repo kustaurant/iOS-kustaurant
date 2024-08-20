@@ -12,9 +12,13 @@ final class NMFMapViewHandler: NSObject {
     private var view: TierMapView
     private var viewModel: TierMapViewModel
     
+    // 마커와 오버레이 관리
+    private var markers: [NMFMarker] = []
+    private var polygons: [NMFPolygonOverlay] = []
+    private var polylines: [NMFPolylineOverlay] = []
+    
     enum Polygon {
-        case solid
-        case dashed
+        case solid, dashed
     }
     
     // MARK: - Initialization
@@ -25,7 +29,6 @@ final class NMFMapViewHandler: NSObject {
         self.view = view
         self.viewModel = viewModel
         super.init()
-        
         view.naverMapView.mapView.touchDelegate = self
     }
 }
@@ -33,10 +36,25 @@ final class NMFMapViewHandler: NSObject {
 extension NMFMapViewHandler {
     func updateMap(_ data: TierMapRestaurants?) {
         guard let mapData = data else { return }
+        clearMap()
         cameraUpdate(mapData.visibleBounds)
         addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
         addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
         addMarkersForRestaurants(tieredRestaurants: mapData.tieredRestaurants, nonTieredRestaurants: mapData.nonTieredRestaurants)
+    }
+    
+    private func clearMap() {
+        // 기존 마커 제거
+        markers.forEach { $0.mapView = nil }
+        markers.removeAll()
+        
+        // 기존 폴리곤 제거
+        polygons.forEach { $0.mapView = nil }
+        polygons.removeAll()
+        
+        // 기존 폴리라인 제거
+        polylines.forEach { $0.mapView = nil }
+        polylines.removeAll()
     }
 
     // MARK: 마커
@@ -99,6 +117,8 @@ extension NMFMapViewHandler {
             }
         }
         marker.mapView = view.naverMapView.mapView
+        
+        markers.append(marker)
     }
 
     // MARK: 카메라
@@ -144,6 +164,11 @@ extension NMFMapViewHandler {
             }
             
             polygonOverlay?.mapView = view.naverMapView.mapView
+            
+            if let overlay = polygonOverlay {
+                polygons.append(overlay)
+            }
+
         }
     }
     
@@ -154,6 +179,10 @@ extension NMFMapViewHandler {
         polylineOverlay?.capType = .butt
         polylineOverlay?.width = 2
         polylineOverlay?.mapView = view.naverMapView.mapView
+        
+        if let overlay = polylineOverlay {
+            polylines.append(overlay)
+        }
     }
 }
 
