@@ -17,6 +17,7 @@ protocol OnboardingViewModelInput {
     func appleLogin()
     func logout()
     func skipLogin()
+    func didTapOkInAlert()
 }
 
 protocol OnboardingViewModelOutput {
@@ -24,6 +25,8 @@ protocol OnboardingViewModelOutput {
     var currentOnboardingPage: Int { get set }
     var currentOnboardingPagePublisher: Published<Int>.Publisher { get }
     var isUpdatingPage: Bool { get set }
+    var showAlert: Bool { get set }
+    var showAlertPublisher: Published<Bool>.Publisher { get }
 }
 
 typealias OnboardingViewModel = OnboardingViewModelInput & OnboardingViewModelOutput
@@ -33,6 +36,8 @@ final class DefaultOnboardingViewModel {
     @Published var currentOnboardingPage: Int = 0
     var currentOnboardingPagePublisher: Published<Int>.Publisher { $currentOnboardingPage }
     @Published var isUpdatingPage: Bool = false
+    @Published var showAlert: Bool = false
+    var showAlertPublisher: Published<Bool>.Publisher { $showAlert }
     
     private let actions: OnboardingViewModelActions
     private let authUseCases: AuthUseCases
@@ -49,12 +54,13 @@ extension DefaultOnboardingViewModel: OnboardingViewModel {
     func naverLogin() {
         authUseCases.naverLogin()
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
                     print(#file, #function, error.localizedDescription)
+                    self?.showAlert = true
                 }
             } receiveValue: { [weak self] user in
                 self?.actions.initiateTabs?()
@@ -69,14 +75,25 @@ extension DefaultOnboardingViewModel: OnboardingViewModel {
     func appleLogin() {
         authUseCases.appleLogin()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] user in
+            .sink { [weak self] completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print(#file, #function, error.localizedDescription)
+                    self?.showAlert = true
+                }
+            } receiveValue: { [weak self] user in
                 self?.actions.initiateTabs?()
-                print(user)
             }
             .store(in: &cancellables)
     }
     
     func skipLogin() {
         actions.initiateTabs?()
+    }
+    
+    func didTapOkInAlert() {
+        showAlert = false
     }
 }

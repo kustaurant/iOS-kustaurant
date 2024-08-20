@@ -10,7 +10,7 @@ import Combine
 
 protocol AuthUseCases {
     func naverLogin() -> AnyPublisher<SocialLoginUser, NetworkError>
-    func appleLogin() -> AnyPublisher<SocialLoginUser, Never>
+    func appleLogin() -> AnyPublisher<SocialLoginUser, NetworkError>
     func logout()
 }
 
@@ -37,7 +37,7 @@ extension DefaultAuthUseCases {
             .eraseToAnyPublisher()
     }
 
-    func appleLogin() -> AnyPublisher<SocialLoginUser, Never> {
+    func appleLogin() -> AnyPublisher<SocialLoginUser, NetworkError> {
         appleLoginService.attemptLogin()
             .flatMap(processAppleLogin)
             .eraseToAnyPublisher()
@@ -75,7 +75,7 @@ extension DefaultAuthUseCases {
         .eraseToAnyPublisher()
     }
     
-    private func processAppleLogin(_ response: SignInWithAppleResponse) -> AnyPublisher<SocialLoginUser, Never> {
+    private func processAppleLogin(_ response: SignInWithAppleResponse) -> AnyPublisher<SocialLoginUser, NetworkError> {
         Future { promise in
             Task { [weak self] in
                 let appleAuthResponse = await self?.authReposiory.appleLogin(authorizationCode: response.authorizationCode, identityToken: response.identityToken)
@@ -85,7 +85,7 @@ extension DefaultAuthUseCases {
                     self?.socialLoginUserRepository.setUser(user)
                     promise(.success(user))
                 case .failure(let error):
-                    break
+                    promise(.failure(error))
                 case .none:
                     break
                 }

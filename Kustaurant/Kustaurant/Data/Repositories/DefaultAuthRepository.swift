@@ -28,7 +28,6 @@ extension DefaultAuthRepository: AuthRepository {
         )
         let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
         let response = await request.responseAsync(with: urlBuilder)
-        print(response)
         
         if let error = response.error {
             return .failure(error)
