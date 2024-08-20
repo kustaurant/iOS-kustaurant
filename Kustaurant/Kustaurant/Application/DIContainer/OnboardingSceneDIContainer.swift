@@ -37,11 +37,11 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
     func makeOnboardingViewModel(actions: OnboardingViewModelActions) -> OnboardingViewModel {
         DefaultOnboardingViewModel(
             actions: actions,
-            onboardingUseCases: makeOnboardingUseCases()
+            onboardingUseCases: makeAuthUseCases()
         )
     }
     
-    func makeOnboardingUseCases() -> AuthUseCases {
+    func makeAuthUseCases() -> AuthUseCases {
         DefaultAuthUseCases(
             naverLoginService: makeNaverLoginService(),
             appleLoginService: makeAppleLoginService(),

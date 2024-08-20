@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol AppFlowCoordinatorNavigating: AnyObject {
+    func showTab()
+    func showOnboarding()
+}
+
 final class AppFlowCoordinator {
     private var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
@@ -28,10 +33,24 @@ extension AppFlowCoordinator {
             showOnboarding()
         }
     }
+        
+    func isIntialLaunch() -> Bool {
+        let userDefaultsStorage = appDIContainer.makeUserDefaultsStorage()
+        guard let isInitialLaunch: Bool = userDefaultsStorage.getValue(forKey: UserDefaultsKey.initialLaunch) else {
+            _ = userDefaultsStorage.setValue(false, forKey: UserDefaultsKey.initialLaunch)
+            return true
+        }
+        return isInitialLaunch
+    }
+    
+    // TODO: 로그인되어 있는지 확인
+    func isLoggedIn() -> Bool {
+        return false
+    }
 }
 
 // MARK: Tabbar
-extension AppFlowCoordinator {
+extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
     func showTab() {
         let tabBarController = UITabBarController()
         let tabBarFlowCoordinator = TabBarFlowCoordinator(
@@ -65,19 +84,17 @@ extension AppFlowCoordinator {
         let myPageFlow = myPageDIContainer.makeMyPageFlowCoordinator(
             navigationController: CustomUINavigationController()
         )
+        myPageFlow.appFlowNavigating = self
 
         tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow, communityFlow, myPageFlow])
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }
-}
-
-extension AppFlowCoordinator: OnboardingSceneDelegate {
-    
+        
     func showOnboarding() {
         let onboardingDIConatainer = appDIContainer.makeOnboardingDIContainer()
         let onboardingFlow = onboardingDIConatainer.makeOnboardingFlowCoordinator(navigationController: navigationController)
-        onboardingFlow.delegate = self
+        onboardingFlow.appFlowNavigating = self
         
         if isIntialLaunch() {
             onboardingFlow.start()
@@ -85,25 +102,5 @@ extension AppFlowCoordinator: OnboardingSceneDelegate {
             onboardingFlow.showLogin()
         }
     }
-        
-    func onLoginSuccess() {
-        showTab()
-    }
 }
 
-extension AppFlowCoordinator {
-    
-    func isIntialLaunch() -> Bool {
-        let userDefaultsStorage = appDIContainer.makeUserDefaultsStorage()
-        guard let isInitialLaunch: Bool = userDefaultsStorage.getValue(forKey: UserDefaultsKey.initialLaunch) else {
-            _ = userDefaultsStorage.setValue(false, forKey: UserDefaultsKey.initialLaunch)
-            return true
-        }
-        return isInitialLaunch
-    }
-    
-    // TODO: 로그인되어 있는지 확인
-    func isLoggedIn() -> Bool {
-        return false
-    }
-}

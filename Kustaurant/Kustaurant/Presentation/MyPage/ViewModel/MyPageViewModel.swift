@@ -8,12 +8,31 @@
 import Foundation
 
 struct MyPageViewModelActions {
+    let showOnboarding: () -> Void
 }
 
-protocol MyPageViewModelInput {}
+protocol MyPageViewModelInput {
+    func didTapLogoutButton()
+}
 protocol MyPageViewModelOutput {}
 
 typealias MyPageViewModel = MyPageViewModelInput & MyPageViewModelOutput
 
-final class DefaultMyPageViewModel: MyPageViewModel {
+final class DefaultMyPageViewModel {
+    
+    private let actions: MyPageViewModelActions
+    private let authUseCases: AuthUseCases
+    
+    init(actions: MyPageViewModelActions, authUseCases: AuthUseCases) {
+        self.actions = actions
+        self.authUseCases = authUseCases
+    }
+}
+
+extension DefaultMyPageViewModel: MyPageViewModel {
+    
+    func didTapLogoutButton() {
+        authUseCases.logout()
+        actions.showOnboarding()
+    }
 }

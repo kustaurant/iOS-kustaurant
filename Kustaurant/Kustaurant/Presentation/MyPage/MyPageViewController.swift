@@ -6,35 +6,39 @@
 //
 
 import UIKit
+import Combine
 
 final class MyPageViewController: UIViewController {
     
-    private let tabBarPageController = KuTabBarPageController(
-        tabs: [
-            KuTabBarPageController.Tab(title: "티어", viewController: FirstVC()),
-            KuTabBarPageController.Tab(title: "지도", viewController: FirstVC()),
-            KuTabBarPageController.Tab(title: "맛집", viewController: FirstVC()),
-            KuTabBarPageController.Tab(title: "평가", viewController: FirstVC()),
-        ],
-        style: .fill
-    )
+    private let viewModel: MyPageViewModel
+    private let myPageView = MyPageView()
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: MyPageViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(
-            tabBarPageController,
-            autoLayout: [
-                .fillX(0), .topSafeArea(constant: 0), .bottomSafeArea(constant: 0)
-            ]
-        )
+        bindViews()
+    }
+    
+    override func loadView() {
+        view = myPageView
     }
 }
 
-class FirstVC: UIViewController {
-    private let colors: [UIColor] = [.systemRed, .systemOrange, .systemPink, .systemPurple, .systemCyan, .systemTeal]
+extension MyPageViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = colors.randomElement()
+    private func bindViews() {
+        myPageView.logoutButton.tapPublisher().sink { [weak self] _ in
+            self?.viewModel.didTapLogoutButton()
+        }
+        .store(in: &cancellables)
     }
 }

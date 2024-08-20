@@ -19,8 +19,8 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
-    func makeMyPageViewController() -> MyPageViewController {
-        MyPageViewController()
+    func makeMyPageViewController(actions: MyPageViewModelActions) -> MyPageViewController {
+        MyPageViewController(viewModel: makeMyPageViewModel(actions: actions))
     }
     
     func makeMyPageFlowCoordinator(navigationController: UINavigationController) -> MyPageFlowCoordinator {
@@ -30,11 +30,11 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
         )
     }
     
-    func makeMyPageViewModel() -> MyPageViewModel {
-        
+    func makeMyPageViewModel(actions: MyPageViewModelActions) -> MyPageViewModel {
+        DefaultMyPageViewModel(actions: actions, authUseCases: makeAuthUseCases())
     }
     
-    func makeOnboardingUseCases() -> AuthUseCases {
+    func makeAuthUseCases() -> AuthUseCases {
         DefaultAuthUseCases(
             naverLoginService: makeNaverLoginService(),
             appleLoginService: makeAppleLoginService(),
