@@ -8,15 +8,12 @@
 import Foundation
 
 protocol RestaurantDetailRepository {
-    associatedtype Items
     
-    func fetch() async -> Items
+    func fetch() async -> RestaurantDetail
     func fetchReviews() async -> [RestaurantDetailCellItem]
 }
 
 final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
-    
-    typealias Items = [RestaurantDetailSection: [RestaurantDetailCellItem]]
     
     private let networkService: NetworkService
     private let restaurantID: Int
@@ -26,16 +23,19 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         self.restaurantID = restaurantID
     }
     
-    func fetch() async -> Items {
+    func fetch() async -> RestaurantDetail {
         let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/\(restaurantID)")
         let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
-        let response: RestaurantDetail? = await request.responseAsync(with: urlBuilder).decode()
+        let response: RestaurantDetailDTO? = await request.responseAsync(with: urlBuilder).decode()
         
-        return viewDatas(from: response)
+        let items = viewDatas(from: response)
+        let tabItems: RestaurantDetail.TabItems = [.menu: items[.tab] ?? [], .review: []]
+        
+        return .init(restaurantImageURLString: response?.restaurantImageURLString ?? "", items: items, tabItems: tabItems)
         
     }
     
-    private func viewDatas(from response: RestaurantDetail?) -> Items {
+    private func viewDatas(from response: RestaurantDetailDTO?) -> RestaurantDetail.Items {
         guard let response else { return [:] }
         
         let null = "NULL"
@@ -60,7 +60,7 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
                 .init(imageURLString: menu.menuImgUrl ?? null, title: menu.menuName ?? null, price: menu.menuPrice ?? null)
         }) ?? []
         
-        let items: Items = [
+        let items: RestaurantDetail.Items = [
             .title: [titleInfo],
             .tier: [RestaurantDetailTiers(tiers: tierInfos)],
             .affiliate: [affiliateInfo],
@@ -74,7 +74,7 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
     func fetchReviews() async -> [RestaurantDetailCellItem] {
         let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/\(restaurantID)/comments")
         let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
-        let response: [RestaurantComment]? = await request.responseAsync(with: urlBuilder).decode()
+        let response: [RestaurantCommentDTO]? = await request.responseAsync(with: urlBuilder).decode()
         
         let null = "NULL"
         

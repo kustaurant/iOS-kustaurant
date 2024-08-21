@@ -9,7 +9,7 @@ import Foundation
 
 struct RestaurantDetailMenu: RestaurantDetailCellItem {
     
-    let imageURLString: String
+    let imageURLString: String?
     let title: String
     let price: String
 }

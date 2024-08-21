@@ -1,5 +1,5 @@
 //
-//  RestaurantDetail.swift
+//  RestaurantDetailDTO.swift
 //  Kustaurant
 //
 //  Created by 류연수 on 8/15/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RestaurantDetail: Decodable {
+struct RestaurantDetailDTO: Decodable {
     let restaurantID: Int
     let restaurantImageURLString: String?
     

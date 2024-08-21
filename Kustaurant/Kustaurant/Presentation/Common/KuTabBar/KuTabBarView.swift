@@ -111,11 +111,7 @@ extension KuTabBarView {
         let label = UILabel()
         label.text = text
         
-        let labelSize = label.systemLayoutSizeFitting(
-            CGSize(width: .greatestFiniteMagnitude, height: UIView.layoutFittingCompressedSize.height),
-            withHorizontalFittingPriority: .required,
-            verticalFittingPriority: .fittingSizeLevel
-        )
+        let labelSize = label.estimatedSize
         
         return .init(width: labelSize.width + 40, height: labelSize.height + 40)
     }

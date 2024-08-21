@@ -13,6 +13,7 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     private let tableView: UITableView = .init()
     
     private let viewModel: RestaurantDetailViewModel
+    private let tierCellHeightSubject: CurrentValueSubject<CGFloat, Never> = .init(0)
     private var tabCancellable: AnyCancellable?
     private var cancellables: Set<AnyCancellable> = .init()
     
@@ -79,23 +80,42 @@ extension RestaurantDetailViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 switch action {
-                case .didfetchItems:
+                case .didFetchItems:
                     self?.tableView.reloadData()
                     
-                case .didChangeTabType:
+                case .didFetchHeaderImage(let image):
+                    self?.tableView.tableHeaderView = UIImageView(image: image)
+                    
+                case .didFetchReviews, .didChangeTabType:
                     self?.tableView.reloadSections(.init(integer: RestaurantDetailSection.tab.index), with: .none)
                 }
+            }
+            .store(in: &cancellables)
+        
+        tierCellHeightSubject
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
             }
             .store(in: &cancellables)
     }
 }
 
 extension RestaurantDetailViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard RestaurantDetailSection(index: section) == .tab
         else { return .zero }
         
         return KuTabBarView.height + 26
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard RestaurantDetailSection(index: indexPath.section) == .tier else {
+            return UITableView.automaticDimension
+        }
+        
+        return tierCellHeightSubject.value
     }
 }
 
@@ -107,7 +127,7 @@ extension RestaurantDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let detailSection = RestaurantDetailSection(index: section),
-              let items = viewModel.sectionItems[detailSection]
+              let items = viewModel.detail?.items[detailSection]
         else { return 0 }
         
         return items.count
@@ -120,7 +140,7 @@ extension RestaurantDetailViewController: UITableViewDataSource {
         switch detailSection {
         case .tab:
             let headerView: RestaurantDetailTabSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
-            tabCancellable = headerView.update(selectedIndex: viewModel.tabType.rawValue)
+            tabCancellable = headerView.update(selectedIndex: viewModel.detail?.tabType.rawValue ?? 0)
                 .sink { [weak self] type in
                     guard let type else { return }
                     self?.viewModel.state = .didTab(at: type)
@@ -136,7 +156,7 @@ extension RestaurantDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let detailSection = RestaurantDetailSection(index: indexPath.section),
-              let items = viewModel.sectionItems[detailSection],
+              let items = viewModel.detail?.items[detailSection],
               let item = items[safe: indexPath.row]
         else { return .init() }
         
@@ -148,7 +168,7 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             
         case .tier:
             let cell: RestaurantDetailTierInfoCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.update(item: item)
+            cell.update(item: item, tierCellHeightSubject: tierCellHeightSubject)
             return cell
             
         case .affiliate:
@@ -167,7 +187,8 @@ extension RestaurantDetailViewController: UITableViewDataSource {
     }
     
     private func tabCell(for indexPath: IndexPath, item: RestaurantDetailCellItem) -> UITableViewCell {
-        switch viewModel.tabType {
+        guard let tabType = viewModel.detail?.tabType else { return .init() }
+        switch tabType {
         case .menu:
             let cell: RestaurantDetailMenuCell = tableView.dequeueReusableCell(for: indexPath)
             cell.update(item: item)

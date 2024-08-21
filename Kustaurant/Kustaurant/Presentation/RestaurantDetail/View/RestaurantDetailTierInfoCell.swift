@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import Combine
 
 final class RestaurantDetailTierInfoCell: UITableViewCell {
     
-    private let title: UILabel = .init()
+    private let titleLabel: UILabel = .init()
     private let collectionView: RestaurantDetailTierCollectionView = .init()
     
     private var tiers: [RestaurantDetailTierInfo] = []
+    private var tierCellHeightSubject: CurrentValueSubject<CGFloat, Never>?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,30 +27,44 @@ final class RestaurantDetailTierInfoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(item: RestaurantDetailCellItem) {
+    func update(item: RestaurantDetailCellItem, tierCellHeightSubject: CurrentValueSubject<CGFloat, Never>) {
         guard let item = item as? RestaurantDetailTiers else { return }
         
         self.tiers = item.tiers
+        self.tierCellHeightSubject = tierCellHeightSubject
         
         Task {
             await MainActor.run {
                 collectionView.reloadData()
+                collectionView.layoutIfNeeded()
+                updateHeight()
             }
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        updateHeight()
     }
     
     private func setupStyle() {
         selectionStyle = .none
         
-        title.text = "티어 정보"
+        titleLabel.text = "티어 정보"
         
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     
     private func setupLayout() {
-        contentView.addSubview(title, autoLayout: [.fill(20), .top(0)])
-        contentView.addSubview(collectionView, autoLayout: [.fillX(20), .topNext(to: title, constant: 0), .bottom(31)])
+        contentView.addSubview(titleLabel, autoLayout: [.fillX(20), .top(0)])
+        contentView.addSubview(collectionView, autoLayout: [.fillX(20), .topNext(to: titleLabel, constant: 0), .bottom(31)])
+    }
+    
+    private func updateHeight() {
+        collectionView.updateHeight()
+        tierCellHeightSubject?.send(titleLabel.estimatedSize.height + collectionView.collectionViewLayout.collectionViewContentSize.height + 31)
     }
 }
 

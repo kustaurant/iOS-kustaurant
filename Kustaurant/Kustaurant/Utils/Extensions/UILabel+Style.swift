@@ -52,4 +52,12 @@ extension UILabel {
         self.attributedText = attributedString
         return self
     }
+    
+    var estimatedSize: CGSize {
+        self.systemLayoutSizeFitting(
+            CGSize(width: .greatestFiniteMagnitude, height: UIView.layoutFittingCompressedSize.height),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        )
+    }
 }

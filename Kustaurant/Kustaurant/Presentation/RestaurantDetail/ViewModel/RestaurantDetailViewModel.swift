@@ -5,7 +5,7 @@
 //  Created by 류연수 on 8/12/24.
 //
 
-import Foundation
+import UIKit
 import Combine
 
 enum RestaurantDetailTabType: Int {
@@ -34,18 +34,16 @@ extension RestaurantDetailViewModel {
     }
     
     enum Action {
-        case didfetchItems
+        case didFetchItems
+        case didFetchHeaderImage(UIImage)
+        case didFetchReviews
         case didChangeTabType
     }
 }
 
 final class RestaurantDetailViewModel {
     
-    typealias Items = [RestaurantDetailSection: [RestaurantDetailCellItem]]
-    
-    private(set) var sectionItems: Items = [:]
-    private(set) var tabType: RestaurantDetailTabType = .menu
-    private var tabItems: [RestaurantDetailTabType: [RestaurantDetailCellItem]] = [:]
+    private(set) var detail: RestaurantDetail?
     
     private let repository: any RestaurantDetailRepository
     
@@ -85,21 +83,38 @@ extension RestaurantDetailViewModel {
     
     private func fetch() {
         Task {
-            sectionItems = await repository.fetch() as? Items ?? [:]
+            detail = await repository.fetch()
             
-            tabItems[.menu] = sectionItems[.tab]
-            tabItems[.review] = await repository.fetchReviews()
+            actionSubject.send(.didFetchItems)
             
-            actionSubject.send(.didfetchItems)
+            if let url: URL = .init(string: detail?.restaurantImageURLString ?? "") {
+                ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
+                    if let image {
+                        self?.actionSubject.send(.didFetchHeaderImage(image))
+                    }
+                }
+            }
+            
+            Task {
+                let reviews = await repository.fetchReviews()
+                var tabItems = detail?.tabItems
+                tabItems?[.review] = reviews
+                await detail?.updateTabItems(as: tabItems ?? [:])
+                
+                if detail?.tabType == .review {
+                    actionSubject.send(.didFetchReviews)
+                }
+            }
         }
     }
     
     private func changeTabType(as type: RestaurantDetailTabType) {
-        guard tabType != type else { return }
-        
-        tabType = type
-        sectionItems[.tab] = tabItems[tabType]
-        
-        actionSubject.send(.didChangeTabType)
+        Task {
+            guard detail?.tabType != type else { return }
+            
+            await detail?.updateTabType(as: type)
+            
+            actionSubject.send(.didChangeTabType)
+        }
     }
 }

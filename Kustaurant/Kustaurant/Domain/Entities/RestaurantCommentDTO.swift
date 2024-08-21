@@ -1,5 +1,5 @@
 //
-//  RestaurantComment.swift
+//  RestaurantCommentDTO.swift
 //  Kustaurant
 //
 //  Created by 류연수 on 8/15/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RestaurantComment: Decodable {
+struct RestaurantCommentDTO: Decodable {
     let commentID: Int
     let commentScore: Double?
     let commentIconImageURLString: String?
@@ -18,7 +18,7 @@ struct RestaurantComment: Decodable {
     let commentLikeStatus: Int?
     let commentLikeCount: Int?
     let commentDislikeCount: Int?
-    let commentReplies: [RestaurantComment]?
+    let commentReplies: [RestaurantCommentDTO]?
     
     enum CodingKeys: String, CodingKey {
         case commentID = "commentId"
@@ -47,6 +47,6 @@ struct RestaurantComment: Decodable {
         commentLikeStatus = try? container.decodeIfPresent(Int.self, forKey: .commentLikeStatus)
         commentLikeCount = try? container.decodeIfPresent(Int.self, forKey: .commentLikeCount)
         commentDislikeCount = try? container.decodeIfPresent(Int.self, forKey: .commentDislikeCount)
-        commentReplies = try? container.decodeIfPresent([RestaurantComment].self, forKey: .commentReplies)
+        commentReplies = try? container.decodeIfPresent([RestaurantCommentDTO].self, forKey: .commentReplies)
     }
 }

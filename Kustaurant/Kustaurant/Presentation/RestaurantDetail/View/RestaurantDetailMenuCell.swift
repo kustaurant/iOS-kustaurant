@@ -27,7 +27,12 @@ final class RestaurantDetailMenuCell: UITableViewCell {
     func update(item: RestaurantDetailCellItem) {
         guard let item = item as? RestaurantDetailMenu else { return }
         
-        menuImageView.image = UIImage(named: item.imageURLString)
+        menuImageView.image = UIImage(named: "icon_menu_default")
+        if let urlString = item.imageURLString, let url = URL(string: urlString) {
+            ImageCacheManager.shared.loadImage(from: url, targetWidth: 94, completion: { [weak self] image in
+                self?.menuImageView.image = image
+            })
+        }
         titleLabel.text = item.title
         priceLabel.text = item.price
     }
@@ -37,6 +42,11 @@ extension RestaurantDetailMenuCell {
     
     private func setupStyle() {
         selectionStyle = .none
+        
+        menuImageView.layer.cornerCurve = .continuous
+        menuImageView.layer.cornerRadius = 11
+        menuImageView.contentMode = .scaleToFill
+        menuImageView.clipsToBounds = true
     }
     
     private func setupLayout() {
@@ -52,7 +62,7 @@ extension RestaurantDetailMenuCell {
         stackView.distribution = .fill
         stackView.alignment = .center
         
-        contentView.addSubview(stackView, autoLayout: [.fillX(0), .top(0), .bottom(13)])
+        contentView.addSubview(stackView, autoLayout: [.fillX(20), .top(0), .bottom(13)])
         menuImageView.autolayout([.width(94), .height(77)])
     }
 }

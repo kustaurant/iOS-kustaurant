@@ -40,7 +40,7 @@ extension RestaurantDetailAffiliateInfoCell {
     }
     
     private func setupLayout() {
-        contentView.addSubview(title, autoLayout: [.fill(20), .top(0)])
+        contentView.addSubview(title, autoLayout: [.fillX(20), .top(0)])
         contentView.addSubview(label, autoLayout: [.fillX(20), .topNext(to: title, constant: 0), .bottom(31)])
     }
 }
