@@ -8,6 +8,6 @@
 import Foundation
 
 protocol SocialLoginUserRepository {
-    func getUser() -> SocialLoginUser?
-    func setUser(_ user: SocialLoginUser?)
+    func getUser() -> KuUser?
+    func setUser(_ user: KuUser?)
 }

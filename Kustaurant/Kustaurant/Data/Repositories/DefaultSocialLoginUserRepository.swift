@@ -17,12 +17,12 @@ final class DefaultSocialLoginUserRepository {
 }
 
 extension DefaultSocialLoginUserRepository: SocialLoginUserRepository {
-    func getUser() -> SocialLoginUser? {
-        let user: SocialLoginUser? = keychainStorage.getValue(forKey: KeychainKey.socialLoginUser)
+    func getUser() -> KuUser? {
+        let user: KuUser? = keychainStorage.getValue(forKey: KeychainKey.socialLoginUser)
         return user
     }
     
-    func setUser(_ user: SocialLoginUser? = nil) {
+    func setUser(_ user: KuUser? = nil) {
         _ = keychainStorage.setValue(user, forKey: KeychainKey.socialLoginUser)
     }
 }
