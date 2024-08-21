@@ -44,6 +44,9 @@ extension RestaurantDetailTitleCell {
     private func setupStyle() {
         selectionStyle = .none
         
+        layer.cornerCurve = .continuous
+        layer.cornerRadius = 13
+        clipsToBounds = true
         reviewCompleteIconImageView.image = .init(systemName: "person.fill")
         addressInfoView.image = .init(systemName: "person.fill")
         openingHoursInfoView.image = .init(systemName: "person.fill")
@@ -86,8 +89,8 @@ extension RestaurantDetailTitleCell {
         mainStackView.addArrangedSubview(topSectionStackView)
         mainStackView.addArrangedSubview(bottomSectionStackView)
         
-        addSubview(mainStackView, autoLayout: [.fillX(20), .top(33)])
-        addSubview(lineView, autoLayout: [.fillX(0), .height(3), .topNext(to: mainStackView, constant: 33), .bottom(23)])
+        contentView.addSubview(mainStackView, autoLayout: [.fillX(20), .top(33)])
+        contentView.addSubview(lineView, autoLayout: [.fillX(0), .height(3), .topNext(to: mainStackView, constant: 33), .bottom(23)])
     }
 }
 
