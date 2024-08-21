@@ -10,6 +10,10 @@ import Security
 
 final class KeychainStorage: KeyValueStorage {
     
+    private init() {}
+    static let shared = KeychainStorage()
+    
+    @discardableResult
     func setValue<T: Codable>(_ value: T?, forKey key: String) -> Bool {
             guard let value = value else { return false }
             
@@ -54,6 +58,7 @@ final class KeychainStorage: KeyValueStorage {
             }
         }
     
+    @discardableResult
     func removeValue(forKey key: String) -> Bool {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,

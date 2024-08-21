@@ -55,9 +55,5 @@ final class AppDIContainer {
         )
         return OnboardingSceneDIContainer(dependencies: dependencies)
     }
-    
-    func makeUserDefaultsStorage() -> UserDefaultsStorage {
-        UserDefaultsStorage()
-    }
 }
 

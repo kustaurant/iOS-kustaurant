@@ -35,9 +35,8 @@ extension AppFlowCoordinator {
     }
         
     func isIntialLaunch() -> Bool {
-        let userDefaultsStorage = appDIContainer.makeUserDefaultsStorage()
-        guard let isInitialLaunch: Bool = userDefaultsStorage.getValue(forKey: UserDefaultsKey.initialLaunch) else {
-            _ = userDefaultsStorage.setValue(false, forKey: UserDefaultsKey.initialLaunch)
+        guard let isInitialLaunch: Bool = UserDefaultsStorage.shared.getValue(forKey: UserDefaultsKey.initialLaunch) else {
+            UserDefaultsStorage.shared.setValue(false, forKey: UserDefaultsKey.initialLaunch)
             return true
         }
         return isInitialLaunch
