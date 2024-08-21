@@ -9,7 +9,7 @@ import UIKit
 
 final class DrawResultViewHandler {
     
-    static let rouletteAnimationDurationSeconds: Double = 4.0
+    static let rouletteAnimationDurationSeconds: Double = 3.0
     static let rouletteCount = 30
     
     private let view: DrawResultView

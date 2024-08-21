@@ -47,11 +47,7 @@ extension DrawResultViewController {
         let searchImage = UIImage(named: "icon_search")
         let searchButtonView = UIImageView(image: searchImage)
         let searchButton = UIBarButtonItem(customView: searchButtonView)
-        
-        let bellImage = UIImage(named: "icon_bell_badged")
-        let notificationButtonView = UIImageView(image: bellImage)
-        let notificationButton = UIBarButtonItem(customView: notificationButtonView)
-        
+
         let backImage = UIImage(named: "icon_back")
         let backButtonView = UIImageView(image: backImage)
         let backButton = UIBarButtonItem(customView: backButtonView)
@@ -59,11 +55,9 @@ extension DrawResultViewController {
         backButtonView.addGestureRecognizer(tapGesture)
         backButtonView.isUserInteractionEnabled = true
         
-        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        space.width = 16.0
         navigationItem.title = "랜덤 맛집 뽑기"
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItems = [searchButton, space, notificationButton]
+        navigationItem.rightBarButtonItems = [searchButton]
     }
     
     private func bind() {
