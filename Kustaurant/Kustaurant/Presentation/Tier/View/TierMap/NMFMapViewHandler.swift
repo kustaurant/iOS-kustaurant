@@ -116,6 +116,18 @@ extension NMFMapViewHandler {
                 marker.zIndex = tier.zIndex
             }
         }
+        
+        marker.userInfo = ["restaurant": restaurant]
+        
+        // 마커 클릭 이벤트 처리
+        marker.touchHandler = { _ in
+            if let restaurantInfo = marker.userInfo["restaurant"] as? Restaurant {
+                print("\(restaurantInfo.restaurantName ?? "unknown")")
+                
+            }
+            return true
+        }
+
         marker.mapView = view.naverMapView.mapView
         
         markers.append(marker)
