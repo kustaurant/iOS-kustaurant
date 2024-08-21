@@ -84,7 +84,13 @@ extension RestaurantDetailViewController {
                     self?.tableView.reloadData()
                     
                 case .didFetchHeaderImage(let image):
-                    self?.tableView.tableHeaderView = UIImageView(image: image)
+                    let headerView: RestaurantDetailStretchyHeaderView = .init(frame: .init(x: 0, y: 0, width: self?.view.bounds.width ?? 0, height: 72))
+                    headerView.update(image: image)
+                    if let scrollView = self?.tableView {
+                        headerView.update(contentInset: scrollView.contentInset, contentOffset: scrollView.contentOffset)
+                    }
+                    headerView.layer.zPosition = -1
+                    self?.tableView.tableHeaderView = headerView
                     
                 case .didFetchReviews, .didChangeTabType:
                     self?.tableView.reloadSections(.init(integer: RestaurantDetailSection.tab.index), with: .none)
@@ -116,6 +122,11 @@ extension RestaurantDetailViewController: UITableViewDelegate {
         }
         
         return tierCellHeightSubject.value
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let tableHeaderView = tableView.tableHeaderView as? RestaurantDetailStretchyHeaderView
+        tableHeaderView?.update(contentInset: scrollView.contentInset, contentOffset: scrollView.contentOffset)
     }
 }
 

@@ -33,7 +33,6 @@ final class LeftAlignCollectionViewFlowLayout: UICollectionViewFlowLayout {
 final class RestaurantDetailTierCollectionView: UICollectionView {
     
     private let layout: LeftAlignCollectionViewFlowLayout = .init()
-    private var heightConstraint: NSLayoutConstraint?
     
     init() {
         super.init(frame: .zero, collectionViewLayout: layout)
@@ -45,17 +44,11 @@ final class RestaurantDetailTierCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateHeight() {
-        heightConstraint?.isActive = true
-        heightConstraint?.constant = collectionViewLayout.collectionViewContentSize.height
-    }
-    
     private func setup() {
         isScrollEnabled = false
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        heightConstraint = heightAnchor.constraint(equalToConstant: 0)
         
         registerCell(ofType: RestaurantDetailTierCell.self)
     }

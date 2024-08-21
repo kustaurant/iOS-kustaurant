@@ -9,7 +9,7 @@ import UIKit
 
 final class RestaurantDetailAffiliateInfoCell: UITableViewCell {
     
-    private let title: UILabel = .init()
+    private let titleLabel: UILabel = .init()
     private let label: UILabel = .init()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -35,12 +35,12 @@ extension RestaurantDetailAffiliateInfoCell {
     private func setupStyle() { 
         selectionStyle = .none
         
-        title.text = "제휴 정보"
+        titleLabel.text = "제휴 정보"
         label.numberOfLines = 0
     }
     
     private func setupLayout() {
-        contentView.addSubview(title, autoLayout: [.fillX(20), .top(0)])
-        contentView.addSubview(label, autoLayout: [.fillX(20), .topNext(to: title, constant: 0), .bottom(31)])
+        contentView.addSubview(titleLabel, autoLayout: [.fillX(20), .top(0)])
+        contentView.addSubview(label, autoLayout: [.fillX(20), .topNext(to: titleLabel, constant: 15), .bottom(31)])
     }
 }

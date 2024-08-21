@@ -31,6 +31,8 @@ final class RestaurantDetailTierCell: UICollectionViewCell {
     
     private func setupStyle() {
         iconImageView.contentMode = .scaleAspectFit
+        contentView.layer.cornerCurve = .continuous
+        contentView.layer.cornerRadius = 6
     }
     
     private func setupLayout() {

@@ -59,12 +59,11 @@ final class RestaurantDetailTierInfoCell: UITableViewCell {
     
     private func setupLayout() {
         contentView.addSubview(titleLabel, autoLayout: [.fillX(20), .top(0)])
-        contentView.addSubview(collectionView, autoLayout: [.fillX(20), .topNext(to: titleLabel, constant: 0), .bottom(31)])
+        contentView.addSubview(collectionView, autoLayout: [.fillX(20), .topNext(to: titleLabel, constant: 15), .bottom(31)])
     }
     
     private func updateHeight() {
-        collectionView.updateHeight()
-        tierCellHeightSubject?.send(titleLabel.estimatedSize.height + collectionView.collectionViewLayout.collectionViewContentSize.height + 31)
+        tierCellHeightSubject?.send(titleLabel.estimatedSize.height + 15 + collectionView.collectionViewLayout.collectionViewContentSize.height + 31)
     }
 }
 

@@ -26,6 +26,9 @@ extension UIView: Ku {
         case bottomEqual(to: UIView, constant: CGFloat)
         case trailingEqual(to: UIView, constant: CGFloat)
         
+        case widthEqual(to: UIView, constant: CGFloat)
+        case heightEqual(to: UIView, constant: CGFloat)
+        
         case topNext(to: UIView, constant: CGFloat)
         case leadingNext(to: UIView, constant: CGFloat)
         
@@ -69,6 +72,9 @@ extension Ku where Self: UIView {
             case .leadingEqual(let to, let constant): [view.leadingAnchor.constraint(equalTo: to.leadingAnchor, constant: constant)]
             case .bottomEqual(let to, let constant): [view.bottomAnchor.constraint(equalTo: to.bottomAnchor, constant: -constant)]
             case .trailingEqual(let to, let constant): [view.trailingAnchor.constraint(equalTo: to.trailingAnchor, constant: -constant)]
+                
+            case .widthEqual(let to, let constant): [view.widthAnchor.constraint(equalTo: to.widthAnchor, constant: constant)]
+            case .heightEqual(let to, let constant): [view.heightAnchor.constraint(equalTo: to.heightAnchor, constant: constant)]
                 
             case .topNext(let to, let constant): [view.topAnchor.constraint(equalTo: to.bottomAnchor, constant: constant)]
             case .leadingNext(let to, let constant): [view.leadingAnchor.constraint(equalTo: to.trailingAnchor, constant: constant)]
