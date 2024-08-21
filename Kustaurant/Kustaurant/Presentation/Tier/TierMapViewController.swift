@@ -47,6 +47,11 @@ final class TierMapViewController: UIViewController {
         setupLocationManager()
         setupBindings()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel.hideBottomSheet()
+    }
 }
 
 extension TierMapViewController {

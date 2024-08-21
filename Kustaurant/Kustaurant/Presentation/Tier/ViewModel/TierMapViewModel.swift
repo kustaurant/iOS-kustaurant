@@ -9,12 +9,17 @@ import Foundation
 
 struct TierMapViewModelActions {
     let showTierCategory: ([Category]) -> Void
+    let showMapBottomSheet: () -> Void
+    let hideMapBottomSheet: () -> Void
 }
 
 protocol TierMapViewModelInput {
     func fetchTierMap()
     func categoryButtonTapped()
     func updateCategories(categories: [Category])
+    func didTapMarker()
+    func didTapMap()
+    func hideBottomSheet()
 }
 
 protocol TierMapViewModelOutput {
@@ -74,5 +79,25 @@ extension DefaultTierMapViewModel {
     
     func updateCategories(categories: [Category]) {
         self.categories = categories
+    }
+    
+    func didTapMarker() {
+        Task {
+            await MainActor.run {
+                self.actions.showMapBottomSheet()
+            }
+        }
+    }
+    
+    func didTapMap() {
+        hideBottomSheet()
+    }
+    
+    func hideBottomSheet() {
+        Task {
+            await MainActor.run {
+                self.actions.hideMapBottomSheet()
+            }
+        }
     }
 }

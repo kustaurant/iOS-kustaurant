@@ -10,6 +10,7 @@ import UIKit
 protocol TierFlowCoordinatorDependencies {
     func makeTierViewController(listActions: TierListViewModelActions, mapActions: TierMapViewModelActions, initialCategories: [Category]) -> TierViewController
     func makeTierCategoryViewController(actions: TierCategoryViewModelActions, categories: [Category]) -> TierCategoryViewController
+    func makeTierMapBottomSheet() -> TierMapBottomSheet
 }
 
 final class TierFlowCoordinator: Coordinator {
@@ -18,6 +19,7 @@ final class TierFlowCoordinator: Coordinator {
     var navigationController: UINavigationController
 
     private weak var tierViewController: TierViewController?
+    private weak var tierMapBottomSheet: TierMapBottomSheet?
     
     init(
         dependencies: TierFlowCoordinatorDependencies,
@@ -38,7 +40,9 @@ extension TierFlowCoordinator {
             showTierCategory: showTierCategory
         )
         let mapActions = TierMapViewModelActions(
-            showTierCategory: showTierCategory
+            showTierCategory: showTierCategory,
+            showMapBottomSheet: showMapBottomSheet,
+            hideMapBottomSheet: hideMapBottomSheet
         )
         let viewController = dependencies.makeTierViewController(
             listActions: listActions,
@@ -64,4 +68,17 @@ extension TierFlowCoordinator {
             currentViewController.receiveTierCategories(categories: categories)
         }
     }
+    
+    private func showMapBottomSheet() {
+        guard tierMapBottomSheet == nil else { return }
+        let viewController = dependencies.makeTierMapBottomSheet()
+        tierMapBottomSheet = viewController
+        navigationController.present(viewController, animated: true)
+    }
+    
+    private func hideMapBottomSheet() {
+        tierMapBottomSheet?.dismiss(animated: true, completion: nil)
+        tierMapBottomSheet = nil
+    }
+    
 }

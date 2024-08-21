@@ -53,6 +53,7 @@
 		5826A1D82C7231060097256C /* TierBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1D72C7231060097256C /* TierBaseView.swift */; };
 		5826A1DA2C7231880097256C /* TierBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1D92C7231880097256C /* TierBaseViewModel.swift */; };
 		5826A1E22C723BF80097256C /* TierCategoryReceivable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1E12C723BF80097256C /* TierCategoryReceivable.swift */; };
+		5826A1E52C75FE9C0097256C /* TierMapBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1E42C75FE9C0097256C /* TierMapBottomSheet.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
 		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
@@ -241,6 +242,7 @@
 		5826A1D72C7231060097256C /* TierBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierBaseView.swift; sourceTree = "<group>"; };
 		5826A1D92C7231880097256C /* TierBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierBaseViewModel.swift; sourceTree = "<group>"; };
 		5826A1E12C723BF80097256C /* TierCategoryReceivable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierCategoryReceivable.swift; sourceTree = "<group>"; };
+		5826A1E42C75FE9C0097256C /* TierMapBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapBottomSheet.swift; sourceTree = "<group>"; };
 		5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantLists.swift; sourceTree = "<group>"; };
 		5841731F2C464695001EC132 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -781,6 +783,7 @@
 			isa = PBXGroup;
 			children = (
 				584FA4C82C647442008DDC19 /* TierMapView.swift */,
+				5826A1E42C75FE9C0097256C /* TierMapBottomSheet.swift */,
 				584FA4D12C6487C4008DDC19 /* NMFMapViewHandler.swift */,
 			);
 			path = TierMap;
@@ -1421,6 +1424,7 @@
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				5826A1E52C75FE9C0097256C /* TierMapBottomSheet.swift in Sources */,
 				5826A1D62C72309B0097256C /* TierTopCategoriesCollectionViewHandler.swift in Sources */,
 				BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,

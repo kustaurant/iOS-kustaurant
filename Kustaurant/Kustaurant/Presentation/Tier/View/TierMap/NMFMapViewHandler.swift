@@ -120,10 +120,10 @@ extension NMFMapViewHandler {
         marker.userInfo = ["restaurant": restaurant]
         
         // 마커 클릭 이벤트 처리
-        marker.touchHandler = { _ in
+        marker.touchHandler = { [weak self] _ in
             if let restaurantInfo = marker.userInfo["restaurant"] as? Restaurant {
                 print("\(restaurantInfo.restaurantName ?? "unknown")")
-                
+                self?.viewModel.didTapMarker()
             }
             return true
         }
@@ -217,6 +217,7 @@ extension NMFMapViewHandler: NMFMapViewTouchDelegate {
         #if DEBUG
         print("\(latlng.lat), \(latlng.lng)")
         #endif
+        viewModel.didTapMap()
     }
     
     /// 지도 심벌이 탭되면 호출되는 콜백 메서드.
@@ -231,6 +232,7 @@ extension NMFMapViewHandler: NMFMapViewTouchDelegate {
         #if DEBUG
         print(symbol.caption!)
         #endif
+        viewModel.didTapMap()
         return true
     }
 }
