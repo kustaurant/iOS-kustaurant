@@ -24,7 +24,7 @@ final class TierMapBottomSheet: UIViewController {
 extension TierMapBottomSheet {
     private func configurePageSheet() {
         modalPresentationStyle = .pageSheet
-        isModalInPresentation = true
+        isModalInPresentation = false
         if let sheet = sheetPresentationController {
             let detentIdentifier = UISheetPresentationController.Detent.Identifier("customDetent")
             let detent = UISheetPresentationController.Detent.custom(identifier: detentIdentifier) { _ in 139 }
