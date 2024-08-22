@@ -171,6 +171,8 @@
 		BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */; };
 		BAC55ECD2C6FB2AB00B3078F /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECC2C6FB2AB00B3078F /* SocialLogin.swift */; };
 		BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */; };
+		BAF177F62C772B8100E17FDC /* RestaurantSearchResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */; };
+		BAF177F82C7735D300E17FDC /* TierBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF177F72C7735D300E17FDC /* TierBadgeView.swift */; };
 		CF54AD082C4288F900E0DE68 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD072C4288F900E0DE68 /* Request.swift */; };
 		CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */; };
 		CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */; };
@@ -373,6 +375,8 @@
 		BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaverLoginRepository.swift; path = ../Repositories/NaverLoginRepository.swift; sourceTree = "<group>"; };
 		BAC55ECC2C6FB2AB00B3078F /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
 		BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResultRowView.swift; sourceTree = "<group>"; };
+		BAF177F72C7735D300E17FDC /* TierBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierBadgeView.swift; sourceTree = "<group>"; };
 		CF54AD072C4288F900E0DE68 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRetrier.swift; sourceTree = "<group>"; };
@@ -977,6 +981,8 @@
 			isa = PBXGroup;
 			children = (
 				BA2D89672C76FC58004E7B8E /* SearchView.swift */,
+				BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */,
+				BAF177F72C7735D300E17FDC /* TierBadgeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1369,6 +1375,7 @@
 			files = (
 				BA37E0722C65E0BF0092115B /* DrawViewModel.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
+				BAF177F62C772B8100E17FDC /* RestaurantSearchResultRowView.swift in Sources */,
 				58067D482C5A027000889C92 /* TierCategoryCollectionViewHandler.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				BA8EEF8D2C6351D800FE6ABF /* KuPageControl.swift in Sources */,
@@ -1466,6 +1473,7 @@
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
 				584FA4D22C6487C4008DDC19 /* NMFMapViewHandler.swift in Sources */,
 				584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */,
+				BAF177F82C7735D300E17FDC /* TierBadgeView.swift in Sources */,
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
 				58067C912C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift in Sources */,
