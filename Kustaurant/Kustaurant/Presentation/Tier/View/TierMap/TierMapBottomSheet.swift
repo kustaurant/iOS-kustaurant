@@ -8,13 +8,16 @@
 import UIKit
 
 final class TierMapBottomSheet: UIViewController {
-    private var restaurant: Restaurant?
+    private let sheetView: TierMapBottomSheetView = TierMapBottomSheetView()
     
     // MARK: - Life Cycle
+    override func loadView() {
+        view = sheetView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePageSheet()
-        view.backgroundColor = .mainGreen
     }
 }
 
@@ -32,13 +35,6 @@ extension TierMapBottomSheet {
     }
     
     func configure(with restaurant: Restaurant) {
-        self.restaurant = restaurant
-        updateUI()
-    }
-    
-    private func updateUI() {
-        guard let restaurant = restaurant else { return }
-        print("Restaurant name: \(restaurant.restaurantName ?? "")")
-        view.backgroundColor = .systemPink
+        sheetView.update(restaurant)
     }
 }
