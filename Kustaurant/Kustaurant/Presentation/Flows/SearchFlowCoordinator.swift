@@ -10,7 +10,7 @@ import SwiftUI
 
 
 protocol SearchFlowCoordinatorDependencies {
-    func makeSearchView() -> SearchView
+    func makeSearchView(actions: SearchViewModelActions) -> SearchView
 }
 
 final class SearchFlowCoordinator: Coordinator {
@@ -26,8 +26,13 @@ final class SearchFlowCoordinator: Coordinator {
 
 extension SearchFlowCoordinator {
     func start() {
-        let searchView = dependencies.makeSearchView()
+        let actions = SearchViewModelActions(didTapBackButton: popAnimated)
+        let searchView = dependencies.makeSearchView(actions: actions)
         let hostingController = UIHostingController(rootView: searchView)
         navigationController.pushViewController(hostingController, animated: true)
+    }
+    
+    func popAnimated() {
+        pop(animated: true)
     }
 }
