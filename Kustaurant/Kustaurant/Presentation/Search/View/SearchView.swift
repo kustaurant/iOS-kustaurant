@@ -19,32 +19,41 @@ struct SearchView: View {
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
-                VStack {
-                    HStack {
-                        backButton
-                        Spacer()
-                        searchBar
-                    }
-                    .padding(.bottom, 20)
-                    
-                    if viewModel.isSearching {
-                        ProgressView()
-                    } else if !viewModel.isSearching && viewModel.restaurants.isEmpty {
+            VStack {
+                HStack {
+                    backButton
+                    Spacer()
+                    searchBar
+                }
+                .padding(.bottom, 20)
+                
+                if viewModel.isSearching {
+                    ProgressView()
+                } else if !viewModel.isSearching && viewModel.restaurants.isEmpty {
+                    VStack {
                         noRestaurantsView
-                    } else {
-                        ScrollView {
-                            LazyVStack(spacing: 16) {
-                                ForEach(viewModel.restaurants) { restaurant in
-                                    RestaurantSearchResultRowView(restaurant: restaurant)
-                                }
+                    }
+                } else {
+                    ScrollView {
+                        LazyVStack(spacing: 16) {
+                            ForEach(viewModel.restaurants) { restaurant in
+                                RestaurantSearchResultRowView(restaurant: restaurant)
                             }
                         }
-                        .scrollIndicators(.hidden)
                     }
-                    Spacer()
+                    .scrollIndicators(.hidden)
                 }
-                .padding(.horizontal, 20)
-                .toolbar(.hidden, for: .navigationBar)
+                Spacer()
+            }
+            .padding(.horizontal, 20)
+            .toolbar(.hidden, for: .navigationBar)
+            .background(
+                Color.clear
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        isSearchBarFocused = false
+                    }
+            )
         }
     }
 }
