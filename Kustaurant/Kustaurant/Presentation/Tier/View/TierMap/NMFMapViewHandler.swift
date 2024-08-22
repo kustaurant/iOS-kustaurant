@@ -12,8 +12,9 @@ final class NMFMapViewHandler: NSObject {
     private var view: TierMapView
     private var viewModel: TierMapViewModel
     
+    private var markerManager: NMFMapMarkerManager
+    
     // 마커와 오버레이 관리
-    private var markers: [NMFMarker] = []
     private var polygons: [NMFPolygonOverlay] = []
     private var polylines: [NMFPolylineOverlay] = []
     
@@ -28,6 +29,7 @@ final class NMFMapViewHandler: NSObject {
     ) {
         self.view = view
         self.viewModel = viewModel
+        markerManager = NMFMapMarkerManager(view: view, viewModel: viewModel)
         super.init()
         view.naverMapView.mapView.touchDelegate = self
     }
@@ -40,13 +42,14 @@ extension NMFMapViewHandler {
         cameraUpdate(mapData.visibleBounds)
         addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
         addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
-        addMarkersForRestaurants(tieredRestaurants: mapData.tieredRestaurants, nonTieredRestaurants: mapData.nonTieredRestaurants)
+        markerManager.addMarkersForRestaurants(
+            tieredRestaurants: mapData.tieredRestaurants,
+            nonTieredRestaurants: mapData.nonTieredRestaurants
+        )
     }
     
     private func clearMap() {
-        // 기존 마커 제거
-        markers.forEach { $0.mapView = nil }
-        markers.removeAll()
+        markerManager.clearMarkers()
         
         // 기존 폴리곤 제거
         polygons.forEach { $0.mapView = nil }
@@ -57,80 +60,6 @@ extension NMFMapViewHandler {
         polylines.removeAll()
     }
 
-    // MARK: 마커
-    private func addMarkersForRestaurants(
-        tieredRestaurants: [Restaurant?]?,
-        nonTieredRestaurants: [TierMapRestaurants.NonTieredRestaurants?]?
-    ) {
-        if let tieredRestaurants = tieredRestaurants?.compactMap({ $0 }) {
-            for restaurant in tieredRestaurants {
-                addMarker(for: restaurant, isFavorite: restaurant.isFavorite ?? false, zoom: nil)
-            }
-        }
-        
-        if let nonTieredRestaurants = nonTieredRestaurants?.compactMap({ $0 }) {
-            for nonRestaurants in nonTieredRestaurants {
-                guard let restaurants = nonRestaurants.restaurants?.compactMap({ $0 }) else { continue }
-                let zoom = nonRestaurants.zoom
-                for restaurant in restaurants {
-                    addMarker(for: restaurant, isFavorite: restaurant.isFavorite ?? false, zoom: zoom)
-                }
-            }
-        }
-    }
-    
-    private func addMarker(
-        for restaurant: Restaurant,
-        isFavorite: Bool,
-        zoom: Int?
-    ) {
-        guard 
-            let lat = Double(restaurant.y ?? ""),
-            let lng = Double(restaurant.x ?? "")
-        else { return }
-
-        let coords = NMGLatLng(lat: lat, lng: lng)
-        let marker = NMFMarker(position: coords)
-        var iconSize: CGSize = CGSize(width: 30, height: 30)
-        
-        if isFavorite {
-            iconSize = CGSize(width: 19, height: 19)
-            if let markerIcon = UIImage(named: "icon_favorite")?.resized(to: iconSize) {
-                marker.iconImage = NMFOverlayImage(image: markerIcon)
-            }
-            marker.zIndex = 100
-            
-        } else {
-            if let zoom = zoom {
-                marker.isMinZoomInclusive = true
-                marker.minZoom = Double(zoom)
-            }
-
-            if let tier = restaurant.mainTier {
-                if tier == .unowned {
-                    iconSize = CGSize(width: 12, height: 16)
-                }
-                if let markerIcon = UIImage(named: restaurant.mainTier?.iconImageName ?? "")?.resized(to: iconSize) {
-                    marker.iconImage = NMFOverlayImage(image: markerIcon)
-                }
-                marker.zIndex = tier.zIndex
-            }
-        }
-        
-        marker.userInfo = ["restaurant": restaurant]
-        
-        // 마커 클릭 이벤트 처리
-        marker.touchHandler = { [weak self] _ in
-            if let restaurant = marker.userInfo["restaurant"] as? Restaurant {
-                self?.viewModel.didTapMarker(restaurant: restaurant)
-            }
-            return true
-        }
-
-        marker.mapView = view.naverMapView.mapView
-        
-        markers.append(marker)
-    }
 
     // MARK: 카메라
     private func cameraUpdate(_ bounds: [CGFloat?]?) {
