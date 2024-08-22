@@ -125,6 +125,8 @@
 		BA2D896E2C770B7E004E7B8E /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D896D2C770B7E004E7B8E /* SearchRepository.swift */; };
 		BA2D89702C770D8C004E7B8E /* DefaultSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D896F2C770D8C004E7B8E /* DefaultSearchRepository.swift */; };
 		BA2D89722C770FED004E7B8E /* SearchUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D89712C770FED004E7B8E /* SearchUseCases.swift */; };
+		BA2D89752C7712E7004E7B8E /* Restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = BA2D89742C7712E7004E7B8E /* Restaurants.json */; };
+		BA2D89782C77130E004E7B8E /* JsonSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D89772C77130E004E7B8E /* JsonSupport.swift */; };
 		BA37E0702C65E0B60092115B /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E06F2C65E0B60092115B /* DrawView.swift */; };
 		BA37E0722C65E0BF0092115B /* DrawViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0712C65E0BF0092115B /* DrawViewModel.swift */; };
 		BA37E0742C65E43F0092115B /* DrawCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */; };
@@ -324,6 +326,8 @@
 		BA2D896D2C770B7E004E7B8E /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
 		BA2D896F2C770D8C004E7B8E /* DefaultSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSearchRepository.swift; sourceTree = "<group>"; };
 		BA2D89712C770FED004E7B8E /* SearchUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCases.swift; sourceTree = "<group>"; };
+		BA2D89742C7712E7004E7B8E /* Restaurants.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Restaurants.json; sourceTree = "<group>"; };
+		BA2D89772C77130E004E7B8E /* JsonSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSupport.swift; sourceTree = "<group>"; };
 		BA37E06F2C65E0B60092115B /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		BA37E0712C65E0BF0092115B /* DrawViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewModel.swift; sourceTree = "<group>"; };
 		BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCollectionViewHandler.swift; sourceTree = "<group>"; };
@@ -569,6 +573,7 @@
 		584173222C464E27001EC132 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BA2D89762C7712F9004E7B8E /* Json */,
 				BA2D895A2C74C744004E7B8E /* Logger */,
 				BAB69ABD2C71DB8000C20F0B /* InMemoryStorage */,
 				BAC55EC02C6F1FCA00B3078F /* LoginService */,
@@ -878,6 +883,7 @@
 		58D83A8F2C3A79B400511AB9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BA2D89732C7712D1004E7B8E /* Json */,
 				584173842C4A06C6001EC132 /* Fonts */,
 				58D83A682C3A785A00511AB9 /* Assets.xcassets */,
 				58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */,
@@ -981,6 +987,22 @@
 				BA2D89692C76FC60004E7B8E /* SearchViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BA2D89732C7712D1004E7B8E /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				BA2D89742C7712E7004E7B8E /* Restaurants.json */,
+			);
+			path = Json;
+			sourceTree = "<group>";
+		};
+		BA2D89762C7712F9004E7B8E /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				BA2D89772C77130E004E7B8E /* JsonSupport.swift */,
+			);
+			path = Json;
 			sourceTree = "<group>";
 		};
 		BA37E06D2C65E0A60092115B /* View */ = {
@@ -1252,6 +1274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				584173922C4A070B001EC132 /* Pretendard-ExtraLight.otf in Resources */,
+				BA2D89752C7712E7004E7B8E /* Restaurants.json in Resources */,
 				584173952C4A070B001EC132 /* Pretendard-Thin.otf in Resources */,
 				58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */,
 				5841738E2C4A070B001EC132 /* Pretendard-Bold.otf in Resources */,
@@ -1523,6 +1546,7 @@
 				5841734F2C4682C8001EC132 /* CommunitySceneDIContainer.swift in Sources */,
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
 				584173392C46664E001EC132 /* DrawViewController.swift in Sources */,
+				BA2D89782C77130E004E7B8E /* JsonSupport.swift in Sources */,
 				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,
 				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,
 				58067CCC2C51552700889C92 /* Category.swift in Sources */,

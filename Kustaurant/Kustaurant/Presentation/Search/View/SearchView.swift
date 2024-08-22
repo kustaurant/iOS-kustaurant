@@ -16,7 +16,7 @@ struct SearchView: View {
     }
     
     var body: some View {
-        Text("search")
+        Text("123")
     }
 }
 
@@ -26,6 +26,7 @@ struct SearchView: View {
 
 struct MockSearchUseCases: SearchUseCases {
     func search(term: String) async -> Result<[Restaurant], NetworkError> {
-        .success([])
+        let restaurants = JsonSupport.loadRestaurantsFromJSON(fileName: "Restaurants")
+        return .success(restaurants ?? [])
     }
 }
