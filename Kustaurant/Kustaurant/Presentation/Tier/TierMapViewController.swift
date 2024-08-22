@@ -50,6 +50,7 @@ final class TierMapViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        bottomSheetDidDismiss()
         viewModel.hideBottomSheet()
     }
 }
@@ -95,5 +96,12 @@ extension TierMapViewController {
 extension TierMapViewController: TierCategoryReceivable {
     func receiveTierCategories(categories: [Category]) {
         viewModel.updateCategories(categories: categories)
+    }
+}
+
+// MARK: - TierMapBottomSheetDelegate
+extension TierMapViewController: TierMapBottomSheetDelegate {
+    func bottomSheetDidDismiss() {
+        mapHandler?.resetSelectedMarker()
     }
 }

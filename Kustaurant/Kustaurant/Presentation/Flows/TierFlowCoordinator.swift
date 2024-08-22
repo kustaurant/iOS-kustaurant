@@ -76,6 +76,11 @@ extension TierFlowCoordinator {
         }
         let viewController = dependencies.makeTierMapBottomSheet()
         viewController.configure(with: restaurant)
+        
+        if let mapViewController = getMapViewController() {
+            viewController.delegate = mapViewController
+        }
+        
         tierMapBottomSheet = viewController
         navigationController.present(viewController, animated: true)
     }
@@ -85,4 +90,10 @@ extension TierFlowCoordinator {
         tierMapBottomSheet = nil
     }
     
+}
+
+extension TierFlowCoordinator {
+    private func getMapViewController() -> TierMapViewController? {
+        tierViewController?.viewControllers?.compactMap { $0 as? TierMapViewController }.first
+    }
 }

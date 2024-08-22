@@ -7,7 +7,12 @@
 
 import UIKit
 
+protocol TierMapBottomSheetDelegate: AnyObject {
+    func bottomSheetDidDismiss()
+}
+
 final class TierMapBottomSheet: UIViewController {
+    weak var delegate: TierMapBottomSheetDelegate?
     private let sheetView: TierMapBottomSheetView = TierMapBottomSheetView()
     
     // MARK: - Life Cycle
@@ -31,10 +36,17 @@ extension TierMapBottomSheet {
             sheet.detents = [detent]
             sheet.largestUndimmedDetentIdentifier = .init(detentIdentifier)
             sheet.prefersGrabberVisible = true
+            sheet.delegate = self
         }
     }
     
     func configure(with restaurant: Restaurant) {
         sheetView.update(restaurant)
+    }
+}
+
+extension TierMapBottomSheet: UISheetPresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        delegate?.bottomSheetDidDismiss()
     }
 }

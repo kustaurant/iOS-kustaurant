@@ -49,6 +49,11 @@ extension NMFMapMarkerManager {
         markers.forEach { $0.mapView = nil }
         markers.removeAll()
     }
+    
+    func resetSelectedMarker() {
+        guard let previousMarker = selectedMarker else { return }
+        resetMarkerAppearance(previousMarker)
+    }
 }
 
 extension NMFMapMarkerManager {
@@ -76,19 +81,23 @@ extension NMFMapMarkerManager {
         return NMGLatLng(lat: lat, lng: lng)
     }
 
-    private func getMarkerIcon(named: String, size: CGSize) -> NMFOverlayImage? {
+    private func getMarkerIcon(
+        named: String,
+        size: CGSize
+    ) -> NMFOverlayImage? {
         guard let markerIcon = UIImage(named: named)?.resized(to: size) else { return nil }
         return NMFOverlayImage(image: markerIcon)
     }
 
-    private func setupMarkerTouchHandler(_ marker: NMFMarker, for restaurant: Restaurant) {
+    private func setupMarkerTouchHandler(
+        _ marker: NMFMarker,
+        for restaurant: Restaurant
+    ) {
         marker.userInfo = ["restaurant": restaurant]
         marker.touchHandler = { [weak self] _ in
             guard let restaurant = marker.userInfo["restaurant"] as? Restaurant else { return true }
             // 이전 선택된 마커의 보더 제거
-            if let previousMarker = self?.selectedMarker {
-                self?.resetMarkerAppearance(previousMarker)
-            }
+            self?.resetSelectedMarker()
             
             // 선택된 마커에 보더 추가
             self?.selectedMarker = (marker, restaurant)
@@ -153,7 +162,11 @@ extension NMFMapMarkerManager {
 
 
 private extension UIImage {
-    func resizedWithBorder(to size: CGSize, borderWidth: CGFloat, cornerRadius: CGFloat) -> UIImage? {
+    func resizedWithBorder(
+        to size: CGSize,
+        borderWidth: CGFloat,
+        cornerRadius: CGFloat
+    ) -> UIImage? {
         let imageRect = CGRect(
             origin: CGPoint(x: borderWidth, y: borderWidth),
             size: CGSize(width: size.width - 2 * borderWidth, height: size.height - 2 * borderWidth)

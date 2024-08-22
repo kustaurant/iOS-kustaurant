@@ -43,6 +43,10 @@ extension NMFMapViewHandler {
             nonTieredRestaurants: mapData.nonTieredRestaurants
         )
     }
+    
+    func resetSelectedMarker() {
+        markerManager.resetSelectedMarker()
+    }
 }
 
 extension NMFMapViewHandler {
@@ -71,6 +75,7 @@ extension NMFMapViewHandler: NMFMapViewTouchDelegate {
         #if DEBUG
         print("\(latlng.lat), \(latlng.lng)")
         #endif
+        resetSelectedMarker()
         viewModel.didTapMap()
     }
     
@@ -86,6 +91,7 @@ extension NMFMapViewHandler: NMFMapViewTouchDelegate {
         #if DEBUG
         print(symbol.caption!)
         #endif
+        resetSelectedMarker()
         viewModel.didTapMap()
         return true
     }
