@@ -70,22 +70,30 @@ extension SearchView {
     
     var searchBar: some View {
         HStack {
-            TextField(
-                "검색어를 입력하세요...",
-                text: $viewModel.searchText
-            )
-            .focused($isSearchBarFocused)
-            .padding(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 10))
-            .font(Font(UIFont.Pretendard.regular14))
-            .onSubmit {
-                viewModel.searchRestaurants()
-                isSearchBarFocused = false
+            ZStack(alignment: .leading) {
+                if viewModel.searchText.isEmpty {
+                    Text("검색어를 입력하세요...")
+                        .foregroundColor(Color(uiColor: .Sementic.gray300 ?? .gray))
+                        .font(Font(UIFont.Pretendard.regular14))
+                        .padding(.leading, 16)
+                }
+                TextField(
+                    "",
+                    text: $viewModel.searchText
+                )
+                .focused($isSearchBarFocused)
+                .padding(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 10))
+                .foregroundColor(Color(uiColor: .Sementic.gray800 ?? .black))
+                .font(Font(UIFont.Pretendard.regular14))
+                .onSubmit {
+                    viewModel.searchRestaurants()
+                    isSearchBarFocused = false
+                }
             }
             Spacer()
             searchButton
         }
         .frame(height: 48)
-        .foregroundColor(Color(uiColor: .Sementic.gray300 ?? .gray))
         .background(Color(uiColor: .Sementic.gray100 ?? .lightGray))
         .cornerRadius(30)
     }
