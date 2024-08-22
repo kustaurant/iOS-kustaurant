@@ -37,7 +37,10 @@ extension DrawFlowCoordinator {
     }
     
     func didTapDrawButton(restaurants: [Restaurant]) {
-        let actions = DrawResultViewModelActions(didTapBackButton: popAnimated)
+        let actions = DrawResultViewModelActions(
+            didTapBackButton: popAnimated,
+            didTapSearchButton: showSearch
+        )
         let viewController = dependencies.makeDrawResultViewController(
             actions: actions,
             restaurants: restaurants
