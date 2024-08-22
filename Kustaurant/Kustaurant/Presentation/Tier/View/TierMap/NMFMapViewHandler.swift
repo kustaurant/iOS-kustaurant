@@ -14,6 +14,7 @@ final class NMFMapViewHandler: NSObject {
     
     private var markerManager: NMFMapMarkerManager
     private var polygonManager: NMFMapPolygonManager
+    private var cameraManager: NMFMapCameraManager
     
     // MARK: - Initialization
     init(
@@ -24,6 +25,7 @@ final class NMFMapViewHandler: NSObject {
         self.viewModel = viewModel
         markerManager = NMFMapMarkerManager(view: view, viewModel: viewModel)
         polygonManager = NMFMapPolygonManager(view: view)
+        cameraManager = NMFMapCameraManager(view: view)
         super.init()
         view.naverMapView.mapView.touchDelegate = self
     }
@@ -33,8 +35,7 @@ extension NMFMapViewHandler {
     func updateMap(_ data: TierMapRestaurants?) {
         guard let mapData = data else { return }
         clearMap()
-        cameraUpdate(mapData.visibleBounds)
-
+        cameraManager.cameraUpdate(mapData.visibleBounds)
         polygonManager.addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
         polygonManager.addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
         markerManager.addMarkersForRestaurants(
@@ -42,28 +43,12 @@ extension NMFMapViewHandler {
             nonTieredRestaurants: mapData.nonTieredRestaurants
         )
     }
-    
+}
+
+extension NMFMapViewHandler {
     private func clearMap() {
         markerManager.clearMarkers()
         polygonManager.clearPolygons()
-    }
-
-
-    // MARK: 카메라
-    private func cameraUpdate(_ bounds: [CGFloat?]?) {
-        guard
-            let bounds = bounds?.compactMap({ $0 }).map({ Double($0 )}),
-            bounds.count >= 4
-        else { return }
-        let visibleBounds = NMGLatLngBounds(
-            southWestLat: bounds[2],
-            southWestLng: bounds[0],
-            northEastLat: bounds[3],
-            northEastLng: bounds[1]
-        )
-        let cameraUpdate = NMFCameraUpdate(fit: visibleBounds, padding: 0)
-        cameraUpdate.animation = .fly
-        view.naverMapView.mapView.moveCamera(cameraUpdate)
     }
 }
 
