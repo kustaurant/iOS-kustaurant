@@ -11,6 +11,7 @@ final class NMFMapMarkerManager {
     private var view: TierMapView
     private var viewModel: TierMapViewModel
     private var markers: [NMFMarker] = []
+    private var selectedMarker: (NMFMarker, Restaurant)?
     
     // MARK: - Initialization
     init(
@@ -59,7 +60,7 @@ extension NMFMapMarkerManager {
         guard let coords = getCoords(for: restaurant) else { return }
         
         let marker = NMFMarker(position: coords)
-        configureMarker(marker, for: restaurant, isFavorite: isFavorite, zoom: zoom)
+        configureMarkerAppearance(marker, for: restaurant, isFavorite: isFavorite, zoom: zoom)
         setupMarkerTouchHandler(marker, for: restaurant)
 
         marker.mapView = view.naverMapView.mapView
@@ -74,66 +75,107 @@ extension NMFMapMarkerManager {
         
         return NMGLatLng(lat: lat, lng: lng)
     }
-    
-    private func configureMarker(
+
+    private func getMarkerIcon(named: String, size: CGSize) -> NMFOverlayImage? {
+        guard let markerIcon = UIImage(named: named)?.resized(to: size) else { return nil }
+        return NMFOverlayImage(image: markerIcon)
+    }
+
+    private func setupMarkerTouchHandler(_ marker: NMFMarker, for restaurant: Restaurant) {
+        marker.userInfo = ["restaurant": restaurant]
+        marker.touchHandler = { [weak self] _ in
+            guard let restaurant = marker.userInfo["restaurant"] as? Restaurant else { return true }
+            // 이전 선택된 마커의 보더 제거
+            if let previousMarker = self?.selectedMarker {
+                self?.resetMarkerAppearance(previousMarker)
+            }
+            
+            // 선택된 마커에 보더 추가
+            self?.selectedMarker = (marker, restaurant)
+            self?.configureBorderedMarkerAppearance(marker, for: restaurant)
+
+            // ViewModel에 마커 클릭 알림 전달
+            self?.viewModel.didTapMarker(restaurant: restaurant)
+
+            return true
+        }
+    }
+
+    private func configureMarkerAppearance(
         _ marker: NMFMarker,
         for restaurant: Restaurant,
         isFavorite: Bool,
         zoom: Int?
     ) {
-        var iconSize: CGSize = CGSize(width: 30, height: 30)
-        
-        if isFavorite {
-            iconSize = CGSize(width: 19, height: 19)
-            if let iconImage = getMarkerIcon(named: "icon_favorite", size: iconSize) {
-                marker.iconImage = iconImage
-                marker.zIndex = 100
-            }
+        var iconSize: CGSize
+        if restaurant.mainTier == .unowned {
+            iconSize = CGSize(width: 12, height: 16)
         } else {
-            configureMarkerForNonFavorite(marker, restaurant: restaurant, zoom: zoom)
+            iconSize = isFavorite ? CGSize(width: 19, height: 19) : CGSize(width: 30, height: 30)
         }
-    }
 
-    private func configureMarkerForNonFavorite(
-        _ marker: NMFMarker,
-        restaurant: Restaurant,
-        zoom: Int?
-    ) {
+        let iconName = isFavorite ? "icon_favorite" : restaurant.mainTier?.iconImageName ?? ""
+
+        if let iconImage = getMarkerIcon(named: iconName, size: iconSize) {
+            marker.iconImage = iconImage
+            marker.zIndex = isFavorite ? 100 : restaurant.mainTier?.zIndex ?? 0
+        }
+
         if let zoom = zoom {
             marker.isMinZoomInclusive = true
             marker.minZoom = Double(zoom)
         }
-
-        if let tier = restaurant.mainTier {
-            var iconSize = CGSize(width: 30, height: 30)
-            if tier == .unowned {
-                iconSize = CGSize(width: 12, height: 16)
-            }
-            if let iconImage = getMarkerIcon(named: restaurant.mainTier?.iconImageName ?? "", size: iconSize) {
-                marker.iconImage = iconImage
-                marker.zIndex = tier.zIndex
-            }
-        }
     }
 
-    private func getMarkerIcon(
-        named: String,
-        size: CGSize
-    ) -> NMFOverlayImage? {
-        guard let markerIcon = UIImage(named: named)?.resized(to: size) else { return nil }
-        return NMFOverlayImage(image: markerIcon)
-    }
-
-    private func setupMarkerTouchHandler(
+    private func configureBorderedMarkerAppearance(
         _ marker: NMFMarker,
-        for restaurant: Restaurant
-    ) {
-        marker.userInfo = ["restaurant": restaurant]
-        marker.touchHandler = { [weak self] _ in
-            if let restaurant = marker.userInfo["restaurant"] as? Restaurant {
-                self?.viewModel.didTapMarker(restaurant: restaurant)
-            }
-            return true
+        for restaurant: Restaurant)
+    {
+        var iconSize: CGSize
+        if restaurant.mainTier == .unowned {
+            iconSize = CGSize(width: 18, height: 24)
+        } else {
+            iconSize = restaurant.isFavorite ?? false ? CGSize(width: 25, height: 25) : CGSize(width: 36, height: 36)
         }
+        
+        let iconName = restaurant.isFavorite ?? false ? "icon_favorite" : restaurant.mainTier?.iconImageName ?? ""
+        
+        if let iconImage = UIImage(named: iconName)?.resizedWithBorder(to: iconSize, borderWidth: 3, cornerRadius: 10) {
+            marker.iconImage = NMFOverlayImage(image: iconImage)
+        }
+    }
+
+    // 기본 상태로 복원
+    private func resetMarkerAppearance(_ marker: (NMFMarker, Restaurant)) {
+        configureMarkerAppearance(marker.0, for: marker.1, isFavorite: marker.1.isFavorite ?? false, zoom: nil)
+    }
+}
+
+
+private extension UIImage {
+    func resizedWithBorder(to size: CGSize, borderWidth: CGFloat, cornerRadius: CGFloat) -> UIImage? {
+        let imageRect = CGRect(
+            origin: CGPoint(x: borderWidth, y: borderWidth),
+            size: CGSize(width: size.width - 2 * borderWidth, height: size.height - 2 * borderWidth)
+        )
+
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+
+        let borderRect = CGRect(origin: .zero, size: size)
+        let context = UIGraphicsGetCurrentContext()
+
+        let path = UIBezierPath(roundedRect: borderRect, cornerRadius: cornerRadius)
+        context?.setFillColor(UIColor.black.cgColor)
+        context?.addPath(path.cgPath)
+        context?.fillPath()
+
+        let clippingPath = UIBezierPath(roundedRect: imageRect, cornerRadius: cornerRadius - borderWidth)
+        clippingPath.addClip()
+        self.draw(in: imageRect)
+
+        let imageWithBorder = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return imageWithBorder
     }
 }
