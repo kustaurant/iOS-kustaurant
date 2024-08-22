@@ -19,7 +19,7 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
 
-    func makeOnboardingFlowCoordinator(navigationController: UINavigationController) -> OnboardingFlowCoordinator {
+    func makeOnboardingFlowCoordinator(appDIContainer: AppDIContainer, navigationController: UINavigationController) -> OnboardingFlowCoordinator {
         OnboardingFlowCoordinator(
             dependencies: self,
             navigationController: navigationController

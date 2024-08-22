@@ -27,11 +27,7 @@ final class AppFlowCoordinator {
 
 extension AppFlowCoordinator {
     func start() {
-        if isLoggedIn() {
-            showTab()
-        } else {
-            showOnboarding()
-        }
+        showTab()
     }
         
     func isIntialLaunch() -> Bool {
@@ -67,6 +63,7 @@ extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
         
         let drawDIContainer = appDIContainer.makeDrawSceneDIContainer()
         let drawFlow = drawDIContainer.makeDrawFlowCoordinator(
+            appDIContainer: appDIContainer,
             navigationController: CustomUINavigationController()
         )
         
@@ -93,7 +90,9 @@ extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
         
     func showOnboarding() {
         let onboardingDIConatainer = appDIContainer.makeOnboardingDIContainer()
-        let onboardingFlow = onboardingDIConatainer.makeOnboardingFlowCoordinator(navigationController: navigationController)
+        let onboardingFlow = onboardingDIConatainer.makeOnboardingFlowCoordinator(
+            appDIContainer: appDIContainer,
+            navigationController: navigationController)
         onboardingFlow.appFlowNavigating = self
         
         if isIntialLaunch() {

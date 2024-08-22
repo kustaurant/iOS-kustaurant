@@ -59,5 +59,10 @@ final class AppDIContainer {
     func makeUserDefaultsStorage() -> UserDefaultsStorage {
         UserDefaultsStorage()
     }
+    
+    func makeSearchDIContainer() -> SearchSceneDIContainer {
+        let dependencies = SearchSceneDIContainer.Dependencies(networkService: networkService)
+        return SearchSceneDIContainer(dependencies: dependencies)
+    }
 }
 
