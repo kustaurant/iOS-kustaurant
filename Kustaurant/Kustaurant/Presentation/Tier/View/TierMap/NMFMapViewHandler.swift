@@ -13,14 +13,7 @@ final class NMFMapViewHandler: NSObject {
     private var viewModel: TierMapViewModel
     
     private var markerManager: NMFMapMarkerManager
-    
-    // 마커와 오버레이 관리
-    private var polygons: [NMFPolygonOverlay] = []
-    private var polylines: [NMFPolylineOverlay] = []
-    
-    enum Polygon {
-        case solid, dashed
-    }
+    private var polygonManager: NMFMapPolygonManager
     
     // MARK: - Initialization
     init(
@@ -30,6 +23,7 @@ final class NMFMapViewHandler: NSObject {
         self.view = view
         self.viewModel = viewModel
         markerManager = NMFMapMarkerManager(view: view, viewModel: viewModel)
+        polygonManager = NMFMapPolygonManager(view: view)
         super.init()
         view.naverMapView.mapView.touchDelegate = self
     }
@@ -40,8 +34,9 @@ extension NMFMapViewHandler {
         guard let mapData = data else { return }
         clearMap()
         cameraUpdate(mapData.visibleBounds)
-        addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
-        addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
+
+        polygonManager.addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
+        polygonManager.addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
         markerManager.addMarkersForRestaurants(
             tieredRestaurants: mapData.tieredRestaurants,
             nonTieredRestaurants: mapData.nonTieredRestaurants
@@ -50,14 +45,7 @@ extension NMFMapViewHandler {
     
     private func clearMap() {
         markerManager.clearMarkers()
-        
-        // 기존 폴리곤 제거
-        polygons.forEach { $0.mapView = nil }
-        polygons.removeAll()
-        
-        // 기존 폴리라인 제거
-        polylines.forEach { $0.mapView = nil }
-        polylines.removeAll()
+        polygonManager.clearPolygons()
     }
 
 
@@ -76,53 +64,6 @@ extension NMFMapViewHandler {
         let cameraUpdate = NMFCameraUpdate(fit: visibleBounds, padding: 0)
         cameraUpdate.animation = .fly
         view.naverMapView.mapView.moveCamera(cameraUpdate)
-    }
-    
-    // MARK: 영역
-    private func addPolygonOverlay(
-        type: Polygon,
-        _ polygonCoordsList: [[Coords?]?]?
-    ) {
-        guard let polygonCoordsList = polygonCoordsList else { return }
-                
-        for coordsList in polygonCoordsList {
-            guard let coordsList = coordsList else { continue }
-            let coords = coordsList.compactMap { $0 }
-            guard !coords.isEmpty else { continue }
-            
-            let nmgLatLngs = coords.map({$0.nmgLatLng})
-
-            let polygonOverlay = NMFPolygonOverlay(nmgLatLngs)
-            polygonOverlay?.fillColor = (type == .solid) ? .mapSolidBackground : .mapDashedBackground
-            
-            switch type {
-            case .solid:
-                polygonOverlay?.outlineColor = .mapOutline
-                polygonOverlay?.outlineWidth = 2
-            case .dashed:
-                addDashedPolylineOverlay(coords: nmgLatLngs)
-            }
-            
-            polygonOverlay?.mapView = view.naverMapView.mapView
-            
-            if let overlay = polygonOverlay {
-                polygons.append(overlay)
-            }
-
-        }
-    }
-    
-    private func addDashedPolylineOverlay(coords: [NMGLatLng]) {
-        let polylineOverlay = NMFPolylineOverlay(coords + [coords.first!]) // 닫힌 다각형
-        polylineOverlay?.pattern = [5, 5]
-        polylineOverlay?.color = .mapOutline
-        polylineOverlay?.capType = .butt
-        polylineOverlay?.width = 2
-        polylineOverlay?.mapView = view.naverMapView.mapView
-        
-        if let overlay = polylineOverlay {
-            polylines.append(overlay)
-        }
     }
 }
 
