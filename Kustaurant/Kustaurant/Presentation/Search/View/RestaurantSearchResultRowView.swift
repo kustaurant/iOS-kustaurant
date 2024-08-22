@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RestaurantSearchResultRowView: View {
     
-    @State private var restaurantImage: UIImage? = nil
     private let restaurant: Restaurant
     
     init(restaurant: Restaurant) {
@@ -61,13 +60,7 @@ extension RestaurantSearchResultRowView {
                 .foregroundStyle(Color(uiColor: .Sementic.gray800 ?? .darkGray))
                 .font(Font(UIFont.Pretendard.medium16))
             HStack {
-                Text(restaurant.restaurantCuisine ?? "")
-                    .foregroundStyle(Color(uiColor: .Sementic.gray400 ?? .darkGray))
-                    .font(Font(UIFont.Pretendard.regular12))
-                Rectangle()
-                    .frame(width: 1, height: 16)
-                    .foregroundStyle(Color(uiColor: .Sementic.gray600 ?? .darkGray))
-                Text(restaurant.restaurantPosition ?? "")
+                Text("\(restaurant.restaurantCuisine ?? "") ㅣ \(restaurant.restaurantPosition ?? "")")
                     .foregroundStyle(Color(uiColor: .Sementic.gray400 ?? .darkGray))
                     .font(Font(UIFont.Pretendard.regular12))
             }
