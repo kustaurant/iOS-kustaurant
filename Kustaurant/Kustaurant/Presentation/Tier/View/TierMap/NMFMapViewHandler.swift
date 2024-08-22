@@ -121,9 +121,8 @@ extension NMFMapViewHandler {
         
         // 마커 클릭 이벤트 처리
         marker.touchHandler = { [weak self] _ in
-            if let restaurantInfo = marker.userInfo["restaurant"] as? Restaurant {
-                print("\(restaurantInfo.restaurantName ?? "unknown")")
-                self?.viewModel.didTapMarker()
+            if let restaurant = marker.userInfo["restaurant"] as? Restaurant {
+                self?.viewModel.didTapMarker(restaurant: restaurant)
             }
             return true
         }

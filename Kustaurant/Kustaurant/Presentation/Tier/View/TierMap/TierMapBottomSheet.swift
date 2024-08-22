@@ -30,4 +30,15 @@ extension TierMapBottomSheet {
             sheet.prefersGrabberVisible = true
         }
     }
+    
+    func configure(with restaurant: Restaurant) {
+        self.restaurant = restaurant
+        updateUI()
+    }
+    
+    private func updateUI() {
+        guard let restaurant = restaurant else { return }
+        print("Restaurant name: \(restaurant.restaurantName ?? "")")
+        view.backgroundColor = .systemPink
+    }
 }

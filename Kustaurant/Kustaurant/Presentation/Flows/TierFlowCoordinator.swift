@@ -69,9 +69,13 @@ extension TierFlowCoordinator {
         }
     }
     
-    private func showMapBottomSheet() {
-        guard tierMapBottomSheet == nil else { return }
+    private func showMapBottomSheet(restaurant: Restaurant) {
+        guard tierMapBottomSheet == nil else {
+            tierMapBottomSheet?.configure(with: restaurant)
+            return
+        }
         let viewController = dependencies.makeTierMapBottomSheet()
+        viewController.configure(with: restaurant)
         tierMapBottomSheet = viewController
         navigationController.present(viewController, animated: true)
     }
