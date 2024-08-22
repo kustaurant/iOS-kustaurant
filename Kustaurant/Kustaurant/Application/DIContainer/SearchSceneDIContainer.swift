@@ -29,6 +29,14 @@ final class SearchSceneDIContainer: SearchFlowCoordinatorDependencies {
     }
     
     func makeSearchViewModel() -> SearchViewModel {
-        SearchViewModel()
+        SearchViewModel(searchUseCases: makeSearchUseCases())
+    }
+    
+    func makeSearchUseCases() -> SearchUseCases {
+        DefaultSearchUseCases(searchRepository: makeSearchRepository())
+    }
+    
+    func makeSearchRepository() -> SearchRepository {
+        DefaultSearchRepository(networkService: dependencies.networkService)
     }
 }

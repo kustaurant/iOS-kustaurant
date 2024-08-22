@@ -11,5 +11,10 @@ protocol SearchViewModelActions {
 }
 
 final class SearchViewModel: ObservableObject {
-    init() {}
+    
+    private let searchUseCases: SearchUseCases
+
+    init(searchUseCases: SearchUseCases) {
+        self.searchUseCases = searchUseCases
+    }
 }

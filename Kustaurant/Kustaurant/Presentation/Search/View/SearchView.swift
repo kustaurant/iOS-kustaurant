@@ -21,5 +21,11 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView(viewModel: SearchViewModel())
+    SearchView(viewModel: SearchViewModel(searchUseCases: MockSearchUseCases()))
+}
+
+struct MockSearchUseCases: SearchUseCases {
+    func search(term: String) async -> Result<[Restaurant], NetworkError> {
+        .success([])
+    }
 }
