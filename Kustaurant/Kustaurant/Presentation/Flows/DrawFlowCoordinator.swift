@@ -29,8 +29,13 @@ extension DrawFlowCoordinator {
     func start() {
         let actions = DrawViewModelActions(didTapDrawButton: didTapDrawButton)
         let viewController = dependencies.makeDrawViewController(actions: actions)
-        let image = UIImage(named: TabBarPage.draw.pageImageName())?.withRenderingMode(.alwaysOriginal)
-        viewController.tabBarItem = UITabBarItem(title: TabBarPage.draw.pageTitleValue(), image: image, selectedImage: image)
+        let image = UIImage(named: TabBarPage.draw.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
+        let selectedImage = UIImage(named: TabBarPage.draw.pageImageName() + "_on")?.withRenderingMode(.alwaysOriginal)
+        viewController.tabBarItem = UITabBarItem(
+            title: TabBarPage.draw.pageTitleValue(),
+            image: image,
+            selectedImage: selectedImage
+        )
         navigationController.pushViewController(viewController, animated: false)
     }
     

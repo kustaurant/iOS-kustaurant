@@ -37,8 +37,13 @@ extension HomeFlowCoordinator {
             showTierScene: showTierScene
         )
         let viewController = dependencies.makeHomeViewController(actions: actions)
-        let image = UIImage(named: TabBarPage.home.pageImageName())?.withRenderingMode(.alwaysOriginal)
-        viewController.tabBarItem = UITabBarItem(title: TabBarPage.home.pageTitleValue(), image: image, selectedImage: image)
+        let image = UIImage(named: TabBarPage.home.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
+        let selectedImage = UIImage(named: TabBarPage.home.pageImageName() + "_on")?.withRenderingMode(.alwaysOriginal)
+        viewController.tabBarItem = UITabBarItem(
+            title: TabBarPage.home.pageTitleValue(),
+            image: image,
+            selectedImage: selectedImage
+        )
         navigationController.pushViewController(viewController, animated: false)
     }
     
