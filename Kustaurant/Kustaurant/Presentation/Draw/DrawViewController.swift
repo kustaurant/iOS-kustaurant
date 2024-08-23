@@ -33,6 +33,11 @@ final class DrawViewController: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     override func loadView() {
         view = drawView
     }
@@ -41,9 +46,8 @@ final class DrawViewController: UIViewController {
 extension DrawViewController {
     
     private func setupNavigationBar() {
-        let searchImage = UIImage(named: "icon_search")
-        let searchButtonView = UIImageView(image: searchImage)
-        let searchButton = UIBarButtonItem(customView: searchButtonView)
+        let searchImage = UIImage(named: "icon_search")?.withRenderingMode(.alwaysOriginal)
+        let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(didTapSearchButton))
         navigationItem.title = "랜덤 맛집 뽑기"
         navigationItem.rightBarButtonItems = [searchButton]
     }
@@ -91,5 +95,9 @@ extension DrawViewController {
             self?.viewModel.didTapOkInAlert()
         }))
         present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func didTapSearchButton() {
+        viewModel.didTapSearchButton()
     }
 }

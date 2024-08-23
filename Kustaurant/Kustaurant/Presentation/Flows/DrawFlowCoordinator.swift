@@ -13,13 +13,12 @@ protocol DrawFlowCoordinatorDependencies {
 }
 
 final class DrawFlowCoordinator: Coordinator {
+    private let appDIContainer: AppDIContainer
     private let dependencies: DrawFlowCoordinatorDependencies
     var navigationController: UINavigationController
     
-    init(
-        dependencies: DrawFlowCoordinatorDependencies,
-        navigationController: UINavigationController
-    ) {
+    init(appDIContainer: AppDIContainer, dependencies: DrawFlowCoordinatorDependencies, navigationController: UINavigationController) {
+        self.appDIContainer = appDIContainer
         self.dependencies = dependencies
         self.navigationController = navigationController
     }
@@ -27,7 +26,10 @@ final class DrawFlowCoordinator: Coordinator {
 
 extension DrawFlowCoordinator {
     func start() {
-        let actions = DrawViewModelActions(didTapDrawButton: didTapDrawButton)
+        let actions = DrawViewModelActions(
+            didTapDrawButton: didTapDrawButton,
+            didTapSearchButton: showSearch
+        )
         let viewController = dependencies.makeDrawViewController(actions: actions)
         let image = UIImage(named: TabBarPage.draw.pageImageName())?.withRenderingMode(.alwaysOriginal)
         viewController.tabBarItem = UITabBarItem(title: TabBarPage.draw.pageTitleValue(), image: image, selectedImage: image)
@@ -35,7 +37,10 @@ extension DrawFlowCoordinator {
     }
     
     func didTapDrawButton(restaurants: [Restaurant]) {
-        let actions = DrawResultViewModelActions(didTapBackButton: popAnimated)
+        let actions = DrawResultViewModelActions(
+            didTapBackButton: popAnimated,
+            didTapSearchButton: showSearch
+        )
         let viewController = dependencies.makeDrawResultViewController(
             actions: actions,
             restaurants: restaurants
@@ -45,5 +50,11 @@ extension DrawFlowCoordinator {
     
     func popAnimated() {
         pop(animated: true)
+    }
+    
+    func showSearch() {
+        let searchDIContainer = appDIContainer.makeSearchDIContainer()
+        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(navigationController: navigationController)
+        searchFlow.start()
     }
 }
