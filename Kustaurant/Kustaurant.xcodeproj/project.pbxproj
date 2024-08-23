@@ -53,6 +53,11 @@
 		5826A1D82C7231060097256C /* TierBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1D72C7231060097256C /* TierBaseView.swift */; };
 		5826A1DA2C7231880097256C /* TierBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1D92C7231880097256C /* TierBaseViewModel.swift */; };
 		5826A1E22C723BF80097256C /* TierCategoryReceivable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1E12C723BF80097256C /* TierCategoryReceivable.swift */; };
+		5826A1E52C75FE9C0097256C /* TierMapBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1E42C75FE9C0097256C /* TierMapBottomSheet.swift */; };
+		5826A1E72C77197F0097256C /* NMFMapMarkerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1E62C77197F0097256C /* NMFMapMarkerManager.swift */; };
+		5826A1E92C77230A0097256C /* NMFMapPolygonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1E82C77230A0097256C /* NMFMapPolygonManager.swift */; };
+		5826A1EB2C77267D0097256C /* NMFMapCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1EA2C77267D0097256C /* NMFMapCameraManager.swift */; };
+		5826A1ED2C772C4B0097256C /* TierMapBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1EC2C772C4B0097256C /* TierMapBottomSheetView.swift */; };
 		5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */; };
 		584173202C464695001EC132 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841731F2C464695001EC132 /* HomeViewController.swift */; };
 		584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */; };
@@ -252,6 +257,11 @@
 		5826A1D72C7231060097256C /* TierBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierBaseView.swift; sourceTree = "<group>"; };
 		5826A1D92C7231880097256C /* TierBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierBaseViewModel.swift; sourceTree = "<group>"; };
 		5826A1E12C723BF80097256C /* TierCategoryReceivable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierCategoryReceivable.swift; sourceTree = "<group>"; };
+		5826A1E42C75FE9C0097256C /* TierMapBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapBottomSheet.swift; sourceTree = "<group>"; };
+		5826A1E62C77197F0097256C /* NMFMapMarkerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMFMapMarkerManager.swift; sourceTree = "<group>"; };
+		5826A1E82C77230A0097256C /* NMFMapPolygonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMFMapPolygonManager.swift; sourceTree = "<group>"; };
+		5826A1EA2C77267D0097256C /* NMFMapCameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMFMapCameraManager.swift; sourceTree = "<group>"; };
+		5826A1EC2C772C4B0097256C /* TierMapBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapBottomSheetView.swift; sourceTree = "<group>"; };
 		5841731C2C46425C001EC132 /* HomeRestaurantLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantLists.swift; sourceTree = "<group>"; };
 		5841731F2C464695001EC132 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		584173262C464FFB001EC132 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -807,7 +817,12 @@
 			isa = PBXGroup;
 			children = (
 				584FA4C82C647442008DDC19 /* TierMapView.swift */,
+				5826A1E42C75FE9C0097256C /* TierMapBottomSheet.swift */,
+				5826A1EC2C772C4B0097256C /* TierMapBottomSheetView.swift */,
 				584FA4D12C6487C4008DDC19 /* NMFMapViewHandler.swift */,
+				5826A1E62C77197F0097256C /* NMFMapMarkerManager.swift */,
+				5826A1E82C77230A0097256C /* NMFMapPolygonManager.swift */,
+				5826A1EA2C77267D0097256C /* NMFMapCameraManager.swift */,
 			);
 			path = TierMap;
 			sourceTree = "<group>";
@@ -1379,6 +1394,7 @@
 				58067D482C5A027000889C92 /* TierCategoryCollectionViewHandler.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				BA8EEF8D2C6351D800FE6ABF /* KuPageControl.swift in Sources */,
+				5826A1ED2C772C4B0097256C /* TierMapBottomSheetView.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
@@ -1388,6 +1404,7 @@
 				BA2D89682C76FC58004E7B8E /* SearchView.swift in Sources */,
 				58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */,
 				BA37E0872C675FF40092115B /* UIStackView+AutoLayout.swift in Sources */,
+				5826A1E72C77197F0097256C /* NMFMapMarkerManager.swift in Sources */,
 				BA37E07B2C65E5F10092115B /* DrawCollectionViewSection.swift in Sources */,
 				BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */,
 				BAB69ACB2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift in Sources */,
@@ -1502,6 +1519,7 @@
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				5826A1E52C75FE9C0097256C /* TierMapBottomSheet.swift in Sources */,
 				5826A1D62C72309B0097256C /* TierTopCategoriesCollectionViewHandler.swift in Sources */,
 				BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
@@ -1549,7 +1567,9 @@
 				584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */,
 				584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */,
 				584FA4CB2C6475C7008DDC19 /* TierMapRepository.swift in Sources */,
+				5826A1E92C77230A0097256C /* NMFMapPolygonManager.swift in Sources */,
 				BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */,
+				5826A1EB2C77267D0097256C /* NMFMapCameraManager.swift in Sources */,
 				58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */,
 				5841734F2C4682C8001EC132 /* CommunitySceneDIContainer.swift in Sources */,
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
