@@ -11,6 +11,7 @@ import OSLog
 enum LogCategory: String {
     case network
     case ui
+    case file
     case none
 }
 
