@@ -42,7 +42,7 @@ extension TierListView {
             topCategoriesView.leadingAnchor.constraint(equalTo: leadingAnchor),
             topCategoriesView.trailingAnchor.constraint(equalTo: trailingAnchor),
             topCategoriesView.heightAnchor.constraint(equalToConstant: Category.height),
-            tableView.topAnchor.constraint(equalTo: topCategoriesView.bottomAnchor, constant: 9),
+            tableView.topAnchor.constraint(equalTo: topCategoriesView.bottomAnchor, constant: 18),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor)

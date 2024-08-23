@@ -50,6 +50,7 @@ extension TierViewController {
     private func setupNavigationBar() {
         navigationItem.titleView = tierNaviationTitleTabView
         configureBackButtonIfNeeded()
+        addBottomBorderToNavigationBar()
     }
     
     private func configureBackButtonIfNeeded() {
@@ -61,6 +62,11 @@ extension TierViewController {
         }
     }
     
+    private func addBottomBorderToNavigationBar() {
+        let borderView = UIView()
+        borderView.backgroundColor = .gray100
+        navigationController?.navigationBar.addSubview(borderView, autoLayout: [.fillX(0), .bottom(0), .height(1.5)])
+    }
     
     private func setViewControllersInPageVC() {
         setPage(index: 0)
