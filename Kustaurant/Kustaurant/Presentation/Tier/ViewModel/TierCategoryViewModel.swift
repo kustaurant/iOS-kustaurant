@@ -14,9 +14,11 @@ struct TierCategoryViewModelActions {
 protocol TierCategoryViewModelInput {
     func selectCategories(categories: [Category])
     func updateTierCategories()
+    func didTapHeaderButton(type: CategoryType)
 }
 
 protocol TierCategoryViewModelOutput {
+    var isCategorySelectionChanged: Bool { get }
     var initialCategories: [Category] { get }
     var cuisines: [Category] { get }
     var situations: [Category] { get }
@@ -24,6 +26,7 @@ protocol TierCategoryViewModelOutput {
     var cuisinesPublisher: Published<[Category]>.Publisher { get }
     var situationsPublisher: Published<[Category]>.Publisher { get }
     var locationsPublisher: Published<[Category]>.Publisher { get }
+    var showPopupPublisher: Published<CategoryType?>.Publisher { get }
 }
 
 typealias TierCategoryViewModel = TierCategoryViewModelInput & TierCategoryViewModelOutput
@@ -32,13 +35,19 @@ final class DefaultTierCategoryViewModel: TierCategoryViewModel {
     private let actions: TierCategoryViewModelActions
     
     // MARK: Output
+    var isCategorySelectionChanged: Bool {
+        initialCategories != (cuisines + situations + locations)
+    }
     var initialCategories: [Category] = []
+    @Published var showPopup: CategoryType?
     @Published var cuisines: [Category] = Cuisine.allCases.map({ $0.category })
     @Published var situations: [Category] = Situation.allCases.map({ $0.category})
     @Published var locations: [Category] = Location.allCases.map({ $0.category })
+    var showPopupPublisher: Published<CategoryType?>.Publisher { $showPopup }
     var cuisinesPublisher: Published<[Category]>.Publisher { $cuisines }
     var situationsPublisher: Published<[Category]>.Publisher { $situations }
     var locationsPublisher: Published<[Category]>.Publisher { $locations }
+    
     
     init(
         actions: TierCategoryViewModelActions,
@@ -52,6 +61,10 @@ final class DefaultTierCategoryViewModel: TierCategoryViewModel {
 
 // MARK: - Input
 extension DefaultTierCategoryViewModel {
+    func didTapHeaderButton(type: CategoryType) {
+        showPopup = type
+    }
+    
     func updateTierCategories() {
         let categories = (cuisines + situations + locations).filter({ $0.isSelect })
         actions.receiveTierCategories(categories)

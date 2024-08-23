@@ -12,6 +12,7 @@ final class TierCategoryViewController: UIViewController {
     private var viewModel: TierCategoryViewModel
     private var tierCategoryCollectionViewHandler: TierCategoryCollectionViewHandler?
     private var tierCategoryView = TierCategoryView()
+    private var popupTier = TierCategoryPopupView()
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
@@ -57,6 +58,18 @@ extension TierCategoryViewController {
     private func setupBinding() {
         bindCategories()
         bindButtons()
+        bindPopup()
+    }
+    
+    private func bindPopup() {
+        viewModel.showPopupPublisher
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                guard let type = value else { return }
+                self?.addPopup(categoryType: type)
+            }
+            .store(in: &cancellables)
     }
     
     private func bindCategories() {
@@ -89,13 +102,12 @@ extension TierCategoryViewController {
 
 extension TierCategoryViewController {
     private func reloadSectionAndButtonState(_ index: Int) {
-        self.tierCategoryCollectionViewHandler?.reloadSection(indexSet: IndexSet(integer: index))
+        tierCategoryCollectionViewHandler?.reloadSection(indexSet: IndexSet(integer: index))
         checkIfStateChanged()
     }
     
     private func checkIfStateChanged() {
-        let currentCategories = viewModel.cuisines + viewModel.situations + viewModel.locations
-        let isChanged = viewModel.initialCategories != currentCategories
+        let isChanged = viewModel.isCategorySelectionChanged
         tierCategoryView.actionButton.buttonState = isChanged ? .on : .off
     }
 }
@@ -103,6 +115,22 @@ extension TierCategoryViewController {
 extension TierCategoryViewController {
     private func setupUI() {
         setupNavigationBar()
+    }
+    
+    private func addPopup(categoryType: CategoryType) {
+        let window = UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .first { $0.isKeyWindow }
+        
+        switch categoryType {
+        case .cuisine:
+            window?.addSubview(popupTier, autoLayout: [.fill(0)])
+        case .situation:
+            return
+        case .location:
+            return
+        }
     }
     
     private func setupNavigationBar() {

@@ -49,8 +49,13 @@ extension TierFlowCoordinator {
             mapActions: mapActions,
             initialCategories: initialCategories
         )
-        let image = UIImage(named: TabBarPage.tier.pageImageName())?.withRenderingMode(.alwaysOriginal)
-        viewController.tabBarItem = UITabBarItem(title: TabBarPage.tier.pageTitleValue(), image: image, selectedImage: image)
+        let image = UIImage(named: TabBarPage.tier.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
+        let selectedImage = UIImage(named: TabBarPage.tier.pageImageName() + "_on")?.withRenderingMode(.alwaysOriginal)
+        viewController.tabBarItem = UITabBarItem(
+            title: TabBarPage.tier.pageTitleValue(),
+            image: image,
+            selectedImage: selectedImage
+        )
         tierViewController = viewController
         navigationController.pushViewController(viewController, animated: true)
     }

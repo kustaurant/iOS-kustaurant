@@ -11,6 +11,7 @@ final class TierCategorySectionHeaderView: UICollectionReusableView {
     static var reuseIdentifier: String = String(describing: TierCategorySectionHeaderView.self)
     static var height: CGFloat = 44
     private let title = UILabel()
+    let button = UIButton()
     var model: CategoryType? { didSet { bind() }}
     
     override init(frame: CGRect) {
@@ -26,32 +27,46 @@ final class TierCategorySectionHeaderView: UICollectionReusableView {
 extension TierCategorySectionHeaderView {
     private func bind() {
         title.text = model?.rawValue
+        configureButton()
+    }
+    
+    private func configureButton() {
+        guard let CategoryType = model else { return }
+        switch CategoryType {
+        case .cuisine:
+            button.setAttributedTitle(createUnderlinedText("티어란?"), for: .normal)
+        case .situation:
+            return
+        case .location:
+            button.setAttributedTitle(createUnderlinedText("위치에 대한 설명이 필요하다면?"), for: .normal)
+        }
     }
 }
 
 extension TierCategorySectionHeaderView {
     private func setupUI() {
         addSubviews()
-        setupConstraints()
-        setupTitle()
+        configureTitle()
     }
     
     private func addSubviews() {
-        [title].forEach {
-            addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+        addSubview(title, autoLayout: [.leading(20), .centerY(0)])
+        addSubview(button, autoLayout: [.trailing(20), .centerY(0)])
     }
     
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            title.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
-    }
-    
-    private func setupTitle() {
+    private func configureTitle() {
         title.textColor = .textBlack
         title.font = UIFont.Pretendard.semiBold17
+    }
+    
+    private func createUnderlinedText(_ title: String) -> NSAttributedString {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.Pretendard.medium11,
+            .foregroundColor: UIColor.gray600,
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .underlineColor: UIColor.gray600
+        ]
+        let attributedString = NSAttributedString(string: title, attributes: attributes)
+        return attributedString
     }
 }
