@@ -117,6 +117,7 @@
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		816A02DA220B296E2DE3721E /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */; };
+		BA1CB3D32C7C405400DA6776 /* AuthorizationInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */; };
 		BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D895B2C74C74C004E7B8E /* Logger.swift */; };
 		BA2D895F2C75A024004E7B8E /* NaverMeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D895E2C75A024004E7B8E /* NaverMeResponse.swift */; };
 		BA2D89612C75A02A004E7B8E /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D89602C75A02A004E7B8E /* AccessTokenResponse.swift */; };
@@ -311,6 +312,7 @@
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.debug.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.debug.xcconfig"; sourceTree = "<group>"; };
 		ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationInterceptor.swift; sourceTree = "<group>"; };
 		BA2D895B2C74C74C004E7B8E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BA2D895E2C75A024004E7B8E /* NaverMeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMeResponse.swift; sourceTree = "<group>"; };
 		BA2D89602C75A02A004E7B8E /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
@@ -1112,6 +1114,7 @@
 				CF54AD112C4289A900E0DE68 /* Response.swift */,
 				CF54AD132C4289B800E0DE68 /* DownloadResponse.swift */,
 				CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */,
+				BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1433,6 +1436,7 @@
 				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
+				BA1CB3D32C7C405400DA6776 /* AuthorizationInterceptor.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
