@@ -28,6 +28,13 @@ final class AppFlowCoordinator {
 extension AppFlowCoordinator {
     
     func start() {
+        let skipOnboarding = UserDefaultsStorage.shared.getValue(forKey: UserDefaultsKey.skipOnboarding) ?? false
+        
+        if skipOnboarding {
+            showTab()
+            return
+        }
+        
         Task {
             if await isLoggedIn() {
                 DispatchQueue.main.async { [weak self] in

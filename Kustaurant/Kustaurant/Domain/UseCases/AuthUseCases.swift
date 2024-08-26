@@ -12,6 +12,7 @@ protocol AuthUseCases {
     func naverLogin() -> AnyPublisher<KuUser, NetworkError>
     func appleLogin() -> AnyPublisher<KuUser, NetworkError>
     func logout()
+    func skipLogin()
 }
 
 final class DefaultAuthUseCases: AuthUseCases {
@@ -47,10 +48,18 @@ extension DefaultAuthUseCases {
         if let user = socialLoginUserRepository.getUser() {
             Task {
                 await authReposiory.logout(userId: user.id)
+                if user.provider == .naver {
+                    naverLoginService.attemptLogout()
+                }
             }
         }
+        
+        UserDefaultsStorage.shared.setValue(false, forKey: UserDefaultsKey.skipOnboarding)
         socialLoginUserRepository.removeUser()
-        naverLoginService.attemptLogout()
+    }
+    
+    func skipLogin() {
+        UserDefaultsStorage.shared.setValue(true, forKey: UserDefaultsKey.skipOnboarding)
     }
 }
 
