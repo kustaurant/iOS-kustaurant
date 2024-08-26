@@ -49,7 +49,7 @@ extension DefaultAuthUseCases {
                 await authReposiory.logout(userId: user.id)
             }
         }
-        socialLoginUserRepository.setUser(nil)
+        socialLoginUserRepository.removeUser()
         naverLoginService.attemptLogout()
     }
 }

@@ -84,7 +84,6 @@ extension URLRequestBuilder {
             Logger.debug("Fail To Add Authorization Header, No User In keychain", category: .network)
             return
         }
-        
         addHeader(field: "Authorization", value: "Bearer \(user.accessToken)")
     }
 }

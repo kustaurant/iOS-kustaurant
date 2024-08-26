@@ -17,4 +17,8 @@ final class DefaultSocialLoginUserRepository: SocialLoginUserRepository {
     func setUser(_ user: KuUser? = nil) {
         KeychainStorage.shared.setValue(user, forKey: KeychainKey.kuUser)
     }
+    
+    func removeUser() {
+        KeychainStorage.shared.removeValue(forKey: KeychainKey.kuUser)
+    }
 }

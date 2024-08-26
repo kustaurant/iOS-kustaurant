@@ -10,4 +10,5 @@ import Foundation
 protocol SocialLoginUserRepository {
     func getUser() -> KuUser?
     func setUser(_ user: KuUser?)
+    func removeUser()
 }

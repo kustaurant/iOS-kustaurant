@@ -26,21 +26,24 @@ final class AppFlowCoordinator {
 }
 
 extension AppFlowCoordinator {
+    
     func start() {
-        showOnboarding()
-    }
-    
-    func isIntialLaunch() -> Bool {
-        guard let isInitialLaunch: Bool = UserDefaultsStorage.shared.getValue(forKey: UserDefaultsKey.initialLaunch) else {
-            UserDefaultsStorage.shared.setValue(false, forKey: UserDefaultsKey.initialLaunch)
-            return true
+        Task {
+            if await isLoggedIn() {
+                DispatchQueue.main.async { [weak self] in
+                    self?.showTab()
+                }
+            } else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.showOnboarding()
+                }
+            }
         }
-        return isInitialLaunch
     }
-    
-    // TODO: 로그인되어 있는지 확인
-    func isLoggedIn() -> Bool {
-        return false
+
+    func isLoggedIn() async -> Bool {
+        let authRepository = DefaultAuthRepository(networkService: appDIContainer.networkService)
+        return await authRepository.verifyToken()
     }
 }
 
@@ -97,4 +100,13 @@ extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
             onboardingFlow.showLogin()
         }
     }
+    
+        func isIntialLaunch() -> Bool {
+        guard let isInitialLaunch: Bool = UserDefaultsStorage.shared.getValue(forKey: UserDefaultsKey.initialLaunch) else {
+            UserDefaultsStorage.shared.setValue(false, forKey: UserDefaultsKey.initialLaunch)
+            return true
+        }
+        return isInitialLaunch
+    }
+    
 }

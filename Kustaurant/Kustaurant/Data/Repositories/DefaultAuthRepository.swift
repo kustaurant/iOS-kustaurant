@@ -17,6 +17,7 @@ final class DefaultAuthRepository {
 }
 
 extension DefaultAuthRepository: AuthRepository {
+    
     func appleLogin(authorizationCode: String, identityToken: String) async -> Result<String, NetworkError> {
         var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/apple-login", method: .post)
         urlBuilder.addHeaders(["Content-Type": "application/json"])
@@ -26,7 +27,7 @@ extension DefaultAuthRepository: AuthRepository {
             "authorizationCode": authorizationCode,
             "identityToken": identityToken
         ]
-
+        
         if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: []) {
             urlBuilder.setBody(jsonData)
         } else {
@@ -49,7 +50,7 @@ extension DefaultAuthRepository: AuthRepository {
         
         return .success(accessToken)
     }
-
+    
     func naverLogin(userId: String, naverAccessToken: String) async -> Result<String, NetworkError> {
         var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/naver-login", method: .post)
         
@@ -60,7 +61,7 @@ extension DefaultAuthRepository: AuthRepository {
             "providerId": userId,
             "naverAccessToken": naverAccessToken
         ]
-
+        
         if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: []) {
             urlBuilder.setBody(jsonData)
         } else {
@@ -74,7 +75,7 @@ extension DefaultAuthRepository: AuthRepository {
             return .failure(error)
         }
         
-        guard 
+        guard
             let data: AccessTokenResponse? = response.decode(),
             let accessToken = data?.accessToken
         else {
@@ -92,7 +93,21 @@ extension DefaultAuthRepository: AuthRepository {
         let response = await request.responseAsync(with: urlBuilder)
         
         if let error = response.error {
-            print(error.localizedDescription)
+            Logger.error(error.localizedDescription, category: .network)
         }
+    }
+    
+    func verifyToken() async -> Bool {
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/verify-token")
+        urlBuilder.addAuthorization()
+        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let response = await request.responseAsync(with: urlBuilder)
+        
+        if let error = response.error {
+            Logger.error(error.localizedDescription, category: .network)
+            return false
+        }
+        
+        return true
     }
 }
