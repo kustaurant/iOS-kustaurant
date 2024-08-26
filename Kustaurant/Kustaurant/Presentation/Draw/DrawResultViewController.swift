@@ -36,6 +36,11 @@ class DrawResultViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     override func loadView() {
         view = drawResultView
     }
@@ -44,10 +49,9 @@ class DrawResultViewController: UIViewController {
 extension DrawResultViewController {
     
     private func setupNavigationBar() {
-        let searchImage = UIImage(named: "icon_search")
-        let searchButtonView = UIImageView(image: searchImage)
-        let searchButton = UIBarButtonItem(customView: searchButtonView)
-
+        let searchImage = UIImage(named: "icon_search")?.withRenderingMode(.alwaysOriginal)
+        let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(didTapSearchButton))
+        
         let backImage = UIImage(named: "icon_back")
         let backButtonView = UIImageView(image: backImage)
         let backButton = UIBarButtonItem(customView: backButtonView)
@@ -93,6 +97,10 @@ extension DrawResultViewController {
     
     @objc private func backButtonTapped() {
         viewModel.didTapBackButton()
+    }
+    
+    @objc private func didTapSearchButton() {
+        viewModel.didTapSearchButton()
     }
 }
 

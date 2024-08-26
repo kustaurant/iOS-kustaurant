@@ -31,8 +31,14 @@ extension MyPageFlowCoordinator {
             showOnboarding: showOnboarding
         )
         let viewController = dependencies.makeMyPageViewController(actions: actions)
-        let image = UIImage(named: TabBarPage.mypage.pageImageName())?.withRenderingMode(.alwaysOriginal)
-        viewController.tabBarItem = UITabBarItem(title: TabBarPage.mypage.pageTitleValue(), image: image, selectedImage: image)
+        let image = UIImage(named: TabBarPage.mypage.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
+        let selectedImage = UIImage(named: TabBarPage.mypage.pageImageName() + "_on")?.withRenderingMode(.alwaysOriginal)
+        
+        viewController.tabBarItem = UITabBarItem(
+            title: TabBarPage.mypage.pageTitleValue(),
+            image: image,
+            selectedImage: selectedImage
+        )
         navigationController.pushViewController(viewController, animated: false)
     }
     

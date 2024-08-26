@@ -46,4 +46,5 @@ extension OnboardingFlowCoordinator {
         let viewController = dependencies.makeLoginViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: false)
     }
+
 }

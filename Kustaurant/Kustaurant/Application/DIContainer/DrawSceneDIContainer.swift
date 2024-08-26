@@ -19,8 +19,9 @@ final class DrawSceneDIContainer: DrawFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
-    func makeDrawFlowCoordinator(navigationController: UINavigationController) -> DrawFlowCoordinator {
+    func makeDrawFlowCoordinator(appDIContainer: AppDIContainer, navigationController: UINavigationController) -> DrawFlowCoordinator {
         DrawFlowCoordinator(
+            appDIContainer: appDIContainer,
             dependencies: self,
             navigationController: navigationController
         )

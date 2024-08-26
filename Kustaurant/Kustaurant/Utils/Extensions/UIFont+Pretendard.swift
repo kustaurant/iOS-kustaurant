@@ -10,6 +10,7 @@ import UIKit
 extension UIFont {
     
     enum Pretendard {
+        static let bold23 = UIFont(name: "Pretendard-Bold", size: 23)!
         static let bold20 = UIFont(name: "Pretendard-Bold", size: 20)!
         static let bold16 = UIFont(name: "Pretendard-Bold", size: 16)!
         static let bold13 = UIFont(name: "Pretendard-Bold", size: 13)!

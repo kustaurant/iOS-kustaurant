@@ -10,6 +10,7 @@ import UIKit
 final class TierViewController: UIPageViewController {
     private var tierNaviationTitleTabView = TierNavigationTitleTabView()
     var pages: [UIViewController]
+    private var navigationBarBottomBorder: UIView?
     private var currentIndex: Int {
         guard let viewController = viewControllers?.first else { return 0 }
         return pages.firstIndex(of: viewController) ?? 0
@@ -37,6 +38,16 @@ final class TierViewController: UIPageViewController {
         setupNavigationBar()
         setViewControllersInPageVC()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addBottomBorderToNavigationBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationBarBottomBorder?.removeFromSuperview()
+    }
 }
 
 // MARK: - Actions
@@ -61,6 +72,12 @@ extension TierViewController {
         }
     }
     
+    private func addBottomBorderToNavigationBar() {
+        let borderView = UIView()
+        borderView.backgroundColor = .gray100
+        navigationController?.navigationBar.addSubview(borderView, autoLayout: [.fillX(0), .bottom(0), .height(1.5)])
+        navigationBarBottomBorder = borderView
+    }
     
     private func setViewControllersInPageVC() {
         setPage(index: 0)

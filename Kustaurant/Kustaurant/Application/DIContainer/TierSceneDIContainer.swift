@@ -105,6 +105,10 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         )
     }
     
+    func makeTierMapBottomSheet() -> TierMapBottomSheet {
+        TierMapBottomSheet()
+    }
+    
     func makeTierViewController(
         listActions: TierListViewModelActions,
         mapActions: TierMapViewModelActions,

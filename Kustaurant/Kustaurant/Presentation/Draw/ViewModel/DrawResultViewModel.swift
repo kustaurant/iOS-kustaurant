@@ -11,11 +11,13 @@ import UIKit
 
 struct DrawResultViewModelActions {
     let didTapBackButton: () -> Void
+    let didTapSearchButton: () -> Void
 }
 
 protocol DrawResultViewModelInput {
     func didTapBackButton() -> Void
     func shuffleRestaurants() -> Void
+    func didTapSearchButton() -> Void
 }
 
 protocol DrawResultViewModelOutput {
@@ -53,5 +55,9 @@ extension DefaultDrawResultViewModel {
         }
         
         restaurants = Array(currentRestaurants.prefix(30))
+    }
+    
+    func didTapSearchButton() {
+        actions.didTapSearchButton()
     }
 }
