@@ -55,5 +55,10 @@ final class AppDIContainer {
         )
         return OnboardingSceneDIContainer(dependencies: dependencies)
     }
+    
+    func makeSearchDIContainer() -> SearchSceneDIContainer {
+        let dependencies = SearchSceneDIContainer.Dependencies(networkService: networkService)
+        return SearchSceneDIContainer(dependencies: dependencies)
+    }
 }
 
