@@ -85,8 +85,9 @@ extension DefaultAuthRepository: AuthRepository {
     }
     
     func logout(userId: String) async {
-        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/log-out")
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/logout", method: .post)
         urlBuilder.addQuery(parameter: ["userId": userId])
+        urlBuilder.addAuthorization()
         let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
         let response = await request.responseAsync(with: urlBuilder)
         

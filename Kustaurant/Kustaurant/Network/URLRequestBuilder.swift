@@ -76,3 +76,15 @@ public struct URLRequestBuilder {
         return request
     }
 }
+
+extension URLRequestBuilder {
+    
+    public mutating func addAuthorization() {
+        guard let user: KuUser = KeychainStorage.shared.getValue(forKey: KeychainKey.kuUser) else {
+            Logger.debug("Fail To Add Authorization Header, No User In keychain", category: .network)
+            return
+        }
+        
+        addHeader(field: "Authorization", value: "Bearer \(user.accessToken)")
+    }
+}
