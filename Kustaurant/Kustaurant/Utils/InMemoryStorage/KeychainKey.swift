@@ -8,5 +8,5 @@
 import Foundation
 
 enum KeychainKey {
-    static let kuUser = "kuUser"
+    static let userCredentials = "userCredentials"
 }

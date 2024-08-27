@@ -37,7 +37,7 @@ public class AuthorizationRetrier: RequestRetrier {
     }
     
     private func refreshToken() async -> Bool {
-        guard let user: KuUser = KeychainStorage.shared.getValue(forKey: KeychainKey.kuUser) else {
+        guard let user: UserCredentials = KeychainStorage.shared.getValue(forKey: KeychainKey.userCredentials) else {
             return false
         }
         
@@ -65,8 +65,8 @@ public class AuthorizationRetrier: RequestRetrier {
             return false
         }
         
-        let updatedUser = KuUser(id: user.id, accessToken: data.accessToken, provider: user.provider)
-        KeychainStorage.shared.setValue(updatedUser, forKey: KeychainKey.kuUser)
+        let updatedUser = UserCredentials(id: user.id, accessToken: data.accessToken, provider: user.provider)
+        KeychainStorage.shared.setValue(updatedUser, forKey: KeychainKey.userCredentials)
         return true
     }
 }

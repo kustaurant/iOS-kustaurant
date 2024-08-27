@@ -35,7 +35,7 @@ extension AppFlowCoordinator {
             return
         }
         
-        guard let _: KuUser = KeychainStorage.shared.getValue(forKey: KeychainKey.kuUser) else {
+        guard let _: UserCredentials = KeychainStorage.shared.getValue(forKey: KeychainKey.userCredentials) else {
             showOnboarding()
             return
         }
@@ -99,7 +99,7 @@ extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
         )
         myPageFlow.appFlowNavigating = self
         
-        tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow, communityFlow, myPageFlow])
+        tabBarFlowCoordinator.setupTabs(with: [myPageFlow, drawFlow, tierFlow, communityFlow, homeFlow])
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }
