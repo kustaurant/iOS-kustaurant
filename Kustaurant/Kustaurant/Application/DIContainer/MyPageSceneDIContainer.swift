@@ -31,7 +31,11 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
     }
     
     func makeMyPageViewModel(actions: MyPageViewModelActions) -> MyPageViewModel {
-        DefaultMyPageViewModel(actions: actions, authUseCases: makeAuthUseCases())
+        DefaultMyPageViewModel(
+            actions: actions,
+            authUseCases: makeAuthUseCases(),
+            myPageUseCases: makeMyPageUseCases()
+        )
     }
     
     func makeAuthUseCases() -> AuthUseCases {
@@ -57,5 +61,13 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
     
     func makeAuthRepository() -> AuthRepository {
         DefaultAuthRepository(networkService: dependencies.networkService)
+    }
+    
+    func makeMyPageRepository() -> MyPageRepository {
+        DefaultMyPageRepository(networkService: dependencies.networkService)
+    }
+    
+    func makeMyPageUseCases() -> MyPageUseCases {
+        DefaultMyPageUseCases(myPageRepository: makeMyPageRepository())
     }
 }

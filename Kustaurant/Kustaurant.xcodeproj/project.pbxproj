@@ -152,6 +152,9 @@
 		BA37E0B52C6B0A710092115B /* DefaultDrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */; };
 		BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B62C6B0A870092115B /* DrawRepository.swift */; };
 		BA37E0B92C6B0DA80092115B /* DrawUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */; };
+		BA494B452C7DD2DA00EB2527 /* MyPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */; };
+		BA494B472C7DD36A00EB2527 /* DefaultMyPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B462C7DD36A00EB2527 /* DefaultMyPageRepository.swift */; };
+		BA494B492C7DD44200EB2527 /* MyPageUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B482C7DD44200EB2527 /* MyPageUseCases.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -365,6 +368,9 @@
 		BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDrawRepository.swift; sourceTree = "<group>"; };
 		BA37E0B62C6B0A870092115B /* DrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRepository.swift; sourceTree = "<group>"; };
 		BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawUseCases.swift; sourceTree = "<group>"; };
+		BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRepository.swift; sourceTree = "<group>"; };
+		BA494B462C7DD36A00EB2527 /* DefaultMyPageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyPageRepository.swift; sourceTree = "<group>"; };
+		BA494B482C7DD44200EB2527 /* MyPageUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUseCases.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -770,6 +776,7 @@
 				584FA4CC2C6475DA008DDC19 /* TierMapUseCases.swift */,
 				BAC55EC82C6F351400B3078F /* AuthUseCases.swift */,
 				BA2D89712C770FED004E7B8E /* SearchUseCases.swift */,
+				BA494B482C7DD44200EB2527 /* MyPageUseCases.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -792,6 +799,7 @@
 				BAB69AC82C71DC5700C20F0B /* SocialLoginUserRepository.swift */,
 				BA2D896D2C770B7E004E7B8E /* SearchRepository.swift */,
 				BA57C7B92C72F1780063F2FA /* AuthRepository.swift */,
+				BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -805,6 +813,7 @@
 				584FA4CE2C6476A7008DDC19 /* DefaultTierMapRepository.swift */,
 				BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */,
 				BA2D896F2C770D8C004E7B8E /* DefaultSearchRepository.swift */,
+				BA494B462C7DD36A00EB2527 /* DefaultMyPageRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1421,6 +1430,7 @@
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
+				BA494B472C7DD36A00EB2527 /* DefaultMyPageRepository.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
 				BA2D896A2C76FC60004E7B8E /* SearchViewModel.swift in Sources */,
 				BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */,
@@ -1446,6 +1456,7 @@
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
+				BA494B452C7DD2DA00EB2527 /* MyPageRepository.swift in Sources */,
 				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
 				BA2D896E2C770B7E004E7B8E /* SearchRepository.swift in Sources */,
 				BA2D89702C770D8C004E7B8E /* DefaultSearchRepository.swift in Sources */,
@@ -1466,6 +1477,7 @@
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
 				BA37E0702C65E0B60092115B /* DrawView.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
+				BA494B492C7DD44200EB2527 /* MyPageUseCases.swift in Sources */,
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
 				584FA4E42C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift in Sources */,

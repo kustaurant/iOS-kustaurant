@@ -22,10 +22,12 @@ final class DefaultMyPageViewModel {
     
     private let actions: MyPageViewModelActions
     private let authUseCases: AuthUseCases
+    private let myPageUseCases: MyPageUseCases
     
-    init(actions: MyPageViewModelActions, authUseCases: AuthUseCases) {
+    init(actions: MyPageViewModelActions, authUseCases: AuthUseCases, myPageUseCases: MyPageUseCases) {
         self.actions = actions
         self.authUseCases = authUseCases
+        self.myPageUseCases = myPageUseCases
     }
 }
 
