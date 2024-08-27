@@ -124,6 +124,7 @@
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		816A02DA220B296E2DE3721E /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */; };
 		BA1CB3D32C7C405400DA6776 /* AuthorizationInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */; };
+		BA1CB3D92C7D891600DA6776 /* AuthorizationRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1CB3D82C7D891600DA6776 /* AuthorizationRetrier.swift */; };
 		BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D895B2C74C74C004E7B8E /* Logger.swift */; };
 		BA2D895F2C75A024004E7B8E /* NaverMeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D895E2C75A024004E7B8E /* NaverMeResponse.swift */; };
 		BA2D89612C75A02A004E7B8E /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D89602C75A02A004E7B8E /* AccessTokenResponse.swift */; };
@@ -336,6 +337,7 @@
 		686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.debug.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.debug.xcconfig"; sourceTree = "<group>"; };
 		ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationInterceptor.swift; sourceTree = "<group>"; };
+		BA1CB3D82C7D891600DA6776 /* AuthorizationRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRetrier.swift; sourceTree = "<group>"; };
 		BA2D895B2C74C74C004E7B8E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BA2D895E2C75A024004E7B8E /* NaverMeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMeResponse.swift; sourceTree = "<group>"; };
 		BA2D89602C75A02A004E7B8E /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
@@ -1206,6 +1208,7 @@
 				CF54AD132C4289B800E0DE68 /* DownloadResponse.swift */,
 				CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */,
 				BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */,
+				BA1CB3D82C7D891600DA6776 /* AuthorizationRetrier.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1439,6 +1442,7 @@
 				BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */,
 				BA57C7C62C7435820063F2FA /* MyPageView.swift in Sources */,
 				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
+				BA1CB3D92C7D891600DA6776 /* AuthorizationRetrier.swift in Sources */,
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
