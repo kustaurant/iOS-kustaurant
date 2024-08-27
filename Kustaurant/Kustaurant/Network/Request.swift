@@ -101,18 +101,20 @@ extension Request {
     }
     
     func execute(with urlRequest: URLRequest, attempt: Int) async throws -> Data {
-        let request = interceptor?.intercept(urlRequest) ?? urlRequest
         var attempt = attempt
         
         repeat {
             do {
+                let request = interceptor?.intercept(urlRequest) ?? urlRequest
                 let data = try await execute(with: request)
                 return data
             } catch {
                 guard
                     let retrier = retrier,
-                    retrier.shouldRetry(request, with: error, attempt: attempt)
-                else { throw error }
+                    await retrier.shouldRetryAsync(with: error, attempt: attempt)
+                else {
+                    throw error
+                }
                 
                 attempt += 1
             }

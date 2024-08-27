@@ -48,6 +48,8 @@ extension DefaultAuthRepository: AuthRepository {
             return .failure(.decodingFailed)
         }
         
+        print(accessToken)
+        
         return .success(accessToken)
     }
     
@@ -100,11 +102,13 @@ extension DefaultAuthRepository: AuthRepository {
     func verifyToken() async -> Bool {
         let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/verify-token")
         let authInterceptor = AuthorizationInterceptor()
-        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: nil)
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
         let response = await request.responseAsync(with: urlBuilder)
         
         if let error = response.error {
-                return false
+            Logger.error(error.localizedDescription, category: .network)
+            return false
         }
         
         return true
