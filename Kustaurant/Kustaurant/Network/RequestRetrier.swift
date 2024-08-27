@@ -9,4 +9,5 @@ import Foundation
 
 public protocol RequestRetrier {
     func shouldRetry(_ request: URLRequest, with error: Error, attempt: Int) -> Bool
+    func shouldRetryAsync(with error: Error, attempt: Int) async -> Bool
 }
