@@ -28,15 +28,21 @@ final class AppFlowCoordinator {
 extension AppFlowCoordinator {
     
     func start() {
-        let skipOnboarding = UserDefaultsStorage.shared.getValue(forKey: UserDefaultsKey.skipOnboarding) ?? false
+        let skipOnboarding: Bool = UserDefaultsStorage.shared.getValue(forKey: UserDefaultsKey.skipOnboarding) ?? false
         
         if skipOnboarding {
             showTab()
             return
         }
         
+        guard let _: KuUser = KeychainStorage.shared.getValue(forKey: KeychainKey.kuUser) else {
+            showOnboarding()
+            return
+        }
+        
         Task {
-            if await isLoggedIn() {
+            let isLoggedIn = await isLoggedIn()
+            if isLoggedIn {
                 DispatchQueue.main.async { [weak self] in
                     self?.showTab()
                 }
@@ -47,10 +53,11 @@ extension AppFlowCoordinator {
             }
         }
     }
-
+    
     func isLoggedIn() async -> Bool {
         let authRepository = DefaultAuthRepository(networkService: appDIContainer.networkService)
-        return await authRepository.verifyToken()
+        let verified = await authRepository.verifyToken()
+        return verified
     }
 }
 
@@ -111,7 +118,7 @@ extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
         }
     }
     
-        func isIntialLaunch() -> Bool {
+    func isIntialLaunch() -> Bool {
         guard let isInitialLaunch: Bool = UserDefaultsStorage.shared.getValue(forKey: UserDefaultsKey.initialLaunch) else {
             UserDefaultsStorage.shared.setValue(false, forKey: UserDefaultsKey.initialLaunch)
             return true

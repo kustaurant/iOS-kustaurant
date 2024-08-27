@@ -1000,8 +1000,8 @@
 				BA2D89602C75A02A004E7B8E /* AccessTokenResponse.swift */,
 			);
 			path = Dto;
-            sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		BA2D89642C76FC3C004E7B8E /* Search */ = {
 			isa = PBXGroup;
 			children = (

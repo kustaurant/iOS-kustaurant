@@ -59,6 +59,7 @@ extension DefaultAuthUseCases {
     }
     
     func skipLogin() {
+        socialLoginUserRepository.removeUser()
         UserDefaultsStorage.shared.setValue(true, forKey: UserDefaultsKey.skipOnboarding)
     }
 }

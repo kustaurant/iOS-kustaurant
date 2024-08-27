@@ -98,14 +98,13 @@ extension DefaultAuthRepository: AuthRepository {
     }
     
     func verifyToken() async -> Bool {
-        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/verify-token")
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/verify-token")
         let authInterceptor = AuthorizationInterceptor()
         let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: nil)
         let response = await request.responseAsync(with: urlBuilder)
         
         if let error = response.error {
-            Logger.error(error.localizedDescription, category: .network)
-            return false
+                return false
         }
         
         return true
