@@ -7,22 +7,18 @@
 
 import Foundation
 
-final class DefaultSocialLoginUserRepository {
+final class DefaultSocialLoginUserRepository: SocialLoginUserRepository {
     
-    private let keychainStorage: KeychainStorage
-    
-    init(keychainStorage: KeychainStorage) {
-        self.keychainStorage = keychainStorage
-    }
-}
-
-extension DefaultSocialLoginUserRepository: SocialLoginUserRepository {
-    func getUser() -> SocialLoginUser? {
-        let user: SocialLoginUser? = keychainStorage.getValue(forKey: KeychainKey.socialLoginUser)
+    func getUser() -> KuUser? {
+        let user: KuUser? = KeychainStorage.shared.getValue(forKey: KeychainKey.kuUser)
         return user
     }
     
-    func setUser(_ user: SocialLoginUser? = nil) {
-        _ = keychainStorage.setValue(user, forKey: KeychainKey.socialLoginUser)
+    func setUser(_ user: KuUser? = nil) {
+        KeychainStorage.shared.setValue(user, forKey: KeychainKey.kuUser)
+    }
+    
+    func removeUser() {
+        KeychainStorage.shared.removeValue(forKey: KeychainKey.kuUser)
     }
 }

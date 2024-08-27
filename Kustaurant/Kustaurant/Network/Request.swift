@@ -39,8 +39,14 @@ extension Request {
             switch statusCode {
             case 200..<300:
                 break
+            case 400:
+                completionHandler(.failure(.badRequest))
+                return
             case 401:
                 completionHandler(.failure(.unauthorized))
+                return
+            case 403:
+                completionHandler(.failure(.forbidden))
                 return
             default:
                 completionHandler(.failure(.serverError(statusCode: statusCode)))
@@ -95,7 +101,7 @@ extension Request {
     }
     
     func execute(with urlRequest: URLRequest, attempt: Int) async throws -> Data {
-        var request = interceptor?.intercept(urlRequest) ?? urlRequest
+        let request = interceptor?.intercept(urlRequest) ?? urlRequest
         var attempt = attempt
         
         repeat {

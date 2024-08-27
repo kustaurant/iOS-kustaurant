@@ -123,7 +123,10 @@
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		816A02DA220B296E2DE3721E /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */; };
+		BA1CB3D32C7C405400DA6776 /* AuthorizationInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */; };
 		BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D895B2C74C74C004E7B8E /* Logger.swift */; };
+		BA2D895F2C75A024004E7B8E /* NaverMeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D895E2C75A024004E7B8E /* NaverMeResponse.swift */; };
+		BA2D89612C75A02A004E7B8E /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D89602C75A02A004E7B8E /* AccessTokenResponse.swift */; };
 		BA2D89632C76FB95004E7B8E /* SearchFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D89622C76FB95004E7B8E /* SearchFlowCoordinator.swift */; };
 		BA2D89682C76FC58004E7B8E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D89672C76FC58004E7B8E /* SearchView.swift */; };
 		BA2D896A2C76FC60004E7B8E /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D89692C76FC60004E7B8E /* SearchViewModel.swift */; };
@@ -175,7 +178,7 @@
 		BAC55EC32C6F1FE200B3078F /* NaverLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */; };
 		BAC55EC92C6F351400B3078F /* AuthUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC82C6F351400B3078F /* AuthUseCases.swift */; };
 		BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */; };
-		BAC55ECD2C6FB2AB00B3078F /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECC2C6FB2AB00B3078F /* SocialLogin.swift */; };
+		BAC55ECD2C6FB2AB00B3078F /* KuUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECC2C6FB2AB00B3078F /* KuUser.swift */; };
 		BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */; };
 		BAF177F62C772B8100E17FDC /* RestaurantSearchResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */; };
 		BAF177F82C7735D300E17FDC /* TierBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF177F72C7735D300E17FDC /* TierBadgeView.swift */; };
@@ -332,7 +335,10 @@
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.debug.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.debug.xcconfig"; sourceTree = "<group>"; };
 		ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationInterceptor.swift; sourceTree = "<group>"; };
 		BA2D895B2C74C74C004E7B8E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		BA2D895E2C75A024004E7B8E /* NaverMeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMeResponse.swift; sourceTree = "<group>"; };
+		BA2D89602C75A02A004E7B8E /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
 		BA2D89622C76FB95004E7B8E /* SearchFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFlowCoordinator.swift; sourceTree = "<group>"; };
 		BA2D89672C76FC58004E7B8E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		BA2D89692C76FC60004E7B8E /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -385,7 +391,7 @@
 		BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverLoginService.swift; sourceTree = "<group>"; };
 		BAC55EC82C6F351400B3078F /* AuthUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCases.swift; sourceTree = "<group>"; };
 		BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaverLoginRepository.swift; path = ../Repositories/NaverLoginRepository.swift; sourceTree = "<group>"; };
-		BAC55ECC2C6FB2AB00B3078F /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
+		BAC55ECC2C6FB2AB00B3078F /* KuUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuUser.swift; sourceTree = "<group>"; };
 		BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResultRowView.swift; sourceTree = "<group>"; };
 		BAF177F72C7735D300E17FDC /* TierBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierBadgeView.swift; sourceTree = "<group>"; };
@@ -745,6 +751,7 @@
 		5841736C2C47BD16001EC132 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				BA2D895D2C75A00C004E7B8E /* Dto */,
 				BA57C7BE2C7316380063F2FA /* ThirdPartyRepositories */,
 				BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */,
 				584173742C47C2FE001EC132 /* Repositories */,
@@ -962,7 +969,7 @@
 				58067CCB2C51552700889C92 /* Category.swift */,
 				584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */,
 				584FA4D52C64A41D008DDC19 /* Coords.swift */,
-				BAC55ECC2C6FB2AB00B3078F /* SocialLogin.swift */,
+				BAC55ECC2C6FB2AB00B3078F /* KuUser.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -984,6 +991,15 @@
 				BA2D895B2C74C74C004E7B8E /* Logger.swift */,
 			);
 			path = Logger;
+			sourceTree = "<group>";
+		};
+		BA2D895D2C75A00C004E7B8E /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				BA2D895E2C75A024004E7B8E /* NaverMeResponse.swift */,
+				BA2D89602C75A02A004E7B8E /* AccessTokenResponse.swift */,
+			);
+			path = Dto;
 			sourceTree = "<group>";
 		};
 		BA2D89642C76FC3C004E7B8E /* Search */ = {
@@ -1189,6 +1205,7 @@
 				CF54AD112C4289A900E0DE68 /* Response.swift */,
 				CF54AD132C4289B800E0DE68 /* DownloadResponse.swift */,
 				CF54AD172C4289EB00E0DE68 /* URLRequestBuilder.swift */,
+				BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1476,6 +1493,7 @@
 				CFE2046B2C5D0A4000BCA87C /* UIView+parentViewController.swift in Sources */,
 				584173832C48CAE0001EC132 /* ReusableCell.swift in Sources */,
 				58067D4A2C5A1D6200889C92 /* CategoryType.swift in Sources */,
+				BA2D895F2C75A024004E7B8E /* NaverMeResponse.swift in Sources */,
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
 				BA8EEF812C630FF900FE6ABF /* OnboardingViewController.swift in Sources */,
 				CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */,
@@ -1513,12 +1531,13 @@
 				58067CA82C4F512100889C92 /* TierPageViewController.swift in Sources */,
 				BA8EEF872C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift in Sources */,
 				BA37E0B92C6B0DA80092115B /* DrawUseCases.swift in Sources */,
-				BAC55ECD2C6FB2AB00B3078F /* SocialLogin.swift in Sources */,
+				BAC55ECD2C6FB2AB00B3078F /* KuUser.swift in Sources */,
 				58067D842C5FD67700889C92 /* HomeLayoutTableViewHandler.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
 				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
+				BA1CB3D32C7C405400DA6776 /* AuthorizationInterceptor.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
@@ -1534,6 +1553,7 @@
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
+				BA2D89612C75A02A004E7B8E /* AccessTokenResponse.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				CFE204522C5A0D7900BCA87C /* UICollectionView+.swift in Sources */,

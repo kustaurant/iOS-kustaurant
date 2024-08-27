@@ -9,9 +9,10 @@ import Foundation
 import Combine
 
 protocol AuthUseCases {
-    func naverLogin() -> AnyPublisher<SocialLoginUser, NetworkError>
-    func appleLogin() -> AnyPublisher<SocialLoginUser, NetworkError>
+    func naverLogin() -> AnyPublisher<KuUser, NetworkError>
+    func appleLogin() -> AnyPublisher<KuUser, NetworkError>
     func logout()
+    func skipLogin()
 }
 
 final class DefaultAuthUseCases: AuthUseCases {
@@ -31,13 +32,13 @@ final class DefaultAuthUseCases: AuthUseCases {
 
 extension DefaultAuthUseCases {
     
-    func naverLogin() -> AnyPublisher<SocialLoginUser, NetworkError> {
+    func naverLogin() -> AnyPublisher<KuUser, NetworkError> {
         naverLoginService.attemptLogin()
             .flatMap(processNaverLogin)
             .eraseToAnyPublisher()
     }
 
-    func appleLogin() -> AnyPublisher<SocialLoginUser, NetworkError> {
+    func appleLogin() -> AnyPublisher<KuUser, NetworkError> {
         appleLoginService.attemptLogin()
             .flatMap(processAppleLogin)
             .eraseToAnyPublisher()
@@ -47,22 +48,31 @@ extension DefaultAuthUseCases {
         if let user = socialLoginUserRepository.getUser() {
             Task {
                 await authReposiory.logout(userId: user.id)
+                if user.provider == .naver {
+                    naverLoginService.attemptLogout()
+                }
             }
         }
-        socialLoginUserRepository.setUser(nil)
-        naverLoginService.attemptLogout()
+        
+        UserDefaultsStorage.shared.setValue(false, forKey: UserDefaultsKey.skipOnboarding)
+        socialLoginUserRepository.removeUser()
+    }
+    
+    func skipLogin() {
+        socialLoginUserRepository.removeUser()
+        UserDefaultsStorage.shared.setValue(true, forKey: UserDefaultsKey.skipOnboarding)
     }
 }
 
 extension DefaultAuthUseCases {
     
-    private func processNaverLogin(_ response: SignInWithNaverResponse) -> AnyPublisher<SocialLoginUser, NetworkError> {
+    private func processNaverLogin(_ response: SignInWithNaverResponse) -> AnyPublisher<KuUser, NetworkError> {
         Future { promise in
             Task { [weak self] in
                 let naverAuthResponse = await self?.authReposiory.naverLogin(userId: response.id, naverAccessToken: response.naverAccessToken)
                 switch naverAuthResponse {
                 case .success(let accessToken):
-                    let user = SocialLoginUser(id: response.id, accessToken: accessToken, provider: .naver)
+                    let user = KuUser(id: response.id, accessToken: accessToken, provider: .naver)
                     self?.socialLoginUserRepository.setUser(user)
                     promise(.success(user))
                 case .failure(let error):
@@ -75,13 +85,13 @@ extension DefaultAuthUseCases {
         .eraseToAnyPublisher()
     }
     
-    private func processAppleLogin(_ response: SignInWithAppleResponse) -> AnyPublisher<SocialLoginUser, NetworkError> {
+    private func processAppleLogin(_ response: SignInWithAppleResponse) -> AnyPublisher<KuUser, NetworkError> {
         Future { promise in
             Task { [weak self] in
                 let appleAuthResponse = await self?.authReposiory.appleLogin(authorizationCode: response.authorizationCode, identityToken: response.identityToken)
                 switch appleAuthResponse {
                 case .success(let accessToken):
-                    let user = SocialLoginUser(id: response.id, accessToken: accessToken, provider: .naver)
+                    let user = KuUser(id: response.id, accessToken: accessToken, provider: .naver)
                     self?.socialLoginUserRepository.setUser(user)
                     promise(.success(user))
                 case .failure(let error):
