@@ -8,10 +8,15 @@
 import Foundation
 
 protocol MyPageUseCases {
-    
+    func getUserProfile() async -> Result<UserProfile, NetworkError>
+    func sendFeedback(_ comments: String) async -> Result<Void, NetworkError>
+    func updateUserPrfile(_ userProfile: UserProfile) async -> Result<Void, NetworkError>
+    func getSavedRestaurantsCount() async -> Result<UserSavedRestaurantsCount, NetworkError>
+    func getFavoriteRestaurants() async -> Result<[FavoriteRestaurant], NetworkError>
+    func getEvaluatedRestaurants() async -> Result<[EvaluatedRestaurant], NetworkError>
 }
 
-final class DefaultMyPageUseCases: MyPageUseCases {
+final class DefaultMyPageUseCases {
     
     private let myPageRepository: MyPageRepository
     
@@ -20,5 +25,28 @@ final class DefaultMyPageUseCases: MyPageUseCases {
     }
 }
     
-extension DefaultMyPageUseCases {
+extension DefaultMyPageUseCases: MyPageUseCases {
+    func sendFeedback(_ comments: String) async -> Result<Void, NetworkError> {
+        return await myPageRepository.sendFeedback(comments)
+    }
+    
+    func updateUserPrfile(_ userProfile: UserProfile) async -> Result<Void, NetworkError> {
+        return await myPageRepository.updateUserPrfile(userProfile)
+    }
+    
+    func getSavedRestaurantsCount() async -> Result<UserSavedRestaurantsCount, NetworkError> {
+        return await myPageRepository.fetchSavedRestaurantsCount()
+    }
+    
+    func getFavoriteRestaurants() async -> Result<[FavoriteRestaurant], NetworkError> {
+        return await myPageRepository.fetchFavoriteRestaurants()
+    }
+    
+    func getEvaluatedRestaurants() async -> Result<[EvaluatedRestaurant], NetworkError> {
+        return await myPageRepository.fetchEvaluatedRestaurants()
+    }
+    
+    func getUserProfile() async -> Result<UserProfile, NetworkError> {
+        return await myPageRepository.fetchUserProfile()
+    }
 }

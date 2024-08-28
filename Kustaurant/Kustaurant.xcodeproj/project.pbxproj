@@ -155,6 +155,10 @@
 		BA494B452C7DD2DA00EB2527 /* MyPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */; };
 		BA494B472C7DD36A00EB2527 /* DefaultMyPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B462C7DD36A00EB2527 /* DefaultMyPageRepository.swift */; };
 		BA494B492C7DD44200EB2527 /* MyPageUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B482C7DD44200EB2527 /* MyPageUseCases.swift */; };
+		BA494B4B2C7DE83C00EB2527 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B4A2C7DE83C00EB2527 /* UserProfile.swift */; };
+		BA494B4D2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B4C2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift */; };
+		BA494B4F2C7DEE6400EB2527 /* FavoriteRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B4E2C7DEE6400EB2527 /* FavoriteRestaurant.swift */; };
+		BA494B512C7DEF9B00EB2527 /* EvaluatedRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B502C7DEF9B00EB2527 /* EvaluatedRestaurant.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -182,7 +186,7 @@
 		BAC55EC32C6F1FE200B3078F /* NaverLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */; };
 		BAC55EC92C6F351400B3078F /* AuthUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC82C6F351400B3078F /* AuthUseCases.swift */; };
 		BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */; };
-		BAC55ECD2C6FB2AB00B3078F /* KuUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECC2C6FB2AB00B3078F /* KuUser.swift */; };
+		BAC55ECD2C6FB2AB00B3078F /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECC2C6FB2AB00B3078F /* UserCredentials.swift */; };
 		BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */; };
 		BAF177F62C772B8100E17FDC /* RestaurantSearchResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */; };
 		BAF177F82C7735D300E17FDC /* TierBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF177F72C7735D300E17FDC /* TierBadgeView.swift */; };
@@ -371,6 +375,10 @@
 		BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRepository.swift; sourceTree = "<group>"; };
 		BA494B462C7DD36A00EB2527 /* DefaultMyPageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyPageRepository.swift; sourceTree = "<group>"; };
 		BA494B482C7DD44200EB2527 /* MyPageUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUseCases.swift; sourceTree = "<group>"; };
+		BA494B4A2C7DE83C00EB2527 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		BA494B4C2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSavedRestaurantsCount.swift; sourceTree = "<group>"; };
+		BA494B4E2C7DEE6400EB2527 /* FavoriteRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRestaurant.swift; sourceTree = "<group>"; };
+		BA494B502C7DEF9B00EB2527 /* EvaluatedRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatedRestaurant.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -399,7 +407,7 @@
 		BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverLoginService.swift; sourceTree = "<group>"; };
 		BAC55EC82C6F351400B3078F /* AuthUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCases.swift; sourceTree = "<group>"; };
 		BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaverLoginRepository.swift; path = ../Repositories/NaverLoginRepository.swift; sourceTree = "<group>"; };
-		BAC55ECC2C6FB2AB00B3078F /* KuUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuUser.swift; sourceTree = "<group>"; };
+		BAC55ECC2C6FB2AB00B3078F /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
 		BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResultRowView.swift; sourceTree = "<group>"; };
 		BAF177F72C7735D300E17FDC /* TierBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierBadgeView.swift; sourceTree = "<group>"; };
@@ -980,7 +988,11 @@
 				58067CCB2C51552700889C92 /* Category.swift */,
 				584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */,
 				584FA4D52C64A41D008DDC19 /* Coords.swift */,
-				BAC55ECC2C6FB2AB00B3078F /* KuUser.swift */,
+				BAC55ECC2C6FB2AB00B3078F /* UserCredentials.swift */,
+				BA494B4A2C7DE83C00EB2527 /* UserProfile.swift */,
+				BA494B4C2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift */,
+				BA494B4E2C7DEE6400EB2527 /* FavoriteRestaurant.swift */,
+				BA494B502C7DEF9B00EB2527 /* EvaluatedRestaurant.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1513,6 +1525,7 @@
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
 				BA8EEF812C630FF900FE6ABF /* OnboardingViewController.swift in Sources */,
 				CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */,
+				BA494B512C7DEF9B00EB2527 /* EvaluatedRestaurant.swift in Sources */,
 				BAB69AC52C71DC0B00C20F0B /* UserDefaultsKey.swift in Sources */,
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
 				58067D512C5B379800889C92 /* KuSubmitButton.swift in Sources */,
@@ -1547,7 +1560,7 @@
 				58067CA82C4F512100889C92 /* TierPageViewController.swift in Sources */,
 				BA8EEF872C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift in Sources */,
 				BA37E0B92C6B0DA80092115B /* DrawUseCases.swift in Sources */,
-				BAC55ECD2C6FB2AB00B3078F /* KuUser.swift in Sources */,
+				BAC55ECD2C6FB2AB00B3078F /* UserCredentials.swift in Sources */,
 				58067D842C5FD67700889C92 /* HomeLayoutTableViewHandler.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
 				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
@@ -1568,6 +1581,7 @@
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				BA494B4F2C7DEE6400EB2527 /* FavoriteRestaurant.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				BA2D89612C75A02A004E7B8E /* AccessTokenResponse.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
@@ -1588,10 +1602,12 @@
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */,
+				BA494B4D2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
 				BA37E0B52C6B0A710092115B /* DefaultDrawRepository.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
 				BAB69AC12C71DBA500C20F0B /* UserDefaultsStorage.swift in Sources */,
+				BA494B4B2C7DE83C00EB2527 /* UserProfile.swift in Sources */,
 				584FA4DE2C6E1C63008DDC19 /* HomeBannerSection.swift in Sources */,
 				58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */,
 				CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */,

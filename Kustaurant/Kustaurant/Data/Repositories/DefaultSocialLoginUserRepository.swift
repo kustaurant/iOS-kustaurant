@@ -9,16 +9,16 @@ import Foundation
 
 final class DefaultSocialLoginUserRepository: SocialLoginUserRepository {
     
-    func getUser() -> KuUser? {
-        let user: KuUser? = KeychainStorage.shared.getValue(forKey: KeychainKey.kuUser)
+    func getUser() -> UserCredentials? {
+        let user: UserCredentials? = KeychainStorage.shared.getValue(forKey: KeychainKey.userCredentials)
         return user
     }
     
-    func setUser(_ user: KuUser? = nil) {
-        KeychainStorage.shared.setValue(user, forKey: KeychainKey.kuUser)
+    func setUser(_ user: UserCredentials? = nil) {
+        KeychainStorage.shared.setValue(user, forKey: KeychainKey.userCredentials)
     }
     
     func removeUser() {
-        KeychainStorage.shared.removeValue(forKey: KeychainKey.kuUser)
+        KeychainStorage.shared.removeValue(forKey: KeychainKey.userCredentials)
     }
 }

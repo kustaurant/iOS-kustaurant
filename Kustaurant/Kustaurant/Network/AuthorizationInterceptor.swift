@@ -10,7 +10,7 @@ import Foundation
 public class AuthorizationInterceptor: RequestInterceptor {
 
     public func intercept(_ request: URLRequest) -> URLRequest {
-        guard let user: KuUser = KeychainStorage.shared.getValue(forKey: KeychainKey.kuUser) else {
+        guard let user: UserCredentials = KeychainStorage.shared.getValue(forKey: KeychainKey.userCredentials) else {
             return request
         }
         var modifiedRequest = request
