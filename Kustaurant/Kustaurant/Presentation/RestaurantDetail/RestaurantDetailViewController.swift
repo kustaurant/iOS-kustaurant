@@ -80,7 +80,7 @@ extension RestaurantDetailViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 switch action {
-                case .didFetchItems:
+                case .didFetchItems, .didFetchReviews, .didChangeTabType:
                     self?.tableView.reloadData()
                     
                 case .didFetchHeaderImage(let image):
@@ -91,9 +91,6 @@ extension RestaurantDetailViewController {
                     }
                     headerView.layer.zPosition = -1
                     self?.tableView.tableHeaderView = headerView
-                    
-                case .didFetchReviews, .didChangeTabType:
-                    self?.tableView.reloadSections(.init(integer: RestaurantDetailSection.tab.index), with: .none)
                 }
             }
             .store(in: &cancellables)

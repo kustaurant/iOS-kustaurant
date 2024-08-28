@@ -9,7 +9,7 @@ import Foundation
 
 struct RestaurantDetailReview: RestaurantDetailCellItem {
     
-    let profileImageName: String
+    let profileImageURLString: String
     let nickname: String
     let time: String
     let photoImageURLString: String
@@ -17,4 +17,6 @@ struct RestaurantDetailReview: RestaurantDetailCellItem {
     let rating: Double?
     let isComment: Bool
     let hasComments: Bool
+    let likeCount: Int
+    let dislikeCount: Int
 }

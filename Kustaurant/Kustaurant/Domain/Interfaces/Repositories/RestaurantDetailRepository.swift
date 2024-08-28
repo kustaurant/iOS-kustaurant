@@ -80,24 +80,28 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         
         let reviews: [RestaurantDetailReview] = (response?.compactMap { comment in
             [RestaurantDetailReview(
-                profileImageName: comment.commentIconImageURLString ?? null,
+                profileImageURLString: comment.commentIconImageURLString ?? null,
                 nickname: comment.commentNickname ?? null,
                 time: comment.commentTime ?? null,
                 photoImageURLString: comment.commentImageURLString ?? null,
                 review: comment.commentBody ?? null,
                 rating: comment.commentScore,
                 isComment: false,
-                hasComments: !(comment.commentReplies?.isEmpty ?? true)
+                hasComments: !(comment.commentReplies?.isEmpty ?? true),
+                likeCount: comment.commentLikeCount ?? 0,
+                dislikeCount: comment.commentDislikeCount ?? 0
             )] + (comment.commentReplies?.enumerated().map { index, reply in
                 RestaurantDetailReview(
-                    profileImageName: reply.commentIconImageURLString ?? null,
+                    profileImageURLString: reply.commentIconImageURLString ?? null,
                     nickname: reply.commentNickname ?? null,
                     time: reply.commentTime ?? null,
                     photoImageURLString: reply.commentImageURLString ?? null,
                     review: reply.commentBody ?? null,
                     rating: nil,
                     isComment: true,
-                    hasComments: index < (comment.commentReplies?.count ?? 0) - 1
+                    hasComments: index < (comment.commentReplies?.count ?? 0) - 1,
+                    likeCount: reply.commentLikeCount ?? 0,
+                    dislikeCount: reply.commentDislikeCount ?? 0
                 )
             } ?? [])
         } ?? []).flatMap { $0 }

@@ -18,9 +18,12 @@ final class RestaurantDetailReviewView: UIView {
     private let photoImageView: UIImageView = .init()
     private let reviewLabel: UILabel = .init()
     
-    private let goodIconButton: UIButton = .init()
-    private let badIconButton: UIButton = .init()
-    private let commentsIconButton: UIButton = .init()
+    private let likeButton: UIButton = .init()
+    private let dislikeButton: UIButton = .init()
+    private let commentsButton: UIButton = .init()
+    
+    private var likeButtonWidthConstraint: NSLayoutConstraint?
+    private var dislikeButtonWidthConstraint: NSLayoutConstraint?
     
     init() {
         super.init(frame: .zero)
@@ -34,13 +37,33 @@ final class RestaurantDetailReviewView: UIView {
     }
     
     func update(item: RestaurantDetailReview) {
-        profileImageView.image = UIImage(named: item.profileImageName)
+        profileImageView.image = UIImage(systemName: "person.fill")
+        if let url = URL(string: item.profileImageURLString) {
+            ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
+                self?.profileImageView.image = image
+            }
+        }
         nicknameLabel.text = item.nickname
         barView.backgroundColor = .gray100
         timeLabel.text = item.time
-        photoImageView.image = UIImage(named: item.photoImageURLString)
+        photoImageView.isHidden = true
+        if let url = URL(string: item.photoImageURLString) {
+            ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
+                self?.photoImageView.image = image
+                self?.photoImageView.isHidden = image == nil
+            }
+        }
         reviewLabel.text = item.review
-        commentsIconButton.isHidden = item.isComment
+        
+        likeButton.configuration?.title = "\(item.likeCount)"
+        likeButtonWidthConstraint?.constant = likeButton.intrinsicContentSize.width
+        
+        dislikeButton.configuration?.title = "\(item.dislikeCount)"
+        dislikeButtonWidthConstraint?.constant = dislikeButton.intrinsicContentSize.width
+        
+        commentsButton.isHidden = item.isComment
+        
+        layoutIfNeeded()
     }
     
     private func setupStyle() {
@@ -56,9 +79,19 @@ final class RestaurantDetailReviewView: UIView {
         reviewLabel.textColor = .black
         reviewLabel.numberOfLines = 0
         
-        goodIconButton.setImage(UIImage(named: "thumbs_up"), for: .normal)
-        badIconButton.setImage(UIImage(named: "thumbs_down"), for: .normal)
-        commentsIconButton.setImage(UIImage(named: "comments"), for: .normal)
+        commentsButton.setImage(UIImage(named: "icon_comment"), for: .normal)
+        
+        var likeConfiguration: UIButton.Configuration = .plain()
+        likeConfiguration.image = UIImage(named: "icon_thumb_up")
+        likeConfiguration.imagePadding = 4
+        likeConfiguration.contentInsets = .zero
+        likeButton.configuration = likeConfiguration
+        
+        var dislikeConfiguration: UIButton.Configuration = .plain()
+        dislikeConfiguration.image = UIImage(named: "icon_thumb_down")
+        dislikeConfiguration.imagePadding = 4
+        dislikeConfiguration.contentInsets = .zero
+        dislikeButton.configuration = dislikeConfiguration
         
         menuEllipsisButton.setImage(UIImage(named: "ellipsis"), for: .normal)
     }
@@ -73,10 +106,16 @@ final class RestaurantDetailReviewView: UIView {
         barView.autolayout([.width(1), .height(14)])
         menuEllipsisButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
-        let interactionStackView = UIStackView(arrangedSubviews: [goodIconButton, badIconButton, commentsIconButton])
+        let interactionStackView = UIStackView(arrangedSubviews: [likeButton, dislikeButton, commentsButton, SpaceView()])
         interactionStackView.axis = .horizontal
         interactionStackView.alignment = .center
         interactionStackView.spacing = 12
+        interactionStackView.distribution = .fillProportionally
+        likeButtonWidthConstraint = likeButton.widthAnchor.constraint(equalToConstant: 30)
+        likeButtonWidthConstraint?.isActive = true
+        dislikeButtonWidthConstraint = dislikeButton.widthAnchor.constraint(equalToConstant: 30)
+        dislikeButtonWidthConstraint?.isActive = true
+        commentsButton.autolayout([.width(14)])
         
         let mainStackView = UIStackView(arrangedSubviews: [topStackView, photoImageView, reviewLabel, interactionStackView])
         mainStackView.axis = .vertical

@@ -29,13 +29,13 @@ final class RestaurantDetailCommentCell: UITableViewCell {
         guard let item = item as? RestaurantDetailReview else { return }
         
         reviewView.update(item: item)
-        lineView.isHidden = !item.hasComments
+        lineView.isHidden = item.hasComments
     }
     
     private func setupStyle() {
         selectionStyle = .none
         
-        iconImageView.image = .iconStar
+        iconImageView.image = .iconReturnRight
         reviewBackgroundView.backgroundColor = .gray100
         lineView.backgroundColor = .gray100
     }

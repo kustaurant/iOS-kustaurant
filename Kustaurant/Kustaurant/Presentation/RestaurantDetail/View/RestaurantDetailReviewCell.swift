@@ -29,7 +29,7 @@ final class RestaurantDetailReviewCell: UITableViewCell {
         
         starsRatingStackView.update(rating: item.rating ?? 0)
         reviewView.update(item: item)
-        lineView.isHidden = !item.hasComments
+        lineView.isHidden = item.hasComments
     }
     
     private func setupStyle() { 
@@ -88,7 +88,7 @@ final class StarsStackView: UIStackView {
     
     private let starImageViews: [UIImageView] = {
         (0..<5).map { _ in
-                .init(image: .init(named: "star_empty"))
+                .init(image: .init(named: "icon_star_empty"))
         }
     }()
     
@@ -106,10 +106,10 @@ final class StarsStackView: UIStackView {
     func update(rating: Double) {
         let count = Int(rating)
         (0..<count).forEach { index in
-            starImageViews[safe: index]?.image = .init(named: "start_fill")
+            starImageViews[safe: index]?.image = .init(named: "icon_star_fill")
         }
         if rating > Double(count) {
-            starImageViews[safe: count + 1]?.image = .init(named: "star_half_fill")
+            starImageViews[safe: count + 1]?.image = .init(named: "icon_star_half_fill")
         }
     }
     

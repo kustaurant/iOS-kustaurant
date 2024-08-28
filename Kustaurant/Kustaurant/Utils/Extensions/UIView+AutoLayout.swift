@@ -47,6 +47,9 @@ extension UIView: Ku {
     enum SizeLayout {
         case width(CGFloat)
         case height(CGFloat)
+        
+        case widthEqual(to: UIView, constant: CGFloat)
+        case heightEqual(to: UIView, constant: CGFloat)
     }
 }
 
@@ -113,8 +116,27 @@ extension Ku where Self: UIView {
             switch layout {
             case .width(let constant): [self.widthAnchor.constraint(equalToConstant: constant)]
             case .height(let constant): [self.heightAnchor.constraint(equalToConstant: constant)]
+                
+            case .widthEqual(let to, let constant): [self.widthAnchor.constraint(equalTo: to.widthAnchor, constant: constant)]
+            case .heightEqual(let to, let constant): [self.heightAnchor.constraint(equalTo: to.heightAnchor, constant: constant)]
             }
         }).flatMap { $0 }
         NSLayoutConstraint.activate(layouts)
+    }
+}
+
+class SpaceView: UIView {
+    
+    init(size: CGFloat = 10, for layout: NSLayoutConstraint.Axis = .horizontal) {
+        super.init(frame: .zero)
+        
+        widthAnchor.constraint(greaterThanOrEqualToConstant: size).isActive = true
+        heightAnchor.constraint(greaterThanOrEqualToConstant: size).isActive = true
+        
+        setContentHuggingPriority(.defaultLow, for: layout)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -33,10 +33,12 @@ struct RestaurantDetail {
     
     mutating func updateTabType(as newValue: RestaurantDetailTabType) async {
         tabType = newValue
+        items[.tab] = tabItems[tabType]
     }
     
     mutating func updateTabItems(as newValue: TabItems) async {
         tabItems = newValue
+        items[.tab] = tabItems[tabType]
     }
     
     init(restaurantImageURLString: String, items: Items, tabType: RestaurantDetailTabType = .menu, tabItems: TabItems) {
