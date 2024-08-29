@@ -70,4 +70,23 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
     func makeMyPageUseCases() -> MyPageUseCases {
         DefaultMyPageUseCases(myPageRepository: makeMyPageRepository())
     }
+        
+    func makeProfileComposeViewController(actions: ProfileComposeViewModelActions) -> ProfileComposeViewController {
+        ProfileComposeViewController(viewModel: makeProfileComposeViewModel(actions: actions))
+    }
+    
+    func makeSavedRestaurantsViewController(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewController {
+        SavedRestaurantsViewController(viewModel: makeSavedRestaurantsViewModel(actions: actions))
+    }
+}
+
+extension MyPageSceneDIContainer {
+
+    func makeProfileComposeViewModel(actions: ProfileComposeViewModelActions) -> ProfileComposeViewModel {
+        DefaultProfileComposeViewModel(actions: actions)
+    }
+    
+    func makeSavedRestaurantsViewModel(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewModel {
+        DefaultSavedRetaurantsViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
+    }
 }

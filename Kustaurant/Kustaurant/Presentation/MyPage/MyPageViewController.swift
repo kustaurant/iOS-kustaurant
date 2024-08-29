@@ -30,7 +30,7 @@ final class MyPageViewController: UIViewController {
         myPageTableViewHandler?.setupTableView()
         bindViews()
         bindUserProfileView()
-        viewModel.getUserProfile()
+        viewModel.getUserSavedRestaurants()
     }
     
     override func viewWillAppear(_ animated: Bool) {

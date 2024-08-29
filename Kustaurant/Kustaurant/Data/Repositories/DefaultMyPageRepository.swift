@@ -85,7 +85,7 @@ extension DefaultMyPageRepository: MyPageRepository {
     }
     
     func fetchFavoriteRestaurants() async -> Result<[FavoriteRestaurant], NetworkError> {
-        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/mypage/favorite-restuarnt-list")
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/mypage/favorite-restaurant-list")
         
         let authInterceptor = AuthorizationInterceptor()
         let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
@@ -104,7 +104,7 @@ extension DefaultMyPageRepository: MyPageRepository {
     }
     
     func fetchEvaluatedRestaurants() async -> Result<[EvaluatedRestaurant], NetworkError> {
-        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/mypage/evaluate-restuarnt-list")
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/mypage/evaluate-restaurant-list")
         let authInterceptor = AuthorizationInterceptor()
         let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
         let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)

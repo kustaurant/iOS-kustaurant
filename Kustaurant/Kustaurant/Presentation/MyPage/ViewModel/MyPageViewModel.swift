@@ -11,13 +11,16 @@ import Combine
 struct MyPageViewModelActions {
     let showOnboarding: () -> Void
     let showProfileCompose: () -> Void
+    let showSavedRestaurants: () -> Void
 }
 
 protocol MyPageViewModelInput {
     func didTapLoginAndStartButton()
     func didTapComposeProfileButton()
-    func getUserProfile()
+    func didTapSavedRestaurantsCell()
+    func getUserSavedRestaurants()
 }
+
 protocol MyPageViewModelOutput {
     var tableViewSections: [MyPageTableViewSection] { get }
     var isLoggedIn: LoginStatus { get set }
@@ -42,25 +45,25 @@ final class DefaultMyPageViewModel {
         MyPageTableViewSection(
             id: "activity",
             items: [
-                MyPageTableViewItem(title: "저장된 맛집", iconNamePrefix: "icon_saved_restaurants")
+                MyPageTableViewItem(type: .savedRestaurants, title: "저장된 맛집", iconNamePrefix: "icon_saved_restaurants")
             ],
             footerHeight: 20
         ),
         MyPageTableViewSection(
             id: "service",
             items: [
-                MyPageTableViewItem(title: "이용약관", iconNamePrefix: "icon_terms_of_service"),
-                MyPageTableViewItem(title: "의견 보내기", iconNamePrefix: "icon_send_feedback"),
-                MyPageTableViewItem(title: "공지사항", iconNamePrefix: "icon_notice_board"),
-                MyPageTableViewItem(title: "개인정보처리방침", iconNamePrefix: "icon_privacy_policy")
+                MyPageTableViewItem(type: .termsOfService, title: "이용약관", iconNamePrefix: "icon_terms_of_service"),
+                MyPageTableViewItem(type: .sendFeedback, title: "의견 보내기", iconNamePrefix: "icon_send_feedback"),
+                MyPageTableViewItem(type: .notice, title: "공지사항", iconNamePrefix: "icon_notice_board"),
+                MyPageTableViewItem(type: .privacyPolicy, title: "개인정보처리방침", iconNamePrefix: "icon_privacy_policy")
             ],
             footerHeight: 20
         ),
         MyPageTableViewSection(
             id: "user",
             items: [
-                MyPageTableViewItem(title: "로그아웃", iconNamePrefix: "icon_logout"),
-                MyPageTableViewItem(title: "회원탈퇴", iconNamePrefix: "icon_delete_account")
+                MyPageTableViewItem(type: .logout, title: "로그아웃", iconNamePrefix: "icon_logout"),
+                MyPageTableViewItem(type: .deleteAccount, title: "회원탈퇴", iconNamePrefix: "icon_delete_account")
             ],
             footerHeight: 100
         )
@@ -75,14 +78,14 @@ final class DefaultMyPageViewModel {
 
 extension DefaultMyPageViewModel {
     
-    func getUserProfile() {
+    func getUserSavedRestaurants() {
         Task {
             let userSavedRestaurants = await myPageUseCases.getSavedRestaurantsCount()
             switch userSavedRestaurants {
             case .success(let savedRestaurants):
                 isLoggedIn = .loggedIn
                 self.userSavedRestaurants = savedRestaurants
-            case .failure(let failure):
+            case .failure:
                 isLoggedIn = .notLoggedIn
             }
         }
@@ -99,5 +102,9 @@ extension DefaultMyPageViewModel: MyPageViewModel {
     
     func didTapComposeProfileButton() {
         actions.showProfileCompose()
+    }
+    
+    func didTapSavedRestaurantsCell() {
+        actions.showSavedRestaurants()
     }
 }

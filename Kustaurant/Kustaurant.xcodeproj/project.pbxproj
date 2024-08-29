@@ -166,6 +166,11 @@
 		BA494B5D2C80244000EB2527 /* LoginStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5C2C80244000EB2527 /* LoginStatus.swift */; };
 		BA494B5F2C80482400EB2527 /* ProfileComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */; };
 		BA494B612C80485A00EB2527 /* ProfileComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */; };
+		BA494B632C80651300EB2527 /* SavedRestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B622C80651300EB2527 /* SavedRestaurantsViewController.swift */; };
+		BA494B652C80652C00EB2527 /* SavedRestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */; };
+		BA494B692C806A3F00EB2527 /* SavedRestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B682C806A3F00EB2527 /* SavedRestaurantsView.swift */; };
+		BA494B6B2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6A2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift */; };
+		BA494B6D2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6C2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -393,6 +398,11 @@
 		BA494B5C2C80244000EB2527 /* LoginStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStatus.swift; sourceTree = "<group>"; };
 		BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposeViewController.swift; sourceTree = "<group>"; };
 		BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposeViewModel.swift; sourceTree = "<group>"; };
+		BA494B622C80651300EB2527 /* SavedRestaurantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsViewController.swift; sourceTree = "<group>"; };
+		BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsViewModel.swift; sourceTree = "<group>"; };
+		BA494B682C806A3F00EB2527 /* SavedRestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsView.swift; sourceTree = "<group>"; };
+		BA494B6A2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsTableViewHandler.swift; sourceTree = "<group>"; };
+		BA494B6C2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsTableViewCell.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -735,6 +745,7 @@
 			children = (
 				584173512C4683E3001EC132 /* MyPageViewController.swift */,
 				BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */,
+				BA494B622C80651300EB2527 /* SavedRestaurantsViewController.swift */,
 				BA57C7C22C74356B0063F2FA /* View */,
 				BA57C7BF2C731F1B0063F2FA /* ViewModel */,
 			);
@@ -1123,6 +1134,28 @@
 			path = CollectionView;
 			sourceTree = "<group>";
 		};
+		BA494B662C806A2100EB2527 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				BA57C7C52C7435820063F2FA /* MyPageView.swift */,
+				BA494B542C7ED0A200EB2527 /* MyPageTableViewHandler.swift */,
+				BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */,
+				BA494B562C7EE81000EB2527 /* MyPageTableViewSection.swift */,
+				BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		BA494B672C806A2D00EB2527 /* SavedRestaurants */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B682C806A3F00EB2527 /* SavedRestaurantsView.swift */,
+				BA494B6A2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift */,
+				BA494B6C2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift */,
+			);
+			path = SavedRestaurants;
+			sourceTree = "<group>";
+		};
 		BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1144,6 +1177,7 @@
 			children = (
 				BA57C7C02C731F270063F2FA /* MyPageViewModel.swift */,
 				BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */,
+				BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1151,11 +1185,8 @@
 		BA57C7C22C74356B0063F2FA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BA57C7C52C7435820063F2FA /* MyPageView.swift */,
-				BA494B542C7ED0A200EB2527 /* MyPageTableViewHandler.swift */,
-				BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */,
-				BA494B562C7EE81000EB2527 /* MyPageTableViewSection.swift */,
-				BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */,
+				BA494B672C806A2D00EB2527 /* SavedRestaurants */,
+				BA494B662C806A2100EB2527 /* MyPage */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1462,6 +1493,7 @@
 				5826A1ED2C772C4B0097256C /* TierMapBottomSheetView.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
+				BA494B692C806A3F00EB2527 /* SavedRestaurantsView.swift in Sources */,
 				BA494B5D2C80244000EB2527 /* LoginStatus.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				BA494B472C7DD36A00EB2527 /* DefaultMyPageRepository.swift in Sources */,
@@ -1483,10 +1515,12 @@
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
 				BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
+				BA494B6B2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
 				BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */,
 				BA57C7C62C7435820063F2FA /* MyPageView.swift in Sources */,
 				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
+				BA494B6D2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift in Sources */,
 				BA1CB3D92C7D891600DA6776 /* AuthorizationRetrier.swift in Sources */,
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
@@ -1558,6 +1592,7 @@
 				BA8EEF972C64981100FE6ABF /* LoginViewController.swift in Sources */,
 				BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */,
 				58067CB52C4FBF9200889C92 /* TierUseCases.swift in Sources */,
+				BA494B652C80652C00EB2527 /* SavedRestaurantsViewModel.swift in Sources */,
 				CFE204672C5BC8AC00BCA87C /* KuTabBarPageController.swift in Sources */,
 				584FA4E82C71D68C008DDC19 /* TierTopCategoriesCollectionView.swift in Sources */,
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
@@ -1596,6 +1631,7 @@
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				5826A1E52C75FE9C0097256C /* TierMapBottomSheet.swift in Sources */,
 				5826A1D62C72309B0097256C /* TierTopCategoriesCollectionViewHandler.swift in Sources */,
+				BA494B632C80651300EB2527 /* SavedRestaurantsViewController.swift in Sources */,
 				BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
