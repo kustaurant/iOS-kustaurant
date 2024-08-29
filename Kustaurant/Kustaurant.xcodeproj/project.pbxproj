@@ -159,6 +159,10 @@
 		BA494B4D2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B4C2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift */; };
 		BA494B4F2C7DEE6400EB2527 /* FavoriteRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B4E2C7DEE6400EB2527 /* FavoriteRestaurant.swift */; };
 		BA494B512C7DEF9B00EB2527 /* EvaluatedRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B502C7DEF9B00EB2527 /* EvaluatedRestaurant.swift */; };
+		BA494B552C7ED0A200EB2527 /* MyPageTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B542C7ED0A200EB2527 /* MyPageTableViewHandler.swift */; };
+		BA494B572C7EE81000EB2527 /* MyPageTableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B562C7EE81000EB2527 /* MyPageTableViewSection.swift */; };
+		BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */; };
+		BA494B5B2C7EFFB900EB2527 /* MyPageUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -379,6 +383,10 @@
 		BA494B4C2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSavedRestaurantsCount.swift; sourceTree = "<group>"; };
 		BA494B4E2C7DEE6400EB2527 /* FavoriteRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRestaurant.swift; sourceTree = "<group>"; };
 		BA494B502C7DEF9B00EB2527 /* EvaluatedRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatedRestaurant.swift; sourceTree = "<group>"; };
+		BA494B542C7ED0A200EB2527 /* MyPageTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewHandler.swift; sourceTree = "<group>"; };
+		BA494B562C7EE81000EB2527 /* MyPageTableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewSection.swift; sourceTree = "<group>"; };
+		BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewTableViewCell.swift; sourceTree = "<group>"; };
+		BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUserProfileView.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -1135,6 +1143,10 @@
 			isa = PBXGroup;
 			children = (
 				BA57C7C52C7435820063F2FA /* MyPageView.swift */,
+				BA494B542C7ED0A200EB2527 /* MyPageTableViewHandler.swift */,
+				BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */,
+				BA494B562C7EE81000EB2527 /* MyPageTableViewSection.swift */,
+				BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1459,6 +1471,7 @@
 				CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */,
 				5841739C2C4A29C6001EC132 /* Tier.swift in Sources */,
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
+				BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
 				BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */,
@@ -1583,6 +1596,7 @@
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				BA494B4F2C7DEE6400EB2527 /* FavoriteRestaurant.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
+				BA494B552C7ED0A200EB2527 /* MyPageTableViewHandler.swift in Sources */,
 				BA2D89612C75A02A004E7B8E /* AccessTokenResponse.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
@@ -1612,6 +1626,7 @@
 				58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */,
 				CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */,
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
+				BA494B572C7EE81000EB2527 /* MyPageTableViewSection.swift in Sources */,
 				5826A1E22C723BF80097256C /* TierCategoryReceivable.swift in Sources */,
 				BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */,
 				5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */,
@@ -1623,6 +1638,7 @@
 				584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */,
 				584FA4CB2C6475C7008DDC19 /* TierMapRepository.swift in Sources */,
 				5826A1E92C77230A0097256C /* NMFMapPolygonManager.swift in Sources */,
+				BA494B5B2C7EFFB900EB2527 /* MyPageUserProfileView.swift in Sources */,
 				BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */,
 				5826A1EB2C77267D0097256C /* NMFMapCameraManager.swift in Sources */,
 				58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */,

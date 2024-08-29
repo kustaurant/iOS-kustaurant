@@ -9,17 +9,20 @@ import UIKit
 
 class MyPageView: UIView {
     
-    let logoutButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("로그아웃", for: .normal)
-        button.setTitleColor(.red, for: .normal)
-        button.titleLabel?.font = .Pretendard.regular14
-        return button
+    let tableView: UITableView = {
+        let tv = UITableView()
+        tv.backgroundColor = .Sementic.gray75
+        return tv
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        setupButtonTableView()
+
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
     
     required init(coder: NSCoder) {
@@ -29,7 +32,7 @@ class MyPageView: UIView {
 
 extension MyPageView {
     
-    private func setupUI() {
-        addSubview(logoutButton, autoLayout: [.center(0), .width(200), .height(40)])
+    private func setupButtonTableView() {
+        addSubview(tableView, autoLayout: [.fill(0)])
     }
 }

@@ -13,9 +13,11 @@ final class MyPageViewController: UIViewController {
     private let viewModel: MyPageViewModel
     private let myPageView = MyPageView()
     private var cancellables = Set<AnyCancellable>()
+    private var myPageTableViewHandler: MyPageTableViewHandler?
     
     init(viewModel: MyPageViewModel) {
         self.viewModel = viewModel
+        self.myPageTableViewHandler = MyPageTableViewHandler(view: myPageView, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,6 +27,8 @@ final class MyPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigation()
+        myPageTableViewHandler?.setupTableView()
         bindViews()
     }
     
@@ -35,10 +39,10 @@ final class MyPageViewController: UIViewController {
 
 extension MyPageViewController {
     
+    private func setupNavigation() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     private func bindViews() {
-        myPageView.logoutButton.tapPublisher().sink { [weak self] _ in
-            self?.viewModel.didTapLogoutButton()
-        }
-        .store(in: &cancellables)
     }
 }
