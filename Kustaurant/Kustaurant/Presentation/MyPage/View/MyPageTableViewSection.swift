@@ -9,7 +9,7 @@ import Foundation
 
 struct MyPageTableViewItem {
     let title: String
-    let iconNamePostfix: String
+    let iconNamePrefix: String
 }
 
 struct MyPageTableViewSection {

@@ -10,7 +10,7 @@ import Combine
 
 final class MyPageViewController: UIViewController {
     
-    private let viewModel: MyPageViewModel
+    private var viewModel: MyPageViewModel
     private let myPageView = MyPageView()
     private var cancellables = Set<AnyCancellable>()
     private var myPageTableViewHandler: MyPageTableViewHandler?
@@ -44,5 +44,18 @@ extension MyPageViewController {
     }
     
     private func bindViews() {
+        viewModel.isLoggedInPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] loginStatus in
+                self?.myPageTableViewHandler?.updateUI(by: loginStatus)
+            }
+            .store(in: &cancellables)
+        
+        if let headerView = myPageView.tableView.tableHeaderView as? MyPageUserProfileView {
+            headerView.profileButton.tapPublisher().sink { [weak self] in
+                self?.viewModel.isLoggedIn = self?.viewModel.isLoggedIn.toggle() ?? .notLoggedIn
+            }
+            .store(in: &cancellables)
+        }
     }
 }

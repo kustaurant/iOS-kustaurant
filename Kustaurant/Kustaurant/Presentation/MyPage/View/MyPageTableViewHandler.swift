@@ -17,6 +17,9 @@ final class MyPageTableViewHandler: NSObject {
         self.view = view
         self.viewModel = viewModel
     }
+}
+
+extension MyPageTableViewHandler {
     
     func setupTableView() {
         view.tableView.delegate = self
@@ -26,6 +29,23 @@ final class MyPageTableViewHandler: NSObject {
         view.tableView.showsVerticalScrollIndicator = false
         view.tableView.tableHeaderView = headerView
         view.tableView.contentInsetAdjustmentBehavior = .never
+    }
+    
+    func updateUI(by loginStatus: LoginStatus) {
+        headerView.profileImageView.image = UIImage(named: loginStatus.profileImageName)
+        headerView.profileButton.configuration = loginStatus.profileButtonConfiguration
+        
+        for sectionIndex in 0..<viewModel.tableViewSections.count {
+            let section = viewModel.tableViewSections[sectionIndex]
+            for row in 0..<section.items.count {
+                let item = section.items[row]
+                let indexPath = IndexPath(row: row, section: sectionIndex)
+                if let cell = view.tableView.cellForRow(at: indexPath) as? MyPageViewTableViewCell {
+                    cell.iconImageView.image = UIImage(named: item.iconNamePrefix + loginStatus.iconNamePostfix)
+                    cell.titleLabel.textColor = loginStatus.textColor
+                }
+            }
+        }
     }
 }
 
@@ -49,7 +69,7 @@ extension MyPageTableViewHandler: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return CGFloat(viewModel.tableViewSections[section].footerHeight)
     }
-   
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.tableViewSections.count
     }

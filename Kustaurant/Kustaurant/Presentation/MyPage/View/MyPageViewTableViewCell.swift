@@ -11,13 +11,13 @@ final class MyPageViewTableViewCell: UITableViewCell, ReusableCell {
     
     static var reuseIdentifier: String = String(describing: MyPageViewTableViewCell.self)
     
-    private let iconImageView: UIImageView = {
+    let iconImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         return iv
     }()
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .Pretendard.medium16
         return label
@@ -49,7 +49,6 @@ extension MyPageViewTableViewCell {
     }
     
     func configure(with item: MyPageTableViewItem) {
-        iconImageView.image = UIImage(named: item.iconNamePostfix + "_enabled")
         titleLabel.text = item.title
     }
 }

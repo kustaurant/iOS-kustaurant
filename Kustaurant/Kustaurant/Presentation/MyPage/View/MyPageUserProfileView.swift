@@ -27,7 +27,7 @@ final class MyPageUserProfileView: UIView {
         return view
     }()
     
-    private let profileImageView: UIImageView = {
+    let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "icon_person")
         iv.contentMode = .scaleAspectFit
@@ -36,15 +36,8 @@ final class MyPageUserProfileView: UIView {
         return iv
     }()
     
-    private let profileButton: UIButton = {
+    let profileButton: UIButton = {
         let button = UIButton()
-        var config = UIButton.Configuration.plain()
-        let chevronImage = UIImage(named: "icon_chevron_right_white")
-        config.image = chevronImage
-        config.imagePadding = 6
-        config.imagePlacement = .trailing
-        button.configuration = config
-        button.setTitle("로그인하고 시작하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .Pretendard.semiBold20
         return button
@@ -83,7 +76,7 @@ final class MyPageUserProfileView: UIView {
         return label
     }()
     
-    private let myEvaluationCountLabel: UILabel = {
+    let myEvaluationCountLabel: UILabel = {
         let label = UILabel()
         label.text = "-"
         label.textColor = .white
@@ -106,7 +99,7 @@ final class MyPageUserProfileView: UIView {
         return label
     }()
     
-    private let myPostCountLabel: UILabel = {
+    let myPostCountLabel: UILabel = {
         let label = UILabel()
         label.text = "-"
         label.textColor = .white

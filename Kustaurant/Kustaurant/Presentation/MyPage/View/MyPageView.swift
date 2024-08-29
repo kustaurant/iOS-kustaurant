@@ -18,7 +18,6 @@ class MyPageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupButtonTableView()
-
     }
     
     override func layoutSubviews() {

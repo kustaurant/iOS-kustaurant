@@ -15,6 +15,7 @@ public class AuthorizationInterceptor: RequestInterceptor {
         }
         var modifiedRequest = request
         modifiedRequest.setValue("Bearer \(user.accessToken)", forHTTPHeaderField: "Authorization")
+        dump(user.accessToken)
         return modifiedRequest
     }
 }

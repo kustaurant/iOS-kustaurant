@@ -163,6 +163,7 @@
 		BA494B572C7EE81000EB2527 /* MyPageTableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B562C7EE81000EB2527 /* MyPageTableViewSection.swift */; };
 		BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */; };
 		BA494B5B2C7EFFB900EB2527 /* MyPageUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */; };
+		BA494B5D2C80244000EB2527 /* LoginStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5C2C80244000EB2527 /* LoginStatus.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -387,6 +388,7 @@
 		BA494B562C7EE81000EB2527 /* MyPageTableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewSection.swift; sourceTree = "<group>"; };
 		BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewTableViewCell.swift; sourceTree = "<group>"; };
 		BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUserProfileView.swift; sourceTree = "<group>"; };
+		BA494B5C2C80244000EB2527 /* LoginStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStatus.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -1001,6 +1003,7 @@
 				BA494B4C2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift */,
 				BA494B4E2C7DEE6400EB2527 /* FavoriteRestaurant.swift */,
 				BA494B502C7DEF9B00EB2527 /* EvaluatedRestaurant.swift */,
+				BA494B5C2C80244000EB2527 /* LoginStatus.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1453,6 +1456,7 @@
 				5826A1ED2C772C4B0097256C /* TierMapBottomSheetView.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
+				BA494B5D2C80244000EB2527 /* LoginStatus.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				BA494B472C7DD36A00EB2527 /* DefaultMyPageRepository.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
