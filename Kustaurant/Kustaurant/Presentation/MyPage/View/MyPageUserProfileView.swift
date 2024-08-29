@@ -33,6 +33,7 @@ final class MyPageUserProfileView: UIView {
         iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 39
         iv.clipsToBounds = true
+        iv.isUserInteractionEnabled = true
         return iv
     }()
     
@@ -123,7 +124,7 @@ final class MyPageUserProfileView: UIView {
         setupMyActivityLabels()
         setupActivityDivider()
     }
-        
+    
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -138,7 +139,15 @@ extension MyPageUserProfileView {
     }
     
     private func setupMyActivityContainerView() {
-        addSubview(myActivityShadowContainerView, autoLayout: [.fillX(20), .topNext(to: greenView, constant: -48), .height(78)])
+        containerView.addSubview(
+            myActivityShadowContainerView,
+            autoLayout: [
+                .topNext(to: greenView, constant: -48),
+                .centerX(0),
+                .width(UIScreen.main.bounds.width - 40),
+                .height(78)
+            ]
+        )
         myActivityShadowContainerView.addSubview(myActivityContainerView, autoLayout: [.fill(0)])
         myActivityContainerView.addArrangedSubview(myEvaluationView)
         myActivityContainerView.addArrangedSubview(myPostsView)
@@ -159,7 +168,6 @@ extension MyPageUserProfileView {
         myPostsView.addSubview(myPostCountLabel, autoLayout: [.fillX(0), .centerY(8)])
     }
     
-        
     private func setupActivityDivider() {
         myActivityShadowContainerView.addSubview(activityDividerView, autoLayout: [.width(1), .centerX(0), .fillY(16)])
     }
