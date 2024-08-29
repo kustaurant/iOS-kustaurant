@@ -11,4 +11,8 @@ struct UserProfile: Codable {
     let nickname: String?
     let email: String?
     let phoneNumber: String?
+    
+    static func empty() -> UserProfile {
+        UserProfile(nickname: "", email: "", phoneNumber: "")
+    }
 }

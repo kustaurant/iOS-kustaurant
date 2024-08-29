@@ -35,6 +35,10 @@ extension MyPageTableViewHandler {
         headerView.profileImageView.image = UIImage(named: loginStatus.profileImageName)
         headerView.profileButton.configuration = loginStatus.profileButtonConfiguration
         
+        if loginStatus == .notLoggedIn {
+            headerView.profileButton.setTitle("로그인하고 시작하기", for: .normal)
+        }
+        
         for sectionIndex in 0..<viewModel.tableViewSections.count {
             let section = viewModel.tableViewSections[sectionIndex]
             for row in 0..<section.items.count {
@@ -46,6 +50,12 @@ extension MyPageTableViewHandler {
                 }
             }
         }
+    }
+    
+    func updateSavedRestaurants(_ userSavedRestaurants: UserSavedRestaurantsCount) {
+        headerView.profileButton.setTitle(userSavedRestaurants.nickname, for: .normal)
+        headerView.myEvaluationCountLabel.text = String(describing: userSavedRestaurants.evaluationCount ?? 0)
+        headerView.myFavoriteRestaurantCountLabel.text = String(describing: userSavedRestaurants.favoriteCount ?? 0)
     }
 }
 

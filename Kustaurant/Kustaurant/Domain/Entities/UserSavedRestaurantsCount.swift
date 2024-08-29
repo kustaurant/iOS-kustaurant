@@ -11,4 +11,8 @@ struct UserSavedRestaurantsCount: Codable {
     let nickname: String?
     let evaluationCount: Int?
     let favoriteCount: Int?
+    
+    static func empty() -> UserSavedRestaurantsCount {
+        return UserSavedRestaurantsCount(nickname: "", evaluationCount: 0, favoriteCount: 0)
+    }
 }

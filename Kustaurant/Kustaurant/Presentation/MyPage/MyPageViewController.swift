@@ -27,9 +27,14 @@ final class MyPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigation()
         myPageTableViewHandler?.setupTableView()
         bindViews()
+        bindUserProfileView()
+        viewModel.getUserProfile()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigation()
     }
     
     override func loadView() {
@@ -50,12 +55,37 @@ extension MyPageViewController {
                 self?.myPageTableViewHandler?.updateUI(by: loginStatus)
             }
             .store(in: &cancellables)
+    }
+    
+    private func bindUserProfileView() {
+        guard let headerView = myPageView.tableView.tableHeaderView as? MyPageUserProfileView else {
+            return
+        }
         
-        if let headerView = myPageView.tableView.tableHeaderView as? MyPageUserProfileView {
-            headerView.profileButton.tapPublisher().sink { [weak self] in
-                self?.viewModel.isLoggedIn = self?.viewModel.isLoggedIn.toggle() ?? .notLoggedIn
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.addTarget(self, action: #selector(toggle))
+        headerView.profileImageView.addGestureRecognizer(tapGesture)
+        
+        headerView.profileButton.tapPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                if self?.viewModel.isLoggedIn == .loggedIn {
+                    self?.viewModel.didTapComposeProfileButton()
+                } else {
+                    self?.viewModel.didTapLoginAndStartButton()
+                }
             }
             .store(in: &cancellables)
-        }
+        
+        viewModel.userSavedRestaurantsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] userSavedRestaurants in
+                self?.myPageTableViewHandler?.updateSavedRestaurants(userSavedRestaurants)
+            }
+            .store(in: &cancellables)
+    }
+    
+    @objc func toggle() {
+        viewModel.isLoggedIn = viewModel.isLoggedIn.toggle()
     }
 }

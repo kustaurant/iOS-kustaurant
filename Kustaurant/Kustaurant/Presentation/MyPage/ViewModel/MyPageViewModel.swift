@@ -10,14 +10,20 @@ import Combine
 
 struct MyPageViewModelActions {
     let showOnboarding: () -> Void
+    let showProfileCompose: () -> Void
 }
 
 protocol MyPageViewModelInput {
+    func didTapLoginAndStartButton()
+    func didTapComposeProfileButton()
+    func getUserProfile()
 }
 protocol MyPageViewModelOutput {
     var tableViewSections: [MyPageTableViewSection] { get }
     var isLoggedIn: LoginStatus { get set }
     var isLoggedInPublisher: Published<LoginStatus>.Publisher { get }
+    var userSavedRestaurants: UserSavedRestaurantsCount { get }
+    var userSavedRestaurantsPublisher: Published<UserSavedRestaurantsCount>.Publisher { get }
 }
 
 typealias MyPageViewModel = MyPageViewModelInput & MyPageViewModelOutput
@@ -29,6 +35,8 @@ final class DefaultMyPageViewModel {
     private let myPageUseCases: MyPageUseCases
     @Published var isLoggedIn: LoginStatus = .notLoggedIn
     var isLoggedInPublisher: Published<LoginStatus>.Publisher { $isLoggedIn }
+    @Published var userSavedRestaurants: UserSavedRestaurantsCount = UserSavedRestaurantsCount.empty()
+    var userSavedRestaurantsPublisher: Published<UserSavedRestaurantsCount>.Publisher { $userSavedRestaurants }
     
     var tableViewSections: [MyPageTableViewSection] = [
         MyPageTableViewSection(
@@ -65,5 +73,31 @@ final class DefaultMyPageViewModel {
     }
 }
 
+extension DefaultMyPageViewModel {
+    
+    func getUserProfile() {
+        Task {
+            let userSavedRestaurants = await myPageUseCases.getSavedRestaurantsCount()
+            switch userSavedRestaurants {
+            case .success(let savedRestaurants):
+                isLoggedIn = .loggedIn
+                self.userSavedRestaurants = savedRestaurants
+            case .failure(let failure):
+                isLoggedIn = .notLoggedIn
+            }
+        }
+    }
+}
+
+// Button Actions
 extension DefaultMyPageViewModel: MyPageViewModel {
+    
+    func didTapLoginAndStartButton() {
+        authUseCases.logout()
+        actions.showOnboarding()
+    }
+    
+    func didTapComposeProfileButton() {
+        actions.showProfileCompose()
+    }
 }

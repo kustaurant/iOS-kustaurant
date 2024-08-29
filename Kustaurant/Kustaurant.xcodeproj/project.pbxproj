@@ -164,6 +164,8 @@
 		BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */; };
 		BA494B5B2C7EFFB900EB2527 /* MyPageUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */; };
 		BA494B5D2C80244000EB2527 /* LoginStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5C2C80244000EB2527 /* LoginStatus.swift */; };
+		BA494B5F2C80482400EB2527 /* ProfileComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */; };
+		BA494B612C80485A00EB2527 /* ProfileComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -389,6 +391,8 @@
 		BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewTableViewCell.swift; sourceTree = "<group>"; };
 		BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUserProfileView.swift; sourceTree = "<group>"; };
 		BA494B5C2C80244000EB2527 /* LoginStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStatus.swift; sourceTree = "<group>"; };
+		BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposeViewController.swift; sourceTree = "<group>"; };
+		BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposeViewModel.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -730,6 +734,7 @@
 			isa = PBXGroup;
 			children = (
 				584173512C4683E3001EC132 /* MyPageViewController.swift */,
+				BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */,
 				BA57C7C22C74356B0063F2FA /* View */,
 				BA57C7BF2C731F1B0063F2FA /* ViewModel */,
 			);
@@ -1138,6 +1143,7 @@
 			isa = PBXGroup;
 			children = (
 				BA57C7C02C731F270063F2FA /* MyPageViewModel.swift */,
+				BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1584,6 +1590,7 @@
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
 				BA1CB3D32C7C405400DA6776 /* AuthorizationInterceptor.swift in Sources */,
+				BA494B612C80485A00EB2527 /* ProfileComposeViewModel.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
@@ -1634,6 +1641,7 @@
 				5826A1E22C723BF80097256C /* TierCategoryReceivable.swift in Sources */,
 				BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */,
 				5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */,
+				BA494B5F2C80482400EB2527 /* ProfileComposeViewController.swift in Sources */,
 				BAB69AC92C71DC5700C20F0B /* SocialLoginUserRepository.swift in Sources */,
 				58067D812C5FC07A00889C92 /* HomeLayoutTableView.swift in Sources */,
 				CFE204692C5D03C400BCA87C /* Collection+.swift in Sources */,

@@ -86,21 +86,21 @@ final class MyPageUserProfileView: UIView {
         return label
     }()
     
-    private let myPostsView: UIView = {
+    private let myFavoriateRestaurantView: UIView = {
         let view = UIView()
         return view
     }()
     
-    private let myPostsLabel: UILabel = {
+    private let myFavoriteRestaurantsLabel: UILabel = {
         let label = UILabel()
-        label.text = "내 게시글"
+        label.text = "내 맛집"
         label.textColor = .white
         label.textAlignment = .center
         label.font = .Pretendard.semiBold14
         return label
     }()
     
-    let myPostCountLabel: UILabel = {
+    let myFavoriteRestaurantCountLabel: UILabel = {
         let label = UILabel()
         label.text = "-"
         label.textColor = .white
@@ -150,7 +150,7 @@ extension MyPageUserProfileView {
         )
         myActivityShadowContainerView.addSubview(myActivityContainerView, autoLayout: [.fill(0)])
         myActivityContainerView.addArrangedSubview(myEvaluationView)
-        myActivityContainerView.addArrangedSubview(myPostsView)
+        myActivityContainerView.addArrangedSubview(myFavoriateRestaurantView)
     }
     
     private func setupProfileImageView() {
@@ -162,10 +162,10 @@ extension MyPageUserProfileView {
     }
     
     private func setupMyActivityLabels() {
-        myEvaluationView.addSubview(myEvaluationTitleLabel, autoLayout: [.fillX(0), .centerY(-8)])
-        myEvaluationView.addSubview(myEvaluationCountLabel, autoLayout: [.fillX(0), .centerY(8)])
-        myPostsView.addSubview(myPostsLabel, autoLayout: [.fillX(0), .centerY(-8)])
-        myPostsView.addSubview(myPostCountLabel, autoLayout: [.fillX(0), .centerY(8)])
+        myEvaluationView.addSubview(myEvaluationTitleLabel, autoLayout: [.fillX(0), .centerY(-10)])
+        myEvaluationView.addSubview(myEvaluationCountLabel, autoLayout: [.fillX(0), .centerY(10)])
+        myFavoriateRestaurantView.addSubview(myFavoriteRestaurantsLabel, autoLayout: [.fillX(0), .centerY(-10)])
+        myFavoriateRestaurantView.addSubview(myFavoriteRestaurantCountLabel, autoLayout: [.fillX(0), .centerY(10)])
     }
     
     private func setupActivityDivider() {
