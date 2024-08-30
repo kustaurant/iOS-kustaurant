@@ -78,6 +78,10 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
     func makeSavedRestaurantsViewController(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewController {
         SavedRestaurantsViewController(viewModel: makeSavedRestaurantsViewModel(actions: actions))
     }
+        
+    func makeFeedbackSubmittingViewController(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewController {
+        FeedbackSubmittingViewController(viewModel: makeFeedbackSubmittingViewModel(actions: actions))
+    }
 }
 
 extension MyPageSceneDIContainer {
@@ -88,5 +92,9 @@ extension MyPageSceneDIContainer {
     
     func makeSavedRestaurantsViewModel(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewModel {
         DefaultSavedRetaurantsViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
+    }
+    
+    func makeFeedbackSubmittingViewModel(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewModel {
+        DefaultFeedbackSubmittingViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
     }
 }

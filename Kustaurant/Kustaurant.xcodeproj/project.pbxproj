@@ -171,6 +171,9 @@
 		BA494B692C806A3F00EB2527 /* SavedRestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B682C806A3F00EB2527 /* SavedRestaurantsView.swift */; };
 		BA494B6B2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6A2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift */; };
 		BA494B6D2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6C2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift */; };
+		BA494B6F2C81590E00EB2527 /* FeedbackSubmittingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */; };
+		BA494B712C81592700EB2527 /* FeedbackSubmittingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */; };
+		BA494B742C81644800EB2527 /* FeedbackSubmittingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B732C81644800EB2527 /* FeedbackSubmittingView.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -403,6 +406,9 @@
 		BA494B682C806A3F00EB2527 /* SavedRestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsView.swift; sourceTree = "<group>"; };
 		BA494B6A2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsTableViewHandler.swift; sourceTree = "<group>"; };
 		BA494B6C2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsTableViewCell.swift; sourceTree = "<group>"; };
+		BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingViewController.swift; sourceTree = "<group>"; };
+		BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingViewModel.swift; sourceTree = "<group>"; };
+		BA494B732C81644800EB2527 /* FeedbackSubmittingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingView.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -746,6 +752,7 @@
 				584173512C4683E3001EC132 /* MyPageViewController.swift */,
 				BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */,
 				BA494B622C80651300EB2527 /* SavedRestaurantsViewController.swift */,
+				BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */,
 				BA57C7C22C74356B0063F2FA /* View */,
 				BA57C7BF2C731F1B0063F2FA /* ViewModel */,
 			);
@@ -1156,6 +1163,14 @@
 			path = SavedRestaurants;
 			sourceTree = "<group>";
 		};
+		BA494B722C81643600EB2527 /* FeedbackSubmitting */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B732C81644800EB2527 /* FeedbackSubmittingView.swift */,
+			);
+			path = FeedbackSubmitting;
+			sourceTree = "<group>";
+		};
 		BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1178,6 +1193,7 @@
 				BA57C7C02C731F270063F2FA /* MyPageViewModel.swift */,
 				BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */,
 				BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */,
+				BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1185,6 +1201,7 @@
 		BA57C7C22C74356B0063F2FA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BA494B722C81643600EB2527 /* FeedbackSubmitting */,
 				BA494B672C806A2D00EB2527 /* SavedRestaurants */,
 				BA494B662C806A2100EB2527 /* MyPage */,
 			);
@@ -1519,11 +1536,13 @@
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
 				BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */,
 				BA57C7C62C7435820063F2FA /* MyPageView.swift in Sources */,
+				BA494B712C81592700EB2527 /* FeedbackSubmittingViewModel.swift in Sources */,
 				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
 				BA494B6D2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift in Sources */,
 				BA1CB3D92C7D891600DA6776 /* AuthorizationRetrier.swift in Sources */,
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
+				BA494B742C81644800EB2527 /* FeedbackSubmittingView.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
 				BA494B452C7DD2DA00EB2527 /* MyPageRepository.swift in Sources */,
 				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
@@ -1607,6 +1626,7 @@
 				58067CBB2C4FCAA400889C92 /* Cuisine.swift in Sources */,
 				58067D4F2C5A347F00889C92 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
 				58067D3F2C58E35800889C92 /* CustomUINavigationController.swift in Sources */,
+				BA494B6F2C81590E00EB2527 /* FeedbackSubmittingViewController.swift in Sources */,
 				5841732F2C465A9D001EC132 /* AppDIContainer.swift in Sources */,
 				58067CA62C4F4FE200889C92 /* TierMapViewController.swift in Sources */,
 				BAC55EC92C6F351400B3078F /* AuthUseCases.swift in Sources */,

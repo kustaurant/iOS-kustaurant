@@ -99,7 +99,7 @@ extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
         )
         myPageFlow.appFlowNavigating = self
         
-        tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow, communityFlow, myPageFlow])
+        tabBarFlowCoordinator.setupTabs(with: [myPageFlow, drawFlow, tierFlow, communityFlow, homeFlow])
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }

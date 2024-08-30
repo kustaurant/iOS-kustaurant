@@ -67,6 +67,8 @@ extension MyPageTableViewHandler: UITableViewDelegate {
         switch item.type {
         case .savedRestaurants:
             viewModel.didTapSavedRestaurantsCell()
+        case .sendFeedback:
+            viewModel.didTapSendFeedback()
         default:
             return
         }

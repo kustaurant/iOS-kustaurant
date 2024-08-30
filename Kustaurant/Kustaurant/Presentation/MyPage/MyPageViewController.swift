@@ -34,7 +34,11 @@ final class MyPageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupNavigation()
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func loadView() {
@@ -43,10 +47,6 @@ final class MyPageViewController: UIViewController {
 }
 
 extension MyPageViewController {
-    
-    private func setupNavigation() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
     
     private func bindViews() {
         viewModel.isLoggedInPublisher
