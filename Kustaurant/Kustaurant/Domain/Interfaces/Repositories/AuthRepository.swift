@@ -11,4 +11,5 @@ protocol AuthRepository {
     func naverLogin(userId: String, naverAccessToken: String) async -> Result<String, NetworkError>
     func appleLogin(authorizationCode: String, identityToken: String) async -> Result<String, NetworkError>
     func logout(userId: String) async
+    func deleteAccount() async
 }

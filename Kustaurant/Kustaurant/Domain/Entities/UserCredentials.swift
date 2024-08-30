@@ -11,9 +11,8 @@ enum SocialLoginProvider: String, Codable {
     case naver, apple
 }
 
-struct KuUser: Codable {
+struct UserCredentials: Codable {
     let id: String
     let accessToken: String
     let provider: SocialLoginProvider
 }
-

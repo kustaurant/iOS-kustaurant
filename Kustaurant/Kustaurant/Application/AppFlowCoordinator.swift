@@ -35,7 +35,7 @@ extension AppFlowCoordinator {
             return
         }
         
-        guard let _: KuUser = KeychainStorage.shared.getValue(forKey: KeychainKey.kuUser) else {
+        guard let _: UserCredentials = KeychainStorage.shared.getValue(forKey: KeychainKey.userCredentials) else {
             showOnboarding()
             return
         }

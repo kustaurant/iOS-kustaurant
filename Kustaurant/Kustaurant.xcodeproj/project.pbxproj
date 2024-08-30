@@ -152,6 +152,25 @@
 		BA37E0B52C6B0A710092115B /* DefaultDrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */; };
 		BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B62C6B0A870092115B /* DrawRepository.swift */; };
 		BA37E0B92C6B0DA80092115B /* DrawUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */; };
+		BA494B452C7DD2DA00EB2527 /* MyPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */; };
+		BA494B472C7DD36A00EB2527 /* DefaultMyPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B462C7DD36A00EB2527 /* DefaultMyPageRepository.swift */; };
+		BA494B492C7DD44200EB2527 /* MyPageUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B482C7DD44200EB2527 /* MyPageUseCases.swift */; };
+		BA494B4B2C7DE83C00EB2527 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B4A2C7DE83C00EB2527 /* UserProfile.swift */; };
+		BA494B4D2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B4C2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift */; };
+		BA494B4F2C7DEE6400EB2527 /* FavoriteRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B4E2C7DEE6400EB2527 /* FavoriteRestaurant.swift */; };
+		BA494B512C7DEF9B00EB2527 /* EvaluatedRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B502C7DEF9B00EB2527 /* EvaluatedRestaurant.swift */; };
+		BA494B552C7ED0A200EB2527 /* MyPageTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B542C7ED0A200EB2527 /* MyPageTableViewHandler.swift */; };
+		BA494B572C7EE81000EB2527 /* MyPageTableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B562C7EE81000EB2527 /* MyPageTableViewSection.swift */; };
+		BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */; };
+		BA494B5B2C7EFFB900EB2527 /* MyPageUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */; };
+		BA494B5D2C80244000EB2527 /* LoginStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5C2C80244000EB2527 /* LoginStatus.swift */; };
+		BA494B5F2C80482400EB2527 /* ProfileComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */; };
+		BA494B612C80485A00EB2527 /* ProfileComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */; };
+		BA494B632C80651300EB2527 /* SavedRestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B622C80651300EB2527 /* SavedRestaurantsViewController.swift */; };
+		BA494B652C80652C00EB2527 /* SavedRestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */; };
+		BA494B692C806A3F00EB2527 /* SavedRestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B682C806A3F00EB2527 /* SavedRestaurantsView.swift */; };
+		BA494B6B2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6A2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift */; };
+		BA494B6D2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6C2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -179,7 +198,7 @@
 		BAC55EC32C6F1FE200B3078F /* NaverLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */; };
 		BAC55EC92C6F351400B3078F /* AuthUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC82C6F351400B3078F /* AuthUseCases.swift */; };
 		BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */; };
-		BAC55ECD2C6FB2AB00B3078F /* KuUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECC2C6FB2AB00B3078F /* KuUser.swift */; };
+		BAC55ECD2C6FB2AB00B3078F /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECC2C6FB2AB00B3078F /* UserCredentials.swift */; };
 		BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */; };
 		BAF177F62C772B8100E17FDC /* RestaurantSearchResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */; };
 		BAF177F82C7735D300E17FDC /* TierBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF177F72C7735D300E17FDC /* TierBadgeView.swift */; };
@@ -365,6 +384,25 @@
 		BA37E0B42C6B0A710092115B /* DefaultDrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDrawRepository.swift; sourceTree = "<group>"; };
 		BA37E0B62C6B0A870092115B /* DrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRepository.swift; sourceTree = "<group>"; };
 		BA37E0B82C6B0DA80092115B /* DrawUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawUseCases.swift; sourceTree = "<group>"; };
+		BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRepository.swift; sourceTree = "<group>"; };
+		BA494B462C7DD36A00EB2527 /* DefaultMyPageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyPageRepository.swift; sourceTree = "<group>"; };
+		BA494B482C7DD44200EB2527 /* MyPageUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUseCases.swift; sourceTree = "<group>"; };
+		BA494B4A2C7DE83C00EB2527 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		BA494B4C2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSavedRestaurantsCount.swift; sourceTree = "<group>"; };
+		BA494B4E2C7DEE6400EB2527 /* FavoriteRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRestaurant.swift; sourceTree = "<group>"; };
+		BA494B502C7DEF9B00EB2527 /* EvaluatedRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatedRestaurant.swift; sourceTree = "<group>"; };
+		BA494B542C7ED0A200EB2527 /* MyPageTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewHandler.swift; sourceTree = "<group>"; };
+		BA494B562C7EE81000EB2527 /* MyPageTableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewSection.swift; sourceTree = "<group>"; };
+		BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewTableViewCell.swift; sourceTree = "<group>"; };
+		BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUserProfileView.swift; sourceTree = "<group>"; };
+		BA494B5C2C80244000EB2527 /* LoginStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStatus.swift; sourceTree = "<group>"; };
+		BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposeViewController.swift; sourceTree = "<group>"; };
+		BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposeViewModel.swift; sourceTree = "<group>"; };
+		BA494B622C80651300EB2527 /* SavedRestaurantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsViewController.swift; sourceTree = "<group>"; };
+		BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsViewModel.swift; sourceTree = "<group>"; };
+		BA494B682C806A3F00EB2527 /* SavedRestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsView.swift; sourceTree = "<group>"; };
+		BA494B6A2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsTableViewHandler.swift; sourceTree = "<group>"; };
+		BA494B6C2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsTableViewCell.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -393,7 +431,7 @@
 		BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverLoginService.swift; sourceTree = "<group>"; };
 		BAC55EC82C6F351400B3078F /* AuthUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCases.swift; sourceTree = "<group>"; };
 		BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaverLoginRepository.swift; path = ../Repositories/NaverLoginRepository.swift; sourceTree = "<group>"; };
-		BAC55ECC2C6FB2AB00B3078F /* KuUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuUser.swift; sourceTree = "<group>"; };
+		BAC55ECC2C6FB2AB00B3078F /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
 		BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResultRowView.swift; sourceTree = "<group>"; };
 		BAF177F72C7735D300E17FDC /* TierBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierBadgeView.swift; sourceTree = "<group>"; };
@@ -706,6 +744,8 @@
 			isa = PBXGroup;
 			children = (
 				584173512C4683E3001EC132 /* MyPageViewController.swift */,
+				BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */,
+				BA494B622C80651300EB2527 /* SavedRestaurantsViewController.swift */,
 				BA57C7C22C74356B0063F2FA /* View */,
 				BA57C7BF2C731F1B0063F2FA /* ViewModel */,
 			);
@@ -770,6 +810,7 @@
 				584FA4CC2C6475DA008DDC19 /* TierMapUseCases.swift */,
 				BAC55EC82C6F351400B3078F /* AuthUseCases.swift */,
 				BA2D89712C770FED004E7B8E /* SearchUseCases.swift */,
+				BA494B482C7DD44200EB2527 /* MyPageUseCases.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -792,6 +833,7 @@
 				BAB69AC82C71DC5700C20F0B /* SocialLoginUserRepository.swift */,
 				BA2D896D2C770B7E004E7B8E /* SearchRepository.swift */,
 				BA57C7B92C72F1780063F2FA /* AuthRepository.swift */,
+				BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -805,6 +847,7 @@
 				584FA4CE2C6476A7008DDC19 /* DefaultTierMapRepository.swift */,
 				BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */,
 				BA2D896F2C770D8C004E7B8E /* DefaultSearchRepository.swift */,
+				BA494B462C7DD36A00EB2527 /* DefaultMyPageRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -971,7 +1014,12 @@
 				58067CCB2C51552700889C92 /* Category.swift */,
 				584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */,
 				584FA4D52C64A41D008DDC19 /* Coords.swift */,
-				BAC55ECC2C6FB2AB00B3078F /* KuUser.swift */,
+				BAC55ECC2C6FB2AB00B3078F /* UserCredentials.swift */,
+				BA494B4A2C7DE83C00EB2527 /* UserProfile.swift */,
+				BA494B4C2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift */,
+				BA494B4E2C7DEE6400EB2527 /* FavoriteRestaurant.swift */,
+				BA494B502C7DEF9B00EB2527 /* EvaluatedRestaurant.swift */,
+				BA494B5C2C80244000EB2527 /* LoginStatus.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1086,6 +1134,28 @@
 			path = CollectionView;
 			sourceTree = "<group>";
 		};
+		BA494B662C806A2100EB2527 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				BA57C7C52C7435820063F2FA /* MyPageView.swift */,
+				BA494B542C7ED0A200EB2527 /* MyPageTableViewHandler.swift */,
+				BA494B5A2C7EFFB900EB2527 /* MyPageUserProfileView.swift */,
+				BA494B562C7EE81000EB2527 /* MyPageTableViewSection.swift */,
+				BA494B582C7EF04000EB2527 /* MyPageViewTableViewCell.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		BA494B672C806A2D00EB2527 /* SavedRestaurants */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B682C806A3F00EB2527 /* SavedRestaurantsView.swift */,
+				BA494B6A2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift */,
+				BA494B6C2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift */,
+			);
+			path = SavedRestaurants;
+			sourceTree = "<group>";
+		};
 		BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1106,6 +1176,8 @@
 			isa = PBXGroup;
 			children = (
 				BA57C7C02C731F270063F2FA /* MyPageViewModel.swift */,
+				BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */,
+				BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1113,7 +1185,8 @@
 		BA57C7C22C74356B0063F2FA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BA57C7C52C7435820063F2FA /* MyPageView.swift */,
+				BA494B672C806A2D00EB2527 /* SavedRestaurants */,
+				BA494B662C806A2100EB2527 /* MyPage */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1420,7 +1493,10 @@
 				5826A1ED2C772C4B0097256C /* TierMapBottomSheetView.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
+				BA494B692C806A3F00EB2527 /* SavedRestaurantsView.swift in Sources */,
+				BA494B5D2C80244000EB2527 /* LoginStatus.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
+				BA494B472C7DD36A00EB2527 /* DefaultMyPageRepository.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
 				BA2D896A2C76FC60004E7B8E /* SearchViewModel.swift in Sources */,
 				BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */,
@@ -1437,15 +1513,19 @@
 				CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */,
 				5841739C2C4A29C6001EC132 /* Tier.swift in Sources */,
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
+				BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
+				BA494B6B2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
 				BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */,
 				BA57C7C62C7435820063F2FA /* MyPageView.swift in Sources */,
 				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
+				BA494B6D2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift in Sources */,
 				BA1CB3D92C7D891600DA6776 /* AuthorizationRetrier.swift in Sources */,
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
+				BA494B452C7DD2DA00EB2527 /* MyPageRepository.swift in Sources */,
 				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
 				BA2D896E2C770B7E004E7B8E /* SearchRepository.swift in Sources */,
 				BA2D89702C770D8C004E7B8E /* DefaultSearchRepository.swift in Sources */,
@@ -1466,6 +1546,7 @@
 				CF54AD162C4289C900E0DE68 /* DownloadRequest.swift in Sources */,
 				BA37E0702C65E0B60092115B /* DrawView.swift in Sources */,
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
+				BA494B492C7DD44200EB2527 /* MyPageUseCases.swift in Sources */,
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
 				584FA4E42C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift in Sources */,
@@ -1501,6 +1582,7 @@
 				58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */,
 				BA8EEF812C630FF900FE6ABF /* OnboardingViewController.swift in Sources */,
 				CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */,
+				BA494B512C7DEF9B00EB2527 /* EvaluatedRestaurant.swift in Sources */,
 				BAB69AC52C71DC0B00C20F0B /* UserDefaultsKey.swift in Sources */,
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
 				58067D512C5B379800889C92 /* KuSubmitButton.swift in Sources */,
@@ -1510,6 +1592,7 @@
 				BA8EEF972C64981100FE6ABF /* LoginViewController.swift in Sources */,
 				BA8EEF652C61DD9200FE6ABF /* OnboardingSceneDIContainer.swift in Sources */,
 				58067CB52C4FBF9200889C92 /* TierUseCases.swift in Sources */,
+				BA494B652C80652C00EB2527 /* SavedRestaurantsViewModel.swift in Sources */,
 				CFE204672C5BC8AC00BCA87C /* KuTabBarPageController.swift in Sources */,
 				584FA4E82C71D68C008DDC19 /* TierTopCategoriesCollectionView.swift in Sources */,
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
@@ -1535,18 +1618,20 @@
 				58067CA82C4F512100889C92 /* TierPageViewController.swift in Sources */,
 				BA8EEF872C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift in Sources */,
 				BA37E0B92C6B0DA80092115B /* DrawUseCases.swift in Sources */,
-				BAC55ECD2C6FB2AB00B3078F /* KuUser.swift in Sources */,
+				BAC55ECD2C6FB2AB00B3078F /* UserCredentials.swift in Sources */,
 				58067D842C5FD67700889C92 /* HomeLayoutTableViewHandler.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
 				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
 				BA1CB3D32C7C405400DA6776 /* AuthorizationInterceptor.swift in Sources */,
+				BA494B612C80485A00EB2527 /* ProfileComposeViewModel.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				5826A1E52C75FE9C0097256C /* TierMapBottomSheet.swift in Sources */,
 				5826A1D62C72309B0097256C /* TierTopCategoriesCollectionViewHandler.swift in Sources */,
+				BA494B632C80651300EB2527 /* SavedRestaurantsViewController.swift in Sources */,
 				BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
@@ -1556,7 +1641,9 @@
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				BA494B4F2C7DEE6400EB2527 /* FavoriteRestaurant.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
+				BA494B552C7ED0A200EB2527 /* MyPageTableViewHandler.swift in Sources */,
 				BA2D89612C75A02A004E7B8E /* AccessTokenResponse.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
@@ -1576,17 +1663,21 @@
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */,
+				BA494B4D2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
 				BA37E0B52C6B0A710092115B /* DefaultDrawRepository.swift in Sources */,
 				CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */,
 				BAB69AC12C71DBA500C20F0B /* UserDefaultsStorage.swift in Sources */,
+				BA494B4B2C7DE83C00EB2527 /* UserProfile.swift in Sources */,
 				584FA4DE2C6E1C63008DDC19 /* HomeBannerSection.swift in Sources */,
 				58067D792C5F99FB00889C92 /* HomeSection.swift in Sources */,
 				CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */,
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
+				BA494B572C7EE81000EB2527 /* MyPageTableViewSection.swift in Sources */,
 				5826A1E22C723BF80097256C /* TierCategoryReceivable.swift in Sources */,
 				BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */,
 				5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */,
+				BA494B5F2C80482400EB2527 /* ProfileComposeViewController.swift in Sources */,
 				BAB69AC92C71DC5700C20F0B /* SocialLoginUserRepository.swift in Sources */,
 				58067D812C5FC07A00889C92 /* HomeLayoutTableView.swift in Sources */,
 				CFE204692C5D03C400BCA87C /* Collection+.swift in Sources */,
@@ -1595,6 +1686,7 @@
 				584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */,
 				584FA4CB2C6475C7008DDC19 /* TierMapRepository.swift in Sources */,
 				5826A1E92C77230A0097256C /* NMFMapPolygonManager.swift in Sources */,
+				BA494B5B2C7EFFB900EB2527 /* MyPageUserProfileView.swift in Sources */,
 				BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */,
 				5826A1EB2C77267D0097256C /* NMFMapCameraManager.swift in Sources */,
 				58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */,

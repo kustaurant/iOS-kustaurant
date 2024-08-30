@@ -113,4 +113,16 @@ extension DefaultAuthRepository: AuthRepository {
         
         return true
     }
+    
+    func deleteAccount() async {
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/goodbye-user", method: .post)
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        
+        if let error = response.error {
+            Logger.error(error.localizedDescription, category: .network)
+        }
+    }
 }
