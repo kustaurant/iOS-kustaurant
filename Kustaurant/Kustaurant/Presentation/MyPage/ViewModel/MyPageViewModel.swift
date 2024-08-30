@@ -13,6 +13,7 @@ struct MyPageViewModelActions {
     let showProfileCompose: () -> Void
     let showSavedRestaurants: () -> Void
     let showFeedbackSubmitting: () -> Void
+    let showNotice:() -> Void
 }
 
 protocol MyPageViewModelInput {
@@ -21,6 +22,7 @@ protocol MyPageViewModelInput {
     func didTapSavedRestaurantsCell()
     func getUserSavedRestaurants()
     func didTapSendFeedback()
+    func didTapNotice()
 }
 
 protocol MyPageViewModelOutput {
@@ -112,5 +114,9 @@ extension DefaultMyPageViewModel: MyPageViewModel {
     
     func didTapSendFeedback() {
         actions.showFeedbackSubmitting()
+    }
+    
+    func didTapNotice() {
+        actions.showNotice()
     }
 }

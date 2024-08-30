@@ -174,6 +174,9 @@
 		BA494B6F2C81590E00EB2527 /* FeedbackSubmittingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */; };
 		BA494B712C81592700EB2527 /* FeedbackSubmittingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */; };
 		BA494B742C81644800EB2527 /* FeedbackSubmittingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B732C81644800EB2527 /* FeedbackSubmittingView.swift */; };
+		BA494B762C8179C500EB2527 /* NoticeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */; };
+		BA494B782C8179DA00EB2527 /* NoticeBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B772C8179DA00EB2527 /* NoticeBoardViewModel.swift */; };
+		BA494B7B2C817BA100EB2527 /* NoticeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -409,6 +412,9 @@
 		BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingViewController.swift; sourceTree = "<group>"; };
 		BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingViewModel.swift; sourceTree = "<group>"; };
 		BA494B732C81644800EB2527 /* FeedbackSubmittingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingView.swift; sourceTree = "<group>"; };
+		BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewController.swift; sourceTree = "<group>"; };
+		BA494B772C8179DA00EB2527 /* NoticeBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewModel.swift; sourceTree = "<group>"; };
+		BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -753,6 +759,7 @@
 				BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */,
 				BA494B622C80651300EB2527 /* SavedRestaurantsViewController.swift */,
 				BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */,
+				BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */,
 				BA57C7C22C74356B0063F2FA /* View */,
 				BA57C7BF2C731F1B0063F2FA /* ViewModel */,
 			);
@@ -1171,6 +1178,14 @@
 			path = FeedbackSubmitting;
 			sourceTree = "<group>";
 		};
+		BA494B792C817B8F00EB2527 /* NoticeBoard */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */,
+			);
+			path = NoticeBoard;
+			sourceTree = "<group>";
+		};
 		BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1194,6 +1209,7 @@
 				BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */,
 				BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */,
 				BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */,
+				BA494B772C8179DA00EB2527 /* NoticeBoardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1201,9 +1217,10 @@
 		BA57C7C22C74356B0063F2FA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BA494B722C81643600EB2527 /* FeedbackSubmitting */,
-				BA494B672C806A2D00EB2527 /* SavedRestaurants */,
 				BA494B662C806A2100EB2527 /* MyPage */,
+				BA494B722C81643600EB2527 /* FeedbackSubmitting */,
+				BA494B792C817B8F00EB2527 /* NoticeBoard */,
+				BA494B672C806A2D00EB2527 /* SavedRestaurants */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1590,6 +1607,7 @@
 				58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */,
 				58067CB22C4FBA9800889C92 /* TierListTableViewCell.swift in Sources */,
 				58067D3D2C58D73C00889C92 /* TierCategoryViewModel.swift in Sources */,
+				BA494B7B2C817BA100EB2527 /* NoticeBoardView.swift in Sources */,
 				584FA4C92C647442008DDC19 /* TierMapView.swift in Sources */,
 				BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
@@ -1654,6 +1672,7 @@
 				BA494B632C80651300EB2527 /* SavedRestaurantsViewController.swift in Sources */,
 				BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
+				BA494B762C8179C500EB2527 /* NoticeBoardViewController.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
@@ -1663,6 +1682,7 @@
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				BA494B4F2C7DEE6400EB2527 /* FavoriteRestaurant.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
+				BA494B782C8179DA00EB2527 /* NoticeBoardViewModel.swift in Sources */,
 				BA494B552C7ED0A200EB2527 /* MyPageTableViewHandler.swift in Sources */,
 				BA2D89612C75A02A004E7B8E /* AccessTokenResponse.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,

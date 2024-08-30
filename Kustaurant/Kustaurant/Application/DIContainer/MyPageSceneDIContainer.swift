@@ -82,6 +82,10 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
     func makeFeedbackSubmittingViewController(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewController {
         FeedbackSubmittingViewController(viewModel: makeFeedbackSubmittingViewModel(actions: actions))
     }
+    
+    func makeNoticeBoardViewController(actions: NoticeBoardViewModelActions) -> NoticeBoardViewController {
+        NoticeBoardViewController(viewModel: makeNoticeBoardViewModel(actions: actions))
+    }
 }
 
 extension MyPageSceneDIContainer {
@@ -96,5 +100,9 @@ extension MyPageSceneDIContainer {
     
     func makeFeedbackSubmittingViewModel(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewModel {
         DefaultFeedbackSubmittingViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
+    }
+    
+    func makeNoticeBoardViewModel(actions: NoticeBoardViewModelActions) -> NoticeBoardViewModel {
+        DefaultNoticeBoardViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
     }
 }

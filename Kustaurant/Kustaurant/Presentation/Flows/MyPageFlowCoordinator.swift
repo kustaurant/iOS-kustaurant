@@ -12,6 +12,7 @@ protocol MyPageFlowCoordinatorDependencies {
     func makeProfileComposeViewController(actions: ProfileComposeViewModelActions) -> ProfileComposeViewController
     func makeSavedRestaurantsViewController(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewController
     func makeFeedbackSubmittingViewController(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewController
+    func makeNoticeBoardViewController(actions: NoticeBoardViewModelActions) -> NoticeBoardViewController
 }
 
 final class MyPageFlowCoordinator: Coordinator {
@@ -34,7 +35,8 @@ extension MyPageFlowCoordinator {
             showOnboarding: showOnboarding,
             showProfileCompose: showProfileCompose,
             showSavedRestaurants: showSavedRestaurants,
-            showFeedbackSubmitting: showFeedbackSubmitting
+            showFeedbackSubmitting: showFeedbackSubmitting,
+            showNotice: showNoticeBoard
         )
         let viewController = dependencies.makeMyPageViewController(actions: actions)
         let image = UIImage(named: TabBarPage.mypage.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
@@ -71,6 +73,14 @@ extension MyPageFlowCoordinator {
             pop: popAnimated
         )
         let viewController = dependencies.makeFeedbackSubmittingViewController(actions: actions)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func showNoticeBoard() {
+        let actions = NoticeBoardViewModelActions(
+            pop: popAnimated
+        )
+        let viewController = dependencies.makeNoticeBoardViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }
     

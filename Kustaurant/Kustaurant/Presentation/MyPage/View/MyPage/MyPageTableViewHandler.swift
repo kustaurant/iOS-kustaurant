@@ -69,6 +69,8 @@ extension MyPageTableViewHandler: UITableViewDelegate {
             viewModel.didTapSavedRestaurantsCell()
         case .sendFeedback:
             viewModel.didTapSendFeedback()
+        case .notice:
+            viewModel.didTapNotice()
         default:
             return
         }
