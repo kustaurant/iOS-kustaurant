@@ -175,8 +175,10 @@
 		BA494B712C81592700EB2527 /* FeedbackSubmittingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */; };
 		BA494B742C81644800EB2527 /* FeedbackSubmittingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B732C81644800EB2527 /* FeedbackSubmittingView.swift */; };
 		BA494B762C8179C500EB2527 /* NoticeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */; };
-		BA494B782C8179DA00EB2527 /* NoticeBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B772C8179DA00EB2527 /* NoticeBoardViewModel.swift */; };
+		BA494B782C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B772C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift */; };
 		BA494B7B2C817BA100EB2527 /* NoticeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */; };
+		BA494B7D2C8193A600EB2527 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7C2C8193A600EB2527 /* TermsOfServiceViewController.swift */; };
+		BA494B802C81956100EB2527 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7F2C81956100EB2527 /* TermsOfServiceView.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -413,8 +415,10 @@
 		BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingViewModel.swift; sourceTree = "<group>"; };
 		BA494B732C81644800EB2527 /* FeedbackSubmittingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingView.swift; sourceTree = "<group>"; };
 		BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewController.swift; sourceTree = "<group>"; };
-		BA494B772C8179DA00EB2527 /* NoticeBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewModel.swift; sourceTree = "<group>"; };
+		BA494B772C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainWebViewLoadViewModel.swift; sourceTree = "<group>"; };
 		BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
+		BA494B7C2C8193A600EB2527 /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
+		BA494B7F2C81956100EB2527 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -760,6 +764,7 @@
 				BA494B622C80651300EB2527 /* SavedRestaurantsViewController.swift */,
 				BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */,
 				BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */,
+				BA494B7C2C8193A600EB2527 /* TermsOfServiceViewController.swift */,
 				BA57C7C22C74356B0063F2FA /* View */,
 				BA57C7BF2C731F1B0063F2FA /* ViewModel */,
 			);
@@ -1186,6 +1191,14 @@
 			path = NoticeBoard;
 			sourceTree = "<group>";
 		};
+		BA494B7E2C81955100EB2527 /* TermsOfService */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B7F2C81956100EB2527 /* TermsOfServiceView.swift */,
+			);
+			path = TermsOfService;
+			sourceTree = "<group>";
+		};
 		BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1209,7 +1222,7 @@
 				BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */,
 				BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */,
 				BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */,
-				BA494B772C8179DA00EB2527 /* NoticeBoardViewModel.swift */,
+				BA494B772C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1218,6 +1231,7 @@
 			isa = PBXGroup;
 			children = (
 				BA494B662C806A2100EB2527 /* MyPage */,
+				BA494B7E2C81955100EB2527 /* TermsOfService */,
 				BA494B722C81643600EB2527 /* FeedbackSubmitting */,
 				BA494B792C817B8F00EB2527 /* NoticeBoard */,
 				BA494B672C806A2D00EB2527 /* SavedRestaurants */,
@@ -1549,6 +1563,7 @@
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
 				BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
+				BA494B7D2C8193A600EB2527 /* TermsOfServiceViewController.swift in Sources */,
 				BA494B6B2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
 				BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */,
@@ -1682,7 +1697,7 @@
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				BA494B4F2C7DEE6400EB2527 /* FavoriteRestaurant.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
-				BA494B782C8179DA00EB2527 /* NoticeBoardViewModel.swift in Sources */,
+				BA494B782C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift in Sources */,
 				BA494B552C7ED0A200EB2527 /* MyPageTableViewHandler.swift in Sources */,
 				BA2D89612C75A02A004E7B8E /* AccessTokenResponse.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
@@ -1738,6 +1753,7 @@
 				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,
 				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,
 				58067CCC2C51552700889C92 /* Category.swift in Sources */,
+				BA494B802C81956100EB2527 /* TermsOfServiceView.swift in Sources */,
 				58067D7B2C5FA70300889C92 /* HomeCategoriesCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

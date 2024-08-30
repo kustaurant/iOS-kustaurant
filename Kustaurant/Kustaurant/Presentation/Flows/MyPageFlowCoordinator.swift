@@ -12,7 +12,8 @@ protocol MyPageFlowCoordinatorDependencies {
     func makeProfileComposeViewController(actions: ProfileComposeViewModelActions) -> ProfileComposeViewController
     func makeSavedRestaurantsViewController(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewController
     func makeFeedbackSubmittingViewController(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewController
-    func makeNoticeBoardViewController(actions: NoticeBoardViewModelActions) -> NoticeBoardViewController
+    func makeNoticeBoardViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> NoticeBoardViewController
+    func makeTermsOfServiceViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> TermsOfServiceViewController
 }
 
 final class MyPageFlowCoordinator: Coordinator {
@@ -36,7 +37,8 @@ extension MyPageFlowCoordinator {
             showProfileCompose: showProfileCompose,
             showSavedRestaurants: showSavedRestaurants,
             showFeedbackSubmitting: showFeedbackSubmitting,
-            showNotice: showNoticeBoard
+            showNotice: showNoticeBoard,
+            showTermsOfService: showTermsOfService
         )
         let viewController = dependencies.makeMyPageViewController(actions: actions)
         let image = UIImage(named: TabBarPage.mypage.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
@@ -77,10 +79,20 @@ extension MyPageFlowCoordinator {
     }
     
     private func showNoticeBoard() {
-        let actions = NoticeBoardViewModelActions(
+        let actions = PlainWebViewLoadViewModelActions(
             pop: popAnimated
         )
-        let viewController = dependencies.makeNoticeBoardViewController(actions: actions)
+        let noticeBoardUrl = "https://kustaurant.com/notice"
+        let viewController = dependencies.makeNoticeBoardViewController(webViewUrl: noticeBoardUrl, actions: actions)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func showTermsOfService() {
+        let actions = PlainWebViewLoadViewModelActions(
+            pop: popAnimated
+        )
+        let noticeBoardUrl = "https://kustaurant.com/terms_of_use"
+        let viewController = dependencies.makeTermsOfServiceViewController(webViewUrl: noticeBoardUrl, actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }
     

@@ -14,6 +14,7 @@ struct MyPageViewModelActions {
     let showSavedRestaurants: () -> Void
     let showFeedbackSubmitting: () -> Void
     let showNotice:() -> Void
+    let showTermsOfService: () -> Void
 }
 
 protocol MyPageViewModelInput {
@@ -23,6 +24,7 @@ protocol MyPageViewModelInput {
     func getUserSavedRestaurants()
     func didTapSendFeedback()
     func didTapNotice()
+    func didTapTermsOfService()
 }
 
 protocol MyPageViewModelOutput {
@@ -118,5 +120,9 @@ extension DefaultMyPageViewModel: MyPageViewModel {
     
     func didTapNotice() {
         actions.showNotice()
+    }
+    
+    func didTapTermsOfService() {
+        actions.showTermsOfService()
     }
 }

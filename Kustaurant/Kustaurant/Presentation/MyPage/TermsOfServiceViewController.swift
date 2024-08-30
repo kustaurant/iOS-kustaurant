@@ -1,17 +1,19 @@
 //
-//  NoticeBoardViewController.swift
+//  TermsOfServiceViewController.swift
 //  Kustaurant
 //
 //  Created by peppermint100 on 8/30/24.
 //
 
 import UIKit
+
+import UIKit
 import WebKit
 
-class NoticeBoardViewController: UIViewController {
+class TermsOfServiceViewController: UIViewController {
     
     private let viewModel: PlainWebViewLoadViewModel
-    private let noticeBoardView = NoticeBoardView()
+    private let termsOfServiceView = TermsOfServiceView()
     
     init(viewModel: PlainWebViewLoadViewModel) {
         self.viewModel = viewModel
@@ -30,17 +32,17 @@ class NoticeBoardViewController: UIViewController {
     }
     
     override func loadView() {
-        view = noticeBoardView
+        view = termsOfServiceView
     }
 }
 
-extension NoticeBoardViewController {
+extension TermsOfServiceViewController {
     
     private func setupWebView() {
-        noticeBoardView.webView.navigationDelegate = self
+        termsOfServiceView.webView.navigationDelegate = self
         if let url = URL(string: viewModel.webViewUrl) {
             let request = URLRequest(url: url)
-            noticeBoardView.webView.load(request)
+            termsOfServiceView.webView.load(request)
         }
     }
     
@@ -51,7 +53,7 @@ extension NoticeBoardViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
         backButtonView.addGestureRecognizer(tapGesture)
         backButtonView.isUserInteractionEnabled = true
-        navigationItem.title = "공지사항"
+        navigationItem.title = "이용약관"
         navigationItem.leftBarButtonItem = backButton
     }
     
@@ -60,7 +62,7 @@ extension NoticeBoardViewController {
     }
 }
 
-extension NoticeBoardViewController: WKNavigationDelegate {
+extension TermsOfServiceViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             if let url = navigationAction.request.url {
@@ -72,3 +74,4 @@ extension NoticeBoardViewController: WKNavigationDelegate {
         decisionHandler(.allow)
     }
 }
+

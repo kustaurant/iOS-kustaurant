@@ -71,6 +71,8 @@ extension MyPageTableViewHandler: UITableViewDelegate {
             viewModel.didTapSendFeedback()
         case .notice:
             viewModel.didTapNotice()
+        case .termsOfService:
+            viewModel.didTapTermsOfService()
         default:
             return
         }
