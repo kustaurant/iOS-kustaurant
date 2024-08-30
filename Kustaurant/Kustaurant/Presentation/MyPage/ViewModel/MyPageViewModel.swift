@@ -27,6 +27,9 @@ protocol MyPageViewModelInput {
     func didTapNotice()
     func didTapTermsOfService()
     func didTapPrivacyPolicy()
+    func didTapLogoutButton()
+    func didTapDeleteAccount()
+    func dismissAlert()
 }
 
 protocol MyPageViewModelOutput {
@@ -35,6 +38,9 @@ protocol MyPageViewModelOutput {
     var isLoggedInPublisher: Published<LoginStatus>.Publisher { get }
     var userSavedRestaurants: UserSavedRestaurantsCount { get }
     var userSavedRestaurantsPublisher: Published<UserSavedRestaurantsCount>.Publisher { get }
+    var showAlert: Bool { get }
+    var showAlertPublisher: Published<Bool>.Publisher { get }
+    var alertPayload: AlertPayload { get }
 }
 
 typealias MyPageViewModel = MyPageViewModelInput & MyPageViewModelOutput
@@ -48,6 +54,9 @@ final class DefaultMyPageViewModel {
     var isLoggedInPublisher: Published<LoginStatus>.Publisher { $isLoggedIn }
     @Published var userSavedRestaurants: UserSavedRestaurantsCount = UserSavedRestaurantsCount.empty()
     var userSavedRestaurantsPublisher: Published<UserSavedRestaurantsCount>.Publisher { $userSavedRestaurants }
+    @Published var showAlert: Bool = false
+    var showAlertPublisher: Published<Bool>.Publisher { $showAlert }
+    @Published var alertPayload: AlertPayload = AlertPayload.empty()
     
     var tableViewSections: [MyPageTableViewSection] = [
         MyPageTableViewSection(
@@ -98,10 +107,41 @@ extension DefaultMyPageViewModel {
             }
         }
     }
+    
+    func logout() {
+        dismissAlert()
+        authUseCases.logout()
+        actions.showOnboarding()
+    }
+    
+    func deleteAccount() {
+        Task {
+            await authUseCases.deleteAccount()
+            await MainActor.run {
+                dismissAlert()
+                actions.showOnboarding()
+            }
+        }
+    }
 }
 
 // Button Actions
 extension DefaultMyPageViewModel: MyPageViewModel {
+    
+    func dismissAlert() {
+        showAlert = false
+        alertPayload = AlertPayload.empty()
+    }
+    
+    func didTapDeleteAccount() {
+        alertPayload = AlertPayload(title: "회원탈퇴 하시겠습니까?", subtitle: "작성한 글, 평가는 삭제되지 않지만 개인정보는 안전하게 삭제됩니다.", onConfirm: deleteAccount)
+        showAlert = true
+    }
+    
+    func didTapLogoutButton() {
+        alertPayload = AlertPayload(title: "로그아웃 하시겠습니까?", subtitle: "", onConfirm: logout)
+        showAlert = true
+    }
     
     func didTapLoginAndStartButton() {
         authUseCases.logout()

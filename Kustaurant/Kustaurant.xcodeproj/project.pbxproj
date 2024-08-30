@@ -181,6 +181,7 @@
 		BA494B802C81956100EB2527 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7F2C81956100EB2527 /* TermsOfServiceView.swift */; };
 		BA494B822C8196F000EB2527 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */; };
 		BA494B852C81972A00EB2527 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B842C81972A00EB2527 /* PrivacyPolicyView.swift */; };
+		BA494B882C81A1E400EB2527 /* AlertPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B872C81A1E400EB2527 /* AlertPayload.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -423,6 +424,7 @@
 		BA494B7F2C81956100EB2527 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		BA494B842C81972A00EB2527 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		BA494B872C81A1E400EB2527 /* AlertPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPayload.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 		584173222C464E27001EC132 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BA494B862C81A1DB00EB2527 /* Alert */,
 				BA2D89762C7712F9004E7B8E /* Json */,
 				BA2D895A2C74C744004E7B8E /* Logger */,
 				BAB69ABD2C71DB8000C20F0B /* InMemoryStorage */,
@@ -1212,6 +1215,14 @@
 			path = PrivacyPolicy;
 			sourceTree = "<group>";
 		};
+		BA494B862C81A1DB00EB2527 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B872C81A1E400EB2527 /* AlertPayload.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
 		BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1579,6 +1590,7 @@
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
 				BA494B7D2C8193A600EB2527 /* TermsOfServiceViewController.swift in Sources */,
 				BA494B6B2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift in Sources */,
+				BA494B882C81A1E400EB2527 /* AlertPayload.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
 				BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */,
 				BA57C7C62C7435820063F2FA /* MyPageView.swift in Sources */,

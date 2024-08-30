@@ -55,6 +55,13 @@ extension MyPageViewController {
                 self?.myPageTableViewHandler?.updateUI(by: loginStatus)
             }
             .store(in: &cancellables)
+        
+        viewModel.showAlertPublisher.sink { [weak self] showAlert in
+            if showAlert {
+                self?.presentAlert()
+            }
+        }
+        .store(in: &cancellables)
     }
     
     private func bindUserProfileView() {
@@ -87,5 +94,19 @@ extension MyPageViewController {
     
     @objc func toggle() {
         viewModel.isLoggedIn = viewModel.isLoggedIn.toggle()
+    }
+}
+
+extension MyPageViewController {
+    
+    private func presentAlert() {
+        let alert = UIAlertController(title: viewModel.alertPayload.title, message: viewModel.alertPayload.subtitle, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { [weak self] _ in
+            self?.viewModel.dismissAlert()
+        }))
+        alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { [weak self] _ in
+            self?.viewModel.alertPayload.onConfirm?()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }

@@ -75,8 +75,10 @@ extension MyPageTableViewHandler: UITableViewDelegate {
             viewModel.didTapTermsOfService()
         case .privacyPolicy:
             viewModel.didTapPrivacyPolicy()
-        default:
-            return
+        case .logout:
+            viewModel.didTapLogoutButton()
+        case .deleteAccount:
+            viewModel.didTapDeleteAccount()
         }
     }
 }
