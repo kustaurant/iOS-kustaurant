@@ -73,6 +73,8 @@ extension MyPageTableViewHandler: UITableViewDelegate {
             viewModel.didTapNotice()
         case .termsOfService:
             viewModel.didTapTermsOfService()
+        case .privacyPolicy:
+            viewModel.didTapPrivacyPolicy()
         default:
             return
         }

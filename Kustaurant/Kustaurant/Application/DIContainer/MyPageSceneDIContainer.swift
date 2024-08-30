@@ -90,6 +90,10 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
     func makeTermsOfServiceViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> TermsOfServiceViewController {
         TermsOfServiceViewController(viewModel: makeWebViewLoadViewModel(webViewUrl: webViewUrl, actions: actions))
     }
+    
+    func makePrivacyPolicyViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> PrivacyPolicyViewController {
+        PrivacyPolicyViewController(viewModel: makeWebViewLoadViewModel(webViewUrl: webViewUrl, actions: actions))
+    }
 }
 
 extension MyPageSceneDIContainer {

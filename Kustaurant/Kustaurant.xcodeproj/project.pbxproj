@@ -179,6 +179,8 @@
 		BA494B7B2C817BA100EB2527 /* NoticeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */; };
 		BA494B7D2C8193A600EB2527 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7C2C8193A600EB2527 /* TermsOfServiceViewController.swift */; };
 		BA494B802C81956100EB2527 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7F2C81956100EB2527 /* TermsOfServiceView.swift */; };
+		BA494B822C8196F000EB2527 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */; };
+		BA494B852C81972A00EB2527 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B842C81972A00EB2527 /* PrivacyPolicyView.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -419,6 +421,8 @@
 		BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
 		BA494B7C2C8193A600EB2527 /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		BA494B7F2C81956100EB2527 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
+		BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		BA494B842C81972A00EB2527 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -765,6 +769,7 @@
 				BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */,
 				BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */,
 				BA494B7C2C8193A600EB2527 /* TermsOfServiceViewController.swift */,
+				BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */,
 				BA57C7C22C74356B0063F2FA /* View */,
 				BA57C7BF2C731F1B0063F2FA /* ViewModel */,
 			);
@@ -1199,6 +1204,14 @@
 			path = TermsOfService;
 			sourceTree = "<group>";
 		};
+		BA494B832C81971500EB2527 /* PrivacyPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B842C81972A00EB2527 /* PrivacyPolicyView.swift */,
+			);
+			path = PrivacyPolicy;
+			sourceTree = "<group>";
+		};
 		BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1230,6 +1243,7 @@
 		BA57C7C22C74356B0063F2FA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BA494B832C81971500EB2527 /* PrivacyPolicy */,
 				BA494B662C806A2100EB2527 /* MyPage */,
 				BA494B7E2C81955100EB2527 /* TermsOfService */,
 				BA494B722C81643600EB2527 /* FeedbackSubmitting */,
@@ -1625,6 +1639,7 @@
 				BA494B7B2C817BA100EB2527 /* NoticeBoardView.swift in Sources */,
 				584FA4C92C647442008DDC19 /* TierMapView.swift in Sources */,
 				BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */,
+				BA494B852C81972A00EB2527 /* PrivacyPolicyView.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
 				BA37E0772C65E5850092115B /* DrawLocationCollectionViewCell.swift in Sources */,
 				CFE2046B2C5D0A4000BCA87C /* UIView+parentViewController.swift in Sources */,
@@ -1687,6 +1702,7 @@
 				BA494B632C80651300EB2527 /* SavedRestaurantsViewController.swift in Sources */,
 				BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
+				BA494B822C8196F000EB2527 /* PrivacyPolicyViewController.swift in Sources */,
 				BA494B762C8179C500EB2527 /* NoticeBoardViewController.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,

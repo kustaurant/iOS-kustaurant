@@ -15,6 +15,7 @@ struct MyPageViewModelActions {
     let showFeedbackSubmitting: () -> Void
     let showNotice:() -> Void
     let showTermsOfService: () -> Void
+    let showPrivacyPolicy: () -> Void
 }
 
 protocol MyPageViewModelInput {
@@ -25,6 +26,7 @@ protocol MyPageViewModelInput {
     func didTapSendFeedback()
     func didTapNotice()
     func didTapTermsOfService()
+    func didTapPrivacyPolicy()
 }
 
 protocol MyPageViewModelOutput {
@@ -124,5 +126,9 @@ extension DefaultMyPageViewModel: MyPageViewModel {
     
     func didTapTermsOfService() {
         actions.showTermsOfService()
+    }
+    
+    func didTapPrivacyPolicy() {
+        actions.showPrivacyPolicy()
     }
 }

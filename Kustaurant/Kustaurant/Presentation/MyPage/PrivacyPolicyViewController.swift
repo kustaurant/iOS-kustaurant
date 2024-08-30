@@ -1,5 +1,5 @@
 //
-//  TermsOfServiceViewController.swift
+//  PrivacyPolicyViewController.swift
 //  Kustaurant
 //
 //  Created by peppermint100 on 8/30/24.
@@ -8,10 +8,10 @@
 import UIKit
 import WebKit
 
-class TermsOfServiceViewController: UIViewController {
+class PrivacyPolicyViewController: UIViewController {
     
     private let viewModel: PlainWebViewLoadViewModel
-    private let termsOfServiceView = TermsOfServiceView()
+    private let privacyPolicyView = PrivacyPolicyView()
     
     init(viewModel: PlainWebViewLoadViewModel) {
         self.viewModel = viewModel
@@ -30,17 +30,17 @@ class TermsOfServiceViewController: UIViewController {
     }
     
     override func loadView() {
-        view = termsOfServiceView
+        view = privacyPolicyView
     }
 }
 
-extension TermsOfServiceViewController {
+extension PrivacyPolicyViewController {
     
     private func setupWebView() {
-        termsOfServiceView.webView.navigationDelegate = self
+        privacyPolicyView.webView.navigationDelegate = self
         if let url = URL(string: viewModel.webViewUrl) {
             let request = URLRequest(url: url)
-            termsOfServiceView.webView.load(request)
+            privacyPolicyView.webView.load(request)
         }
     }
     
@@ -51,7 +51,7 @@ extension TermsOfServiceViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
         backButtonView.addGestureRecognizer(tapGesture)
         backButtonView.isUserInteractionEnabled = true
-        navigationItem.title = "이용약관"
+        navigationItem.title = "개인정보처리방침"
         navigationItem.leftBarButtonItem = backButton
     }
     
@@ -60,7 +60,7 @@ extension TermsOfServiceViewController {
     }
 }
 
-extension TermsOfServiceViewController: WKNavigationDelegate {
+extension PrivacyPolicyViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             if let url = navigationAction.request.url {
@@ -72,4 +72,5 @@ extension TermsOfServiceViewController: WKNavigationDelegate {
         decisionHandler(.allow)
     }
 }
+
 

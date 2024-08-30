@@ -14,6 +14,7 @@ protocol MyPageFlowCoordinatorDependencies {
     func makeFeedbackSubmittingViewController(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewController
     func makeNoticeBoardViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> NoticeBoardViewController
     func makeTermsOfServiceViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> TermsOfServiceViewController
+    func makePrivacyPolicyViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> PrivacyPolicyViewController
 }
 
 final class MyPageFlowCoordinator: Coordinator {
@@ -38,7 +39,8 @@ extension MyPageFlowCoordinator {
             showSavedRestaurants: showSavedRestaurants,
             showFeedbackSubmitting: showFeedbackSubmitting,
             showNotice: showNoticeBoard,
-            showTermsOfService: showTermsOfService
+            showTermsOfService: showTermsOfService,
+            showPrivacyPolicy: showPrivacyPolicy
         )
         let viewController = dependencies.makeMyPageViewController(actions: actions)
         let image = UIImage(named: TabBarPage.mypage.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
@@ -91,8 +93,17 @@ extension MyPageFlowCoordinator {
         let actions = PlainWebViewLoadViewModelActions(
             pop: popAnimated
         )
-        let noticeBoardUrl = "https://kustaurant.com/terms_of_use"
-        let viewController = dependencies.makeTermsOfServiceViewController(webViewUrl: noticeBoardUrl, actions: actions)
+        let termsOfServiceUrl = "https://kustaurant.com/terms_of_use"
+        let viewController = dependencies.makeTermsOfServiceViewController(webViewUrl: termsOfServiceUrl, actions: actions)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func showPrivacyPolicy() {
+        let actions = PlainWebViewLoadViewModelActions(
+            pop: popAnimated
+        )
+        let privacyPolicyUrl = "https://kustaurant.com/privacy-policy"
+        let viewController = dependencies.makePrivacyPolicyViewController(webViewUrl: privacyPolicyUrl, actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }
     
