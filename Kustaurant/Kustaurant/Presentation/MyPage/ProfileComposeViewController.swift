@@ -31,6 +31,10 @@ class ProfileComposeViewController: UIViewController {
         setupKeyboardEndGesture()
         textFieldHandler?.setupTextFields()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel.getUserProfile()
     }
     
