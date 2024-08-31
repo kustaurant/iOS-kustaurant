@@ -31,6 +31,7 @@ class ProfileComposeViewController: UIViewController {
         setupKeyboardEndGesture()
         textFieldHandler?.setupTextFields()
         bind()
+        viewModel.getUserProfile()
     }
     
     override func loadView() {
@@ -68,6 +69,13 @@ extension ProfileComposeViewController {
 extension ProfileComposeViewController {
     
     private func bind() {
+        viewModel.userProfilePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] userProfile in
+                self?.textFieldHandler?.fillTextFields(with: userProfile)
+            }
+            .store(in: &cancellables)
+        
         viewModel.nicknameErrorPublisher.sink { [weak self] error in
             switch error {
             case .invalidPhoneNumber:

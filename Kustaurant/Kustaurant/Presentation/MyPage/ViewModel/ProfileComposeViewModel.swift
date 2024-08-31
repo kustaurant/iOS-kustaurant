@@ -13,6 +13,7 @@ struct ProfileComposeViewModelActions {
 }
 
 protocol ProfileComposeViewModelInput {
+    func getUserProfile()
     func didTapBackButton()
     func didTapSubmitButton()
     func updateNicknameText(_ text: String)
@@ -33,11 +34,16 @@ protocol ProfileComposeViewModelOutput {
     var showAlert: Bool { get }
     var showAlertPublisher: Published<Bool>.Publisher { get }
     var alertPayload: AlertPayload { get }
+    var userProfile: UserProfile { get }
+    var userProfilePublisher: Published<UserProfile>.Publisher { get }
 }
 
 typealias ProfileComposeViewModel = ProfileComposeViewModelInput & ProfileComposeViewModelOutput
 
 final class DefaultProfileComposeViewModel: ProfileComposeViewModel {
+    @Published var userProfile: UserProfile = UserProfile.empty()
+    var userProfilePublisher: Published<UserProfile>.Publisher { $userProfile }
+    
     @Published var nicknameError: ProfileComposeTextFieldError = .none
     var nicknameErrorPublisher: Published<ProfileComposeTextFieldError>.Publisher { $nicknameError }
     @Published var phoneNumberError: ProfileComposeTextFieldError = .none
@@ -62,6 +68,18 @@ final class DefaultProfileComposeViewModel: ProfileComposeViewModel {
 }
 
 extension DefaultProfileComposeViewModel {
+    
+    func getUserProfile() {
+        Task {
+            let result = await myPageUseCases.getUserProfile()
+            switch result {
+            case .success(let userProfile):
+                self.userProfile = userProfile
+            case .failure(let failure):
+                break
+            }
+        }
+    }
     
     func didTapBackButton() {
         actions.pop()

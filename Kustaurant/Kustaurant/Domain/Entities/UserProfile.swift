@@ -18,6 +18,12 @@ struct UserProfile: Codable {
         self.email = nil
     }
     
+    init(nickname: String, email: String, phoneNumber: String) {
+        self.nickname = nickname
+        self.phoneNumber = phoneNumber
+        self.email = email
+    }
+    
     static func empty() -> UserProfile {
         UserProfile(nickname: "", phoneNumber: "")
     }

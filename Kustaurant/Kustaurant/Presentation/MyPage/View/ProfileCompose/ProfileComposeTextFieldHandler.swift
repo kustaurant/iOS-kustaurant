@@ -69,6 +69,12 @@ extension ProfileComposeTextFieldHandler: UITextFieldDelegate {
 
 extension ProfileComposeTextFieldHandler {
     
+    func fillTextFields(with userProfile: UserProfile) {
+        view.nicknameTextField.textField.text = userProfile.nickname
+        view.emailTextField.textField.text = userProfile.email
+        view.phoneNumberTextField.textField.text = userProfile.phoneNumber
+    }
+    
     private func validateNicknameTextField(_ text: String) -> Bool {
         if text.count > 10 {
             viewModel.updateNicknameError(.nicknameTooLong)
