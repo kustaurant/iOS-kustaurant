@@ -30,11 +30,11 @@ final class MyPageViewController: UIViewController {
         myPageTableViewHandler?.setupTableView()
         bindViews()
         bindUserProfileView()
-        viewModel.getUserSavedRestaurants()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: false)
+        viewModel.getUserSavedRestaurants()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
