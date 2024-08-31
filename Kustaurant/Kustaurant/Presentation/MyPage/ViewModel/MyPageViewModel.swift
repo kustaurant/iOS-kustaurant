@@ -10,7 +10,7 @@ import Combine
 
 struct MyPageViewModelActions {
     let showOnboarding: () -> Void
-    let showProfileCompose: () -> Void
+    let showProfileCompose: (_ profileImgUrl: String?) -> Void
     let showSavedRestaurants: () -> Void
     let showFeedbackSubmitting: () -> Void
     let showNotice:() -> Void
@@ -149,7 +149,7 @@ extension DefaultMyPageViewModel: MyPageViewModel {
     }
     
     func didTapComposeProfileButton() {
-        actions.showProfileCompose()
+        actions.showProfileCompose(userSavedRestaurants.iconImgUrl)
     }
     
     func didTapSavedRestaurantsCell() {

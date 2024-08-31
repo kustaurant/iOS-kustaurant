@@ -56,6 +56,13 @@ extension MyPageTableViewHandler {
         headerView.profileButton.setTitle(userSavedRestaurants.nickname, for: .normal)
         headerView.myEvaluationCountLabel.text = String(describing: userSavedRestaurants.evaluationCount ?? 0)
         headerView.myFavoriteRestaurantCountLabel.text = String(describing: userSavedRestaurants.favoriteCount ?? 0)
+        if 
+            let imgUrlString = userSavedRestaurants.iconImgUrl,
+            let imgUrl = URL(string: imgUrlString) {
+            ImageCacheManager.shared.loadImage(from: imgUrl, targetWidth: 77, defaultImage: UIImage(named: "img_babycow")) { [weak self] image in
+                self?.headerView.profileImageView.image = image
+            }
+        }
     }
 }
 

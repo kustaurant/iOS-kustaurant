@@ -36,6 +36,7 @@ protocol ProfileComposeViewModelOutput {
     var alertPayload: AlertPayload { get }
     var userProfile: UserProfile { get }
     var userProfilePublisher: Published<UserProfile>.Publisher { get }
+    var profileImgUrl: String? { get }
 }
 
 typealias ProfileComposeViewModel = ProfileComposeViewModelInput & ProfileComposeViewModelOutput
@@ -60,10 +61,12 @@ final class DefaultProfileComposeViewModel: ProfileComposeViewModel {
     
     private let actions: ProfileComposeViewModelActions
     private let myPageUseCases: MyPageUseCases
+    var profileImgUrl: String?
     
-    init(actions: ProfileComposeViewModelActions, myPageUseCases: MyPageUseCases) {
+    init(actions: ProfileComposeViewModelActions, myPageUseCases: MyPageUseCases, profileImgUrl: String?) {
         self.actions = actions
         self.myPageUseCases = myPageUseCases
+        self.profileImgUrl = profileImgUrl
     }
 }
 
@@ -75,7 +78,7 @@ extension DefaultProfileComposeViewModel {
             switch result {
             case .success(let userProfile):
                 self.userProfile = userProfile
-            case .failure(let failure):
+            case .failure:
                 break
             }
         }

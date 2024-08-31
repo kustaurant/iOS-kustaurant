@@ -71,8 +71,8 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
         DefaultMyPageUseCases(myPageRepository: makeMyPageRepository())
     }
         
-    func makeProfileComposeViewController(actions: ProfileComposeViewModelActions) -> ProfileComposeViewController {
-        ProfileComposeViewController(viewModel: makeProfileComposeViewModel(actions: actions))
+    func makeProfileComposeViewController(actions: ProfileComposeViewModelActions, profileImgUrl: String?) -> ProfileComposeViewController {
+        ProfileComposeViewController(viewModel: makeProfileComposeViewModel(actions: actions, profileImgUrl: profileImgUrl))
     }
     
     func makeSavedRestaurantsViewController(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewController {
@@ -98,8 +98,8 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
 
 extension MyPageSceneDIContainer {
 
-    func makeProfileComposeViewModel(actions: ProfileComposeViewModelActions) -> ProfileComposeViewModel {
-        DefaultProfileComposeViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
+    func makeProfileComposeViewModel(actions: ProfileComposeViewModelActions, profileImgUrl: String?) -> ProfileComposeViewModel {
+        DefaultProfileComposeViewModel(actions: actions, myPageUseCases: makeMyPageUseCases(), profileImgUrl: profileImgUrl)
     }
     
     func makeSavedRestaurantsViewModel(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewModel {

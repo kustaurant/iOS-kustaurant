@@ -29,6 +29,7 @@ class ProfileComposeViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupKeyboardEndGesture()
+        setupProfileImage()
         textFieldHandler?.setupTextFields()
         bind()
     }
@@ -44,6 +45,16 @@ class ProfileComposeViewController: UIViewController {
 }
 
 extension ProfileComposeViewController {
+    
+    private func setupProfileImage() {
+        if 
+            let imgUrlString = viewModel.profileImgUrl,
+            let imgUrl = URL(string: imgUrlString) {
+            ImageCacheManager.shared.loadImage(from: imgUrl, targetWidth: 90, defaultImage: UIImage(named: "img_babycow")) { [weak self] image in
+                self?.profileComposeView.profileImageView.image = image
+            }
+        }
+    }
     
     private func setupNavigationBar() {
         let backImage = UIImage(named: "icon_back")

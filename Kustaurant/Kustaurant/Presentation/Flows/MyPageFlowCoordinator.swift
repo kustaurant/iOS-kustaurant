@@ -9,7 +9,7 @@ import UIKit
 
 protocol MyPageFlowCoordinatorDependencies {
     func makeMyPageViewController(actions: MyPageViewModelActions) -> MyPageViewController
-    func makeProfileComposeViewController(actions: ProfileComposeViewModelActions) -> ProfileComposeViewController
+    func makeProfileComposeViewController(actions: ProfileComposeViewModelActions, profileImgUrl: String?) -> ProfileComposeViewController
     func makeSavedRestaurantsViewController(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewController
     func makeFeedbackSubmittingViewController(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewController
     func makeNoticeBoardViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> NoticeBoardViewController
@@ -58,9 +58,9 @@ extension MyPageFlowCoordinator {
         appFlowNavigating?.showOnboarding()
     }
     
-    private func showProfileCompose() {
+    private func showProfileCompose(_ profileImgUrl: String?) {
         let actions = ProfileComposeViewModelActions(pop: popAnimated)
-        let viewController = dependencies.makeProfileComposeViewController(actions: actions)
+        let viewController = dependencies.makeProfileComposeViewController(actions: actions, profileImgUrl: profileImgUrl)
         navigationController.pushViewController(viewController, animated: true)
     }
     
