@@ -59,7 +59,13 @@ extension DefaultMyPageRepository: MyPageRepository {
         let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
         let response = await request.responseAsync(with: urlBuilder)
         
+        // TODO: 에러 메시지 서버에서 받은걸로 처리해야 함.
+        /// Request 객체에서 error 안에 있는 데이터를 가져올수 있도록 수정해야 합니다.
         if let error = response.error {
+            if error == .badRequest {
+                return .failure(.custom("닉네임을 변경한 지 30일이 지나지 않아 변경할 수 없습니다."))
+            }
+            
             return .failure(error)
         }
         

@@ -182,6 +182,10 @@
 		BA494B822C8196F000EB2527 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */; };
 		BA494B852C81972A00EB2527 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B842C81972A00EB2527 /* PrivacyPolicyView.swift */; };
 		BA494B882C81A1E400EB2527 /* AlertPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B872C81A1E400EB2527 /* AlertPayload.swift */; };
+		BA494B8B2C81A6F000EB2527 /* ProfileComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B8A2C81A6F000EB2527 /* ProfileComposeView.swift */; };
+		BA494B8E2C81A7E800EB2527 /* KuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B8D2C81A7E800EB2527 /* KuTextField.swift */; };
+		BA494B902C81B0AD00EB2527 /* ProfileComposeTextFieldHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B8F2C81B0AD00EB2527 /* ProfileComposeTextFieldHandler.swift */; };
+		BA494B922C81C01800EB2527 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B912C81C01800EB2527 /* UITextField+.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -425,6 +429,10 @@
 		BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		BA494B842C81972A00EB2527 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		BA494B872C81A1E400EB2527 /* AlertPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPayload.swift; sourceTree = "<group>"; };
+		BA494B8A2C81A6F000EB2527 /* ProfileComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposeView.swift; sourceTree = "<group>"; };
+		BA494B8D2C81A7E800EB2527 /* KuTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuTextField.swift; sourceTree = "<group>"; };
+		BA494B8F2C81B0AD00EB2527 /* ProfileComposeTextFieldHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposeTextFieldHandler.swift; sourceTree = "<group>"; };
+		BA494B912C81C01800EB2527 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -813,6 +821,7 @@
 				CFE204572C5A121D00BCA87C /* UIView+AutoLayout.swift */,
 				BA37E0822C674BE40092115B /* UIButton+Publisher.swift */,
 				BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */,
+				BA494B912C81C01800EB2527 /* UITextField+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1223,6 +1232,23 @@
 			path = Alert;
 			sourceTree = "<group>";
 		};
+		BA494B892C81A6E400EB2527 /* ProfileCompose */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B8A2C81A6F000EB2527 /* ProfileComposeView.swift */,
+				BA494B8F2C81B0AD00EB2527 /* ProfileComposeTextFieldHandler.swift */,
+			);
+			path = ProfileCompose;
+			sourceTree = "<group>";
+		};
+		BA494B8C2C81A7D200EB2527 /* KuTextField */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B8D2C81A7E800EB2527 /* KuTextField.swift */,
+			);
+			path = KuTextField;
+			sourceTree = "<group>";
+		};
 		BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1254,6 +1280,7 @@
 		BA57C7C22C74356B0063F2FA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BA494B892C81A6E400EB2527 /* ProfileCompose */,
 				BA494B832C81971500EB2527 /* PrivacyPolicy */,
 				BA494B662C806A2100EB2527 /* MyPage */,
 				BA494B7E2C81955100EB2527 /* TermsOfService */,
@@ -1362,6 +1389,7 @@
 		CFE204652C5BC46700BCA87C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BA494B8C2C81A7D200EB2527 /* KuTextField */,
 				BA8EEF8B2C6351CD00FE6ABF /* KuPageControl */,
 				CFE2046C2C5E68B400BCA87C /* KuTabBar */,
 			);
@@ -1576,6 +1604,7 @@
 				BA2D89682C76FC58004E7B8E /* SearchView.swift in Sources */,
 				58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */,
 				BA37E0872C675FF40092115B /* UIStackView+AutoLayout.swift in Sources */,
+				BA494B8B2C81A6F000EB2527 /* ProfileComposeView.swift in Sources */,
 				5826A1E72C77197F0097256C /* NMFMapMarkerManager.swift in Sources */,
 				BA37E07B2C65E5F10092115B /* DrawCollectionViewSection.swift in Sources */,
 				BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */,
@@ -1609,6 +1638,7 @@
 				5826A1DA2C7231880097256C /* TierBaseViewModel.swift in Sources */,
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
+				BA494B902C81B0AD00EB2527 /* ProfileComposeTextFieldHandler.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
 				5826A1CC2C71F20D0097256C /* TierTopCategoriesView.swift in Sources */,
 				BAB69ABF2C71DB8C00C20F0B /* KeyValueStorage.swift in Sources */,
@@ -1625,6 +1655,7 @@
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
 				BA494B492C7DD44200EB2527 /* MyPageUseCases.swift in Sources */,
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
+				BA494B8E2C81A7E800EB2527 /* KuTextField.swift in Sources */,
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
 				584FA4E42C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift in Sources */,
 				584173402C467BDD001EC132 /* TabBarPage.swift in Sources */,
@@ -1735,6 +1766,7 @@
 				BA2D896C2C76FCF6004E7B8E /* SearchSceneDIContainer.swift in Sources */,
 				5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */,
 				58067D772C5F96BB00889C92 /* HomeCategoriesSection.swift in Sources */,
+				BA494B922C81C01800EB2527 /* UITextField+.swift in Sources */,
 				58067CCA2C514FEF00889C92 /* TierCategoryCollectionViewCell.swift in Sources */,
 				58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */,
 				BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */,

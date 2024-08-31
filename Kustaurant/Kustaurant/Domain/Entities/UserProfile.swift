@@ -12,7 +12,13 @@ struct UserProfile: Codable {
     let email: String?
     let phoneNumber: String?
     
+    init(nickname: String, phoneNumber: String) {
+        self.nickname = nickname
+        self.phoneNumber = phoneNumber
+        self.email = nil
+    }
+    
     static func empty() -> UserProfile {
-        UserProfile(nickname: "", email: "", phoneNumber: "")
+        UserProfile(nickname: "", phoneNumber: "")
     }
 }

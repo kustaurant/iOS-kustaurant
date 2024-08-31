@@ -99,7 +99,7 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
 extension MyPageSceneDIContainer {
 
     func makeProfileComposeViewModel(actions: ProfileComposeViewModelActions) -> ProfileComposeViewModel {
-        DefaultProfileComposeViewModel(actions: actions)
+        DefaultProfileComposeViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
     }
     
     func makeSavedRestaurantsViewModel(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewModel {
