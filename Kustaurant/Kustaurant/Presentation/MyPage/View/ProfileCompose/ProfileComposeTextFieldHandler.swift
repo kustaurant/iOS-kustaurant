@@ -22,6 +22,9 @@ enum ProfileComposeTextFieldTag: Int {
 
 final class ProfileComposeTextFieldHandler: NSObject {
     
+    static let nicknameMaxLength = 25
+    static let phoneNumberMaxLength = 11
+    
     private let view: ProfileComposeView
     private let viewModel: ProfileComposeViewModel
     
@@ -76,7 +79,7 @@ extension ProfileComposeTextFieldHandler {
     }
     
     private func validateNicknameTextField(_ text: String) -> Bool {
-        if text.count > 10 {
+        if text.count > ProfileComposeTextFieldHandler.nicknameMaxLength {
             viewModel.updateNicknameError(.nicknameTooLong)
             return false
         }
@@ -86,7 +89,7 @@ extension ProfileComposeTextFieldHandler {
     }
     
     private func validatePhoneNumber(_ text: String, replacementString string: String) -> Bool {
-        if text.count > 11 {
+        if text.count > ProfileComposeTextFieldHandler.phoneNumberMaxLength {
             viewModel.updatePhoneNumberError(.phoneNumberTooLong)
             return false
         }
