@@ -9,7 +9,7 @@ import UIKit
 
 enum ProfileComposeTextFieldError: String {
     case none = ""
-    case nicknameTooLong = "닉네임은 최대 10자까지 설정할 수 있습니다."
+    case nicknameTooLong = "닉네임은 최대 25자까지 설정할 수 있습니다."
     case invalidPhoneNumber = "연락처에는 '-' 을 제외한 숫자만 입력 가능합니다."
     case phoneNumberTooLong = "연락처에는 최대 10자까지 입력할 수 있습니다."
 }
