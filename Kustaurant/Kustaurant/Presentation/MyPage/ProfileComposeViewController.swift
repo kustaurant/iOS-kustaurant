@@ -82,13 +82,22 @@ extension ProfileComposeViewController {
         
         viewModel.nicknameErrorPublisher.sink { [weak self] error in
             switch error {
-            case .invalidPhoneNumber:
-                self?.profileComposeView.nicknameTextField.errorText = ProfileComposeTextFieldError.invalidPhoneNumber.rawValue
             case .nicknameTooLong:
                 self?.profileComposeView.nicknameTextField.errorText = ProfileComposeTextFieldError.nicknameTooLong.rawValue
+            default:
+                self?.profileComposeView.nicknameTextField.errorText = ""
+                
+            }
+        }
+        .store(in: &cancellables)
+        
+        viewModel.phoneNumberErrorPublisher.sink { [weak self] error in
+            switch error {
+            case .invalidPhoneNumber:
+                self?.profileComposeView.nicknameTextField.errorText = ProfileComposeTextFieldError.invalidPhoneNumber.rawValue
             case .phoneNumberTooLong:
                 self?.profileComposeView.phoneNumberTextField.errorText = ProfileComposeTextFieldError.phoneNumberTooLong.rawValue
-            case .none:
+            default:
                 self?.profileComposeView.nicknameTextField.errorText = ""
             }
         }
