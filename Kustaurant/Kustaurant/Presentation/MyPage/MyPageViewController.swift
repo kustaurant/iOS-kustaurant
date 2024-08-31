@@ -69,10 +69,6 @@ extension MyPageViewController {
             return
         }
         
-        let tapGesture = UITapGestureRecognizer()
-        tapGesture.addTarget(self, action: #selector(toggle))
-        headerView.profileImageView.addGestureRecognizer(tapGesture)
-        
         headerView.profileButton.tapPublisher()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
@@ -90,10 +86,6 @@ extension MyPageViewController {
                 self?.myPageTableViewHandler?.updateSavedRestaurants(userSavedRestaurants)
             }
             .store(in: &cancellables)
-    }
-    
-    @objc func toggle() {
-        viewModel.isLoggedIn = viewModel.isLoggedIn.toggle()
     }
 }
 
