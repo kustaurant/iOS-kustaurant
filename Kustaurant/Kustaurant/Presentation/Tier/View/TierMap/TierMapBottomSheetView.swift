@@ -105,7 +105,7 @@ extension TierMapBottomSheetView {
     
     private func updateTier() {
         guard let tier = restaurant?.mainTier else { return }
-        tierLabel.text = "\(tier.rawValue)"
+        tierLabel.text = (tier != .unowned) ? "\(tier.rawValue)" : "-"
         tierLabel.backgroundColor = tier.backgroundColor()
     }
     

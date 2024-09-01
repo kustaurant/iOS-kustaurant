@@ -27,7 +27,7 @@ extension Tier {
         case .fourth:
             return .tierFourth
         case .unowned:
-            return .clear
+            return .gray300
         }
     }
     
