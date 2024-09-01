@@ -34,7 +34,8 @@ extension HomeFlowCoordinator {
     func start() {
         let actions = HomeViewModelActions(
             showRestaurantDetail: showRestaurantDetail,
-            showTierScene: showTierScene
+            showTierScene: showTierScene,
+            didTapSearchButton: showSearch
         )
         let viewController = dependencies.makeHomeViewController(actions: actions)
         let image = UIImage(named: TabBarPage.home.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
@@ -65,5 +66,11 @@ extension HomeFlowCoordinator {
             Situation.all.category,
             Location.all.category
         ])
+    }
+    
+    func showSearch() {
+        let searchDIContainer = appDIContainer.makeSearchDIContainer()
+        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(navigationController: navigationController)
+        searchFlow.start()
     }
 }
