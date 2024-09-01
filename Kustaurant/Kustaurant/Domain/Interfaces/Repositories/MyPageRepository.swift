@@ -14,4 +14,5 @@ protocol MyPageRepository {
     func fetchSavedRestaurantsCount() async -> Result<UserSavedRestaurantsCount, NetworkError>
     func fetchFavoriteRestaurants() async -> Result<[FavoriteRestaurant], NetworkError>
     func fetchEvaluatedRestaurants() async -> Result<[EvaluatedRestaurant], NetworkError>
+    func fetchNoticeList() async -> Result<[Notice], NetworkError> 
 }

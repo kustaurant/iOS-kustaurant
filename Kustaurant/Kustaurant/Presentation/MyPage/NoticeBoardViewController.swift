@@ -6,15 +6,18 @@
 //
 
 import UIKit
-import WebKit
+import Combine
 
 class NoticeBoardViewController: UIViewController {
     
-    private let viewModel: PlainWebViewLoadViewModel
     private let noticeBoardView = NoticeBoardView()
+    private let viewModel: NoticeBoardViewModel
+    private var tableViewHandler: NoticeBoardTableViewHandler?
+    private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: PlainWebViewLoadViewModel) {
+    init(viewModel: NoticeBoardViewModel) {
         self.viewModel = viewModel
+        self.tableViewHandler = NoticeBoardTableViewHandler(view: noticeBoardView, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,7 +29,9 @@ class NoticeBoardViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupNavigationBar()
-        setupWebView()
+        tableViewHandler?.setupTableView()
+        bind()
+        viewModel.getNoticeList()
     }
     
     override func loadView() {
@@ -36,12 +41,13 @@ class NoticeBoardViewController: UIViewController {
 
 extension NoticeBoardViewController {
     
-    private func setupWebView() {
-        noticeBoardView.webView.navigationDelegate = self
-        if let url = URL(string: viewModel.webViewUrl) {
-            let request = URLRequest(url: url)
-            noticeBoardView.webView.load(request)
+    private func bind() {
+        viewModel.noticeListPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] noticeList in
+            self?.tableViewHandler?.reloadData()
         }
+        .store(in: &cancellables)
     }
     
     private func setupNavigationBar() {
@@ -57,18 +63,5 @@ extension NoticeBoardViewController {
     
     @objc private func backButtonTapped() {
         viewModel.didTapBackButton()
-    }
-}
-
-extension NoticeBoardViewController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.navigationType == WKNavigationType.linkActivated {
-            if let url = navigationAction.request.url {
-                webView.load(URLRequest(url: url))
-            }
-            decisionHandler(.cancel)
-            return
-        }
-        decisionHandler(.allow)
     }
 }

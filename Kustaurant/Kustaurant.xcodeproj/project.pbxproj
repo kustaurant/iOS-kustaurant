@@ -123,6 +123,11 @@
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		816A02DA220B296E2DE3721E /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */; };
+		BA0A89CD2C840DEB000A724D /* NoticeBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */; };
+		BA0A89CF2C84109F000A724D /* NoticeBoardTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CE2C84109F000A724D /* NoticeBoardTableViewHandler.swift */; };
+		BA0A89D12C8412F2000A724D /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89D02C8412F2000A724D /* Notice.swift */; };
+		BA0A89D32C84163F000A724D /* NoticeTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89D22C84163F000A724D /* NoticeTitleTableViewCell.swift */; };
+		BA0A89D52C841C66000A724D /* NoticeContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89D42C841C66000A724D /* NoticeContentTableViewCell.swift */; };
 		BA1CB3D32C7C405400DA6776 /* AuthorizationInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */; };
 		BA1CB3D92C7D891600DA6776 /* AuthorizationRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1CB3D82C7D891600DA6776 /* AuthorizationRetrier.swift */; };
 		BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D895B2C74C74C004E7B8E /* Logger.swift */; };
@@ -370,6 +375,11 @@
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.debug.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.debug.xcconfig"; sourceTree = "<group>"; };
 		ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewModel.swift; sourceTree = "<group>"; };
+		BA0A89CE2C84109F000A724D /* NoticeBoardTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardTableViewHandler.swift; sourceTree = "<group>"; };
+		BA0A89D02C8412F2000A724D /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		BA0A89D22C84163F000A724D /* NoticeTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTitleTableViewCell.swift; sourceTree = "<group>"; };
+		BA0A89D42C841C66000A724D /* NoticeContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentTableViewCell.swift; sourceTree = "<group>"; };
 		BA1CB3D22C7C405400DA6776 /* AuthorizationInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationInterceptor.swift; sourceTree = "<group>"; };
 		BA1CB3D82C7D891600DA6776 /* AuthorizationRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRetrier.swift; sourceTree = "<group>"; };
 		BA2D895B2C74C74C004E7B8E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -1056,6 +1066,7 @@
 				BA494B4E2C7DEE6400EB2527 /* FavoriteRestaurant.swift */,
 				BA494B502C7DEF9B00EB2527 /* EvaluatedRestaurant.swift */,
 				BA494B5C2C80244000EB2527 /* LoginStatus.swift */,
+				BA0A89D02C8412F2000A724D /* Notice.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1204,6 +1215,9 @@
 			isa = PBXGroup;
 			children = (
 				BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */,
+				BA0A89CE2C84109F000A724D /* NoticeBoardTableViewHandler.swift */,
+				BA0A89D22C84163F000A724D /* NoticeTitleTableViewCell.swift */,
+				BA0A89D42C841C66000A724D /* NoticeContentTableViewCell.swift */,
 			);
 			path = NoticeBoard;
 			sourceTree = "<group>";
@@ -1273,6 +1287,7 @@
 				BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */,
 				BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */,
 				BA494B772C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift */,
+				BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1708,9 +1723,11 @@
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
 				584FA4D22C6487C4008DDC19 /* NMFMapViewHandler.swift in Sources */,
 				584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */,
+				BA0A89D52C841C66000A724D /* NoticeContentTableViewCell.swift in Sources */,
 				BAF177F82C7735D300E17FDC /* TierBadgeView.swift in Sources */,
 				58067CA12C4F425900889C92 /* TierNavigationTitleTabView.swift in Sources */,
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
+				BA0A89D32C84163F000A724D /* NoticeTitleTableViewCell.swift in Sources */,
 				58067C912C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift in Sources */,
 				584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */,
 				58067CBD2C4FCC2100889C92 /* Situation.swift in Sources */,
@@ -1733,6 +1750,7 @@
 				58067D842C5FD67700889C92 /* HomeLayoutTableViewHandler.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
 				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
+				BA0A89CF2C84109F000A724D /* NoticeBoardTableViewHandler.swift in Sources */,
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
 				BA1CB3D32C7C405400DA6776 /* AuthorizationInterceptor.swift in Sources */,
@@ -1748,6 +1766,7 @@
 				BA494B822C8196F000EB2527 /* PrivacyPolicyViewController.swift in Sources */,
 				BA494B762C8179C500EB2527 /* NoticeBoardViewController.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
+				BA0A89CD2C840DEB000A724D /* NoticeBoardViewModel.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
@@ -1797,6 +1816,7 @@
 				58067D812C5FC07A00889C92 /* HomeLayoutTableView.swift in Sources */,
 				CFE204692C5D03C400BCA87C /* Collection+.swift in Sources */,
 				BA2D89632C76FB95004E7B8E /* SearchFlowCoordinator.swift in Sources */,
+				BA0A89D12C8412F2000A724D /* Notice.swift in Sources */,
 				584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */,
 				584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */,
 				584FA4CB2C6475C7008DDC19 /* TierMapRepository.swift in Sources */,

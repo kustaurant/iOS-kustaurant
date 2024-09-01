@@ -14,6 +14,7 @@ protocol MyPageUseCases {
     func getSavedRestaurantsCount() async -> Result<UserSavedRestaurantsCount, NetworkError>
     func getFavoriteRestaurants() async -> Result<[FavoriteRestaurant], NetworkError>
     func getEvaluatedRestaurants() async -> Result<[EvaluatedRestaurant], NetworkError>
+    func getNoticeList() async -> Result<[Notice], NetworkError> 
 }
 
 final class DefaultMyPageUseCases {
@@ -48,5 +49,9 @@ extension DefaultMyPageUseCases: MyPageUseCases {
     
     func getUserProfile() async -> Result<UserProfile, NetworkError> {
         return await myPageRepository.fetchUserProfile()
+    }
+    
+    func getNoticeList() async -> Result<[Notice], NetworkError> {
+        return await myPageRepository.fetchNoticeList()
     }
 }

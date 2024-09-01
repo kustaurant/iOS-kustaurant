@@ -144,4 +144,20 @@ extension DefaultMyPageRepository: MyPageRepository {
         
         return .success(data)
     }
+    
+    func fetchNoticeList() async -> Result<[Notice], NetworkError> {
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/mypage/noticelist")
+        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let response = await request.responseAsync(with: urlBuilder)
+        
+        if let error = response.error {
+            return .failure(error)
+        }
+        
+        guard let data: [Notice] = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        
+        return .success(data)
+    }
 }
