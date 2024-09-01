@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController, NavigationBarHideable {
     private var viewModel: HomeViewModel
     private var homeLayoutTableViewHandler: HomeLayoutTableViewHandler?
     private var homeView = HomeView()
@@ -40,6 +40,11 @@ final class HomeViewController: UIViewController {
         setupNavigationBar()
         viewModel.fetchRestaurantLists()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showNavigationBar(animated: false)
+    }
 }
 
 extension HomeViewController {
@@ -48,6 +53,16 @@ extension HomeViewController {
         let logoImageView = UIImageView(image: image)
         let button = UIBarButtonItem(customView: logoImageView)
         navigationItem.leftBarButtonItem = button
+        
+        let searchImage = UIImage(named: "icon_search")?.withRenderingMode(.alwaysOriginal)
+        let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(didTapSearchButton))
+        navigationItem.rightBarButtonItem = searchButton
+    }
+}
+
+extension HomeViewController {
+    @objc private func didTapSearchButton() {
+        viewModel.didTapSearchButton()
     }
 }
 
