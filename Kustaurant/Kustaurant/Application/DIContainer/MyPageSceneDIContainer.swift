@@ -83,8 +83,8 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
         FeedbackSubmittingViewController(viewModel: makeFeedbackSubmittingViewModel(actions: actions))
     }
     
-    func makeNoticeBoardViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> NoticeBoardViewController {
-        NoticeBoardViewController(viewModel: makeWebViewLoadViewModel(webViewUrl: webViewUrl, actions: actions))
+    func makeNoticeBoardViewController(actions: NoticeBoardViewModelActions) -> NoticeBoardViewController {
+        NoticeBoardViewController(viewModel: makeNoticeBoardViewModel(actions: actions))
     }
 
     func makeTermsOfServiceViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> TermsOfServiceViewController {
@@ -97,6 +97,10 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
 }
 
 extension MyPageSceneDIContainer {
+    
+    func makeNoticeBoardViewModel(actions: NoticeBoardViewModelActions) -> NoticeBoardViewModel {
+        DefaultNoticeBoardViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
+    }
 
     func makeProfileComposeViewModel(actions: ProfileComposeViewModelActions, profileImgUrl: String?) -> ProfileComposeViewModel {
         DefaultProfileComposeViewModel(actions: actions, myPageUseCases: makeMyPageUseCases(), profileImgUrl: profileImgUrl)

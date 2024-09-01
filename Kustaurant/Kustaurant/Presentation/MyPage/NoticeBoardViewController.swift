@@ -6,15 +6,16 @@
 //
 
 import UIKit
-import WebKit
 
 class NoticeBoardViewController: UIViewController {
     
-    private let viewModel: PlainWebViewLoadViewModel
     private let noticeBoardView = NoticeBoardView()
+    private let viewModel: NoticeBoardViewModel
+    private var tableViewHandler: NoticeBoardTableViewHandler?
     
-    init(viewModel: PlainWebViewLoadViewModel) {
+    init(viewModel: NoticeBoardViewModel) {
         self.viewModel = viewModel
+        self.tableViewHandler = NoticeBoardTableViewHandler(view: noticeBoardView, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,7 +27,8 @@ class NoticeBoardViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupNavigationBar()
-        setupWebView()
+        tableViewHandler?.setupTableView()
+        viewModel.getNoticeList()
     }
     
     override func loadView() {
@@ -35,14 +37,6 @@ class NoticeBoardViewController: UIViewController {
 }
 
 extension NoticeBoardViewController {
-    
-    private func setupWebView() {
-        noticeBoardView.webView.navigationDelegate = self
-        if let url = URL(string: viewModel.webViewUrl) {
-            let request = URLRequest(url: url)
-            noticeBoardView.webView.load(request)
-        }
-    }
     
     private func setupNavigationBar() {
         let backImage = UIImage(named: "icon_back")
@@ -57,18 +51,5 @@ extension NoticeBoardViewController {
     
     @objc private func backButtonTapped() {
         viewModel.didTapBackButton()
-    }
-}
-
-extension NoticeBoardViewController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.navigationType == WKNavigationType.linkActivated {
-            if let url = navigationAction.request.url {
-                webView.load(URLRequest(url: url))
-            }
-            decisionHandler(.cancel)
-            return
-        }
-        decisionHandler(.allow)
     }
 }

@@ -10,9 +10,9 @@ import WebKit
 
 class NoticeBoardView: UIView {
     
-    let webView: WKWebView = {
-        let wv = WKWebView()
-        return wv
+    let tableView: UITableView = {
+        let tv = UITableView()
+        return tv
     }()
 
     override init(frame: CGRect) {
@@ -29,6 +29,6 @@ class NoticeBoardView: UIView {
 extension NoticeBoardView {
     
     private func setupUI() {
-        addSubview(webView, autoLayout: [.fill(0)])
+        addSubview(tableView, autoLayout: [.fill(0)])
     }
 }

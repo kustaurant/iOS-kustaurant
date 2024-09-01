@@ -12,9 +12,9 @@ protocol MyPageFlowCoordinatorDependencies {
     func makeProfileComposeViewController(actions: ProfileComposeViewModelActions, profileImgUrl: String?) -> ProfileComposeViewController
     func makeSavedRestaurantsViewController(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewController
     func makeFeedbackSubmittingViewController(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewController
-    func makeNoticeBoardViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> NoticeBoardViewController
     func makeTermsOfServiceViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> TermsOfServiceViewController
     func makePrivacyPolicyViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> PrivacyPolicyViewController
+    func makeNoticeBoardViewController(actions: NoticeBoardViewModelActions) -> NoticeBoardViewController
 }
 
 final class MyPageFlowCoordinator: Coordinator {
@@ -81,11 +81,11 @@ extension MyPageFlowCoordinator {
     }
     
     private func showNoticeBoard() {
-        let actions = PlainWebViewLoadViewModelActions(
+        let actions = NoticeBoardViewModelActions(
             pop: popAnimated
         )
         let noticeBoardUrl = "https://kustaurant.com/notice"
-        let viewController = dependencies.makeNoticeBoardViewController(webViewUrl: noticeBoardUrl, actions: actions)
+        let viewController = dependencies.makeNoticeBoardViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }
     
