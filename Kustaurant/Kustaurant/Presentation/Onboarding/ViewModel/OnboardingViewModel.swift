@@ -90,6 +90,7 @@ extension DefaultOnboardingViewModel: OnboardingViewModel {
     }
     
     func skipLogin() {
+        authUseCases.skipLogin()
         actions.initiateTabs?()
     }
     

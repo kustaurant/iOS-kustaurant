@@ -31,7 +31,11 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
     }
     
     func makeMyPageViewModel(actions: MyPageViewModelActions) -> MyPageViewModel {
-        DefaultMyPageViewModel(actions: actions, authUseCases: makeAuthUseCases())
+        DefaultMyPageViewModel(
+            actions: actions,
+            authUseCases: makeAuthUseCases(),
+            myPageUseCases: makeMyPageUseCases()
+        )
     }
     
     func makeAuthUseCases() -> AuthUseCases {
@@ -48,11 +52,7 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
     }
     
     func makeSocialLoginUserRepository() -> SocialLoginUserRepository {
-        DefaultSocialLoginUserRepository(keychainStorage: makeKeychaingStorage())
-    }
-    
-    func makeKeychaingStorage() -> KeychainStorage {
-        KeychainStorage()
+        DefaultSocialLoginUserRepository()
     }
     
     func makeAppleLoginService() -> AppleLoginService {
@@ -61,5 +61,32 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
     
     func makeAuthRepository() -> AuthRepository {
         DefaultAuthRepository(networkService: dependencies.networkService)
+    }
+    
+    func makeMyPageRepository() -> MyPageRepository {
+        DefaultMyPageRepository(networkService: dependencies.networkService)
+    }
+    
+    func makeMyPageUseCases() -> MyPageUseCases {
+        DefaultMyPageUseCases(myPageRepository: makeMyPageRepository())
+    }
+        
+    func makeProfileComposeViewController(actions: ProfileComposeViewModelActions) -> ProfileComposeViewController {
+        ProfileComposeViewController(viewModel: makeProfileComposeViewModel(actions: actions))
+    }
+    
+    func makeSavedRestaurantsViewController(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewController {
+        SavedRestaurantsViewController(viewModel: makeSavedRestaurantsViewModel(actions: actions))
+    }
+}
+
+extension MyPageSceneDIContainer {
+
+    func makeProfileComposeViewModel(actions: ProfileComposeViewModelActions) -> ProfileComposeViewModel {
+        DefaultProfileComposeViewModel(actions: actions)
+    }
+    
+    func makeSavedRestaurantsViewModel(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewModel {
+        DefaultSavedRetaurantsViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
     }
 }

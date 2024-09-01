@@ -9,4 +9,5 @@ import Foundation
 
 enum UserDefaultsKey {
     static let initialLaunch = "initialLaunch"
+    static let skipOnboarding = "skipOnboarding"
 }

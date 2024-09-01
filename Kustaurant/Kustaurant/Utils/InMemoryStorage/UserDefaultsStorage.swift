@@ -9,8 +9,11 @@ import Foundation
 
 final class UserDefaultsStorage: KeyValueStorage {
     
+    private init() {}
+    static let shared = UserDefaultsStorage()
     private let defaults = UserDefaults.standard
     
+    @discardableResult
     func setValue<T: Codable>(_ value: T?, forKey key: String) -> Bool {
         guard let value = value else {
             defaults.removeObject(forKey: key)

@@ -8,5 +8,5 @@
 import Foundation
 
 enum KeychainKey {
-    static let socialLoginUser = "SocialLoginUser"
+    static let userCredentials = "userCredentials"
 }

@@ -55,11 +55,7 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
     }
     
     func makeSocialLoginUserRepository() -> SocialLoginUserRepository {
-        DefaultSocialLoginUserRepository(keychainStorage: makeKeychaingStorage())
-    }
-    
-    func makeKeychaingStorage() -> KeychainStorage {
-        KeychainStorage()
+        DefaultSocialLoginUserRepository()
     }
     
     func makeAppleLoginService() -> AppleLoginService {

@@ -9,6 +9,8 @@ import UIKit
 
 protocol MyPageFlowCoordinatorDependencies {
     func makeMyPageViewController(actions: MyPageViewModelActions) -> MyPageViewController
+    func makeProfileComposeViewController(actions: ProfileComposeViewModelActions) -> ProfileComposeViewController
+    func makeSavedRestaurantsViewController(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewController
 }
 
 final class MyPageFlowCoordinator: Coordinator {
@@ -28,7 +30,9 @@ final class MyPageFlowCoordinator: Coordinator {
 extension MyPageFlowCoordinator {
     func start() {
         let actions = MyPageViewModelActions(
-            showOnboarding: showOnboarding
+            showOnboarding: showOnboarding,
+            showProfileCompose: showProfileCompose,
+            showSavedRestaurants: showSavedRestaurants
         )
         let viewController = dependencies.makeMyPageViewController(actions: actions)
         let image = UIImage(named: TabBarPage.mypage.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
@@ -44,5 +48,23 @@ extension MyPageFlowCoordinator {
     
     private func showOnboarding() {
         appFlowNavigating?.showOnboarding()
+    }
+    
+    private func showProfileCompose() {
+        let actions = ProfileComposeViewModelActions(pop: popAnimated)
+        let viewController = dependencies.makeProfileComposeViewController(actions: actions)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func showSavedRestaurants() {
+        let actions = SavedRestaurantsViewModelActions(
+            pop: popAnimated
+        )
+        let viewController = dependencies.makeSavedRestaurantsViewController(actions: actions)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func popAnimated() {
+        pop(animated: true)
     }
 }

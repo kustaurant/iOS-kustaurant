@@ -10,12 +10,14 @@ import Combine
 
 final class MyPageViewController: UIViewController {
     
-    private let viewModel: MyPageViewModel
+    private var viewModel: MyPageViewModel
     private let myPageView = MyPageView()
     private var cancellables = Set<AnyCancellable>()
+    private var myPageTableViewHandler: MyPageTableViewHandler?
     
     init(viewModel: MyPageViewModel) {
         self.viewModel = viewModel
+        self.myPageTableViewHandler = MyPageTableViewHandler(view: myPageView, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,7 +27,14 @@ final class MyPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        myPageTableViewHandler?.setupTableView()
         bindViews()
+        bindUserProfileView()
+        viewModel.getUserSavedRestaurants()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigation()
     }
     
     override func loadView() {
@@ -35,10 +44,48 @@ final class MyPageViewController: UIViewController {
 
 extension MyPageViewController {
     
+    private func setupNavigation() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     private func bindViews() {
-        myPageView.logoutButton.tapPublisher().sink { [weak self] _ in
-            self?.viewModel.didTapLogoutButton()
+        viewModel.isLoggedInPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] loginStatus in
+                self?.myPageTableViewHandler?.updateUI(by: loginStatus)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func bindUserProfileView() {
+        guard let headerView = myPageView.tableView.tableHeaderView as? MyPageUserProfileView else {
+            return
         }
-        .store(in: &cancellables)
+        
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.addTarget(self, action: #selector(toggle))
+        headerView.profileImageView.addGestureRecognizer(tapGesture)
+        
+        headerView.profileButton.tapPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                if self?.viewModel.isLoggedIn == .loggedIn {
+                    self?.viewModel.didTapComposeProfileButton()
+                } else {
+                    self?.viewModel.didTapLoginAndStartButton()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.userSavedRestaurantsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] userSavedRestaurants in
+                self?.myPageTableViewHandler?.updateSavedRestaurants(userSavedRestaurants)
+            }
+            .store(in: &cancellables)
+    }
+    
+    @objc func toggle() {
+        viewModel.isLoggedIn = viewModel.isLoggedIn.toggle()
     }
 }
