@@ -30,11 +30,17 @@ final class MyPageViewController: UIViewController {
         myPageTableViewHandler?.setupTableView()
         bindViews()
         bindUserProfileView()
-        viewModel.getUserSavedRestaurants()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupNavigation()
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        viewModel.getUserSavedRestaurants()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func loadView() {
@@ -44,10 +50,6 @@ final class MyPageViewController: UIViewController {
 
 extension MyPageViewController {
     
-    private func setupNavigation() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
     private func bindViews() {
         viewModel.isLoggedInPublisher
             .receive(on: DispatchQueue.main)
@@ -55,16 +57,19 @@ extension MyPageViewController {
                 self?.myPageTableViewHandler?.updateUI(by: loginStatus)
             }
             .store(in: &cancellables)
+        
+        viewModel.showAlertPublisher.sink { [weak self] showAlert in
+            if showAlert {
+                self?.presentAlert()
+            }
+        }
+        .store(in: &cancellables)
     }
     
     private func bindUserProfileView() {
         guard let headerView = myPageView.tableView.tableHeaderView as? MyPageUserProfileView else {
             return
         }
-        
-        let tapGesture = UITapGestureRecognizer()
-        tapGesture.addTarget(self, action: #selector(toggle))
-        headerView.profileImageView.addGestureRecognizer(tapGesture)
         
         headerView.profileButton.tapPublisher()
             .receive(on: DispatchQueue.main)
@@ -84,8 +89,18 @@ extension MyPageViewController {
             }
             .store(in: &cancellables)
     }
+}
+
+extension MyPageViewController {
     
-    @objc func toggle() {
-        viewModel.isLoggedIn = viewModel.isLoggedIn.toggle()
+    private func presentAlert() {
+        let alert = UIAlertController(title: viewModel.alertPayload.title, message: viewModel.alertPayload.subtitle, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { [weak self] _ in
+            self?.viewModel.dismissAlert()
+        }))
+        alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { [weak self] _ in
+            self?.viewModel.alertPayload.onConfirm?()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
