@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 final class HomeBannerCollectionViewHandler: NSObject {
     private var view: HomeBannerSection
     private var viewModel: HomeViewModel
-    
+    private var autoScrollCancellable: AnyCancellable?
+
     init(
         view: HomeBannerSection,
         viewModel: HomeViewModel
@@ -19,6 +21,11 @@ final class HomeBannerCollectionViewHandler: NSObject {
         self.viewModel = viewModel
         super.init()
         setup()
+        startAutoScroll()
+    }
+    
+    deinit {
+        stopAutoScroll()
     }
 }
 
@@ -30,13 +37,65 @@ extension HomeBannerCollectionViewHandler {
     
     func reload() {
         view.collectionView.reloadData()
+        stopAutoScroll()
+        startAutoScroll()
     }
 }
 
-extension HomeBannerCollectionViewHandler: UICollectionViewDelegate {
+// Auto Scroll
+extension HomeBannerCollectionViewHandler {
+    private func startAutoScroll() {
+        autoScrollCancellable = Timer.publish(every: 5.0, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                self?.autoScrollToNext()
+            }
+    }
+    
+    private func stopAutoScroll() {
+        autoScrollCancellable?.cancel()
+    }
+    
+    private func autoScrollToNext() {
+        guard viewModel.banners.count > 1 else { return }
+
+        let currentOffset = view.collectionView.contentOffset.x
+        let nextOffset = currentOffset + view.collectionView.frame.width
+        let maxOffset = view.collectionView.frame.width * CGFloat(viewModel.banners.count + 1)
+
+        if nextOffset >= maxOffset {
+            let firstIndexPath = IndexPath(item: 1, section: 0)
+            view.collectionView.scrollToItem(at: firstIndexPath, at: .centeredHorizontally, animated: true)
+            view.updatePageLabel(for: firstIndexPath)
+        } else {
+            let nextIndexPath = IndexPath(item: Int(nextOffset / view.collectionView.frame.width), section: 0)
+            view.collectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
+            view.updatePageLabel(for: nextIndexPath)
+        }
+    }
+}
+
+extension HomeBannerCollectionViewHandler: UIScrollViewDelegate {
+    // 스크롤을 시작
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        stopAutoScroll()
+    }
+
+    // 스크롤이 끝난 후
+    func scrollViewDidEndDragging(
+        _ scrollView: UIScrollView,
+        willDecelerate decelerate: Bool
+    ) {
+        if !decelerate {
+            startAutoScroll()
+        }
+    }
+
+    // 스크롤 감속이 끝났을 때
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard viewModel.banners.count > 1 else { return } // 데이터가 1개면 페이징 처리 없음
-
+        startAutoScroll()
+        
         let currentIndex = Int(scrollView.contentOffset.x / view.collectionView.frame.width)
         let visibleIndexPath = IndexPath(item: currentIndex, section: 0)
 
