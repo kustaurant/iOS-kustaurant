@@ -71,22 +71,46 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
         DefaultMyPageUseCases(myPageRepository: makeMyPageRepository())
     }
         
-    func makeProfileComposeViewController(actions: ProfileComposeViewModelActions) -> ProfileComposeViewController {
-        ProfileComposeViewController(viewModel: makeProfileComposeViewModel(actions: actions))
+    func makeProfileComposeViewController(actions: ProfileComposeViewModelActions, profileImgUrl: String?) -> ProfileComposeViewController {
+        ProfileComposeViewController(viewModel: makeProfileComposeViewModel(actions: actions, profileImgUrl: profileImgUrl))
     }
     
     func makeSavedRestaurantsViewController(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewController {
         SavedRestaurantsViewController(viewModel: makeSavedRestaurantsViewModel(actions: actions))
     }
+        
+    func makeFeedbackSubmittingViewController(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewController {
+        FeedbackSubmittingViewController(viewModel: makeFeedbackSubmittingViewModel(actions: actions))
+    }
+    
+    func makeNoticeBoardViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> NoticeBoardViewController {
+        NoticeBoardViewController(viewModel: makeWebViewLoadViewModel(webViewUrl: webViewUrl, actions: actions))
+    }
+
+    func makeTermsOfServiceViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> TermsOfServiceViewController {
+        TermsOfServiceViewController(viewModel: makeWebViewLoadViewModel(webViewUrl: webViewUrl, actions: actions))
+    }
+    
+    func makePrivacyPolicyViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> PrivacyPolicyViewController {
+        PrivacyPolicyViewController(viewModel: makeWebViewLoadViewModel(webViewUrl: webViewUrl, actions: actions))
+    }
 }
 
 extension MyPageSceneDIContainer {
 
-    func makeProfileComposeViewModel(actions: ProfileComposeViewModelActions) -> ProfileComposeViewModel {
-        DefaultProfileComposeViewModel(actions: actions)
+    func makeProfileComposeViewModel(actions: ProfileComposeViewModelActions, profileImgUrl: String?) -> ProfileComposeViewModel {
+        DefaultProfileComposeViewModel(actions: actions, myPageUseCases: makeMyPageUseCases(), profileImgUrl: profileImgUrl)
     }
     
     func makeSavedRestaurantsViewModel(actions: SavedRestaurantsViewModelActions) -> SavedRestaurantsViewModel {
         DefaultSavedRetaurantsViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
+    }
+    
+    func makeFeedbackSubmittingViewModel(actions: FeedbackSubmittingViewModelActions) -> FeedbackSubmittingViewModel {
+        DefaultFeedbackSubmittingViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
+    }
+    
+    func makeWebViewLoadViewModel(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> PlainWebViewLoadViewModel {
+        DefaultPlainWebViewLoadViewModel(webViewUrl: webViewUrl, actions: actions)
     }
 }

@@ -35,10 +35,6 @@ class SavedRestaurantsViewController: UIViewController {
     override func loadView() {
         view = savedRestaurantsView
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: false)
-    }
 }
 
 extension SavedRestaurantsViewController {

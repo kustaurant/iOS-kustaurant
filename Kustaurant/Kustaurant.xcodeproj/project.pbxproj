@@ -171,6 +171,21 @@
 		BA494B692C806A3F00EB2527 /* SavedRestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B682C806A3F00EB2527 /* SavedRestaurantsView.swift */; };
 		BA494B6B2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6A2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift */; };
 		BA494B6D2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6C2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift */; };
+		BA494B6F2C81590E00EB2527 /* FeedbackSubmittingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */; };
+		BA494B712C81592700EB2527 /* FeedbackSubmittingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */; };
+		BA494B742C81644800EB2527 /* FeedbackSubmittingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B732C81644800EB2527 /* FeedbackSubmittingView.swift */; };
+		BA494B762C8179C500EB2527 /* NoticeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */; };
+		BA494B782C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B772C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift */; };
+		BA494B7B2C817BA100EB2527 /* NoticeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */; };
+		BA494B7D2C8193A600EB2527 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7C2C8193A600EB2527 /* TermsOfServiceViewController.swift */; };
+		BA494B802C81956100EB2527 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B7F2C81956100EB2527 /* TermsOfServiceView.swift */; };
+		BA494B822C8196F000EB2527 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */; };
+		BA494B852C81972A00EB2527 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B842C81972A00EB2527 /* PrivacyPolicyView.swift */; };
+		BA494B882C81A1E400EB2527 /* AlertPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B872C81A1E400EB2527 /* AlertPayload.swift */; };
+		BA494B8B2C81A6F000EB2527 /* ProfileComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B8A2C81A6F000EB2527 /* ProfileComposeView.swift */; };
+		BA494B8E2C81A7E800EB2527 /* KuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B8D2C81A7E800EB2527 /* KuTextField.swift */; };
+		BA494B902C81B0AD00EB2527 /* ProfileComposeTextFieldHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B8F2C81B0AD00EB2527 /* ProfileComposeTextFieldHandler.swift */; };
+		BA494B922C81C01800EB2527 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B912C81C01800EB2527 /* UITextField+.swift */; };
 		BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B52C721A680063F2FA /* AppleLoginService.swift */; };
 		BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7B92C72F1780063F2FA /* AuthRepository.swift */; };
 		BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57C7BB2C7306340063F2FA /* DefaultAuthRepository.swift */; };
@@ -403,6 +418,21 @@
 		BA494B682C806A3F00EB2527 /* SavedRestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsView.swift; sourceTree = "<group>"; };
 		BA494B6A2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsTableViewHandler.swift; sourceTree = "<group>"; };
 		BA494B6C2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRestaurantsTableViewCell.swift; sourceTree = "<group>"; };
+		BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingViewController.swift; sourceTree = "<group>"; };
+		BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingViewModel.swift; sourceTree = "<group>"; };
+		BA494B732C81644800EB2527 /* FeedbackSubmittingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSubmittingView.swift; sourceTree = "<group>"; };
+		BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewController.swift; sourceTree = "<group>"; };
+		BA494B772C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainWebViewLoadViewModel.swift; sourceTree = "<group>"; };
+		BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
+		BA494B7C2C8193A600EB2527 /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
+		BA494B7F2C81956100EB2527 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
+		BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		BA494B842C81972A00EB2527 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		BA494B872C81A1E400EB2527 /* AlertPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPayload.swift; sourceTree = "<group>"; };
+		BA494B8A2C81A6F000EB2527 /* ProfileComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposeView.swift; sourceTree = "<group>"; };
+		BA494B8D2C81A7E800EB2527 /* KuTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuTextField.swift; sourceTree = "<group>"; };
+		BA494B8F2C81B0AD00EB2527 /* ProfileComposeTextFieldHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComposeTextFieldHandler.swift; sourceTree = "<group>"; };
+		BA494B912C81C01800EB2527 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kustaurant.entitlements; sourceTree = "<group>"; };
 		BA57C7B52C721A680063F2FA /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		BA57C7B92C72F1780063F2FA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -636,6 +666,7 @@
 		584173222C464E27001EC132 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BA494B862C81A1DB00EB2527 /* Alert */,
 				BA2D89762C7712F9004E7B8E /* Json */,
 				BA2D895A2C74C744004E7B8E /* Logger */,
 				BAB69ABD2C71DB8000C20F0B /* InMemoryStorage */,
@@ -746,6 +777,10 @@
 				584173512C4683E3001EC132 /* MyPageViewController.swift */,
 				BA494B5E2C80482400EB2527 /* ProfileComposeViewController.swift */,
 				BA494B622C80651300EB2527 /* SavedRestaurantsViewController.swift */,
+				BA494B6E2C81590E00EB2527 /* FeedbackSubmittingViewController.swift */,
+				BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */,
+				BA494B7C2C8193A600EB2527 /* TermsOfServiceViewController.swift */,
+				BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */,
 				BA57C7C22C74356B0063F2FA /* View */,
 				BA57C7BF2C731F1B0063F2FA /* ViewModel */,
 			);
@@ -786,6 +821,7 @@
 				CFE204572C5A121D00BCA87C /* UIView+AutoLayout.swift */,
 				BA37E0822C674BE40092115B /* UIButton+Publisher.swift */,
 				BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */,
+				BA494B912C81C01800EB2527 /* UITextField+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1156,6 +1192,63 @@
 			path = SavedRestaurants;
 			sourceTree = "<group>";
 		};
+		BA494B722C81643600EB2527 /* FeedbackSubmitting */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B732C81644800EB2527 /* FeedbackSubmittingView.swift */,
+			);
+			path = FeedbackSubmitting;
+			sourceTree = "<group>";
+		};
+		BA494B792C817B8F00EB2527 /* NoticeBoard */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B7A2C817BA100EB2527 /* NoticeBoardView.swift */,
+			);
+			path = NoticeBoard;
+			sourceTree = "<group>";
+		};
+		BA494B7E2C81955100EB2527 /* TermsOfService */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B7F2C81956100EB2527 /* TermsOfServiceView.swift */,
+			);
+			path = TermsOfService;
+			sourceTree = "<group>";
+		};
+		BA494B832C81971500EB2527 /* PrivacyPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B842C81972A00EB2527 /* PrivacyPolicyView.swift */,
+			);
+			path = PrivacyPolicy;
+			sourceTree = "<group>";
+		};
+		BA494B862C81A1DB00EB2527 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B872C81A1E400EB2527 /* AlertPayload.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		BA494B892C81A6E400EB2527 /* ProfileCompose */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B8A2C81A6F000EB2527 /* ProfileComposeView.swift */,
+				BA494B8F2C81B0AD00EB2527 /* ProfileComposeTextFieldHandler.swift */,
+			);
+			path = ProfileCompose;
+			sourceTree = "<group>";
+		};
+		BA494B8C2C81A7D200EB2527 /* KuTextField */ = {
+			isa = PBXGroup;
+			children = (
+				BA494B8D2C81A7E800EB2527 /* KuTextField.swift */,
+			);
+			path = KuTextField;
+			sourceTree = "<group>";
+		};
 		BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1178,6 +1271,8 @@
 				BA57C7C02C731F270063F2FA /* MyPageViewModel.swift */,
 				BA494B602C80485A00EB2527 /* ProfileComposeViewModel.swift */,
 				BA494B642C80652C00EB2527 /* SavedRestaurantsViewModel.swift */,
+				BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */,
+				BA494B772C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1185,8 +1280,13 @@
 		BA57C7C22C74356B0063F2FA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BA494B672C806A2D00EB2527 /* SavedRestaurants */,
+				BA494B892C81A6E400EB2527 /* ProfileCompose */,
+				BA494B832C81971500EB2527 /* PrivacyPolicy */,
 				BA494B662C806A2100EB2527 /* MyPage */,
+				BA494B7E2C81955100EB2527 /* TermsOfService */,
+				BA494B722C81643600EB2527 /* FeedbackSubmitting */,
+				BA494B792C817B8F00EB2527 /* NoticeBoard */,
+				BA494B672C806A2D00EB2527 /* SavedRestaurants */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1289,6 +1389,7 @@
 		CFE204652C5BC46700BCA87C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BA494B8C2C81A7D200EB2527 /* KuTextField */,
 				BA8EEF8B2C6351CD00FE6ABF /* KuPageControl */,
 				CFE2046C2C5E68B400BCA87C /* KuTabBar */,
 			);
@@ -1503,6 +1604,7 @@
 				BA2D89682C76FC58004E7B8E /* SearchView.swift in Sources */,
 				58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */,
 				BA37E0872C675FF40092115B /* UIStackView+AutoLayout.swift in Sources */,
+				BA494B8B2C81A6F000EB2527 /* ProfileComposeView.swift in Sources */,
 				5826A1E72C77197F0097256C /* NMFMapMarkerManager.swift in Sources */,
 				BA37E07B2C65E5F10092115B /* DrawCollectionViewSection.swift in Sources */,
 				BA57C7BC2C7306340063F2FA /* DefaultAuthRepository.swift in Sources */,
@@ -1515,15 +1617,19 @@
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
 				BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
+				BA494B7D2C8193A600EB2527 /* TermsOfServiceViewController.swift in Sources */,
 				BA494B6B2C806E6700EB2527 /* SavedRestaurantsTableViewHandler.swift in Sources */,
+				BA494B882C81A1E400EB2527 /* AlertPayload.swift in Sources */,
 				5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */,
 				BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */,
 				BA57C7C62C7435820063F2FA /* MyPageView.swift in Sources */,
+				BA494B712C81592700EB2527 /* FeedbackSubmittingViewModel.swift in Sources */,
 				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
 				BA494B6D2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift in Sources */,
 				BA1CB3D92C7D891600DA6776 /* AuthorizationRetrier.swift in Sources */,
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
+				BA494B742C81644800EB2527 /* FeedbackSubmittingView.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
 				BA494B452C7DD2DA00EB2527 /* MyPageRepository.swift in Sources */,
 				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
@@ -1532,6 +1638,7 @@
 				5826A1DA2C7231880097256C /* TierBaseViewModel.swift in Sources */,
 				CFE204722C5E690200BCA87C /* KuTabBarView.swift in Sources */,
 				584173762C47C311001EC132 /* DefaultHomeRepository.swift in Sources */,
+				BA494B902C81B0AD00EB2527 /* ProfileComposeTextFieldHandler.swift in Sources */,
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
 				5826A1CC2C71F20D0097256C /* TierTopCategoriesView.swift in Sources */,
 				BAB69ABF2C71DB8C00C20F0B /* KeyValueStorage.swift in Sources */,
@@ -1548,6 +1655,7 @@
 				584173362C4661B5001EC132 /* Coordinator.swift in Sources */,
 				BA494B492C7DD44200EB2527 /* MyPageUseCases.swift in Sources */,
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
+				BA494B8E2C81A7E800EB2527 /* KuTextField.swift in Sources */,
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
 				584FA4E42C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift in Sources */,
 				584173402C467BDD001EC132 /* TabBarPage.swift in Sources */,
@@ -1571,8 +1679,10 @@
 				58067D372C58B00800889C92 /* PaddedLabel.swift in Sources */,
 				58067CB22C4FBA9800889C92 /* TierListTableViewCell.swift in Sources */,
 				58067D3D2C58D73C00889C92 /* TierCategoryViewModel.swift in Sources */,
+				BA494B7B2C817BA100EB2527 /* NoticeBoardView.swift in Sources */,
 				584FA4C92C647442008DDC19 /* TierMapView.swift in Sources */,
 				BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */,
+				BA494B852C81972A00EB2527 /* PrivacyPolicyView.swift in Sources */,
 				CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */,
 				BA37E0772C65E5850092115B /* DrawLocationCollectionViewCell.swift in Sources */,
 				CFE2046B2C5D0A4000BCA87C /* UIView+parentViewController.swift in Sources */,
@@ -1607,6 +1717,7 @@
 				58067CBB2C4FCAA400889C92 /* Cuisine.swift in Sources */,
 				58067D4F2C5A347F00889C92 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
 				58067D3F2C58E35800889C92 /* CustomUINavigationController.swift in Sources */,
+				BA494B6F2C81590E00EB2527 /* FeedbackSubmittingViewController.swift in Sources */,
 				5841732F2C465A9D001EC132 /* AppDIContainer.swift in Sources */,
 				58067CA62C4F4FE200889C92 /* TierMapViewController.swift in Sources */,
 				BAC55EC92C6F351400B3078F /* AuthUseCases.swift in Sources */,
@@ -1634,6 +1745,8 @@
 				BA494B632C80651300EB2527 /* SavedRestaurantsViewController.swift in Sources */,
 				BA37E0B72C6B0A870092115B /* DrawRepository.swift in Sources */,
 				BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */,
+				BA494B822C8196F000EB2527 /* PrivacyPolicyViewController.swift in Sources */,
+				BA494B762C8179C500EB2527 /* NoticeBoardViewController.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
@@ -1643,6 +1756,7 @@
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				BA494B4F2C7DEE6400EB2527 /* FavoriteRestaurant.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
+				BA494B782C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift in Sources */,
 				BA494B552C7ED0A200EB2527 /* MyPageTableViewHandler.swift in Sources */,
 				BA2D89612C75A02A004E7B8E /* AccessTokenResponse.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
@@ -1652,6 +1766,7 @@
 				BA2D896C2C76FCF6004E7B8E /* SearchSceneDIContainer.swift in Sources */,
 				5841732A2C465598001EC132 /* AppConfiguration.swift in Sources */,
 				58067D772C5F96BB00889C92 /* HomeCategoriesSection.swift in Sources */,
+				BA494B922C81C01800EB2527 /* UITextField+.swift in Sources */,
 				58067CCA2C514FEF00889C92 /* TierCategoryCollectionViewCell.swift in Sources */,
 				58067CC22C509FEA00889C92 /* CustomIconImageView.swift in Sources */,
 				BA8EEF632C61DA7400FE6ABF /* OnboardingFlowCoordinator.swift in Sources */,
@@ -1698,6 +1813,7 @@
 				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,
 				584FA4CF2C6476A7008DDC19 /* DefaultTierMapRepository.swift in Sources */,
 				58067CCC2C51552700889C92 /* Category.swift in Sources */,
+				BA494B802C81956100EB2527 /* TermsOfServiceView.swift in Sources */,
 				58067D7B2C5FA70300889C92 /* HomeCategoriesCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
