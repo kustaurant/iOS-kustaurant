@@ -49,14 +49,17 @@ final class DefaultNoticeBoardViewModel: NoticeBoardViewModel {
 extension DefaultNoticeBoardViewModel {
     
     func getNoticeList() {
-        noticeList = [
-            ExpandableNotice(notice:
-                Notice(noticeTitle: "쿠스토랑 첫번째 공지 - [1차 평가10개 이벤트당첨자 쿠폰수령안내]", noticeLink: "https://kustaurant.blogspot.com/2024/03/1-10.html", createdDate: "2024-03-27")
-            ),
-            ExpandableNotice(notice:
-                Notice(noticeTitle: "쿠스토랑 두번째 공지 - [2차 맛집10곳 평가하고 스벅쿠폰받자! 이벤트]", noticeLink: "https://kustaurant.blogspot.com/2024/03/2-10.html", createdDate: "2024-03-31")
-            ),
-        ]
+        Task {
+            let result = await myPageUseCases.getNoticeList()
+            switch result {
+            case .success(let noticeList):
+                print(noticeList)
+                self.noticeList = noticeList.map { ExpandableNotice(notice: $0) }
+            case .failure(let failure):
+                print(failure.localizedDescription)
+                self.noticeList = []
+            }
+        }
     }
     
     func didTapBackButton() {

@@ -18,10 +18,15 @@ final class NoticeBoardTableViewHandler: NSObject {
     }
     
     func setupTableView() {
+        view.tableView.showsVerticalScrollIndicator = false
         view.tableView.delegate = self
         view.tableView.dataSource = self
         view.tableView.registerCell(ofType: NoticeTitleTableViewCell.self)
         view.tableView.registerCell(ofType: NoticeContentTableViewCell.self)
+    }
+    
+    func reloadData() {
+        view.tableView.reloadData()
     }
 }
 

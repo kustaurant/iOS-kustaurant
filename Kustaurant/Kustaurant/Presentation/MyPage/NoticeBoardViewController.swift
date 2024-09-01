@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class NoticeBoardViewController: UIViewController {
     
     private let noticeBoardView = NoticeBoardView()
     private let viewModel: NoticeBoardViewModel
     private var tableViewHandler: NoticeBoardTableViewHandler?
+    private var cancellables = Set<AnyCancellable>()
     
     init(viewModel: NoticeBoardViewModel) {
         self.viewModel = viewModel
@@ -28,6 +30,7 @@ class NoticeBoardViewController: UIViewController {
         view.backgroundColor = .white
         setupNavigationBar()
         tableViewHandler?.setupTableView()
+        bind()
         viewModel.getNoticeList()
     }
     
@@ -37,6 +40,15 @@ class NoticeBoardViewController: UIViewController {
 }
 
 extension NoticeBoardViewController {
+    
+    private func bind() {
+        viewModel.noticeListPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] noticeList in
+            self?.tableViewHandler?.reloadData()
+        }
+        .store(in: &cancellables)
+    }
     
     private func setupNavigationBar() {
         let backImage = UIImage(named: "icon_back")
