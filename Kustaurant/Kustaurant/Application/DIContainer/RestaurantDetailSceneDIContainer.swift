@@ -8,14 +8,39 @@
 import UIKit
 
 final class RestaurantDetailSceneDIContainer: RestaurantDetailFlowCoordinatorDependencies {
-    func makeRestaurantDetailViewController() -> RestaurantDetailViewController {
-        RestaurantDetailViewController()
+    
+    struct Dependencies {
+        let appDIContainer: AppDIContainer
+        let networkService: NetworkService
+    }
+    
+    private let dependencies: RestaurantDetailSceneDIContainer.Dependencies
+    
+    init(dependencies: RestaurantDetailSceneDIContainer.Dependencies) {
+        self.dependencies = dependencies
+    }
+    
+    func makeRestaurantDetailViewController(with id: Int, actions: RestaurantDetailViewModelActions) -> RestaurantDetailViewController {
+        RestaurantDetailViewController(viewModel: makeRestaurantDetailViewModel(with: id, actions: actions))
+    }
+    
+    func makeRestaurantDetailViewModel(with id: Int, actions: RestaurantDetailViewModelActions) -> RestaurantDetailViewModel {
+        RestaurantDetailViewModel(actions: actions, repository: makeRestaurantDetailRepository(with: id), authRepository: makeAuthRepository())
+    }
+    
+    func makeRestaurantDetailRepository(with id: Int) -> RestaurantDetailRepository {
+        DefaultRestaurantDetailRepository(networkService: dependencies.networkService, restaurantID: id)
     }
 
     func makeRestaurantDetailFlowCoordinator(navigationController: UINavigationController) -> RestaurantDetailFlowCoordinator {
         RestaurantDetailFlowCoordinator(
+            appDIContainer: dependencies.appDIContainer,
             dependencies: self,
             navigationController: navigationController
         )
+    }
+    
+    func makeAuthRepository() -> AuthRepository {
+        DefaultAuthRepository(networkService: dependencies.networkService)
     }
 }

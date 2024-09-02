@@ -26,6 +26,8 @@ final class KuTabBarCollectionView: UICollectionView {
         
         layout.scrollDirection = .horizontal
         layout.estimatedItemSize = .zero
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         
         registerCell(ofType: KuTabBarCollectionViewCell.self)
     }

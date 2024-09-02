@@ -53,7 +53,7 @@ extension HomeFlowCoordinator {
         let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
             navigationController: rootNavigationController
         )
-        flow.start()
+        flow.start(id: restaurant.restaurantId ?? 0)
     }
     
     private func showTierScene(cuisine: Cuisine) {

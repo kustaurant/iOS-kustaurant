@@ -22,11 +22,6 @@ final class KuTabBarView: UIView {
     
     let style: Style
     
-    private let indicatorBackgroundView: UIView = .init()
-    private let indicatorView: UIView = .init()
-    private var indicatorLeadingConstraint: NSLayoutConstraint?
-    private var indicatorWidthConstraint: NSLayoutConstraint?
-    
     var isScrollEnabled: Bool = false {
         didSet {
             collectionView.isScrollEnabled = isScrollEnabled
@@ -34,16 +29,16 @@ final class KuTabBarView: UIView {
     }
     
     @Published var state: State = .initial
-    private let actionSubject: CurrentValueSubject<Action, Never> = CurrentValueSubject(.didSelect(at: 0))
+    private let actionSubject: PassthroughSubject<Action, Never> = .init()
     private var cancellabels: Set<AnyCancellable> = .init()
     
     var actionPublisher: AnyPublisher<Action, Never> {
         actionSubject.eraseToAnyPublisher()
     }
     
-    init(tabs: [String], style: Style) {
+    init(tabs: [String], style: Style, selectedIndex: Int = 0) {
         self.tabs = tabs.enumerated().map { index, title in
-                .init(title: title, isSelcted: index == 0)
+                .init(title: title, isSelcted: index == selectedIndex)
         }
         self.style = style
         
@@ -79,22 +74,10 @@ extension KuTabBarView {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isPagingEnabled = true
-        indicatorBackgroundView.backgroundColor = .Sementic.gray200
-        indicatorView.backgroundColor = .Signature.green100
     }
     
     private func setupLayout() {
         addSubview(collectionView, autoLayout: [.fill(0)])
-        addSubview(indicatorBackgroundView, autoLayout: [.topNext(to: collectionView, constant: 0), .fillX(0), .height(KuTabBarPageController.indicatorViewHeight)])
-        addSubview(indicatorView, autoLayout: [.topNext(to: collectionView, constant: 0), .height(KuTabBarPageController.indicatorViewHeight)])
-        
-        indicatorLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        indicatorWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: 100) // 초기 너비는 0으로 설정
-        
-        NSLayoutConstraint.activate([
-            indicatorLeadingConstraint!,
-            indicatorWidthConstraint!
-        ])
     }
     
     private func bind() {
@@ -110,57 +93,27 @@ extension KuTabBarView {
     }
     
     private func didSelect(at index: Int) {
-        actionSubject.send(.didSelect(at: index))
         tabs = tabs.enumerated().map { i, tab in
                 .init(title: tab.title, isSelcted: i == index)
         }
-        updateIndicatorView(at: index, animated: true)
         collectionView.reloadData()
-    }
-    
-    private func updateIndicatorView(at index: Int, animated: Bool) {
-        let xPosition = calculateIndicatorViewXPosition(at: index)
-        let width = calculateIndicatorViewWidth(at: index)
-        
-        indicatorLeadingConstraint?.constant = xPosition
-        indicatorWidthConstraint?.constant = width
-        
-        if animated {
-            UIView.animate(withDuration: 0.3) {
-                self.layoutIfNeeded()
-            }
-        } else {
-            self.layoutIfNeeded()
-        }
     }
 }
 
 // MARK: View Frame 계산
 extension KuTabBarView {
     
-    private func calculateLabelSize(of text: String) -> CGSize {
+    static var height: CGFloat {
+        Self.init(tabs: [""], style: .fill).calculateCellSize(of: "hello").height
+    }
+    
+    private func calculateCellSize(of text: String) -> CGSize {
         let label = UILabel()
         label.text = text
         
-        return label.systemLayoutSizeFitting(
-            CGSize(width: .greatestFiniteMagnitude, height: UIView.layoutFittingCompressedSize.height),
-            withHorizontalFittingPriority: .required,
-            verticalFittingPriority: .fittingSizeLevel
-        )
-    }
-    
-    private func calculateIndicatorViewWidth(at index: Int) -> CGFloat {
-        guard index == tabs.count - 1 else {
-            return calculateIndicatorViewXPosition(at: index + 1) - calculateIndicatorViewXPosition(at: index)
-        }
+        let labelSize = label.estimatedSize
         
-        return collectionView.frame.width - calculateIndicatorViewXPosition(at: index)
-    }
-    
-    private func calculateIndicatorViewXPosition(at index: Int) -> CGFloat {
-        let indexPath = IndexPath(item: index, section: 0)
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return 0 }
-        return cell.frame.origin.x - collectionView.contentOffset.x
+        return .init(width: labelSize.width + 40, height: labelSize.height + 40)
     }
 }
 
@@ -170,6 +123,7 @@ extension KuTabBarView: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
+        actionSubject.send(.didSelect(at: indexPath.row))
         didSelect(at: indexPath.row)
     }
     
@@ -178,14 +132,14 @@ extension KuTabBarView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let labelSize = calculateLabelSize(of: tabs[safe: indexPath.row]?.title ?? "")
+        let cellSize = calculateCellSize(of: tabs[safe: indexPath.row]?.title ?? "")
         
         switch style {
         case .fitToContents:
-            return CGSize(width: labelSize.width + 40, height: labelSize.height + 40)
+            return cellSize
             
         case .fill:
-            return .init(width: UIScreen.main.bounds.width / CGFloat(tabs.count), height: labelSize.height + 40)
+            return .init(width: UIScreen.main.bounds.width / CGFloat(tabs.count), height: cellSize.height)
         }
     }
 }

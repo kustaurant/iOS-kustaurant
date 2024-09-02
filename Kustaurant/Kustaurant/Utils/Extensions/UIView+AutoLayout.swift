@@ -26,6 +26,9 @@ extension UIView: Ku {
         case bottomEqual(to: UIView, constant: CGFloat)
         case trailingEqual(to: UIView, constant: CGFloat)
         
+        case widthEqual(to: UIView, constant: CGFloat)
+        case heightEqual(to: UIView, constant: CGFloat)
+        
         case topNext(to: UIView, constant: CGFloat)
         case leadingNext(to: UIView, constant: CGFloat)
         case trailingNext(to: UIView, constant: CGFloat)
@@ -45,6 +48,9 @@ extension UIView: Ku {
     enum SizeLayout {
         case width(CGFloat)
         case height(CGFloat)
+        
+        case widthEqual(to: UIView, constant: CGFloat)
+        case heightEqual(to: UIView, constant: CGFloat)
     }
 }
 
@@ -70,6 +76,9 @@ extension Ku where Self: UIView {
             case .leadingEqual(let to, let constant): [view.leadingAnchor.constraint(equalTo: to.leadingAnchor, constant: constant)]
             case .bottomEqual(let to, let constant): [view.bottomAnchor.constraint(equalTo: to.bottomAnchor, constant: -constant)]
             case .trailingEqual(let to, let constant): [view.trailingAnchor.constraint(equalTo: to.trailingAnchor, constant: -constant)]
+                
+            case .widthEqual(let to, let constant): [view.widthAnchor.constraint(equalTo: to.widthAnchor, constant: constant)]
+            case .heightEqual(let to, let constant): [view.heightAnchor.constraint(equalTo: to.heightAnchor, constant: constant)]
                 
             case .topNext(let to, let constant): [view.topAnchor.constraint(equalTo: to.bottomAnchor, constant: constant)]
             case .leadingNext(let to, let constant): [view.leadingAnchor.constraint(equalTo: to.trailingAnchor, constant: constant)]
@@ -109,8 +118,27 @@ extension Ku where Self: UIView {
             switch layout {
             case .width(let constant): [self.widthAnchor.constraint(equalToConstant: constant)]
             case .height(let constant): [self.heightAnchor.constraint(equalToConstant: constant)]
+                
+            case .widthEqual(let to, let constant): [self.widthAnchor.constraint(equalTo: to.widthAnchor, constant: constant)]
+            case .heightEqual(let to, let constant): [self.heightAnchor.constraint(equalTo: to.heightAnchor, constant: constant)]
             }
         }).flatMap { $0 }
         NSLayoutConstraint.activate(layouts)
+    }
+}
+
+class SpaceView: UIView {
+    
+    init(size: CGFloat = 10, for layout: NSLayoutConstraint.Axis = .horizontal) {
+        super.init(frame: .zero)
+        
+        widthAnchor.constraint(greaterThanOrEqualToConstant: size).isActive = true
+        heightAnchor.constraint(greaterThanOrEqualToConstant: size).isActive = true
+        
+        setContentHuggingPriority(.defaultLow, for: layout)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
