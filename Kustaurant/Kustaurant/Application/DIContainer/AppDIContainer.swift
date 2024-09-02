@@ -20,8 +20,11 @@ final class AppDIContainer {
         )
     }
     
-    func makeRecommendSceneDIContainer() -> RecommendSceneDIContainer {
-        RecommendSceneDIContainer()
+    func makeDrawSceneDIContainer() -> DrawSceneDIContainer {
+        let dependencies = DrawSceneDIContainer.Dependencies(
+            networkService: networkService
+        )
+        return DrawSceneDIContainer(dependencies: dependencies)
     }
     
     func makeTierSceneDIContainer() -> TierSceneDIContainer {
@@ -38,7 +41,8 @@ final class AppDIContainer {
     }
     
     func makeMyPageSceneDIContainer() -> MyPageSceneDIContainer {
-        MyPageSceneDIContainer()
+        let dependencies = MyPageSceneDIContainer.Dependencies(networkService: networkService)
+        return MyPageSceneDIContainer(dependencies: dependencies)
     }
     
     func makeRestaurantDetailSceneDIContainer() -> RestaurantDetailSceneDIContainer {
@@ -46,8 +50,15 @@ final class AppDIContainer {
     }
     
     func makeOnboardingDIContainer() -> OnboardingSceneDIContainer {
-        let dependencies = OnboardingSceneDIContainer.Dependencies(networkService: networkService)
+        let dependencies = OnboardingSceneDIContainer.Dependencies(
+            networkService: networkService
+        )
         return OnboardingSceneDIContainer(dependencies: dependencies)
+    }
+    
+    func makeSearchDIContainer() -> SearchSceneDIContainer {
+        let dependencies = SearchSceneDIContainer.Dependencies(networkService: networkService)
+        return SearchSceneDIContainer(dependencies: dependencies)
     }
 }
 

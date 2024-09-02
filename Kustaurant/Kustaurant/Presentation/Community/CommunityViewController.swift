@@ -8,8 +8,13 @@
 import UIKit
 
 final class CommunityViewController: UIViewController {
+    private let imgView = UIImageView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .white
+        
+        imgView.image = UIImage(named: "img_preparing")
+        view.addSubview(imgView, autoLayout: [.center(0)])
     }
 }

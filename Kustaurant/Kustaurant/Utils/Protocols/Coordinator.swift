@@ -9,6 +9,14 @@ import UIKit
 
 protocol Coordinator: AnyObject {
     var navigationController: UINavigationController { get set }
-
+    
     func start()
+}
+
+extension Coordinator {
+    func pop(animated: Bool = true) {
+        if navigationController.viewControllers.count > 1 {
+            navigationController.popViewController(animated: animated)
+        }
+    }
 }

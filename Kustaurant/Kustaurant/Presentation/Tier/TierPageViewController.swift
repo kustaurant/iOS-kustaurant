@@ -10,6 +10,7 @@ import UIKit
 final class TierViewController: UIPageViewController {
     private var tierNaviationTitleTabView = TierNavigationTitleTabView()
     var pages: [UIViewController]
+    private var navigationBarBottomBorder: UIView?
     private var currentIndex: Int {
         guard let viewController = viewControllers?.first else { return 0 }
         return pages.firstIndex(of: viewController) ?? 0
@@ -37,11 +38,45 @@ final class TierViewController: UIPageViewController {
         setupNavigationBar()
         setViewControllersInPageVC()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addBottomBorderToNavigationBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationBarBottomBorder?.removeFromSuperview()
+    }
+}
+
+// MARK: - Actions
+extension TierViewController {
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 extension TierViewController {
     private func setupNavigationBar() {
         navigationItem.titleView = tierNaviationTitleTabView
+        configureBackButtonIfNeeded()
+    }
+    
+    private func configureBackButtonIfNeeded() {
+        // 네비게이션 스택에 현재 뷰컨트롤러가 루트가 아닌 경우에만 백 버튼을 추가
+        if navigationController?.viewControllers.count ?? 0 > 1 {
+            let icon = UIImage(named: "icon_back")?.withRenderingMode(.alwaysOriginal)
+            let backButton = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(backButtonTapped))
+            navigationItem.leftBarButtonItem = backButton
+        }
+    }
+    
+    private func addBottomBorderToNavigationBar() {
+        let borderView = UIView()
+        borderView.backgroundColor = .gray100
+        navigationController?.navigationBar.addSubview(borderView, autoLayout: [.fillX(0), .bottom(0), .height(1.5)])
+        navigationBarBottomBorder = borderView
     }
     
     private func setViewControllersInPageVC() {

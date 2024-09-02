@@ -16,6 +16,7 @@ final class CustomUINavigationController: UINavigationController {
     private func setupNavigationBarAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
+        appearance.shadowColor = .clear
         let font = UIFont.Pretendard.semiBold17
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,

@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController, NavigationBarHideable {
     private var viewModel: HomeViewModel
     private var homeLayoutTableViewHandler: HomeLayoutTableViewHandler?
     private var homeView = HomeView()
@@ -40,6 +40,11 @@ final class HomeViewController: UIViewController {
         setupNavigationBar()
         viewModel.fetchRestaurantLists()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showNavigationBar(animated: false)
+    }
 }
 
 extension HomeViewController {
@@ -48,26 +53,60 @@ extension HomeViewController {
         let logoImageView = UIImageView(image: image)
         let button = UIBarButtonItem(customView: logoImageView)
         navigationItem.leftBarButtonItem = button
+        
+        let searchImage = UIImage(named: "icon_search")?.withRenderingMode(.alwaysOriginal)
+        let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(didTapSearchButton))
+        navigationItem.rightBarButtonItem = searchButton
+    }
+}
+
+extension HomeViewController {
+    @objc private func didTapSearchButton() {
+        viewModel.didTapSearchButton()
     }
 }
 
 // MARK: - Bindings
 extension HomeViewController {
     private func setupBindings() {
-        bindRestaurantLists()
+        bindMainSection()
+        bindSection(publisher: viewModel.bannersPublisher, section: .banner, atIndex: 0)
+        bindSection(publisher: viewModel.topRestaurantsPublisher, section: .topRestaurants)
+        bindSection(publisher: viewModel.forMeRestaurantsPublisher, section: .forMeRestaurants)
     }
     
-    private func bindRestaurantLists() {
-        viewModel.topRestaurantsPublisher
+    private func bindMainSection() {
+        viewModel.mainSectionPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.homeLayoutTableViewHandler?.reloadSection(.topRestaurants)
+                self?.homeLayoutTableViewHandler?.reloadTable()
             }.store(in: &cancellables)
-        
-        viewModel.forMeRestaurantsPublisher
+    }
+    
+    private func bindSection<T>(
+        publisher: Published<T>.Publisher,
+        section: HomeSection,
+        atIndex index: Int? = nil
+    ) where T: Collection {
+        publisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.homeLayoutTableViewHandler?.reloadSection(.forMeRestaurants)
-            }.store(in: &cancellables)
+            .sink { [weak self] data in
+                guard let self = self else { return }
+                guard !data.isEmpty else {
+                    self.viewModel.mainSections.removeAll(where: { $0 == section })
+                    return
+                }
+                
+                if !(self.viewModel.mainSections.contains(where: { $0 == section })) {
+                    if let index = index {
+                        self.viewModel.mainSections.insert(section, at: index)
+                    } else {
+                        self.viewModel.mainSections.append(section)
+                    }
+                } else {
+                    self.homeLayoutTableViewHandler?.reloadSection(section)
+                }
+            }
+            .store(in: &cancellables)
     }
 }

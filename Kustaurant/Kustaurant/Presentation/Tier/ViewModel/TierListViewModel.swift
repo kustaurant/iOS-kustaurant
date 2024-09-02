@@ -18,19 +18,23 @@ protocol TierListViewModelInput {
 }
 
 protocol TierListViewModelOutput {
-    var categories: [Category] { get set }
+    var categoriesPublisher: Published<[Category]>.Publisher { get }
     var tierRestaurants: [Restaurant] { get }
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
 }
 
-typealias TierListViewModel = TierListViewModelInput & TierListViewModelOutput
+typealias TierListViewModel = TierListViewModelInput & TierListViewModelOutput & TierBaseViewModel
 
 final class DefaultTierListViewModel: TierListViewModel {
     private let tierUseCase: TierUseCases
     private let actions: TierListViewModelActions
     
+    @Published var categories: [Category]
+    private var listPage = 1
+    private var hasMoreData = true
+    
     // MARK: - Output
-    var categories: [Category]
+    var categoriesPublisher: Published<[Category]>.Publisher { $categories }
     @Published private(set) var tierRestaurants: [Restaurant] = []
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { $tierRestaurants }
     
@@ -49,6 +53,8 @@ final class DefaultTierListViewModel: TierListViewModel {
 // MARK: - Input
 extension DefaultTierListViewModel {
     func fetchTierLists() {
+        guard hasMoreData else { return }
+        
         Task {
             let cuisines = Category.extractCuisines(from: categories)
             let situations = Category.extractSituations(from: categories)
@@ -57,12 +63,18 @@ extension DefaultTierListViewModel {
             let result = await tierUseCase.fetchTierLists(
                 cuisines: cuisines,
                 situations: situations,
-                locations: locations
+                locations: locations,
+                page: listPage
             )
             
             switch result {
             case .success(let data):
+                if data.isEmpty {
+                    hasMoreData = false
+                    return
+                }
                 tierRestaurants += data
+                listPage += 1
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -75,5 +87,8 @@ extension DefaultTierListViewModel {
     
     func updateCategories(categories: [Category]) {
         self.categories = categories
+        hasMoreData = true
+        listPage = 1
+        tierRestaurants.removeAll()
     }
 }

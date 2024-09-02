@@ -17,16 +17,16 @@ final class TierListTableViewCell: UITableViewCell, ReusableCell {
     private var indexLabel = UILabel()
     private var restaurantNameLabel = UILabel()
     private var restaurantInfoLabel = UILabel()
-    private var evaluatedImageView = CustomIconImageView(type: .check, size: CGSize(width: 19, height: 19))
-    private var favoriteImageView = CustomIconImageView(type: .favorite, size: CGSize(width: 19, height: 19))
+    private var iconsStackView = UIStackView()
+    private var evaluatedImageView = UIImageView()
+    private var favoriteImageView = UIImageView()
     private var line = UIView()
     
-    private var evaluatedTrailingConstraint: NSLayoutConstraint!
-    private var favoriteTrailingConstraint: NSLayoutConstraint!
-    private var evaluatedLeadingConstraint: NSLayoutConstraint!
-    
     // MARK: - Initialization
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(
+        style: UITableViewCell.CellStyle,
+        reuseIdentifier: String?
+    ) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         setupUI()
@@ -35,107 +35,65 @@ final class TierListTableViewCell: UITableViewCell, ReusableCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK:
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0))
-    }
 }
 
 extension TierListTableViewCell {
     private func setupUI() {
-        addSubviews()
-        setupConstraints()
-        setupLabels()
-        setupImageView()
-        setupLine()
+        contentView.addSubview(restaurantImageView, autoLayout: [.top(7), .leading(20), .width(55), .height(55)])
+        contentView.addSubview(tierLabel, autoLayout: [.topEqual(to: restaurantImageView, constant: 0), .leadingEqual(to: restaurantImageView, constant: 0), .width(20), .height(20)])
+        
+        iconsStackView.addArrangedSubview(favoriteImageView)
+        iconsStackView.addArrangedSubview(evaluatedImageView)
+        contentView.addSubview(iconsStackView, autoLayout: [.topEqual(to: restaurantImageView, constant: 8), .trailing(14)])
+        contentView.addSubview(indexLabel, autoLayout: [.topEqual(to: restaurantImageView, constant: 8), .leadingNext(to: restaurantImageView, constant: 18)])
+        contentView.addSubview(restaurantNameLabel, autoLayout: [.topEqual(to: restaurantImageView, constant: 8), .leadingNext(to: indexLabel, constant: 5), .trailingNext(to: iconsStackView, constant: 11)])
+        contentView.addSubview(restaurantInfoLabel, autoLayout: [.leadingEqual(to: restaurantNameLabel, constant: 0), .trailingEqual(to: restaurantNameLabel, constant: 0), .topNext(to: restaurantNameLabel, constant: 6)])
+        contentView.addSubview(line, autoLayout: [.bottom(0), .leading(90), .trailing(20), .height(0.3)])
+        
+        configureImageView()
+        configureLine()
+        configureIndexLabel()
+        configureStackView()
+        configureStatusImageView()
+        configureRestaurantNameLabel()
+        configureRestaurantInfoLabel()
     }
     
-    private func addSubviews() {
-        [restaurantImageView, tierLabel, indexLabel, restaurantNameLabel, restaurantInfoLabel, favoriteImageView, evaluatedImageView, line].forEach {
-            contentView.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+    private func configureStackView() {
+        iconsStackView.spacing = 3
     }
     
-    private func setupConstraints() {
-        setupImageViewConstraints()
-        setupLabelConstraints()
-        setupIconConstraints()
-        setupLineConstraint()
+    private func configureStatusImageView() {
+        favoriteImageView.image = UIImage(named: "icon_favorite")
+        evaluatedImageView.image = UIImage(named: "icon_check")
+        favoriteImageView.autolayout([.width(19), .height(19)])
+        evaluatedImageView.autolayout([.width(19), .height(19)])
     }
     
-    private func setupImageView() {
-        restaurantImageView.layer.cornerRadius = 11
-        restaurantImageView.clipsToBounds = true
-    }
-    
-    private func setupLabels() {
+    private func configureIndexLabel() {
         indexLabel.font = .Pretendard.semiBold16
         indexLabel.textColor = .textGreen
+        indexLabel.setContentHuggingPriority(.required, for: .horizontal)
+        indexLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+    }
+    
+    private func configureRestaurantNameLabel() {
         restaurantNameLabel.font = .Pretendard.medium16
         restaurantNameLabel.textColor = .textBlack
+    }
+    
+    private func configureRestaurantInfoLabel() {
         restaurantInfoLabel.font = .Pretendard.regular12
         restaurantInfoLabel.textColor = .textDarkGray
     }
     
-    private func setupLine() {
+    private func configureImageView() {
+        restaurantImageView.layer.cornerRadius = 11
+        restaurantImageView.clipsToBounds = true
+    }
+    
+    private func configureLine() {
         line.backgroundColor = .lineGray
-    }
-    
-    private func setupImageViewConstraints() {
-        NSLayoutConstraint.activate([
-            restaurantImageView.widthAnchor.constraint(equalToConstant: 55),
-            restaurantImageView.heightAnchor.constraint(equalToConstant: 55),
-            restaurantImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            restaurantImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            
-            tierLabel.topAnchor.constraint(equalTo: restaurantImageView.topAnchor),
-            tierLabel.leadingAnchor.constraint(equalTo: restaurantImageView.leadingAnchor),
-            tierLabel.widthAnchor.constraint(equalToConstant: 20),
-            tierLabel.heightAnchor.constraint(equalToConstant: 20)
-        ])
-    }
-    
-    private func setupLabelConstraints() {
-        NSLayoutConstraint.activate([
-            indexLabel.topAnchor.constraint(equalTo: restaurantImageView.topAnchor, constant: 7),
-            indexLabel.leadingAnchor.constraint(equalTo: restaurantImageView.trailingAnchor, constant: 17),
-            
-            restaurantNameLabel.leadingAnchor.constraint(equalTo: restaurantImageView.trailingAnchor, constant: 46),
-            restaurantNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -65),
-            restaurantNameLabel.centerYAnchor.constraint(equalTo: indexLabel.centerYAnchor),
-            
-            restaurantInfoLabel.leadingAnchor.constraint(equalTo: restaurantNameLabel.leadingAnchor),
-            restaurantInfoLabel.trailingAnchor.constraint(equalTo: restaurantNameLabel.trailingAnchor),
-            restaurantInfoLabel.topAnchor.constraint(equalTo: restaurantNameLabel.bottomAnchor, constant: 6)
-        ])
-    }
-    
-    private func setupIconConstraints() {
-        favoriteTrailingConstraint = favoriteImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -13)
-        evaluatedTrailingConstraint = evaluatedImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -13)
-        evaluatedLeadingConstraint = evaluatedImageView.trailingAnchor.constraint(equalTo: favoriteImageView.leadingAnchor, constant: -3)
-        
-        NSLayoutConstraint.activate([
-            favoriteImageView.centerYAnchor.constraint(equalTo: indexLabel.centerYAnchor),
-            favoriteImageView.widthAnchor.constraint(equalToConstant: 19),
-            favoriteImageView.heightAnchor.constraint(equalToConstant: 19),
-            
-            evaluatedImageView.centerYAnchor.constraint(equalTo: favoriteImageView.centerYAnchor),
-            evaluatedImageView.widthAnchor.constraint(equalToConstant: 19),
-            evaluatedImageView.heightAnchor.constraint(equalToConstant: 19)
-        ])
-    }
-    
-    private func setupLineConstraint() {
-        NSLayoutConstraint.activate([
-            line.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -7),
-            line.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 90),
-            line.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            line.heightAnchor.constraint(equalToConstant: 0.3)
-        ])
     }
 }
 
@@ -152,21 +110,23 @@ extension TierListTableViewCell {
         }
         restaurantNameLabel.text = model?.restaurantName
         restaurantInfoLabel.text = [model?.restaurantCuisine, model?.restaurantPosition].compactMap({ $0 }).joined(separator: " ㅣ ")
-        indexLabel.text = "\(model?.index ?? 0)"
+        indexLabel.text = "\(model?.index ?? 0)."
     }
     
     private func bindIcons() {
+        iconsStackView.arrangedSubviews.forEach { view in
+            iconsStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+
         let isFavorite = model?.isFavorite ?? false
         let isEvaluated = model?.isEvaluated ?? false
-        favoriteImageView.isHidden = !isFavorite
-        evaluatedImageView.isHidden = !isEvaluated
-        
+
         if isFavorite {
-            NSLayoutConstraint.deactivate([evaluatedTrailingConstraint])
-            NSLayoutConstraint.activate([favoriteTrailingConstraint, evaluatedLeadingConstraint])
-        } else {
-            NSLayoutConstraint.deactivate([favoriteTrailingConstraint, evaluatedLeadingConstraint])
-            NSLayoutConstraint.activate([evaluatedTrailingConstraint])
+            iconsStackView.addArrangedSubview(favoriteImageView)
+        }
+        if isEvaluated {
+            iconsStackView.addArrangedSubview(evaluatedImageView)
         }
     }
     

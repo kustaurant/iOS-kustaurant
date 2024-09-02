@@ -78,6 +78,9 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: TierCategorySectionHeaderView.reuseIdentifier, for: indexPath) as? TierCategorySectionHeaderView else { return UICollectionReusableView() }
         let categoryType = CategoryType.allCases[indexPath.section]
         header.model = categoryType
+        header.button.addAction(UIAction { [weak self] _ in
+            self?.viewModel.didTapHeaderButton(type: categoryType)
+        }, for: .touchUpInside)
         return header
     }
     
@@ -99,7 +102,7 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TierListCategoryCollectionViewCell.reuseIdentifier, for: indexPath) as? TierListCategoryCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TierCategoryCollectionViewCell.reuseIdentifier, for: indexPath) as? TierCategoryCollectionViewCell else { return UICollectionViewCell() }
         let category = getCategory(for: indexPath)
         cell.model = category
         return cell
@@ -126,6 +129,6 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDelegateFlowLayout 
         label.text = category.displayName
         label.font = UIFont.Pretendard.regular14
         let size = label.intrinsicContentSize
-        return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.height)
+        return CGSize(width: size.width + (TierCategoryCollectionViewCell.horizontalPadding * 2), height: Category.height)
     }
 }

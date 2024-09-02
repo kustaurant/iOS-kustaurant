@@ -22,29 +22,6 @@ extension UILabel {
     }
     
     @discardableResult
-    func setCategoryStyle(
-        _ category: Category,
-        textInsets: UIEdgeInsets? = nil
-    ) -> Self {
-        font = .Pretendard.regular14
-        text = category.displayName
-        textAlignment = .center
-        textColor = category.isSelect ? .mainGreen : .categoryOff
-        layer.borderColor = category.isSelect ? UIColor.mainGreen.cgColor : UIColor.categoryOff.cgColor
-        layer.borderWidth = 0.7
-        layer.cornerRadius = 16
-        backgroundColor = category.isSelect ? .categoryOn : .clear
-        clipsToBounds = true
-        translatesAutoresizingMaskIntoConstraints = false
-        heightAnchor.constraint(equalToConstant: Category.height).isActive = true
-        if let paddedLabel = self as? PaddedLabel,
-           let textInsets = textInsets {
-            paddedLabel.textInsets = textInsets
-        }
-        return self
-    }
-    
-    @discardableResult
     func setAttributedText(text: String, highlightedText: String, highlightColor: UIColor) -> Self {
         let attributedString = NSMutableAttributedString(string: text)
         let range = (text as NSString).range(of: highlightedText)

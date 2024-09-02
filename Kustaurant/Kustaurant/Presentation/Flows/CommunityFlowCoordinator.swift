@@ -27,8 +27,13 @@ final class CommunityFlowCoordinator: Coordinator {
 extension CommunityFlowCoordinator {
     func start() {
         let viewController = dependencies.makeCommunityViewController()
-        let image = UIImage(named: TabBarPage.community.pageImageName())?.withRenderingMode(.alwaysOriginal)
-        viewController.tabBarItem = UITabBarItem(title: TabBarPage.community.pageTitleValue(), image: image, selectedImage: image)
+        let image = UIImage(named: TabBarPage.community.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
+        let selectedImage = UIImage(named: TabBarPage.community.pageImageName() + "_on")?.withRenderingMode(.alwaysOriginal)
+        viewController.tabBarItem = UITabBarItem(
+            title: TabBarPage.community.pageTitleValue(),
+            image: image,
+            selectedImage: selectedImage
+        )
         navigationController.pushViewController(viewController, animated: false)
     }
 }

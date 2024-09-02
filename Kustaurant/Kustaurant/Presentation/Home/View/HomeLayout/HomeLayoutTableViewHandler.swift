@@ -10,6 +10,7 @@ import UIKit
 final class HomeLayoutTableViewHandler: NSObject {
     private var view: HomeView
     private var viewModel: HomeViewModel
+    private var bannerHandler: HomeBannerCollectionViewHandler?
     private var categoriesHandler: HomeCategoriesCollectionViewHandler?
     private var restaurantsHandlerDic: [HomeSection : HomeRestaurantsCollectionViewHandler?] = [
         .topRestaurants : nil,
@@ -38,10 +39,14 @@ extension HomeLayoutTableViewHandler {
         HomeSection(rawValue: indexPath.row)
     }
     
+    func reloadTable() {
+        view.homeLayoutTableView.reloadData()
+    }
+    
     func reloadSection(_ section: HomeSection) {
         switch section {
         case .banner:
-            return
+            bannerHandler?.reload()
         case .categories:
             return
         case .topRestaurants, .forMeRestaurants:
@@ -58,13 +63,17 @@ extension HomeLayoutTableViewHandler: UITableViewDelegate {
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
         switch sectionType(indexPath: indexPath) {
+        case .banner:
+            return HomeBannerSection.sectionHeight + HomeBannerSection.sectionBottomInset + HomeBannerSection.sectionTopInset
+            
         case .categories:
             return HomeCategoriesSection.sectionHeight + HomeCategoriesSection.sectionBottomInset
             
         case .forMeRestaurants, .topRestaurants:
             return HomeRestaurantsSection.sectionHeight + HomeRestaurantsSection.sectionBottomInset
             
-        default: return 100
+        default: 
+            return 0
         }
     }
 }
@@ -83,6 +92,12 @@ extension HomeLayoutTableViewHandler: UITableViewDataSource {
     ) -> UITableViewCell {
         let section = sectionType(indexPath: indexPath)
         switch section {
+        case .banner:
+            let sectionCell = tableView.dequeueReusableCell(withReuseIdentifier: HomeBannerSection.reuseIdentifier) as HomeBannerSection
+            sectionCell.bannersCount = viewModel.banners.count
+            bannerHandler = HomeBannerCollectionViewHandler(view: sectionCell, viewModel: viewModel)
+            return sectionCell
+            
         case .categories:
             let sectionCell = tableView.dequeueReusableCell(withReuseIdentifier: HomeCategoriesSection.reuseIdentifier, for: indexPath) as HomeCategoriesSection
             categoriesHandler = HomeCategoriesCollectionViewHandler(view: sectionCell, viewModel: viewModel)
@@ -95,10 +110,7 @@ extension HomeLayoutTableViewHandler: UITableViewDataSource {
             return sectionCell
         
         default:
-            let cell = tableView.dequeueReusableCell(withReuseIdentifier: "Default", for: indexPath)
-            cell.backgroundColor = .purple
-            cell.layer.borderWidth = 1.0
-            return cell
+            return UITableViewCell()
         }
     }
 }

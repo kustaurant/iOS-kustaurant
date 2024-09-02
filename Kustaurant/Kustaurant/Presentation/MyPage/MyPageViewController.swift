@@ -6,35 +6,101 @@
 //
 
 import UIKit
+import Combine
 
 final class MyPageViewController: UIViewController {
     
-    private let tabBarPageController = KuTabBarPageController(
-        tabs: [
-            KuTabBarPageController.Tab(title: "티어", viewController: FirstVC()),
-            KuTabBarPageController.Tab(title: "지도", viewController: FirstVC()),
-            KuTabBarPageController.Tab(title: "맛집", viewController: FirstVC()),
-            KuTabBarPageController.Tab(title: "평가", viewController: FirstVC()),
-        ],
-        style: .fill
-    )
+    private var viewModel: MyPageViewModel
+    private let myPageView = MyPageView()
+    private var cancellables = Set<AnyCancellable>()
+    private var myPageTableViewHandler: MyPageTableViewHandler?
+    
+    init(viewModel: MyPageViewModel) {
+        self.viewModel = viewModel
+        self.myPageTableViewHandler = MyPageTableViewHandler(view: myPageView, viewModel: viewModel)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(
-            tabBarPageController,
-            autoLayout: [
-                .fillX(0), .topSafeArea(constant: 0), .bottomSafeArea(constant: 0)
-            ]
-        )
+        myPageTableViewHandler?.setupTableView()
+        bindViews()
+        bindUserProfileView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        viewModel.getUserSavedRestaurants()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    override func loadView() {
+        view = myPageView
     }
 }
 
-class FirstVC: UIViewController {
-    private let colors: [UIColor] = [.systemRed, .systemOrange, .systemPink, .systemPurple, .systemCyan, .systemTeal]
+extension MyPageViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = colors.randomElement()
+    private func bindViews() {
+        viewModel.isLoggedInPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] loginStatus in
+                self?.myPageTableViewHandler?.updateUI(by: loginStatus)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.showAlertPublisher.sink { [weak self] showAlert in
+            if showAlert {
+                self?.presentAlert()
+            }
+        }
+        .store(in: &cancellables)
+    }
+    
+    private func bindUserProfileView() {
+        guard let headerView = myPageView.tableView.tableHeaderView as? MyPageUserProfileView else {
+            return
+        }
+        
+        headerView.profileButton.tapPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                if self?.viewModel.isLoggedIn == .loggedIn {
+                    self?.viewModel.didTapComposeProfileButton()
+                } else {
+                    self?.viewModel.didTapLoginAndStartButton()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.userSavedRestaurantsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] userSavedRestaurants in
+                self?.myPageTableViewHandler?.updateSavedRestaurants(userSavedRestaurants)
+            }
+            .store(in: &cancellables)
+    }
+}
+
+extension MyPageViewController {
+    
+    private func presentAlert() {
+        let alert = UIAlertController(title: viewModel.alertPayload.title, message: viewModel.alertPayload.subtitle, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { [weak self] _ in
+            self?.viewModel.dismissAlert()
+        }))
+        alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { [weak self] _ in
+            self?.viewModel.alertPayload.onConfirm?()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }

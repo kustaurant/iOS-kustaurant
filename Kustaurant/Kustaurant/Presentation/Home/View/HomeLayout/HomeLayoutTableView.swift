@@ -22,8 +22,8 @@ final class HomeLayoutTableView: UITableView {
         separatorStyle = .none
         showsVerticalScrollIndicator = false
         
+        registerCell(ofType: HomeBannerSection.self, withReuseIdentifier: HomeBannerSection.reuseIdentifier)
         registerCell(ofType: HomeCategoriesSection.self, withReuseIdentifier: HomeCategoriesSection.reuseIdentifier)
         registerCell(ofType: HomeRestaurantsSection.self, withReuseIdentifier: HomeRestaurantsSection.reuseIdentifier)
-        registerCell(ofType: UITableViewCell.self, withReuseIdentifier: "Default")
     }
 }

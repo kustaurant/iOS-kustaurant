@@ -97,17 +97,17 @@ public final class DownloadRequest: Request {
         withFileName fileName: String? = nil,
         attempt: Int
     ) async throws -> URL {
-        let request = interceptor?.intercept(urlRequest) ?? urlRequest
         var attempt = attempt
         
         repeat {
             do {
+                let request = interceptor?.intercept(urlRequest) ?? urlRequest
                 let url = try await execute(with: urlRequest, toDirectory: directoryURL, withFileName: fileName)
                 return url
             } catch {
                 guard
                     let retrier = retrier,
-                    retrier.shouldRetry(request, with: error, attempt: attempt)
+                    await retrier.shouldRetryAsync(with: error, attempt: attempt)
                 else { throw error }
                 
                 attempt += 1

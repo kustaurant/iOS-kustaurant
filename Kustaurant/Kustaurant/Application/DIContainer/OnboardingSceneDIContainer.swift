@@ -19,22 +19,50 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
 
-    func makeOnboardingFlowCoordinator(navigationController: UINavigationController) -> OnboardingFlowCoordinator {
+    func makeOnboardingFlowCoordinator(appDIContainer: AppDIContainer, navigationController: UINavigationController) -> OnboardingFlowCoordinator {
         OnboardingFlowCoordinator(
             dependencies: self,
             navigationController: navigationController
         )
     }
     
-    func makeOnboardingViewController() -> OnboardingViewController {
-        OnboardingViewController(viewModel: makeOnboardingViewModel())
+    func makeOnboardingViewController(actions: OnboardingViewModelActions) -> OnboardingViewController {
+        OnboardingViewController(viewModel: makeOnboardingViewModel(actions: actions))
     }
     
-    func makeLoginViewController() -> LoginViewController {
-        LoginViewController(viewModel: makeOnboardingViewModel())
+    func makeLoginViewController(actions: OnboardingViewModelActions) -> LoginViewController {
+        LoginViewController(viewModel: makeOnboardingViewModel(actions: actions))
     }
     
-    func makeOnboardingViewModel() -> OnboardingViewModel {
-        DefaultOnboardingViewModel()
+    func makeOnboardingViewModel(actions: OnboardingViewModelActions) -> OnboardingViewModel {
+        DefaultOnboardingViewModel(
+            actions: actions,
+            onboardingUseCases: makeAuthUseCases()
+        )
+    }
+    
+    func makeAuthUseCases() -> AuthUseCases {
+        DefaultAuthUseCases(
+            naverLoginService: makeNaverLoginService(),
+            appleLoginService: makeAppleLoginService(),
+            socialLoginUserRepository: makeSocialLoginUserRepository(),
+            authReposiory: makeAuthRepository()
+        )
+    }
+    
+    func makeNaverLoginService() -> NaverLoginService {
+        NaverLoginService(networkService: dependencies.networkService)
+    }
+    
+    func makeSocialLoginUserRepository() -> SocialLoginUserRepository {
+        DefaultSocialLoginUserRepository()
+    }
+    
+    func makeAppleLoginService() -> AppleLoginService {
+        AppleLoginService()
+    }
+    
+    func makeAuthRepository() -> AuthRepository {
+        DefaultAuthRepository(networkService: dependencies.networkService)
     }
 }

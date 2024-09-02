@@ -7,15 +7,20 @@
 
 import UIKit
 
+protocol OnboardingSceneDelegate: AnyObject {
+    func onLoginSuccess()
+}
+
 protocol OnboardingFlowCoordinatorDependencies {
-    func makeOnboardingViewController() -> OnboardingViewController
-    func makeLoginViewController() -> LoginViewController
+    func makeOnboardingViewController(actions: OnboardingViewModelActions) -> OnboardingViewController
+    func makeLoginViewController(actions: OnboardingViewModelActions) -> LoginViewController
 }
 
 final class OnboardingFlowCoordinator: Coordinator {
     
     private let dependencies: OnboardingFlowCoordinatorDependencies
     var navigationController: UINavigationController
+    weak var appFlowNavigating: AppFlowCoordinatorNavigating?
     
     init(
         dependencies: OnboardingFlowCoordinatorDependencies,
@@ -28,13 +33,18 @@ final class OnboardingFlowCoordinator: Coordinator {
 
 extension OnboardingFlowCoordinator {
     
+    /// 앱 최초 실행시 보여지는 OnBoardingView
     func start() {
-        let viewController = dependencies.makeOnboardingViewController()
+        let actions = OnboardingViewModelActions(initiateTabs: appFlowNavigating?.showTab)
+        let viewController = dependencies.makeOnboardingViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: false)
     }
     
+    /// 앱을 실행한 적이 있으면 보여지는 LoginView
     func showLogin() {
-        let viewController = dependencies.makeLoginViewController()
+        let actions = OnboardingViewModelActions(initiateTabs: appFlowNavigating?.showTab)
+        let viewController = dependencies.makeLoginViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: false)
     }
+
 }

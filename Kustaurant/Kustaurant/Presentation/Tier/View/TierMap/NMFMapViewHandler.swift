@@ -12,10 +12,9 @@ final class NMFMapViewHandler: NSObject {
     private var view: TierMapView
     private var viewModel: TierMapViewModel
     
-    enum Polygon {
-        case solid
-        case dashed
-    }
+    private var markerManager: NMFMapMarkerManager
+    private var polygonManager: NMFMapPolygonManager
+    private var cameraManager: NMFMapCameraManager
     
     // MARK: - Initialization
     init(
@@ -24,8 +23,10 @@ final class NMFMapViewHandler: NSObject {
     ) {
         self.view = view
         self.viewModel = viewModel
+        markerManager = NMFMapMarkerManager(view: view, viewModel: viewModel)
+        polygonManager = NMFMapPolygonManager(view: view)
+        cameraManager = NMFMapCameraManager(view: view)
         super.init()
-        
         view.naverMapView.mapView.touchDelegate = self
     }
 }
@@ -33,127 +34,25 @@ final class NMFMapViewHandler: NSObject {
 extension NMFMapViewHandler {
     func updateMap(_ data: TierMapRestaurants?) {
         guard let mapData = data else { return }
-        cameraUpdate(mapData.visibleBounds)
-        addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
-        addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
-        addMarkersForRestaurants(tieredRestaurants: mapData.tieredRestaurants, nonTieredRestaurants: mapData.nonTieredRestaurants)
-    }
-
-    // MARK: 마커
-    private func addMarkersForRestaurants(
-        tieredRestaurants: [Restaurant?]?,
-        nonTieredRestaurants: [TierMapRestaurants.NonTieredRestaurants?]?
-    ) {
-        if let tieredRestaurants = tieredRestaurants?.compactMap({ $0 }) {
-            for restaurant in tieredRestaurants {
-                addMarker(for: restaurant, isFavorite: restaurant.isFavorite ?? false, zoom: nil)
-            }
-        }
-        
-        if let nonTieredRestaurants = nonTieredRestaurants?.compactMap({ $0 }) {
-            for nonRestaurants in nonTieredRestaurants {
-                guard let restaurants = nonRestaurants.restaurants?.compactMap({ $0 }) else { continue }
-                let zoom = nonRestaurants.zoom
-                for restaurant in restaurants {
-                    addMarker(for: restaurant, isFavorite: restaurant.isFavorite ?? false, zoom: zoom)
-                }
-            }
-        }
-    }
-    
-    private func addMarker(
-        for restaurant: Restaurant,
-        isFavorite: Bool,
-        zoom: Int?
-    ) {
-        guard 
-            let lat = Double(restaurant.y ?? ""),
-            let lng = Double(restaurant.x ?? "")
-        else { return }
-
-        let coords = NMGLatLng(lat: lat, lng: lng)
-        let marker = NMFMarker(position: coords)
-        var iconSize: CGSize = CGSize(width: 30, height: 30)
-        
-        if isFavorite {
-            iconSize = CGSize(width: 19, height: 19)
-            if let markerIcon = UIImage(named: "icon_favorite")?.resized(to: iconSize) {
-                marker.iconImage = NMFOverlayImage(image: markerIcon)
-            }
-            marker.zIndex = 100
-            
-        } else {
-            if let zoom = zoom {
-                marker.isMinZoomInclusive = true
-                marker.minZoom = Double(zoom)
-            }
-
-            if let tier = restaurant.mainTier {
-                if tier == .unowned {
-                    iconSize = CGSize(width: 12, height: 16)
-                }
-                if let markerIcon = UIImage(named: restaurant.mainTier?.iconImageName ?? "")?.resized(to: iconSize) {
-                    marker.iconImage = NMFOverlayImage(image: markerIcon)
-                }
-                marker.zIndex = tier.zIndex
-            }
-        }
-        marker.mapView = view.naverMapView.mapView
-    }
-
-    // MARK: 카메라
-    private func cameraUpdate(_ bounds: [CGFloat?]?) {
-        guard
-            let bounds = bounds?.compactMap({ $0 }).map({ Double($0 )}),
-            bounds.count >= 4
-        else { return }
-        let visibleBounds = NMGLatLngBounds(
-            southWestLat: bounds[2],
-            southWestLng: bounds[0],
-            northEastLat: bounds[3],
-            northEastLng: bounds[1]
+        clearMap()
+        cameraManager.cameraUpdate(mapData.visibleBounds)
+        polygonManager.addPolygonOverlay(type: .solid, mapData.solidPolygonCoordsList)
+        polygonManager.addPolygonOverlay(type: .dashed, mapData.dashedPolygonCoordsList)
+        markerManager.addMarkersForRestaurants(
+            tieredRestaurants: mapData.tieredRestaurants,
+            nonTieredRestaurants: mapData.nonTieredRestaurants
         )
-        let cameraUpdate = NMFCameraUpdate(fit: visibleBounds, padding: 0)
-        cameraUpdate.animation = .fly
-        view.naverMapView.mapView.moveCamera(cameraUpdate)
     }
     
-    // MARK: 영역
-    private func addPolygonOverlay(
-        type: Polygon,
-        _ polygonCoordsList: [[Coords?]?]?
-    ) {
-        guard let polygonCoordsList = polygonCoordsList else { return }
-                
-        for coordsList in polygonCoordsList {
-            guard let coordsList = coordsList else { continue }
-            let coords = coordsList.compactMap { $0 }
-            guard !coords.isEmpty else { continue }
-            
-            let nmgLatLngs = coords.map({$0.nmgLatLng})
+    func resetSelectedMarker() {
+        markerManager.resetSelectedMarker()
+    }
+}
 
-            let polygonOverlay = NMFPolygonOverlay(nmgLatLngs)
-            polygonOverlay?.fillColor = (type == .solid) ? .mapSolidBackground : .mapDashedBackground
-            
-            switch type {
-            case .solid:
-                polygonOverlay?.outlineColor = .mapOutline
-                polygonOverlay?.outlineWidth = 2
-            case .dashed:
-                addDashedPolylineOverlay(coords: nmgLatLngs)
-            }
-            
-            polygonOverlay?.mapView = view.naverMapView.mapView
-        }
-    }
-    
-    private func addDashedPolylineOverlay(coords: [NMGLatLng]) {
-        let polylineOverlay = NMFPolylineOverlay(coords + [coords.first!]) // 닫힌 다각형
-        polylineOverlay?.pattern = [5, 5]
-        polylineOverlay?.color = .mapOutline
-        polylineOverlay?.capType = .butt
-        polylineOverlay?.width = 2
-        polylineOverlay?.mapView = view.naverMapView.mapView
+extension NMFMapViewHandler {
+    private func clearMap() {
+        markerManager.clearMarkers()
+        polygonManager.clearPolygons()
     }
 }
 
@@ -176,6 +75,8 @@ extension NMFMapViewHandler: NMFMapViewTouchDelegate {
         #if DEBUG
         print("\(latlng.lat), \(latlng.lng)")
         #endif
+        resetSelectedMarker()
+        viewModel.didTapMap()
     }
     
     /// 지도 심벌이 탭되면 호출되는 콜백 메서드.
@@ -190,6 +91,8 @@ extension NMFMapViewHandler: NMFMapViewTouchDelegate {
         #if DEBUG
         print(symbol.caption!)
         #endif
+        resetSelectedMarker()
+        viewModel.didTapMap()
         return true
     }
 }
