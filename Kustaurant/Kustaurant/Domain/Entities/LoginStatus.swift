@@ -60,4 +60,22 @@ enum LoginStatus {
         
         return configuration
     }
+    
+    var kuButtonStatus: KuSubmitButton.ButtonState {
+        switch self {
+        case .loggedIn:
+            KuSubmitButton.ButtonState.on
+        case .notLoggedIn:
+            KuSubmitButton.ButtonState.off
+        }
+    }
+    
+    var likeButtonImageResourceName: String {
+        switch self {
+        case .loggedIn:
+            "icon_star_enabled"
+        case .notLoggedIn:
+            "icon_star_disabled"
+        }
+    }
 }

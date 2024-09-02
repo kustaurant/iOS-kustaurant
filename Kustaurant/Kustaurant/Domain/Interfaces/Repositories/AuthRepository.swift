@@ -12,4 +12,5 @@ protocol AuthRepository {
     func appleLogin(authorizationCode: String, identityToken: String) async -> Result<String, NetworkError>
     func logout(userId: String) async
     func deleteAccount() async
+    func verifyToken() async -> Bool 
 }

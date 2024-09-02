@@ -11,6 +11,7 @@ import Combine
 final class RestaurantDetailViewController: UIViewController, NavigationBarHideable {
     
     private let tableView: UITableView = .init()
+    private let affiliateFloatingView: AffiliabteFloatingView = .init()
     
     private let viewModel: RestaurantDetailViewModel
     private let tierCellHeightSubject: CurrentValueSubject<CGFloat, Never> = .init(0)
@@ -25,6 +26,7 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         viewModel.state = .fetch
         bind()
         setupTableView()
+        setupAffiliateFloatingView()
         setupLayout()
     }
     
@@ -71,8 +73,16 @@ extension RestaurantDetailViewController {
         tableView.registerHeaderFooterView(ofType: RestaurantDetailTabSectionHeaderView.self)
     }
     
+    private func setupAffiliateFloatingView() {
+        affiliateFloatingView.backgroundColor = .white
+        affiliateFloatingView.onTapEvaluateButton = { [weak self] in
+            self?.viewModel.state = .didTapEvaluationButton
+        }
+    }
+    
     private func setupLayout() {
         view.addSubview(tableView, autoLayout: [.fill(0)])
+        view.addSubview(affiliateFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84 + view.safeAreaInsets.bottom)])
     }
     
     private func bind() {
@@ -91,6 +101,11 @@ extension RestaurantDetailViewController {
                     }
                     headerView.layer.zPosition = -1
                     self?.tableView.tableHeaderView = headerView
+                    
+                case .loginStatus(let loginStatus):
+                    self?.affiliateFloatingView.evaluateButtonStatus = loginStatus.kuButtonStatus
+                    self?.affiliateFloatingView.likeButtonImageName = loginStatus.likeButtonImageResourceName
+                    self?.affiliateFloatingView.likeButtonText = "1002명"
                 }
             }
             .store(in: &cancellables)

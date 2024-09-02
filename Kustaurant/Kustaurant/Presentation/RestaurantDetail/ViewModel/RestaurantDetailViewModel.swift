@@ -8,6 +8,11 @@
 import UIKit
 import Combine
 
+struct RestaurantDetailViewModelActions {
+    let pop: () -> Void
+    let showEvaluateScene: () -> Void
+}
+
 enum RestaurantDetailTabType: Int {
     case menu = 0
     case review
@@ -31,6 +36,7 @@ extension RestaurantDetailViewModel {
         case initial
         case fetch
         case didTab(at: RestaurantDetailTabType)
+        case didTapEvaluationButton
     }
     
     enum Action {
@@ -38,6 +44,7 @@ extension RestaurantDetailViewModel {
         case didFetchHeaderImage(UIImage)
         case didFetchReviews
         case didChangeTabType
+        case loginStatus(LoginStatus)
     }
 }
 
@@ -46,18 +53,26 @@ final class RestaurantDetailViewModel {
     private(set) var detail: RestaurantDetail?
     
     private let repository: any RestaurantDetailRepository
+    private let authRepository: any AuthRepository
+    private let actions: RestaurantDetailViewModelActions
     
     @Published var state: State = .initial
     private let actionSubject: PassthroughSubject<Action, Never> = .init()
     private var cancellables: Set<AnyCancellable> = .init()
+    @Published private(set) var loginStatus: LoginStatus = .notLoggedIn
     
     var actionPublisher: AnyPublisher<Action, Never> {
         actionSubject.eraseToAnyPublisher()
     }
     
-    init(repository: any RestaurantDetailRepository) {
+    init(
+        actions: RestaurantDetailViewModelActions,
+        repository: any RestaurantDetailRepository,
+        authRepository: any AuthRepository
+    ) {
+        self.actions = actions
         self.repository = repository
-        
+        self.authRepository = authRepository
         bind()
     }
     
@@ -76,6 +91,9 @@ extension RestaurantDetailViewModel {
                     
                 case .didTab(let type):
                     self?.changeTabType(as: type)
+                    
+                case .didTapEvaluationButton:
+                    self?.actions.showEvaluateScene()
                 }
             }
             .store(in: &cancellables)
@@ -83,6 +101,10 @@ extension RestaurantDetailViewModel {
     
     private func fetch() {
         Task {
+            let verified = await authRepository.verifyToken()
+            loginStatus = verified ? LoginStatus.loggedIn : LoginStatus.notLoggedIn
+            actionSubject.send(.loginStatus(loginStatus))
+            
             detail = await repository.fetch()
             
             actionSubject.send(.didFetchItems)
