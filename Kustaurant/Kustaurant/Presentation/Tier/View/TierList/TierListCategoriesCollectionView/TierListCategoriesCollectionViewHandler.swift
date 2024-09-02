@@ -28,6 +28,14 @@ extension TierListCategoriesCollectionViewHandler {
         view.categoriesCollectionView.delegate = self
         view.categoriesCollectionView.dataSource = self
     }
+    
+    func reloadData() {
+        Task {
+            await MainActor.run {
+                view.categoriesCollectionView.reloadData()
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -56,8 +64,6 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDataSource {
         
         return cell
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -72,7 +78,7 @@ extension TierListCategoriesCollectionViewHandler: UICollectionViewDelegateFlowL
         label.text = category.displayName
         label.font = .Pretendard.regular14
         let size = label.intrinsicContentSize
-        return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.Height)
+        return CGSize(width: size.width + (TierListCategoryCollectionViewCell.horizontalPadding * 2), height: Category.height)
     }
 
     func collectionView(

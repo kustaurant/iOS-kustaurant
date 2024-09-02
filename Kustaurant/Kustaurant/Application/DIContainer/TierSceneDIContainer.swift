@@ -8,6 +8,7 @@
 import UIKit
 
 final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
+    
     struct Dependencies {
         let networkService: NetworkService
     }
@@ -18,8 +19,33 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
+    func makeTierCategoryViewModel(
+        actions: TierCategoryViewModelActions,
+        categories: [Category]
+    ) -> TierCategoryViewModel {
+        DefaultTierCategoryViewModel(
+            actions: actions,
+            categories: categories
+        )
+    }
+    
+    func makeTierCategoryViewController(
+        actions: TierCategoryViewModelActions,
+        categories: [Category]
+    ) -> TierCategoryViewController {
+        TierCategoryViewController(
+            viewModel: makeTierCategoryViewModel(actions: actions, categories: categories)
+        )
+    }
+    
     func makeTierRepository() -> TierRepository {
         DefaultTierRepository(
+            networkService: dependencies.networkService
+        )
+    }
+    
+    func makeTierMapRepository() -> TierMapRepository {
+        DefaultTierMapRepository(
             networkService: dependencies.networkService
         )
     }
@@ -30,25 +56,53 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         )
     }
     
-    func makeTierListViewModel() -> TierListViewModel {
-        DefaultTierListViewModel(
-            tierUseCase: makeTierUseCase()
+
+    func makeTierMapUseCase() -> TierMapUseCases {
+        DefaultTierMapUseCases(
+            tierMapRepository: makeTierMapRepository()
         )
     }
     
-    func makeTierListViewController() -> TierListViewController {
+
+    func makeTierListViewModel(
+        actions: TierListViewModelActions,
+        initialCategories: [Category]
+    ) -> TierListViewModel {
+        DefaultTierListViewModel(
+            tierUseCase: makeTierUseCase(),
+            actions: actions,
+            initialCategories: initialCategories
+        )
+    }
+    
+    func makeTierListViewController(
+        actions: TierListViewModelActions,
+        initialCategories: [Category]
+    ) -> TierListViewController {
         TierListViewController(
-            viewModel: makeTierListViewModel()
+            viewModel: makeTierListViewModel(actions: actions, initialCategories: initialCategories)
+        )
+    }
+    
+    func makeTierMpaViewModel() -> TierMapViewModel {
+        DefaultTierMapViewModel(
+            tierUseCase: makeTierUseCase(),
+            tierMapUseCase: makeTierMapUseCase()
         )
     }
     
     func makeTierMapViewController() -> TierMapViewController {
-        TierMapViewController()
+        TierMapViewController(
+            viewModel: makeTierMpaViewModel()
+        )
     }
     
-    func makeTierViewController() -> TierViewController {
+    func makeTierViewController(
+        actions: TierListViewModelActions,
+        initialCategories: [Category]
+    ) -> TierViewController {
         TierViewController(
-            tierListViewController: makeTierListViewController(),
+            tierListViewController: makeTierListViewController(actions: actions, initialCategories: initialCategories),
             TierMapViewController: makeTierMapViewController()
         )
     }

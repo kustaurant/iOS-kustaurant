@@ -29,16 +29,16 @@ final class KuTabBarView: UIView {
     }
     
     @Published var state: State = .initial
-    private let actionSubject: CurrentValueSubject<Action, Never> = CurrentValueSubject(.didSelect(at: 0))
+    private let actionSubject: PassthroughSubject<Action, Never> = .init()
     private var cancellabels: Set<AnyCancellable> = .init()
     
     var actionPublisher: AnyPublisher<Action, Never> {
         actionSubject.eraseToAnyPublisher()
     }
     
-    init(tabs: [String], style: Style) {
+    init(tabs: [String], style: Style, selectedIndex: Int = 0) {
         self.tabs = tabs.enumerated().map { index, title in
-                .init(title: title, isSelcted: index == 0)
+                .init(title: title, isSelcted: index == selectedIndex)
         }
         self.style = style
         
@@ -103,15 +103,17 @@ extension KuTabBarView {
 // MARK: View Frame 계산
 extension KuTabBarView {
     
-    private func calculateLabelSize(of text: String) -> CGSize {
+    static var height: CGFloat {
+        Self.init(tabs: [""], style: .fill).calculateCellSize(of: "hello").height
+    }
+    
+    private func calculateCellSize(of text: String) -> CGSize {
         let label = UILabel()
         label.text = text
         
-        return label.systemLayoutSizeFitting(
-            CGSize(width: .greatestFiniteMagnitude, height: UIView.layoutFittingCompressedSize.height),
-            withHorizontalFittingPriority: .required,
-            verticalFittingPriority: .fittingSizeLevel
-        )
+        let labelSize = label.estimatedSize
+        
+        return .init(width: labelSize.width + 40, height: labelSize.height + 40)
     }
 }
 
@@ -130,14 +132,14 @@ extension KuTabBarView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let labelSize = calculateLabelSize(of: tabs[safe: indexPath.row]?.title ?? "")
+        let cellSize = calculateCellSize(of: tabs[safe: indexPath.row]?.title ?? "")
         
         switch style {
         case .fitToContents:
-            return CGSize(width: labelSize.width + 40, height: labelSize.height + 40)
+            return cellSize
             
         case .fill:
-            return .init(width: UIScreen.main.bounds.width / CGFloat(tabs.count), height: labelSize.height + 40)
+            return .init(width: UIScreen.main.bounds.width / CGFloat(tabs.count), height: cellSize.height)
         }
     }
 }

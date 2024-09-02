@@ -13,7 +13,7 @@ public class ImageCacheManager {
 
     private init() {}
 
-    public func loadImage(from url: URL, targetWidth: CGFloat, completion: @escaping (UIImage?) -> Void) {
+    public func loadImage(from url: URL, targetWidth: CGFloat? = nil, completion: @escaping (UIImage?) -> Void) {
         let cacheKey = url.absoluteString as NSString
         
         if let cachedImage = cache.object(forKey: cacheKey) {
@@ -32,8 +32,12 @@ public class ImageCacheManager {
                 return
             }
             
-            let resizedImage = image.resized(to: targetWidth)
-            
+            let resizedImage: UIImage?
+            if let targetWidth {
+                resizedImage  = image.resized(to: targetWidth)
+            } else {
+                resizedImage = image
+            }
             
             if let resizedImage = resizedImage {
                 self.cache.setObject(resizedImage, forKey: cacheKey)

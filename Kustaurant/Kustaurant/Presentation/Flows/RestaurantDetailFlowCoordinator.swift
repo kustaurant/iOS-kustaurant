@@ -8,10 +8,10 @@
 import UIKit
 
 protocol RestaurantDetailFlowCoordinatorDependencies {
-    func makeRestaurantDetailViewController() -> RestaurantDetailViewController
+    func makeRestaurantDetailViewController(with id: Int) -> RestaurantDetailViewController
 }
 
-final class RestaurantDetailFlowCoordinator: Coordinator {
+final class RestaurantDetailFlowCoordinator {
     private let dependencies: RestaurantDetailFlowCoordinatorDependencies
     var navigationController: UINavigationController
     
@@ -25,8 +25,8 @@ final class RestaurantDetailFlowCoordinator: Coordinator {
 }
 
 extension RestaurantDetailFlowCoordinator {
-    func start() {
-        let viewController = dependencies.makeRestaurantDetailViewController()
+    func start(id: Int) {
+        let viewController = dependencies.makeRestaurantDetailViewController(with: id)
         navigationController.pushViewController(viewController, animated: true)
     }
 }

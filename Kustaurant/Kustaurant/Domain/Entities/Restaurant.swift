@@ -22,7 +22,7 @@ struct Restaurant: Codable {
     var situationList: [String?]?
     var partnershipInfo: String?
     var evaluationCount: Int?
-    var restaurantScore: String?
+    var restaurantScore: CGFloat?
     var isEvaluated: Bool?
     var isFavorite: Bool?
     var x: String?
@@ -51,12 +51,12 @@ struct Restaurant: Codable {
         situationList = try? container.decodeIfPresent([String].self, forKey: .situationList)
         partnershipInfo = try? container.decodeIfPresent(String.self, forKey: .partnershipInfo)
         evaluationCount = try? container.decodeIfPresent(Int.self, forKey: .evaluationCount)
-        restaurantScore = try? container.decodeIfPresent(String.self, forKey: .restaurantScore)
+        restaurantScore = try? container.decodeIfPresent(CGFloat.self, forKey: .restaurantScore)
         isEvaluated = try? container.decodeIfPresent(Bool.self, forKey: .isEvaluated)
         isFavorite = try? container.decodeIfPresent(Bool.self, forKey: .isFavorite)
         x = try? container.decodeIfPresent(String.self, forKey: .x)
         y = try? container.decodeIfPresent(String.self, forKey: .y)
-        restaurantMenuList = try? container.decodeIfPresent([RestaurantMenu].self, forKey: .isFavorite)
+        restaurantMenuList = try? container.decodeIfPresent([RestaurantMenu].self, forKey: .restaurantMenuList)
     }
 }
 

@@ -33,7 +33,8 @@ final class HomeFlowCoordinator: Coordinator {
 extension HomeFlowCoordinator {
     func start() {
         let actions = HomeViewModelActions(
-            showRestaurantDetail: showRestaurantDetail
+            showRestaurantDetail: showRestaurantDetail,
+            showTierScene: showTierScene
         )
         let viewController = dependencies.makeHomeViewController(actions: actions)
         let image = UIImage(named: TabBarPage.home.pageImageName())?.withRenderingMode(.alwaysOriginal)
@@ -46,6 +47,14 @@ extension HomeFlowCoordinator {
         let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
             navigationController: rootNavigationController
         )
-        flow.start()
+        flow.start(id: restaurant.restaurantId ?? 0)
+    }
+    
+    private func showTierScene(cuisine: Cuisine) {
+        let tierDIContainer = appDIContainer.makeTierSceneDIContainer()
+        let tierFlow = tierDIContainer.makeTierFlowCoordinator(
+            navigationController: navigationController
+        )
+        tierFlow.start(initialCategories: [cuisine.category])
     }
 }

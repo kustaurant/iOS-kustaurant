@@ -8,8 +8,8 @@
 import UIKit
 
 final class RestaurantDetailSceneDIContainer: RestaurantDetailFlowCoordinatorDependencies {
-    func makeRestaurantDetailViewController() -> RestaurantDetailViewController {
-        RestaurantDetailViewController()
+    func makeRestaurantDetailViewController(with id: Int) -> RestaurantDetailViewController {
+        RestaurantDetailViewController(viewModel: .init(repository: DefaultRestaurantDetailRepository(networkService: .init(), restaurantID: id)))
     }
 
     func makeRestaurantDetailFlowCoordinator(navigationController: UINavigationController) -> RestaurantDetailFlowCoordinator {

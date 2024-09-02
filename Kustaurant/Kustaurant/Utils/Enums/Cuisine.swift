@@ -27,6 +27,10 @@ enum Cuisine: String, CaseIterable {
     case jh = "제휴업체"
     
     var category: Category {
-        Category(displayName: rawValue, code: String(describing: self).uppercased(), isSelect: false)
+        Category(displayName: rawValue, code: String(describing: self).uppercased(), isSelect: false, origin: .cuisine(self), type: .cuisine)
+    }
+    
+    var iconName: String {
+        "icon_cuisine_\(String(describing: self))"
     }
 }

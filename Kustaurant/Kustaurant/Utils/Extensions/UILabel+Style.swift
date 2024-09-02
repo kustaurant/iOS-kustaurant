@@ -36,7 +36,7 @@ extension UILabel {
         backgroundColor = category.isSelect ? .categoryOn : .clear
         clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
-        heightAnchor.constraint(equalToConstant: Category.Height).isActive = true
+        heightAnchor.constraint(equalToConstant: Category.height).isActive = true
         if let paddedLabel = self as? PaddedLabel,
            let textInsets = textInsets {
             paddedLabel.textInsets = textInsets
@@ -44,4 +44,20 @@ extension UILabel {
         return self
     }
     
+    @discardableResult
+    func setAttributedText(text: String, highlightedText: String, highlightColor: UIColor) -> Self {
+        let attributedString = NSMutableAttributedString(string: text)
+        let range = (text as NSString).range(of: highlightedText)
+        attributedString.addAttribute(.foregroundColor, value: highlightColor, range: range)
+        self.attributedText = attributedString
+        return self
+    }
+    
+    var estimatedSize: CGSize {
+        self.systemLayoutSizeFitting(
+            CGSize(width: .greatestFiniteMagnitude, height: UIView.layoutFittingCompressedSize.height),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        )
+    }
 }

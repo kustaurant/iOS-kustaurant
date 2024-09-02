@@ -9,7 +9,7 @@ import UIKit
 
 final class TierViewController: UIPageViewController {
     private var tierNaviationTitleTabView = TierNavigationTitleTabView()
-    private var pages: [UIViewController]
+    var pages: [UIViewController]
     private var currentIndex: Int {
         guard let viewController = viewControllers?.first else { return 0 }
         return pages.firstIndex(of: viewController) ?? 0
@@ -41,16 +41,7 @@ final class TierViewController: UIPageViewController {
 
 extension TierViewController {
     private func setupNavigationBar() {
-        /*
-         let backImage = UIImage(systemName: "arrow.backward")
-         let backButton = UIBarButtonItem(image: backImage, style: .plain, target: nil, action: nil)
-         navigationItem.leftBarButtonItem = backButton
-         */
         navigationItem.titleView = tierNaviationTitleTabView
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     private func setViewControllersInPageVC() {
