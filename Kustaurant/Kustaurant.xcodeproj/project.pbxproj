@@ -122,7 +122,6 @@
 		58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */; };
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
-		816A02DA220B296E2DE3721E /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0975BF676C41DAB8302C643 /* Pods_KustaurantTests.framework */; };
 		BA0A89CD2C840DEB000A724D /* NoticeBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */; };
 		BA0A89CF2C84109F000A724D /* NoticeBoardTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CE2C84109F000A724D /* NoticeBoardTableViewHandler.swift */; };
 		BA0A89D12C8412F2000A724D /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89D02C8412F2000A724D /* Notice.swift */; };
@@ -208,7 +207,6 @@
 		BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */; };
 		BA8EEF972C64981100FE6ABF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF962C64981100FE6ABF /* LoginViewController.swift */; };
 		BA8EEF992C64994F00FE6ABF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8EEF982C64994F00FE6ABF /* LoginView.swift */; };
-		C3DDE0D66D47A89AFDA47693 /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA10EE7CE4B398C56D8E64 /* Pods_KustaurantTests.framework */; };
 		BAB69ABF2C71DB8C00C20F0B /* KeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69ABE2C71DB8C00C20F0B /* KeyValueStorage.swift */; };
 		BAB69AC12C71DBA500C20F0B /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC02C71DBA500C20F0B /* UserDefaultsStorage.swift */; };
 		BAB69AC32C71DBB500C20F0B /* KeyChainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC22C71DBB500C20F0B /* KeyChainStorage.swift */; };
@@ -220,9 +218,9 @@
 		BAC55EC92C6F351400B3078F /* AuthUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC82C6F351400B3078F /* AuthUseCases.swift */; };
 		BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */; };
 		BAC55ECD2C6FB2AB00B3078F /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECC2C6FB2AB00B3078F /* UserCredentials.swift */; };
-		BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */; };
 		BAF177F62C772B8100E17FDC /* RestaurantSearchResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */; };
 		BAF177F82C7735D300E17FDC /* TierBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF177F72C7735D300E17FDC /* TierBadgeView.swift */; };
+		C3DDE0D66D47A89AFDA47693 /* Pods_KustaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA10EE7CE4B398C56D8E64 /* Pods_KustaurantTests.framework */; };
 		CF54AD082C4288F900E0DE68 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD072C4288F900E0DE68 /* Request.swift */; };
 		CF54AD0A2C42892E00E0DE68 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */; };
 		CF54AD0C2C42894100E0DE68 /* RequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */; };
@@ -403,8 +401,6 @@
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		70969EAC2D84033B4B6EDBD6 /* Pods-Kustaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.release.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.release.xcconfig"; sourceTree = "<group>"; };
 		898D644402C4962B169D267F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		686EAA931A52A03C8178D3E6 /* Pods-Kustaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.debug.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.debug.xcconfig"; sourceTree = "<group>"; };
-		ACFF1999BE7ABBCE9843175F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewModel.swift; sourceTree = "<group>"; };
 		BA0A89CE2C84109F000A724D /* NoticeBoardTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardTableViewHandler.swift; sourceTree = "<group>"; };
 		BA0A89D02C8412F2000A724D /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
@@ -424,6 +420,7 @@
 		BA2D89712C770FED004E7B8E /* SearchUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCases.swift; sourceTree = "<group>"; };
 		BA2D89742C7712E7004E7B8E /* Restaurants.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Restaurants.json; sourceTree = "<group>"; };
 		BA2D89772C77130E004E7B8E /* JsonSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSupport.swift; sourceTree = "<group>"; };
+		BA37772A2C85769F004F68F5 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		BA37E06F2C65E0B60092115B /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		BA37E0712C65E0BF0092115B /* DrawViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewModel.swift; sourceTree = "<group>"; };
 		BA37E0732C65E43F0092115B /* DrawCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCollectionViewHandler.swift; sourceTree = "<group>"; };
@@ -491,7 +488,6 @@
 		BA8EEF902C644EF500FE6ABF /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
 		BA8EEF962C64981100FE6ABF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BA8EEF982C64994F00FE6ABF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		CCD4C85E841D3E1F737C3BDA /* Pods-KustaurantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KustaurantTests.debug.xcconfig"; path = "Target Support Files/Pods-KustaurantTests/Pods-KustaurantTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BAB69ABE2C71DB8C00C20F0B /* KeyValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStorage.swift; sourceTree = "<group>"; };
 		BAB69AC02C71DBA500C20F0B /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
 		BAB69AC22C71DBB500C20F0B /* KeyChainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainStorage.swift; sourceTree = "<group>"; };
@@ -503,9 +499,9 @@
 		BAC55EC82C6F351400B3078F /* AuthUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCases.swift; sourceTree = "<group>"; };
 		BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaverLoginRepository.swift; path = ../Repositories/NaverLoginRepository.swift; sourceTree = "<group>"; };
 		BAC55ECC2C6FB2AB00B3078F /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
-		BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		BAF177F52C772B8100E17FDC /* RestaurantSearchResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResultRowView.swift; sourceTree = "<group>"; };
 		BAF177F72C7735D300E17FDC /* TierBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierBadgeView.swift; sourceTree = "<group>"; };
+		CCD4C85E841D3E1F737C3BDA /* Pods-KustaurantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KustaurantTests.debug.xcconfig"; path = "Target Support Files/Pods-KustaurantTests/Pods-KustaurantTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF54AD072C4288F900E0DE68 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		CF54AD092C42892E00E0DE68 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		CF54AD0B2C42894100E0DE68 /* RequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRetrier.swift; sourceTree = "<group>"; };
@@ -1065,7 +1061,7 @@
 				58D83A682C3A785A00511AB9 /* Assets.xcassets */,
 				58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */,
 				58D83A6D2C3A785A00511AB9 /* Info.plist */,
-				BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */,
+				BA37772A2C85769F004F68F5 /* Secrets.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1616,7 +1612,6 @@
 				584173942C4A070B001EC132 /* Pretendard-Regular.otf in Resources */,
 				584173912C4A070B001EC132 /* Pretendard-ExtraBold.otf in Resources */,
 				5841738F2C4A070B001EC132 /* Pretendard-Black.otf in Resources */,
-				BAE8380B2C6C412A000538B8 /* Secrets.xcconfig in Resources */,
 				584173902C4A070B001EC132 /* Pretendard-Light.otf in Resources */,
 				58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */,
 				584173962C4A070B001EC132 /* Pretendard-Medium.otf in Resources */,
@@ -1855,7 +1850,6 @@
 				58067D7D2C5FA75A00889C92 /* HomeCategoriesCollectionViewCell.swift in Sources */,
 				584173662C47A964001EC132 /* HomeView.swift in Sources */,
 				584173202C464695001EC132 /* HomeViewController.swift in Sources */,
-				58067CC72C514FCD00889C92 /* TierListCategoriesCollectionViewHandler.swift in Sources */,
 				CFE204762C5F58C700BCA87C /* RestaurantDetailReviewCell.swift in Sources */,
 				58067CA82C4F512100889C92 /* TierPageViewController.swift in Sources */,
 				BA8EEF872C63433D00FE6ABF /* OnboardingCollectionViewHandler.swift in Sources */,
@@ -1931,7 +1925,7 @@
 				CFE204702C5E68E000BCA87C /* KuTabBarCollectionViewCell.swift in Sources */,
 				584173542C468410001EC132 /* MyPageFlowCoordinator.swift in Sources */,
 				CFE204892C6A118600BCA87C /* RestaurantDetailTierInfo.swift in Sources */,
-				5841733D2C4679FE001EC132 /* RecommendSceneDIContainer.swift in Sources */,
+				5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */,
 				BA494B572C7EE81000EB2527 /* MyPageTableViewSection.swift in Sources */,
 				5826A1E22C723BF80097256C /* TierCategoryReceivable.swift in Sources */,
 				BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */,
@@ -1955,7 +1949,7 @@
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
 				CFE204642C5BA3E500BCA87C /* RestaurantDetailMenuCell.swift in Sources */,
 				CFE204542C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift in Sources */,
-				584173392C46664E001EC132 /* RecommendViewController.swift in Sources */,
+				584173392C46664E001EC132 /* DrawViewController.swift in Sources */,
 				CFEC6EF22C6E113900B4DAAB /* RestaurantDetailDTO.swift in Sources */,
 				CFEC6EFF2C75D52600B4DAAB /* RestaurantDetail.swift in Sources */,
 				58067CCC2C51552700889C92 /* Category.swift in Sources */,
@@ -2004,7 +1998,6 @@
 /* Begin XCBuildConfiguration section */
 		58D83A842C3A785A00511AB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -2068,7 +2061,6 @@
 		};
 		58D83A852C3A785A00511AB9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BAE8380A2C6C412A000538B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

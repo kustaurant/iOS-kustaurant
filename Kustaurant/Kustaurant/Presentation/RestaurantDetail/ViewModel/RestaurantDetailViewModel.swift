@@ -60,7 +60,7 @@ final class RestaurantDetailViewModel {
         
         bind()
     }
-
+    
 }
 
 extension RestaurantDetailViewModel {
