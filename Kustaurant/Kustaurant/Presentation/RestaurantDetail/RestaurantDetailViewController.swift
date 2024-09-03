@@ -177,8 +177,30 @@ extension RestaurantDetailViewController: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let detailSection = RestaurantDetailSection(index: section)
+        else { return .init() }
+        
+        switch detailSection {
+        case .tab:
+            return 84
+        default:
+            return 0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
+        guard let detailSection = RestaurantDetailSection(index: section)
+        else { return .init() }
+        
+        switch detailSection {
+        case .tab:
+            let view = UIView()
+            view.backgroundColor = .clear
+            return view
+        default:
+            return nil
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
