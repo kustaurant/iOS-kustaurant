@@ -55,7 +55,7 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         )] + (response.situationList?.compactMap { title in
             return .init(restaurantCuisine: nil, title: title, backgroundColor: .green100)
         } ?? [])
-        let affiliateInfo: RestaurantDetailAffiliateInfo = .init(text: response.partnershipInfo ?? null)
+        let affiliateInfo: RestaurantDetailAffiliateInfo = .init(text: response.partnershipInfo ?? "제휴정보 없음")
         let ratingInfo: RestaurantDetailRating = .init(count: response.evaluationCount ?? 0, score: response.restaurantScore)
         let menuInfos: [RestaurantDetailMenu] = response.restaurantMenuList?.compactMap ({ menu in
                 .init(imageURLString: menu.menuImgUrl ?? null, title: menu.menuName ?? null, price: menu.menuPrice ?? null)
