@@ -31,7 +31,7 @@ final class RestaurantDetailTitleCell: UITableViewCell {
     func update(item: RestaurantDetailCellItem) {
         guard let item = item as? RestaurantDetailTitle else { return }
         
-        cuisineTypeLabel.text = item.cuisineType
+        cuisineTypeLabel.text = "\(item.cuisineType) | \(item.restaurantPosition)"
         titleLabel.text = item.title
         reviewCompleteIconImageView.isHidden = !item.isReviewCompleted
         addressInfoView.text = item.address
@@ -47,10 +47,23 @@ extension RestaurantDetailTitleCell {
         layer.cornerCurve = .continuous
         layer.cornerRadius = 13
         clipsToBounds = true
-        reviewCompleteIconImageView.image = .init(systemName: "person.fill")
-        addressInfoView.image = .init(systemName: "person.fill")
-        openingHoursInfoView.image = .init(systemName: "person.fill")
+        reviewCompleteIconImageView.image = .init(named: "icon_check")
+        reviewCompleteIconImageView.contentMode = .scaleAspectFit
+        addressInfoView.image = .init(named: "icon_map_marker_gray")
+        openingHoursInfoView.image = .init(named: "icon_business_hour")
         lineView.backgroundColor = .gray100
+        
+        cuisineTypeLabel.font = .Pretendard.regular12
+        cuisineTypeLabel.textColor = .Sementic.gray600
+        
+        titleLabel.font = .Pretendard.bold20
+        titleLabel.textColor = .Sementic.gray800
+        
+        let attributedString = NSMutableAttributedString(string: "네이버 지도로 이동하기")
+        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttribute(.font, value: UIFont.Pretendard.medium12, range: NSRange(location: 0, length: attributedString.length))
+        goToMapNavigationLabel.textColor = .Signature.green100
+        goToMapNavigationLabel.attributedText = attributedString
     }
     
     private func setupLayout() {
@@ -133,7 +146,11 @@ final fileprivate class InfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupStyle() { }
+    private func setupStyle() {
+        label.font = .Pretendard.medium15
+        label.textColor = .Sementic.gray300
+        iconImageView.contentMode = .scaleAspectFit
+    }
     
     private func setupLayout() {
         addSubview(iconImageView, autoLayout: [.centerY(0), .leading(0), .width(15), .height(15)])

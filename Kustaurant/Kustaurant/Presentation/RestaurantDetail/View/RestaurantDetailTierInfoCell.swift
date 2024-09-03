@@ -52,6 +52,8 @@ final class RestaurantDetailTierInfoCell: UITableViewCell {
         selectionStyle = .none
         
         titleLabel.text = "티어 정보"
+        titleLabel.font = .Pretendard.regular14
+        titleLabel.textColor = .Sementic.gray800
         
         collectionView.delegate = self
         collectionView.dataSource = self
