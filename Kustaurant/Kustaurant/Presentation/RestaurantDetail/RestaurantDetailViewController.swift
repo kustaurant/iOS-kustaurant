@@ -20,10 +20,9 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     
     init(viewModel: RestaurantDetailViewModel) {
         self.viewModel = viewModel
-        
         super.init(nibName: nil, bundle: nil)
-        
         viewModel.state = .fetch
+        setupNavigationBar()
         bind()
         setupTableView()
         setupAffiliateFloatingView()
@@ -50,6 +49,39 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
 }
 
 extension RestaurantDetailViewController {
+    
+    private func setupNavigationBar() {
+        let backImage = UIImage(named: "icon_back_white")
+        let backButtonView = UIImageView(image: backImage)
+        let backButton = UIBarButtonItem(customView: backButtonView)
+        let backTapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
+        backButtonView.contentMode = .left
+        backButtonView.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        backButtonView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        backButtonView.addGestureRecognizer(backTapGesture)
+        backButtonView.isUserInteractionEnabled = true
+        
+        let searchImage = UIImage(named: "icon_search_white")
+        let searchButtonView = UIImageView(image: searchImage)
+        let searchButton = UIBarButtonItem(customView: searchButtonView)
+        let searchTapGesture = UITapGestureRecognizer(target: self, action: #selector(searchButtonTapped))
+        searchButtonView.contentMode = .right
+        searchButtonView.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        searchButtonView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        searchButtonView.addGestureRecognizer(searchTapGesture)
+        searchButtonView.isUserInteractionEnabled = true
+        
+        navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = searchButton
+    }
+    
+    @objc private func backButtonTapped() {
+        viewModel.state = .didTapBackButton
+    }
+    
+    @objc private func searchButtonTapped() {
+        viewModel.state = .didTapSearchButton
+    }
     
     private func setupTableView() {
         tableView.delegate = self

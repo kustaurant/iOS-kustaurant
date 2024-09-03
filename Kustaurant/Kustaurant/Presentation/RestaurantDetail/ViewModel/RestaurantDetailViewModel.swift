@@ -11,6 +11,7 @@ import Combine
 struct RestaurantDetailViewModelActions {
     let pop: () -> Void
     let showEvaluateScene: () -> Void
+    let showSearchScene: () -> Void
 }
 
 enum RestaurantDetailTabType: Int {
@@ -37,6 +38,8 @@ extension RestaurantDetailViewModel {
         case fetch
         case didTab(at: RestaurantDetailTabType)
         case didTapEvaluationButton
+        case didTapBackButton
+        case didTapSearchButton
     }
     
     enum Action {
@@ -94,6 +97,12 @@ extension RestaurantDetailViewModel {
                     
                 case .didTapEvaluationButton:
                     self?.actions.showEvaluateScene()
+                    
+                case .didTapBackButton:
+                    self?.actions.pop()
+                    
+                case .didTapSearchButton:
+                    self?.actions.showSearchScene()
                 }
             }
             .store(in: &cancellables)
