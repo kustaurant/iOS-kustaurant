@@ -45,14 +45,15 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
             isReviewCompleted: response.isEvaluated ?? false,
             address: response.restaurantAddress ?? null,
             openingHours: response.businessHours ?? null,
-            mapURL: .init(string: response.naverMapURLString ?? null)
+            mapURL: .init(string: response.naverMapURLString ?? null),
+            restaurantPosition: response.restaurantPosition ?? ""
         )
         let tierInfos: [RestaurantDetailTierInfo] = [.init(
-            iconImageName: response.mainTier?.iconImageName,
+            restaurantCuisine: response.restaurantCuisine,
             title: "\(response.restaurantCuisine ?? null) \(response.mainTier?.rawValue ?? 0)티어",
             backgroundColor: response.mainTier?.backgroundColor()
         )] + (response.situationList?.compactMap { title in
-            return .init(iconImageName: nil, title: title, backgroundColor: .green100)
+            return .init(restaurantCuisine: nil, title: title, backgroundColor: .green100)
         } ?? [])
         let affiliateInfo: RestaurantDetailAffiliateInfo = .init(text: response.partnershipInfo ?? null)
         let ratingInfo: RestaurantDetailRating = .init(count: response.evaluationCount ?? 0, score: response.restaurantScore)

@@ -24,7 +24,11 @@ final class RestaurantDetailTierCell: UICollectionViewCell {
     }
     
     func update(item: RestaurantDetailTierInfo) {
-        iconImageView.image = .init(named: item.iconImageName ?? "")
+        if
+            let cuisineString = item.restaurantCuisine,
+            let cuisine = Cuisine(rawValue: cuisineString) {
+            iconImageView.image = .init(named: cuisine.iconName)
+        }
         label.text = item.title
         contentView.backgroundColor = item.backgroundColor
     }
@@ -33,6 +37,8 @@ final class RestaurantDetailTierCell: UICollectionViewCell {
         iconImageView.contentMode = .scaleAspectFit
         contentView.layer.cornerCurve = .continuous
         contentView.layer.cornerRadius = 6
+        label.textColor = .white
+        label.font = .Pretendard.bold17
     }
     
     private func setupLayout() {

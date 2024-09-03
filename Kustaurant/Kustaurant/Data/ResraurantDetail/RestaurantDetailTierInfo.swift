@@ -13,7 +13,7 @@ struct RestaurantDetailTiers: RestaurantDetailCellItem {
 
 struct RestaurantDetailTierInfo {
     
-    let iconImageName: String?
+    let restaurantCuisine: String?
     let title: String
     let backgroundColor: UIColor?
 }
