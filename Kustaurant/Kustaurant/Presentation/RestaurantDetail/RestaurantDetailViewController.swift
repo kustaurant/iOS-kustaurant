@@ -22,7 +22,6 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         viewModel.state = .fetch
-        setupNavigationBar()
         bind()
         setupTableView()
         setupAffiliateFloatingView()
@@ -39,49 +38,16 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showNavigationBar(animated: false)
+        hideNavigationBar(animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        hideNavigationBar(animated: false)
+        showNavigationBar(animated: false)
     }
 }
 
 extension RestaurantDetailViewController {
-    
-    private func setupNavigationBar() {
-        let backImage = UIImage(named: "icon_back_white")
-        let backButtonView = UIImageView(image: backImage)
-        let backButton = UIBarButtonItem(customView: backButtonView)
-        let backTapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonView.contentMode = .left
-        backButtonView.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        backButtonView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        backButtonView.addGestureRecognizer(backTapGesture)
-        backButtonView.isUserInteractionEnabled = true
-        
-        let searchImage = UIImage(named: "icon_search_white")
-        let searchButtonView = UIImageView(image: searchImage)
-        let searchButton = UIBarButtonItem(customView: searchButtonView)
-        let searchTapGesture = UITapGestureRecognizer(target: self, action: #selector(searchButtonTapped))
-        searchButtonView.contentMode = .right
-        searchButtonView.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        searchButtonView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        searchButtonView.addGestureRecognizer(searchTapGesture)
-        searchButtonView.isUserInteractionEnabled = true
-        
-        navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = searchButton
-    }
-    
-    @objc private func backButtonTapped() {
-        viewModel.state = .didTapBackButton
-    }
-    
-    @objc private func searchButtonTapped() {
-        viewModel.state = .didTapSearchButton
-    }
     
     private func setupTableView() {
         tableView.delegate = self
@@ -126,12 +92,18 @@ extension RestaurantDetailViewController {
                     self?.tableView.reloadData()
                     
                 case .didFetchHeaderImage(let image):
-                    let headerView: RestaurantDetailStretchyHeaderView = .init(frame: .init(x: 0, y: 0, width: self?.view.bounds.width ?? 0, height: 72))
+                    let headerView: RestaurantDetailStretchyHeaderView = .init(frame: .init(x: 0, y: 0, width: self?.view.bounds.width ?? 0, height: 72 + self!.view.safeAreaInsets.top))
                     headerView.update(image: image)
                     if let scrollView = self?.tableView {
                         headerView.update(contentInset: scrollView.contentInset, contentOffset: scrollView.contentOffset)
                     }
                     headerView.layer.zPosition = -1
+                    headerView.didTapBackButton = {
+                        self?.viewModel.state = .didTapBackButton
+                    }
+                    headerView.didTapSearchButton = {
+                        self?.viewModel.state = .didTapSearchButton
+                    }
                     self?.tableView.tableHeaderView = headerView
                     
                 case .loginStatus(let loginStatus):
