@@ -71,7 +71,12 @@ fileprivate final class RatingView: UIView {
         self.ratingLabel.text = rating
     }
     
-    private func setupStyle() { }
+    private func setupStyle() {
+        titleLabel.font = .Pretendard.regular12
+        titleLabel.textColor = .Sementic.gray800
+        ratingLabel.font = .Pretendard.bold18
+        ratingLabel.textColor = .Sementic.gray800
+    }
     
     private func setupLayout() {
         let stackView: UIStackView = .init(arrangedSubviews: [titleLabel, ratingLabel])
