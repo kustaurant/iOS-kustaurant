@@ -19,11 +19,14 @@ final class RestaurantDetailTitleCell: UITableViewCell {
     private let lineView: UIView = .init()
     private let tierIconView: UIImageView = .init()
     
+    private var placeId: Int?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupStyle()
         setupLayout()
+        setupGoToMapNavigationLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -41,6 +44,7 @@ final class RestaurantDetailTitleCell: UITableViewCell {
         if let tier = item.tier, tier != .unowned {
             tierIconView.image = UIImage(named: tier.iconImageName)
         }
+        self.placeId = item.placeId
     }
 }
 
@@ -114,6 +118,18 @@ extension RestaurantDetailTitleCell {
         contentView.addSubview(containerView, autoLayout: [.fill(0)])
         containerView.addSubview(mainStackView, autoLayout: [.fillX(20), .top(33)])
         contentView.addSubview(lineView, autoLayout: [.fillX(0), .height(3), .topNext(to: mainStackView, constant: 33), .bottom(23)])
+    }
+    
+    private func setupGoToMapNavigationLabel() {
+        goToMapNavigationLabel.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToMapNavigationLabelTapped))
+        goToMapNavigationLabel.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func goToMapNavigationLabelTapped() {
+        if let placeId = placeId {
+            NaverMapExternalLinkService.openNaverMapOrAppStore(with: placeId)
+        }
     }
 }
 
