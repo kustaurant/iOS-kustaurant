@@ -16,4 +16,5 @@ struct RestaurantDetailTitle: RestaurantDetailCellItem {
     let openingHours: String
     let mapURL: URL?
     let restaurantPosition: String
+    let tier: Tier?
 }

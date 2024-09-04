@@ -9,6 +9,7 @@ import UIKit
 
 final class RestaurantDetailTitleCell: UITableViewCell {
     
+    private let containerView: UIView = .init()
     private let cuisineTypeLabel: UILabel = .init()
     private let titleLabel: UILabel = .init()
     private let reviewCompleteIconImageView: UIImageView = .init()
@@ -16,6 +17,7 @@ final class RestaurantDetailTitleCell: UITableViewCell {
     private let openingHoursInfoView: InfoView = .init()
     private let goToMapNavigationLabel: UILabel = .init()
     private let lineView: UIView = .init()
+    private let tierIconView: UIImageView = .init()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,6 +38,9 @@ final class RestaurantDetailTitleCell: UITableViewCell {
         reviewCompleteIconImageView.isHidden = !item.isReviewCompleted
         addressInfoView.text = item.address
         openingHoursInfoView.text = item.openingHours
+        if let tier = item.tier, tier != .unowned {
+            tierIconView.image = UIImage(named: tier.iconImageName)
+        }
     }
 }
 
@@ -44,14 +49,16 @@ extension RestaurantDetailTitleCell {
     private func setupStyle() {
         selectionStyle = .none
         
-        layer.cornerCurve = .continuous
-        layer.cornerRadius = 13
-        clipsToBounds = true
+        containerView.layer.cornerCurve = .continuous
+        containerView.layer.cornerRadius = 13
+        containerView.clipsToBounds = true
         reviewCompleteIconImageView.image = .init(named: "icon_check")
         reviewCompleteIconImageView.contentMode = .scaleAspectFit
         addressInfoView.image = .init(named: "icon_map_marker_gray")
         openingHoursInfoView.image = .init(named: "icon_business_hour")
         lineView.backgroundColor = .gray100
+        
+        tierIconView.contentMode = .scaleAspectFit
         
         cuisineTypeLabel.font = .Pretendard.regular12
         cuisineTypeLabel.textColor = .Sementic.gray600
@@ -67,6 +74,8 @@ extension RestaurantDetailTitleCell {
     }
     
     private func setupLayout() {
+        contentView.addSubview(tierIconView, autoLayout: [.trailing(15), .top(-20), .width(38), .height(40)])
+        
         let titleHStackView: UIStackView = .init()
         titleHStackView.axis = .horizontal
         titleHStackView.alignment = .center
@@ -102,7 +111,8 @@ extension RestaurantDetailTitleCell {
         mainStackView.addArrangedSubview(topSectionStackView)
         mainStackView.addArrangedSubview(bottomSectionStackView)
         
-        contentView.addSubview(mainStackView, autoLayout: [.fillX(20), .top(33)])
+        contentView.addSubview(containerView, autoLayout: [.fill(0)])
+        containerView.addSubview(mainStackView, autoLayout: [.fillX(20), .top(33)])
         contentView.addSubview(lineView, autoLayout: [.fillX(0), .height(3), .topNext(to: mainStackView, constant: 33), .bottom(23)])
     }
 }

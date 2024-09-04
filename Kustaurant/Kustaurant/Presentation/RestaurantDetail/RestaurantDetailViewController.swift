@@ -40,11 +40,6 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         super.viewWillAppear(animated)
         hideNavigationBar(animated: false)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        showNavigationBar(animated: false)
-    }
 }
 
 extension RestaurantDetailViewController {

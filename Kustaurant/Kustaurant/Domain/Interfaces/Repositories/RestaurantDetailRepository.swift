@@ -46,7 +46,8 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
             address: response.restaurantAddress ?? null,
             openingHours: response.businessHours ?? null,
             mapURL: .init(string: response.naverMapURLString ?? null),
-            restaurantPosition: response.restaurantPosition ?? ""
+            restaurantPosition: response.restaurantPosition ?? "",
+            tier: response.mainTier
         )
         let tierInfos: [RestaurantDetailTierInfo] = [.init(
             restaurantCuisine: response.restaurantCuisine,
