@@ -27,10 +27,14 @@ final class RestaurantDetailAffiliateInfoCell: UITableViewCell {
         guard let item = item as? RestaurantDetailAffiliateInfo else { return }
         label.text = item.text
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
 }
 
 extension RestaurantDetailAffiliateInfoCell {
-        
+    
     private func setupLayout() {
         contentView.addSubview(titleLabel, autoLayout: [.fillX(20), .top(0)])
         contentView.addSubview(label, autoLayout: [.fillX(20), .topNext(to: titleLabel, constant: 15), .bottom(31)])
@@ -48,13 +52,13 @@ extension RestaurantDetailAffiliateInfoCell {
         label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
     }
-
+    
     private func setupLabelGesture() {
         label.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapLabel))
         label.addGestureRecognizer(tapGesture)
     }
-        
+    
     @objc private func didTapLabel() {
         if label.numberOfLines == 0 {
             label.numberOfLines = 2

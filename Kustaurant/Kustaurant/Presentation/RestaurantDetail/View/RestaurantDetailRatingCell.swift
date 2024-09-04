@@ -8,6 +8,8 @@
 import UIKit
 
 final class RestaurantDetailRatingCell: UITableViewCell {
+    private let shadowContainerView: UIView = .init()
+    private let containerView: UIView = .init()
     private let ratingCountView: RatingView = .init()
     private let lineView: LineView = .init()
     private let ratingScoreView: RatingView = .init()
@@ -23,6 +25,11 @@ final class RestaurantDetailRatingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        shadowContainerView.frame = containerView.frame
+    }
+    
     func update(item: RestaurantDetailCellItem) {
         guard let item = item as? RestaurantDetailRating else { return }
         
@@ -32,15 +39,25 @@ final class RestaurantDetailRatingCell: UITableViewCell {
     
     private func setupStyle() {
         selectionStyle = .none
+        shadowContainerView.backgroundColor = .white
+        shadowContainerView.layer.cornerRadius = 13
+        shadowContainerView.layer.shadowColor = UIColor.black.cgColor
+        shadowContainerView.layer.shadowOpacity = 0.1
+        shadowContainerView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        shadowContainerView.layer.shadowRadius = 6
+        shadowContainerView.layer.masksToBounds = false
     }
     
     private func setupLayout() {
+        contentView.addSubview(shadowContainerView, autoLayout: [.fillX(0), .top(0), .bottom(30)])
+        shadowContainerView.addSubview(containerView, autoLayout: [.fill(0)])
+        
         let stackView: UIStackView = .init(arrangedSubviews: [ratingCountView, lineView, ratingScoreView])
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fillProportionally
         
-        contentView.addSubview(stackView, autoLayout: [.fill(0)])
+        containerView.addSubview(stackView, autoLayout: [.fillX(0), .top(0), .bottom(20)])
         [ratingCountView, ratingScoreView].forEach {
             $0.autolayout([.width(UIScreen.main.bounds.width / 2 - 1)])
         }
