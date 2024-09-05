@@ -8,6 +8,11 @@
 import UIKit
 import Combine
 
+enum RestaurantDetailReviewMenuType {
+    case report(commentId: Int)
+    case delete(commentId: Int)
+}
+
 protocol RestaurantDetailReviewCellType {
     var reviewView: RestaurantDetailReviewView { get }
     func updateReviewView(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus)
@@ -31,6 +36,9 @@ final class RestaurantDetailReviewView: UIView {
     private var likeButtonWidthConstraint: NSLayoutConstraint?
     private var dislikeButtonWidthConstraint: NSLayoutConstraint?
     
+    private let reportTapSubject = PassthroughSubject<Void, Never>()
+    private let deleteTapSubject = PassthroughSubject<Void, Never>()
+    
     private var item: RestaurantDetailReview?
     
     init() {
@@ -41,67 +49,6 @@ final class RestaurantDetailReviewView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func likeButtonTapPublisher() -> AnyPublisher<Void, Never> {
-        return likeButton.tapPublisher()
-    }
-    
-    func dislikeButtonTapPublisher() -> AnyPublisher<Void, Never> {
-        return dislikeButton.tapPublisher()
-    }
-    
-    func update(item: RestaurantDetailReview) {
-        self.item = item
-        let defaultImage = UIImage(systemName: "person.fill")
-        if let url = URL(string: item.profileImageURLString) {
-            ImageCacheManager.shared.loadImage(from: url, defaultImage: defaultImage) { [weak self] image in
-                self?.profileImageView.image = image
-            }
-        }
-        nicknameLabel.text = item.nickname
-        barView.backgroundColor = .gray100
-        timeLabel.text = item.time
-        photoImageView.isHidden = true
-        if let url = URL(string: item.photoImageURLString) {
-            ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
-                self?.photoImageView.image = image
-                self?.photoImageView.isHidden = image == nil
-            }
-        }
-        reviewLabel.text = item.review
-        commentsButton.isHidden = item.isComment
-        likeButton.configuration?.title = "\(item.likeCount)"
-        likeButtonWidthConstraint?.constant = likeButton.intrinsicContentSize.width
-        dislikeButton.configuration?.title = "\(item.dislikeCount)"
-        dislikeButtonWidthConstraint?.constant = dislikeButton.intrinsicContentSize.width
-        
-        updateButtonConfiguration(likeCount: item.likeCount, dislikeCount: item.dislikeCount, likeStatus: item.likeStatus)
-        layoutIfNeeded()
-    }
-    
-    func updateButtonConfiguration(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus) {
-        var likeConfiguration: UIButton.Configuration = .plain()
-        let likeTitle = "\(likeCount)"
-        likeConfiguration.image = UIImage(named: likeStatus.thumbsUpIconImageName)
-        likeConfiguration.imagePadding = 4
-        likeConfiguration.contentInsets = .zero
-        likeConfiguration.attributedTitle = AttributedString(likeTitle, attributes: AttributeContainer([
-            .font: UIFont.Pretendard.regular11,
-            .foregroundColor: likeStatus.foregroundColor
-        ]))
-        likeButton.configuration = likeConfiguration
-        
-        var dislikeConfiguration: UIButton.Configuration = .plain()
-        let dislikeTitle = "\(dislikeCount)"
-        dislikeConfiguration.image = UIImage(named: likeStatus.thumbsDownIconImageName)
-        dislikeConfiguration.imagePadding = 4
-        dislikeConfiguration.contentInsets = .zero
-        dislikeConfiguration.attributedTitle = AttributedString(dislikeTitle, attributes: AttributeContainer([
-            .font: UIFont.Pretendard.regular11,
-            .foregroundColor: likeStatus.foregroundColor
-        ]))
-        dislikeButton.configuration = dislikeConfiguration
     }
     
     private func setupStyle() {
@@ -151,5 +98,104 @@ final class RestaurantDetailReviewView: UIView {
         
         photoImageView.autolayout([.height(207), .width(207)])
         addSubview(mainStackView, autoLayout: [.fill(0)])
+    }
+    
+    func update(item: RestaurantDetailReview) {
+        self.item = item
+        let defaultImage = UIImage(systemName: "person.fill")
+        if let url = URL(string: item.profileImageURLString) {
+            ImageCacheManager.shared.loadImage(from: url, defaultImage: defaultImage) { [weak self] image in
+                self?.profileImageView.image = image
+            }
+        }
+        nicknameLabel.text = item.nickname
+        barView.backgroundColor = .Sementic.gray50
+        timeLabel.text = item.time
+        photoImageView.isHidden = true
+        if let url = URL(string: item.photoImageURLString) {
+            ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
+                self?.photoImageView.image = image
+                self?.photoImageView.isHidden = image == nil
+            }
+        }
+        reviewLabel.text = item.review
+        commentsButton.isHidden = item.isComment
+        likeButton.configuration?.title = "\(item.likeCount)"
+        likeButtonWidthConstraint?.constant = likeButton.intrinsicContentSize.width
+        dislikeButton.configuration?.title = "\(item.dislikeCount)"
+        dislikeButtonWidthConstraint?.constant = dislikeButton.intrinsicContentSize.width
+        
+        updateButtonConfiguration(likeCount: item.likeCount, dislikeCount: item.dislikeCount, likeStatus: item.likeStatus)
+        setupMenuEllipsisButton()
+        layoutIfNeeded()
+    }
+    
+}
+
+// MARK: Like, Dislike
+extension RestaurantDetailReviewView {
+    
+    func likeButtonTapPublisher() -> AnyPublisher<Void, Never> {
+        return likeButton.tapPublisher()
+    }
+    
+    func dislikeButtonTapPublisher() -> AnyPublisher<Void, Never> {
+        return dislikeButton.tapPublisher()
+    }
+    
+    func updateButtonConfiguration(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus) {
+        var likeConfiguration: UIButton.Configuration = .plain()
+        let likeTitle = "\(likeCount)"
+        likeConfiguration.image = UIImage(named: likeStatus.thumbsUpIconImageName)
+        likeConfiguration.imagePadding = 4
+        likeConfiguration.contentInsets = .zero
+        likeConfiguration.attributedTitle = AttributedString(likeTitle, attributes: AttributeContainer([
+            .font: UIFont.Pretendard.regular11,
+            .foregroundColor: likeStatus.foregroundColor
+        ]))
+        likeButton.configuration = likeConfiguration
+        
+        var dislikeConfiguration: UIButton.Configuration = .plain()
+        let dislikeTitle = "\(dislikeCount)"
+        dislikeConfiguration.image = UIImage(named: likeStatus.thumbsDownIconImageName)
+        dislikeConfiguration.imagePadding = 4
+        dislikeConfiguration.contentInsets = .zero
+        dislikeConfiguration.attributedTitle = AttributedString(dislikeTitle, attributes: AttributeContainer([
+            .font: UIFont.Pretendard.regular11,
+            .foregroundColor: likeStatus.foregroundColor
+        ]))
+        dislikeButton.configuration = dislikeConfiguration
+    }
+}
+
+// MARK: Menu
+extension RestaurantDetailReviewView {
+    
+    func reportActionTapPublisher() -> AnyPublisher<Void, Never> {
+        return reportTapSubject.eraseToAnyPublisher()
+    }
+    
+    func deleteActionTapPublisdher() -> AnyPublisher<Void, Never> {
+        return deleteTapSubject.eraseToAnyPublisher()
+    }
+    
+    private func setupMenuEllipsisButton() {
+        var actions: [UIAction] = []
+        
+        let reportAction = UIAction(title: "신고하기", image: UIImage(named: "icon_shield")) { [weak self] _ in
+            self?.reportTapSubject.send()
+        }
+        actions.append(reportAction)
+        
+        if let item = self.item, item.isCommentMine {
+            let deleteAction = UIAction(title: "삭제하기", image: UIImage(named: "icon_trash"), attributes: .destructive) { [weak self] _ in
+                self?.deleteTapSubject.send()
+            }
+            actions.append(deleteAction)
+        }
+        
+        let menu = UIMenu(title: "", children: actions)
+        menuEllipsisButton.menu = menu
+        menuEllipsisButton.showsMenuAsPrimaryAction = true
     }
 }

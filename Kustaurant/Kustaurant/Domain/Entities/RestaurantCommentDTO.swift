@@ -18,6 +18,7 @@ struct RestaurantCommentDTO: Decodable {
     let commentLikeStatus: CommentLikeStatus?
     let commentLikeCount: Int?
     let commentDislikeCount: Int?
+    let isCommentMine: Bool?
     let commentReplies: [RestaurantCommentDTO]?
     
     enum CodingKeys: String, CodingKey {
@@ -31,6 +32,7 @@ struct RestaurantCommentDTO: Decodable {
         case commentLikeStatus = "commentLikeStatus"
         case commentLikeCount = "commentLikeCount"
         case commentDislikeCount = "commentDislikeCount"
+        case isCommentMine = "isCommentMine"
         case commentReplies = "commentReplies"
     }
     
@@ -47,6 +49,7 @@ struct RestaurantCommentDTO: Decodable {
         commentLikeStatus = try? container.decodeIfPresent(CommentLikeStatus.self, forKey: .commentLikeStatus)
         commentLikeCount = try? container.decodeIfPresent(Int.self, forKey: .commentLikeCount)
         commentDislikeCount = try? container.decodeIfPresent(Int.self, forKey: .commentDislikeCount)
+        isCommentMine = try? container.decodeIfPresent(Bool.self, forKey: .isCommentMine)
         commentReplies = try? container.decodeIfPresent([RestaurantCommentDTO].self, forKey: .commentReplies)
     }
 }

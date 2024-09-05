@@ -50,18 +50,6 @@ final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewC
         contentView.addSubview(stackView, autoLayout: [.fillX(20), .top(22)])
         contentView.addSubview(lineView, autoLayout: [.fillX(20), .topNext(to: stackView, constant: 22), .bottom(0), .height(2)])
     }
-    
-    func likeButtonPublisher() -> AnyPublisher<Void, Never> {
-        return reviewView.likeButtonTapPublisher()
-    }
-    
-    func dislikeButtonPublisher() -> AnyPublisher<Void, Never> {
-        return reviewView.dislikeButtonTapPublisher()
-    }
-    
-    func updateReviewView(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus) {
-        reviewView.updateButtonConfiguration(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
-    }
 }
 
 final class StarsRatingStackView: UIStackView {
@@ -138,5 +126,33 @@ final class StarsStackView: UIStackView {
             addArrangedSubview($0)
             $0.autolayout([.width(26), .height(26)])
         }
+    }
+}
+
+// MARK: Like, Dislike
+extension RestaurantDetailReviewCell {
+    
+    func likeButtonPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.likeButtonTapPublisher()
+    }
+    
+    func dislikeButtonPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.dislikeButtonTapPublisher()
+    }
+    
+    func updateReviewView(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus) {
+        reviewView.updateButtonConfiguration(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
+    }
+}
+
+// MARK: Report, Delete
+extension RestaurantDetailReviewCell {
+    
+    func reportTapPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.reportActionTapPublisher()
+    }
+    
+    func deleteTapPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.deleteActionTapPublisdher()
     }
 }

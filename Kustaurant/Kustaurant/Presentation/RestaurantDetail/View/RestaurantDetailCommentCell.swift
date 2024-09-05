@@ -26,7 +26,6 @@ final class RestaurantDetailCommentCell: UITableViewCell, RestaurantDetailReview
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     func update(item: RestaurantDetailCellItem) {
         guard let item = item as? RestaurantDetailReview else { return }
         
@@ -58,7 +57,12 @@ final class RestaurantDetailCommentCell: UITableViewCell, RestaurantDetailReview
         contentView.addSubview(stackView, autoLayout: [.fillX(20), .top(0)])
         contentView.addSubview(lineView, autoLayout: [.fillX(20), .topNext(to: stackView, constant: 22), .bottom(0), .height(2)])
     }
-    
+
+}
+
+// MARK: Like, Dislike
+extension RestaurantDetailCommentCell {
+        
     func likeButtonPublisher() -> AnyPublisher<Void, Never> {
         return reviewView.likeButtonTapPublisher()
     }
@@ -69,5 +73,17 @@ final class RestaurantDetailCommentCell: UITableViewCell, RestaurantDetailReview
     
     func updateReviewView(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus) {
         reviewView.updateButtonConfiguration(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
+    }
+}
+
+// MARK: Report, Delete
+extension RestaurantDetailCommentCell {
+    
+    func reportTapPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.reportActionTapPublisher()
+    }
+    
+    func deleteTapPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.deleteActionTapPublisdher()
     }
 }

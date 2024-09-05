@@ -13,5 +13,7 @@ protocol RestaurantDetailRepository {
     func fetchReviews() async -> [RestaurantDetailCellItem]
     func likeComment(restaurantId: Int, commentId: Int) async -> Result<RestaurantCommentDTO, NetworkError>
     func dislikeComment(restaurantId: Int, commentId: Int) async -> Result<RestaurantCommentDTO, NetworkError>
+    func reportComment(restaurantId: Int, commentId: Int) async -> Bool
+    func deleteComment(restaurantId: Int, commentId: Int) async -> Bool
 }
 

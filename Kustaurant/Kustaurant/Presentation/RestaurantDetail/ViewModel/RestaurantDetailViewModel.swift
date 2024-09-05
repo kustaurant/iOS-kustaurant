@@ -42,6 +42,8 @@ extension RestaurantDetailViewModel {
         case didTapSearchButton
         case didTaplikeCommentButton(indexPath: IndexPath, commentId: Int)
         case didTapDislikeCommentButton(indexPath: IndexPath, commentId: Int)
+        case didTapReportComment(indexPath: IndexPath, commentId: Int)
+        case didTapDeleteComment(indexPath: IndexPath, commentId: Int)
     }
     
     enum Action {
@@ -51,6 +53,7 @@ extension RestaurantDetailViewModel {
         case didChangeTabType
         case loginStatus(LoginStatus)
         case didSuccessLikeOrDisLikeButton(indexPath: IndexPath, likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus)
+        case showAlert(payload: AlertPayload)
     }
 }
 
@@ -112,11 +115,15 @@ extension RestaurantDetailViewModel {
                     
                 case .didTaplikeCommentButton(let indexPath, let commentId):
                     self?.likeComment(indexPath: indexPath, commentId: commentId)
-                    return
                     
                 case .didTapDislikeCommentButton(let indexPath, let commentId):
                     self?.dislikeComment(indexPath: indexPath, commentId: commentId)
-                    return
+                    
+                case .didTapReportComment(let indexPath, let commentId):
+                    self?.reportComment(at: indexPath, commentId: commentId)
+                    
+                case .didTapDeleteComment(let indexPath, let commentId):
+                    self?.deleteComment(at: indexPath, commentId: commentId)
                 }
             }
             .store(in: &cancellables)
@@ -177,7 +184,7 @@ extension RestaurantDetailViewModel {
                             likeStatus: data.commentLikeStatus ?? .none)
                     )
                 case .failure(let failure):
-                    print("fail to like \(failure.localizedDescription)")
+                    Logger.error("fail to like \(failure.localizedDescription)", category: .ui)
                     return
                 }
             }
@@ -198,10 +205,28 @@ extension RestaurantDetailViewModel {
                             likeStatus: data.commentLikeStatus ?? .none)
                     )
                 case .failure(let failure):
-                    print("fail to dislike \(failure.localizedDescription)")
+                    Logger.error("fail to dislike \(failure.localizedDescription)", category: .ui)
                     return
                 }
             }
         }
+    }
+    
+    private func reportComment(at indexPath: IndexPath, commentId: Int) {
+        actionSubject.send(.showAlert(payload: AlertPayload(title: "코멘트를 신고하시겠습니까?", subtitle: "", onConfirm: { [weak self] in
+            guard let self = self else { return }
+            Task {
+                await self.repository.reportComment(restaurantId: self.restaurantId, commentId: commentId)
+            }
+        })))
+    }
+    
+    private func deleteComment(at indexPath: IndexPath, commentId: Int) {
+        actionSubject.send(.showAlert(payload: AlertPayload(title: "댓글을 삭제하시겠습니까?", subtitle: "", onConfirm: { [weak self] in
+            guard let self = self else { return }
+            Task {
+                await self.repository.deleteComment(restaurantId: self.restaurantId, commentId: commentId)
+            }
+        })))
     }
 }

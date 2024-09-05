@@ -45,7 +45,6 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
 extension RestaurantDetailViewController {
     
     private func setupTableView() {
-        tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -55,6 +54,9 @@ extension RestaurantDetailViewController {
         
         tableView.tableHeaderView = nil
         tableView.tableFooterView = nil
+        
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.showsVerticalScrollIndicator = false
         
         tableView.registerCell(ofType: RestaurantDetailTitleCell.self)
         tableView.registerCell(ofType: RestaurantDetailTierInfoCell.self)
@@ -113,6 +115,9 @@ extension RestaurantDetailViewController {
                     }
                     commentCell.updateReviewView(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
                     return
+                    
+                case .showAlert(let payload):
+                    self?.presentAlert(payload: payload)
                 }
             }
             .store(in: &cancellables)
@@ -255,18 +260,35 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             if item.isComment {
                 let cell: RestaurantDetailCommentCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.update(item: item)
+                
                 cell.likeButtonPublisher()
                     .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
                     .sink { [weak self] in
                         self?.viewModel.state = .didTaplikeCommentButton(indexPath: indexPath, commentId: item.commentId)
                     }
                     .store(in: &cancellables)
+                
                 cell.dislikeButtonPublisher()
                     .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
                     .sink { [weak self] in
                         self?.viewModel.state = .didTapDislikeCommentButton(indexPath: indexPath, commentId: item.commentId)
                     }
                     .store(in: &cancellables)
+                
+                cell.reportTapPublisher()
+                    .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                    .sink { [weak self] in
+                        self?.viewModel.state = .didTapReportComment(indexPath: indexPath, commentId: item.commentId)
+                    }
+                    .store(in: &cancellables)
+                
+                cell.deleteTapPublisher()
+                    .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                    .sink { [weak self] in
+                        self?.viewModel.state = .didTapDeleteComment(indexPath: indexPath, commentId: item.commentId)
+                    }
+                    .store(in: &cancellables)
+                
                 
                 return cell
             }
@@ -285,7 +307,36 @@ extension RestaurantDetailViewController: UITableViewDataSource {
                     self?.viewModel.state = .didTapDislikeCommentButton(indexPath: indexPath, commentId: item.commentId)
                 }
                 .store(in: &cancellables)
+            
+            cell.reportTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink { [weak self] in
+                    self?.viewModel.state = .didTapReportComment(indexPath: indexPath, commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
+            cell.deleteTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink { [weak self] in
+                    self?.viewModel.state = .didTapDeleteComment(indexPath: indexPath, commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
             return cell
         }
     }
 }
+
+extension RestaurantDetailViewController {
+    
+    private func presentAlert(payload: AlertPayload) {
+        let alert = UIAlertController(title: payload.title, message: payload.subtitle, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .default, handler: { _ in
+        }))
+        alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { _ in
+            payload.onConfirm?()
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+}
+

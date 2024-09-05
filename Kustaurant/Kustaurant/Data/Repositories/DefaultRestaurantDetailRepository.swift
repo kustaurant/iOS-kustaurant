@@ -87,7 +87,8 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
                 likeCount: comment.commentLikeCount ?? 0,
                 dislikeCount: comment.commentDislikeCount ?? 0,
                 likeStatus: comment.commentLikeStatus ?? .none,
-                commentId: comment.commentID ?? -1
+                commentId: comment.commentID ?? -1,
+                isCommentMine: comment.isCommentMine ?? false
             )] + (comment.commentReplies?.enumerated().map { index, reply in
                 RestaurantDetailReview(
                     profileImageURLString: reply.commentIconImageURLString ?? null,
@@ -101,7 +102,8 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
                     likeCount: reply.commentLikeCount ?? 0,
                     dislikeCount: reply.commentDislikeCount ?? 0,
                     likeStatus: comment.commentLikeStatus ?? .none,
-                    commentId: comment.commentID ?? -1
+                    commentId: comment.commentID ?? -1,
+                    isCommentMine: comment.isCommentMine ?? false
                 )
             } ?? [])
         } ?? []).flatMap { $0 }
@@ -142,5 +144,34 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         }
         
         return .success(data)
+    }
+    
+    func reportComment(restaurantId: Int, commentId: Int) async -> Bool {
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/restaurants/\(restaurantId)/comments/\(commentId)/report", method: .post)
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        
+        if let error = response.error {
+            Logger.error(error.localizedDescription, category: .network)
+            return false
+        }
+        
+        return true
+    }
+    
+    func deleteComment(restaurantId: Int, commentId: Int) async -> Bool {
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/restaurants/\(restaurantId)/comments/\(commentId)", method: .delete)
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        
+        if let error = response.error {
+            return false
+        }
+        
+        return true
     }
 }
