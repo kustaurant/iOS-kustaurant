@@ -28,6 +28,8 @@ final class RestaurantDetailRatingCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         shadowContainerView.frame = containerView.frame
+        let shadowRect = CGRect(x: 0, y: shadowContainerView.bounds.height - 10, width: shadowContainerView.bounds.width, height: 10)
+        shadowContainerView.layer.shadowPath = UIBezierPath(rect: shadowRect).cgPath
     }
     
     func update(item: RestaurantDetailCellItem) {
