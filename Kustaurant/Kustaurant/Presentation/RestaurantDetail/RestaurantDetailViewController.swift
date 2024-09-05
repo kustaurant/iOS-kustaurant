@@ -45,6 +45,7 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
 extension RestaurantDetailViewController {
     
     private func setupTableView() {
+        tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -87,7 +88,7 @@ extension RestaurantDetailViewController {
                     self?.tableView.reloadData()
                     
                 case .didFetchHeaderImage(let image):
-                    let headerView: RestaurantDetailStretchyHeaderView = .init(frame: .init(x: 0, y: 0, width: self?.view.bounds.width ?? 0, height: 72 + self!.view.safeAreaInsets.top))
+                    let headerView: RestaurantDetailStretchyHeaderView = .init(frame: .init(x: 0, y: 0, width: self?.view.bounds.width ?? 0, height: 145 + self!.view.safeAreaInsets.top))
                     headerView.update(image: image)
                     if let scrollView = self?.tableView {
                         headerView.update(contentInset: scrollView.contentInset, contentOffset: scrollView.contentOffset)
@@ -131,15 +132,19 @@ extension RestaurantDetailViewController: UITableViewDelegate {
         guard RestaurantDetailSection(index: section) == .tab
         else { return .zero }
         
-        return KuTabBarView.height + 26
+        return KuTabBarView.height + view.safeAreaInsets.top
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard RestaurantDetailSection(index: indexPath.section) == .tier else {
-            return UITableView.automaticDimension
+        if RestaurantDetailSection(index: indexPath.section) == .tier {
+            return tierCellHeightSubject.value
         }
         
-        return tierCellHeightSubject.value
+        if RestaurantDetailSection(index: indexPath.section) == .rating {
+            return 71
+        }
+        
+        return UITableView.automaticDimension
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -270,16 +275,16 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             cell.likeButtonPublisher()
                 .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
                 .sink { [weak self] in
-                self?.viewModel.state = .didTaplikeCommentButton(indexPath: indexPath, commentId: item.commentId)
-            }
-            .store(in: &cancellables)
+                    self?.viewModel.state = .didTaplikeCommentButton(indexPath: indexPath, commentId: item.commentId)
+                }
+                .store(in: &cancellables)
             
             cell.dislikeButtonPublisher()
                 .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
                 .sink { [weak self] in
-                self?.viewModel.state = .didTapDislikeCommentButton(indexPath: indexPath, commentId: item.commentId)
-            }
-            .store(in: &cancellables)
+                    self?.viewModel.state = .didTapDislikeCommentButton(indexPath: indexPath, commentId: item.commentId)
+                }
+                .store(in: &cancellables)
             return cell
         }
     }

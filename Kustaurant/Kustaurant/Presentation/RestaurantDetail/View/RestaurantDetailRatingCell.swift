@@ -28,7 +28,7 @@ final class RestaurantDetailRatingCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         shadowContainerView.frame = containerView.frame
-        let shadowRect = CGRect(x: 0, y: shadowContainerView.bounds.height - 10, width: shadowContainerView.bounds.width, height: 10)
+        let shadowRect = CGRect(x: 0, y: shadowContainerView.bounds.height - 5, width: shadowContainerView.bounds.width, height: 5)
         shadowContainerView.layer.shadowPath = UIBezierPath(rect: shadowRect).cgPath
     }
     
@@ -44,14 +44,13 @@ final class RestaurantDetailRatingCell: UITableViewCell {
         shadowContainerView.backgroundColor = .white
         shadowContainerView.layer.cornerRadius = 13
         shadowContainerView.layer.shadowColor = UIColor.black.cgColor
-        shadowContainerView.layer.shadowOpacity = 0.1
-        shadowContainerView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        shadowContainerView.layer.shadowOpacity = 0.25
         shadowContainerView.layer.shadowRadius = 6
         shadowContainerView.layer.masksToBounds = false
     }
     
     private func setupLayout() {
-        contentView.addSubview(shadowContainerView, autoLayout: [.fillX(0), .top(0), .bottom(30)])
+        contentView.addSubview(shadowContainerView, autoLayout: [.fillX(0), .top(0), .bottom(10)])
         shadowContainerView.addSubview(containerView, autoLayout: [.fill(0)])
         
         let stackView: UIStackView = .init(arrangedSubviews: [ratingCountView, lineView, ratingScoreView])
@@ -59,7 +58,7 @@ final class RestaurantDetailRatingCell: UITableViewCell {
         stackView.alignment = .center
         stackView.distribution = .fillProportionally
         
-        containerView.addSubview(stackView, autoLayout: [.fillX(0), .top(0), .bottom(20)])
+        containerView.addSubview(stackView, autoLayout: [.fillX(0), .top(0), .bottom(0)])
         [ratingCountView, ratingScoreView].forEach {
             $0.autolayout([.width(UIScreen.main.bounds.width / 2 - 1)])
         }
