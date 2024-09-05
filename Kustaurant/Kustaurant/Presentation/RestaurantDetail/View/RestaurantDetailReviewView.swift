@@ -130,6 +130,9 @@ final class RestaurantDetailReviewView: UIView {
         layoutIfNeeded()
     }
     
+    func commentButtonTapPublisher() -> AnyPublisher<Void, Never> {
+        return commentsButton.tapPublisher()
+    }
 }
 
 // MARK: Like, Dislike

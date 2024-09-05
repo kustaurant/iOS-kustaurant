@@ -12,15 +12,23 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     
     private let tableView: UITableView = .init()
     private let affiliateFloatingView: AffiliabteFloatingView = .init()
+    private let commentAccessoryView: CommentAccessoryView = .init()
     
     private let viewModel: RestaurantDetailViewModel
     private let tierCellHeightSubject: CurrentValueSubject<CGFloat, Never> = .init(0)
     private var tabCancellable: AnyCancellable?
     private var cancellables: Set<AnyCancellable> = .init()
     
+    private var accessoryViewHandler: RestaurantDetailAccessoryViewHandler?
+    
     init(viewModel: RestaurantDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.accessoryViewHandler = RestaurantDetailAccessoryViewHandler(
+            viewController: self,
+            accessoryView: commentAccessoryView,
+            viewModel: viewModel
+        )
         viewModel.state = .fetch
         bind()
         setupTableView()
@@ -34,6 +42,7 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        accessoryViewHandler?.setupAccessoryView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +88,7 @@ extension RestaurantDetailViewController {
     private func setupLayout() {
         view.addSubview(tableView, autoLayout: [.fill(0)])
         view.addSubview(affiliateFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84 + view.safeAreaInsets.bottom)])
+        view.addSubview(commentAccessoryView, autoLayout: [.fillX(0), .height(68), .bottomKeyboard(0)])
     }
     
     private func bind() {
@@ -118,6 +128,9 @@ extension RestaurantDetailViewController {
                     
                 case .showAlert(let payload):
                     self?.presentAlert(payload: payload)
+                    
+                case .showKeyboard(let indexPath, let commentId):
+                    self?.accessoryViewHandler?.showKeyboard(indexPath: indexPath, commentId: commentId)
                 }
             }
             .store(in: &cancellables)
@@ -126,6 +139,14 @@ extension RestaurantDetailViewController {
             .removeDuplicates()
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
+            }
+            .store(in: &cancellables)
+        
+        accessoryViewHandler?.sendButtonTapPublisher()
+            .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+            .sink { [weak self] payload in
+                self?.accessoryViewHandler?.hideKeyboard()
+                self?.viewModel.state = .didTapSendButtonInAccessory(payload: payload)
             }
             .store(in: &cancellables)
     }
@@ -289,9 +310,16 @@ extension RestaurantDetailViewController: UITableViewDataSource {
                     }
                     .store(in: &cancellables)
                 
+                cell.commentTapPublisher()
+                    .sink { [weak self] in
+                        self?.viewModel.state = .didTapCommentButton(indexPath: indexPath, commentId: item.commentId)
+                    }
+                    .store(in: &cancellables)
+                
                 
                 return cell
             }
+            
             let cell: RestaurantDetailReviewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.update(item: item)
             cell.likeButtonPublisher()
@@ -322,11 +350,19 @@ extension RestaurantDetailViewController: UITableViewDataSource {
                 }
                 .store(in: &cancellables)
             
+            cell.commentTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink { [weak self] in
+                    self?.viewModel.state = .didTapCommentButton(indexPath: indexPath, commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
             return cell
         }
     }
 }
 
+// MARK: Alert
 extension RestaurantDetailViewController {
     
     private func presentAlert(payload: AlertPayload) {
@@ -339,4 +375,3 @@ extension RestaurantDetailViewController {
         present(alert, animated: true, completion: nil)
     }
 }
-

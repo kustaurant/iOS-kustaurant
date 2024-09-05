@@ -87,3 +87,10 @@ extension RestaurantDetailCommentCell {
         return reviewView.deleteActionTapPublisdher()
     }
 }
+
+extension RestaurantDetailCommentCell {
+    
+    func commentTapPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.commentButtonTapPublisher()
+    }
+}

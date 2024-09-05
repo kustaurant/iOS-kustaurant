@@ -44,6 +44,8 @@ extension RestaurantDetailViewModel {
         case didTapDislikeCommentButton(indexPath: IndexPath, commentId: Int)
         case didTapReportComment(indexPath: IndexPath, commentId: Int)
         case didTapDeleteComment(indexPath: IndexPath, commentId: Int)
+        case didTapCommentButton(indexPath: IndexPath, commentId: Int)
+        case didTapSendButtonInAccessory(payload: CommentPayload)
     }
     
     enum Action {
@@ -54,6 +56,7 @@ extension RestaurantDetailViewModel {
         case loginStatus(LoginStatus)
         case didSuccessLikeOrDisLikeButton(indexPath: IndexPath, likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus)
         case showAlert(payload: AlertPayload)
+        case showKeyboard(indexPath: IndexPath, commentId: Int)
     }
 }
 
@@ -124,6 +127,12 @@ extension RestaurantDetailViewModel {
                     
                 case .didTapDeleteComment(let indexPath, let commentId):
                     self?.deleteComment(at: indexPath, commentId: commentId)
+                    
+                case .didTapCommentButton(let indexPath, let commentId):
+                    self?.showKeyboard(indexPath: indexPath, commentId: commentId)
+                    
+                case .didTapSendButtonInAccessory(let payload):
+                    self?.addComment(payload: payload)
                 }
             }
             .store(in: &cancellables)
@@ -169,6 +178,11 @@ extension RestaurantDetailViewModel {
             actionSubject.send(.didChangeTabType)
         }
     }
+    
+}
+
+// MARK: Comment
+extension RestaurantDetailViewModel {
     
     private func likeComment(indexPath: IndexPath, commentId: Int) {
         Task {
@@ -228,5 +242,21 @@ extension RestaurantDetailViewModel {
                 await self.repository.deleteComment(restaurantId: self.restaurantId, commentId: commentId)
             }
         })))
+    }
+}
+
+// MARK: Accessory
+extension RestaurantDetailViewModel {
+    
+    private func showKeyboard(indexPath: IndexPath, commentId: Int) {
+        actionSubject.send(.showKeyboard(indexPath: indexPath, commentId: commentId))
+    }
+    
+    private func addComment(payload: CommentPayload) {
+        if let commentId = payload.commentId, let comment = payload.comment {
+            Task {
+                let result = await repository.addComment(restaurantId: restaurantId, commentId: commentId, comment: comment)
+            }
+        }
     }
 }

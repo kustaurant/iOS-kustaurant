@@ -169,6 +169,25 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         let response = await request.responseAsync(with: urlBuilder)
         
         if let error = response.error {
+            Logger.error(error.localizedDescription, category: .network)
+            return false
+        }
+        
+        return true
+    }
+    
+    func addComment(restaurantId: Int, commentId: Int, comment: String) async -> Bool {
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/restaurants/\(restaurantId)/comments/\(commentId)", method: .post)
+        let authInterceptor = AuthorizationInterceptor()
+        urlBuilder.addContentType(.textPlain)
+        let body = comment.data(using: .utf8)
+        urlBuilder.setBody(body)
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        
+        if let error = response.error {
+            Logger.error(error.localizedDescription, category: .network)
             return false
         }
         
