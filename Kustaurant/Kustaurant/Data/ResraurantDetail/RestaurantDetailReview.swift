@@ -19,4 +19,6 @@ struct RestaurantDetailReview: RestaurantDetailCellItem {
     let hasComments: Bool
     let likeCount: Int
     let dislikeCount: Int
+    let likeStatus: CommentLikeStatus
+    let commentId: Int
 }

@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Combine
 
-final class RestaurantDetailCommentCell: UITableViewCell {
+final class RestaurantDetailCommentCell: UITableViewCell, RestaurantDetailReviewCellType {
     
     private let iconImageView: UIImageView = .init()
     private let reviewBackgroundView: UIView = .init()
-    private let reviewView: RestaurantDetailReviewView = .init()
+    var reviewView: RestaurantDetailReviewView = .init()
     private let lineView: UIView = .init()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -24,6 +25,7 @@ final class RestaurantDetailCommentCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
     func update(item: RestaurantDetailCellItem) {
         guard let item = item as? RestaurantDetailReview else { return }
@@ -36,8 +38,11 @@ final class RestaurantDetailCommentCell: UITableViewCell {
         selectionStyle = .none
         
         iconImageView.image = .iconReturnRight
-        reviewBackgroundView.backgroundColor = .gray100
-        lineView.backgroundColor = .gray100
+        reviewBackgroundView.backgroundColor = .Sementic.gray50
+        lineView.backgroundColor = .Sementic.gray75
+        
+        reviewBackgroundView.layer.cornerRadius = 8
+        reviewBackgroundView.clipsToBounds = true
     }
     
     private func setupLayout() {
@@ -52,5 +57,17 @@ final class RestaurantDetailCommentCell: UITableViewCell {
         
         contentView.addSubview(stackView, autoLayout: [.fillX(20), .top(0)])
         contentView.addSubview(lineView, autoLayout: [.fillX(20), .topNext(to: stackView, constant: 22), .bottom(0), .height(2)])
+    }
+    
+    func likeButtonPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.likeButtonTapPublisher()
+    }
+    
+    func dislikeButtonPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.dislikeButtonTapPublisher()
+    }
+    
+    func updateReviewView(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus) {
+        reviewView.updateButtonConfiguration(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
     }
 }

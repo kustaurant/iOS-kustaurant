@@ -40,6 +40,8 @@ extension RestaurantDetailViewModel {
         case didTapEvaluationButton
         case didTapBackButton
         case didTapSearchButton
+        case didTaplikeCommentButton(indexPath: IndexPath, commentId: Int)
+        case didTapDislikeCommentButton(indexPath: IndexPath, commentId: Int)
     }
     
     enum Action {
@@ -48,11 +50,13 @@ extension RestaurantDetailViewModel {
         case didFetchReviews
         case didChangeTabType
         case loginStatus(LoginStatus)
+        case didSuccessLikeOrDisLikeButton(indexPath: IndexPath, likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus)
     }
 }
 
 final class RestaurantDetailViewModel {
     
+    private(set) var restaurantId: Int
     private(set) var detail: RestaurantDetail?
     
     private let repository: any RestaurantDetailRepository
@@ -69,10 +73,12 @@ final class RestaurantDetailViewModel {
     }
     
     init(
+        restaurantId: Int,
         actions: RestaurantDetailViewModelActions,
         repository: any RestaurantDetailRepository,
         authRepository: any AuthRepository
     ) {
+        self.restaurantId = restaurantId
         self.actions = actions
         self.repository = repository
         self.authRepository = authRepository
@@ -103,6 +109,14 @@ extension RestaurantDetailViewModel {
                     
                 case .didTapSearchButton:
                     self?.actions.showSearchScene()
+                    
+                case .didTaplikeCommentButton(let indexPath, let commentId):
+                    self?.likeComment(indexPath: indexPath, commentId: commentId)
+                    return
+                    
+                case .didTapDislikeCommentButton(let indexPath, let commentId):
+                    self?.dislikeComment(indexPath: indexPath, commentId: commentId)
+                    return
                 }
             }
             .store(in: &cancellables)
@@ -146,6 +160,48 @@ extension RestaurantDetailViewModel {
             await detail?.updateTabType(as: type)
             
             actionSubject.send(.didChangeTabType)
+        }
+    }
+    
+    private func likeComment(indexPath: IndexPath, commentId: Int) {
+        Task {
+            let result = await repository.likeComment(restaurantId: restaurantId, commentId: commentId)
+            await MainActor.run {
+                switch result {
+                case .success(let data):
+                    actionSubject.send(
+                        .didSuccessLikeOrDisLikeButton(
+                            indexPath: indexPath,
+                            likeCount: data.commentLikeCount ?? 0,
+                            dislikeCount: data.commentDislikeCount ?? 0,
+                            likeStatus: data.commentLikeStatus ?? .none)
+                    )
+                case .failure(let failure):
+                    print("fail to like \(failure.localizedDescription)")
+                    return
+                }
+            }
+        }
+    }
+    
+    private func dislikeComment(indexPath: IndexPath, commentId: Int) {
+        Task {
+            let result = await repository.dislikeComment(restaurantId: restaurantId, commentId: commentId)
+            await MainActor.run {
+                switch result {
+                case .success(let data):
+                    actionSubject.send(
+                        .didSuccessLikeOrDisLikeButton(
+                            indexPath: indexPath,
+                            likeCount: data.commentLikeCount ?? 0,
+                            dislikeCount: data.commentDislikeCount ?? 0,
+                            likeStatus: data.commentLikeStatus ?? .none)
+                    )
+                case .failure(let failure):
+                    print("fail to dislike \(failure.localizedDescription)")
+                    return
+                }
+            }
         }
     }
 }

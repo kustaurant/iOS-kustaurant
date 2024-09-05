@@ -105,6 +105,13 @@ extension RestaurantDetailViewController {
                     self?.affiliateFloatingView.evaluateButtonStatus = loginStatus.kuButtonStatus
                     self?.affiliateFloatingView.likeButtonImageName = loginStatus.likeButtonImageResourceName
                     self?.affiliateFloatingView.likeButtonText = "1002명"
+                    
+                case .didSuccessLikeOrDisLikeButton(let indexPath, let likeCount, let dislikeCount, let likeStatus):
+                    guard let commentCell = self?.tableView.cellForRow(at: indexPath) as? RestaurantDetailReviewCellType else {
+                        return
+                    }
+                    commentCell.updateReviewView(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
+                    return
                 }
             }
             .store(in: &cancellables)
@@ -243,10 +250,36 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             if item.isComment {
                 let cell: RestaurantDetailCommentCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.update(item: item)
+                cell.likeButtonPublisher()
+                    .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                    .sink { [weak self] in
+                        self?.viewModel.state = .didTaplikeCommentButton(indexPath: indexPath, commentId: item.commentId)
+                    }
+                    .store(in: &cancellables)
+                cell.dislikeButtonPublisher()
+                    .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                    .sink { [weak self] in
+                        self?.viewModel.state = .didTapDislikeCommentButton(indexPath: indexPath, commentId: item.commentId)
+                    }
+                    .store(in: &cancellables)
+                
                 return cell
             }
             let cell: RestaurantDetailReviewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.update(item: item)
+            cell.likeButtonPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink { [weak self] in
+                self?.viewModel.state = .didTaplikeCommentButton(indexPath: indexPath, commentId: item.commentId)
+            }
+            .store(in: &cancellables)
+            
+            cell.dislikeButtonPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink { [weak self] in
+                self?.viewModel.state = .didTapDislikeCommentButton(indexPath: indexPath, commentId: item.commentId)
+            }
+            .store(in: &cancellables)
             return cell
         }
     }

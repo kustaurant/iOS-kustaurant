@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
-final class RestaurantDetailReviewCell: UITableViewCell {
+
+final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewCellType {
     
     private let starsRatingStackView: StarsRatingStackView = .init()
-    private let reviewView: RestaurantDetailReviewView = .init()
+    var reviewView: RestaurantDetailReviewView = .init()
     private let lineView: UIView = .init()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -47,6 +49,18 @@ final class RestaurantDetailReviewCell: UITableViewCell {
         
         contentView.addSubview(stackView, autoLayout: [.fillX(20), .top(22)])
         contentView.addSubview(lineView, autoLayout: [.fillX(20), .topNext(to: stackView, constant: 22), .bottom(0), .height(2)])
+    }
+    
+    func likeButtonPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.likeButtonTapPublisher()
+    }
+    
+    func dislikeButtonPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.dislikeButtonTapPublisher()
+    }
+    
+    func updateReviewView(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus) {
+        reviewView.updateButtonConfiguration(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
     }
 }
 

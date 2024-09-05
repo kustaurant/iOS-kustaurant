@@ -25,7 +25,7 @@ final class RestaurantDetailSceneDIContainer: RestaurantDetailFlowCoordinatorDep
     }
     
     func makeRestaurantDetailViewModel(with id: Int, actions: RestaurantDetailViewModelActions) -> RestaurantDetailViewModel {
-        RestaurantDetailViewModel(actions: actions, repository: makeRestaurantDetailRepository(with: id), authRepository: makeAuthRepository())
+        RestaurantDetailViewModel(restaurantId: id, actions: actions, repository: makeRestaurantDetailRepository(with: id), authRepository: makeAuthRepository())
     }
     
     func makeRestaurantDetailRepository(with id: Int) -> RestaurantDetailRepository {

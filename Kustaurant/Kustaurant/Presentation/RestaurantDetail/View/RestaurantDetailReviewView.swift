@@ -6,6 +6,12 @@
 //
 
 import UIKit
+import Combine
+
+protocol RestaurantDetailReviewCellType {
+    var reviewView: RestaurantDetailReviewView { get }
+    func updateReviewView(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus)
+}
 
 final class RestaurantDetailReviewView: UIView {
     
@@ -25,9 +31,10 @@ final class RestaurantDetailReviewView: UIView {
     private var likeButtonWidthConstraint: NSLayoutConstraint?
     private var dislikeButtonWidthConstraint: NSLayoutConstraint?
     
+    private var item: RestaurantDetailReview?
+    
     init() {
         super.init(frame: .zero)
-        
         setupStyle()
         setupLayout()
     }
@@ -36,10 +43,19 @@ final class RestaurantDetailReviewView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func likeButtonTapPublisher() -> AnyPublisher<Void, Never> {
+        return likeButton.tapPublisher()
+    }
+    
+    func dislikeButtonTapPublisher() -> AnyPublisher<Void, Never> {
+        return dislikeButton.tapPublisher()
+    }
+    
     func update(item: RestaurantDetailReview) {
-        profileImageView.image = UIImage(systemName: "person.fill")
+        self.item = item
+        let defaultImage = UIImage(systemName: "person.fill")
         if let url = URL(string: item.profileImageURLString) {
-            ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
+            ImageCacheManager.shared.loadImage(from: url, defaultImage: defaultImage) { [weak self] image in
                 self?.profileImageView.image = image
             }
         }
@@ -54,57 +70,69 @@ final class RestaurantDetailReviewView: UIView {
             }
         }
         reviewLabel.text = item.review
-        
+        commentsButton.isHidden = item.isComment
         likeButton.configuration?.title = "\(item.likeCount)"
         likeButtonWidthConstraint?.constant = likeButton.intrinsicContentSize.width
-        
         dislikeButton.configuration?.title = "\(item.dislikeCount)"
         dislikeButtonWidthConstraint?.constant = dislikeButton.intrinsicContentSize.width
         
-        commentsButton.isHidden = item.isComment
-        
+        updateButtonConfiguration(likeCount: item.likeCount, dislikeCount: item.dislikeCount, likeStatus: item.likeStatus)
         layoutIfNeeded()
     }
     
-    private func setupStyle() {
-        nicknameLabel.font = .boldSystemFont(ofSize: 14)
-        nicknameLabel.textColor = .black
-        
-        timeLabel.font = .systemFont(ofSize: 12)
-        timeLabel.textColor = .gray
-        
-        photoImageView.contentMode = .scaleAspectFill
-        
-        reviewLabel.font = .systemFont(ofSize: 14)
-        reviewLabel.textColor = .black
-        reviewLabel.numberOfLines = 0
-        
-        commentsButton.setImage(UIImage(named: "icon_comment"), for: .normal)
-        
+    func updateButtonConfiguration(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus) {
         var likeConfiguration: UIButton.Configuration = .plain()
-        likeConfiguration.image = UIImage(named: "icon_thumb_up")
+        let likeTitle = "\(likeCount)"
+        likeConfiguration.image = UIImage(named: likeStatus.thumbsUpIconImageName)
         likeConfiguration.imagePadding = 4
         likeConfiguration.contentInsets = .zero
+        likeConfiguration.attributedTitle = AttributedString(likeTitle, attributes: AttributeContainer([
+            .font: UIFont.Pretendard.regular11,
+            .foregroundColor: likeStatus.foregroundColor
+        ]))
         likeButton.configuration = likeConfiguration
         
         var dislikeConfiguration: UIButton.Configuration = .plain()
-        dislikeConfiguration.image = UIImage(named: "icon_thumb_down")
+        let dislikeTitle = "\(dislikeCount)"
+        dislikeConfiguration.image = UIImage(named: likeStatus.thumbsDownIconImageName)
         dislikeConfiguration.imagePadding = 4
         dislikeConfiguration.contentInsets = .zero
+        dislikeConfiguration.attributedTitle = AttributedString(dislikeTitle, attributes: AttributeContainer([
+            .font: UIFont.Pretendard.regular11,
+            .foregroundColor: likeStatus.foregroundColor
+        ]))
         dislikeButton.configuration = dislikeConfiguration
+    }
+    
+    private func setupStyle() {
         
-        menuEllipsisButton.setImage(UIImage(named: "ellipsis"), for: .normal)
+        profileImageView.contentMode = .scaleAspectFill
+        
+        nicknameLabel.font = .Pretendard.bold13
+        nicknameLabel.textColor = .Sementic.gray800
+        
+        timeLabel.font = .Pretendard.regular12
+        timeLabel.textColor = .Sementic.gray600
+        
+        photoImageView.contentMode = .scaleAspectFill
+        
+        reviewLabel.font = .Pretendard.regular14
+        reviewLabel.textColor = .Sementic.gray800
+        reviewLabel.numberOfLines = 0
+        
+        commentsButton.setImage(UIImage(named: "icon_comment"), for: .normal)
+        menuEllipsisButton.setImage(UIImage(named: "icon_ellipsis"), for: .normal)
     }
     
     private func setupLayout() {
-        let topStackView = UIStackView(arrangedSubviews: [profileImageView, nicknameLabel, barView, timeLabel, menuEllipsisButton])
-        topStackView.axis = .horizontal
-        topStackView.alignment = .center
-        topStackView.spacing = 8
+        let topView = UIView()
+        topView.addSubview(profileImageView, autoLayout: [.leading(0), .top(0), .centerY(0)])
+        topView.addSubview(nicknameLabel, autoLayout: [.leadingNext(to: profileImageView, constant: 5), .top(0), .centerY(0)])
+        topView.addSubview(barView, autoLayout: [.leadingNext(to: nicknameLabel, constant: 10), .top(0), .width(1), .height(14), .centerY(0)])
+        topView.addSubview(timeLabel, autoLayout: [.leadingNext(to: barView, constant: 10), .top(0), .centerY(0)])
+        topView.addSubview(menuEllipsisButton, autoLayout: [.trailing(0), .top(0), .centerY(0)])
         
         profileImageView.autolayout([.height(24), .width(24)])
-        barView.autolayout([.width(1), .height(14)])
-        menuEllipsisButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let interactionStackView = UIStackView(arrangedSubviews: [likeButton, dislikeButton, commentsButton, SpaceView()])
         interactionStackView.axis = .horizontal
@@ -117,7 +145,7 @@ final class RestaurantDetailReviewView: UIView {
         dislikeButtonWidthConstraint?.isActive = true
         commentsButton.autolayout([.width(14)])
         
-        let mainStackView = UIStackView(arrangedSubviews: [topStackView, photoImageView, reviewLabel, interactionStackView])
+        let mainStackView = UIStackView(arrangedSubviews: [topView, photoImageView, reviewLabel, interactionStackView])
         mainStackView.axis = .vertical
         mainStackView.spacing = 11
         
