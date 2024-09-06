@@ -11,7 +11,7 @@ import Combine
 
 final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewCellType {
     
-    private let starsRatingStackView: StarsRatingStackView = .init()
+    private let starsRatingStackView: KuStarRatingView = .init()
     var reviewView: RestaurantDetailReviewView = .init()
     private let lineView: UIView = .init()
     var cancellables = Set<AnyCancellable>()
@@ -96,83 +96,6 @@ final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewC
                 }
                 .store(in: &cancellables)
         }
-}
-
-final class StarsRatingStackView: UIStackView {
-    private let starsStackView: StarsStackView = .init()
-    private let label: UILabel = .init()
-    
-    init() {
-        super.init(frame: .zero)
-        
-        setupStyle()
-        setupLayout()
-    }
-    
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func update(rating: Double) {
-        starsStackView.update(rating: rating)
-        label.text = "\(rating)"
-    }
-    
-    private func setupStyle() {
-        axis = .horizontal
-        distribution = .fillProportionally
-        alignment = .center
-        spacing = 7
-    }
-    
-    private func setupLayout() {
-        [starsStackView, label].forEach {
-            addArrangedSubview($0)
-        }
-    }
-}
-
-final class StarsStackView: UIStackView {
-    
-    private let starImageViews: [UIImageView] = {
-        (0..<5).map { _ in
-                .init(image: .init(named: "icon_star_empty"))
-        }
-    }()
-    
-    init() {
-        super.init(frame: .zero)
-        
-        setupStyle()
-        setupLayout()
-    }
-    
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func update(rating: Double) {
-        let count = Int(rating)
-        (0..<count).forEach { index in
-            starImageViews[safe: index]?.image = .init(named: "icon_star_fill")
-        }
-        if rating > Double(count) {
-            starImageViews[safe: count + 1]?.image = .init(named: "icon_star_half_fill")
-        }
-    }
-    
-    private func setupStyle() {
-        axis = .horizontal
-        distribution = .fillEqually
-        alignment = .center
-    }
-    
-    private func setupLayout() {
-        starImageViews.forEach {
-            addArrangedSubview($0)
-            $0.autolayout([.width(26), .height(26)])
-        }
-    }
 }
 
 // MARK: Like, Dislike

@@ -266,15 +266,8 @@ extension RestaurantDetailViewModel {
             }
         })))
     }
-}
-
-// MARK: Accessory
-extension RestaurantDetailViewModel {
     
-    private func showKeyboard(commentId: Int) {
-        actionSubject.send(.showKeyboard(commentId: commentId))
-    }
-    
+        
     private func addComment(payload: CommentPayload) {
         if let commentId = payload.commentId, let comment = payload.comment {
             Task {
@@ -291,6 +284,14 @@ extension RestaurantDetailViewModel {
             }
         }
     }
+}
+
+// MARK: Accessory
+extension RestaurantDetailViewModel {
+    
+    private func showKeyboard(commentId: Int) {
+        actionSubject.send(.showKeyboard(commentId: commentId))
+    }
     
     private func toggleFavorite() {
         Task {
@@ -299,7 +300,7 @@ extension RestaurantDetailViewModel {
                 switch result {
                 case .success(let isFavorite):
                     actionSubject.send(.toggleFavorite(isFavorite))
-                case .failure(let failure):
+                case .failure:
                     return
                 }
             }

@@ -32,6 +32,7 @@ extension UIFont {
         static let medium11 = UIFont(name: "Pretendard-Medium", size: 11)!
         
         static let regular18 = UIFont(name: "Pretendard-Regular", size: 18)!
+        static let regular17 = UIFont(name: "Pretendard-Regular", size: 17)!
         static let regular14 = UIFont(name: "Pretendard-Regular", size: 14)!
         static let regular13 = UIFont(name: "Pretendard-Regular", size: 13)!
         static let regular12 = UIFont(name: "Pretendard-Regular", size: 12)!
