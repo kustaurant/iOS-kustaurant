@@ -47,6 +47,12 @@ extension RestaurantDetailMenuCell {
         menuImageView.layer.cornerRadius = 11
         menuImageView.contentMode = .scaleToFill
         menuImageView.clipsToBounds = true
+        
+        titleLabel.font = .Pretendard.regular14
+        titleLabel.textColor = .Sementic.gray600
+        
+        priceLabel.font = .Pretendard.regular14
+        priceLabel.textColor = .Sementic.gray800
     }
     
     private func setupLayout() {

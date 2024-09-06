@@ -43,6 +43,8 @@ extension UIView: Ku {
         case fillX(CGFloat)
         case fillY(CGFloat)
         case fill(CGFloat)
+        
+        case bottomKeyboard(CGFloat)
     }
     
     enum SizeLayout {
@@ -107,6 +109,9 @@ extension Ku where Self: UIView {
                 view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: constant),
                 view.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -constant),
                 view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -constant)
+            ]
+            case .bottomKeyboard(let constant): [
+                view.bottomAnchor.constraint(equalTo: self.keyboardLayoutGuide.topAnchor, constant: -constant)
             ]
             }
         }).flatMap { $0 }
