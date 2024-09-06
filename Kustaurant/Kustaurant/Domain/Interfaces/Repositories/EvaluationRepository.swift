@@ -8,15 +8,5 @@
 import Foundation
 
 protocol EvaluationRepository {
-}
-
-final class DefaultEvaluationRepositoryRepository: EvaluationRepository {
-    
-    private let networkService: NetworkService
-    private let restaurantID: Int
-    
-    init(networkService: NetworkService, restaurantID: Int) {
-        self.networkService = networkService
-        self.restaurantID = restaurantID
-    }
+    func fetch() async -> Result<EvaluationDTO, NetworkError>
 }

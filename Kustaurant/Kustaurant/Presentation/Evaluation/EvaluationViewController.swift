@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class EvaluationViewController: UIViewController, NavigationBarHideable {
     
     private let viewModel: EvaluationViewModel
+    private var cancellables = Set<AnyCancellable>()
     
     init(viewModel: EvaluationViewModel) {
         self.viewModel = viewModel
@@ -24,6 +26,7 @@ class EvaluationViewController: UIViewController, NavigationBarHideable {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupNavigationBar()
+        setupBindings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,5 +49,20 @@ extension EvaluationViewController {
     
     @objc private func backButtonTapped() {
         viewModel.didTapBackButton()
+    }
+}
+
+
+extension EvaluationViewController {
+    private func setupBindings() {
+        bindEvaluationData()
+    }
+    
+    private func bindEvaluationData() {
+        viewModel.evaluationDataPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] data in
+            }
+            .store(in: &cancellables)
     }
 }
