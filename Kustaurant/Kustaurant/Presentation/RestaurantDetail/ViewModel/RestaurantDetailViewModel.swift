@@ -10,7 +10,7 @@ import Combine
 
 struct RestaurantDetailViewModelActions {
     let pop: () -> Void
-    let showEvaluateScene: (Int) -> Void
+    let showEvaluateScene: (Int, RestaurantDetailTitle) -> Void
     let showSearchScene: () -> Void
 }
 
@@ -113,7 +113,8 @@ extension RestaurantDetailViewModel {
                     self?.changeTabType(as: type)
                     
                 case .didTapEvaluationButton:
-                    self?.actions.showEvaluateScene(self?.repository.restaurantID ?? 0)
+                    guard let item = self?.detail?.items[RestaurantDetailSection.title]?.first as? RestaurantDetailTitle else { return }
+                    self?.actions.showEvaluateScene(self?.repository.restaurantID ?? 0, item)
                     
                 case .didTapBackButton:
                     self?.actions.pop()

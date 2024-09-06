@@ -29,15 +29,19 @@ final class DefaultEvaluationViewModel: EvaluationViewModel {
     
     // MARK: - Output
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { $evaluationData }
+    var restaurantDetailTitle: RestaurantDetailTitle
     
     // MARK: - Initialization
     init(
         actions: EvaluationViewModelActions,
-        repository: EvaluationRepository
+        repository: EvaluationRepository,
+        titleData: RestaurantDetailTitle
     ) {
+        
         self.actions = actions
         self.repository = repository
-
+        self.restaurantDetailTitle = titleData
+        
         fetch()
     }
 }

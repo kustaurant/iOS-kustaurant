@@ -30,23 +30,27 @@ extension EvaluationSceneDIContainer {
     
     func makeEvaluationViewController(
         with id: Int,
-        actions: EvaluationViewModelActions
+        actions: EvaluationViewModelActions,
+        titleData: RestaurantDetailTitle
     ) -> EvaluationViewController {
         EvaluationViewController(
             viewModel: makeEvaluationViewModel(
                 id: id,
-                actions: actions
+                actions: actions,
+                titleData: titleData
             )
         )
     }
     
     func makeEvaluationViewModel(
         id: Int,
-        actions: EvaluationViewModelActions
+        actions: EvaluationViewModelActions,
+        titleData: RestaurantDetailTitle
     ) -> EvaluationViewModel {
         DefaultEvaluationViewModel(
             actions: actions,
-            repository: makeEvaluationRepository(id: id)
+            repository: makeEvaluationRepository(id: id),
+            titleData: titleData
         )
     }
     

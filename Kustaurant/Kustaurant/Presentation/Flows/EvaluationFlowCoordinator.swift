@@ -8,7 +8,7 @@
 import UIKit
 
 protocol EvaluationFlowCoordinatorDependencies {
-    func makeEvaluationViewController(with id: Int, actions: EvaluationViewModelActions) -> EvaluationViewController
+    func makeEvaluationViewController(with id: Int, actions: EvaluationViewModelActions, titleData: RestaurantDetailTitle) -> EvaluationViewController
 }
 
 final class EvaluationFlowCoordinator: Coordinator {
@@ -25,11 +25,14 @@ final class EvaluationFlowCoordinator: Coordinator {
 }
 
 extension EvaluationFlowCoordinator {
-    func start(id: Int) {
+    func start(
+        id: Int,
+        titleData: RestaurantDetailTitle
+    ) {
         let actions = EvaluationViewModelActions(
             pop: popAnimated
         )
-        let viewController = dependencies.makeEvaluationViewController(with: id, actions: actions)
+        let viewController = dependencies.makeEvaluationViewController(with: id, actions: actions, titleData: titleData)
         navigationController.pushViewController(viewController, animated: true)
     }
     

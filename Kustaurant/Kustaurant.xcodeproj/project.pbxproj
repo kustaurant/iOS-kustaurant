@@ -123,6 +123,7 @@
 		588496752C8AE62600E21F64 /* EvaluationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496742C8AE62600E21F64 /* EvaluationTableView.swift */; };
 		588496782C8AEB1800E21F64 /* EvaluationTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496772C8AEB1800E21F64 /* EvaluationTableViewHandler.swift */; };
 		5884967B2C8AEBC200E21F64 /* EvaluationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884967A2C8AEBC200E21F64 /* EvaluationSection.swift */; };
+		5884967E2C8AFEC700E21F64 /* EvaluationTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884967D2C8AFEC700E21F64 /* EvaluationTitleCell.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
@@ -415,6 +416,7 @@
 		588496742C8AE62600E21F64 /* EvaluationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationTableView.swift; sourceTree = "<group>"; };
 		588496772C8AEB1800E21F64 /* EvaluationTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationTableViewHandler.swift; sourceTree = "<group>"; };
 		5884967A2C8AEBC200E21F64 /* EvaluationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationSection.swift; sourceTree = "<group>"; };
+		5884967D2C8AFEC700E21F64 /* EvaluationTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationTitleCell.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1068,6 +1070,7 @@
 			children = (
 				588496742C8AE62600E21F64 /* EvaluationTableView.swift */,
 				588496772C8AEB1800E21F64 /* EvaluationTableViewHandler.swift */,
+				5884967C2C8AFEB800E21F64 /* Cells */,
 			);
 			path = EvaluationTableView;
 			sourceTree = "<group>";
@@ -1078,6 +1081,14 @@
 				5884967A2C8AEBC200E21F64 /* EvaluationSection.swift */,
 			);
 			path = Evaluation;
+			sourceTree = "<group>";
+		};
+		5884967C2C8AFEB800E21F64 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5884967D2C8AFEC700E21F64 /* EvaluationTitleCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		58D83A532C3A785800511AB9 = {
@@ -1836,6 +1847,7 @@
 				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
 				584173472C467F5B001EC132 /* TierSceneDIContainer.swift in Sources */,
 				CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */,
+				5884967E2C8AFEC700E21F64 /* EvaluationTitleCell.swift in Sources */,
 				BA45C2532C882A990033E146 /* CommentLikeStatus.swift in Sources */,
 				5841739C2C4A29C6001EC132 /* Tier.swift in Sources */,
 				BA3777352C85BB6F004F68F5 /* EvaluationSceneDIContainer.swift in Sources */,

@@ -45,10 +45,13 @@ extension RestaurantDetailFlowCoordinator {
         pop(animated: true)
     }
     
-    private func showEvaluateScene(id: Int) {
+    private func showEvaluateScene(
+        id: Int,
+        titleData: RestaurantDetailTitle
+    ) {
         let diContainer = appDIContainer.makeEvaluationDIContainer()
         let coordinator = diContainer.makeEvaluationFlowCoordianator(navigationController: navigationController)
-        coordinator.start(id: id)
+        coordinator.start(id: id, titleData: titleData)
     }
     
     func showSearchScene() {
