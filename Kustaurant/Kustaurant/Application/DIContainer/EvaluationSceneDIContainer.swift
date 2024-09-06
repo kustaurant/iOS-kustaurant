@@ -51,7 +51,7 @@ extension EvaluationSceneDIContainer {
     }
     
     func makeEvaluationRepository(id: Int) -> EvaluationRepository {
-        DefaultEvaluationRepositoryRepository(
+        DefaultEvaluationRepository(
             networkService: dependencies.networkService,
             restaurantID: id
         )

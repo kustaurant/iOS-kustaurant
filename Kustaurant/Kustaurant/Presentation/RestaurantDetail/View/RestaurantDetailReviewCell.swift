@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import Combine
 
-final class RestaurantDetailReviewCell: UITableViewCell {
+
+final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewCellType {
     
-    private let starsRatingStackView: StarsRatingStackView = .init()
-    private let reviewView: RestaurantDetailReviewView = .init()
+    private let starsRatingStackView: KuStarRatingView = .init()
+    var reviewView: RestaurantDetailReviewView = .init()
     private let lineView: UIView = .init()
+    var cancellables = Set<AnyCancellable>()
+    
+    var item: RestaurantDetailReview?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,15 +29,17 @@ final class RestaurantDetailReviewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(item: RestaurantDetailCellItem) {
-        guard let item = item as? RestaurantDetailReview else { return }
-        
+    override func prepareForReuse() {
+        self.cancellables = Set<AnyCancellable>()
+    }
+    
+    func update(item: RestaurantDetailReview) {
         starsRatingStackView.update(rating: item.rating ?? 0)
         reviewView.update(item: item)
         lineView.isHidden = item.hasComments
     }
     
-    private func setupStyle() { 
+    private func setupStyle() {
         selectionStyle = .none
         
         lineView.backgroundColor = .gray100
@@ -48,81 +55,80 @@ final class RestaurantDetailReviewCell: UITableViewCell {
         contentView.addSubview(stackView, autoLayout: [.fillX(20), .top(22)])
         contentView.addSubview(lineView, autoLayout: [.fillX(20), .topNext(to: stackView, constant: 22), .bottom(0), .height(2)])
     }
+    
+    func bind(
+        item: RestaurantDetailCellItem,
+        indexPath: IndexPath,
+        viewModel: RestaurantDetailViewModel) {
+            guard let item = item as? RestaurantDetailReview else { return }
+            self.item = item
+            reviewView.likeButtonTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink {
+                    viewModel.state = .didTaplikeCommentButton(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
+            reviewView.dislikeButtonTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink {
+                    viewModel.state = .didTapDislikeCommentButton(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
+            reviewView.reportActionTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink {
+                    viewModel.state = .didTapReportComment(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
+            reviewView.deleteActionTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink {
+                    viewModel.state = .didTapDeleteComment(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
+            reviewView.commentButtonTapPublisher()
+                .sink {
+                    viewModel.state = .didTapCommentButton(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+        }
 }
 
-final class StarsRatingStackView: UIStackView {
-    private let starsStackView: StarsStackView = .init()
-    private let label: UILabel = .init()
+// MARK: Like, Dislike
+extension RestaurantDetailReviewCell {
     
-    init() {
-        super.init(frame: .zero)
-        
-        setupStyle()
-        setupLayout()
+    func likeButtonPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.likeButtonTapPublisher()
     }
     
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func dislikeButtonPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.dislikeButtonTapPublisher()
     }
     
-    func update(rating: Double) {
-        starsStackView.update(rating: rating)
-        label.text = "\(rating)"
-    }
-    
-    private func setupStyle() {
-        axis = .horizontal
-        distribution = .fillProportionally
-        alignment = .center
-        spacing = 7
-    }
-    
-    private func setupLayout() {
-        [starsStackView, label].forEach {
-            addArrangedSubview($0)
-        }
+    func updateReviewView(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus) {
+        reviewView.updateButtonConfiguration(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
     }
 }
 
-final class StarsStackView: UIStackView {
+// MARK: Report, Delete
+extension RestaurantDetailReviewCell {
     
-    private let starImageViews: [UIImageView] = {
-        (0..<5).map { _ in
-                .init(image: .init(named: "icon_star_empty"))
-        }
-    }()
-    
-    init() {
-        super.init(frame: .zero)
-        
-        setupStyle()
-        setupLayout()
+    func reportTapPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.reportActionTapPublisher()
     }
     
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func deleteTapPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.deleteActionTapPublisher()
     }
+}
+
+extension RestaurantDetailReviewCell {
     
-    func update(rating: Double) {
-        let count = Int(rating)
-        (0..<count).forEach { index in
-            starImageViews[safe: index]?.image = .init(named: "icon_star_fill")
-        }
-        if rating > Double(count) {
-            starImageViews[safe: count + 1]?.image = .init(named: "icon_star_half_fill")
-        }
-    }
-    
-    private func setupStyle() {
-        axis = .horizontal
-        distribution = .fillEqually
-        alignment = .center
-    }
-    
-    private func setupLayout() {
-        starImageViews.forEach {
-            addArrangedSubview($0)
-            $0.autolayout([.width(26), .height(26)])
-        }
+    func commentTapPublisher() -> AnyPublisher<Void, Never> {
+        return reviewView.commentButtonTapPublisher()
     }
 }

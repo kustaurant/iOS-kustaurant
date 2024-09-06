@@ -1,5 +1,5 @@
 //
-//  DefaultEvaluationRepositoryRepository.swift
+//  DefaultEvaluationRepository.swift
 //  Kustaurant
 //
 //  Created by 송우진 on 9/6/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultEvaluationRepositoryRepository: EvaluationRepository {
+final class DefaultEvaluationRepository: EvaluationRepository {
     
     private let networkService: NetworkService
     private let restaurantID: Int
@@ -21,7 +21,7 @@ final class DefaultEvaluationRepositoryRepository: EvaluationRepository {
     }
 }
 
-extension DefaultEvaluationRepositoryRepository {
+extension DefaultEvaluationRepository {
     func fetch() async -> Result<EvaluationDTO, NetworkError> {
         let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/restaurants/\(restaurantID)/evaluation")
         let authInterceptor = AuthorizationInterceptor()

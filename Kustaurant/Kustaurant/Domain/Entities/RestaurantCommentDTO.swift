@@ -8,16 +8,17 @@
 import Foundation
 
 struct RestaurantCommentDTO: Decodable {
-    let commentID: Int
+    let commentID: Int?
     let commentScore: Double?
     let commentIconImageURLString: String?
     let commentNickname: String?
     let commentTime: String?
     let commentImageURLString: String?
     let commentBody: String?
-    let commentLikeStatus: Int?
+    let commentLikeStatus: CommentLikeStatus?
     let commentLikeCount: Int?
     let commentDislikeCount: Int?
+    let isCommentMine: Bool?
     let commentReplies: [RestaurantCommentDTO]?
     
     enum CodingKeys: String, CodingKey {
@@ -31,22 +32,24 @@ struct RestaurantCommentDTO: Decodable {
         case commentLikeStatus = "commentLikeStatus"
         case commentLikeCount = "commentLikeCount"
         case commentDislikeCount = "commentDislikeCount"
+        case isCommentMine = "isCommentMine"
         case commentReplies = "commentReplies"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        commentID = try container.decode(Int.self, forKey: .commentID)
+        commentID = try container.decodeIfPresent(Int.self, forKey: .commentID)
         commentScore = try? container.decodeIfPresent(Double.self, forKey: .commentScore)
         commentIconImageURLString = try? container.decodeIfPresent(String.self, forKey: .commentIconImageURLString)
         commentNickname = try? container.decodeIfPresent(String.self, forKey: .commentNickname)
         commentTime = try? container.decodeIfPresent(String.self, forKey: .commentTime)
         commentImageURLString = try? container.decodeIfPresent(String.self, forKey: .commentImageURLString)
         commentBody = try? container.decodeIfPresent(String.self, forKey: .commentBody)
-        commentLikeStatus = try? container.decodeIfPresent(Int.self, forKey: .commentLikeStatus)
+        commentLikeStatus = try? container.decodeIfPresent(CommentLikeStatus.self, forKey: .commentLikeStatus)
         commentLikeCount = try? container.decodeIfPresent(Int.self, forKey: .commentLikeCount)
         commentDislikeCount = try? container.decodeIfPresent(Int.self, forKey: .commentDislikeCount)
+        isCommentMine = try? container.decodeIfPresent(Bool.self, forKey: .isCommentMine)
         commentReplies = try? container.decodeIfPresent([RestaurantCommentDTO].self, forKey: .commentReplies)
     }
 }

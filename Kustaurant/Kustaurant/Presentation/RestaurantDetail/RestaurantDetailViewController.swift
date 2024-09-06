@@ -11,22 +11,27 @@ import Combine
 final class RestaurantDetailViewController: UIViewController, NavigationBarHideable {
     
     private let tableView: UITableView = .init()
-    private let affiliateFloatingView: AffiliabteFloatingView = .init()
+    private let evaluationFloatingView: EvaluationFloatingView = .init()
+    private let commentAccessoryView: CommentAccessoryView = .init()
     
     private let viewModel: RestaurantDetailViewModel
     private let tierCellHeightSubject: CurrentValueSubject<CGFloat, Never> = .init(0)
     private var tabCancellable: AnyCancellable?
     private var cancellables: Set<AnyCancellable> = .init()
     
+    private var accessoryViewHandler: RestaurantDetailAccessoryViewHandler?
+    
     init(viewModel: RestaurantDetailViewModel) {
         self.viewModel = viewModel
-        
         super.init(nibName: nil, bundle: nil)
-        
+        self.accessoryViewHandler = RestaurantDetailAccessoryViewHandler(
+            viewController: self,
+            accessoryView: commentAccessoryView,
+            viewModel: viewModel
+        )
         viewModel.state = .fetch
         bind()
         setupTableView()
-        setupAffiliateFloatingView()
         setupLayout()
     }
     
@@ -36,15 +41,11 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        accessoryViewHandler?.setupAccessoryView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showNavigationBar(animated: false)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
         hideNavigationBar(animated: false)
     }
 }
@@ -62,6 +63,9 @@ extension RestaurantDetailViewController {
         tableView.tableHeaderView = nil
         tableView.tableFooterView = nil
         
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.showsVerticalScrollIndicator = false
+        
         tableView.registerCell(ofType: RestaurantDetailTitleCell.self)
         tableView.registerCell(ofType: RestaurantDetailTierInfoCell.self)
         tableView.registerCell(ofType: RestaurantDetailAffiliateInfoCell.self)
@@ -73,16 +77,10 @@ extension RestaurantDetailViewController {
         tableView.registerHeaderFooterView(ofType: RestaurantDetailTabSectionHeaderView.self)
     }
     
-    private func setupAffiliateFloatingView() {
-        affiliateFloatingView.backgroundColor = .white
-        affiliateFloatingView.onTapEvaluateButton = { [weak self] in
-            self?.viewModel.state = .didTapEvaluationButton
-        }
-    }
-    
     private func setupLayout() {
         view.addSubview(tableView, autoLayout: [.fill(0)])
-        view.addSubview(affiliateFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84 + view.safeAreaInsets.bottom)])
+        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84 + view.safeAreaInsets.bottom)])
+        view.addSubview(commentAccessoryView, autoLayout: [.fillX(0), .height(68), .bottomKeyboard(0)])
     }
     
     private func bind() {
@@ -94,18 +92,60 @@ extension RestaurantDetailViewController {
                     self?.tableView.reloadData()
                     
                 case .didFetchHeaderImage(let image):
-                    let headerView: RestaurantDetailStretchyHeaderView = .init(frame: .init(x: 0, y: 0, width: self?.view.bounds.width ?? 0, height: 72))
+                    let headerView: RestaurantDetailStretchyHeaderView = .init(frame: .init(x: 0, y: 0, width: self?.view.bounds.width ?? 0, height: 145 + self!.view.safeAreaInsets.top))
                     headerView.update(image: image)
                     if let scrollView = self?.tableView {
                         headerView.update(contentInset: scrollView.contentInset, contentOffset: scrollView.contentOffset)
                     }
                     headerView.layer.zPosition = -1
+                    headerView.didTapBackButton = {
+                        self?.viewModel.state = .didTapBackButton
+                    }
+                    headerView.didTapSearchButton = {
+                        self?.viewModel.state = .didTapSearchButton
+                    }
                     self?.tableView.tableHeaderView = headerView
                     
+                case .didFetchEvaluation(let isFavorite, let evalutionCount):
+                    self?.evaluationFloatingView.isFavorite = isFavorite
+                    self?.evaluationFloatingView.evaluationCount = evalutionCount
+                    
                 case .loginStatus(let loginStatus):
-                    self?.affiliateFloatingView.evaluateButtonStatus = loginStatus.kuButtonStatus
-                    self?.affiliateFloatingView.likeButtonImageName = loginStatus.likeButtonImageResourceName
-                    self?.affiliateFloatingView.likeButtonText = "1002명"
+                    self?.evaluationFloatingView.loginStatus = loginStatus
+                    self?.evaluationFloatingView.onTapEvaluateButton = { [weak self] in
+                        self?.viewModel.state = .didTapEvaluationButton
+                    }
+                    self?.evaluationFloatingView.onTapFavoriteButton = { [weak self] in
+                        self?.viewModel.state = .didTapFavoriteButton
+                    }
+                    
+                case .didSuccessLikeOrDisLikeButton(let commentId, let likeCount, let dislikeCount, let likeStatus):
+                    guard let self = self else { return }
+                    for cell in self.tableView.visibleCells {
+                        if let commentCell = cell as? RestaurantDetailReviewCellType, commentCell.item?.commentId == commentId {
+                            commentCell.updateReviewView(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
+                        }
+                    }
+                    
+                case .showAlert(let payload):
+                    self?.presentAlert(payload: payload)
+                    
+                case .showKeyboard(let commentId):
+                    self?.accessoryViewHandler?.showKeyboard(commentId: commentId)
+                    
+                case .removeComment:
+                    self?.tableView.reloadSections([RestaurantDetailSection.tab.index], with: .fade)
+                    
+                case .addComment:
+                    self?.tableView.reloadSections([RestaurantDetailSection.tab.index], with: .automatic)
+                    
+                case .toggleFavorite(let isFavorite):
+                    self?.evaluationFloatingView.isFavorite = isFavorite
+                    if isFavorite {
+                        self?.evaluationFloatingView.evaluationCount += 1
+                    } else {
+                        self?.evaluationFloatingView.evaluationCount -= 1
+                    }
                 }
             }
             .store(in: &cancellables)
@@ -114,6 +154,14 @@ extension RestaurantDetailViewController {
             .removeDuplicates()
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
+            }
+            .store(in: &cancellables)
+        
+        accessoryViewHandler?.sendButtonTapPublisher()
+            .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+            .sink { [weak self] payload in
+                self?.accessoryViewHandler?.hideKeyboard()
+                self?.viewModel.state = .didTapSendButtonInAccessory(payload: payload)
             }
             .store(in: &cancellables)
     }
@@ -125,15 +173,19 @@ extension RestaurantDetailViewController: UITableViewDelegate {
         guard RestaurantDetailSection(index: section) == .tab
         else { return .zero }
         
-        return KuTabBarView.height + 26
+        return KuTabBarView.height + view.safeAreaInsets.top
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard RestaurantDetailSection(index: indexPath.section) == .tier else {
-            return UITableView.automaticDimension
+        if RestaurantDetailSection(index: indexPath.section) == .tier {
+            return tierCellHeightSubject.value
         }
         
-        return tierCellHeightSubject.value
+        if RestaurantDetailSection(index: indexPath.section) == .rating {
+            return 71
+        }
+        
+        return UITableView.automaticDimension
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -173,8 +225,30 @@ extension RestaurantDetailViewController: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let detailSection = RestaurantDetailSection(index: section)
+        else { return .init() }
+        
+        switch detailSection {
+        case .tab:
+            return 84
+        default:
+            return 0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
+        guard let detailSection = RestaurantDetailSection(index: section)
+        else { return .init() }
+        
+        switch detailSection {
+        case .tab:
+            let view = UIView()
+            view.backgroundColor = .clear
+            return view
+        default:
+            return nil
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -221,12 +295,28 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             guard let item = item as? RestaurantDetailReview else { return  .init() }
             if item.isComment {
                 let cell: RestaurantDetailCommentCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.bind(item: item, indexPath: indexPath, viewModel: viewModel)
                 cell.update(item: item)
                 return cell
             }
             let cell: RestaurantDetailReviewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bind(item: item, indexPath: indexPath, viewModel: viewModel)
             cell.update(item: item)
             return cell
         }
+    }
+}
+
+// MARK: Alert
+extension RestaurantDetailViewController {
+    
+    private func presentAlert(payload: AlertPayload) {
+        let alert = UIAlertController(title: payload.title, message: payload.subtitle, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .default, handler: { _ in
+        }))
+        alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { _ in
+            payload.onConfirm?()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }

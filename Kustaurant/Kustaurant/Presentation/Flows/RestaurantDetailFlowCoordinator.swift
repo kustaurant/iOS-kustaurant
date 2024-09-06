@@ -34,7 +34,9 @@ extension RestaurantDetailFlowCoordinator {
     func start(id: Int) {
         let actions = RestaurantDetailViewModelActions(
             pop: popAnimated,
-            showEvaluateScene: showEvaluateScene)
+            showEvaluateScene: showEvaluateScene,
+            showSearchScene: showSearchScene
+        )
         let viewController = dependencies.makeRestaurantDetailViewController(with: id, actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }
@@ -47,5 +49,11 @@ extension RestaurantDetailFlowCoordinator {
         let diContainer = appDIContainer.makeEvaluationDIContainer()
         let coordinator = diContainer.makeEvaluationFlowCoordianator(navigationController: navigationController)
         coordinator.start(id: id)
+    }
+    
+    func showSearchScene() {
+        let searchDIContainer = appDIContainer.makeSearchDIContainer()
+        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(navigationController: navigationController)
+        searchFlow.start()
     }
 }

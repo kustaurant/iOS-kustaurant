@@ -27,7 +27,6 @@ public class ImageCacheManager {
                   let image = UIImage(data: data),
                   error == nil else {
                 DispatchQueue.main.async {
-                    print(#file, #function, "❗️ Fail To Load Image URL \(url.absoluteString)")
                     completion(defaultImage)
                 }
                 return
