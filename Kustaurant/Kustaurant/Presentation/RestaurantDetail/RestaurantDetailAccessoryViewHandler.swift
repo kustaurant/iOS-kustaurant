@@ -9,7 +9,6 @@ import UIKit
 import Combine
 
 struct CommentPayload {
-    let indexPath: IndexPath?
     let commentId: Int?
     let comment: String?
 }
@@ -21,7 +20,6 @@ final class RestaurantDetailAccessoryViewHandler: NSObject {
     private let viewModel: RestaurantDetailViewModel
     
     private var text = ""
-    private var indexPath: IndexPath?
     private var commentId: Int?
     
     init(
@@ -43,18 +41,17 @@ extension RestaurantDetailAccessoryViewHandler: UIGestureRecognizerDelegate {
         setupKeyboardEndGesture()
     }
 
-    func showKeyboard(indexPath: IndexPath, commentId: Int) {
-        self.indexPath = indexPath
+    func showKeyboard(commentId: Int) {
         self.commentId = commentId
         accessoryView.isHidden = false
         accessoryView.textField.becomeFirstResponder()
     }
 
     @objc func hideKeyboard() {
-        indexPath = nil
         commentId = nil
         text = ""
         accessoryView.isHidden = true
+        accessoryView.textField.text = ""
         accessoryView.textField.resignFirstResponder()
     }
 
@@ -74,7 +71,7 @@ extension RestaurantDetailAccessoryViewHandler: UIGestureRecognizerDelegate {
 
     func sendButtonTapPublisher() -> AnyPublisher<CommentPayload, Never> {
         return accessoryView.sendButtonTapPublisher().map { [weak self] in
-            CommentPayload(indexPath: self?.indexPath, commentId: self?.commentId, comment: self?.text)
+            CommentPayload(commentId: self?.commentId, comment: self?.text)
         }.eraseToAnyPublisher()
     }
 }

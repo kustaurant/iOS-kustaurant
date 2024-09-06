@@ -19,14 +19,15 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
     
     func fetch() async -> RestaurantDetail {
         let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/\(restaurantID)")
-        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
         let response: RestaurantDetailDTO? = await request.responseAsync(with: urlBuilder).decode()
         
         let items = viewDatas(from: response)
         let tabItems: RestaurantDetail.TabItems = [.menu: items[.tab] ?? [], .review: []]
         
         return .init(restaurantImageURLString: response?.restaurantImageURLString ?? "", items: items, tabItems: tabItems)
-        
     }
     
     private func viewDatas(from response: RestaurantDetailDTO?) -> RestaurantDetail.Items {
@@ -69,7 +70,9 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
     
     func fetchReviews() async -> [RestaurantDetailCellItem] {
         let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/\(restaurantID)/comments")
-        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
         let response: [RestaurantCommentDTO]? = await request.responseAsync(with: urlBuilder).decode()
         
         let null = "NULL"
@@ -88,7 +91,8 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
                 dislikeCount: comment.commentDislikeCount ?? 0,
                 likeStatus: comment.commentLikeStatus ?? .none,
                 commentId: comment.commentID ?? -1,
-                isCommentMine: comment.isCommentMine ?? false
+                isCommentMine: comment.isCommentMine ?? false,
+                commentChildrenCount: comment.commentReplies?.count ?? 0
             )] + (comment.commentReplies?.enumerated().map { index, reply in
                 RestaurantDetailReview(
                     profileImageURLString: reply.commentIconImageURLString ?? null,
@@ -101,9 +105,10 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
                     hasComments: index < (comment.commentReplies?.count ?? 0) - 1,
                     likeCount: reply.commentLikeCount ?? 0,
                     dislikeCount: reply.commentDislikeCount ?? 0,
-                    likeStatus: comment.commentLikeStatus ?? .none,
-                    commentId: comment.commentID ?? -1,
-                    isCommentMine: comment.isCommentMine ?? false
+                    likeStatus: reply.commentLikeStatus ?? .none,
+                    commentId: reply.commentID ?? -1,
+                    isCommentMine: reply.isCommentMine ?? false,
+                    commentChildrenCount: 0
                 )
             } ?? [])
         } ?? []).flatMap { $0 }
@@ -176,7 +181,8 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         return true
     }
     
-    func addComment(restaurantId: Int, commentId: Int, comment: String) async -> Bool {
+    func addComment(restaurantId: Int, commentId: Int, comment: String) async -> Result<RestaurantDetailReview, NetworkError> {
+        let null = "NULL"
         var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/restaurants/\(restaurantId)/comments/\(commentId)", method: .post)
         let authInterceptor = AuthorizationInterceptor()
         urlBuilder.addContentType(.textPlain)
@@ -188,9 +194,30 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         
         if let error = response.error {
             Logger.error(error.localizedDescription, category: .network)
-            return false
+            return .failure(error)
         }
         
-        return true
+        guard let data: RestaurantCommentDTO = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        
+        let review = RestaurantDetailReview(
+            profileImageURLString: data.commentIconImageURLString ?? null,
+            nickname: data.commentNickname ?? null,
+            time: data.commentTime ?? null,
+            photoImageURLString: data.commentImageURLString ?? null,
+            review: data.commentBody ?? null,
+            rating: nil,
+            isComment: true,
+            hasComments: true,
+            likeCount: data.commentLikeCount ?? 0,
+            dislikeCount: data.commentDislikeCount ?? 0,
+            likeStatus: data.commentLikeStatus ?? .none,
+            commentId: data.commentID ?? -1,
+            isCommentMine: data.isCommentMine ?? false,
+            commentChildrenCount: 0
+        )
+        
+        return .success(review)
     }
 }

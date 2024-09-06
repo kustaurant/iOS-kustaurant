@@ -14,6 +14,9 @@ final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewC
     private let starsRatingStackView: StarsRatingStackView = .init()
     var reviewView: RestaurantDetailReviewView = .init()
     private let lineView: UIView = .init()
+    var cancellables = Set<AnyCancellable>()
+    
+    var item: RestaurantDetailReview?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,15 +29,17 @@ final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewC
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(item: RestaurantDetailCellItem) {
-        guard let item = item as? RestaurantDetailReview else { return }
-        
+    override func prepareForReuse() {
+        self.cancellables = Set<AnyCancellable>()
+    }
+    
+    func update(item: RestaurantDetailReview) {
         starsRatingStackView.update(rating: item.rating ?? 0)
         reviewView.update(item: item)
         lineView.isHidden = item.hasComments
     }
     
-    private func setupStyle() { 
+    private func setupStyle() {
         selectionStyle = .none
         
         lineView.backgroundColor = .gray100
@@ -50,6 +55,47 @@ final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewC
         contentView.addSubview(stackView, autoLayout: [.fillX(20), .top(22)])
         contentView.addSubview(lineView, autoLayout: [.fillX(20), .topNext(to: stackView, constant: 22), .bottom(0), .height(2)])
     }
+    
+    func bind(
+        item: RestaurantDetailCellItem,
+        indexPath: IndexPath,
+        viewModel: RestaurantDetailViewModel) {
+            guard let item = item as? RestaurantDetailReview else { return }
+            self.item = item
+            reviewView.likeButtonTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink {
+                    viewModel.state = .didTaplikeCommentButton(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
+            reviewView.dislikeButtonTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink {
+                    viewModel.state = .didTapDislikeCommentButton(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
+            reviewView.reportActionTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink {
+                    viewModel.state = .didTapReportComment(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
+            reviewView.deleteActionTapPublisher()
+                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+                .sink {
+                    viewModel.state = .didTapDeleteComment(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
+            reviewView.commentButtonTapPublisher()
+                .sink {
+                    viewModel.state = .didTapCommentButton(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+        }
 }
 
 final class StarsRatingStackView: UIStackView {
@@ -153,7 +199,7 @@ extension RestaurantDetailReviewCell {
     }
     
     func deleteTapPublisher() -> AnyPublisher<Void, Never> {
-        return reviewView.deleteActionTapPublisdher()
+        return reviewView.deleteActionTapPublisher()
     }
 }
 

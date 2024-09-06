@@ -119,18 +119,25 @@ extension RestaurantDetailViewController {
                     self?.affiliateFloatingView.likeButtonImageName = loginStatus.likeButtonImageResourceName
                     self?.affiliateFloatingView.likeButtonText = "1002명"
                     
-                case .didSuccessLikeOrDisLikeButton(let indexPath, let likeCount, let dislikeCount, let likeStatus):
-                    guard let commentCell = self?.tableView.cellForRow(at: indexPath) as? RestaurantDetailReviewCellType else {
-                        return
+                case .didSuccessLikeOrDisLikeButton(let commentId, let likeCount, let dislikeCount, let likeStatus):
+                    guard let self = self else { return }
+                    for cell in self.tableView.visibleCells {
+                        if let commentCell = cell as? RestaurantDetailReviewCellType, commentCell.item?.commentId == commentId {
+                            commentCell.updateReviewView(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
+                        }
                     }
-                    commentCell.updateReviewView(likeCount: likeCount, dislikeCount: dislikeCount, likeStatus: likeStatus)
-                    return
                     
                 case .showAlert(let payload):
                     self?.presentAlert(payload: payload)
                     
-                case .showKeyboard(let indexPath, let commentId):
-                    self?.accessoryViewHandler?.showKeyboard(indexPath: indexPath, commentId: commentId)
+                case .showKeyboard(let commentId):
+                    self?.accessoryViewHandler?.showKeyboard(commentId: commentId)
+                    
+                case .removeComment:
+                    self?.tableView.reloadSections([RestaurantDetailSection.tab.index], with: .fade)
+                    
+                case .addComment:
+                    self?.tableView.reloadSections([RestaurantDetailSection.tab.index], with: .automatic)
                 }
             }
             .store(in: &cancellables)
@@ -280,83 +287,13 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             guard let item = item as? RestaurantDetailReview else { return  .init() }
             if item.isComment {
                 let cell: RestaurantDetailCommentCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.bind(item: item, indexPath: indexPath, viewModel: viewModel)
                 cell.update(item: item)
-                
-                cell.likeButtonPublisher()
-                    .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
-                    .sink { [weak self] in
-                        self?.viewModel.state = .didTaplikeCommentButton(indexPath: indexPath, commentId: item.commentId)
-                    }
-                    .store(in: &cancellables)
-                
-                cell.dislikeButtonPublisher()
-                    .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
-                    .sink { [weak self] in
-                        self?.viewModel.state = .didTapDislikeCommentButton(indexPath: indexPath, commentId: item.commentId)
-                    }
-                    .store(in: &cancellables)
-                
-                cell.reportTapPublisher()
-                    .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
-                    .sink { [weak self] in
-                        self?.viewModel.state = .didTapReportComment(indexPath: indexPath, commentId: item.commentId)
-                    }
-                    .store(in: &cancellables)
-                
-                cell.deleteTapPublisher()
-                    .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
-                    .sink { [weak self] in
-                        self?.viewModel.state = .didTapDeleteComment(indexPath: indexPath, commentId: item.commentId)
-                    }
-                    .store(in: &cancellables)
-                
-                cell.commentTapPublisher()
-                    .sink { [weak self] in
-                        self?.viewModel.state = .didTapCommentButton(indexPath: indexPath, commentId: item.commentId)
-                    }
-                    .store(in: &cancellables)
-                
-                
                 return cell
             }
-            
             let cell: RestaurantDetailReviewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bind(item: item, indexPath: indexPath, viewModel: viewModel)
             cell.update(item: item)
-            cell.likeButtonPublisher()
-                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
-                .sink { [weak self] in
-                    self?.viewModel.state = .didTaplikeCommentButton(indexPath: indexPath, commentId: item.commentId)
-                }
-                .store(in: &cancellables)
-            
-            cell.dislikeButtonPublisher()
-                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
-                .sink { [weak self] in
-                    self?.viewModel.state = .didTapDislikeCommentButton(indexPath: indexPath, commentId: item.commentId)
-                }
-                .store(in: &cancellables)
-            
-            cell.reportTapPublisher()
-                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
-                .sink { [weak self] in
-                    self?.viewModel.state = .didTapReportComment(indexPath: indexPath, commentId: item.commentId)
-                }
-                .store(in: &cancellables)
-            
-            cell.deleteTapPublisher()
-                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
-                .sink { [weak self] in
-                    self?.viewModel.state = .didTapDeleteComment(indexPath: indexPath, commentId: item.commentId)
-                }
-                .store(in: &cancellables)
-            
-            cell.commentTapPublisher()
-                .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
-                .sink { [weak self] in
-                    self?.viewModel.state = .didTapCommentButton(indexPath: indexPath, commentId: item.commentId)
-                }
-                .store(in: &cancellables)
-            
             return cell
         }
     }

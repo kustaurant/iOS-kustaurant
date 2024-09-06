@@ -41,6 +41,52 @@ struct RestaurantDetail {
         items[.tab] = tabItems[tabType]
     }
     
+    mutating func addComment(to commentId: Int, newComment: RestaurantDetailReview) async {
+        guard var currentTabItems = tabItems[.review] as? [RestaurantDetailReview] else {
+            return
+        }
+        
+        if let parentIndex = currentTabItems.firstIndex(where: { $0.commentId == commentId }) {
+            let insertIndex = parentIndex + 1 + currentTabItems[parentIndex].commentChildrenCount
+            let currentTabItem = currentTabItems[parentIndex]
+            currentTabItems[parentIndex] = currentTabItem
+            if insertIndex - 1 >= 0 {
+                currentTabItems[insertIndex - 1].hasComments = true
+                let tabItemBefore = currentTabItems[insertIndex-1]
+                currentTabItems[insertIndex - 1] = tabItemBefore
+            }
+            currentTabItems.insert(newComment, at: insertIndex)
+        }
+        
+        await updateTabItems(as: [.review: currentTabItems])
+    }
+    
+    mutating func deleteComment(commentId: Int) async {
+        guard
+            var currentTabItems = tabItems[.review] as? [RestaurantDetailReview],
+            let idx = currentTabItems.firstIndex (where: { $0.commentId == commentId })
+        else { return }
+        if let parentIndex = currentTabItems.firstIndex(where: { $0.commentId == commentId }) {
+            currentTabItems[parentIndex].commentChildrenCount -= 1
+            let currentTabItem = currentTabItems[parentIndex]
+            currentTabItems[parentIndex] = currentTabItem
+        }
+        currentTabItems.remove(at: idx)
+        await updateTabItems(as: [.review: currentTabItems])
+    }
+    
+    mutating func likeOrDislikeComment(commentId: Int, likeStatus: CommentLikeStatus) async {
+        guard
+            var currentTabItems = tabItems[.review] as? [RestaurantDetailReview],
+            let idx = currentTabItems.firstIndex (where: { $0.commentId == commentId })
+        else { return }
+        
+        var item = currentTabItems[idx]
+        item.updateLikeStatus(to: likeStatus)
+        currentTabItems[idx] = item
+        await updateTabItems(as: [.review: currentTabItems])
+    }
+    
     init(restaurantImageURLString: String, items: Items, tabType: RestaurantDetailTabType = .menu, tabItems: TabItems) {
         self.restaurantImageURLString = restaurantImageURLString
         self.items = items

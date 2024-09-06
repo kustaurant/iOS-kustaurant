@@ -14,6 +14,7 @@ enum RestaurantDetailReviewMenuType {
 }
 
 protocol RestaurantDetailReviewCellType {
+    var item: RestaurantDetailReview? { get }
     var reviewView: RestaurantDetailReviewView { get }
     func updateReviewView(likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus)
 }
@@ -38,8 +39,6 @@ final class RestaurantDetailReviewView: UIView {
     
     private let reportTapSubject = PassthroughSubject<Void, Never>()
     private let deleteTapSubject = PassthroughSubject<Void, Never>()
-    
-    private var item: RestaurantDetailReview?
     
     init() {
         super.init(frame: .zero)
@@ -68,7 +67,8 @@ final class RestaurantDetailReviewView: UIView {
         reviewLabel.numberOfLines = 0
         
         commentsButton.setImage(UIImage(named: "icon_comment"), for: .normal)
-        menuEllipsisButton.setImage(UIImage(named: "icon_ellipsis"), for: .normal)
+        menuEllipsisButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        menuEllipsisButton.tintColor = .Sementic.gray75
     }
     
     private func setupLayout() {
@@ -101,7 +101,6 @@ final class RestaurantDetailReviewView: UIView {
     }
     
     func update(item: RestaurantDetailReview) {
-        self.item = item
         let defaultImage = UIImage(systemName: "person.fill")
         if let url = URL(string: item.profileImageURLString) {
             ImageCacheManager.shared.loadImage(from: url, defaultImage: defaultImage) { [weak self] image in
@@ -126,7 +125,7 @@ final class RestaurantDetailReviewView: UIView {
         dislikeButtonWidthConstraint?.constant = dislikeButton.intrinsicContentSize.width
         
         updateButtonConfiguration(likeCount: item.likeCount, dislikeCount: item.dislikeCount, likeStatus: item.likeStatus)
-        setupMenuEllipsisButton()
+        setupMenuEllipsisButton(with: item)
         layoutIfNeeded()
     }
     
@@ -178,11 +177,11 @@ extension RestaurantDetailReviewView {
         return reportTapSubject.eraseToAnyPublisher()
     }
     
-    func deleteActionTapPublisdher() -> AnyPublisher<Void, Never> {
+    func deleteActionTapPublisher() -> AnyPublisher<Void, Never> {
         return deleteTapSubject.eraseToAnyPublisher()
     }
     
-    private func setupMenuEllipsisButton() {
+    private func setupMenuEllipsisButton(with item: RestaurantDetailReview) {
         var actions: [UIAction] = []
         
         let reportAction = UIAction(title: "신고하기", image: UIImage(named: "icon_shield")) { [weak self] _ in
@@ -190,7 +189,7 @@ extension RestaurantDetailReviewView {
         }
         actions.append(reportAction)
         
-        if let item = self.item, item.isCommentMine {
+        if item.isCommentMine {
             let deleteAction = UIAction(title: "삭제하기", image: UIImage(named: "icon_trash"), attributes: .destructive) { [weak self] _ in
                 self?.deleteTapSubject.send()
             }

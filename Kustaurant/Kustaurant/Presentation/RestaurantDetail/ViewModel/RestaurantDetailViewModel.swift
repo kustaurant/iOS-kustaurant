@@ -40,11 +40,11 @@ extension RestaurantDetailViewModel {
         case didTapEvaluationButton
         case didTapBackButton
         case didTapSearchButton
-        case didTaplikeCommentButton(indexPath: IndexPath, commentId: Int)
-        case didTapDislikeCommentButton(indexPath: IndexPath, commentId: Int)
-        case didTapReportComment(indexPath: IndexPath, commentId: Int)
-        case didTapDeleteComment(indexPath: IndexPath, commentId: Int)
-        case didTapCommentButton(indexPath: IndexPath, commentId: Int)
+        case didTaplikeCommentButton(commentId: Int)
+        case didTapDislikeCommentButton(commentId: Int)
+        case didTapReportComment(commentId: Int)
+        case didTapDeleteComment(commentId: Int)
+        case didTapCommentButton(commentId: Int)
         case didTapSendButtonInAccessory(payload: CommentPayload)
     }
     
@@ -54,9 +54,11 @@ extension RestaurantDetailViewModel {
         case didFetchReviews
         case didChangeTabType
         case loginStatus(LoginStatus)
-        case didSuccessLikeOrDisLikeButton(indexPath: IndexPath, likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus)
+        case didSuccessLikeOrDisLikeButton(commentId: Int, likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus)
         case showAlert(payload: AlertPayload)
-        case showKeyboard(indexPath: IndexPath, commentId: Int)
+        case showKeyboard(commentId: Int)
+        case removeComment
+        case addComment
     }
 }
 
@@ -116,20 +118,20 @@ extension RestaurantDetailViewModel {
                 case .didTapSearchButton:
                     self?.actions.showSearchScene()
                     
-                case .didTaplikeCommentButton(let indexPath, let commentId):
-                    self?.likeComment(indexPath: indexPath, commentId: commentId)
+                case .didTaplikeCommentButton(let commentId):
+                    self?.likeComment(commentId: commentId)
                     
-                case .didTapDislikeCommentButton(let indexPath, let commentId):
-                    self?.dislikeComment(indexPath: indexPath, commentId: commentId)
+                case .didTapDislikeCommentButton(let commentId):
+                    self?.dislikeComment(commentId: commentId)
                     
-                case .didTapReportComment(let indexPath, let commentId):
-                    self?.reportComment(at: indexPath, commentId: commentId)
+                case .didTapReportComment(let commentId):
+                    self?.reportComment(commentId: commentId)
                     
-                case .didTapDeleteComment(let indexPath, let commentId):
-                    self?.deleteComment(at: indexPath, commentId: commentId)
+                case .didTapDeleteComment(let commentId):
+                    self?.deleteComment(commentId: commentId)
                     
-                case .didTapCommentButton(let indexPath, let commentId):
-                    self?.showKeyboard(indexPath: indexPath, commentId: commentId)
+                case .didTapCommentButton(let commentId):
+                    self?.showKeyboard(commentId: commentId)
                     
                 case .didTapSendButtonInAccessory(let payload):
                     self?.addComment(payload: payload)
@@ -184,15 +186,16 @@ extension RestaurantDetailViewModel {
 // MARK: Comment
 extension RestaurantDetailViewModel {
     
-    private func likeComment(indexPath: IndexPath, commentId: Int) {
+    private func likeComment(commentId: Int) {
         Task {
             let result = await repository.likeComment(restaurantId: restaurantId, commentId: commentId)
+            await detail?.likeOrDislikeComment(commentId: commentId, likeStatus: .liked)
             await MainActor.run {
                 switch result {
                 case .success(let data):
                     actionSubject.send(
                         .didSuccessLikeOrDisLikeButton(
-                            indexPath: indexPath,
+                            commentId: commentId,
                             likeCount: data.commentLikeCount ?? 0,
                             dislikeCount: data.commentDislikeCount ?? 0,
                             likeStatus: data.commentLikeStatus ?? .none)
@@ -205,15 +208,16 @@ extension RestaurantDetailViewModel {
         }
     }
     
-    private func dislikeComment(indexPath: IndexPath, commentId: Int) {
+    private func dislikeComment(commentId: Int) {
         Task {
             let result = await repository.dislikeComment(restaurantId: restaurantId, commentId: commentId)
+            await detail?.likeOrDislikeComment(commentId: commentId, likeStatus: .disliked)
             await MainActor.run {
                 switch result {
                 case .success(let data):
                     actionSubject.send(
                         .didSuccessLikeOrDisLikeButton(
-                            indexPath: indexPath,
+                            commentId: commentId,
                             likeCount: data.commentLikeCount ?? 0,
                             dislikeCount: data.commentDislikeCount ?? 0,
                             likeStatus: data.commentLikeStatus ?? .none)
@@ -226,7 +230,7 @@ extension RestaurantDetailViewModel {
         }
     }
     
-    private func reportComment(at indexPath: IndexPath, commentId: Int) {
+    private func reportComment(commentId: Int) {
         actionSubject.send(.showAlert(payload: AlertPayload(title: "코멘트를 신고하시겠습니까?", subtitle: "", onConfirm: { [weak self] in
             guard let self = self else { return }
             Task {
@@ -235,11 +239,17 @@ extension RestaurantDetailViewModel {
         })))
     }
     
-    private func deleteComment(at indexPath: IndexPath, commentId: Int) {
+    private func deleteComment(commentId: Int) {
         actionSubject.send(.showAlert(payload: AlertPayload(title: "댓글을 삭제하시겠습니까?", subtitle: "", onConfirm: { [weak self] in
             guard let self = self else { return }
             Task {
-                await self.repository.deleteComment(restaurantId: self.restaurantId, commentId: commentId)
+                let deleted = await self.repository.deleteComment(restaurantId: self.restaurantId, commentId: commentId)
+                if deleted {
+                    await self.detail?.deleteComment(commentId: commentId)
+                    await MainActor.run {
+                        self.actionSubject.send(.removeComment)
+                    }
+                }
             }
         })))
     }
@@ -248,14 +258,23 @@ extension RestaurantDetailViewModel {
 // MARK: Accessory
 extension RestaurantDetailViewModel {
     
-    private func showKeyboard(indexPath: IndexPath, commentId: Int) {
-        actionSubject.send(.showKeyboard(indexPath: indexPath, commentId: commentId))
+    private func showKeyboard(commentId: Int) {
+        actionSubject.send(.showKeyboard(commentId: commentId))
     }
     
     private func addComment(payload: CommentPayload) {
         if let commentId = payload.commentId, let comment = payload.comment {
             Task {
                 let result = await repository.addComment(restaurantId: restaurantId, commentId: commentId, comment: comment)
+                switch result {
+                case .success(let review):
+                    await self.detail?.addComment(to: commentId, newComment: review)
+                    await MainActor.run {
+                        self.actionSubject.send(.addComment)
+                    }
+                case .failure:
+                    return
+                }
             }
         }
     }
