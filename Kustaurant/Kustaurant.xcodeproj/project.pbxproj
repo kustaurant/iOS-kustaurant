@@ -116,6 +116,7 @@
 		584FA4E22C708A12008DDC19 /* HomeBannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4E12C708A12008DDC19 /* HomeBannerCollectionViewCell.swift */; };
 		584FA4E42C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4E32C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift */; };
 		584FA4E82C71D68C008DDC19 /* TierTopCategoriesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4E72C71D68C008DDC19 /* TierTopCategoriesCollectionView.swift */; };
+		5884966A2C8ACAE900E21F64 /* EvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496692C8ACAE900E21F64 /* EvaluationRepository.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
@@ -395,6 +396,7 @@
 		584FA4E12C708A12008DDC19 /* HomeBannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		584FA4E32C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerCollectionViewHandler.swift; sourceTree = "<group>"; };
 		584FA4E72C71D68C008DDC19 /* TierTopCategoriesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierTopCategoriesCollectionView.swift; sourceTree = "<group>"; };
+		588496692C8ACAE900E21F64 /* EvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationRepository.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -945,6 +947,7 @@
 				BA2D896D2C770B7E004E7B8E /* SearchRepository.swift */,
 				BA57C7B92C72F1780063F2FA /* AuthRepository.swift */,
 				BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */,
+				588496692C8ACAE900E21F64 /* EvaluationRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1020,6 +1023,13 @@
 				58067CC92C514FEF00889C92 /* TierCategoryCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		588496682C8AC89B00E21F64 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		58D83A532C3A785800511AB9 = {
@@ -1214,17 +1224,10 @@
 			isa = PBXGroup;
 			children = (
 				BA37772E2C85BB23004F68F5 /* EvaluationViewController.swift */,
+				588496682C8AC89B00E21F64 /* View */,
 				BA3777312C85BB31004F68F5 /* ViewModel */,
-				BA3777302C85BB2E004F68F5 /* View */,
 			);
 			path = Evaluation;
-			sourceTree = "<group>";
-		};
-		BA3777302C85BB2E004F68F5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		BA3777312C85BB31004F68F5 /* ViewModel */ = {
@@ -1769,6 +1772,7 @@
 				BA3777352C85BB6F004F68F5 /* EvaluationSceneDIContainer.swift in Sources */,
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
 				BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */,
+				5884966A2C8ACAE900E21F64 /* EvaluationRepository.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
 				CFE2047E2C68E76B00BCA87C /* RestaurantDetailAffiliateInfoCell.swift in Sources */,
 				BA494B7D2C8193A600EB2527 /* TermsOfServiceViewController.swift in Sources */,

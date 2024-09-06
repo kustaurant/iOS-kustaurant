@@ -43,9 +43,9 @@ extension RestaurantDetailFlowCoordinator {
         pop(animated: true)
     }
     
-    private func showEvaluateScene() {
+    private func showEvaluateScene(id: Int) {
         let diContainer = appDIContainer.makeEvaluationDIContainer()
         let coordinator = diContainer.makeEvaluationFlowCoordianator(navigationController: navigationController)
-        coordinator.start()
+        coordinator.start(id: id)
     }
 }

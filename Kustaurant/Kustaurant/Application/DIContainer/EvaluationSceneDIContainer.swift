@@ -22,14 +22,38 @@ final class EvaluationSceneDIContainer: EvaluationFlowCoordinatorDependencies {
 extension EvaluationSceneDIContainer {
     
     func makeEvaluationFlowCoordianator(navigationController: UINavigationController) -> EvaluationFlowCoordinator {
-        EvaluationFlowCoordinator(dependencies: self, navigationController: navigationController)
+        EvaluationFlowCoordinator(
+            dependencies: self,
+            navigationController: navigationController
+        )
     }
     
-    func makeEvaluationViewController(actions: EvaluationViewModelActions) -> EvaluationViewController {
-        EvaluationViewController(viewModel: makeEvaluationViewModel(actions: actions))
+    func makeEvaluationViewController(
+        with id: Int,
+        actions: EvaluationViewModelActions
+    ) -> EvaluationViewController {
+        EvaluationViewController(
+            viewModel: makeEvaluationViewModel(
+                id: id,
+                actions: actions
+            )
+        )
     }
     
-    func makeEvaluationViewModel(actions: EvaluationViewModelActions) -> EvaluationViewModel {
-        DefaultEvaluationViewModel(actions: actions)
+    func makeEvaluationViewModel(
+        id: Int,
+        actions: EvaluationViewModelActions
+    ) -> EvaluationViewModel {
+        DefaultEvaluationViewModel(
+            actions: actions,
+            repository: makeEvaluationRepository(id: id)
+        )
+    }
+    
+    func makeEvaluationRepository(id: Int) -> EvaluationRepository {
+        DefaultEvaluationRepositoryRepository(
+            networkService: dependencies.networkService,
+            restaurantID: id
+        )
     }
 }

@@ -20,10 +20,15 @@ typealias EvaluationViewModel = EvaluationViewModelInput & EvaluationViewModelOu
 
 final class DefaultEvaluationViewModel: EvaluationViewModel {
     
+    private let repository: any EvaluationRepository
     private let actions: EvaluationViewModelActions
     
-    init(actions: EvaluationViewModelActions) {
+    init(
+        actions: EvaluationViewModelActions,
+        repository: any EvaluationRepository
+    ) {
         self.actions = actions
+        self.repository = repository
     }
 }
 

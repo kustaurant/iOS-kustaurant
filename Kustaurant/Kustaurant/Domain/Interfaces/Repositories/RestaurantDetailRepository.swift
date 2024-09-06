@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RestaurantDetailRepository {
-    
+    var restaurantID: Int { get }
     func fetch() async -> RestaurantDetail
     func fetchReviews() async -> [RestaurantDetailCellItem]
 }
@@ -16,7 +16,7 @@ protocol RestaurantDetailRepository {
 final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
     
     private let networkService: NetworkService
-    private let restaurantID: Int
+    let restaurantID: Int
     
     init(networkService: NetworkService, restaurantID: Int) {
         self.networkService = networkService

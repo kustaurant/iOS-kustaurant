@@ -10,7 +10,7 @@ import Combine
 
 struct RestaurantDetailViewModelActions {
     let pop: () -> Void
-    let showEvaluateScene: () -> Void
+    let showEvaluateScene: (Int) -> Void
 }
 
 enum RestaurantDetailTabType: Int {
@@ -93,7 +93,7 @@ extension RestaurantDetailViewModel {
                     self?.changeTabType(as: type)
                     
                 case .didTapEvaluationButton:
-                    self?.actions.showEvaluateScene()
+                    self?.actions.showEvaluateScene(self?.repository.restaurantID ?? 0)
                 }
             }
             .store(in: &cancellables)
