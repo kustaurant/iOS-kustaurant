@@ -119,6 +119,10 @@
 		5884966A2C8ACAE900E21F64 /* EvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496692C8ACAE900E21F64 /* EvaluationRepository.swift */; };
 		5884966C2C8AD11D00E21F64 /* EvaluationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */; };
 		5884966E2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */; };
+		588496732C8AE52100E21F64 /* EvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496722C8AE52100E21F64 /* EvaluationView.swift */; };
+		588496752C8AE62600E21F64 /* EvaluationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496742C8AE62600E21F64 /* EvaluationTableView.swift */; };
+		588496782C8AEB1800E21F64 /* EvaluationTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496772C8AEB1800E21F64 /* EvaluationTableViewHandler.swift */; };
+		5884967B2C8AEBC200E21F64 /* EvaluationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884967A2C8AEBC200E21F64 /* EvaluationSection.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
@@ -407,6 +411,10 @@
 		588496692C8ACAE900E21F64 /* EvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationRepository.swift; sourceTree = "<group>"; };
 		5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationDTO.swift; sourceTree = "<group>"; };
 		5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEvaluationRepository.swift; sourceTree = "<group>"; };
+		588496722C8AE52100E21F64 /* EvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationView.swift; sourceTree = "<group>"; };
+		588496742C8AE62600E21F64 /* EvaluationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationTableView.swift; sourceTree = "<group>"; };
+		588496772C8AEB1800E21F64 /* EvaluationTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationTableViewHandler.swift; sourceTree = "<group>"; };
+		5884967A2C8AEBC200E21F64 /* EvaluationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationSection.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -922,6 +930,7 @@
 		5841736C2C47BD16001EC132 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				588496792C8AEBA100E21F64 /* Evaluation */,
 				CFE2047F2C6A0FD700BCA87C /* ResraurantDetail */,
 				BA2D895D2C75A00C004E7B8E /* Dto */,
 				BA57C7BE2C7316380063F2FA /* ThirdPartyRepositories */,
@@ -1048,8 +1057,27 @@
 		588496682C8AC89B00E21F64 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				588496722C8AE52100E21F64 /* EvaluationView.swift */,
+				588496762C8AEB0300E21F64 /* EvaluationTableView */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		588496762C8AEB0300E21F64 /* EvaluationTableView */ = {
+			isa = PBXGroup;
+			children = (
+				588496742C8AE62600E21F64 /* EvaluationTableView.swift */,
+				588496772C8AEB1800E21F64 /* EvaluationTableViewHandler.swift */,
+			);
+			path = EvaluationTableView;
+			sourceTree = "<group>";
+		};
+		588496792C8AEBA100E21F64 /* Evaluation */ = {
+			isa = PBXGroup;
+			children = (
+				5884967A2C8AEBC200E21F64 /* EvaluationSection.swift */,
+			);
+			path = Evaluation;
 			sourceTree = "<group>";
 		};
 		58D83A532C3A785800511AB9 = {
@@ -1812,6 +1840,7 @@
 				5841739C2C4A29C6001EC132 /* Tier.swift in Sources */,
 				BA3777352C85BB6F004F68F5 /* EvaluationSceneDIContainer.swift in Sources */,
 				58067CA42C4F4FBA00889C92 /* TierListViewController.swift in Sources */,
+				588496732C8AE52100E21F64 /* EvaluationView.swift in Sources */,
 				BA494B592C7EF04000EB2527 /* MyPageViewTableViewCell.swift in Sources */,
 				5884966A2C8ACAE900E21F64 /* EvaluationRepository.swift in Sources */,
 				58067CAF2C4FB98500889C92 /* TierListTableViewHandler.swift in Sources */,
@@ -1841,6 +1870,7 @@
 				BA8EEF3C2C5CAAD400FE6ABF /* UIColor+.swift in Sources */,
 				5826A1CC2C71F20D0097256C /* TierTopCategoriesView.swift in Sources */,
 				BAB69ABF2C71DB8C00C20F0B /* KeyValueStorage.swift in Sources */,
+				588496782C8AEB1800E21F64 /* EvaluationTableViewHandler.swift in Sources */,
 				5841733B2C467972001EC132 /* DrawFlowCoordinator.swift in Sources */,
 				58067D882C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift in Sources */,
 				CFE204812C6A0FF000BCA87C /* RestaurantDetailSection.swift in Sources */,
@@ -1856,6 +1886,7 @@
 				BA494B492C7DD44200EB2527 /* MyPageUseCases.swift in Sources */,
 				BA45C25C2C8AD3D40033E146 /* KuStarRatingView.swift in Sources */,
 				CF54AD182C4289EB00E0DE68 /* URLRequestBuilder.swift in Sources */,
+				5884967B2C8AEBC200E21F64 /* EvaluationSection.swift in Sources */,
 				CFE2047C2C68AD4C00BCA87C /* RestaurantDetailTierInfoCell.swift in Sources */,
 				BA494B8E2C81A7E800EB2527 /* KuTextField.swift in Sources */,
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
@@ -2040,6 +2071,7 @@
 				58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */,
 				5826A1EF2C7892CC0097256C /* TierCategoryPopupView.swift in Sources */,
 				5841734F2C4682C8001EC132 /* CommunitySceneDIContainer.swift in Sources */,
+				588496752C8AE62600E21F64 /* EvaluationTableView.swift in Sources */,
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
 				CFE204642C5BA3E500BCA87C /* RestaurantDetailMenuCell.swift in Sources */,
 				CFE204542C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift in Sources */,
