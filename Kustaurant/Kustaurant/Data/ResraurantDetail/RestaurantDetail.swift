@@ -13,6 +13,8 @@ struct RestaurantDetail {
     typealias Items = [RestaurantDetailSection: [RestaurantDetailCellItem]]
     typealias TabItems = [RestaurantDetailTabType: [RestaurantDetailCellItem]]
     
+    private(set) var isFavorite: Bool
+    private(set) var evaluationCount: Int
     private(set) var restaurantImageURLString: String
     private(set) var items: Items
     private(set) var tabType: RestaurantDetailTabType
@@ -87,7 +89,9 @@ struct RestaurantDetail {
         await updateTabItems(as: [.review: currentTabItems])
     }
     
-    init(restaurantImageURLString: String, items: Items, tabType: RestaurantDetailTabType = .menu, tabItems: TabItems) {
+    init(evaluationCount: Int, isFavorite: Bool, restaurantImageURLString: String, items: Items, tabType: RestaurantDetailTabType = .menu, tabItems: TabItems) {
+        self.evaluationCount = evaluationCount
+        self.isFavorite = isFavorite
         self.restaurantImageURLString = restaurantImageURLString
         self.items = items
         self.tabType = tabType

@@ -27,7 +27,13 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         let items = viewDatas(from: response)
         let tabItems: RestaurantDetail.TabItems = [.menu: items[.tab] ?? [], .review: []]
         
-        return .init(restaurantImageURLString: response?.restaurantImageURLString ?? "", items: items, tabItems: tabItems)
+        return .init(
+            evaluationCount: response?.evaluationCount ?? 0,
+            isFavorite: response?.isFavorite ?? false,
+            restaurantImageURLString: response?.restaurantImageURLString ?? "",
+            items: items,
+            tabItems: tabItems
+        )
     }
     
     private func viewDatas(from response: RestaurantDetailDTO?) -> RestaurantDetail.Items {
@@ -42,7 +48,8 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
             openingHours: response.businessHours ?? null,
             mapURL: .init(string: response.naverMapURLString ?? null),
             restaurantPosition: response.restaurantPosition ?? "",
-            tier: response.mainTier
+            tier: response.mainTier,
+            isFavorite: response.isFavorite ?? false
         )
         let tierInfos: [RestaurantDetailTierInfo] = [.init(
             restaurantCuisine: response.restaurantCuisine,
@@ -219,5 +226,24 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         )
         
         return .success(review)
+    }
+    
+    func toggleFavorite(restaurantId: Int) async -> Result<Bool, NetworkError> {
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/restaurants/\(restaurantId)/favorite-toggle", method: .post)
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        
+        if let error = response.error {
+            Logger.error(error.localizedDescription, category: .network)
+            return .failure(error)
+        }
+        
+        guard let data: Bool = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        
+        return .success(data)
     }
 }

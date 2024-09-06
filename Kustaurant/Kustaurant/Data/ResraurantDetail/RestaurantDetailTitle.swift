@@ -17,6 +17,7 @@ struct RestaurantDetailTitle: RestaurantDetailCellItem {
     let mapURL: URL?
     let restaurantPosition: String
     let tier: Tier?
+    let isFavorite: Bool
   
     var placeId: Int? {
         guard let url = mapURL else { return nil }

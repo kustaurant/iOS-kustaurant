@@ -16,5 +16,6 @@ protocol RestaurantDetailRepository {
     func reportComment(restaurantId: Int, commentId: Int) async -> Bool
     func deleteComment(restaurantId: Int, commentId: Int) async -> Bool
     func addComment(restaurantId: Int, commentId: Int, comment: String) async -> Result<RestaurantDetailReview, NetworkError>
+    func toggleFavorite(restaurantId: Int) async -> Result<Bool, NetworkError>
 }
 

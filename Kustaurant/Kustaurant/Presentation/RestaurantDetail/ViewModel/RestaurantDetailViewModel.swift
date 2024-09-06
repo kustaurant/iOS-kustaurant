@@ -46,12 +46,14 @@ extension RestaurantDetailViewModel {
         case didTapDeleteComment(commentId: Int)
         case didTapCommentButton(commentId: Int)
         case didTapSendButtonInAccessory(payload: CommentPayload)
+        case didTapFavoriteButton
     }
     
     enum Action {
         case didFetchItems
         case didFetchHeaderImage(UIImage)
         case didFetchReviews
+        case didFetchEvaluation(isFavorite: Bool, evaluationCount: Int)
         case didChangeTabType
         case loginStatus(LoginStatus)
         case didSuccessLikeOrDisLikeButton(commentId: Int, likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus)
@@ -59,6 +61,7 @@ extension RestaurantDetailViewModel {
         case showKeyboard(commentId: Int)
         case removeComment
         case addComment
+        case toggleFavorite(Bool)
     }
 }
 
@@ -135,6 +138,9 @@ extension RestaurantDetailViewModel {
                     
                 case .didTapSendButtonInAccessory(let payload):
                     self?.addComment(payload: payload)
+                    
+                case .didTapFavoriteButton:
+                    self?.toggleFavorite()
                 }
             }
             .store(in: &cancellables)
@@ -149,6 +155,13 @@ extension RestaurantDetailViewModel {
             detail = await repository.fetch()
             
             actionSubject.send(.didFetchItems)
+            
+            if 
+                let isFavorite = self.detail?.isFavorite,
+                let evaluationCount = self.detail?.evaluationCount
+            {
+                actionSubject.send(.didFetchEvaluation(isFavorite: isFavorite, evaluationCount: evaluationCount))
+            }
             
             if let url: URL = .init(string: detail?.restaurantImageURLString ?? "") {
                 ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
@@ -273,6 +286,20 @@ extension RestaurantDetailViewModel {
                         self.actionSubject.send(.addComment)
                     }
                 case .failure:
+                    return
+                }
+            }
+        }
+    }
+    
+    private func toggleFavorite() {
+        Task {
+            let result = await repository.toggleFavorite(restaurantId: self.restaurantId)
+            await MainActor.run {
+                switch result {
+                case .success(let isFavorite):
+                    actionSubject.send(.toggleFavorite(isFavorite))
+                case .failure(let failure):
                     return
                 }
             }

@@ -11,7 +11,7 @@ import Combine
 final class RestaurantDetailViewController: UIViewController, NavigationBarHideable {
     
     private let tableView: UITableView = .init()
-    private let affiliateFloatingView: AffiliabteFloatingView = .init()
+    private let evaluationFloatingView: EvaluationFloatingView = .init()
     private let commentAccessoryView: CommentAccessoryView = .init()
     
     private let viewModel: RestaurantDetailViewModel
@@ -32,7 +32,6 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         viewModel.state = .fetch
         bind()
         setupTableView()
-        setupAffiliateFloatingView()
         setupLayout()
     }
     
@@ -78,16 +77,9 @@ extension RestaurantDetailViewController {
         tableView.registerHeaderFooterView(ofType: RestaurantDetailTabSectionHeaderView.self)
     }
     
-    private func setupAffiliateFloatingView() {
-        affiliateFloatingView.backgroundColor = .white
-        affiliateFloatingView.onTapEvaluateButton = { [weak self] in
-            self?.viewModel.state = .didTapEvaluationButton
-        }
-    }
-    
     private func setupLayout() {
         view.addSubview(tableView, autoLayout: [.fill(0)])
-        view.addSubview(affiliateFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84 + view.safeAreaInsets.bottom)])
+        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84 + view.safeAreaInsets.bottom)])
         view.addSubview(commentAccessoryView, autoLayout: [.fillX(0), .height(68), .bottomKeyboard(0)])
     }
     
@@ -114,10 +106,18 @@ extension RestaurantDetailViewController {
                     }
                     self?.tableView.tableHeaderView = headerView
                     
+                case .didFetchEvaluation(let isFavorite, let evalutionCount):
+                    self?.evaluationFloatingView.isFavorite = isFavorite
+                    self?.evaluationFloatingView.evaluationCount = evalutionCount
+                    
                 case .loginStatus(let loginStatus):
-                    self?.affiliateFloatingView.evaluateButtonStatus = loginStatus.kuButtonStatus
-                    self?.affiliateFloatingView.likeButtonImageName = loginStatus.likeButtonImageResourceName
-                    self?.affiliateFloatingView.likeButtonText = "1002명"
+                    self?.evaluationFloatingView.loginStatus = loginStatus
+                    self?.evaluationFloatingView.onTapEvaluateButton = { [weak self] in
+                        self?.viewModel.state = .didTapEvaluationButton
+                    }
+                    self?.evaluationFloatingView.onTapFavoriteButton = { [weak self] in
+                        self?.viewModel.state = .didTapFavoriteButton
+                    }
                     
                 case .didSuccessLikeOrDisLikeButton(let commentId, let likeCount, let dislikeCount, let likeStatus):
                     guard let self = self else { return }
@@ -138,6 +138,14 @@ extension RestaurantDetailViewController {
                     
                 case .addComment:
                     self?.tableView.reloadSections([RestaurantDetailSection.tab.index], with: .automatic)
+                    
+                case .toggleFavorite(let isFavorite):
+                    self?.evaluationFloatingView.isFavorite = isFavorite
+                    if isFavorite {
+                        self?.evaluationFloatingView.evaluationCount += 1
+                    } else {
+                        self?.evaluationFloatingView.evaluationCount -= 1
+                    }
                 }
             }
             .store(in: &cancellables)

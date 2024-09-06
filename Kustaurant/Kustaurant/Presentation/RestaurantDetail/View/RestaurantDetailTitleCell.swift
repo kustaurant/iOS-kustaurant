@@ -83,34 +83,39 @@ extension RestaurantDetailTitleCell {
         let titleHStackView: UIStackView = .init()
         titleHStackView.axis = .horizontal
         titleHStackView.alignment = .center
+
+        // Spacer 뷰 추가
+        let spacerView = UIView()
+        spacerView.setContentHuggingPriority(.defaultLow, for: .horizontal) // Spacer가 공간을 차지하도록 설정
+        
         titleHStackView.addArrangedSubview(titleLabel)
+        titleHStackView.addArrangedSubview(spacerView)  // Spacer 추가
         titleHStackView.addArrangedSubview(reviewCompleteIconImageView)
         
         let topSectionStackView: UIStackView = .init()
         topSectionStackView.axis = .vertical
-        topSectionStackView.alignment = .leading
+        topSectionStackView.alignment = .fill
         topSectionStackView.spacing = 6.5
         topSectionStackView.addArrangedSubview(cuisineTypeLabel)
         topSectionStackView.addArrangedSubview(titleHStackView)
         
         let infoStackView: UIStackView = .init()
         infoStackView.axis = .vertical
-        infoStackView.alignment = .leading
+        infoStackView.alignment = .fill
         infoStackView.spacing = 6
         infoStackView.addArrangedSubview(addressInfoView)
         infoStackView.addArrangedSubview(openingHoursInfoView)
         
         let bottomSectionStackView: UIStackView = .init()
         bottomSectionStackView.axis = .vertical
-        bottomSectionStackView.alignment = .leading
+        bottomSectionStackView.alignment = .fill
         bottomSectionStackView.spacing = 12
         bottomSectionStackView.addArrangedSubview(infoStackView)
         bottomSectionStackView.addArrangedSubview(goToMapNavigationLabel)
         
-        
         let mainStackView: UIStackView = .init()
         mainStackView.axis = .vertical
-        mainStackView.alignment = .leading
+        mainStackView.alignment = .fill
         mainStackView.spacing = 19.5
         mainStackView.addArrangedSubview(topSectionStackView)
         mainStackView.addArrangedSubview(bottomSectionStackView)
