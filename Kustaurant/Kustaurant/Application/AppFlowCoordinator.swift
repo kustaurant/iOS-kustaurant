@@ -85,6 +85,7 @@ extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
         
         let tierDIContainer = appDIContainer.makeTierSceneDIContainer()
         let tierFlow = tierDIContainer.makeTierFlowCoordinator(
+            appDIContainer: appDIContainer,
             navigationController: CustomUINavigationController()
         )
         

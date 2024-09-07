@@ -9,12 +9,14 @@ import Combine
 
 struct TierListViewModelActions {
     let showTierCategory: ([Category]) -> Void
+    let showRestaurantDetail: (Int) -> Void
 }
 
 protocol TierListViewModelInput {
     func fetchTierLists()
     func categoryButtonTapped()
     func updateCategories(categories: [Category])
+    func didTapRestaurant(restaurantId: Int)
 }
 
 protocol TierListViewModelOutput {
@@ -90,5 +92,9 @@ extension DefaultTierListViewModel {
         hasMoreData = true
         listPage = 1
         tierRestaurants.removeAll()
+    }
+    
+    func didTapRestaurant(restaurantId: Int) {
+        actions.showRestaurantDetail(restaurantId)
     }
 }

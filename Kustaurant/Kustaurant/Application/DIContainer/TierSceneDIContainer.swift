@@ -120,9 +120,10 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         )
     }
     
-    func makeTierFlowCoordinator(navigationController: UINavigationController) -> TierFlowCoordinator {
+    func makeTierFlowCoordinator(appDIContainer: AppDIContainer, navigationController: UINavigationController) -> TierFlowCoordinator {
         TierFlowCoordinator(
             dependencies: self,
+            appDIContainer: appDIContainer,
             navigationController: navigationController
         )
     }

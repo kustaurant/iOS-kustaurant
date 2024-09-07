@@ -59,6 +59,7 @@ extension HomeFlowCoordinator {
     private func showTierScene(cuisine: Cuisine) {
         let tierDIContainer = appDIContainer.makeTierSceneDIContainer()
         let tierFlow = tierDIContainer.makeTierFlowCoordinator(
+            appDIContainer: appDIContainer,
             navigationController: navigationController
         )
         tierFlow.start(initialCategories: [

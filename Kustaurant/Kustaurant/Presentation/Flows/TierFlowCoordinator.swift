@@ -16,6 +16,7 @@ protocol TierFlowCoordinatorDependencies {
 final class TierFlowCoordinator: Coordinator {
     
     private let dependencies: TierFlowCoordinatorDependencies
+    private let appDIContainer: AppDIContainer
     var navigationController: UINavigationController
 
     private weak var tierViewController: TierViewController?
@@ -23,9 +24,11 @@ final class TierFlowCoordinator: Coordinator {
     
     init(
         dependencies: TierFlowCoordinatorDependencies,
+        appDIContainer: AppDIContainer,
         navigationController: UINavigationController
     ) {
         self.dependencies = dependencies
+        self.appDIContainer = appDIContainer
         self.navigationController = navigationController
     }
 }
@@ -37,7 +40,8 @@ extension TierFlowCoordinator {
     
     func start(initialCategories: [Category]) {
         let listActions = TierListViewModelActions(
-            showTierCategory: showTierCategory
+            showTierCategory: showTierCategory,
+            showRestaurantDetail: showRestaurantDetail
         )
         let mapActions = TierMapViewModelActions(
             showTierCategory: showTierCategory,
@@ -95,6 +99,13 @@ extension TierFlowCoordinator {
         tierMapBottomSheet = nil
     }
     
+    private func showRestaurantDetail(restaurantId: Int) {
+        let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
+        let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
+            navigationController: navigationController
+        )
+        flow.start(id: restaurantId)
+    }
 }
 
 extension TierFlowCoordinator {
