@@ -100,6 +100,10 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
     func makePrivacyPolicyViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> PrivacyPolicyViewController {
         PrivacyPolicyViewController(viewModel: makeWebViewLoadViewModel(webViewUrl: webViewUrl, actions: actions))
     }
+    
+    func makeMyEvaluationViewController(actions: MyEvaluationViewModelActions) -> MyEvaluationViewController {
+        MyEvaluationViewController(viewModel: makeMyEvaluationViewModel(actions: actions))
+    }
 }
 
 extension MyPageSceneDIContainer {
@@ -122,5 +126,9 @@ extension MyPageSceneDIContainer {
     
     func makeWebViewLoadViewModel(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> PlainWebViewLoadViewModel {
         DefaultPlainWebViewLoadViewModel(webViewUrl: webViewUrl, actions: actions)
+    }
+    
+    func makeMyEvaluationViewModel(actions: MyEvaluationViewModelActions) -> MyEvaluationViewModel {
+        DefaultMyEvaluationViewModel(actions: actions, myPageUseCases: makeMyPageUseCases())
     }
 }

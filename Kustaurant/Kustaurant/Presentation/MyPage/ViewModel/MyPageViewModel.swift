@@ -16,12 +16,14 @@ struct MyPageViewModelActions {
     let showNotice:() -> Void
     let showTermsOfService: () -> Void
     let showPrivacyPolicy: () -> Void
+    let showEvaluatedRestaurants: () -> Void
 }
 
 protocol MyPageViewModelInput {
     func didTapLoginAndStartButton()
     func didTapComposeProfileButton()
-    func didTapSavedRestaurantsCell()
+    func didTapSavedRestaurants()
+    func didTapEvaluatedRestaurants()
     func getUserSavedRestaurants()
     func didTapSendFeedback()
     func didTapNotice()
@@ -152,8 +154,12 @@ extension DefaultMyPageViewModel: MyPageViewModel {
         actions.showProfileCompose(userSavedRestaurants.iconImgUrl)
     }
     
-    func didTapSavedRestaurantsCell() {
+    func didTapSavedRestaurants() {
         actions.showSavedRestaurants()
+    }
+    
+    func didTapEvaluatedRestaurants() {
+        actions.showEvaluatedRestaurants()
     }
     
     func didTapSendFeedback() {

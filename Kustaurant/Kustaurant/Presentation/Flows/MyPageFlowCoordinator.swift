@@ -15,6 +15,7 @@ protocol MyPageFlowCoordinatorDependencies {
     func makeTermsOfServiceViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> TermsOfServiceViewController
     func makePrivacyPolicyViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> PrivacyPolicyViewController
     func makeNoticeBoardViewController(actions: NoticeBoardViewModelActions) -> NoticeBoardViewController
+    func makeMyEvaluationViewController(actions: MyEvaluationViewModelActions) -> MyEvaluationViewController
 }
 
 final class MyPageFlowCoordinator: Coordinator {
@@ -46,7 +47,8 @@ extension MyPageFlowCoordinator {
             showFeedbackSubmitting: showFeedbackSubmitting,
             showNotice: showNoticeBoard,
             showTermsOfService: showTermsOfService,
-            showPrivacyPolicy: showPrivacyPolicy
+            showPrivacyPolicy: showPrivacyPolicy,
+            showEvaluatedRestaurants: showMyEvaluation
         )
         let viewController = dependencies.makeMyPageViewController(actions: actions)
         let image = UIImage(named: TabBarPage.mypage.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
@@ -119,6 +121,15 @@ extension MyPageFlowCoordinator {
             navigationController: rootNavigationController
         )
         flow.start(id: restaurantId)
+    }
+    
+    private func showMyEvaluation() {
+        let actions = MyEvaluationViewModelActions(
+            pop: popAnimated,
+            showRestaurantDetail: showRestaurantDetail
+        )
+        let viewController = dependencies.makeMyEvaluationViewController(actions: actions)
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     private func popAnimated() {

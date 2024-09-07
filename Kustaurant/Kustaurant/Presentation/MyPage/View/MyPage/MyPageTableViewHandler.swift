@@ -39,6 +39,16 @@ extension MyPageTableViewHandler {
             headerView.profileButton.setTitle("로그인하고 시작하기", for: .normal)
         }
         
+        if loginStatus == .loggedIn {
+            headerView.onTapMyEvaluation = { [weak self] in
+                self?.viewModel.didTapEvaluatedRestaurants()
+            }
+            
+            headerView.onTapSavedRestaurants = { [weak self] in
+                self?.viewModel.didTapSavedRestaurants()
+            }
+        }
+        
         for sectionIndex in 0..<viewModel.tableViewSections.count {
             let section = viewModel.tableViewSections[sectionIndex]
             for row in 0..<section.items.count {
@@ -73,7 +83,7 @@ extension MyPageTableViewHandler: UITableViewDelegate {
         let item = viewModel.tableViewSections[indexPath.section].items[indexPath.row]
         switch item.type {
         case .savedRestaurants:
-            viewModel.didTapSavedRestaurantsCell()
+            viewModel.didTapSavedRestaurants()
         case .sendFeedback:
             viewModel.didTapSendFeedback()
         case .notice:

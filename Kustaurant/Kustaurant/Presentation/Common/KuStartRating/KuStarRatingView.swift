@@ -42,7 +42,7 @@ final class KuStarRatingView: UIStackView {
     }
 }
 
-fileprivate final class KuStarRatingImageView: UIStackView {
+final class KuStarRatingImageView: UIStackView {
     
     private let starImageViews: [UIImageView] = {
         (0..<5).map { _ in
@@ -70,16 +70,27 @@ fileprivate final class KuStarRatingImageView: UIStackView {
         }
     }
     
+    func update(rating: Double, width: CGFloat) {
+        let count = Int(rating)
+        (0..<count).forEach { index in
+            starImageViews[safe: index]?.image = .init(named: "icon_star_fill")
+        }
+        if rating > Double(count) {
+            starImageViews[safe: count + 1]?.image = .init(named: "icon_star_half_fill")
+        }
+        setupLayout(width)
+    }
+    
     private func setupStyle() {
         axis = .horizontal
         distribution = .fillEqually
         alignment = .center
     }
     
-    private func setupLayout() {
+    private func setupLayout(_ width: CGFloat = 26) {
         starImageViews.forEach {
             addArrangedSubview($0)
-            $0.autolayout([.width(26), .height(26)])
+            $0.autolayout([.width(width), .height(width)])
         }
     }
 }
