@@ -39,9 +39,8 @@ extension SavedRestaurantsTableViewHandler: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TODO: API 수정되면 restuarnatId로 변경
-        let _ = viewModel.favoriteRestaurants[indexPath.row]
-        viewModel.didTapRestaurant(restaurantId: 511)
+        let restaurant = viewModel.favoriteRestaurants[indexPath.row]
+        viewModel.didTapRestaurant(restaurantId: restaurant.restaurantId ?? 0)
     }
 }
 

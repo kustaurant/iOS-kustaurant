@@ -13,5 +13,6 @@ struct EvaluatedRestaurant: Codable {
     let cuisine: String?
     let evaluationScore: Double?
     let restaurantComment: String?
+    let restaurantId: Int?
     let evaluationItemScores: [String]?
 }
