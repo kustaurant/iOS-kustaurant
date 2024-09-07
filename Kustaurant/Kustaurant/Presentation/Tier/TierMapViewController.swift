@@ -104,4 +104,8 @@ extension TierMapViewController: TierMapBottomSheetDelegate {
     func bottomSheetDidDismiss() {
         mapHandler?.resetSelectedMarker()
     }
+    
+    func didTapRestaurant() {
+        viewModel.didTapRestaurant()
+    }
 }

@@ -46,7 +46,8 @@ extension TierFlowCoordinator {
         let mapActions = TierMapViewModelActions(
             showTierCategory: showTierCategory,
             showMapBottomSheet: showMapBottomSheet,
-            hideMapBottomSheet: hideMapBottomSheet
+            hideMapBottomSheet: hideMapBottomSheet,
+            showRestaurantDetail: showRestaurantDetail
         )
         let viewController = dependencies.makeTierViewController(
             listActions: listActions,
