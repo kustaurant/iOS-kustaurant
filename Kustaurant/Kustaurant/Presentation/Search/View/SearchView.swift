@@ -38,6 +38,9 @@ struct SearchView: View {
                         LazyVStack(spacing: 16) {
                             ForEach(viewModel.restaurants) { restaurant in
                                 RestaurantSearchResultRowView(restaurant: restaurant)
+                                    .onTapGesture {
+                                        viewModel.didTapRestaurant(restaurantId: restaurant.restaurantId ?? 0)
+                                    }
                             }
                         }
                     }
@@ -121,7 +124,7 @@ extension SearchView {
 #Preview {
     SearchView(
         viewModel: SearchViewModel(
-            actions: SearchViewModelActions(didTapBackButton: {}),
+            actions: SearchViewModelActions(didTapBackButton: {}, didTapRestaurant: { _ in }),
             searchUseCases: MockSearchUseCases()))
 }
 

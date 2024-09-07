@@ -72,7 +72,9 @@ extension HomeFlowCoordinator {
     
     func showSearch() {
         let searchDIContainer = appDIContainer.makeSearchDIContainer()
-        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(navigationController: navigationController)
+        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(
+            appDIContainer: appDIContainer, navigationController: navigationController, rootNavigationController: rootNavigationController
+        )
         searchFlow.start()
     }
 }
