@@ -88,10 +88,10 @@ extension RestaurantDetailViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 switch action {
-                case .didFetchItems:
+                case .didFetchItems, .didFetchReviews:
                     self?.tableView.reloadData()
                     
-                case .didFetchReviews, .didChangeTabType:
+                case .didChangeTabType:
                     let indexSet = IndexSet(integer: RestaurantDetailSection.tab.index)
                     self?.tableView.reloadSections(indexSet, with: .none)
                     
