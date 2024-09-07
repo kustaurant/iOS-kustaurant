@@ -73,9 +73,8 @@ class DrawResultView: UIView {
         return label
     }()
     
-    let ratingsView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .yellow
+    let ratingsView: KuStarRatingView = {
+        let view = KuStarRatingView()
         return view
     }()
     
@@ -165,7 +164,7 @@ extension DrawResultView {
     private func setupLabelsView() {
         labelContainerView.addSubview(categoryLabel, autoLayout: [.top(26), .fillX(0)])
         labelContainerView.addSubview(restaurantNameLabel, autoLayout: [.topNext(to: categoryLabel, constant: 8), .fillX(0)])
-        labelContainerView.addSubview(ratingsView, autoLayout: [.topNext(to: restaurantNameLabel, constant: 8), .fillX(112), .height(20)])
+        labelContainerView.addSubview(ratingsView, autoLayout: [.topNext(to: restaurantNameLabel, constant: 8), .centerX(0)])
         labelContainerView.addSubview(partinerShipLabel, autoLayout: [.topNext(to: ratingsView, constant: 12), .fillX(0)])
     }
     

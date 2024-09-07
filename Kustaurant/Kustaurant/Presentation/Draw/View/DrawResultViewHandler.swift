@@ -32,6 +32,7 @@ extension DrawResultViewHandler {
         view.restaurantNameLabel.text = restaurant?.restaurantName
         view.partinerShipLabel.text = restaurant?.partnershipInfo
         view.ratingsView.isHidden = false
+        view.ratingsView.update(rating: Double(restaurant?.restaurantScore ?? 0))
     }
     
     func resetRestaurantLabels() {
