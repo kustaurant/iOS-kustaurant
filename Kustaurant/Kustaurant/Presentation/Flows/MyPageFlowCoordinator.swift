@@ -21,16 +21,19 @@ final class MyPageFlowCoordinator: Coordinator {
     private let dependencies: MyPageFlowCoordinatorDependencies
     private let appDIContainer: AppDIContainer
     var navigationController: UINavigationController
+    var rootNavigationController: UINavigationController
     weak var appFlowNavigating: AppFlowCoordinatorNavigating?
     
     init(
         dependencies: MyPageFlowCoordinatorDependencies,
         appDIContainer: AppDIContainer,
-        navigationController: UINavigationController
+        navigationController: UINavigationController,
+        rootNavigationController: UINavigationController
     ) {
         self.dependencies = dependencies
         self.appDIContainer = appDIContainer
         self.navigationController = navigationController
+        self.rootNavigationController = rootNavigationController
     }
 }
 
@@ -113,7 +116,7 @@ extension MyPageFlowCoordinator {
     private func showRestaurantDetail(restaurantId: Int) {
         let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
         let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
-            navigationController: navigationController
+            navigationController: rootNavigationController
         )
         flow.start(id: restaurantId)
     }

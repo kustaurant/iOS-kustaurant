@@ -16,11 +16,18 @@ final class DrawFlowCoordinator: Coordinator {
     private let appDIContainer: AppDIContainer
     private let dependencies: DrawFlowCoordinatorDependencies
     var navigationController: UINavigationController
+    var rootNavigationController: UINavigationController
     
-    init(appDIContainer: AppDIContainer, dependencies: DrawFlowCoordinatorDependencies, navigationController: UINavigationController) {
+    init(
+        appDIContainer: AppDIContainer,
+        dependencies: DrawFlowCoordinatorDependencies,
+        navigationController: UINavigationController,
+        rootNavigationController: UINavigationController
+    ) {
         self.appDIContainer = appDIContainer
         self.dependencies = dependencies
         self.navigationController = navigationController
+        self.rootNavigationController = rootNavigationController
     }
 }
 
@@ -67,7 +74,7 @@ extension DrawFlowCoordinator {
     private func showRestaurantDetail(restaurantId: Int) {
         let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
         let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
-            navigationController: navigationController
+            navigationController: rootNavigationController
         )
         flow.start(id: restaurantId)
     }

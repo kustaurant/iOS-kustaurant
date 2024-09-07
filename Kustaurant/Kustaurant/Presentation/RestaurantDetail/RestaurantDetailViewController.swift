@@ -29,10 +29,6 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
             accessoryView: commentAccessoryView,
             viewModel: viewModel
         )
-        viewModel.state = .fetch
-        bind()
-        setupTableView()
-        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -41,16 +37,16 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.state = .fetch
+        bind()
+        setupTableView()
+        setupLayout()
         accessoryViewHandler?.setupAccessoryView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar(animated: false)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        showNavigationBar(animated: false)
     }
 }
 
@@ -83,7 +79,7 @@ extension RestaurantDetailViewController {
     
     private func setupLayout() {
         view.addSubview(tableView, autoLayout: [.fill(0)])
-        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84 + view.safeAreaInsets.bottom)])
+        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84)])
         view.addSubview(commentAccessoryView, autoLayout: [.fillX(0), .height(68), .bottomKeyboard(0)])
     }
     
