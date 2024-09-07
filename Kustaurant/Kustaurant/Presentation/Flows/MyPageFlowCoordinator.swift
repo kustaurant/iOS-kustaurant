@@ -19,14 +19,17 @@ protocol MyPageFlowCoordinatorDependencies {
 
 final class MyPageFlowCoordinator: Coordinator {
     private let dependencies: MyPageFlowCoordinatorDependencies
+    private let appDIContainer: AppDIContainer
     var navigationController: UINavigationController
     weak var appFlowNavigating: AppFlowCoordinatorNavigating?
     
     init(
         dependencies: MyPageFlowCoordinatorDependencies,
+        appDIContainer: AppDIContainer,
         navigationController: UINavigationController
     ) {
         self.dependencies = dependencies
+        self.appDIContainer = appDIContainer
         self.navigationController = navigationController
     }
 }
@@ -66,7 +69,8 @@ extension MyPageFlowCoordinator {
     
     private func showSavedRestaurants() {
         let actions = SavedRestaurantsViewModelActions(
-            pop: popAnimated
+            pop: popAnimated,
+            showRestaurantDetail: showRestaurantDetail
         )
         let viewController = dependencies.makeSavedRestaurantsViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
@@ -84,7 +88,6 @@ extension MyPageFlowCoordinator {
         let actions = NoticeBoardViewModelActions(
             pop: popAnimated
         )
-        let noticeBoardUrl = "https://kustaurant.com/notice"
         let viewController = dependencies.makeNoticeBoardViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }
@@ -105,6 +108,14 @@ extension MyPageFlowCoordinator {
         let privacyPolicyUrl = "https://kustaurant.com/privacy-policy"
         let viewController = dependencies.makePrivacyPolicyViewController(webViewUrl: privacyPolicyUrl, actions: actions)
         navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func showRestaurantDetail(restaurantId: Int) {
+        let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
+        let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
+            navigationController: navigationController
+        )
+        flow.start(id: restaurantId)
     }
     
     private func popAnimated() {

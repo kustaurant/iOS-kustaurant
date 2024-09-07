@@ -17,7 +17,6 @@ class SavedRestaurantsView: UIView {
     let emptyView: UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
-        sv.isHidden = true
         sv.spacing = 26
         return sv
     }()

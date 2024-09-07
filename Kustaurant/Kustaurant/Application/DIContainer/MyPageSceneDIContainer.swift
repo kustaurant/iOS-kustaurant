@@ -23,9 +23,10 @@ final class MyPageSceneDIContainer: MyPageFlowCoordinatorDependencies {
         MyPageViewController(viewModel: makeMyPageViewModel(actions: actions))
     }
     
-    func makeMyPageFlowCoordinator(navigationController: UINavigationController) -> MyPageFlowCoordinator {
+    func makeMyPageFlowCoordinator(appDIContainer: AppDIContainer, navigationController: UINavigationController) -> MyPageFlowCoordinator {
         MyPageFlowCoordinator(
             dependencies: self,
+            appDIContainer: appDIContainer,
             navigationController: navigationController
         )
     }

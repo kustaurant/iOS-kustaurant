@@ -95,6 +95,7 @@ extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
         
         let myPageDIContainer = appDIContainer.makeMyPageSceneDIContainer()
         let myPageFlow = myPageDIContainer.makeMyPageFlowCoordinator(
+            appDIContainer: appDIContainer,
             navigationController: CustomUINavigationController()
         )
         myPageFlow.appFlowNavigating = self

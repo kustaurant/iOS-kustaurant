@@ -27,7 +27,7 @@ final class DrawResultViewHandler {
 // View
 extension DrawResultViewHandler {
     
-    func configureRestaurantLabels(with restaurant: Restaurant?) {
+    private func configureRestaurantLabels(with restaurant: Restaurant?) {
         view.categoryLabel.text = restaurant?.restaurantCuisine
         view.restaurantNameLabel.text = restaurant?.restaurantName
         view.partinerShipLabel.text = restaurant?.partnershipInfo
@@ -101,5 +101,15 @@ extension DrawResultViewHandler {
         UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseOut]) { [weak self] in
             self?.view.drawedRestaurantImageView.alpha = 1
         }
+    }
+    
+    func setupDrawedRestaurantTapGesture() {
+        view.drawedRestaurantImageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapDrawedRestaurant))
+        view.drawedRestaurantImageView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func didTapDrawedRestaurant() {
+        viewModel.didTapDrawedRestaurant(restaurantId: viewModel.restaurants.last?.restaurantId ?? 0)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class SavedRestaurantsViewController: UIViewController {
+class SavedRestaurantsViewController: UIViewController, NavigationBarHideable {
     
     private let viewModel: SavedRestaurantsViewModel
     private var cancellables = Set<AnyCancellable>()
@@ -35,6 +35,11 @@ class SavedRestaurantsViewController: UIViewController {
     override func loadView() {
         view = savedRestaurantsView
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showNavigationBar(animated: false)
+    }
 }
 
 extension SavedRestaurantsViewController {
@@ -42,8 +47,9 @@ extension SavedRestaurantsViewController {
     private func bind() {
         viewModel.favoriteRestaurantsPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] restaurants in
+                print(restaurants)
                 if restaurants.isEmpty {
-                    self?.savedRestaurantsView.emptyView.isHidden = false
+                    self?.savedRestaurantsView.emptyView.isHidden = true
                 } else {
                     self?.savedRestaurantsTableViewHandler?.reloadData()
                 }

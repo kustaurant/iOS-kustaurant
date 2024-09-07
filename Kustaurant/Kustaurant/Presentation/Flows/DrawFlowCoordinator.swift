@@ -44,7 +44,8 @@ extension DrawFlowCoordinator {
     func didTapDrawButton(restaurants: [Restaurant]) {
         let actions = DrawResultViewModelActions(
             didTapBackButton: popAnimated,
-            didTapSearchButton: showSearch
+            didTapSearchButton: showSearch,
+            showRestaurantDetails: showRestaurantDetail
         )
         let viewController = dependencies.makeDrawResultViewController(
             actions: actions,
@@ -61,5 +62,13 @@ extension DrawFlowCoordinator {
         let searchDIContainer = appDIContainer.makeSearchDIContainer()
         let searchFlow = searchDIContainer.makeSearchFlowCoordinator(navigationController: navigationController)
         searchFlow.start()
+    }
+    
+    private func showRestaurantDetail(restaurantId: Int) {
+        let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
+        let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
+            navigationController: navigationController
+        )
+        flow.start(id: restaurantId)
     }
 }
