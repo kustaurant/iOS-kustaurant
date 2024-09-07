@@ -18,6 +18,7 @@ class MyEvaluationView: UIView {
         let sv = UIStackView()
         sv.axis = .vertical
         sv.spacing = 26
+        sv.isHidden = true
         return sv
     }()
     

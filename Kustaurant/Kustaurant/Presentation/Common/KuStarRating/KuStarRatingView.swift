@@ -60,25 +60,24 @@ final class KuStarRatingImageView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(rating: Double) {
-        let count = Int(rating)
-        (0..<count).forEach { index in
-            starImageViews[safe: index]?.image = .init(named: "icon_star_fill")
+    func update(rating: Double, width: CGFloat? = 26) {
+        let roundedRating = round(rating * 2) / 2
+        let fullStarCount = Int(roundedRating)
+        let hasHalfStar = (roundedRating - Double(fullStarCount)) == 0.5
+        
+        starImageViews.forEach { $0.image = .init(named: "icon_star_empty") }
+        
+        (0..<fullStarCount).forEach { index in
+            starImageViews[index].image = .init(named: "icon_star_fill")
         }
-        if rating > Double(count) {
-            starImageViews[safe: count + 1]?.image = .init(named: "icon_star_half_fill")
+        
+        if hasHalfStar && fullStarCount < starImageViews.count {
+            starImageViews[fullStarCount].image = .init(named: "icon_star_half_fill")
         }
-    }
-    
-    func update(rating: Double, width: CGFloat) {
-        let count = Int(rating)
-        (0..<count).forEach { index in
-            starImageViews[safe: index]?.image = .init(named: "icon_star_fill")
+        
+        if let width = width {
+            setupLayout(width)
         }
-        if rating > Double(count) {
-            starImageViews[safe: count + 1]?.image = .init(named: "icon_star_half_fill")
-        }
-        setupLayout(width)
     }
     
     private func setupStyle() {

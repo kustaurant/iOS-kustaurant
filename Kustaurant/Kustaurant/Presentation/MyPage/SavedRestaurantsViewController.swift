@@ -47,10 +47,10 @@ extension SavedRestaurantsViewController {
     private func bind() {
         viewModel.favoriteRestaurantsPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] restaurants in
-                print(restaurants)
                 if restaurants.isEmpty {
-                    self?.savedRestaurantsView.emptyView.isHidden = true
+                    self?.savedRestaurantsView.emptyView.isHidden = false
                 } else {
+                    self?.savedRestaurantsView.emptyView.isHidden = true
                     self?.savedRestaurantsTableViewHandler?.reloadData()
                 }
             }

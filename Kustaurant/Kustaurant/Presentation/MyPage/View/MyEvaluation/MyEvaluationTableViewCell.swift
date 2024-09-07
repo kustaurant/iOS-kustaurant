@@ -83,7 +83,7 @@ extension MyEvaluationTableViewCell {
     private func bind() {
         loadImage()
         setupRestaurantNameButton()
-        ratingStarView.update(rating: Double(model?.evaluationStore ?? 0), width: 20)
+        ratingStarView.update(rating: Double(model?.evaluationScore ?? 0), width: 20)
         commentLabel.text = model?.restaurantComment
         if let model = model, let scores = model.evaluationItemScores, !scores.isEmpty {
             collectionViewHeightConstraint = evaluationTagCollectionView.heightAnchor.constraint(equalToConstant: 29)

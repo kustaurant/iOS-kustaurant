@@ -47,6 +47,7 @@ extension MyEvaluationViewController {
                 if restaurants.isEmpty {
                     self?.myEvaluationView.emptyView.isHidden = false
                 } else {
+                    self?.myEvaluationView.emptyView.isHidden = true
                     self?.myEvaluationView.tableView.reloadData()
                 }
             }

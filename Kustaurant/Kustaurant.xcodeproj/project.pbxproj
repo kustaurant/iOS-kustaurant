@@ -1309,12 +1309,12 @@
 			path = ExternalLink;
 			sourceTree = "<group>";
 		};
-		BA45C25A2C8AD3BE0033E146 /* KuStartRating */ = {
+		BA45C25A2C8AD3BE0033E146 /* KuStarRating */ = {
 			isa = PBXGroup;
 			children = (
 				BA45C25B2C8AD3D40033E146 /* KuStarRatingView.swift */,
 			);
-			path = KuStartRating;
+			path = KuStarRating;
 			sourceTree = "<group>";
 		};
 		BA494B662C806A2100EB2527 /* MyPage */ = {
@@ -1552,7 +1552,7 @@
 		CFE204652C5BC46700BCA87C /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				BA45C25A2C8AD3BE0033E146 /* KuStartRating */,
+				BA45C25A2C8AD3BE0033E146 /* KuStarRating */,
 				BA494B8C2C81A7D200EB2527 /* KuTextField */,
 				BA8EEF8B2C6351CD00FE6ABF /* KuPageControl */,
 				CFE2046C2C5E68B400BCA87C /* KuTabBar */,

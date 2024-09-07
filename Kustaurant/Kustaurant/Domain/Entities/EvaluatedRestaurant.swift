@@ -11,7 +11,7 @@ struct EvaluatedRestaurant: Codable {
     let restaurantName: String?
     let restaurantImgURL: String?
     let cuisine: String?
-    let evaluationStore: Int?
+    let evaluationScore: Double?
     let restaurantComment: String?
     let evaluationItemScores: [String]?
 }
