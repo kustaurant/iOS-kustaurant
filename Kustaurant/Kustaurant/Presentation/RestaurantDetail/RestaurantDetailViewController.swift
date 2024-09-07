@@ -88,8 +88,12 @@ extension RestaurantDetailViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 switch action {
-                case .didFetchItems, .didFetchReviews, .didChangeTabType:
+                case .didFetchItems:
                     self?.tableView.reloadData()
+                    
+                case .didFetchReviews, .didChangeTabType:
+                    let indexSet = IndexSet(integer: RestaurantDetailSection.tab.index)
+                    self?.tableView.reloadSections(indexSet, with: .none)
                     
                 case .didFetchHeaderImage(let image):
                     let headerView: RestaurantDetailStretchyHeaderView = .init(frame: .init(x: 0, y: 0, width: self?.view.bounds.width ?? 0, height: 145 + self!.view.safeAreaInsets.top))
@@ -152,8 +156,12 @@ extension RestaurantDetailViewController {
         
         tierCellHeightSubject
             .removeDuplicates()
-            .sink { [weak self] _ in
-                self?.tableView.reloadData()
+            .sink { [weak self] newHeight in
+                guard let self = self else { return }
+                if self.tableView.rowHeight != newHeight {
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                }
             }
             .store(in: &cancellables)
         

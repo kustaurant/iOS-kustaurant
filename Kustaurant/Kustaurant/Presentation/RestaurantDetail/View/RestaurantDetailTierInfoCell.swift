@@ -44,7 +44,6 @@ final class RestaurantDetailTierInfoCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         updateHeight()
     }
     
