@@ -36,29 +36,42 @@ extension EvaluationTableViewHandler: UITableViewDelegate {
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-        150
-//        UITableView.automaticDimension
+        UITableView.automaticDimension
     }
 }
 
 // MARK: - UITableViewDataSource
 extension EvaluationTableViewHandler: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        EvaluationSection.count
+    }
+    
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        EvaluationSection.count
+        1
     }
     
     func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "test", for: indexPath)
-        let colors: [UIColor] = [.blue, .red, .gray, .green, .yellow]
-        cell.layer.borderWidth = 0.5
-        cell.backgroundColor = colors.randomElement()?.withAlphaComponent(0.5)
-        
-        return cell
+        guard let section = EvaluationSection(index: indexPath.section)
+        else { return .init() }
+
+        switch section {
+        case .title:
+            let cell: EvaluationTitleCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.update(item: viewModel.restaurantDetailTitle)
+            return cell
+            
+        case .keyword, .rating, .submit:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "test", for: indexPath)
+            let colors: [UIColor] = [.blue, .red, .gray, .green, .yellow]
+            cell.layer.borderWidth = 0.5
+            cell.backgroundColor = colors.randomElement()?.withAlphaComponent(0.5)
+            return cell
+        }
     }
 }

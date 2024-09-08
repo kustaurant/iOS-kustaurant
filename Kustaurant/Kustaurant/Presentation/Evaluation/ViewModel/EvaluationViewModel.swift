@@ -16,6 +16,7 @@ protocol EvaluationViewModelInput {
 }
 protocol EvaluationViewModelOutput {
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { get }
+    var restaurantDetailTitle: RestaurantDetailTitle { get }
 }
 
 typealias EvaluationViewModel = EvaluationViewModelInput & EvaluationViewModelOutput

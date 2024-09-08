@@ -28,5 +28,6 @@ final class EvaluationTableView: UITableView {
         contentInsetAdjustmentBehavior = .never
 
         registerCell(ofType: UITableViewCell.self, withReuseIdentifier: "test")
+        registerCell(ofType: EvaluationTitleCell.self)
     }
 }

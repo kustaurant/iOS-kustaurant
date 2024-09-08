@@ -116,6 +116,7 @@
 		584FA4E22C708A12008DDC19 /* HomeBannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4E12C708A12008DDC19 /* HomeBannerCollectionViewCell.swift */; };
 		584FA4E42C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4E32C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift */; };
 		584FA4E82C71D68C008DDC19 /* TierTopCategoriesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4E72C71D68C008DDC19 /* TierTopCategoriesCollectionView.swift */; };
+		585740FD2C8DE1160098BAB0 /* RestaurantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585740FC2C8DE1160098BAB0 /* RestaurantInfoView.swift */; };
 		5884966A2C8ACAE900E21F64 /* EvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496692C8ACAE900E21F64 /* EvaluationRepository.swift */; };
 		5884966C2C8AD11D00E21F64 /* EvaluationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */; };
 		5884966E2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */; };
@@ -409,6 +410,7 @@
 		584FA4E12C708A12008DDC19 /* HomeBannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		584FA4E32C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerCollectionViewHandler.swift; sourceTree = "<group>"; };
 		584FA4E72C71D68C008DDC19 /* TierTopCategoriesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierTopCategoriesCollectionView.swift; sourceTree = "<group>"; };
+		585740FC2C8DE1160098BAB0 /* RestaurantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoView.swift; sourceTree = "<group>"; };
 		588496692C8ACAE900E21F64 /* EvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationRepository.swift; sourceTree = "<group>"; };
 		5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationDTO.swift; sourceTree = "<group>"; };
 		5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEvaluationRepository.swift; sourceTree = "<group>"; };
@@ -1581,6 +1583,7 @@
 				BA494B8C2C81A7D200EB2527 /* KuTextField */,
 				BA8EEF8B2C6351CD00FE6ABF /* KuPageControl */,
 				CFE2046C2C5E68B400BCA87C /* KuTabBar */,
+				585740FC2C8DE1160098BAB0 /* RestaurantInfoView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2085,6 +2088,7 @@
 				5841734F2C4682C8001EC132 /* CommunitySceneDIContainer.swift in Sources */,
 				588496752C8AE62600E21F64 /* EvaluationTableView.swift in Sources */,
 				584173492C468250001EC132 /* CommunityFlowCoordinator.swift in Sources */,
+				585740FD2C8DE1160098BAB0 /* RestaurantInfoView.swift in Sources */,
 				CFE204642C5BA3E500BCA87C /* RestaurantDetailMenuCell.swift in Sources */,
 				CFE204542C5A0DA700BCA87C /* RestaurantDetailTierCollectionView.swift in Sources */,
 				BA45C2512C881ABB0033E146 /* NaverMapExternalLinkService.swift in Sources */,
