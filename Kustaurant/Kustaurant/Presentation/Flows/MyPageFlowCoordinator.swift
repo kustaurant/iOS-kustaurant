@@ -15,19 +15,26 @@ protocol MyPageFlowCoordinatorDependencies {
     func makeTermsOfServiceViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> TermsOfServiceViewController
     func makePrivacyPolicyViewController(webViewUrl: String, actions: PlainWebViewLoadViewModelActions) -> PrivacyPolicyViewController
     func makeNoticeBoardViewController(actions: NoticeBoardViewModelActions) -> NoticeBoardViewController
+    func makeMyEvaluationViewController(actions: MyEvaluationViewModelActions) -> MyEvaluationViewController
 }
 
 final class MyPageFlowCoordinator: Coordinator {
     private let dependencies: MyPageFlowCoordinatorDependencies
+    private let appDIContainer: AppDIContainer
     var navigationController: UINavigationController
+    var rootNavigationController: UINavigationController
     weak var appFlowNavigating: AppFlowCoordinatorNavigating?
     
     init(
         dependencies: MyPageFlowCoordinatorDependencies,
-        navigationController: UINavigationController
+        appDIContainer: AppDIContainer,
+        navigationController: UINavigationController,
+        rootNavigationController: UINavigationController
     ) {
         self.dependencies = dependencies
+        self.appDIContainer = appDIContainer
         self.navigationController = navigationController
+        self.rootNavigationController = rootNavigationController
     }
 }
 
@@ -40,7 +47,8 @@ extension MyPageFlowCoordinator {
             showFeedbackSubmitting: showFeedbackSubmitting,
             showNotice: showNoticeBoard,
             showTermsOfService: showTermsOfService,
-            showPrivacyPolicy: showPrivacyPolicy
+            showPrivacyPolicy: showPrivacyPolicy,
+            showEvaluatedRestaurants: showMyEvaluation
         )
         let viewController = dependencies.makeMyPageViewController(actions: actions)
         let image = UIImage(named: TabBarPage.mypage.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
@@ -66,7 +74,8 @@ extension MyPageFlowCoordinator {
     
     private func showSavedRestaurants() {
         let actions = SavedRestaurantsViewModelActions(
-            pop: popAnimated
+            pop: popAnimated,
+            showRestaurantDetail: showRestaurantDetail
         )
         let viewController = dependencies.makeSavedRestaurantsViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
@@ -84,7 +93,6 @@ extension MyPageFlowCoordinator {
         let actions = NoticeBoardViewModelActions(
             pop: popAnimated
         )
-        let noticeBoardUrl = "https://kustaurant.com/notice"
         let viewController = dependencies.makeNoticeBoardViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }
@@ -104,6 +112,23 @@ extension MyPageFlowCoordinator {
         )
         let privacyPolicyUrl = "https://kustaurant.com/privacy-policy"
         let viewController = dependencies.makePrivacyPolicyViewController(webViewUrl: privacyPolicyUrl, actions: actions)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func showRestaurantDetail(restaurantId: Int) {
+        let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
+        let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
+            navigationController: rootNavigationController
+        )
+        flow.start(id: restaurantId)
+    }
+    
+    private func showMyEvaluation() {
+        let actions = MyEvaluationViewModelActions(
+            pop: popAnimated,
+            showRestaurantDetail: showRestaurantDetail
+        )
+        let viewController = dependencies.makeMyEvaluationViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }
     

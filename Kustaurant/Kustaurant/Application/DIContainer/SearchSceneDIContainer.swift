@@ -24,8 +24,17 @@ final class SearchSceneDIContainer: SearchFlowCoordinatorDependencies {
         return SearchView(viewModel: makeSearchViewModel(actions: actions))
     }
     
-    func makeSearchFlowCoordinator(navigationController: UINavigationController) -> SearchFlowCoordinator {
-        SearchFlowCoordinator(dependencies: self, navigationController: navigationController)
+    func makeSearchFlowCoordinator(
+        appDIContainer: AppDIContainer,
+        navigationController: UINavigationController,
+        rootNavigationController: UINavigationController
+    ) -> SearchFlowCoordinator {
+        SearchFlowCoordinator(
+            dependencies: self,
+            appDIContainer: appDIContainer,
+            navigationController: navigationController,
+            rootNavigationController: rootNavigationController
+        )
     }
     
     func makeSearchViewModel(actions: SearchViewModelActions) -> SearchViewModel {

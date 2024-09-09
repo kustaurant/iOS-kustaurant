@@ -16,17 +16,23 @@ protocol TierFlowCoordinatorDependencies {
 final class TierFlowCoordinator: Coordinator {
     
     private let dependencies: TierFlowCoordinatorDependencies
+    private let appDIContainer: AppDIContainer
     var navigationController: UINavigationController
+    var rootNavigationController: UINavigationController
 
     private weak var tierViewController: TierViewController?
     private weak var tierMapBottomSheet: TierMapBottomSheet?
     
     init(
         dependencies: TierFlowCoordinatorDependencies,
-        navigationController: UINavigationController
+        appDIContainer: AppDIContainer,
+        navigationController: UINavigationController,
+        rootNavigationController: UINavigationController
     ) {
         self.dependencies = dependencies
+        self.appDIContainer = appDIContainer
         self.navigationController = navigationController
+        self.rootNavigationController = rootNavigationController
     }
 }
 
@@ -37,12 +43,14 @@ extension TierFlowCoordinator {
     
     func start(initialCategories: [Category]) {
         let listActions = TierListViewModelActions(
-            showTierCategory: showTierCategory
+            showTierCategory: showTierCategory,
+            showRestaurantDetail: showRestaurantDetail
         )
         let mapActions = TierMapViewModelActions(
             showTierCategory: showTierCategory,
             showMapBottomSheet: showMapBottomSheet,
-            hideMapBottomSheet: hideMapBottomSheet
+            hideMapBottomSheet: hideMapBottomSheet,
+            showRestaurantDetail: showRestaurantDetail
         )
         let viewController = dependencies.makeTierViewController(
             listActions: listActions,
@@ -95,6 +103,13 @@ extension TierFlowCoordinator {
         tierMapBottomSheet = nil
     }
     
+    private func showRestaurantDetail(restaurantId: Int) {
+        let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
+        let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
+            navigationController: rootNavigationController
+        )
+        flow.start(id: restaurantId)
+    }
 }
 
 extension TierFlowCoordinator {

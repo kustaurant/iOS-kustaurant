@@ -29,10 +29,6 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
             accessoryView: commentAccessoryView,
             viewModel: viewModel
         )
-        viewModel.state = .fetch
-        bind()
-        setupTableView()
-        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -41,12 +37,40 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.state = .fetch
+        bind()
+        setupTableView()
+        setupLayout()
         accessoryViewHandler?.setupAccessoryView()
+        setupNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        hideNavigationBar(animated: false)
+        showNavigationBar(animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        hideNavigationBar(animated: true)
+    }
+    
+    private func setupNavigationBar() {
+        let searchImage = UIImage(named: "icon_search")?.withRenderingMode(.alwaysTemplate)
+        let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(didTapSearchButton))
+        let backImage = UIImage(named: "icon_back")?.withRenderingMode(.alwaysTemplate)
+        let backButton = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(didTapBackButton))
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barTintColor = .white
+        navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = searchButton
+    }
+    
+    @objc private func didTapBackButton() {
+        viewModel.state = .didTapBackButton
+    }
+    
+    @objc private func didTapSearchButton() {
+        viewModel.state = .didTapSearchButton
     }
 }
 
@@ -63,7 +87,7 @@ extension RestaurantDetailViewController {
         tableView.tableHeaderView = nil
         tableView.tableFooterView = nil
         
-        tableView.contentInsetAdjustmentBehavior = .never
+//        tableView.contentInsetAdjustmentBehavior = .never
         tableView.showsVerticalScrollIndicator = false
         
         tableView.registerCell(ofType: RestaurantDetailTitleCell.self)
@@ -79,7 +103,7 @@ extension RestaurantDetailViewController {
     
     private func setupLayout() {
         view.addSubview(tableView, autoLayout: [.fill(0)])
-        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84 + view.safeAreaInsets.bottom)])
+        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84)])
         view.addSubview(commentAccessoryView, autoLayout: [.fillX(0), .height(68), .bottomKeyboard(0)])
     }
     
@@ -88,8 +112,12 @@ extension RestaurantDetailViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 switch action {
-                case .didFetchItems, .didFetchReviews, .didChangeTabType:
+                case .didFetchItems, .didFetchReviews:
                     self?.tableView.reloadData()
+                    
+                case .didChangeTabType:
+                    let indexSet = IndexSet(integer: RestaurantDetailSection.tab.index)
+                    self?.tableView.reloadSections(indexSet, with: .none)
                     
                 case .didFetchHeaderImage(let image):
                     let headerView: RestaurantDetailStretchyHeaderView = .init(frame: .init(x: 0, y: 0, width: self?.view.bounds.width ?? 0, height: 145 + self!.view.safeAreaInsets.top))
@@ -98,12 +126,6 @@ extension RestaurantDetailViewController {
                         headerView.update(contentInset: scrollView.contentInset, contentOffset: scrollView.contentOffset)
                     }
                     headerView.layer.zPosition = -1
-                    headerView.didTapBackButton = {
-                        self?.viewModel.state = .didTapBackButton
-                    }
-                    headerView.didTapSearchButton = {
-                        self?.viewModel.state = .didTapSearchButton
-                    }
                     self?.tableView.tableHeaderView = headerView
                     
                 case .didFetchEvaluation(let isFavorite, let evalutionCount):
@@ -152,8 +174,12 @@ extension RestaurantDetailViewController {
         
         tierCellHeightSubject
             .removeDuplicates()
-            .sink { [weak self] _ in
-                self?.tableView.reloadData()
+            .sink { [weak self] newHeight in
+                guard let self = self else { return }
+                if self.tableView.rowHeight != newHeight {
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                }
             }
             .store(in: &cancellables)
         
@@ -173,7 +199,7 @@ extension RestaurantDetailViewController: UITableViewDelegate {
         guard RestaurantDetailSection(index: section) == .tab
         else { return .zero }
         
-        return KuTabBarView.height + view.safeAreaInsets.top
+        return KuTabBarView.height + 26
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -191,6 +217,14 @@ extension RestaurantDetailViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let tableHeaderView = tableView.tableHeaderView as? RestaurantDetailStretchyHeaderView
         tableHeaderView?.update(contentInset: scrollView.contentInset, contentOffset: scrollView.contentOffset)
+        
+        let offset = scrollView.contentOffset.y
+        let threshold: CGFloat = navigationController?.navigationBar.frame.height ?? 100
+        if offset > threshold {
+            navigationController?.navigationBar.tintColor = .black
+        } else {
+            navigationController?.navigationBar.tintColor = .white
+        }
     }
 }
 

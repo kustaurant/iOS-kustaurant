@@ -12,5 +12,6 @@ struct FavoriteRestaurant: Codable {
     let restaurantImgURL: String?
     let mainTier: Tier?
     let restaurantType: String?
+    let restaurantId: Int?
     let restaurantPosition: String?
 }

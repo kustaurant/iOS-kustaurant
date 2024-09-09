@@ -80,12 +80,15 @@ extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
         let drawDIContainer = appDIContainer.makeDrawSceneDIContainer()
         let drawFlow = drawDIContainer.makeDrawFlowCoordinator(
             appDIContainer: appDIContainer,
-            navigationController: CustomUINavigationController()
+            navigationController: CustomUINavigationController(),
+            rootNaivgationcController: navigationController
         )
         
         let tierDIContainer = appDIContainer.makeTierSceneDIContainer()
         let tierFlow = tierDIContainer.makeTierFlowCoordinator(
-            navigationController: CustomUINavigationController()
+            appDIContainer: appDIContainer,
+            navigationController: CustomUINavigationController(),
+            rootNavigationController: navigationController
         )
         
         let communityDIContainer = appDIContainer.makeCommunitySceneDIContainer()
@@ -95,7 +98,9 @@ extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
         
         let myPageDIContainer = appDIContainer.makeMyPageSceneDIContainer()
         let myPageFlow = myPageDIContainer.makeMyPageFlowCoordinator(
-            navigationController: CustomUINavigationController()
+            appDIContainer: appDIContainer,
+            navigationController: CustomUINavigationController(),
+            rootNavigationController: navigationController
         )
         myPageFlow.appFlowNavigating = self
         

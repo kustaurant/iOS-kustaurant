@@ -10,11 +10,13 @@ import Combine
 
 struct SavedRestaurantsViewModelActions {
     let pop: () -> Void
+    let showRestaurantDetail: (Int) -> Void
 }
 
 protocol SavedRestaurantsViewModelInput {
     func getFavoriteRestaurants()
     func didTapBackButton()
+    func didTapRestaurant(restaurantId: Int)
 }
 protocol SavedRestaurantsViewModelOutput {
     var favoriteRestaurants: [FavoriteRestaurant] { get }
@@ -48,6 +50,10 @@ extension DefaultSavedRetaurantsViewModel {
                 return
             }
         }
+    }
+    
+    func didTapRestaurant(restaurantId: Int) {
+        actions.showRestaurantDetail(restaurantId)
     }
     
     func didTapBackButton() {

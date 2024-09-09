@@ -16,11 +16,18 @@ final class DrawFlowCoordinator: Coordinator {
     private let appDIContainer: AppDIContainer
     private let dependencies: DrawFlowCoordinatorDependencies
     var navigationController: UINavigationController
+    var rootNavigationController: UINavigationController
     
-    init(appDIContainer: AppDIContainer, dependencies: DrawFlowCoordinatorDependencies, navigationController: UINavigationController) {
+    init(
+        appDIContainer: AppDIContainer,
+        dependencies: DrawFlowCoordinatorDependencies,
+        navigationController: UINavigationController,
+        rootNavigationController: UINavigationController
+    ) {
         self.appDIContainer = appDIContainer
         self.dependencies = dependencies
         self.navigationController = navigationController
+        self.rootNavigationController = rootNavigationController
     }
 }
 
@@ -44,7 +51,8 @@ extension DrawFlowCoordinator {
     func didTapDrawButton(restaurants: [Restaurant]) {
         let actions = DrawResultViewModelActions(
             didTapBackButton: popAnimated,
-            didTapSearchButton: showSearch
+            didTapSearchButton: showSearch,
+            showRestaurantDetails: showRestaurantDetail
         )
         let viewController = dependencies.makeDrawResultViewController(
             actions: actions,
@@ -59,7 +67,16 @@ extension DrawFlowCoordinator {
     
     func showSearch() {
         let searchDIContainer = appDIContainer.makeSearchDIContainer()
-        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(navigationController: navigationController)
+        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(
+            appDIContainer: appDIContainer, navigationController: navigationController, rootNavigationController: rootNavigationController)
         searchFlow.start()
+    }
+    
+    private func showRestaurantDetail(restaurantId: Int) {
+        let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
+        let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
+            navigationController: rootNavigationController
+        )
+        flow.start(id: restaurantId)
     }
 }

@@ -1,13 +1,13 @@
 //
-//  SavedRestaurantsView.swift
+//  MyEvaluationView.swift
 //  Kustaurant
 //
-//  Created by peppermint100 on 8/29/24.
+//  Created by peppermint100 on 9/7/24.
 //
 
 import UIKit
 
-class SavedRestaurantsView: UIView {
+class MyEvaluationView: UIView {
     
     let tableView: UITableView = {
         let tv = UITableView()
@@ -31,7 +31,7 @@ class SavedRestaurantsView: UIView {
     
     private let emptyLabel: UILabel = {
         let label = UILabel()
-        label.text = "아직 저장된 맛집이 없어요."
+        label.text = "아직 평가한 맛집이 없어요."
         label.font = .Pretendard.semiBold17
         label.textColor = .Sementic.gray300
         label.textAlignment = .center
@@ -49,7 +49,7 @@ class SavedRestaurantsView: UIView {
     }
 }
 
-extension SavedRestaurantsView {
+extension MyEvaluationView {
     
     private func setupUI() {
         addSubview(tableView, autoLayout: [.fill(0)])
@@ -58,3 +58,4 @@ extension SavedRestaurantsView {
         emptyView.addSubview(emptyLabel, autoLayout: [.topNext(to: kuImageView, constant: 26), .fillX(0)])
     }
 }
+
