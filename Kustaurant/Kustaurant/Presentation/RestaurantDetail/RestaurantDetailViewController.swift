@@ -11,7 +11,7 @@ import Combine
 final class RestaurantDetailViewController: UIViewController, NavigationBarHideable {
     
     private let tableView: UITableView = .init()
-    private let evaluationFloatingView: EvaluationFloatingView = .init()
+    private let evaluationFloatingView: EvaluationFloatingView = .init(viewType: .detail)
     private let commentAccessoryView: CommentAccessoryView = .init()
     
     private let viewModel: RestaurantDetailViewModel

@@ -7,8 +7,15 @@
 
 import UIKit
 
+extension EvaluationFloatingView {
+    enum ViewType {
+        case detail, evaluation
+    }
+}
+
 final class EvaluationFloatingView: UIView {
     
+    private var viewType: ViewType
     private let evaluateButton: KuSubmitButton = .init()
     private let favoriteButton: UIButton = .init()
     private var favoriteButtonConfiguration = UIButton.Configuration.plain()
@@ -35,12 +42,14 @@ final class EvaluationFloatingView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewType: ViewType) {
+        self.viewType = viewType
+        super.init(frame: .zero)
         setupLayout()
         setupEvaluateButton()
         setupFavoriteButton()
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -59,12 +68,18 @@ extension EvaluationFloatingView {
     
     private func setupLayout() {
         backgroundColor = .white
-        addSubview(evaluateButton, autoLayout: [.leading(16), .height(52), .top(12)])
-        addSubview(favoriteButton, autoLayout: [.leadingNext(to: evaluateButton, constant: 8), .centerY(0), .trailing(22), .height(48)])
+        switch viewType {
+        case .detail:
+            addSubview(evaluateButton, autoLayout: [.leading(16), .height(52), .top(12)])
+            addSubview(favoriteButton, autoLayout: [.leadingNext(to: evaluateButton, constant: 8), .centerY(0), .trailing(22), .height(48)])
+        case .evaluation:
+            addSubview(evaluateButton, autoLayout: [.fillX(20), .height(52), .top(12)])
+        }
+        
     }
     
     private func setupEvaluateButton() {
-        evaluateButton.buttonTitle = "맛집 평가하기"
+        evaluateButton.buttonTitle = (viewType == .detail) ? "맛집 평가하기" : "평가 제출하기"
         evaluateButton.addTarget(self, action: #selector(didTapEvaluateButton), for: .touchUpInside)
     }
     
