@@ -17,6 +17,7 @@ protocol EvaluationViewModelInput {
 protocol EvaluationViewModelOutput {
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { get }
     var restaurantDetailTitle: RestaurantDetailTitle { get }
+    var situations: [Category] { get }
 }
 
 typealias EvaluationViewModel = EvaluationViewModelInput & EvaluationViewModelOutput
@@ -31,6 +32,7 @@ final class DefaultEvaluationViewModel: EvaluationViewModel {
     // MARK: - Output
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { $evaluationData }
     var restaurantDetailTitle: RestaurantDetailTitle
+    @Published var situations: [Category] = Situation.allCases.filter({ $0 != .all }).map({ $0.category})
     
     // MARK: - Initialization
     init(

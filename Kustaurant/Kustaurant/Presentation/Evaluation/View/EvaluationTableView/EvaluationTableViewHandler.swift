@@ -10,6 +10,7 @@ import UIKit
 final class EvaluationTableViewHandler: NSObject {
     private var view: EvaluationView
     private var viewModel: EvaluationViewModel
+    private var keywordHandler: EvaluationKeywordCollectionViewHandler?
     
     // MARK: - Initialization
     init(
@@ -66,7 +67,12 @@ extension EvaluationTableViewHandler: UITableViewDataSource {
             cell.update(item: viewModel.restaurantDetailTitle)
             return cell
             
-        case .keyword, .rating, .submit:
+        case .keyword:
+            let cell: EvaluationKeywordCell = tableView.dequeueReusableCell(for: indexPath)
+            keywordHandler = EvaluationKeywordCollectionViewHandler(view: cell, viewModel: viewModel)
+            return cell
+            
+        case .rating, .submit:
             let cell = tableView.dequeueReusableCell(withIdentifier: "test", for: indexPath)
             let colors: [UIColor] = [.blue, .red, .gray, .green, .yellow]
             cell.layer.borderWidth = 0.5
