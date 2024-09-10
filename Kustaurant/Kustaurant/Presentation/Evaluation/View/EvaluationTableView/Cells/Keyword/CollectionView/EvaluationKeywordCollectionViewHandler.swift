@@ -30,6 +30,11 @@ extension EvaluationKeywordCollectionViewHandler {
         view.keywrodsCollectionView.delegate = self
         view.keywrodsCollectionView.dataSource = self
     }
+    
+    func reload() {
+        view.keywrodsCollectionView.reloadData()
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegate
@@ -38,7 +43,8 @@ extension EvaluationKeywordCollectionViewHandler: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        
+        let keyword = viewModel.situations[indexPath.item]
+        viewModel.selectKeyword(keyword: keyword)
     }
 }
 

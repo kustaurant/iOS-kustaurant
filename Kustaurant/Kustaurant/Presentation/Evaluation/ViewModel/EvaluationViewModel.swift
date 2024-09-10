@@ -13,11 +13,13 @@ struct EvaluationViewModelActions {
 
 protocol EvaluationViewModelInput {
     func didTapBackButton()
+    func selectKeyword(keyword: Category)
 }
 protocol EvaluationViewModelOutput {
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { get }
     var restaurantDetailTitle: RestaurantDetailTitle { get }
     var situations: [Category] { get }
+    var situationsPublisher: Published<[Category]>.Publisher { get }
 }
 
 typealias EvaluationViewModel = EvaluationViewModelInput & EvaluationViewModelOutput
@@ -33,6 +35,7 @@ final class DefaultEvaluationViewModel: EvaluationViewModel {
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { $evaluationData }
     var restaurantDetailTitle: RestaurantDetailTitle
     @Published var situations: [Category] = Situation.allCases.filter({ $0 != .all }).map({ $0.category})
+    var situationsPublisher: Published<[Category]>.Publisher { $situations }
     
     // MARK: - Initialization
     init(
@@ -40,7 +43,6 @@ final class DefaultEvaluationViewModel: EvaluationViewModel {
         repository: EvaluationRepository,
         titleData: RestaurantDetailTitle
     ) {
-        
         self.actions = actions
         self.repository = repository
         self.restaurantDetailTitle = titleData
@@ -64,8 +66,12 @@ extension DefaultEvaluationViewModel {
 
 // MAKR: Input
 extension DefaultEvaluationViewModel {
-    
     func didTapBackButton() {
         actions.pop()
+    }
+    
+    func selectKeyword(keyword: Category) {
+        guard let index = situations.firstIndex(where: { $0 == keyword }) else { return }
+        situations[index].isSelect.toggle()
     }
 }

@@ -29,6 +29,10 @@ extension EvaluationTableViewHandler {
         view.tableView.delegate = self
         view.tableView.dataSource = self
     }
+    
+    func keywordReload() {
+        keywordHandler?.reload()
+    }
 }
 
 // MARK: - UITableViewDelegate
