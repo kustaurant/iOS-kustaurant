@@ -26,8 +26,8 @@ final class EvaluationTableView: UITableView {
         tableHeaderView = nil
         tableFooterView = nil
         
-        registerCell(ofType: UITableViewCell.self, withReuseIdentifier: "test")
         registerCell(ofType: EvaluationTitleCell.self)
         registerCell(ofType: EvaluationKeywordCell.self)
+        registerCell(ofType: EvaluationRatingCell.self)
     }
 }

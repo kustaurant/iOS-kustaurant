@@ -76,11 +76,8 @@ extension EvaluationTableViewHandler: UITableViewDataSource {
             keywordHandler = EvaluationKeywordCollectionViewHandler(view: cell, viewModel: viewModel)
             return cell
             
-        case .rating, .submit:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "test", for: indexPath)
-            let colors: [UIColor] = [.blue, .red, .gray, .green, .yellow]
-            cell.layer.borderWidth = 0.5
-            cell.backgroundColor = colors.randomElement()?.withAlphaComponent(0.5)
+        case .rating:
+            let cell: EvaluationRatingCell = tableView.dequeueReusableCell(for: indexPath)
             return cell
         }
     }
