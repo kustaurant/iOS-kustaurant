@@ -25,8 +25,7 @@ final class EvaluationTableView: UITableView {
         sectionHeaderTopPadding = 0
         tableHeaderView = nil
         tableFooterView = nil
-        contentInsetAdjustmentBehavior = .never
-
+        
         registerCell(ofType: UITableViewCell.self, withReuseIdentifier: "test")
         registerCell(ofType: EvaluationTitleCell.self)
         registerCell(ofType: EvaluationKeywordCell.self)
