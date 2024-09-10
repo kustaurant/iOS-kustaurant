@@ -56,7 +56,11 @@ extension RestaurantDetailFlowCoordinator {
     
     func showSearchScene() {
         let searchDIContainer = appDIContainer.makeSearchDIContainer()
-        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(navigationController: navigationController)
+        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(
+            appDIContainer: appDIContainer,
+            navigationController: navigationController,
+            rootNavigationController: navigationController
+        )
         searchFlow.start()
     }
 }

@@ -11,11 +11,7 @@ final class RestaurantDetailStretchyHeaderView: UIView {
     
     private let containerView: UIView = .init()
     private let imageView: UIImageView = .init()
-    private let backButton: UIView = .init()
-    private let searchButton: UIView = .init()
     private let dimmedLayer = CAGradientLayer()
-    var didTapBackButton: (() -> Void)?
-    var didTapSearchButton: (() -> Void)?
     
     private var containerViewHeightConstraint: NSLayoutConstraint?
     private var imageViewHeightConstraint: NSLayoutConstraint?
@@ -25,7 +21,6 @@ final class RestaurantDetailStretchyHeaderView: UIView {
         super.init(frame: frame)
         setupStyle()
         setupLayout()
-        setupButtons()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,8 +55,6 @@ final class RestaurantDetailStretchyHeaderView: UIView {
     private func setupLayout() {
         addSubview(containerView, autoLayout: [.widthEqual(to: self, constant: 0)])
         containerView.addSubview(imageView, autoLayout: [.widthEqual(to: containerView, constant: 0)])
-        containerView.addSubview(backButton, autoLayout: [.leading(16), .topSafeArea(constant: 0), .width(30), .height(30)])
-        containerView.addSubview(searchButton, autoLayout: [.trailing(16), .topSafeArea(constant: 0), .width(30), .height(30)])
         
         containerViewHeightConstraint = containerView.heightAnchor.constraint(equalTo: self.heightAnchor)
         containerViewHeightConstraint?.isActive = true
@@ -71,29 +64,6 @@ final class RestaurantDetailStretchyHeaderView: UIView {
         
         imageViewHeightConstraint = imageView.heightAnchor.constraint(equalTo: containerView.heightAnchor)
         imageViewHeightConstraint?.isActive = true
-    }
-    
-    private func setupButtons() {
-        let backImage = UIImage(named: "icon_back_white")
-        let searchImage = UIImage(named: "icon_search_white")
-        let backImageView = UIImageView(image: backImage)
-        let searchImageView = UIImageView(image: searchImage)
-        backImageView.contentMode = .scaleAspectFit
-        searchImageView.contentMode = .scaleAspectFit
-        backButton.addSubview(backImageView)
-        searchButton.addSubview(searchImageView)
-        let backTapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        let searchTapGesture = UITapGestureRecognizer(target: self, action: #selector(searchButtonTapped))
-        backButton.addGestureRecognizer(backTapGesture)
-        searchButton.addGestureRecognizer(searchTapGesture)
-    }
-    
-    @objc private func backButtonTapped() {
-        didTapBackButton?()
-    }
-    
-    @objc private func searchButtonTapped() {
-        didTapSearchButton?()
     }
     
     func update(image: UIImage) {

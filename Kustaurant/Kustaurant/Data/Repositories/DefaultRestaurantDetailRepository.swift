@@ -40,6 +40,16 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         guard let response else { return [:] }
         
         let null = "NULL"
+        let tierTitle: String
+        if let cuisine = response.restaurantCuisine,
+           let tier = response.mainTier?.rawValue,
+           tier != -1
+        {
+            tierTitle = "\(cuisine) \(tier)티어"
+        } else {
+            tierTitle = response.restaurantCuisine ?? ""
+        }
+        
         let titleInfo: RestaurantDetailTitle = .init(
             cuisineType: response.restaurantCuisine ?? null,
             title: response.restaurantName ?? null,
@@ -53,7 +63,7 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         )
         let tierInfos: [RestaurantDetailTierInfo] = [.init(
             restaurantCuisine: response.restaurantCuisine,
-            title: "\(response.restaurantCuisine ?? null) \(response.mainTier?.rawValue ?? 0)티어",
+            title: tierTitle,
             backgroundColor: response.mainTier?.backgroundColor()
         )] + (response.situationList?.compactMap { title in
             return .init(restaurantCuisine: nil, title: title, backgroundColor: .green100)

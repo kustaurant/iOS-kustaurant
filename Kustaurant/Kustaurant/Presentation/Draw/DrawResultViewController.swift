@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class DrawResultViewController: UIViewController {
+class DrawResultViewController: UIViewController, NavigationBarHideable {
     
     private var viewModel: DrawResultViewModel
     private let drawResultView = DrawResultView()
@@ -18,6 +18,7 @@ class DrawResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        drawResultViewHandler?.setupDrawedRestaurantTapGesture()
         bind()
     }
     
@@ -38,7 +39,7 @@ class DrawResultViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        showNavigationBar(animated: false)
     }
     
     override func loadView() {

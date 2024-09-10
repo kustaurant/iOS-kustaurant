@@ -9,6 +9,7 @@ import Foundation
 
 struct SearchViewModelActions {
     let didTapBackButton: () -> Void
+    let didTapRestaurant: (Int) -> Void
 }
 
 final class SearchViewModel: ObservableObject {
@@ -47,5 +48,9 @@ extension SearchViewModel {
     
     func didTapBackButton() {
         actions.didTapBackButton()
+    }
+    
+    func didTapRestaurant(restaurantId: Int) {
+        actions.didTapRestaurant(restaurantId)
     }
 }

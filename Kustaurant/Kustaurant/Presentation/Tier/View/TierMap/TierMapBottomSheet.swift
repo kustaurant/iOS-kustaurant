@@ -9,6 +9,7 @@ import UIKit
 
 protocol TierMapBottomSheetDelegate: AnyObject {
     func bottomSheetDidDismiss()
+    func didTapRestaurant()
 }
 
 final class TierMapBottomSheet: UIViewController {
@@ -42,6 +43,12 @@ extension TierMapBottomSheet {
     
     func configure(with restaurant: Restaurant) {
         sheetView.update(restaurant)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapSheetView))
+        sheetView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func didTapSheetView() {
+        delegate?.didTapRestaurant()
     }
 }
 

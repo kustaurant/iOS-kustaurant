@@ -9,6 +9,9 @@ import UIKit
 
 final class MyPageUserProfileView: UIView {
     
+    var onTapSavedRestaurants: (() -> Void)?
+    var onTapMyEvaluation: (() -> Void)?
+    
     private let containerView: UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
@@ -151,6 +154,22 @@ extension MyPageUserProfileView {
         myActivityShadowContainerView.addSubview(myActivityContainerView, autoLayout: [.fill(0)])
         myActivityContainerView.addArrangedSubview(myEvaluationView)
         myActivityContainerView.addArrangedSubview(myFavoriateRestaurantView)
+        
+        myEvaluationView.isUserInteractionEnabled = true
+        let myEvaluationViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapMyEvaluationView))
+        myEvaluationView.addGestureRecognizer(myEvaluationViewTapGesture)
+        
+        myFavoriateRestaurantView.isUserInteractionEnabled = true
+        let myFavoriteRetaurantsTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapMyFavoriteRestaurantsView))
+        myFavoriateRestaurantView.addGestureRecognizer(myFavoriteRetaurantsTapGesture)
+    }
+    
+    @objc private func didTapMyEvaluationView() {
+        onTapMyEvaluation?()
+    }
+    
+    @objc private func didTapMyFavoriteRestaurantsView() {
+        onTapSavedRestaurants?()
     }
     
     private func setupProfileImageView() {

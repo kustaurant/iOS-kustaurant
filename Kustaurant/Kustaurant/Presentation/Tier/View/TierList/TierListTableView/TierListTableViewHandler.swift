@@ -66,6 +66,11 @@ extension TierListTableViewHandler: UITableViewDelegate {
             viewModel.fetchTierLists()
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let restaurant = viewModel.tierRestaurants[indexPath.row]
+        viewModel.didTapRestaurant(restaurantId: restaurant.restaurantId ?? 0)
+    }
 }
 
 // MARK: - UITableViewDataSource

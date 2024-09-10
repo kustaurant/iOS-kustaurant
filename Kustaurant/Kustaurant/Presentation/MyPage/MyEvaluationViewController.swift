@@ -1,24 +1,24 @@
 //
-//  SavedRestaurantsViewController.swift
+//  MyEvaluationViewController.swift
 //  Kustaurant
 //
-//  Created by peppermint100 on 8/29/24.
+//  Created by peppermint100 on 9/7/24.
 //
 
 import UIKit
 import Combine
 
-class SavedRestaurantsViewController: UIViewController, NavigationBarHideable {
+class MyEvaluationViewController: UIViewController {
     
-    private let viewModel: SavedRestaurantsViewModel
+    private let myEvaluationView = MyEvaluationView()
+    private let viewModel: MyEvaluationViewModel
     private var cancellables = Set<AnyCancellable>()
-    private let savedRestaurantsView = SavedRestaurantsView()
-    private var savedRestaurantsTableViewHandler: SavedRestaurantsTableViewHandler?
+    private var tableViewHandler: MyEvaluationTableViewHandler?
     
-    init(viewModel: SavedRestaurantsViewModel) {
+    init(viewModel: MyEvaluationViewModel) {
         self.viewModel = viewModel
-        self.savedRestaurantsTableViewHandler = SavedRestaurantsTableViewHandler(view: savedRestaurantsView, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
+        self.tableViewHandler = MyEvaluationTableViewHandler(view: myEvaluationView, viewModel: viewModel)
     }
     
     required init(coder: NSCoder) {
@@ -27,31 +27,28 @@ class SavedRestaurantsViewController: UIViewController, NavigationBarHideable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupNavigationBar()
-        viewModel.getFavoriteRestaurants()
         bind()
+        tableViewHandler?.setupTableView()
+        viewModel.getEvaluatedRestaurants()
     }
     
     override func loadView() {
-        view = savedRestaurantsView
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        showNavigationBar(animated: false)
+        view = myEvaluationView
     }
 }
 
-extension SavedRestaurantsViewController {
+extension MyEvaluationViewController {
     
     private func bind() {
-        viewModel.favoriteRestaurantsPublisher.receive(on: DispatchQueue.main)
+        viewModel.evaluatedRestaurantsPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] restaurants in
                 if restaurants.isEmpty {
-                    self?.savedRestaurantsView.emptyView.isHidden = false
+                    self?.myEvaluationView.emptyView.isHidden = false
                 } else {
-                    self?.savedRestaurantsView.emptyView.isHidden = true
-                    self?.savedRestaurantsTableViewHandler?.reloadData()
+                    self?.myEvaluationView.emptyView.isHidden = true
+                    self?.myEvaluationView.tableView.reloadData()
                 }
             }
             .store(in: &cancellables)
@@ -64,7 +61,7 @@ extension SavedRestaurantsViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
         backButtonView.addGestureRecognizer(tapGesture)
         backButtonView.isUserInteractionEnabled = true
-        navigationItem.title = "저장된 맛집"
+        navigationItem.title = "내 평가"
         navigationItem.leftBarButtonItem = backButton
     }
     

@@ -234,6 +234,11 @@
 		BAB69AC72C71DC1700C20F0B /* KeychainKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC62C71DC1700C20F0B /* KeychainKey.swift */; };
 		BAB69AC92C71DC5700C20F0B /* SocialLoginUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69AC82C71DC5700C20F0B /* SocialLoginUserRepository.swift */; };
 		BAB69ACB2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB69ACA2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift */; };
+		BAC273002C8C081800F08F72 /* MyEvaluationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC272FF2C8C081800F08F72 /* MyEvaluationViewController.swift */; };
+		BAC273022C8C083B00F08F72 /* MyEvaluationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC273012C8C083B00F08F72 /* MyEvaluationViewModel.swift */; };
+		BAC273042C8C101200F08F72 /* MyEvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC273032C8C101200F08F72 /* MyEvaluationView.swift */; };
+		BAC273062C8C103900F08F72 /* MyEvaluationTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC273052C8C103900F08F72 /* MyEvaluationTableViewHandler.swift */; };
+		BAC273082C8C2A1900F08F72 /* MyEvaluationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC273072C8C2A1900F08F72 /* MyEvaluationTableViewCell.swift */; };
 		BAC55EC32C6F1FE200B3078F /* NaverLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */; };
 		BAC55EC92C6F351400B3078F /* AuthUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55EC82C6F351400B3078F /* AuthUseCases.swift */; };
 		BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */; };
@@ -535,6 +540,11 @@
 		BAB69AC62C71DC1700C20F0B /* KeychainKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainKey.swift; sourceTree = "<group>"; };
 		BAB69AC82C71DC5700C20F0B /* SocialLoginUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginUserRepository.swift; sourceTree = "<group>"; };
 		BAB69ACA2C71DE3400C20F0B /* DefaultSocialLoginUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultSocialLoginUserRepository.swift; path = ../Repositories/DefaultSocialLoginUserRepository.swift; sourceTree = "<group>"; };
+		BAC272FF2C8C081800F08F72 /* MyEvaluationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvaluationViewController.swift; sourceTree = "<group>"; };
+		BAC273012C8C083B00F08F72 /* MyEvaluationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvaluationViewModel.swift; sourceTree = "<group>"; };
+		BAC273032C8C101200F08F72 /* MyEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvaluationView.swift; sourceTree = "<group>"; };
+		BAC273052C8C103900F08F72 /* MyEvaluationTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvaluationTableViewHandler.swift; sourceTree = "<group>"; };
+		BAC273072C8C2A1900F08F72 /* MyEvaluationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvaluationTableViewCell.swift; sourceTree = "<group>"; };
 		BAC55EC22C6F1FE200B3078F /* NaverLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverLoginService.swift; sourceTree = "<group>"; };
 		BAC55EC82C6F351400B3078F /* AuthUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCases.swift; sourceTree = "<group>"; };
 		BAC55ECA2C6FA29B00B3078F /* NaverLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaverLoginRepository.swift; path = ../Repositories/NaverLoginRepository.swift; sourceTree = "<group>"; };
@@ -886,6 +896,7 @@
 				BA494B752C8179C500EB2527 /* NoticeBoardViewController.swift */,
 				BA494B7C2C8193A600EB2527 /* TermsOfServiceViewController.swift */,
 				BA494B812C8196F000EB2527 /* PrivacyPolicyViewController.swift */,
+				BAC272FF2C8C081800F08F72 /* MyEvaluationViewController.swift */,
 				BA57C7C22C74356B0063F2FA /* View */,
 				BA57C7BF2C731F1B0063F2FA /* ViewModel */,
 			);
@@ -1348,12 +1359,12 @@
 			path = ExternalLink;
 			sourceTree = "<group>";
 		};
-		BA45C25A2C8AD3BE0033E146 /* KuStartRating */ = {
+		BA45C25A2C8AD3BE0033E146 /* KuStarRating */ = {
 			isa = PBXGroup;
 			children = (
 				BA45C25B2C8AD3D40033E146 /* KuStarRatingView.swift */,
 			);
-			path = KuStartRating;
+			path = KuStarRating;
 			sourceTree = "<group>";
 		};
 		BA494B662C806A2100EB2527 /* MyPage */ = {
@@ -1463,6 +1474,7 @@
 				BA494B702C81592700EB2527 /* FeedbackSubmittingViewModel.swift */,
 				BA494B772C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift */,
 				BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */,
+				BAC273012C8C083B00F08F72 /* MyEvaluationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1470,6 +1482,7 @@
 		BA57C7C22C74356B0063F2FA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BAC272FE2C8C080600F08F72 /* MyEvaluation */,
 				BA494B892C81A6E400EB2527 /* ProfileCompose */,
 				BA494B832C81971500EB2527 /* PrivacyPolicy */,
 				BA494B662C806A2100EB2527 /* MyPage */,
@@ -1548,6 +1561,16 @@
 			path = InMemoryStorage;
 			sourceTree = "<group>";
 		};
+		BAC272FE2C8C080600F08F72 /* MyEvaluation */ = {
+			isa = PBXGroup;
+			children = (
+				BAC273032C8C101200F08F72 /* MyEvaluationView.swift */,
+				BAC273052C8C103900F08F72 /* MyEvaluationTableViewHandler.swift */,
+				BAC273072C8C2A1900F08F72 /* MyEvaluationTableViewCell.swift */,
+			);
+			path = MyEvaluation;
+			sourceTree = "<group>";
+		};
 		BAC55EC02C6F1FCA00B3078F /* LoginService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1579,7 +1602,7 @@
 		CFE204652C5BC46700BCA87C /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				BA45C25A2C8AD3BE0033E146 /* KuStartRating */,
+				BA45C25A2C8AD3BE0033E146 /* KuStarRating */,
 				BA494B8C2C81A7D200EB2527 /* KuTextField */,
 				BA8EEF8B2C6351CD00FE6ABF /* KuPageControl */,
 				CFE2046C2C5E68B400BCA87C /* KuTabBar */,
@@ -1960,6 +1983,7 @@
 				BA3777332C85BB4E004F68F5 /* EvaluationViewModel.swift in Sources */,
 				584FA4E82C71D68C008DDC19 /* TierTopCategoriesCollectionView.swift in Sources */,
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
+				BAC273082C8C2A1900F08F72 /* MyEvaluationTableViewCell.swift in Sources */,
 				584FA4D22C6487C4008DDC19 /* NMFMapViewHandler.swift in Sources */,
 				584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */,
 				BA0A89D52C841C66000A724D /* NoticeContentTableViewCell.swift in Sources */,
@@ -1994,6 +2018,7 @@
 				58067D842C5FD67700889C92 /* HomeLayoutTableViewHandler.swift in Sources */,
 				5841736F2C47C172001EC132 /* HomeUseCases.swift in Sources */,
 				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
+				BAC273022C8C083B00F08F72 /* MyEvaluationViewModel.swift in Sources */,
 				BA0A89CF2C84109F000A724D /* NoticeBoardTableViewHandler.swift in Sources */,
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
@@ -2013,12 +2038,14 @@
 				CFEC6EEA2C6A285900B4DAAB /* RestaurantDetailViewModel.swift in Sources */,
 				CFE2048D2C6A1BE400BCA87C /* RestaurantDetailReview.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
+				BAC273062C8C103900F08F72 /* MyEvaluationTableViewHandler.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				CFE204832C6A105600BCA87C /* RestaurantDetailTitle.swift in Sources */,
 				BA0A89CD2C840DEB000A724D /* NoticeBoardViewModel.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
+				BAC273042C8C101200F08F72 /* MyEvaluationView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
@@ -2077,6 +2104,7 @@
 				BA0A89D12C8412F2000A724D /* Notice.swift in Sources */,
 				584173522C4683E3001EC132 /* MyPageViewController.swift in Sources */,
 				584173422C467E72001EC132 /* TierFlowCoordinator.swift in Sources */,
+				BAC273002C8C081800F08F72 /* MyEvaluationViewController.swift in Sources */,
 				584FA4CB2C6475C7008DDC19 /* TierMapRepository.swift in Sources */,
 				BA37772F2C85BB23004F68F5 /* EvaluationViewController.swift in Sources */,
 				5826A1E92C77230A0097256C /* NMFMapPolygonManager.swift in Sources */,

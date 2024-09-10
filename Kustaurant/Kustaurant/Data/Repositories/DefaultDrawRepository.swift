@@ -24,7 +24,7 @@ extension DefaultDrawRepository: DrawRepository {
         
         var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/draw")
         urlBuilder.addQuery(parameter: [
-            "location": locationsQuery,
+            "locations": locationsQuery,
             "cuisines": cuisinesQuery
         ])
         

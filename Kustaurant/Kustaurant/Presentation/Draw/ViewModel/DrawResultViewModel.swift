@@ -12,12 +12,14 @@ import UIKit
 struct DrawResultViewModelActions {
     let didTapBackButton: () -> Void
     let didTapSearchButton: () -> Void
+    let showRestaurantDetails: (Int) -> Void
 }
 
 protocol DrawResultViewModelInput {
     func didTapBackButton() -> Void
     func shuffleRestaurants() -> Void
     func didTapSearchButton() -> Void
+    func didTapDrawedRestaurant(restaurantId: Int) -> Void
 }
 
 protocol DrawResultViewModelOutput {
@@ -59,5 +61,9 @@ extension DefaultDrawResultViewModel {
     
     func didTapSearchButton() {
         actions.didTapSearchButton()
+    }
+    
+    func didTapDrawedRestaurant(restaurantId: Int) {
+        actions.showRestaurantDetails(restaurantId)
     }
 }

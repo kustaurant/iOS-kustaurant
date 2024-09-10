@@ -59,7 +59,9 @@ extension HomeFlowCoordinator {
     private func showTierScene(cuisine: Cuisine) {
         let tierDIContainer = appDIContainer.makeTierSceneDIContainer()
         let tierFlow = tierDIContainer.makeTierFlowCoordinator(
-            navigationController: navigationController
+            appDIContainer: appDIContainer,
+            navigationController: navigationController,
+            rootNavigationController: rootNavigationController
         )
         tierFlow.start(initialCategories: [
             cuisine.category,
@@ -70,7 +72,9 @@ extension HomeFlowCoordinator {
     
     func showSearch() {
         let searchDIContainer = appDIContainer.makeSearchDIContainer()
-        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(navigationController: navigationController)
+        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(
+            appDIContainer: appDIContainer, navigationController: navigationController, rootNavigationController: rootNavigationController
+        )
         searchFlow.start()
     }
 }
