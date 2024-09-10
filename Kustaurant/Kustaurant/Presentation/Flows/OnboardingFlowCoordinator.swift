@@ -20,7 +20,7 @@ final class OnboardingFlowCoordinator: Coordinator {
     
     private let dependencies: OnboardingFlowCoordinatorDependencies
     var navigationController: UINavigationController
-    weak var delegate: OnboardingSceneDelegate?
+    weak var appFlowNavigating: AppFlowCoordinatorNavigating?
     
     init(
         dependencies: OnboardingFlowCoordinatorDependencies,
@@ -33,15 +33,18 @@ final class OnboardingFlowCoordinator: Coordinator {
 
 extension OnboardingFlowCoordinator {
     
+    /// 앱 최초 실행시 보여지는 OnBoardingView
     func start() {
-        let actions = OnboardingViewModelActions(initiateTabs: delegate?.onLoginSuccess)
+        let actions = OnboardingViewModelActions(initiateTabs: appFlowNavigating?.showTab)
         let viewController = dependencies.makeOnboardingViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: false)
     }
     
+    /// 앱을 실행한 적이 있으면 보여지는 LoginView
     func showLogin() {
-        let actions = OnboardingViewModelActions(initiateTabs: delegate?.onLoginSuccess)
+        let actions = OnboardingViewModelActions(initiateTabs: appFlowNavigating?.showTab)
         let viewController = dependencies.makeLoginViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: false)
     }
+
 }

@@ -78,6 +78,9 @@ extension TierCategoryCollectionViewHandler: UICollectionViewDataSource {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: TierCategorySectionHeaderView.reuseIdentifier, for: indexPath) as? TierCategorySectionHeaderView else { return UICollectionReusableView() }
         let categoryType = CategoryType.allCases[indexPath.section]
         header.model = categoryType
+        header.button.addAction(UIAction { [weak self] _ in
+            self?.viewModel.didTapHeaderButton(type: categoryType)
+        }, for: .touchUpInside)
         return header
     }
     

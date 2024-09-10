@@ -34,11 +34,17 @@ extension HomeFlowCoordinator {
     func start() {
         let actions = HomeViewModelActions(
             showRestaurantDetail: showRestaurantDetail,
-            showTierScene: showTierScene
+            showTierScene: showTierScene,
+            didTapSearchButton: showSearch
         )
         let viewController = dependencies.makeHomeViewController(actions: actions)
-        let image = UIImage(named: TabBarPage.home.pageImageName())?.withRenderingMode(.alwaysOriginal)
-        viewController.tabBarItem = UITabBarItem(title: TabBarPage.home.pageTitleValue(), image: image, selectedImage: image)
+        let image = UIImage(named: TabBarPage.home.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
+        let selectedImage = UIImage(named: TabBarPage.home.pageImageName() + "_on")?.withRenderingMode(.alwaysOriginal)
+        viewController.tabBarItem = UITabBarItem(
+            title: TabBarPage.home.pageTitleValue(),
+            image: image,
+            selectedImage: selectedImage
+        )
         navigationController.pushViewController(viewController, animated: false)
     }
     
@@ -47,18 +53,28 @@ extension HomeFlowCoordinator {
         let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
             navigationController: rootNavigationController
         )
-        flow.start()
+        flow.start(id: restaurant.restaurantId ?? 0)
     }
     
     private func showTierScene(cuisine: Cuisine) {
         let tierDIContainer = appDIContainer.makeTierSceneDIContainer()
         let tierFlow = tierDIContainer.makeTierFlowCoordinator(
-            navigationController: navigationController
+            appDIContainer: appDIContainer,
+            navigationController: navigationController,
+            rootNavigationController: rootNavigationController
         )
         tierFlow.start(initialCategories: [
             cuisine.category,
             Situation.all.category,
             Location.all.category
         ])
+    }
+    
+    func showSearch() {
+        let searchDIContainer = appDIContainer.makeSearchDIContainer()
+        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(
+            appDIContainer: appDIContainer, navigationController: navigationController, rootNavigationController: rootNavigationController
+        )
+        searchFlow.start()
     }
 }

@@ -76,3 +76,14 @@ public struct URLRequestBuilder {
         return request
     }
 }
+
+enum RequestContentType: String {
+    case applicationJson = "application/json"
+    case textPlain = "text/plain"
+}
+
+extension URLRequestBuilder {
+    mutating func addContentType(_ contentType: RequestContentType) {
+        self.addHeader(field: "Content-Type", value: contentType.rawValue)
+    }
+}

@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class DrawResultViewController: UIViewController {
+class DrawResultViewController: UIViewController, NavigationBarHideable {
     
     private var viewModel: DrawResultViewModel
     private let drawResultView = DrawResultView()
@@ -18,6 +18,7 @@ class DrawResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        drawResultViewHandler?.setupDrawedRestaurantTapGesture()
         bind()
     }
     
@@ -36,6 +37,11 @@ class DrawResultViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showNavigationBar(animated: false)
+    }
+    
     override func loadView() {
         view = drawResultView
     }
@@ -44,13 +50,8 @@ class DrawResultViewController: UIViewController {
 extension DrawResultViewController {
     
     private func setupNavigationBar() {
-        let searchImage = UIImage(named: "icon_search")
-        let searchButtonView = UIImageView(image: searchImage)
-        let searchButton = UIBarButtonItem(customView: searchButtonView)
-        
-        let bellImage = UIImage(named: "icon_bell_badged")
-        let notificationButtonView = UIImageView(image: bellImage)
-        let notificationButton = UIBarButtonItem(customView: notificationButtonView)
+        let searchImage = UIImage(named: "icon_search")?.withRenderingMode(.alwaysOriginal)
+        let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(didTapSearchButton))
         
         let backImage = UIImage(named: "icon_back")
         let backButtonView = UIImageView(image: backImage)
@@ -59,11 +60,9 @@ extension DrawResultViewController {
         backButtonView.addGestureRecognizer(tapGesture)
         backButtonView.isUserInteractionEnabled = true
         
-        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        space.width = 16.0
         navigationItem.title = "랜덤 맛집 뽑기"
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItems = [searchButton, space, notificationButton]
+        navigationItem.rightBarButtonItems = [searchButton]
     }
     
     private func bind() {
@@ -99,6 +98,10 @@ extension DrawResultViewController {
     
     @objc private func backButtonTapped() {
         viewModel.didTapBackButton()
+    }
+    
+    @objc private func didTapSearchButton() {
+        viewModel.didTapSearchButton()
     }
 }
 

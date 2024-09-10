@@ -19,7 +19,7 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
 
-    func makeOnboardingFlowCoordinator(navigationController: UINavigationController) -> OnboardingFlowCoordinator {
+    func makeOnboardingFlowCoordinator(appDIContainer: AppDIContainer, navigationController: UINavigationController) -> OnboardingFlowCoordinator {
         OnboardingFlowCoordinator(
             dependencies: self,
             navigationController: navigationController
@@ -37,15 +37,16 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
     func makeOnboardingViewModel(actions: OnboardingViewModelActions) -> OnboardingViewModel {
         DefaultOnboardingViewModel(
             actions: actions,
-            onboardingUseCases: makeOnboardingUseCases()
+            onboardingUseCases: makeAuthUseCases()
         )
     }
     
-    func makeOnboardingUseCases() -> OnboardingUseCases {
-        DefaultOnboardingUseCases(
+    func makeAuthUseCases() -> AuthUseCases {
+        DefaultAuthUseCases(
             naverLoginService: makeNaverLoginService(),
             appleLoginService: makeAppleLoginService(),
-            socialLoginUserRepository: makeSocialLoginUserRepository()
+            socialLoginUserRepository: makeSocialLoginUserRepository(),
+            authReposiory: makeAuthRepository()
         )
     }
     
@@ -54,14 +55,14 @@ final class OnboardingSceneDIContainer: OnboardingFlowCoordinatorDependencies {
     }
     
     func makeSocialLoginUserRepository() -> SocialLoginUserRepository {
-        DefaultSocialLoginUserRepository(keychainStorage: makeKeychaingStorage())
-    }
-    
-    func makeKeychaingStorage() -> KeychainStorage {
-        KeychainStorage()
+        DefaultSocialLoginUserRepository()
     }
     
     func makeAppleLoginService() -> AppleLoginService {
         AppleLoginService()
+    }
+    
+    func makeAuthRepository() -> AuthRepository {
+        DefaultAuthRepository(networkService: dependencies.networkService)
     }
 }

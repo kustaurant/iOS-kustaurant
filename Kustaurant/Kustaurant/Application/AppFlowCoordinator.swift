@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol AppFlowCoordinatorNavigating: AnyObject {
+    func showTab()
+    func showOnboarding()
+}
+
 final class AppFlowCoordinator {
     private var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
@@ -21,17 +26,44 @@ final class AppFlowCoordinator {
 }
 
 extension AppFlowCoordinator {
+    
     func start() {
-//        if isLoggedIn() {
+
+        let skipOnboarding: Bool = UserDefaultsStorage.shared.getValue(forKey: UserDefaultsKey.skipOnboarding) ?? false
+        
+        if skipOnboarding {
             showTab()
-//        } else {
-//            showOnboarding()
-//        }
+            return
+        }
+        
+        guard let _: UserCredentials = KeychainStorage.shared.getValue(forKey: KeychainKey.userCredentials) else {
+            showOnboarding()
+            return
+        }
+        
+        Task {
+            let isLoggedIn = await isLoggedIn()
+            if isLoggedIn {
+                DispatchQueue.main.async { [weak self] in
+                    self?.showTab()
+                }
+            } else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.showOnboarding()
+                }
+            }
+        }
+    }
+    
+    func isLoggedIn() async -> Bool {
+        let authRepository = DefaultAuthRepository(networkService: appDIContainer.networkService)
+        let verified = await authRepository.verifyToken()
+        return verified
     }
 }
 
 // MARK: Tabbar
-extension AppFlowCoordinator {
+extension AppFlowCoordinator: AppFlowCoordinatorNavigating {
     func showTab() {
         let tabBarController = UITabBarController()
         let tabBarFlowCoordinator = TabBarFlowCoordinator(
@@ -48,12 +80,16 @@ extension AppFlowCoordinator {
         
         let drawDIContainer = appDIContainer.makeDrawSceneDIContainer()
         let drawFlow = drawDIContainer.makeDrawFlowCoordinator(
-            navigationController: CustomUINavigationController()
+            appDIContainer: appDIContainer,
+            navigationController: CustomUINavigationController(),
+            rootNaivgationcController: navigationController
         )
         
         let tierDIContainer = appDIContainer.makeTierSceneDIContainer()
         let tierFlow = tierDIContainer.makeTierFlowCoordinator(
-            navigationController: CustomUINavigationController()
+            appDIContainer: appDIContainer,
+            navigationController: CustomUINavigationController(),
+            rootNavigationController: navigationController
         )
         
         let communityDIContainer = appDIContainer.makeCommunitySceneDIContainer()
@@ -63,22 +99,24 @@ extension AppFlowCoordinator {
         
         let myPageDIContainer = appDIContainer.makeMyPageSceneDIContainer()
         let myPageFlow = myPageDIContainer.makeMyPageFlowCoordinator(
-            navigationController: CustomUINavigationController()
+            appDIContainer: appDIContainer,
+            navigationController: CustomUINavigationController(),
+            rootNavigationController: navigationController
         )
 
-//        tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow, communityFlow, myPageFlow])
-        tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow])
+        myPageFlow.appFlowNavigating = self
+        
+        tabBarFlowCoordinator.setupTabs(with: [homeFlow, drawFlow, tierFlow, communityFlow, myPageFlow])
         tabBarFlowCoordinator.configureTabBar()
         tabBarFlowCoordinator.start()
     }
-}
-
-extension AppFlowCoordinator: OnboardingSceneDelegate {
     
     func showOnboarding() {
         let onboardingDIConatainer = appDIContainer.makeOnboardingDIContainer()
-        let onboardingFlow = onboardingDIConatainer.makeOnboardingFlowCoordinator(navigationController: navigationController)
-        onboardingFlow.delegate = self
+        let onboardingFlow = onboardingDIConatainer.makeOnboardingFlowCoordinator(
+            appDIContainer: appDIContainer,
+            navigationController: navigationController)
+        onboardingFlow.appFlowNavigating = self
         
         if isIntialLaunch() {
             onboardingFlow.start()
@@ -86,25 +124,13 @@ extension AppFlowCoordinator: OnboardingSceneDelegate {
             onboardingFlow.showLogin()
         }
     }
-        
-    func onLoginSuccess() {
-        showTab()
-    }
-}
-
-extension AppFlowCoordinator {
     
     func isIntialLaunch() -> Bool {
-        let userDefaultsStorage = appDIContainer.makeUserDefaultsStorage()
-        guard let isInitialLaunch: Bool = userDefaultsStorage.getValue(forKey: UserDefaultsKey.initialLaunch) else {
-            _ = userDefaultsStorage.setValue(false, forKey: UserDefaultsKey.initialLaunch)
+        guard let isInitialLaunch: Bool = UserDefaultsStorage.shared.getValue(forKey: UserDefaultsKey.initialLaunch) else {
+            UserDefaultsStorage.shared.setValue(false, forKey: UserDefaultsKey.initialLaunch)
             return true
         }
         return isInitialLaunch
     }
     
-    // TODO: 로그인되어 있는지 확인
-    func isLoggedIn() -> Bool {
-        return false
-    }
 }

@@ -20,6 +20,7 @@ struct SelectableCuisine: Hashable {
 
 struct DrawViewModelActions {
     let didTapDrawButton: ([Restaurant]) -> Void
+    let didTapSearchButton: () -> Void
 }
 
 protocol DrawViewModelInput {
@@ -27,6 +28,7 @@ protocol DrawViewModelInput {
     func toggleSelectable(cuisine: SelectableCuisine) -> Void
     func didTapDrawButton() -> Void
     func didTapOkInAlert() -> Void
+    func didTapSearchButton() -> Void
 }
 
 protocol DrawViewModelOutput {
@@ -172,5 +174,9 @@ extension DefaultDrawViewModel {
     
     func didTapOkInAlert() {
         showAlert = false
+    }
+    
+    func didTapSearchButton() {
+        actions.didTapSearchButton()
     }
 }

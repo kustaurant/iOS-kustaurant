@@ -40,7 +40,15 @@ extension HomeBannerCollectionViewCell {
             defaultImage: nil) { [weak self] image in
                 Task {
                     await MainActor.run {
-                        self?.imageView.image = image
+                        UIView.transition(
+                            with: self?.imageView ?? UIImageView(),
+                            duration: 0.25,
+                            options: .transitionCrossDissolve,
+                            animations: {
+                                self?.imageView.image = image
+                            },
+                            completion: nil
+                        )
                     }
                 }
             }

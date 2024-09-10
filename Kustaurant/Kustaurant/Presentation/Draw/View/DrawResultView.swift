@@ -73,9 +73,8 @@ class DrawResultView: UIView {
         return label
     }()
     
-    let ratingsView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .yellow
+    let ratingsView: KuStarRatingView = {
+        let view = KuStarRatingView()
         return view
     }()
     
@@ -101,11 +100,11 @@ class DrawResultView: UIView {
         button.backgroundColor = .white
         button.setTitle("카테고리 재설정", for: .normal)
         button.setTitleColor(.Signature.green100, for: .normal)
-        button.titleLabel?.font = .Pretendard.semiBold18
+        button.titleLabel?.font = .Pretendard.semiBold16
         button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.4
-        button.layer.shadowOffset = CGSize(width: 0, height: 2)
-        button.layer.shadowRadius = 4
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = CGSize(width: 0, height: 1.5)
+        button.layer.shadowRadius = 3
         button.layer.masksToBounds = false
         return button
     }()
@@ -115,13 +114,12 @@ class DrawResultView: UIView {
         let buttonImage = UIImage(named: "icon_arrow_counterclockwise")
         button.buttonTitle = "다시 뽑기"
         button.buttonState = .on
-        button.configuration?.image = buttonImage
-        button.configuration?.imagePadding = 8
-        button.configuration?.imagePlacement = .leading
+        button.size = .medium
+        button.image = buttonImage
         button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.4
-        button.layer.shadowOffset = CGSize(width: 0, height: 2)
-        button.layer.shadowRadius = 4
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = CGSize(width: 0, height: 1.5)
+        button.layer.shadowRadius = 3
         button.layer.masksToBounds = false
         return button
     }()
@@ -166,7 +164,7 @@ extension DrawResultView {
     private func setupLabelsView() {
         labelContainerView.addSubview(categoryLabel, autoLayout: [.top(26), .fillX(0)])
         labelContainerView.addSubview(restaurantNameLabel, autoLayout: [.topNext(to: categoryLabel, constant: 8), .fillX(0)])
-        labelContainerView.addSubview(ratingsView, autoLayout: [.topNext(to: restaurantNameLabel, constant: 8), .fillX(112), .height(20)])
+        labelContainerView.addSubview(ratingsView, autoLayout: [.topNext(to: restaurantNameLabel, constant: 8), .centerX(0)])
         labelContainerView.addSubview(partinerShipLabel, autoLayout: [.topNext(to: ratingsView, constant: 12), .fillX(0)])
     }
     

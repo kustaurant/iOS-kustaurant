@@ -10,12 +10,14 @@ import Combine
 struct HomeViewModelActions {
     let showRestaurantDetail: (Restaurant) -> Void
     let showTierScene: (Cuisine) -> Void
+    let didTapSearchButton: () -> Void
 }
 
 protocol HomeViewModelInput {
     func fetchRestaurantLists()
     func restaurantListsDidSelect(restaurant: Restaurant)
     func categoryCellDidSelect(_ cuisineCategory: Cuisine)
+    func didTapSearchButton() -> Void
 }
 
 protocol HomeViewModelOutput {
@@ -79,5 +81,9 @@ extension DefaultHomeViewModel {
     
     func restaurantListsDidSelect(restaurant: Restaurant) {
 //        actions.showRestaurantDetail(restaurant)
+    }
+    
+    func didTapSearchButton() {
+        actions.didTapSearchButton()
     }
 }

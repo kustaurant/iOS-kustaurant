@@ -105,6 +105,10 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         )
     }
     
+    func makeTierMapBottomSheet() -> TierMapBottomSheet {
+        TierMapBottomSheet()
+    }
+    
     func makeTierViewController(
         listActions: TierListViewModelActions,
         mapActions: TierMapViewModelActions,
@@ -116,10 +120,16 @@ final class TierSceneDIContainer: TierFlowCoordinatorDependencies {
         )
     }
     
-    func makeTierFlowCoordinator(navigationController: UINavigationController) -> TierFlowCoordinator {
+    func makeTierFlowCoordinator(
+        appDIContainer: AppDIContainer,
+        navigationController: UINavigationController,
+        rootNavigationController: UINavigationController
+    ) -> TierFlowCoordinator {
         TierFlowCoordinator(
             dependencies: self,
-            navigationController: navigationController
+            appDIContainer: appDIContainer,
+            navigationController: navigationController,
+            rootNavigationController: rootNavigationController
         )
     }
 }

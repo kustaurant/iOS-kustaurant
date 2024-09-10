@@ -29,10 +29,27 @@ extension Request {
                 return
             }
             
-            guard let httpResponse = urlResponse as? HTTPURLResponse,
-                  httpResponse.statusCode != 401
-            else {
+            guard let httpResponse = urlResponse as? HTTPURLResponse else {
                 completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            let statusCode = httpResponse.statusCode
+            
+            switch statusCode {
+            case 200..<300:
+                break
+            case 400:
+                completionHandler(.failure(.badRequest))
+                return
+            case 401:
+                completionHandler(.failure(.unauthorized))
+                return
+            case 403:
+                completionHandler(.failure(.forbidden))
+                return
+            default:
+                completionHandler(.failure(.serverError(statusCode: statusCode)))
                 return
             }
             
@@ -84,18 +101,20 @@ extension Request {
     }
     
     func execute(with urlRequest: URLRequest, attempt: Int) async throws -> Data {
-        var request = interceptor?.intercept(urlRequest) ?? urlRequest
         var attempt = attempt
         
         repeat {
             do {
+                let request = interceptor?.intercept(urlRequest) ?? urlRequest
                 let data = try await execute(with: request)
                 return data
             } catch {
                 guard
                     let retrier = retrier,
-                    retrier.shouldRetry(request, with: error, attempt: attempt)
-                else { throw error }
+                    await retrier.shouldRetryAsync(with: error, attempt: attempt)
+                else {
+                    throw error
+                }
                 
                 attempt += 1
             }

@@ -9,28 +9,38 @@ import Foundation
 
 struct TierMapViewModelActions {
     let showTierCategory: ([Category]) -> Void
+    let showMapBottomSheet: (Restaurant) -> Void
+    let hideMapBottomSheet: () -> Void
+    let showRestaurantDetail: (Int) -> Void
 }
 
 protocol TierMapViewModelInput {
     func fetchTierMap()
     func categoryButtonTapped()
     func updateCategories(categories: [Category])
+    func didTapMarker(restaurant: Restaurant)
+    func didTapMap()
+    func hideBottomSheet()
+    func didTapRestaurant()
 }
 
 protocol TierMapViewModelOutput {
     var categoriesPublisher: Published<[Category]>.Publisher { get }
     var mapRestaurantsPublisher: Published<TierMapRestaurants?>.Publisher { get }
+    var selectedRestaurant: Restaurant? { get }
 }
 
 typealias TierMapViewModel = TierMapViewModelInput & TierMapViewModelOutput & TierBaseViewModel
 
 final class DefaultTierMapViewModel: TierMapViewModel {
+    
     private let tierUseCase: TierUseCases
     private let tierMapUseCase: TierMapUseCases
     private let actions: TierMapViewModelActions
     
     @Published var categories: [Category]
     @Published var mapRestaurants: TierMapRestaurants?
+    @Published var selectedRestaurant: Restaurant?
     
     // MARK: Output
     var categoriesPublisher: Published<[Category]>.Publisher { $categories }
@@ -74,5 +84,35 @@ extension DefaultTierMapViewModel {
     
     func updateCategories(categories: [Category]) {
         self.categories = categories
+    }
+    
+    func didTapMarker(restaurant: Restaurant) {
+        selectedRestaurant = restaurant
+        Task {
+            await MainActor.run {
+                self.actions.showMapBottomSheet(restaurant)
+            }
+        }
+    }
+    
+    func didTapMap() {
+        hideBottomSheet()
+    }
+    
+    func hideBottomSheet() {
+        selectedRestaurant = nil
+        Task {
+            await MainActor.run {
+                self.actions.hideMapBottomSheet()
+            }
+        }
+    }
+    
+    func didTapRestaurant() {
+        if let restaurant = selectedRestaurant {
+            let restaurantId = selectedRestaurant?.restaurantId ?? 0
+            hideBottomSheet()
+            actions.showRestaurantDetail(restaurantId)
+        }
     }
 }

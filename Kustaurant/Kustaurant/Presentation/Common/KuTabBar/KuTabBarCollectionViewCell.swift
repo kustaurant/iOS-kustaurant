@@ -14,6 +14,7 @@ protocol KuTabBarCollectionViewCellable: UICollectionViewCell {
 class KuTabBarCollectionViewCell: UICollectionViewCell, KuTabBarCollectionViewCellable {
     
     private let titleLabel: UILabel = .init()
+    private let line: UIView = .init()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,14 +28,16 @@ class KuTabBarCollectionViewCell: UICollectionViewCell, KuTabBarCollectionViewCe
     
     func configure(title: String, isSelected: Bool) {
         titleLabel.text = title
-        titleLabel.font = .Pretendard.regular14
+        line.backgroundColor = isSelected ? .green100 : .gray100
     }
     
     private func setupStyle() {
         titleLabel.textAlignment = .center
+        titleLabel.font = .Pretendard.regular14
     }
     
     private func setupLayout() {
         contentView.addSubview(titleLabel, autoLayout: [.fill(20)])
+        contentView.addSubview(line, autoLayout: [.fillX(0), .bottom(0), .height(2)])
     }
 }

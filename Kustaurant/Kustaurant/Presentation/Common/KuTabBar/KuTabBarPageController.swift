@@ -10,8 +10,6 @@ import Combine
 
 extension KuTabBarPageController {
     
-    static let indicatorViewHeight: CGFloat = 2.0
-    
     struct Tab {
         let title: String
         let viewController: UIViewController
@@ -53,8 +51,8 @@ extension KuTabBarPageController {
     }
     
     private func setupLayout() {
-        addSubview(tabBarView, autoLayout: [.top(0), .fillX(0), .height(50)])
-        addSubview(pageViewController.view, autoLayout: [.topNext(to: tabBarView, constant: KuTabBarPageController.indicatorViewHeight), .fillX(0), .bottom(0)])
+        addSubview(tabBarView, autoLayout: [.top(0), .fillX(0), .height(60.33)])
+        addSubview(pageViewController.view, autoLayout: [.topNext(to: tabBarView, constant: 0), .fillX(0), .bottom(0)])
     }
     
     private func setupParentViewController() {
@@ -62,6 +60,10 @@ extension KuTabBarPageController {
         
         parentViewController.addChild(pageViewController)
         pageViewController.didMove(toParent: parentViewController)
+        
+        if let firstViewController = viewControllers.first {
+            pageViewController.setViewControllers([firstViewController], direction: .forward, animated: false, completion: nil)
+        }
     }
     
     private func bind() {
@@ -69,41 +71,54 @@ extension KuTabBarPageController {
             .sink { [weak self] action in
                 switch action {
                 case .didSelect(let index):
-                    guard let viewController = self?.viewControllers[safe: index],
-                          let currentPageIndex = self?.currentPageIndex
-                    else { return }
-                    let direction: UIPageViewController.NavigationDirection = currentPageIndex < index ? .forward : .reverse
-                    self?.currentPageIndex = index
-                    self?.pageViewController.setViewControllers([viewController], direction: direction, animated: true, completion: nil)
+                    self?.updatePageViewController(as: index)
                 }
             }
             .store(in: &cancellables)
     }
     
-    private func pageDidChange(at index: Int) -> UIViewController? {
-        tabBarView.state = .tabDidChange(to: index)
+    private func updatePageViewController(as index: Int) {
+        guard let viewController = viewControllers[safe: index]
+        else { return }
+        
+        let direction: UIPageViewController.NavigationDirection = currentPageIndex < index ? .forward : .reverse
         currentPageIndex = index
-        return viewControllers[safe: index]
+        pageViewController.setViewControllers([viewController], direction: direction, animated: true, completion: nil)
     }
 }
 
 extension KuTabBarPageController: UIPageViewControllerDelegate {
     
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        didFinishAnimating finished: Bool,
+        previousViewControllers: [UIViewController],
+        transitionCompleted completed: Bool
+    ) {
+        guard let currentViewController = pageViewController.viewControllers?.first,
+              let currentIndex = viewControllers.firstIndex(of: currentViewController),
+              (0..<viewControllers.count) ~= currentIndex
+        else { return }
+        
+        currentPageIndex = currentIndex
+        tabBarView.state = .tabDidChange(to: currentIndex)
+        updatePageViewController(as: currentIndex)
+    }
 }
 
 extension KuTabBarPageController: UIPageViewControllerDataSource {
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = viewControllers.firstIndex(of: viewController), index > 0 else {
             return nil
         }
-        return pageDidChange(at: index - 1)
+        return viewControllers[safe: index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = viewControllers.firstIndex(of: viewController), index < viewControllers.count - 1 else {
             return nil
         }
-        return pageDidChange(at: index + 1)
+        return viewControllers[safe: index + 1]
     }
-    
 }

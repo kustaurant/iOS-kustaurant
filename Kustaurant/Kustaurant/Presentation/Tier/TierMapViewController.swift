@@ -47,6 +47,12 @@ final class TierMapViewController: UIViewController {
         setupLocationManager()
         setupBindings()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        bottomSheetDidDismiss()
+        viewModel.hideBottomSheet()
+    }
 }
 
 extension TierMapViewController {
@@ -90,5 +96,16 @@ extension TierMapViewController {
 extension TierMapViewController: TierCategoryReceivable {
     func receiveTierCategories(categories: [Category]) {
         viewModel.updateCategories(categories: categories)
+    }
+}
+
+// MARK: - TierMapBottomSheetDelegate
+extension TierMapViewController: TierMapBottomSheetDelegate {
+    func bottomSheetDidDismiss() {
+        mapHandler?.resetSelectedMarker()
+    }
+    
+    func didTapRestaurant() {
+        viewModel.didTapRestaurant()
     }
 }

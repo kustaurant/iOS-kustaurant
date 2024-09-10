@@ -10,21 +10,29 @@ import UIKit
 protocol TierFlowCoordinatorDependencies {
     func makeTierViewController(listActions: TierListViewModelActions, mapActions: TierMapViewModelActions, initialCategories: [Category]) -> TierViewController
     func makeTierCategoryViewController(actions: TierCategoryViewModelActions, categories: [Category]) -> TierCategoryViewController
+    func makeTierMapBottomSheet() -> TierMapBottomSheet
 }
 
 final class TierFlowCoordinator: Coordinator {
     
     private let dependencies: TierFlowCoordinatorDependencies
+    private let appDIContainer: AppDIContainer
     var navigationController: UINavigationController
+    var rootNavigationController: UINavigationController
 
     private weak var tierViewController: TierViewController?
+    private weak var tierMapBottomSheet: TierMapBottomSheet?
     
     init(
         dependencies: TierFlowCoordinatorDependencies,
-        navigationController: UINavigationController
+        appDIContainer: AppDIContainer,
+        navigationController: UINavigationController,
+        rootNavigationController: UINavigationController
     ) {
         self.dependencies = dependencies
+        self.appDIContainer = appDIContainer
         self.navigationController = navigationController
+        self.rootNavigationController = rootNavigationController
     }
 }
 
@@ -35,18 +43,27 @@ extension TierFlowCoordinator {
     
     func start(initialCategories: [Category]) {
         let listActions = TierListViewModelActions(
-            showTierCategory: showTierCategory
+            showTierCategory: showTierCategory,
+            showRestaurantDetail: showRestaurantDetail
         )
         let mapActions = TierMapViewModelActions(
-            showTierCategory: showTierCategory
+            showTierCategory: showTierCategory,
+            showMapBottomSheet: showMapBottomSheet,
+            hideMapBottomSheet: hideMapBottomSheet,
+            showRestaurantDetail: showRestaurantDetail
         )
         let viewController = dependencies.makeTierViewController(
             listActions: listActions,
             mapActions: mapActions,
             initialCategories: initialCategories
         )
-        let image = UIImage(named: TabBarPage.tier.pageImageName())?.withRenderingMode(.alwaysOriginal)
-        viewController.tabBarItem = UITabBarItem(title: TabBarPage.tier.pageTitleValue(), image: image, selectedImage: image)
+        let image = UIImage(named: TabBarPage.tier.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
+        let selectedImage = UIImage(named: TabBarPage.tier.pageImageName() + "_on")?.withRenderingMode(.alwaysOriginal)
+        viewController.tabBarItem = UITabBarItem(
+            title: TabBarPage.tier.pageTitleValue(),
+            image: image,
+            selectedImage: selectedImage
+        )
         tierViewController = viewController
         navigationController.pushViewController(viewController, animated: true)
     }
@@ -63,5 +80,40 @@ extension TierFlowCoordinator {
         if let currentViewController = tierViewController?.viewControllers?.first as? TierCategoryReceivable {
             currentViewController.receiveTierCategories(categories: categories)
         }
+    }
+    
+    private func showMapBottomSheet(restaurant: Restaurant) {
+        guard tierMapBottomSheet == nil else {
+            tierMapBottomSheet?.configure(with: restaurant)
+            return
+        }
+        let viewController = dependencies.makeTierMapBottomSheet()
+        viewController.configure(with: restaurant)
+        
+        if let mapViewController = getMapViewController() {
+            viewController.delegate = mapViewController
+        }
+        
+        tierMapBottomSheet = viewController
+        navigationController.present(viewController, animated: true)
+    }
+    
+    private func hideMapBottomSheet() {
+        tierMapBottomSheet?.dismiss(animated: true, completion: nil)
+        tierMapBottomSheet = nil
+    }
+    
+    private func showRestaurantDetail(restaurantId: Int) {
+        let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
+        let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
+            navigationController: rootNavigationController
+        )
+        flow.start(id: restaurantId)
+    }
+}
+
+extension TierFlowCoordinator {
+    private func getMapViewController() -> TierMapViewController? {
+        tierViewController?.viewControllers?.compactMap { $0 as? TierMapViewController }.first
     }
 }

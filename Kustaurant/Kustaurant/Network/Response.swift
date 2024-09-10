@@ -19,8 +19,14 @@ public class Response {
 
 extension Response {
     
+    // TODO: - 네트워크 에러 처리 필요
     public func decode<T: Decodable>() -> T? {
         guard let data else { return nil }
         return try? JSONDecoder().decode(T.self, from: data)
+    }
+    
+    public func decodeString(encoding: String.Encoding = .utf8) -> String? {
+        guard let data else { return nil }
+        return String(data: data, encoding: encoding)
     }
 }

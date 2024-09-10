@@ -13,29 +13,47 @@ protocol DrawFlowCoordinatorDependencies {
 }
 
 final class DrawFlowCoordinator: Coordinator {
+    private let appDIContainer: AppDIContainer
     private let dependencies: DrawFlowCoordinatorDependencies
     var navigationController: UINavigationController
+    var rootNavigationController: UINavigationController
     
     init(
+        appDIContainer: AppDIContainer,
         dependencies: DrawFlowCoordinatorDependencies,
-        navigationController: UINavigationController
+        navigationController: UINavigationController,
+        rootNavigationController: UINavigationController
     ) {
+        self.appDIContainer = appDIContainer
         self.dependencies = dependencies
         self.navigationController = navigationController
+        self.rootNavigationController = rootNavigationController
     }
 }
 
 extension DrawFlowCoordinator {
     func start() {
-        let actions = DrawViewModelActions(didTapDrawButton: didTapDrawButton)
+        let actions = DrawViewModelActions(
+            didTapDrawButton: didTapDrawButton,
+            didTapSearchButton: showSearch
+        )
         let viewController = dependencies.makeDrawViewController(actions: actions)
-        let image = UIImage(named: TabBarPage.draw.pageImageName())?.withRenderingMode(.alwaysOriginal)
-        viewController.tabBarItem = UITabBarItem(title: TabBarPage.draw.pageTitleValue(), image: image, selectedImage: image)
+        let image = UIImage(named: TabBarPage.draw.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
+        let selectedImage = UIImage(named: TabBarPage.draw.pageImageName() + "_on")?.withRenderingMode(.alwaysOriginal)
+        viewController.tabBarItem = UITabBarItem(
+            title: TabBarPage.draw.pageTitleValue(),
+            image: image,
+            selectedImage: selectedImage
+        )
         navigationController.pushViewController(viewController, animated: false)
     }
     
     func didTapDrawButton(restaurants: [Restaurant]) {
-        let actions = DrawResultViewModelActions(didTapBackButton: popAnimated)
+        let actions = DrawResultViewModelActions(
+            didTapBackButton: popAnimated,
+            didTapSearchButton: showSearch,
+            showRestaurantDetails: showRestaurantDetail
+        )
         let viewController = dependencies.makeDrawResultViewController(
             actions: actions,
             restaurants: restaurants
@@ -45,5 +63,20 @@ extension DrawFlowCoordinator {
     
     func popAnimated() {
         pop(animated: true)
+    }
+    
+    func showSearch() {
+        let searchDIContainer = appDIContainer.makeSearchDIContainer()
+        let searchFlow = searchDIContainer.makeSearchFlowCoordinator(
+            appDIContainer: appDIContainer, navigationController: navigationController, rootNavigationController: rootNavigationController)
+        searchFlow.start()
+    }
+    
+    private func showRestaurantDetail(restaurantId: Int) {
+        let restaurantDetailSceneDIContainer = appDIContainer.makeRestaurantDetailSceneDIContainer()
+        let flow = restaurantDetailSceneDIContainer.makeRestaurantDetailFlowCoordinator(
+            navigationController: rootNavigationController
+        )
+        flow.start(id: restaurantId)
     }
 }
