@@ -30,6 +30,10 @@ extension EvaluationTableViewHandler {
         view.tableView.dataSource = self
     }
     
+    func reload() {
+        view.tableView.reloadData()
+    }
+    
     func keywordReload() {
         keywordHandler?.reload()
     }
@@ -78,6 +82,7 @@ extension EvaluationTableViewHandler: UITableViewDataSource {
             
         case .rating:
             let cell: EvaluationRatingCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.update(data: viewModel.evaluationData)
             return cell
         }
     }

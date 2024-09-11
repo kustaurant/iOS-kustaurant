@@ -121,6 +121,7 @@
 		585741012C8FDE960098BAB0 /* EvaluationKeywordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585741002C8FDE960098BAB0 /* EvaluationKeywordCollectionView.swift */; };
 		585741052C8FEA5F0098BAB0 /* EvaluationKeywordCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585741042C8FEA5F0098BAB0 /* EvaluationKeywordCollectionViewHandler.swift */; };
 		585741072C909EAE0098BAB0 /* EvaluationRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585741062C909EAE0098BAB0 /* EvaluationRatingCell.swift */; };
+		5857410A2C90A1CB0098BAB0 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585741092C90A1CB0098BAB0 /* StarRatingView.swift */; };
 		5884966A2C8ACAE900E21F64 /* EvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496692C8ACAE900E21F64 /* EvaluationRepository.swift */; };
 		5884966C2C8AD11D00E21F64 /* EvaluationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */; };
 		5884966E2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */; };
@@ -424,6 +425,7 @@
 		585741002C8FDE960098BAB0 /* EvaluationKeywordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationKeywordCollectionView.swift; sourceTree = "<group>"; };
 		585741042C8FEA5F0098BAB0 /* EvaluationKeywordCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationKeywordCollectionViewHandler.swift; sourceTree = "<group>"; };
 		585741062C909EAE0098BAB0 /* EvaluationRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationRatingCell.swift; sourceTree = "<group>"; };
+		585741092C90A1CB0098BAB0 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		588496692C8ACAE900E21F64 /* EvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationRepository.swift; sourceTree = "<group>"; };
 		5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationDTO.swift; sourceTree = "<group>"; };
 		5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEvaluationRepository.swift; sourceTree = "<group>"; };
@@ -1095,6 +1097,15 @@
 			path = CollectionView;
 			sourceTree = "<group>";
 		};
+		585741082C90A1BF0098BAB0 /* Rating */ = {
+			isa = PBXGroup;
+			children = (
+				585741062C909EAE0098BAB0 /* EvaluationRatingCell.swift */,
+				585741092C90A1CB0098BAB0 /* StarRatingView.swift */,
+			);
+			path = Rating;
+			sourceTree = "<group>";
+		};
 		588496682C8AC89B00E21F64 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1125,9 +1136,9 @@
 		5884967C2C8AFEB800E21F64 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				585741082C90A1BF0098BAB0 /* Rating */,
 				585741022C8FE9CC0098BAB0 /* Keyword */,
 				5884967D2C8AFEC700E21F64 /* EvaluationTitleCell.swift */,
-				585741062C909EAE0098BAB0 /* EvaluationRatingCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2084,6 +2095,7 @@
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				CFE204622C5A764100BCA87C /* RestaurantDetailRatingCell.swift in Sources */,
 				BA494B4F2C7DEE6400EB2527 /* FavoriteRestaurant.swift in Sources */,
+				5857410A2C90A1CB0098BAB0 /* StarRatingView.swift in Sources */,
 				58067D452C59FA6700889C92 /* TierCategoryView.swift in Sources */,
 				BA494B782C8179DA00EB2527 /* PlainWebViewLoadViewModel.swift in Sources */,
 				BA494B552C7ED0A200EB2527 /* MyPageTableViewHandler.swift in Sources */,

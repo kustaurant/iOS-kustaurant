@@ -70,6 +70,7 @@ extension EvaluationViewController {
         viewModel.evaluationDataPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] data in
+                self?.tableViewHandler?.reload()
             }
             .store(in: &cancellables)
     }

@@ -16,6 +16,7 @@ protocol EvaluationViewModelInput {
     func selectKeyword(keyword: Category)
 }
 protocol EvaluationViewModelOutput {
+    var evaluationData: EvaluationDTO? { get }
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { get }
     var restaurantDetailTitle: RestaurantDetailTitle { get }
     var situations: [Category] { get }
@@ -29,9 +30,10 @@ final class DefaultEvaluationViewModel: EvaluationViewModel {
     private let repository: EvaluationRepository
     private let actions: EvaluationViewModelActions
     
-    @Published private(set) var evaluationData: EvaluationDTO?
+    
     
     // MARK: - Output
+    @Published var evaluationData: EvaluationDTO?
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { $evaluationData }
     var restaurantDetailTitle: RestaurantDetailTitle
     @Published var situations: [Category] = Situation.allCases.filter({ $0 != .all }).map({ $0.category})
