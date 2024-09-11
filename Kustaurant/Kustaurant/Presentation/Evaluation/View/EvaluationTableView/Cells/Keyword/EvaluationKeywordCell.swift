@@ -29,6 +29,8 @@ final class EvaluationKeywordCell: UITableViewCell {
 
 extension EvaluationKeywordCell {
     private func setupStyle() {
+        selectionStyle = .none
+        
         titleLabel.text = "키워드를 선택해 주세요"
         titleLabel.font = .Pretendard.medium18
         titleLabel.textColor = .textBlack
