@@ -27,6 +27,7 @@ final class EvaluationRatingCell: UITableViewCell {
         setupLayout()
         setupDismissKeyboardGesture()
         registerForKeyboardNotifications()
+        addDoneButtonOnKeyboard()
         bindRating()
     }
     
@@ -97,7 +98,7 @@ extension EvaluationRatingCell {
         containerView.addSubview(titleLabel, autoLayout: [.leading(20), .top(0), .height(42)])
         containerView.addSubview(starRatingView, autoLayout: [.topNext(to: titleLabel, constant: 6), .leading(20), .width(208), .height(40)])
         containerView.addSubview(starCommentsLabel, autoLayout: [.topNext(to: starRatingView, constant: 6), .fillX(20)])
-        containerView.addSubview(reviewTextView, autoLayout: [.topNext(to: starCommentsLabel, constant: 24), .fillX(20), .height(160), .bottom(90)])
+        containerView.addSubview(reviewTextView, autoLayout: [.topNext(to: starCommentsLabel, constant: 24), .fillX(20), .height(160), .bottom(110)])
 //        containerView.addSubview(addImageButton, autoLayout: [.topNext(to: reviewTextView, constant: 12), .fillX(20), .height(46), .bottom(90)])
     }
 }
@@ -119,10 +120,16 @@ extension EvaluationRatingCell {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    private func submitButtonHeight() -> CGFloat {
+        let window = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.flatMap { $0.windows }.first { $0.isKeyWindow }
+        let bottomSafeAreaHeight = window?.safeAreaInsets.bottom ?? 0
+        return 68 + (bottomSafeAreaHeight == 0 ? 16 : bottomSafeAreaHeight)
+    }
+    
     @objc private func keyboardWillShow(notification: NSNotification) {
         guard let parentVC = parentViewController else { return }
         if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            let bottomInset = keyboardSize.height - 90
+            let bottomInset = keyboardSize.height - submitButtonHeight()
             parentVC.view.frame.origin.y = -bottomInset
         }
     }
@@ -130,6 +137,19 @@ extension EvaluationRatingCell {
     @objc private func keyboardWillHide(notification: NSNotification) {
         guard let parentVC = parentViewController else { return }
         parentVC.view.frame.origin.y = 0
+    }
+    
+    private func addDoneButtonOnKeyboard() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(dismissKeyboard))
+        
+        toolbar.setItems([flexSpace, doneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        reviewTextView.inputAccessoryView = toolbar
     }
 }
 

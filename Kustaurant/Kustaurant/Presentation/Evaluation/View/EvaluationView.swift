@@ -27,6 +27,6 @@ extension EvaluationView {
     private func setupUI() {
         backgroundColor = .white
         addSubview(tableView, autoLayout: [.fill(0)])
-        addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84)])
+        addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0)])
     }
 }

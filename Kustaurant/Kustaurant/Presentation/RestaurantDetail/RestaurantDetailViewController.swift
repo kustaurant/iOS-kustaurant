@@ -103,7 +103,7 @@ extension RestaurantDetailViewController {
     
     private func setupLayout() {
         view.addSubview(tableView, autoLayout: [.fill(0)])
-        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84)])
+        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0)])
         view.addSubview(commentAccessoryView, autoLayout: [.fillX(0), .height(68), .bottomKeyboard(0)])
     }
     
