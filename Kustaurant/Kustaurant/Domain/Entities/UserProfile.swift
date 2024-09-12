@@ -8,9 +8,9 @@
 import Foundation
 
 struct UserProfile: Codable {
-    let nickname: String?
+    var nickname: String?
     let email: String?
-    let phoneNumber: String?
+    var phoneNumber: String?
     
     init(nickname: String, phoneNumber: String) {
         self.nickname = nickname
@@ -26,5 +26,13 @@ struct UserProfile: Codable {
     
     static func empty() -> UserProfile {
         UserProfile(nickname: "", phoneNumber: "")
+    }
+    
+    mutating func updateNickname(_ text: String) {
+        self.nickname = text
+    }
+    
+    mutating func updatePhoneNumber(_ text: String) {
+        self.phoneNumber = text
     }
 }

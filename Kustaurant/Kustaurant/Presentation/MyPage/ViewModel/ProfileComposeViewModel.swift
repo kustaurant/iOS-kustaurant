@@ -23,12 +23,8 @@ protocol ProfileComposeViewModelInput {
 }
 
 protocol ProfileComposeViewModelOutput {
-    var nicknameText: String { get }
-    var nicknameTextPublisher: Published<String>.Publisher { get }
     var nicknameError: ProfileComposeTextFieldError { get }
     var nicknameErrorPublisher: Published<ProfileComposeTextFieldError>.Publisher { get }
-    var phoneNumberText: String { get }
-    var phoneNumberTextPublisher: Published<String>.Publisher { get }
     var phoneNumberError: ProfileComposeTextFieldError { get }
     var phoneNumberErrorPublisher: Published<ProfileComposeTextFieldError>.Publisher { get }
     var showAlert: Bool { get }
@@ -49,11 +45,6 @@ final class DefaultProfileComposeViewModel: ProfileComposeViewModel {
     var nicknameErrorPublisher: Published<ProfileComposeTextFieldError>.Publisher { $nicknameError }
     @Published var phoneNumberError: ProfileComposeTextFieldError = .none
     var phoneNumberErrorPublisher: Published<ProfileComposeTextFieldError>.Publisher { $phoneNumberError }
-    
-    @Published var nicknameText: String = ""
-    var nicknameTextPublisher: Published<String>.Publisher { $nicknameText }
-    @Published var phoneNumberText: String = ""
-    var phoneNumberTextPublisher: Published<String>.Publisher { $phoneNumberText }
     
     @Published var showAlert: Bool = false
     var showAlertPublisher: Published<Bool>.Publisher { $showAlert }
@@ -90,7 +81,7 @@ extension DefaultProfileComposeViewModel {
     
     func didTapSubmitButton() {
         Task {
-            let result = await myPageUseCases.updateUserPrfile(UserProfile(nickname: nicknameText, phoneNumber: phoneNumberText))
+            let result = await myPageUseCases.updateUserPrfile(userProfile)
             switch result {
             case .success:
                 alertPayload = AlertPayload(title: "프로필을 편집했습니다.", subtitle: "", onConfirm: dismissAlert)
@@ -112,11 +103,11 @@ extension DefaultProfileComposeViewModel {
     }
     
     func updateNicknameText(_ text: String) {
-        nicknameText = text
+        userProfile.updateNickname(text)
     }
     
     func updatePhoneNumberText(_ text: String) {
-        phoneNumberText = text
+        userProfile.updatePhoneNumber(text)
     }
     
     func updateNicknameError(_ error: ProfileComposeTextFieldError) {
