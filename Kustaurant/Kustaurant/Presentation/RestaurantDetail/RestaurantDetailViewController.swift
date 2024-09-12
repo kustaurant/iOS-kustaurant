@@ -181,10 +181,8 @@ extension RestaurantDetailViewController {
             .removeDuplicates()
             .sink { [weak self] newHeight in
                 guard let self = self else { return }
-                if self.tableView.rowHeight != newHeight {
-                    self.tableView.beginUpdates()
-                    self.tableView.endUpdates()
-                }
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
             }
             .store(in: &cancellables)
         
