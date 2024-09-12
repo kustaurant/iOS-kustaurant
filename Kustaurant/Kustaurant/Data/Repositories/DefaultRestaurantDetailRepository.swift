@@ -10,7 +10,7 @@ import Foundation
 final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
     
     private let networkService: NetworkService
-    private let restaurantID: Int
+    let restaurantID: Int
     
     init(networkService: NetworkService, restaurantID: Int) {
         self.networkService = networkService

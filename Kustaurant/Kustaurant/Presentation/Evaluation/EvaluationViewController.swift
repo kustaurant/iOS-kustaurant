@@ -6,24 +6,34 @@
 //
 
 import UIKit
+import Combine
 
-class EvaluationViewController: UIViewController, NavigationBarHideable {
+final class EvaluationViewController: UIViewController, NavigationBarHideable {
     
     private let viewModel: EvaluationViewModel
+    private let evaluationView = EvaluationView()
+    private var tableViewHandler: EvaluationTableViewHandler?
+    private var cancellables = Set<AnyCancellable>()
     
     init(viewModel: EvaluationViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        tableViewHandler = EvaluationTableViewHandler(view: evaluationView, viewModel: viewModel)
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Life Cycle
+    override func loadView() {
+        view = evaluationView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         setupNavigationBar()
+        setupBindings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,5 +56,31 @@ extension EvaluationViewController {
     
     @objc private func backButtonTapped() {
         viewModel.didTapBackButton()
+    }
+}
+
+
+extension EvaluationViewController {
+    private func setupBindings() {
+        bindEvaluationData()
+        bindSituationKeyword()
+    }
+    
+    private func bindEvaluationData() {
+        viewModel.evaluationDataPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] data in
+                self?.tableViewHandler?.reload()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func bindSituationKeyword() {
+        viewModel.situationsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tableViewHandler?.keywordReload()
+            }
+            .store(in: &cancellables)
     }
 }

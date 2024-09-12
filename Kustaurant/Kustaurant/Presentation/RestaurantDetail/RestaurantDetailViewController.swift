@@ -11,7 +11,7 @@ import Combine
 final class RestaurantDetailViewController: UIViewController, NavigationBarHideable {
     
     private let tableView: UITableView = .init()
-    private let evaluationFloatingView: EvaluationFloatingView = .init()
+    private let evaluationFloatingView: EvaluationFloatingView = .init(viewType: .detail)
     private let commentAccessoryView: CommentAccessoryView = .init()
     
     private let viewModel: RestaurantDetailViewModel
@@ -103,7 +103,7 @@ extension RestaurantDetailViewController {
     
     private func setupLayout() {
         view.addSubview(tableView, autoLayout: [.fill(0)])
-        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84)])
+        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0)])
         view.addSubview(commentAccessoryView, autoLayout: [.fillX(0), .height(68), .bottomKeyboard(0)])
     }
     

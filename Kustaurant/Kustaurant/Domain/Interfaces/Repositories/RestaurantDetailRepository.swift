@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RestaurantDetailRepository {
-    
+    var restaurantID: Int { get }
     func fetch() async -> RestaurantDetail
     func fetchReviews() async -> [RestaurantDetailCellItem]
     func likeComment(restaurantId: Int, commentId: Int) async -> Result<RestaurantCommentDTO, NetworkError>
@@ -18,4 +18,3 @@ protocol RestaurantDetailRepository {
     func addComment(restaurantId: Int, commentId: Int, comment: String) async -> Result<RestaurantDetailReview, NetworkError>
     func toggleFavorite(restaurantId: Int) async -> Result<Bool, NetworkError>
 }
-
