@@ -16,6 +16,7 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     
     private let viewModel: RestaurantDetailViewModel
     private let tierCellHeightSubject: CurrentValueSubject<CGFloat, Never> = .init(0)
+    private let tapHeaderCellHeightSubject: CurrentValueSubject<CGFloat, Never> = .init(KuTabBarView.height + 26)
     private var tabCancellable: AnyCancellable?
     private var cancellables: Set<AnyCancellable> = .init()
     
@@ -87,7 +88,6 @@ extension RestaurantDetailViewController {
         tableView.tableHeaderView = nil
         tableView.tableFooterView = nil
         
-//        tableView.contentInsetAdjustmentBehavior = .never
         tableView.showsVerticalScrollIndicator = false
         
         tableView.registerCell(ofType: RestaurantDetailTitleCell.self)
@@ -115,8 +115,13 @@ extension RestaurantDetailViewController {
                 case .didFetchItems, .didFetchReviews:
                     self?.tableView.reloadData()
                     
-                case .didChangeTabType:
+                case .didChangeTabType(let type):
                     let indexSet = IndexSet(integer: RestaurantDetailSection.tab.index)
+                    if type == .menu {
+                        self?.tapHeaderCellHeightSubject.send(KuTabBarView.height + 26)
+                    } else {
+                        self?.tapHeaderCellHeightSubject.send(KuTabBarView.height + 40)
+                    }
                     self?.tableView.reloadSections(indexSet, with: .none)
                     
                 case .didFetchHeaderImage(let image):
@@ -199,8 +204,8 @@ extension RestaurantDetailViewController: UITableViewDelegate {
         guard RestaurantDetailSection(index: section) == .tab
         else { return .zero }
         
-        return KuTabBarView.height + 26
-    }
+        return tapHeaderCellHeightSubject.value
+   }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if RestaurantDetailSection(index: indexPath.section) == .tier {
@@ -254,6 +259,20 @@ extension RestaurantDetailViewController: UITableViewDataSource {
                     guard let type else { return }
                     self?.viewModel.state = .didTab(at: type)
                 }
+            
+            headerView.popularButtonTapPublisher()
+                .debounce(for: .seconds(0.4), scheduler: RunLoop.main)
+                .sink { [weak self] in
+                self?.viewModel.state = .didTapReviewSortOptionButton(sort: .popular)
+            }
+            .store(in: &cancellables)
+            
+            headerView.recentButtonTapPublisher()
+                .debounce(for: .seconds(0.4), scheduler: RunLoop.main)
+                .sink { [weak self] in
+                self?.viewModel.state = .didTapReviewSortOptionButton(sort: .recent)
+            }
+            .store(in: &cancellables)
             return headerView
         default: return nil
         }
