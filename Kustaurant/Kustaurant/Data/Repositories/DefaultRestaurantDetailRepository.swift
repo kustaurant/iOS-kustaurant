@@ -10,7 +10,7 @@ import Foundation
 final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
     
     private let networkService: NetworkService
-    private let restaurantID: Int
+    let restaurantID: Int
     
     init(networkService: NetworkService, restaurantID: Int) {
         self.networkService = networkService
@@ -85,8 +85,9 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
         return items
     }
     
-    func fetchReviews() async -> [RestaurantDetailCellItem] {
-        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/\(restaurantID)/comments")
+    func fetchReviews(sort: ReviewSort) async -> [RestaurantDetailCellItem] {
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/restaurants/\(restaurantID)/comments")
+        urlBuilder.addQuery(parameter: ["sort": sort.rawValue])
         let authInterceptor = AuthorizationInterceptor()
         let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
         let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)

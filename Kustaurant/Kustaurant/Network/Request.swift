@@ -40,7 +40,12 @@ extension Request {
             case 200..<300:
                 break
             case 400:
-                completionHandler(.failure(.badRequest))
+                if let data {
+                    let serverMessage = self.decodeErrorMessage(from: data)
+                    completionHandler(.failure(.custom(serverMessage ?? "Unknown server error")))
+                } else {
+                    completionHandler(.failure(.badRequest))
+                }
                 return
             case 401:
                 completionHandler(.failure(.unauthorized))
@@ -123,6 +128,11 @@ extension Request {
 }
 
 extension Request {
+    
+    private func decodeErrorMessage(from data: Data) -> String? {
+        let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        return json?["error"] as? String
+    }
     
     public func response(with urlRequest: URLRequest, completion: @escaping (Response) -> Void) {
         execute(with: urlRequest) { result in

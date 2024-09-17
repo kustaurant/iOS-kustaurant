@@ -7,8 +7,16 @@
 
 import UIKit
 
+extension EvaluationFloatingView {
+    enum ViewType {
+        case detail, evaluation
+    }
+}
+
 final class EvaluationFloatingView: UIView {
     
+    private var viewType: ViewType
+    private let containerView: UIView = .init()
     private let evaluateButton: KuSubmitButton = .init()
     private let favoriteButton: UIButton = .init()
     private var favoriteButtonConfiguration = UIButton.Configuration.plain()
@@ -35,12 +43,14 @@ final class EvaluationFloatingView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewType: ViewType) {
+        self.viewType = viewType
+        super.init(frame: .zero)
         setupLayout()
         setupEvaluateButton()
         setupFavoriteButton()
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -57,14 +67,25 @@ extension EvaluationFloatingView {
         onTapFavoriteButton?()
     }
     
+    
     private func setupLayout() {
-        backgroundColor = .white
-        addSubview(evaluateButton, autoLayout: [.leading(16), .height(52), .top(12)])
-        addSubview(favoriteButton, autoLayout: [.leadingNext(to: evaluateButton, constant: 8), .centerY(0), .trailing(22), .height(48)])
+        containerView.backgroundColor = .white
+        let window = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.flatMap { $0.windows }.first { $0.isKeyWindow }        
+        let bottomSafeAreaHeight = window?.safeAreaInsets.bottom ?? 0
+        addSubview(containerView, autoLayout: [.fill(0), .height(68 + (bottomSafeAreaHeight == 0 ? 16 : bottomSafeAreaHeight))])
+        
+        switch viewType {
+        case .detail:
+            containerView.addSubview(evaluateButton, autoLayout: [.leading(16), .height(52), .top(16)])
+            containerView.addSubview(favoriteButton, autoLayout: [.leadingNext(to: evaluateButton, constant: 8), .centerY(0), .trailing(22), .height(48)])
+        case .evaluation:
+            containerView.addSubview(evaluateButton, autoLayout: [.fillX(20), .height(52), .top(16)])
+        }
+        
     }
     
     private func setupEvaluateButton() {
-        evaluateButton.buttonTitle = "맛집 평가하기"
+        evaluateButton.buttonTitle = (viewType == .detail) ? "맛집 평가하기" : "평가 제출하기"
         evaluateButton.addTarget(self, action: #selector(didTapEvaluateButton), for: .touchUpInside)
     }
     
