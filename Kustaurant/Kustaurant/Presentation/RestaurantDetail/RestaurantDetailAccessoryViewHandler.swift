@@ -39,6 +39,7 @@ extension RestaurantDetailAccessoryViewHandler: UIGestureRecognizerDelegate {
         accessoryView.textField.delegate = self
         hideKeyboard()
         setupKeyboardEndGesture()
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange), name: UITextField.textDidChangeNotification, object: accessoryView.textField)
     }
 
     func showKeyboard(commentId: Int) {
@@ -61,6 +62,12 @@ extension RestaurantDetailAccessoryViewHandler: UIGestureRecognizerDelegate {
         tapGesture.delegate = self
         viewController.view.addGestureRecognizer(tapGesture)
     }
+    
+    @objc func textFieldDidChange(_ notification: Notification) {
+        if let textField = notification.object as? UITextField {
+            text = textField.text ?? ""
+        }
+    }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let touchedView = touch.view, touchedView.isDescendant(of: accessoryView.sendButton) {
@@ -73,6 +80,10 @@ extension RestaurantDetailAccessoryViewHandler: UIGestureRecognizerDelegate {
         return accessoryView.sendButtonTapPublisher().map { [weak self] in
             CommentPayload(commentId: self?.commentId, comment: self?.text)
         }.eraseToAnyPublisher()
+    }
+    
+    func unregisterAccessoryView() {
+        NotificationCenter.default.removeObserver(self, name: UITextField.textDidChangeNotification, object: accessoryView.textField)
     }
 }
 

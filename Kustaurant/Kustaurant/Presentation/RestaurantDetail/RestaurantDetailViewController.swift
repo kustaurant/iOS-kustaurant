@@ -55,6 +55,10 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         hideNavigationBar(animated: true)
     }
     
+    deinit {
+        accessoryViewHandler?.unregisterAccessoryView()
+    }
+    
     private func setupNavigationBar() {
         let searchImage = UIImage(named: "icon_search")?.withRenderingMode(.alwaysTemplate)
         let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(didTapSearchButton))
@@ -353,6 +357,10 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             let cell: RestaurantDetailReviewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.bind(item: item, indexPath: indexPath, viewModel: viewModel)
             cell.update(item: item)
+            cell.reloadTableView = { [weak self] in
+                self?.tableView.beginUpdates()
+                self?.tableView.endUpdates()
+            }
             return cell
         }
     }

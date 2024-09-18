@@ -39,6 +39,7 @@ final class RestaurantDetailReviewView: UIView {
     
     private let reportTapSubject = PassthroughSubject<Void, Never>()
     private let deleteTapSubject = PassthroughSubject<Void, Never>()
+    private let photoImageViewSubject = PassthroughSubject<Void, Never>()
     
     init() {
         super.init(frame: .zero)
@@ -60,7 +61,10 @@ final class RestaurantDetailReviewView: UIView {
         timeLabel.font = .Pretendard.regular12
         timeLabel.textColor = .Sementic.gray600
         
+        photoImageView.isHidden = true
         photoImageView.contentMode = .scaleAspectFill
+        photoImageView.layer.cornerRadius = 10
+        photoImageView.clipsToBounds = true
         
         reviewLabel.font = .Pretendard.regular14
         reviewLabel.textColor = .Sementic.gray800
@@ -91,12 +95,12 @@ final class RestaurantDetailReviewView: UIView {
         dislikeButtonWidthConstraint = dislikeButton.widthAnchor.constraint(equalToConstant: 30)
         dislikeButtonWidthConstraint?.isActive = true
         commentsButton.autolayout([.width(14)])
+        photoImageView.autolayout([.width(207), .height(207)])
         
         let mainStackView = UIStackView(arrangedSubviews: [topView, photoImageView, reviewLabel, interactionStackView])
         mainStackView.axis = .vertical
         mainStackView.spacing = 11
         
-        photoImageView.autolayout([.height(207), .width(207)])
         addSubview(mainStackView, autoLayout: [.fill(0)])
     }
     
@@ -113,6 +117,7 @@ final class RestaurantDetailReviewView: UIView {
         photoImageView.isHidden = true
         if let url = URL(string: item.photoImageURLString) {
             ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
+                self?.photoImageViewSubject.send()
                 self?.photoImageView.image = image
                 self?.photoImageView.isHidden = image == nil
             }
@@ -131,6 +136,10 @@ final class RestaurantDetailReviewView: UIView {
     
     func commentButtonTapPublisher() -> AnyPublisher<Void, Never> {
         return commentsButton.tapPublisher()
+    }
+
+    func photoImageReloadPublisher() -> AnyPublisher<Void, Never> {
+        return photoImageViewSubject.eraseToAnyPublisher()
     }
 }
 
