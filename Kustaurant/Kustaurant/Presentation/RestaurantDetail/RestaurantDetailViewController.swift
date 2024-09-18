@@ -357,6 +357,10 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             let cell: RestaurantDetailReviewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.bind(item: item, indexPath: indexPath, viewModel: viewModel)
             cell.update(item: item)
+            cell.reloadTableView = { [weak self] in
+                self?.tableView.beginUpdates()
+                self?.tableView.endUpdates()
+            }
             return cell
         }
     }
