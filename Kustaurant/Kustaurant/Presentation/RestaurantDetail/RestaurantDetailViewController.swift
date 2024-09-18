@@ -55,6 +55,10 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         hideNavigationBar(animated: true)
     }
     
+    deinit {
+        accessoryViewHandler?.unregisterAccessoryView()
+    }
+    
     private func setupNavigationBar() {
         let searchImage = UIImage(named: "icon_search")?.withRenderingMode(.alwaysTemplate)
         let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(didTapSearchButton))
