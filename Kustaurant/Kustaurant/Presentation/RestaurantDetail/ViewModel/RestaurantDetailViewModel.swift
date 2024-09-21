@@ -8,9 +8,14 @@
 import UIKit
 import Combine
 
+enum ReviewSort: String {
+    case popular = "popularity"
+    case recent = "latest"
+}
+
 struct RestaurantDetailViewModelActions {
     let pop: () -> Void
-    let showEvaluateScene: () -> Void
+    let showEvaluateScene: (Int, RestaurantDetailTitle) -> Void
     let showSearchScene: () -> Void
 }
 
@@ -47,6 +52,7 @@ extension RestaurantDetailViewModel {
         case didTapCommentButton(commentId: Int)
         case didTapSendButtonInAccessory(payload: CommentPayload)
         case didTapFavoriteButton
+        case didTapReviewSortOptionButton(sort: ReviewSort)
     }
     
     enum Action {
@@ -54,7 +60,7 @@ extension RestaurantDetailViewModel {
         case didFetchHeaderImage(UIImage)
         case didFetchReviews
         case didFetchEvaluation(isFavorite: Bool, evaluationCount: Int)
-        case didChangeTabType
+        case didChangeTabType(type: RestaurantDetailTabType)
         case loginStatus(LoginStatus)
         case didSuccessLikeOrDisLikeButton(commentId: Int, likeCount: Int, dislikeCount: Int, likeStatus: CommentLikeStatus)
         case showAlert(payload: AlertPayload)
@@ -113,7 +119,8 @@ extension RestaurantDetailViewModel {
                     self?.changeTabType(as: type)
                     
                 case .didTapEvaluationButton:
-                    self?.actions.showEvaluateScene()
+                    guard let item = self?.detail?.items[RestaurantDetailSection.title]?.first as? RestaurantDetailTitle else { return }
+                    self?.actions.showEvaluateScene(self?.repository.restaurantID ?? 0, item)
                     
                 case .didTapBackButton:
                     self?.actions.pop()
@@ -141,6 +148,9 @@ extension RestaurantDetailViewModel {
                     
                 case .didTapFavoriteButton:
                     self?.toggleFavorite()
+                    
+                case .didTapReviewSortOptionButton(let sort):
+                    self?.changeReviewSort(sort: sort)
                 }
             }
             .store(in: &cancellables)
@@ -156,7 +166,7 @@ extension RestaurantDetailViewModel {
             
             actionSubject.send(.didFetchItems)
             
-            if 
+            if
                 let isFavorite = self.detail?.isFavorite,
                 let evaluationCount = self.detail?.evaluationCount
             {
@@ -172,7 +182,7 @@ extension RestaurantDetailViewModel {
             }
             
             Task {
-                let reviews = await repository.fetchReviews()
+                let reviews = await repository.fetchReviews(sort: .popular)
                 var tabItems = detail?.tabItems
                 tabItems?[.review] = reviews
                 await detail?.updateTabItems(as: tabItems ?? [:])
@@ -190,10 +200,22 @@ extension RestaurantDetailViewModel {
             
             await detail?.updateTabType(as: type)
             
-            actionSubject.send(.didChangeTabType)
+            actionSubject.send(.didChangeTabType(type: type))
         }
     }
     
+    private func changeReviewSort(sort: ReviewSort) {
+        Task {
+            let reviews = await repository.fetchReviews(sort: sort)
+            var tabItems = detail?.tabItems
+            tabItems?[.review] = reviews
+            await detail?.updateTabItems(as: tabItems ?? [:])
+            
+            if detail?.tabType == .review {
+                actionSubject.send(.didFetchReviews)
+            }
+        }
+    }
 }
 
 // MARK: Comment
@@ -267,7 +289,7 @@ extension RestaurantDetailViewModel {
         })))
     }
     
-        
+    
     private func addComment(payload: CommentPayload) {
         if let commentId = payload.commentId, let comment = payload.comment {
             Task {

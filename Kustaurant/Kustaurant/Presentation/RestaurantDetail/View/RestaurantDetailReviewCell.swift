@@ -18,6 +18,8 @@ final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewC
     
     var item: RestaurantDetailReview?
     
+    var reloadTableView: (() -> Void)?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -30,6 +32,7 @@ final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewC
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         self.cancellables = Set<AnyCancellable>()
     }
     
@@ -41,7 +44,6 @@ final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewC
     
     private func setupStyle() {
         selectionStyle = .none
-        
         lineView.backgroundColor = .gray100
     }
     
@@ -93,6 +95,12 @@ final class RestaurantDetailReviewCell: UITableViewCell, RestaurantDetailReviewC
             reviewView.commentButtonTapPublisher()
                 .sink {
                     viewModel.state = .didTapCommentButton(commentId: item.commentId)
+                }
+                .store(in: &cancellables)
+            
+            reviewView.photoImageReloadPublisher()
+                .sink { [weak self] in
+                    self?.reloadTableView?()
                 }
                 .store(in: &cancellables)
         }

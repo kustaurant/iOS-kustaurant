@@ -11,11 +11,12 @@ import Combine
 final class RestaurantDetailViewController: UIViewController, NavigationBarHideable {
     
     private let tableView: UITableView = .init()
-    private let evaluationFloatingView: EvaluationFloatingView = .init()
+    private let evaluationFloatingView: EvaluationFloatingView = .init(viewType: .detail)
     private let commentAccessoryView: CommentAccessoryView = .init()
     
     private let viewModel: RestaurantDetailViewModel
     private let tierCellHeightSubject: CurrentValueSubject<CGFloat, Never> = .init(0)
+    private let tapHeaderCellHeightSubject: CurrentValueSubject<CGFloat, Never> = .init(KuTabBarView.height + 26)
     private var tabCancellable: AnyCancellable?
     private var cancellables: Set<AnyCancellable> = .init()
     
@@ -43,6 +44,9 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         setupLayout()
         accessoryViewHandler?.setupAccessoryView()
         setupNavigationBar()
+        
+        // MARK: 1차 배포용
+        evaluationFloatingView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +56,10 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     
     override func viewWillDisappear(_ animated: Bool) {
         hideNavigationBar(animated: true)
+    }
+    
+    deinit {
+        accessoryViewHandler?.unregisterAccessoryView()
     }
     
     private func setupNavigationBar() {
@@ -87,7 +95,6 @@ extension RestaurantDetailViewController {
         tableView.tableHeaderView = nil
         tableView.tableFooterView = nil
         
-//        tableView.contentInsetAdjustmentBehavior = .never
         tableView.showsVerticalScrollIndicator = false
         
         tableView.registerCell(ofType: RestaurantDetailTitleCell.self)
@@ -103,7 +110,7 @@ extension RestaurantDetailViewController {
     
     private func setupLayout() {
         view.addSubview(tableView, autoLayout: [.fill(0)])
-        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0), .height(84)])
+        view.addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0)])
         view.addSubview(commentAccessoryView, autoLayout: [.fillX(0), .height(68), .bottomKeyboard(0)])
     }
     
@@ -115,8 +122,13 @@ extension RestaurantDetailViewController {
                 case .didFetchItems, .didFetchReviews:
                     self?.tableView.reloadData()
                     
-                case .didChangeTabType:
+                case .didChangeTabType(let type):
                     let indexSet = IndexSet(integer: RestaurantDetailSection.tab.index)
+                    if type == .menu {
+                        self?.tapHeaderCellHeightSubject.send(KuTabBarView.height + 26)
+                    } else {
+                        self?.tapHeaderCellHeightSubject.send(KuTabBarView.height + 40)
+                    }
                     self?.tableView.reloadSections(indexSet, with: .none)
                     
                 case .didFetchHeaderImage(let image):
@@ -176,10 +188,8 @@ extension RestaurantDetailViewController {
             .removeDuplicates()
             .sink { [weak self] newHeight in
                 guard let self = self else { return }
-                if self.tableView.rowHeight != newHeight {
-                    self.tableView.beginUpdates()
-                    self.tableView.endUpdates()
-                }
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
             }
             .store(in: &cancellables)
         
@@ -199,8 +209,8 @@ extension RestaurantDetailViewController: UITableViewDelegate {
         guard RestaurantDetailSection(index: section) == .tab
         else { return .zero }
         
-        return KuTabBarView.height + 26
-    }
+        return tapHeaderCellHeightSubject.value
+   }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if RestaurantDetailSection(index: indexPath.section) == .tier {
@@ -254,6 +264,20 @@ extension RestaurantDetailViewController: UITableViewDataSource {
                     guard let type else { return }
                     self?.viewModel.state = .didTab(at: type)
                 }
+            
+            headerView.popularButtonTapPublisher()
+                .debounce(for: .seconds(0.4), scheduler: RunLoop.main)
+                .sink { [weak self] in
+                self?.viewModel.state = .didTapReviewSortOptionButton(sort: .popular)
+            }
+            .store(in: &cancellables)
+            
+            headerView.recentButtonTapPublisher()
+                .debounce(for: .seconds(0.4), scheduler: RunLoop.main)
+                .sink { [weak self] in
+                self?.viewModel.state = .didTapReviewSortOptionButton(sort: .recent)
+            }
+            .store(in: &cancellables)
             return headerView
         default: return nil
         }
@@ -336,6 +360,10 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             let cell: RestaurantDetailReviewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.bind(item: item, indexPath: indexPath, viewModel: viewModel)
             cell.update(item: item)
+            cell.reloadTableView = { [weak self] in
+                self?.tableView.beginUpdates()
+                self?.tableView.endUpdates()
+            }
             return cell
         }
     }
