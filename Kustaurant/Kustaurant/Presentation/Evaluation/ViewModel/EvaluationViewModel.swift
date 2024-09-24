@@ -14,6 +14,8 @@ struct EvaluationViewModelActions {
 protocol EvaluationViewModelInput {
     func didTapBackButton()
     func selectKeyword(keyword: Category)
+    func updateEvaluationReceiveData(_ data: EvaluationData)
+    func updateEvaluationReceiveKeyword()
 }
 protocol EvaluationViewModelOutput {
     var evaluationData: EvaluationDTO? { get }
@@ -21,18 +23,19 @@ protocol EvaluationViewModelOutput {
     var restaurantDetailTitle: RestaurantDetailTitle { get }
     var situations: [Category] { get }
     var situationsPublisher: Published<[Category]>.Publisher { get }
+    var evaluationReceiveData: EvaluationData { get }
 }
 
 typealias EvaluationViewModel = EvaluationViewModelInput & EvaluationViewModelOutput
 
 final class DefaultEvaluationViewModel: EvaluationViewModel {
     
+    
     private let repository: EvaluationRepository
     private let actions: EvaluationViewModelActions
     
-    
-    
     // MARK: - Output
+    var evaluationReceiveData: EvaluationData = EvaluationData(rating: 3.0)
     @Published var evaluationData: EvaluationDTO?
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { $evaluationData }
     var restaurantDetailTitle: RestaurantDetailTitle
@@ -75,5 +78,14 @@ extension DefaultEvaluationViewModel {
     func selectKeyword(keyword: Category) {
         guard let index = situations.firstIndex(where: { $0 == keyword }) else { return }
         situations[index].isSelect.toggle()
+    }
+    
+    func updateEvaluationReceiveData(_ data: EvaluationData) {
+        evaluationReceiveData = data
+    }
+    
+    func updateEvaluationReceiveKeyword() {
+        evaluationReceiveData.keywords = situations.filter({ $0.isSelect })
+        print(evaluationReceiveData)
     }
 }

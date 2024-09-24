@@ -44,9 +44,6 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         setupLayout()
         accessoryViewHandler?.setupAccessoryView()
         setupNavigationBar()
-        
-        // MARK: 1차 배포용
-        evaluationFloatingView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

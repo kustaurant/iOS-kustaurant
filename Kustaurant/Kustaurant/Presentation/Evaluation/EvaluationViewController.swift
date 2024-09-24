@@ -64,6 +64,7 @@ extension EvaluationViewController {
     private func setupBindings() {
         bindEvaluationData()
         bindSituationKeyword()
+        handleEvaluationButton()
     }
     
     private func bindEvaluationData() {
@@ -79,8 +80,17 @@ extension EvaluationViewController {
         viewModel.situationsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
+                self?.viewModel.updateEvaluationReceiveKeyword()
                 self?.tableViewHandler?.keywordReload()
             }
             .store(in: &cancellables)
+    }
+    
+    
+    private func handleEvaluationButton() {
+        evaluationView.evaluationFloatingView.onTapEvaluateButton = { [weak self] in
+            guard let data = self?.viewModel.evaluationReceiveData else { return }
+            print(data)
+        }
     }
 }

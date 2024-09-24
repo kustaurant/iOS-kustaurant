@@ -8,8 +8,8 @@
 import UIKit
 
 final class EvaluationView: UIView {
-    let tableView: EvaluationTableView = EvaluationTableView()
-    let evaluationFloatingView: EvaluationFloatingView = .init(viewType: .evaluation)
+    private(set) var tableView: EvaluationTableView = EvaluationTableView()
+    private(set) var evaluationFloatingView: EvaluationFloatingView = .init(viewType: .evaluation)
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -26,6 +26,7 @@ final class EvaluationView: UIView {
 extension EvaluationView {
     private func setupUI() {
         backgroundColor = .white
+        evaluationFloatingView.changeEvaluateState(.on)
         addSubview(tableView, autoLayout: [.fill(0)])
         addSubview(evaluationFloatingView, autoLayout: [.fillX(0), .bottom(0)])
     }

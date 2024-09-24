@@ -55,6 +55,10 @@ final class EvaluationFloatingView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func changeEvaluateState(_ onOff: KuSubmitButton.ButtonState) {
+        evaluateButton.buttonState = onOff
+    }
 }
 
 extension EvaluationFloatingView {
