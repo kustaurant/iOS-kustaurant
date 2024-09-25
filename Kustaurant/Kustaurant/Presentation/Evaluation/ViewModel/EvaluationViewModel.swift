@@ -24,6 +24,7 @@ protocol EvaluationViewModelOutput {
     var situations: [Category] { get }
     var situationsPublisher: Published<[Category]>.Publisher { get }
     var evaluationReceiveData: EvaluationData { get }
+    var isLoadingPublisher: Published<Bool>.Publisher { get }
 }
 
 typealias EvaluationViewModel = EvaluationViewModelInput & EvaluationViewModelOutput
@@ -33,8 +34,11 @@ final class DefaultEvaluationViewModel: EvaluationViewModel {
     
     private let repository: EvaluationRepository
     private let actions: EvaluationViewModelActions
+
     
     // MARK: - Output
+    @Published var isLoading: Bool = false
+    var isLoadingPublisher: Published<Bool>.Publisher { $isLoading }
     var evaluationReceiveData: EvaluationData = EvaluationData(rating: 3.0)
     @Published var evaluationData: EvaluationDTO?
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { $evaluationData }
@@ -86,6 +90,5 @@ extension DefaultEvaluationViewModel {
     
     func updateEvaluationReceiveKeyword() {
         evaluationReceiveData.keywords = situations.filter({ $0.isSelect })
-        print(evaluationReceiveData)
     }
 }

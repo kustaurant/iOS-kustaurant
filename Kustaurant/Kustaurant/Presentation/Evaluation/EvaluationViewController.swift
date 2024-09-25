@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class EvaluationViewController: UIViewController, NavigationBarHideable {
+final class EvaluationViewController: UIViewController, NavigationBarHideable, LoadingDisplayable {
     
     private let viewModel: EvaluationViewModel
     private let evaluationView = EvaluationView()
@@ -67,6 +67,19 @@ extension EvaluationViewController {
         handleEvaluationButton()
     }
     
+    private func bindLoading() {
+        viewModel.isLoadingPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] val in
+                if val {
+                    self?.showLoadingView()
+                } else {
+                    self?.hideLoadingView()
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
     private func bindEvaluationData() {
         viewModel.evaluationDataPublisher
             .receive(on: DispatchQueue.main)
@@ -90,7 +103,7 @@ extension EvaluationViewController {
     private func handleEvaluationButton() {
         evaluationView.evaluationFloatingView.onTapEvaluateButton = { [weak self] in
             guard let data = self?.viewModel.evaluationReceiveData else { return }
-            print(data)
+            self?.viewModel.submitEvaluation()
         }
     }
 }
