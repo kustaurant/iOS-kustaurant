@@ -63,10 +63,20 @@ final class DefaultEvaluationViewModel: EvaluationViewModel {
 
 extension DefaultEvaluationViewModel {
     private func fetch() {
-        Task {
+        Task { @MainActor in
             switch await repository.fetch() {
             case .success(let success):
                 evaluationData = success
+                if let codes = evaluationData?.evaluationSituations?.compactMap({ $0 }).map({ String($0) }) {
+                    situations = situations.map { category in
+                        var modifiedCategory = category
+                        if codes.contains(category.code) {
+                            modifiedCategory.isSelect = true
+                        }
+                        return modifiedCategory
+                    }
+                }
+                
             case .failure(let failure):
                 Logger.error(failure.localizedDescription)
             }
