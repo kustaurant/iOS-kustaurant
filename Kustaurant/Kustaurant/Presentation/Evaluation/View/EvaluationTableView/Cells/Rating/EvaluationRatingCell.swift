@@ -50,6 +50,11 @@ extension EvaluationRatingCell {
         guard let data = data else { return }
         evaluationData = data
         
+        if let review = data.evaluationComment {
+            reviewTextView.text = review
+            reviewTextView.textColor = .black
+        }
+        
         if let score = data.evaluationScore {
             starRatingView.rating = Float(score)
             updateRating?(starRatingView.rating)
