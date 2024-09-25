@@ -129,6 +129,8 @@ extension RestaurantDetailTitleCell {
         goToMapNavigationLabel.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToMapNavigationLabelTapped))
         goToMapNavigationLabel.addGestureRecognizer(tapGesture)
+        // MARK: - 앱 리젝 사유 ( apple map 연동 필요 ) 우선 제거.
+        goToMapNavigationLabel.isHidden = true
     }
 
     @objc private func goToMapNavigationLabelTapped() {

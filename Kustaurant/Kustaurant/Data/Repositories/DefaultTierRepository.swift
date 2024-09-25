@@ -25,13 +25,17 @@ extension DefaultTierRepository: TierRepository {
         let cuisineCodes = cuisines.map { $0.category.code }.joined(separator: ",")
         let situationCodes = situations.map({ $0.category.code }).joined(separator: ",")
         let locationCodes = locations.map({ $0.category.code }).joined(separator: ",")
+        
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        
         var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/tier/map")
         urlBuilder.addQuery(parameter: [
             "cuisines": cuisineCodes,
             "situations": situationCodes,
             "locations": locationCodes
         ])
-        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
         let response = await request.responseAsync(with: urlBuilder)
         if let error = response.error {
             return .failure(error)
@@ -60,7 +64,9 @@ extension DefaultTierRepository: TierRepository {
             "page": "\(page)",
             "limit": "\(limit)"
         ])
-        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
         let response = await request.responseAsync(with: urlBuilder)
         if let error = response.error {
             return .failure(error)

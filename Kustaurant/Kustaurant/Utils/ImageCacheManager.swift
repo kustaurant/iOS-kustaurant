@@ -21,9 +21,8 @@ public class ImageCacheManager {
             return
         }
         
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            guard let self,
-                  let data = data,
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data,
                   let image = UIImage(data: data),
                   error == nil else {
                 DispatchQueue.main.async {

@@ -28,7 +28,6 @@ extension DrawCollectionViewHandler {
         cv.delegate = self
         cv.showsHorizontalScrollIndicator = false
         cv.showsVerticalScrollIndicator = false
-        cv.isScrollEnabled = false
         cv.collectionViewLayout = layout
         cv.register(DrawLocationCollectionViewCell.self, forCellWithReuseIdentifier: DrawLocationCollectionViewCell.reuseIdentifier)
         cv.register(DrawCuisineCollectionViewCell.self, forCellWithReuseIdentifier: DrawCuisineCollectionViewCell.reuseIdentifier)

@@ -16,7 +16,7 @@ final class StarRatingView: UIView {
     var ratingChanged: ((Float) -> Void)?
     
     // 현재 별점
-    var rating: Float = 5 {
+    var rating: Float = 3 {
         didSet {
             updateStarRating()
         }

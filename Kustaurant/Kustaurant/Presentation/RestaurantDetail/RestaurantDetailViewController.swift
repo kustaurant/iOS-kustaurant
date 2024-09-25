@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 final class RestaurantDetailViewController: UIViewController, NavigationBarHideable {
-    
+
     private let tableView: UITableView = .init()
     private let evaluationFloatingView: EvaluationFloatingView = .init(viewType: .detail)
     private let commentAccessoryView: CommentAccessoryView = .init()
@@ -44,9 +44,6 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         setupLayout()
         accessoryViewHandler?.setupAccessoryView()
         setupNavigationBar()
-        
-        // MARK: 1차 배포용
-        evaluationFloatingView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -380,5 +377,13 @@ extension RestaurantDetailViewController {
             payload.onConfirm?()
         }))
         present(alert, animated: true, completion: nil)
+    }
+}
+
+
+// MARK: - EvaluationViewControllerDelegate
+extension RestaurantDetailViewController: EvaluationViewControllerDelegate {
+    func evaluationDidUpdate() {
+        viewModel.state = .fetch
     }
 }

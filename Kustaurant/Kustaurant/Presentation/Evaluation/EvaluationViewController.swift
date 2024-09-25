@@ -8,8 +8,12 @@
 import UIKit
 import Combine
 
-final class EvaluationViewController: UIViewController, NavigationBarHideable {
-    
+protocol EvaluationViewControllerDelegate: AnyObject {
+    func evaluationDidUpdate()
+}
+
+final class EvaluationViewController: UIViewController, NavigationBarHideable, LoadingDisplayable, Alertable {
+    weak var delegate: EvaluationViewControllerDelegate?
     private let viewModel: EvaluationViewModel
     private let evaluationView = EvaluationView()
     private var tableViewHandler: EvaluationTableViewHandler?
@@ -64,6 +68,36 @@ extension EvaluationViewController {
     private func setupBindings() {
         bindEvaluationData()
         bindSituationKeyword()
+        handleEvaluationButton()
+        bindState()
+    }
+    
+    private func bindState() {
+        viewModel.statePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
+                switch state {
+                case .inital:
+                    return
+                case .pop:
+                    self?.viewModel.didTapBackButton()
+                case .isLoading(let isLoading):
+                    if isLoading {
+                        self?.showLoadingView()
+                    } else {
+                        self?.hideLoadingView()
+                    }
+                case .errorAlert(let error):
+                    if let _ = error as? NetworkError {
+                        self?.showAlert(title: "평가 실패", message: "다시 시도해 주세요.")
+                    } else {
+                        self?.showAlert(title: "에러", message: error.localizedDescription)
+                    }
+                case .success:
+                    self?.delegate?.evaluationDidUpdate()
+                }
+            }
+            .store(in: &cancellables)
     }
     
     private func bindEvaluationData() {
@@ -79,8 +113,16 @@ extension EvaluationViewController {
         viewModel.situationsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
+                self?.viewModel.updateEvaluationReceiveKeyword()
                 self?.tableViewHandler?.keywordReload()
             }
             .store(in: &cancellables)
+    }
+    
+    
+    private func handleEvaluationButton() {
+        evaluationView.evaluationFloatingView.onTapEvaluateButton = { [weak self] in
+            self?.viewModel.submitEvaluation()
+        }
     }
 }
