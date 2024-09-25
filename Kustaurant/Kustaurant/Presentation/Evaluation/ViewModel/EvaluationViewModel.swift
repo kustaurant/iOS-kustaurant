@@ -74,21 +74,24 @@ extension DefaultEvaluationViewModel {
     }
     
     func submitEvaluation() {
-        isLoading = true
         Task {
-            let situations = [1, 2, 7]
+            isLoading = true
+            
+            var situations: [Int]?
+            if let keywords = evaluationReceiveData.keywords {
+                situations = Category.extractSituations(from: keywords).map({ Int($0.category.code) ?? 0 })
+            }
             let imageData = evaluationReceiveData.image
-            let imageName = "TEST"
             let evaluation = EvaluationDTO(evaluationScore: Double(evaluationReceiveData.rating),
                                            evaluationSituations: situations,
                                            evaluationImgUrl: nil,
                                            evaluationComment: evaluationReceiveData.review,
                                            starComments: nil,
-                                           newImage: imageName)
-            let result = await repository.submitEvaluationAF(evaluation: evaluation, imageData: imageData, imageName: imageName)
+                                           newImage: nil)
+            let result = await repository.submitEvaluationAF(evaluation: evaluation, imageData: imageData)
             switch result {
-            case .success(let comment):
-                print("Comment submitted successfully: \(comment)")
+            case .success(let comments):
+                print("Comment submitted successfully: \(comments)")
             case .failure(let error):
                 print("Failed to submit evaluation: \(error.localizedDescription)")
             }
