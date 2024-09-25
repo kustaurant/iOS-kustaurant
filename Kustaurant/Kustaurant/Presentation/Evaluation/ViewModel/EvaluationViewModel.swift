@@ -41,6 +41,7 @@ final class DefaultEvaluationViewModel: EvaluationViewModel {
         case isLoading(Bool)
         case pop
         case errorAlert(Error)
+        case success
     }
     
     // MARK: - Output
@@ -108,6 +109,7 @@ extension DefaultEvaluationViewModel {
             switch result {
             case .success(let comments):
                 Logger.info("평가 성공 \(comments)")
+                state = .success
                 state = .pop
             case .failure(let error):
                 state = .errorAlert(error)

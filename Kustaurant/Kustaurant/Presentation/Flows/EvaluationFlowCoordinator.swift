@@ -27,12 +27,14 @@ final class EvaluationFlowCoordinator: Coordinator {
 extension EvaluationFlowCoordinator {
     func start(
         id: Int,
-        titleData: RestaurantDetailTitle
+        titleData: RestaurantDetailTitle,
+        parentVC: UIViewController?
     ) {
         let actions = EvaluationViewModelActions(
             pop: popAnimated
         )
         let viewController = dependencies.makeEvaluationViewController(with: id, actions: actions, titleData: titleData)
+        viewController.delegate = parentVC as? any EvaluationViewControllerDelegate
         navigationController.pushViewController(viewController, animated: true)
     }
     

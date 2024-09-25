@@ -8,8 +8,12 @@
 import UIKit
 import Combine
 
+protocol EvaluationViewControllerDelegate: AnyObject {
+    func evaluationDidUpdate()
+}
+
 final class EvaluationViewController: UIViewController, NavigationBarHideable, LoadingDisplayable, Alertable {
-    
+    weak var delegate: EvaluationViewControllerDelegate?
     private let viewModel: EvaluationViewModel
     private let evaluationView = EvaluationView()
     private var tableViewHandler: EvaluationTableViewHandler?
@@ -89,6 +93,8 @@ extension EvaluationViewController {
                     } else {
                         self?.showAlert(title: "에러", message: error.localizedDescription)
                     }
+                case .success:
+                    self?.delegate?.evaluationDidUpdate()
                 }
             }
             .store(in: &cancellables)
