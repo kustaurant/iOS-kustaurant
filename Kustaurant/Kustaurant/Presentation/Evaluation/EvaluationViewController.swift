@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class EvaluationViewController: UIViewController, NavigationBarHideable, LoadingDisplayable {
+final class EvaluationViewController: UIViewController, NavigationBarHideable, LoadingDisplayable, Alertable {
     
     private let viewModel: EvaluationViewModel
     private let evaluationView = EvaluationView()
@@ -65,16 +65,30 @@ extension EvaluationViewController {
         bindEvaluationData()
         bindSituationKeyword()
         handleEvaluationButton()
+        bindState()
     }
     
-    private func bindLoading() {
-        viewModel.isLoadingPublisher
+    private func bindState() {
+        viewModel.statePublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] val in
-                if val {
-                    self?.showLoadingView()
-                } else {
-                    self?.hideLoadingView()
+            .sink { [weak self] state in
+                switch state {
+                case .inital:
+                    return
+                case .pop:
+                    self?.viewModel.didTapBackButton()
+                case .isLoading(let isLoading):
+                    if isLoading {
+                        self?.showLoadingView()
+                    } else {
+                        self?.hideLoadingView()
+                    }
+                case .errorAlert(let error):
+                    if let _ = error as? NetworkError {
+                        self?.showAlert(title: "평가 실패", message: "다시 시도해 주세요.")
+                    } else {
+                        self?.showAlert(title: "에러", message: error.localizedDescription)
+                    }
                 }
             }
             .store(in: &cancellables)
@@ -102,7 +116,6 @@ extension EvaluationViewController {
     
     private func handleEvaluationButton() {
         evaluationView.evaluationFloatingView.onTapEvaluateButton = { [weak self] in
-            guard let data = self?.viewModel.evaluationReceiveData else { return }
             self?.viewModel.submitEvaluation()
         }
     }

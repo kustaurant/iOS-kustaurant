@@ -24,7 +24,6 @@ final class DefaultEvaluationRepository: EvaluationRepository {
 
 extension DefaultEvaluationRepository {
     func fetch() async -> Result<EvaluationDTO, NetworkError> {
-        print("restaurantID : \(restaurantID)")
         let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/restaurants/\(restaurantID)/evaluation")
         let authInterceptor = AuthorizationInterceptor()
         let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)

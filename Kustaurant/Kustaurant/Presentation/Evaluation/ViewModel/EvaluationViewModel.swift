@@ -25,7 +25,7 @@ protocol EvaluationViewModelOutput {
     var situations: [Category] { get }
     var situationsPublisher: Published<[Category]>.Publisher { get }
     var evaluationReceiveData: EvaluationData { get }
-    var isLoadingPublisher: Published<Bool>.Publisher { get }
+    var statePublisher: Published<DefaultEvaluationViewModel.State>.Publisher { get }
 }
 
 typealias EvaluationViewModel = EvaluationViewModelInput & EvaluationViewModelOutput
@@ -36,10 +36,16 @@ final class DefaultEvaluationViewModel: EvaluationViewModel {
     private let repository: EvaluationRepository
     private let actions: EvaluationViewModelActions
 
+    enum State {
+        case inital
+        case isLoading(Bool)
+        case pop
+        case errorAlert(Error)
+    }
     
     // MARK: - Output
-    @Published var isLoading: Bool = false
-    var isLoadingPublisher: Published<Bool>.Publisher { $isLoading }
+    @Published var state: State = .inital
+    var statePublisher: Published<State>.Publisher { $state }
     var evaluationReceiveData: EvaluationData = EvaluationData(rating: 3.0)
     @Published var evaluationData: EvaluationDTO?
     var evaluationDataPublisher: Published<EvaluationDTO?>.Publisher { $evaluationData }
@@ -85,7 +91,7 @@ extension DefaultEvaluationViewModel {
     
     func submitEvaluation() {
         Task {
-            isLoading = true
+            state = .isLoading(true)
             
             var situations: [Int]?
             if let keywords = evaluationReceiveData.keywords {
@@ -101,12 +107,14 @@ extension DefaultEvaluationViewModel {
             let result = await repository.submitEvaluationAF(evaluation: evaluation, imageData: imageData)
             switch result {
             case .success(let comments):
-                print("Comment submitted successfully: \(comments)")
+                Logger.info("평가 성공 \(comments)")
+                state = .pop
             case .failure(let error):
-                print("Failed to submit evaluation: \(error.localizedDescription)")
+                state = .errorAlert(error)
             }
             
-            isLoading = false
+            state = .isLoading(false)
+            
         }
     }
 }
@@ -114,7 +122,11 @@ extension DefaultEvaluationViewModel {
 // MAKR: Input
 extension DefaultEvaluationViewModel {
     func didTapBackButton() {
-        actions.pop()
+        Task {
+            await MainActor.run {
+                actions.pop()
+            }
+        }
     }
     
     func selectKeyword(keyword: Category) {
