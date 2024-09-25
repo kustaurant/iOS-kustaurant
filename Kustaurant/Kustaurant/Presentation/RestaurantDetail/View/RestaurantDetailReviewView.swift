@@ -115,13 +115,13 @@ final class RestaurantDetailReviewView: UIView {
         barView.backgroundColor = .Sementic.gray50
         timeLabel.text = item.time
         photoImageView.isHidden = true
-        if let url = URL(string: item.photoImageURLString) {
-            ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
-                self?.photoImageViewSubject.send()
-                self?.photoImageView.image = image
-                self?.photoImageView.isHidden = image == nil
-            }
-        }
+//        if let url = URL(string: item.photoImageURLString) {
+//            ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
+//                self?.photoImageViewSubject.send()
+//                self?.photoImageView.image = image
+//                self?.photoImageView.isHidden = image == nil
+//            }
+//        }
         reviewLabel.text = item.review
         commentsButton.isHidden = item.isComment
         likeButton.configuration?.title = "\(item.likeCount)"
