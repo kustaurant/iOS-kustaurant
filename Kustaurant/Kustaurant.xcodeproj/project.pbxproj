@@ -137,6 +137,7 @@
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		58E611332CA2B6640068922F /* EvaluationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E611322CA2B6640068922F /* EvaluationData.swift */; };
+		58F4CC182CA2BDA80042EDA8 /* LoadingDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */; };
 		BA0A89CD2C840DEB000A724D /* NoticeBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */; };
 		BA0A89CF2C84109F000A724D /* NoticeBoardTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CE2C84109F000A724D /* NoticeBoardTableViewHandler.swift */; };
 		BA0A89D12C8412F2000A724D /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89D02C8412F2000A724D /* Notice.swift */; };
@@ -445,6 +446,7 @@
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		58E611322CA2B6640068922F /* EvaluationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationData.swift; sourceTree = "<group>"; };
+		58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDisplayable.swift; sourceTree = "<group>"; };
 		70969EAC2D84033B4B6EDBD6 /* Pods-Kustaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.release.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.release.xcconfig"; sourceTree = "<group>"; };
 		898D644402C4962B169D267F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewModel.swift; sourceTree = "<group>"; };
@@ -847,6 +849,7 @@
 				584173352C4661B5001EC132 /* Coordinator.swift */,
 				584173822C48CAE0001EC132 /* ReusableCell.swift */,
 				58067C922C4AA91D00889C92 /* NavigationBarHideable.swift */,
+				58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2166,6 +2169,7 @@
 				5826A1E92C77230A0097256C /* NMFMapPolygonManager.swift in Sources */,
 				BA494B5B2C7EFFB900EB2527 /* MyPageUserProfileView.swift in Sources */,
 				BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */,
+				58F4CC182CA2BDA80042EDA8 /* LoadingDisplayable.swift in Sources */,
 				5826A1EB2C77267D0097256C /* NMFMapCameraManager.swift in Sources */,
 				58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */,
 				5826A1EF2C7892CC0097256C /* TierCategoryPopupView.swift in Sources */,

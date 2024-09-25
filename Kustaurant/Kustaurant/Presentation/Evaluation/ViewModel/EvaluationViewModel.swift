@@ -16,6 +16,7 @@ protocol EvaluationViewModelInput {
     func selectKeyword(keyword: Category)
     func updateEvaluationReceiveData(_ data: EvaluationData)
     func updateEvaluationReceiveKeyword()
+    func submitEvaluation()
 }
 protocol EvaluationViewModelOutput {
     var evaluationData: EvaluationDTO? { get }
@@ -69,6 +70,30 @@ extension DefaultEvaluationViewModel {
             case .failure(let failure):
                 Logger.error(failure.localizedDescription)
             }
+        }
+    }
+    
+    func submitEvaluation() {
+        isLoading = true
+        Task {
+            let situations = [1, 2, 7]
+            let imageData = evaluationReceiveData.image
+            let imageName = "TEST"
+            let evaluation = EvaluationDTO(evaluationScore: Double(evaluationReceiveData.rating),
+                                           evaluationSituations: situations,
+                                           evaluationImgUrl: nil,
+                                           evaluationComment: evaluationReceiveData.review,
+                                           starComments: nil,
+                                           newImage: imageName)
+            let result = await repository.submitEvaluationAF(evaluation: evaluation, imageData: imageData, imageName: imageName)
+            switch result {
+            case .success(let comment):
+                print("Comment submitted successfully: \(comment)")
+            case .failure(let error):
+                print("Failed to submit evaluation: \(error.localizedDescription)")
+            }
+            
+            isLoading = false
         }
     }
 }

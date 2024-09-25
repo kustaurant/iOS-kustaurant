@@ -93,6 +93,12 @@ extension EvaluationTableViewHandler: UITableViewDataSource {
                 data.rating = rating
                 self?.viewModel.updateEvaluationReceiveData(data)
             }
+            cell.updateImage = { [weak self] imageData in
+                guard var data = self?.viewModel.evaluationReceiveData else { return }
+                data.image = imageData
+                self?.viewModel.updateEvaluationReceiveData(data)
+                
+            }
             return cell
         }
     }

@@ -10,6 +10,6 @@ import UIKit
 struct EvaluationData {
     var rating: Float
     var review: String?
-    var image: UIImage?
+    var image: Data?
     var keywords: [Category]?
 }

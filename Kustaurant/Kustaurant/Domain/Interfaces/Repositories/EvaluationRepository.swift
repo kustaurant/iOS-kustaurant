@@ -9,4 +9,5 @@ import Foundation
 
 protocol EvaluationRepository {
     func fetch() async -> Result<EvaluationDTO, NetworkError>
+    func submitEvaluationAF(evaluation: EvaluationDTO, imageData: Data?, imageName: String?) async -> Result<RestaurantCommentDTO, NetworkError>
 }

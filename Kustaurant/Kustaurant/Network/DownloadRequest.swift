@@ -101,7 +101,7 @@ public final class DownloadRequest: Request {
         
         repeat {
             do {
-                let request = interceptor?.intercept(urlRequest) ?? urlRequest
+                let _ = interceptor?.intercept(urlRequest) ?? urlRequest
                 let url = try await execute(with: urlRequest, toDirectory: directoryURL, withFileName: fileName)
                 return url
             } catch {

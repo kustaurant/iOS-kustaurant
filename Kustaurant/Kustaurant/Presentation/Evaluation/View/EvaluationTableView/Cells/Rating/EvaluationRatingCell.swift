@@ -19,6 +19,7 @@ final class EvaluationRatingCell: UITableViewCell {
     
     var updateRating: ((Float) -> Void)?
     var updateReview: ((String) -> Void)?
+    var updateImage: ((Data?) -> Void)?
     
     private var evaluationData: EvaluationDTO? = nil
     
@@ -132,6 +133,7 @@ extension EvaluationRatingCell: UIImagePickerControllerDelegate, UINavigationCon
         picker.dismiss(animated: true, completion: nil)
         if let image = info[.originalImage] as? UIImage {
             selectedImageView.image = image
+            updateImage?(image.jpegData(compressionQuality: 0.8))
         }
     }
 
