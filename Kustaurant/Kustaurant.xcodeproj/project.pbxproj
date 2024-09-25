@@ -2377,7 +2377,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kustaurant/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠스토랑";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "앱이 실행되는 동안 사용자의 위치를 사용하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보를 기반으로 현재 위치, 주변 식당 정보를 제공합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -2421,7 +2421,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kustaurant/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠스토랑";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "앱이 실행되는 동안 사용자의 위치를 사용하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보를 기반으로 현재 위치, 주변 식당 정보를 제공합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
