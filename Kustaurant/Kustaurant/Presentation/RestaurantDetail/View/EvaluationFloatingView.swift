@@ -55,6 +55,16 @@ final class EvaluationFloatingView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func changeEvaluateState(_ onOff: KuSubmitButton.ButtonState) {
+        evaluateButton.buttonState = onOff
+    }
+    
+    static func getHeight() -> CGFloat {
+        let window = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.flatMap { $0.windows }.first { $0.isKeyWindow }
+        let bottomSafeAreaHeight = window?.safeAreaInsets.bottom ?? 0
+        return 68 + (bottomSafeAreaHeight == 0 ? 16 : bottomSafeAreaHeight)
+    }
 }
 
 extension EvaluationFloatingView {
@@ -67,12 +77,11 @@ extension EvaluationFloatingView {
         onTapFavoriteButton?()
     }
     
-    
     private func setupLayout() {
         containerView.backgroundColor = .white
         let window = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.flatMap { $0.windows }.first { $0.isKeyWindow }        
         let bottomSafeAreaHeight = window?.safeAreaInsets.bottom ?? 0
-        addSubview(containerView, autoLayout: [.fill(0), .height(68 + (bottomSafeAreaHeight == 0 ? 16 : bottomSafeAreaHeight))])
+        addSubview(containerView, autoLayout: [.fill(0), .height(EvaluationFloatingView.getHeight())])
         
         switch viewType {
         case .detail:

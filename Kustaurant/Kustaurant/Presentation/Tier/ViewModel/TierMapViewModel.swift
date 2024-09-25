@@ -110,7 +110,7 @@ extension DefaultTierMapViewModel {
     
     func didTapRestaurant() {
         if let restaurant = selectedRestaurant {
-            let restaurantId = selectedRestaurant?.restaurantId ?? 0
+            let restaurantId = restaurant.restaurantId ?? 0
             hideBottomSheet()
             actions.showRestaurantDetail(restaurantId)
         }

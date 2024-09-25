@@ -16,6 +16,7 @@ final class RestaurantDetailFlowCoordinator: Coordinator {
     private let appDIContainer: AppDIContainer
     private let dependencies: RestaurantDetailFlowCoordinatorDependencies
     var navigationController: UINavigationController
+    var currentViewController: UIViewController?
     
     init(
         appDIContainer: AppDIContainer,
@@ -38,6 +39,7 @@ extension RestaurantDetailFlowCoordinator {
             showSearchScene: showSearchScene
         )
         let viewController = dependencies.makeRestaurantDetailViewController(with: id, actions: actions)
+        currentViewController = viewController
         navigationController.pushViewController(viewController, animated: true)
     }
     
@@ -51,7 +53,7 @@ extension RestaurantDetailFlowCoordinator {
     ) {
         let diContainer = appDIContainer.makeEvaluationDIContainer()
         let coordinator = diContainer.makeEvaluationFlowCoordianator(navigationController: navigationController)
-        coordinator.start(id: id, titleData: titleData)
+        coordinator.start(id: id, titleData: titleData, parentVC: currentViewController)
     }
     
     func showSearchScene() {

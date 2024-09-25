@@ -51,8 +51,9 @@ extension NaverLoginService: NaverThirdPartyLoginConnectionDelegate {
         }
     }
     
+    
     func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
-        naverLoginInstance?.accessToken
+        let _ = naverLoginInstance?.accessToken
     }
     
     func oauth20ConnectionDidFinishDeleteToken() {

@@ -122,6 +122,8 @@
 		585741052C8FEA5F0098BAB0 /* EvaluationKeywordCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585741042C8FEA5F0098BAB0 /* EvaluationKeywordCollectionViewHandler.swift */; };
 		585741072C909EAE0098BAB0 /* EvaluationRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585741062C909EAE0098BAB0 /* EvaluationRatingCell.swift */; };
 		5857410A2C90A1CB0098BAB0 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585741092C90A1CB0098BAB0 /* StarRatingView.swift */; };
+		586DDA082CA3E43600D15B1B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 586DDA072CA3E43600D15B1B /* Alamofire */; };
+		586DDA0C2CA4035100D15B1B /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586DDA0B2CA4035100D15B1B /* Alertable.swift */; };
 		5884966A2C8ACAE900E21F64 /* EvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496692C8ACAE900E21F64 /* EvaluationRepository.swift */; };
 		5884966C2C8AD11D00E21F64 /* EvaluationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */; };
 		5884966E2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */; };
@@ -136,6 +138,8 @@
 		58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */; };
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
+		58E611332CA2B6640068922F /* EvaluationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E611322CA2B6640068922F /* EvaluationData.swift */; };
+		58F4CC182CA2BDA80042EDA8 /* LoadingDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */; };
 		BA0A89CD2C840DEB000A724D /* NoticeBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */; };
 		BA0A89CF2C84109F000A724D /* NoticeBoardTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CE2C84109F000A724D /* NoticeBoardTableViewHandler.swift */; };
 		BA0A89D12C8412F2000A724D /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89D02C8412F2000A724D /* Notice.swift */; };
@@ -426,6 +430,7 @@
 		585741042C8FEA5F0098BAB0 /* EvaluationKeywordCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationKeywordCollectionViewHandler.swift; sourceTree = "<group>"; };
 		585741062C909EAE0098BAB0 /* EvaluationRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationRatingCell.swift; sourceTree = "<group>"; };
 		585741092C90A1CB0098BAB0 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		586DDA0B2CA4035100D15B1B /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		588496692C8ACAE900E21F64 /* EvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationRepository.swift; sourceTree = "<group>"; };
 		5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationDTO.swift; sourceTree = "<group>"; };
 		5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEvaluationRepository.swift; sourceTree = "<group>"; };
@@ -443,6 +448,8 @@
 		58D83A722C3A785A00511AB9 /* KustaurantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KustaurantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		58E611322CA2B6640068922F /* EvaluationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationData.swift; sourceTree = "<group>"; };
+		58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDisplayable.swift; sourceTree = "<group>"; };
 		70969EAC2D84033B4B6EDBD6 /* Pods-Kustaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.release.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.release.xcconfig"; sourceTree = "<group>"; };
 		898D644402C4962B169D267F /* Pods_Kustaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kustaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewModel.swift; sourceTree = "<group>"; };
@@ -613,6 +620,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C896ED3CB807B021E345EEC /* Pods_Kustaurant.framework in Frameworks */,
+				586DDA082CA3E43600D15B1B /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,6 +853,8 @@
 				584173352C4661B5001EC132 /* Coordinator.swift */,
 				584173822C48CAE0001EC132 /* ReusableCell.swift */,
 				58067C922C4AA91D00889C92 /* NavigationBarHideable.swift */,
+				58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */,
+				586DDA0B2CA4035100D15B1B /* Alertable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1129,6 +1139,7 @@
 			isa = PBXGroup;
 			children = (
 				5884967A2C8AEBC200E21F64 /* EvaluationSection.swift */,
+				58E611322CA2B6640068922F /* EvaluationData.swift */,
 			);
 			path = Evaluation;
 			sourceTree = "<group>";
@@ -1136,11 +1147,19 @@
 		5884967C2C8AFEB800E21F64 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				585741082C90A1BF0098BAB0 /* Rating */,
+				58C4C8AC2CA2A447009F67A3 /* Title */,
 				585741022C8FE9CC0098BAB0 /* Keyword */,
-				5884967D2C8AFEC700E21F64 /* EvaluationTitleCell.swift */,
+				585741082C90A1BF0098BAB0 /* Rating */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		58C4C8AC2CA2A447009F67A3 /* Title */ = {
+			isa = PBXGroup;
+			children = (
+				5884967D2C8AFEC700E21F64 /* EvaluationTitleCell.swift */,
+			);
+			path = Title;
 			sourceTree = "<group>";
 		};
 		58D83A532C3A785800511AB9 = {
@@ -1723,6 +1742,9 @@
 			dependencies = (
 			);
 			name = Kustaurant;
+			packageProductDependencies = (
+				586DDA072CA3E43600D15B1B /* Alamofire */,
+			);
 			productName = Kustaurant;
 			productReference = 58D83A5C2C3A785800511AB9 /* Kustaurant.app */;
 			productType = "com.apple.product-type.application";
@@ -1774,6 +1796,9 @@
 				Base,
 			);
 			mainGroup = 58D83A532C3A785800511AB9;
+			packageReferences = (
+				586DDA062CA3E43600D15B1B /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 58D83A5D2C3A785800511AB9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2026,6 +2051,7 @@
 				5841735A2C46C95F001EC132 /* HomeViewModel.swift in Sources */,
 				BAC273082C8C2A1900F08F72 /* MyEvaluationTableViewCell.swift in Sources */,
 				584FA4D22C6487C4008DDC19 /* NMFMapViewHandler.swift in Sources */,
+				586DDA0C2CA4035100D15B1B /* Alertable.swift in Sources */,
 				584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */,
 				BA0A89D52C841C66000A724D /* NoticeContentTableViewCell.swift in Sources */,
 				BAF177F82C7735D300E17FDC /* TierBadgeView.swift in Sources */,
@@ -2035,6 +2061,7 @@
 				5841732C2C465A35001EC132 /* AppFlowCoordinator.swift in Sources */,
 				BA0A89D32C84163F000A724D /* NoticeTitleTableViewCell.swift in Sources */,
 				58067C912C4A991900889C92 /* RestaurantDetailFlowCoordinator.swift in Sources */,
+				58E611332CA2B6640068922F /* EvaluationData.swift in Sources */,
 				584173272C464FFB001EC132 /* TabBarFlowCoordinator.swift in Sources */,
 				58067CBD2C4FCC2100889C92 /* Situation.swift in Sources */,
 				58067CBB2C4FCAA400889C92 /* Cuisine.swift in Sources */,
@@ -2154,6 +2181,7 @@
 				5826A1E92C77230A0097256C /* NMFMapPolygonManager.swift in Sources */,
 				BA494B5B2C7EFFB900EB2527 /* MyPageUserProfileView.swift in Sources */,
 				BA57C7BA2C72F1780063F2FA /* AuthRepository.swift in Sources */,
+				58F4CC182CA2BDA80042EDA8 /* LoadingDisplayable.swift in Sources */,
 				5826A1EB2C77267D0097256C /* NMFMapCameraManager.swift in Sources */,
 				58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */,
 				5826A1EF2C7892CC0097256C /* TierCategoryPopupView.swift in Sources */,
@@ -2493,6 +2521,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		586DDA062CA3E43600D15B1B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		586DDA072CA3E43600D15B1B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 586DDA062CA3E43600D15B1B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 58D83A542C3A785800511AB9 /* Project object */;
 }

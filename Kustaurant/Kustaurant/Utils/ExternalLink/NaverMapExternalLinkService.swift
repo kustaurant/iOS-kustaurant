@@ -12,7 +12,7 @@ final class NaverMapExternalLinkService {
     private init() {}
     
     static func openNaverMapOrAppStore(with placeId: Int) {
-        var appName = Bundle.main.bundleIdentifier ?? "kustrauant.Kustaurant"
+        let appName = Bundle.main.bundleIdentifier ?? "kustrauant.Kustaurant"
         let urlString = "nmap://place?id=\(placeId)&appname=\(appName)"
         guard let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         guard let url = URL(string: encodedStr) else { return }

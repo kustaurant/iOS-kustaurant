@@ -240,7 +240,7 @@ final class DefaultRestaurantDetailRepository: RestaurantDetailRepository {
     }
     
     func toggleFavorite(restaurantId: Int) async -> Result<Bool, NetworkError> {
-        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/restaurants/\(restaurantId)/favorite-toggle", method: .post)
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + "/api/v1/auth/restaurants/\(restaurantId)/favorite-toggle", method: .post)
         let authInterceptor = AuthorizationInterceptor()
         let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
         let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
