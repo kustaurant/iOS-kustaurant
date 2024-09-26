@@ -48,6 +48,11 @@
 		58067D862C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D852C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift */; };
 		58067D882C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D872C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift */; };
 		58067D972C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58067D962C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift */; };
+		580E98372CA59460004D6FE2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 580E98362CA59460004D6FE2 /* FirebaseAnalytics */; };
+		580E98392CA59460004D6FE2 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 580E98382CA59460004D6FE2 /* FirebaseAnalyticsOnDeviceConversion */; };
+		580E983B2CA59460004D6FE2 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 580E983A2CA59460004D6FE2 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		580E983D2CA59460004D6FE2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 580E983C2CA59460004D6FE2 /* FirebaseCrashlytics */; };
+		580E983F2CA5960B004D6FE2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 580E983E2CA5960B004D6FE2 /* GoogleService-Info.plist */; };
 		5826A1CC2C71F20D0097256C /* TierTopCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1CB2C71F20D0097256C /* TierTopCategoriesView.swift */; };
 		5826A1D62C72309B0097256C /* TierTopCategoriesCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1D52C72309B0097256C /* TierTopCategoriesCollectionViewHandler.swift */; };
 		5826A1D82C7231060097256C /* TierBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5826A1D72C7231060097256C /* TierBaseView.swift */; };
@@ -356,6 +361,7 @@
 		58067D852C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantsCollectionViewHandler.swift; sourceTree = "<group>"; };
 		58067D872C60ABFB00889C92 /* HomeRestaurantsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRestaurantsCollectionView.swift; sourceTree = "<group>"; };
 		58067D962C61DA3400889C92 /* HomeCategoriesCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoriesCollectionViewHandler.swift; sourceTree = "<group>"; };
+		580E983E2CA5960B004D6FE2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5826A1CB2C71F20D0097256C /* TierTopCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierTopCategoriesView.swift; sourceTree = "<group>"; };
 		5826A1D52C72309B0097256C /* TierTopCategoriesCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierTopCategoriesCollectionViewHandler.swift; sourceTree = "<group>"; };
 		5826A1D72C7231060097256C /* TierBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierBaseView.swift; sourceTree = "<group>"; };
@@ -620,7 +626,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C896ED3CB807B021E345EEC /* Pods_Kustaurant.framework in Frameworks */,
+				580E983B2CA59460004D6FE2 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				586DDA082CA3E43600D15B1B /* Alamofire in Frameworks */,
+				580E983D2CA59460004D6FE2 /* FirebaseCrashlytics in Frameworks */,
+				580E98372CA59460004D6FE2 /* FirebaseAnalytics in Frameworks */,
+				580E98392CA59460004D6FE2 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1186,6 +1196,7 @@
 			isa = PBXGroup;
 			children = (
 				BA57C7B42C721A580063F2FA /* Kustaurant.entitlements */,
+				580E983E2CA5960B004D6FE2 /* GoogleService-Info.plist */,
 				58D83A902C3A79C400511AB9 /* Application */,
 				58D83A912C3A7A1C00511AB9 /* Presentation */,
 				58D83AFA2C463AB100511AB9 /* Domain */,
@@ -1744,6 +1755,10 @@
 			name = Kustaurant;
 			packageProductDependencies = (
 				586DDA072CA3E43600D15B1B /* Alamofire */,
+				580E98362CA59460004D6FE2 /* FirebaseAnalytics */,
+				580E98382CA59460004D6FE2 /* FirebaseAnalyticsOnDeviceConversion */,
+				580E983A2CA59460004D6FE2 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				580E983C2CA59460004D6FE2 /* FirebaseCrashlytics */,
 			);
 			productName = Kustaurant;
 			productReference = 58D83A5C2C3A785800511AB9 /* Kustaurant.app */;
@@ -1798,6 +1813,7 @@
 			mainGroup = 58D83A532C3A785800511AB9;
 			packageReferences = (
 				586DDA062CA3E43600D15B1B /* XCRemoteSwiftPackageReference "Alamofire" */,
+				580E98352CA59460004D6FE2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 58D83A5D2C3A785800511AB9 /* Products */;
 			projectDirPath = "";
@@ -1814,6 +1830,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				580E983F2CA5960B004D6FE2 /* GoogleService-Info.plist in Resources */,
 				584173922C4A070B001EC132 /* Pretendard-ExtraLight.otf in Resources */,
 				BA2D89752C7712E7004E7B8E /* Restaurants.json in Resources */,
 				584173952C4A070B001EC132 /* Pretendard-Thin.otf in Resources */,
@@ -2531,6 +2548,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		580E98352CA59460004D6FE2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.2.0;
+			};
+		};
 		586DDA062CA3E43600D15B1B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -2542,6 +2567,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		580E98362CA59460004D6FE2 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580E98352CA59460004D6FE2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		580E98382CA59460004D6FE2 /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580E98352CA59460004D6FE2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		580E983A2CA59460004D6FE2 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580E98352CA59460004D6FE2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		580E983C2CA59460004D6FE2 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580E98352CA59460004D6FE2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
 		586DDA072CA3E43600D15B1B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 586DDA062CA3E43600D15B1B /* XCRemoteSwiftPackageReference "Alamofire" */;
