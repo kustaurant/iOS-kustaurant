@@ -69,6 +69,7 @@ class SocialLoginView: UIView {
         button.setAttributedTitle(underlineAttriString1, for: .normal)
         button.titleLabel?.font = .Pretendard.regular12
         button.setTitleColor(titleColor, for: .normal)
+        button.isHidden = true
         return button
     }()
     
