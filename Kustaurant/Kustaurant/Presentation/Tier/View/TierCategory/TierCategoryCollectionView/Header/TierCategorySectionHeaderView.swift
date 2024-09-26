@@ -35,10 +35,8 @@ extension TierCategorySectionHeaderView {
         switch CategoryType {
         case .cuisine:
             button.setAttributedTitle(createUnderlinedText("티어란?"), for: .normal)
-        case .situation:
+        case .situation, .location:
             return
-        case .location:
-            button.setAttributedTitle(createUnderlinedText("위치에 대한 설명이 필요하다면?"), for: .normal)
         }
     }
 }
