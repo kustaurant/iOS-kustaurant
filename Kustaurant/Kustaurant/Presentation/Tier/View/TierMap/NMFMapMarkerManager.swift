@@ -118,7 +118,7 @@ extension NMFMapMarkerManager {
     ) {
         var iconSize: CGSize
         if restaurant.mainTier == .unowned {
-            iconSize = CGSize(width: 15, height: 19)
+            iconSize = CGSize(width: 12, height: 16)
         } else {
             iconSize = isFavorite ? CGSize(width: 19, height: 19) : CGSize(width: 30, height: 30)
         }
@@ -142,16 +142,21 @@ extension NMFMapMarkerManager {
     {
         var iconSize: CGSize
         if restaurant.mainTier == .unowned {
-            iconSize = CGSize(width: 21, height: 27)
+            iconSize = CGSize(width: 18, height: 26)
+            let iconName = (restaurant.mainTier?.iconImageName ?? "") + "_select"
+            if let iconImage = getMarkerIcon(named: iconName, size: iconSize) {
+                marker.iconImage = iconImage
+            }
         } else {
             iconSize = restaurant.isFavorite ?? false ? CGSize(width: 25, height: 25) : CGSize(width: 36, height: 36)
+            
+            let iconName = restaurant.isFavorite ?? false ? "icon_favorite" : restaurant.mainTier?.iconImageName ?? ""
+            if let iconImage = UIImage(named: iconName)?.resizedWithBorder(to: iconSize, borderWidth: 3, cornerRadius: 10) {
+                marker.iconImage = NMFOverlayImage(image: iconImage)
+            }
         }
         
-        let iconName = restaurant.isFavorite ?? false ? "icon_favorite" : restaurant.mainTier?.iconImageName ?? ""
         
-        if let iconImage = UIImage(named: iconName)?.resizedWithBorder(to: iconSize, borderWidth: 3, cornerRadius: 10) {
-            marker.iconImage = NMFOverlayImage(image: iconImage)
-        }
     }
 
     // 기본 상태로 복원
