@@ -14,9 +14,7 @@ final class EvaluationRatingCell: UITableViewCell {
     private let starCommentsLabel: UILabel = .init()
     
     var updateRating: ((Float) -> Void)?
-    var updateReview: ((String) -> Void)?
-    var updateImage: ((Data?) -> Void)?
-    
+
     private var evaluationData: EvaluationDTO? = nil
     
     override init(
