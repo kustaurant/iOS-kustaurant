@@ -69,13 +69,9 @@ extension DefaultEvaluationRepository {
                 params["evaluationComment"] = evaluationComment
             }
             
-            if let _ = imageData {
-                params["newImage"] = imageName
-            }
-            
             AF.upload(multipartFormData: { MultipartFormData in
                 if let image = imageData {
-                    MultipartFormData.append(image, withName: "image", fileName: imageName, mimeType: "image/jpg")
+                    MultipartFormData.append(image, withName: "newImage", fileName: imageName, mimeType: "image/jpg")
                 }
                 
                 for (key, value) in params {

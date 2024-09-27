@@ -83,21 +83,24 @@ extension EvaluationTableViewHandler: UITableViewDataSource {
         case .rating:
             let cell: EvaluationRatingCell = tableView.dequeueReusableCell(for: indexPath)
             cell.update(data: viewModel.evaluationData)
-            cell.updateReview = { [weak self] review in
-                guard var data = self?.viewModel.evaluationReceiveData else { return }
-                data.review = review
-                self?.viewModel.updateEvaluationReceiveData(data)
-            }
             cell.updateRating = { [weak self] rating in
                 guard var data = self?.viewModel.evaluationReceiveData else { return }
                 data.rating = rating
+                self?.viewModel.updateEvaluationReceiveData(data)
+            }
+            return cell
+        case .review:
+            let cell: EvaluationReviewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.update(data: viewModel.evaluationData)
+            cell.updateReview = { [weak self] review in
+                guard var data = self?.viewModel.evaluationReceiveData else { return }
+                data.review = review
                 self?.viewModel.updateEvaluationReceiveData(data)
             }
             cell.updateImage = { [weak self] imageData in
                 guard var data = self?.viewModel.evaluationReceiveData else { return }
                 data.image = imageData
                 self?.viewModel.updateEvaluationReceiveData(data)
-                
             }
             return cell
         }
