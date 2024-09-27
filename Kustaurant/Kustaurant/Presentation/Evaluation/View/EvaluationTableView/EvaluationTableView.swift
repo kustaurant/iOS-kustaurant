@@ -29,5 +29,6 @@ final class EvaluationTableView: UITableView {
         registerCell(ofType: EvaluationTitleCell.self)
         registerCell(ofType: EvaluationKeywordCell.self)
         registerCell(ofType: EvaluationRatingCell.self)
+        registerCell(ofType: EvaluationReviewCell.self)
     }
 }

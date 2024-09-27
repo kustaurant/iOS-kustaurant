@@ -97,12 +97,18 @@ extension DefaultEvaluationViewModel {
             var situations: [Int]?
             if let keywords = evaluationReceiveData.keywords {
                 situations = Category.extractSituations(from: keywords).map({ Int($0.category.code) ?? 0 })
+            } else {
+                situations = evaluationData?.evaluationSituations?.compactMap({ $0 })
             }
+            
             let imageData = evaluationReceiveData.image
+            
+            let review = evaluationReceiveData.review ?? evaluationData?.evaluationComment
+            
             let evaluation = EvaluationDTO(evaluationScore: Double(evaluationReceiveData.rating),
                                            evaluationSituations: situations,
                                            evaluationImgUrl: nil,
-                                           evaluationComment: evaluationReceiveData.review,
+                                           evaluationComment: review,
                                            starComments: nil,
                                            newImage: nil)
             let result = await repository.submitEvaluationAF(evaluation: evaluation, imageData: imageData)
