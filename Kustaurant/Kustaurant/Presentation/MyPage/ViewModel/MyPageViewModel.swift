@@ -111,11 +111,11 @@ extension DefaultMyPageViewModel {
         }
         
         tableViewSections = sections
+        self.isLoggedIn = isLoggedIn
     }
     
     func getUserSavedRestaurants() {
         guard isLogin() == true else {
-            isLoggedIn = .notLoggedIn
             updateTableViewSections(isLoggedIn: .notLoggedIn)
             return
         }
@@ -123,12 +123,11 @@ extension DefaultMyPageViewModel {
             let userSavedRestaurants = await myPageUseCases.getSavedRestaurantsCount()
             switch userSavedRestaurants {
             case .success(let savedRestaurants):
-                isLoggedIn = .loggedIn
-                self.userSavedRestaurants = savedRestaurants
                 updateTableViewSections(isLoggedIn: .loggedIn)
+                self.userSavedRestaurants = savedRestaurants
+                
                 
             case .failure:
-                isLoggedIn = .notLoggedIn
                 updateTableViewSections(isLoggedIn: .notLoggedIn)
             }
         }
