@@ -26,7 +26,7 @@ final class EvaluationFloatingView: UIView {
     var loginStatus: LoginStatus = .notLoggedIn {
         didSet {
             evaluateButton.buttonState = loginStatus == .loggedIn ? .on : .off
-            favoriteButton.isEnabled = loginStatus == .loggedIn ? true : false
+            evaluateButton.isEnabled = true
         }
     }
     
@@ -80,7 +80,6 @@ extension EvaluationFloatingView {
     private func setupLayout() {
         containerView.backgroundColor = .white
         let window = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.flatMap { $0.windows }.first { $0.isKeyWindow }        
-        let bottomSafeAreaHeight = window?.safeAreaInsets.bottom ?? 0
         addSubview(containerView, autoLayout: [.fill(0), .height(EvaluationFloatingView.getHeight())])
         
         switch viewType {

@@ -143,12 +143,6 @@ extension RestaurantDetailViewController {
                     
                 case .loginStatus(let loginStatus):
                     self?.evaluationFloatingView.loginStatus = loginStatus
-                    self?.evaluationFloatingView.onTapEvaluateButton = { [weak self] in
-                        self?.viewModel.state = .didTapEvaluationButton
-                    }
-                    self?.evaluationFloatingView.onTapFavoriteButton = { [weak self] in
-                        self?.viewModel.state = .didTapFavoriteButton
-                    }
                     
                 case .didSuccessLikeOrDisLikeButton(let commentId, let likeCount, let dislikeCount, let likeStatus):
                     guard let self = self else { return }
@@ -197,6 +191,13 @@ extension RestaurantDetailViewController {
                 self?.viewModel.state = .didTapSendButtonInAccessory(payload: payload)
             }
             .store(in: &cancellables)
+        
+        evaluationFloatingView.onTapEvaluateButton = { [weak self] in
+            self?.viewModel.state = .didTapEvaluationButton
+        }
+        evaluationFloatingView.onTapFavoriteButton = { [weak self] in
+            self?.viewModel.state = .didTapFavoriteButton
+        }
     }
 }
 
@@ -371,9 +372,9 @@ extension RestaurantDetailViewController {
     
     private func presentAlert(payload: AlertPayload) {
         let alert = UIAlertController(title: payload.title, message: payload.subtitle, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "취소", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { _ in
         }))
-        alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
             payload.onConfirm?()
         }))
         present(alert, animated: true, completion: nil)

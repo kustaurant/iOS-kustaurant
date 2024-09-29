@@ -119,9 +119,8 @@ extension RestaurantDetailViewModel {
                     self?.changeTabType(as: type)
                     
                 case .didTapEvaluationButton:
-                    guard let item = self?.detail?.items[RestaurantDetailSection.title]?.first as? RestaurantDetailTitle else { return }
-                    self?.actions.showEvaluateScene(self?.repository.restaurantID ?? 0, item)
-                    
+                    self?.showEvaluateScene()
+            
                 case .didTapBackButton:
                     self?.actions.pop()
                     
@@ -220,7 +219,6 @@ extension RestaurantDetailViewModel {
 
 // MARK: Comment
 extension RestaurantDetailViewModel {
-    
     private func likeComment(commentId: Int) {
         Task {
             let result = await repository.likeComment(restaurantId: restaurantId, commentId: commentId)
@@ -317,14 +315,39 @@ extension RestaurantDetailViewModel {
     
     private func toggleFavorite() {
         Task {
-            let result = await repository.toggleFavorite(restaurantId: self.restaurantId)
-            await MainActor.run {
-                switch result {
-                case .success(let isFavorite):
-                    actionSubject.send(.toggleFavorite(isFavorite))
-                case .failure:
-                    return
+            let verified = await authRepository.verifyToken()
+            if verified {
+                let result = await repository.toggleFavorite(restaurantId: self.restaurantId)
+                await MainActor.run {
+                    switch result {
+                    case .success(let isFavorite):
+                        actionSubject.send(.toggleFavorite(isFavorite))
+                    case .failure:
+                        return
+                    }
                 }
+            } else {
+                loginAlert()
+            }
+        }
+    }
+    
+    private func loginAlert() {
+        actionSubject.send(
+            .showAlert(payload:
+                        AlertPayload(title: "로그인 후 사용 가능합니다.", subtitle: "", onConfirm: nil)
+                      )
+        )
+    }
+    
+    private func showEvaluateScene() {
+        Task {
+            let verified = await authRepository.verifyToken()
+            if verified {
+                guard let item = detail?.items[RestaurantDetailSection.title]?.first as? RestaurantDetailTitle else { return }
+                actions.showEvaluateScene(repository.restaurantID, item)
+            } else {
+                loginAlert()
             }
         }
     }
