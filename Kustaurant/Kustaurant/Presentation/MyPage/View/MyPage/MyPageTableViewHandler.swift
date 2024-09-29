@@ -31,6 +31,10 @@ extension MyPageTableViewHandler {
         view.tableView.contentInsetAdjustmentBehavior = .never
     }
     
+    func reloadData() {
+        view.tableView.reloadData()
+    }
+    
     func updateUI(by loginStatus: LoginStatus) {
         headerView.profileImageView.image = UIImage(named: loginStatus.profileImageName)
         headerView.profileButton.configuration = loginStatus.profileButtonConfiguration

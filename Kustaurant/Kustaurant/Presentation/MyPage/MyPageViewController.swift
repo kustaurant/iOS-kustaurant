@@ -64,6 +64,13 @@ extension MyPageViewController {
             }
         }
         .store(in: &cancellables)
+        
+        viewModel.tableViewSectionsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.myPageTableViewHandler?.reloadData()
+            }
+            .store(in: &cancellables)
     }
     
     private func bindUserProfileView() {

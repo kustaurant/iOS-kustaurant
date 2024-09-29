@@ -25,6 +25,6 @@ struct MyPageTableViewItem {
 
 struct MyPageTableViewSection {
     let id: String
-    let items: [MyPageTableViewItem]
+    var items: [MyPageTableViewItem]
     let footerHeight: Int
 }
