@@ -105,7 +105,7 @@ extension MyPageViewController {
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { [weak self] _ in
             self?.viewModel.dismissAlert()
         }))
-        alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { [weak self] _ in
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
             self?.viewModel.alertPayload.onConfirm?()
         }))
         present(alert, animated: true, completion: nil)

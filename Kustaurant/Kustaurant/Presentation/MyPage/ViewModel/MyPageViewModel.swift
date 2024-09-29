@@ -149,6 +149,11 @@ extension DefaultMyPageViewModel {
             }
         }
     }
+    
+    private func showAlertLogin() {
+        alertPayload = AlertPayload(title: "로그인 후 사용 가능합니다.", subtitle: "로그인 하시겠습니까?", onConfirm: didTapLoginAndStartButton)
+        showAlert = true
+    }
 }
 
 // Button Actions
@@ -179,10 +184,18 @@ extension DefaultMyPageViewModel: MyPageViewModel {
     }
     
     func didTapSavedRestaurants() {
+        guard isLogin() == true else {
+            showAlertLogin()
+            return
+        }
         actions.showSavedRestaurants()
     }
     
     func didTapEvaluatedRestaurants() {
+        guard isLogin() == true else {
+            showAlertLogin()
+            return
+        }
         actions.showEvaluatedRestaurants()
     }
     

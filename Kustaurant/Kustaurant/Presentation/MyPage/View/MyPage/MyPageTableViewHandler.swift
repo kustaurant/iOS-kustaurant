@@ -43,14 +43,12 @@ extension MyPageTableViewHandler {
             headerView.profileButton.setTitle("로그인하고 시작하기", for: .normal)
         }
         
-        if loginStatus == .loggedIn {
-            headerView.onTapMyEvaluation = { [weak self] in
-                self?.viewModel.didTapEvaluatedRestaurants()
-            }
-            
-            headerView.onTapSavedRestaurants = { [weak self] in
-                self?.viewModel.didTapSavedRestaurants()
-            }
+        headerView.onTapMyEvaluation = { [weak self] in
+            self?.viewModel.didTapEvaluatedRestaurants()
+        }
+        
+        headerView.onTapSavedRestaurants = { [weak self] in
+            self?.viewModel.didTapSavedRestaurants()
         }
         
         for sectionIndex in 0..<viewModel.tableViewSections.count {
