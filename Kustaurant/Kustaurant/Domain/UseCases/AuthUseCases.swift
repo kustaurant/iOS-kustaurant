@@ -14,6 +14,7 @@ protocol AuthUseCases {
     func logout()
     func skipLogin()
     func deleteAccount() async
+    func isLogin() async -> Bool
 }
 
 final class DefaultAuthUseCases {
@@ -32,6 +33,10 @@ final class DefaultAuthUseCases {
 }
 
 extension DefaultAuthUseCases: AuthUseCases {
+    
+    func isLogin() async -> Bool {
+        await authReposiory.verifyToken()
+    }
     
     func naverLogin() -> AnyPublisher<UserCredentials, NetworkError> {
         naverLoginService.attemptLogin()

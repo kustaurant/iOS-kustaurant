@@ -43,6 +43,7 @@ protocol MyPageViewModelOutput {
     var showAlert: Bool { get }
     var showAlertPublisher: Published<Bool>.Publisher { get }
     var alertPayload: AlertPayload { get }
+    var tableViewSectionsPublisher: Published<[MyPageTableViewSection]>.Publisher { get }
 }
 
 typealias MyPageViewModel = MyPageViewModelInput & MyPageViewModelOutput
@@ -59,34 +60,8 @@ final class DefaultMyPageViewModel {
     @Published var showAlert: Bool = false
     var showAlertPublisher: Published<Bool>.Publisher { $showAlert }
     @Published var alertPayload: AlertPayload = AlertPayload.empty()
-    
-    var tableViewSections: [MyPageTableViewSection] = [
-        MyPageTableViewSection(
-            id: "activity",
-            items: [
-                MyPageTableViewItem(type: .savedRestaurants, title: "저장된 맛집", iconNamePrefix: "icon_saved_restaurants")
-            ],
-            footerHeight: 20
-        ),
-        MyPageTableViewSection(
-            id: "service",
-            items: [
-                MyPageTableViewItem(type: .termsOfService, title: "이용약관", iconNamePrefix: "icon_terms_of_service"),
-                MyPageTableViewItem(type: .sendFeedback, title: "의견 보내기", iconNamePrefix: "icon_send_feedback"),
-                MyPageTableViewItem(type: .notice, title: "공지사항", iconNamePrefix: "icon_notice_board"),
-                MyPageTableViewItem(type: .privacyPolicy, title: "개인정보처리방침", iconNamePrefix: "icon_privacy_policy")
-            ],
-            footerHeight: 20
-        ),
-        MyPageTableViewSection(
-            id: "user",
-            items: [
-                MyPageTableViewItem(type: .logout, title: "로그아웃", iconNamePrefix: "icon_logout"),
-                MyPageTableViewItem(type: .deleteAccount, title: "회원탈퇴", iconNamePrefix: "icon_delete_account")
-            ],
-            footerHeight: 100
-        )
-    ]
+    @Published var tableViewSections: [MyPageTableViewSection] = []
+    var tableViewSectionsPublisher: Published<[MyPageTableViewSection]>.Publisher { $tableViewSections }
     
     init(actions: MyPageViewModelActions, authUseCases: AuthUseCases, myPageUseCases: MyPageUseCases) {
         self.actions = actions
@@ -97,15 +72,66 @@ final class DefaultMyPageViewModel {
 
 extension DefaultMyPageViewModel {
     
+    func isLogin() async -> Bool {
+        await authUseCases.isLogin()
+    }
+    
+    func updateTableViewSections(isLoggedIn: LoginStatus) {
+        var sections: [MyPageTableViewSection] = [
+            MyPageTableViewSection(
+                id: "service",
+                items: [
+                    MyPageTableViewItem(type: .termsOfService, title: "이용약관", iconNamePrefix: "icon_terms_of_service"),
+                    MyPageTableViewItem(type: .notice, title: "공지사항", iconNamePrefix: "icon_notice_board"),
+                    MyPageTableViewItem(type: .privacyPolicy, title: "개인정보처리방침", iconNamePrefix: "icon_privacy_policy")
+                ],
+                footerHeight: 20
+            )
+        ]
+        
+        if isLoggedIn == .loggedIn {
+            sections.insert(
+                MyPageTableViewSection(
+                    id: "activity",
+                    items: [
+                        MyPageTableViewItem(type: .savedRestaurants, title: "저장된 맛집", iconNamePrefix: "icon_saved_restaurants")
+                    ],
+                    footerHeight: 20
+                ), at: 0)
+            sections[1].items.append(MyPageTableViewItem(type: .sendFeedback, title: "의견 보내기", iconNamePrefix: "icon_send_feedback"))
+            sections.append(
+                MyPageTableViewSection(
+                    id: "user",
+                    items: [
+                        MyPageTableViewItem(type: .logout, title: "로그아웃", iconNamePrefix: "icon_logout"),
+                        MyPageTableViewItem(type: .deleteAccount, title: "회원탈퇴", iconNamePrefix: "icon_delete_account")
+                    ],
+                    footerHeight: 100
+                )
+            )
+        }
+        
+        tableViewSections = sections
+        self.isLoggedIn = isLoggedIn
+    }
+    
     func getUserSavedRestaurants() {
+        
         Task {
+            guard await isLogin() == true else {
+                updateTableViewSections(isLoggedIn: .notLoggedIn)
+                return
+            }
+            
             let userSavedRestaurants = await myPageUseCases.getSavedRestaurantsCount()
             switch userSavedRestaurants {
             case .success(let savedRestaurants):
-                isLoggedIn = .loggedIn
+                updateTableViewSections(isLoggedIn: .loggedIn)
                 self.userSavedRestaurants = savedRestaurants
+                
+                
             case .failure:
-                isLoggedIn = .notLoggedIn
+                updateTableViewSections(isLoggedIn: .notLoggedIn)
             }
         }
     }
@@ -123,6 +149,13 @@ extension DefaultMyPageViewModel {
                 dismissAlert()
                 actions.showOnboarding()
             }
+        }
+    }
+    
+    private func showAlertLogin() async {
+        await MainActor.run {
+            alertPayload = AlertPayload(title: "로그인 후 사용 가능합니다.", subtitle: "로그인 하시겠습니까?", onConfirm: didTapLoginAndStartButton)
+            showAlert = true
         }
     }
 }
@@ -155,11 +188,25 @@ extension DefaultMyPageViewModel: MyPageViewModel {
     }
     
     func didTapSavedRestaurants() {
-        actions.showSavedRestaurants()
+        Task {
+            guard await isLogin() == true else {
+                await showAlertLogin()
+                return
+            }
+            actions.showSavedRestaurants()
+        }
+        
     }
     
     func didTapEvaluatedRestaurants() {
-        actions.showEvaluatedRestaurants()
+        Task {
+            guard await isLogin() == true else {
+                await showAlertLogin()
+                return
+            }
+            actions.showEvaluatedRestaurants()
+        }
+        
     }
     
     func didTapSendFeedback() {

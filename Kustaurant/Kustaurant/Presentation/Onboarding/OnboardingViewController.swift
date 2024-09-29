@@ -69,10 +69,11 @@ extension OnboardingViewController {
         }
         .store(in: &cancellables)
         
-        onboardingView.socialLoginView.skipButton.tapPublisher().sink { [weak self] in
-            self?.viewModel.skipLogin()
-        }
-        .store(in: &cancellables)
+        
+        onboardingView.socialLoginView.skipButton.addAction(
+            UIAction { [weak self] _ in
+                self?.viewModel.skipLogin()
+            }, for: .touchUpInside)
     }
 }
 
