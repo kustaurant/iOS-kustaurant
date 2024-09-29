@@ -57,10 +57,10 @@ extension LoginViewController {
         }
         .store(in: &cancellables)
         
-        loginView.socialLoginView.skipButton.tapPublisher().sink { [weak self] in
-            self?.viewModel.skipLogin()
-        }
-        .store(in: &cancellables)
+        loginView.socialLoginView.skipButton.addAction(
+            UIAction { [weak self] _ in
+                self?.viewModel.skipLogin()
+            }, for: .touchUpInside)
     }
 }
 
