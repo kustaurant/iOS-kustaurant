@@ -345,7 +345,9 @@ extension RestaurantDetailViewModel {
             let verified = await authRepository.verifyToken()
             if verified {
                 guard let item = detail?.items[RestaurantDetailSection.title]?.first as? RestaurantDetailTitle else { return }
-                actions.showEvaluateScene(repository.restaurantID, item)
+                await MainActor.run {
+                    actions.showEvaluateScene(repository.restaurantID, item)
+                }
             } else {
                 loginAlert()
             }
