@@ -83,7 +83,6 @@ extension MyPageTableViewHandler {
 extension MyPageTableViewHandler: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if viewModel.isLoggedIn == .notLoggedIn { return }
         let item = viewModel.tableViewSections[indexPath.section].items[indexPath.row]
         switch item.type {
         case .savedRestaurants:

@@ -78,13 +78,6 @@ extension DefaultMyPageViewModel {
     func updateTableViewSections(isLoggedIn: LoginStatus) {
         var sections: [MyPageTableViewSection] = [
             MyPageTableViewSection(
-                id: "activity",
-                items: [
-                    MyPageTableViewItem(type: .savedRestaurants, title: "저장된 맛집", iconNamePrefix: "icon_saved_restaurants")
-                ],
-                footerHeight: 20
-            ),
-            MyPageTableViewSection(
                 id: "service",
                 items: [
                     MyPageTableViewItem(type: .termsOfService, title: "이용약관", iconNamePrefix: "icon_terms_of_service"),
@@ -96,6 +89,14 @@ extension DefaultMyPageViewModel {
         ]
         
         if isLoggedIn == .loggedIn {
+            sections.insert(
+                MyPageTableViewSection(
+                    id: "activity",
+                    items: [
+                        MyPageTableViewItem(type: .savedRestaurants, title: "저장된 맛집", iconNamePrefix: "icon_saved_restaurants")
+                    ],
+                    footerHeight: 20
+                ), at: 0)
             sections[1].items.append(MyPageTableViewItem(type: .sendFeedback, title: "의견 보내기", iconNamePrefix: "icon_send_feedback"))
             sections.append(
                 MyPageTableViewSection(
