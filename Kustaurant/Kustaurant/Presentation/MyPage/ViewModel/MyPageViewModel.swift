@@ -72,9 +72,10 @@ final class DefaultMyPageViewModel {
 
 extension DefaultMyPageViewModel {
     
-    func isLogin() -> Bool {
-        myPageUseCases.isLogin()
+    func isLogin() async -> Bool {
+        await authUseCases.isLogin()
     }
+    
     func updateTableViewSections(isLoggedIn: LoginStatus) {
         var sections: [MyPageTableViewSection] = [
             MyPageTableViewSection(
@@ -115,11 +116,13 @@ extension DefaultMyPageViewModel {
     }
     
     func getUserSavedRestaurants() {
-        guard isLogin() == true else {
-            updateTableViewSections(isLoggedIn: .notLoggedIn)
-            return
-        }
+        
         Task {
+            guard await isLogin() == true else {
+                updateTableViewSections(isLoggedIn: .notLoggedIn)
+                return
+            }
+            
             let userSavedRestaurants = await myPageUseCases.getSavedRestaurantsCount()
             switch userSavedRestaurants {
             case .success(let savedRestaurants):
@@ -149,9 +152,11 @@ extension DefaultMyPageViewModel {
         }
     }
     
-    private func showAlertLogin() {
-        alertPayload = AlertPayload(title: "로그인 후 사용 가능합니다.", subtitle: "로그인 하시겠습니까?", onConfirm: didTapLoginAndStartButton)
-        showAlert = true
+    private func showAlertLogin() async {
+        await MainActor.run {
+            alertPayload = AlertPayload(title: "로그인 후 사용 가능합니다.", subtitle: "로그인 하시겠습니까?", onConfirm: didTapLoginAndStartButton)
+            showAlert = true
+        }
     }
 }
 
@@ -183,19 +188,25 @@ extension DefaultMyPageViewModel: MyPageViewModel {
     }
     
     func didTapSavedRestaurants() {
-        guard isLogin() == true else {
-            showAlertLogin()
-            return
+        Task {
+            guard await isLogin() == true else {
+                await showAlertLogin()
+                return
+            }
+            actions.showSavedRestaurants()
         }
-        actions.showSavedRestaurants()
+        
     }
     
     func didTapEvaluatedRestaurants() {
-        guard isLogin() == true else {
-            showAlertLogin()
-            return
+        Task {
+            guard await isLogin() == true else {
+                await showAlertLogin()
+                return
+            }
+            actions.showEvaluatedRestaurants()
         }
-        actions.showEvaluatedRestaurants()
+        
     }
     
     func didTapSendFeedback() {

@@ -15,7 +15,6 @@ protocol MyPageUseCases {
     func getFavoriteRestaurants() async -> Result<[FavoriteRestaurant], NetworkError>
     func getEvaluatedRestaurants() async -> Result<[EvaluatedRestaurant], NetworkError>
     func getNoticeList() async -> Result<[Notice], NetworkError> 
-    func isLogin() -> Bool
 }
 
 final class DefaultMyPageUseCases {
@@ -28,12 +27,6 @@ final class DefaultMyPageUseCases {
 }
     
 extension DefaultMyPageUseCases: MyPageUseCases {
-    func isLogin() -> Bool {
-        guard let _: UserCredentials = KeychainStorage.shared.getValue(forKey: KeychainKey.userCredentials) else {
-            return false
-        }
-        return true
-    }
     func sendFeedback(_ comments: String) async -> Result<Void, NetworkError> {
         return await myPageRepository.sendFeedback(comments)
     }
