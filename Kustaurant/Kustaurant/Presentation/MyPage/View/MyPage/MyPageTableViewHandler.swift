@@ -31,6 +31,10 @@ extension MyPageTableViewHandler {
         view.tableView.contentInsetAdjustmentBehavior = .never
     }
     
+    func reloadData() {
+        view.tableView.reloadData()
+    }
+    
     func updateUI(by loginStatus: LoginStatus) {
         headerView.profileImageView.image = UIImage(named: loginStatus.profileImageName)
         headerView.profileButton.configuration = loginStatus.profileButtonConfiguration
@@ -39,14 +43,12 @@ extension MyPageTableViewHandler {
             headerView.profileButton.setTitle("로그인하고 시작하기", for: .normal)
         }
         
-        if loginStatus == .loggedIn {
-            headerView.onTapMyEvaluation = { [weak self] in
-                self?.viewModel.didTapEvaluatedRestaurants()
-            }
-            
-            headerView.onTapSavedRestaurants = { [weak self] in
-                self?.viewModel.didTapSavedRestaurants()
-            }
+        headerView.onTapMyEvaluation = { [weak self] in
+            self?.viewModel.didTapEvaluatedRestaurants()
+        }
+        
+        headerView.onTapSavedRestaurants = { [weak self] in
+            self?.viewModel.didTapSavedRestaurants()
         }
         
         for sectionIndex in 0..<viewModel.tableViewSections.count {
@@ -79,7 +81,6 @@ extension MyPageTableViewHandler {
 extension MyPageTableViewHandler: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if viewModel.isLoggedIn == .notLoggedIn { return }
         let item = viewModel.tableViewSections[indexPath.section].items[indexPath.row]
         switch item.type {
         case .savedRestaurants:
