@@ -188,7 +188,7 @@ extension DefaultMyPageViewModel: MyPageViewModel {
     }
     
     func didTapSavedRestaurants() {
-        Task {
+        Task { @MainActor in
             guard await isLogin() == true else {
                 await showAlertLogin()
                 return
@@ -199,7 +199,7 @@ extension DefaultMyPageViewModel: MyPageViewModel {
     }
     
     func didTapEvaluatedRestaurants() {
-        Task {
+        Task { @MainActor in
             guard await isLogin() == true else {
                 await showAlertLogin()
                 return
