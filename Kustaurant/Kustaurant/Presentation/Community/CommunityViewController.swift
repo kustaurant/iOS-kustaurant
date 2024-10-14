@@ -9,16 +9,26 @@ import UIKit
 import Combine
 
 final class CommunityViewController: UIViewController, LoadingDisplayable {
+    private var rootView = CommunityRootView()
     private let viewModel: CommunityViewModel
+    private var postsCollectionViewHandler: CommunityPostsCollectionViewHandler?
     private var cancellables: Set<AnyCancellable> = .init()
     
     init(viewModel: CommunityViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        postsCollectionViewHandler = CommunityPostsCollectionViewHandler(
+            collectionView: rootView.postsCollectionView,
+            viewModel: viewModel
+        )
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        view = rootView
     }
     
     override func viewDidLoad() {
@@ -48,10 +58,7 @@ extension CommunityViewController {
                         self?.hideLoadingView()
                     }
                 case .didFetchPosts:
-                    self?.viewModel.posts.forEach {
-                        print("---------------------")
-                        print($0)
-                    }
+                    self?.postsCollectionViewHandler?.update()
                 }
             }
             .store(in: &cancellables)

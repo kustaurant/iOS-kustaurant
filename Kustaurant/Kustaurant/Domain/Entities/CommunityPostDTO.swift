@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct CommunityPostDTO: Codable {
-    struct User: Codable {
+struct CommunityPostDTO: Codable, Hashable {
+    struct User: Codable, Hashable {
         let userNickname: String?
         let rankImg: String?
         let evaluationCount: Int?
         let rank: Int?
     }
     
-    struct PostComment: Codable {
+    struct PostComment: Codable, Hashable {
         let commentId: Int?
         let commentBody: String?
         let status: String?

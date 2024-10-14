@@ -21,7 +21,7 @@ typealias CommunityViewModel = CommunityViewModelInput & CommunityViewModelOutpu
 
 extension DefaultCommunityViewModel {
     enum State {
-        case initial, fetchPosts
+        case initial, fetchPosts, fetchPostsNextPage
     }
     enum Action {
         case showLoading(Bool), didFetchPosts
@@ -37,9 +37,10 @@ final class DefaultCommunityViewModel: CommunityViewModel {
     
     var posts: [CommunityPostDTO] = []
     
+    private var isLastPage = false
     private var currentPage = 0
     private var currentCategory: CommunityPostCategory = .all
-    private var currentSortType: CommunityPostSortType = .popular
+    private var currentSortType: CommunityPostSortType = .recent
     private var isFetching = false {
         didSet {
             Task { @MainActor in
@@ -70,6 +71,8 @@ extension DefaultCommunityViewModel {
                 case .initial: break
                 case .fetchPosts:
                     self?.fetchPosts()
+                case .fetchPostsNextPage:
+                    self?.fetchPostsNextPage()
                 }
             }
             .store(in: &cancellables)
@@ -88,6 +91,11 @@ extension DefaultCommunityViewModel {
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
     }
     
+    private func fetchPostsNextPage() {
+        guard !isFetching && !isLastPage else { return }
+        fetchPosts()
+    }
+    
     private func fetchPosts() {
         guard !isFetching else { return }
         isFetching = true
@@ -96,8 +104,12 @@ extension DefaultCommunityViewModel {
             let result = await communityUseCase.fetchPosts(category: currentCategory, page: currentPage, sort: currentSortType)
             switch result {
             case .success(let success):
+                guard !success.isEmpty else {
+                    isLastPage = true
+                    return
+                }
                 currentPage += 1
-                posts = success
+                posts += success
                 actionSubject.send(.didFetchPosts)
             case .failure(let failure):
                 handleError(failure)
