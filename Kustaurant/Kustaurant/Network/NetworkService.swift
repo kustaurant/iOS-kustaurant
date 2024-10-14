@@ -10,4 +10,5 @@ import Foundation
 final class NetworkService {
     lazy var appConfiguration = AppConfiguration()
     
+    let getCommunityPostsURL = "/api/v1/community/posts"
 }

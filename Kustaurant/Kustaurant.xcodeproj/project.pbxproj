@@ -131,6 +131,11 @@
 		586DDA082CA3E43600D15B1B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 586DDA072CA3E43600D15B1B /* Alamofire */; };
 		586DDA0C2CA4035100D15B1B /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586DDA0B2CA4035100D15B1B /* Alertable.swift */; };
 		58772F972CBC057E00F2C170 /* CommunityPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772F962CBC057E00F2C170 /* CommunityPostDTO.swift */; };
+		58772F992CBC0B9E00F2C170 /* CommunityUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772F982CBC0B9E00F2C170 /* CommunityUseCases.swift */; };
+		58772F9B2CBC0BC400F2C170 /* CommunityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772F9A2CBC0BC400F2C170 /* CommunityRepository.swift */; };
+		58772F9D2CBC116300F2C170 /* CommunityPostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772F9C2CBC116300F2C170 /* CommunityPostCategory.swift */; };
+		58772F9F2CBC11DD00F2C170 /* CommunityPostSortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772F9E2CBC11DD00F2C170 /* CommunityPostSortType.swift */; };
+		58772FA12CBC128800F2C170 /* DefaultCommunityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772FA02CBC128800F2C170 /* DefaultCommunityRepository.swift */; };
 		5884966A2C8ACAE900E21F64 /* EvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496692C8ACAE900E21F64 /* EvaluationRepository.swift */; };
 		5884966C2C8AD11D00E21F64 /* EvaluationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */; };
 		5884966E2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */; };
@@ -441,6 +446,11 @@
 		585741092C90A1CB0098BAB0 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		586DDA0B2CA4035100D15B1B /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		58772F962CBC057E00F2C170 /* CommunityPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDTO.swift; sourceTree = "<group>"; };
+		58772F982CBC0B9E00F2C170 /* CommunityUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityUseCases.swift; sourceTree = "<group>"; };
+		58772F9A2CBC0BC400F2C170 /* CommunityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityRepository.swift; sourceTree = "<group>"; };
+		58772F9C2CBC116300F2C170 /* CommunityPostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostCategory.swift; sourceTree = "<group>"; };
+		58772F9E2CBC11DD00F2C170 /* CommunityPostSortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostSortType.swift; sourceTree = "<group>"; };
+		58772FA02CBC128800F2C170 /* DefaultCommunityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCommunityRepository.swift; sourceTree = "<group>"; };
 		588496692C8ACAE900E21F64 /* EvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationRepository.swift; sourceTree = "<group>"; };
 		5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationDTO.swift; sourceTree = "<group>"; };
 		5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEvaluationRepository.swift; sourceTree = "<group>"; };
@@ -902,6 +912,8 @@
 				58067CBE2C4FCCC100889C92 /* Location.swift */,
 				58067D782C5F99FB00889C92 /* HomeSection.swift */,
 				58067D492C5A1D6200889C92 /* CategoryType.swift */,
+				58772F9C2CBC116300F2C170 /* CommunityPostCategory.swift */,
+				58772F9E2CBC11DD00F2C170 /* CommunityPostSortType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1007,6 +1019,7 @@
 				BAC55EC82C6F351400B3078F /* AuthUseCases.swift */,
 				BA2D89712C770FED004E7B8E /* SearchUseCases.swift */,
 				BA494B482C7DD44200EB2527 /* MyPageUseCases.swift */,
+				58772F982CBC0B9E00F2C170 /* CommunityUseCases.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1032,6 +1045,7 @@
 				BA57C7B92C72F1780063F2FA /* AuthRepository.swift */,
 				BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */,
 				588496692C8ACAE900E21F64 /* EvaluationRepository.swift */,
+				58772F9A2CBC0BC400F2C170 /* CommunityRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1048,6 +1062,7 @@
 				BA494B462C7DD36A00EB2527 /* DefaultMyPageRepository.swift */,
 				5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */,
 				BA45C2542C8832B10033E146 /* DefaultRestaurantDetailRepository.swift */,
+				58772FA02CBC128800F2C170 /* DefaultCommunityRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1967,6 +1982,7 @@
 				CFE204562C5A0FF100BCA87C /* RestaurantDetailTitleCell.swift in Sources */,
 				CF54AD082C4288F900E0DE68 /* Request.swift in Sources */,
 				584173472C467F5B001EC132 /* TierSceneDIContainer.swift in Sources */,
+				58772F992CBC0B9E00F2C170 /* CommunityUseCases.swift in Sources */,
 				CF54AD0E2C42896100E0DE68 /* HTTPMethod.swift in Sources */,
 				5884967E2C8AFEC700E21F64 /* EvaluationTitleCell.swift in Sources */,
 				BA45C2532C882A990033E146 /* CommentLikeStatus.swift in Sources */,
@@ -1985,6 +2001,7 @@
 				BA2D895C2C74C74C004E7B8E /* Logger.swift in Sources */,
 				BA57C7C62C7435820063F2FA /* MyPageView.swift in Sources */,
 				BA494B712C81592700EB2527 /* FeedbackSubmittingViewModel.swift in Sources */,
+				58772FA12CBC128800F2C170 /* DefaultCommunityRepository.swift in Sources */,
 				BA37E0812C6743300092115B /* DrawResultViewModel.swift in Sources */,
 				BA494B6D2C806F6700EB2527 /* SavedRestaurantsTableViewCell.swift in Sources */,
 				BA1CB3D92C7D891600DA6776 /* AuthorizationRetrier.swift in Sources */,
@@ -2039,6 +2056,7 @@
 				584173562C46844C001EC132 /* MyPageSceneDIContainer.swift in Sources */,
 				584FA4CD2C6475DA008DDC19 /* TierMapUseCases.swift in Sources */,
 				58067C8D2C4A815000889C92 /* RestaurantDetailViewController.swift in Sources */,
+				58772F9F2CBC11DD00F2C170 /* CommunityPostSortType.swift in Sources */,
 				BA37E0B32C6A0CBF0092115B /* DrawResultViewHandler.swift in Sources */,
 				BA2D89722C770FED004E7B8E /* SearchUseCases.swift in Sources */,
 				58067C8F2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift in Sources */,
@@ -2049,6 +2067,7 @@
 				58772F972CBC057E00F2C170 /* CommunityPostDTO.swift in Sources */,
 				58067CB22C4FBA9800889C92 /* TierListTableViewCell.swift in Sources */,
 				58067D3D2C58D73C00889C92 /* TierCategoryViewModel.swift in Sources */,
+				58772F9B2CBC0BC400F2C170 /* CommunityRepository.swift in Sources */,
 				BA494B7B2C817BA100EB2527 /* NoticeBoardView.swift in Sources */,
 				584FA4C92C647442008DDC19 /* TierMapView.swift in Sources */,
 				BA8EEF912C644EF500FE6ABF /* SocialLoginView.swift in Sources */,
@@ -2107,6 +2126,7 @@
 				BA8EEF8A2C634C4B00FE6ABF /* OnboardingCollectionViewCell.swift in Sources */,
 				58067D4D2C5A1FD000889C92 /* TierCategorySectionHeaderView.swift in Sources */,
 				58067D7D2C5FA75A00889C92 /* HomeCategoriesCollectionViewCell.swift in Sources */,
+				58772F952CBC00C200F2C170 /* CommunityViewModel.swift in Sources */,
 				584173662C47A964001EC132 /* HomeView.swift in Sources */,
 				584173202C464695001EC132 /* HomeViewController.swift in Sources */,
 				CFE204762C5F58C700BCA87C /* RestaurantDetailReviewCell.swift in Sources */,
@@ -2180,6 +2200,7 @@
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */,
+				58772F9D2CBC116300F2C170 /* CommunityPostCategory.swift in Sources */,
 				CFEC6F022C75FA2B00B4DAAB /* RestaurantDetailStretchyHeaderView.swift in Sources */,
 				BA494B4D2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift in Sources */,
 				584173332C465F1C001EC132 /* HomeSceneDIContainer.swift in Sources */,
