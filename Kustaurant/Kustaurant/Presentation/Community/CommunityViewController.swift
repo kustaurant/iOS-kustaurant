@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Combine
 
-final class CommunityViewController: UIViewController {
+final class CommunityViewController: UIViewController, LoadingDisplayable {
     private let viewModel: CommunityViewModel
+    private var cancellables: Set<AnyCancellable> = .init()
     
     init(viewModel: CommunityViewModel) {
         self.viewModel = viewModel
@@ -21,6 +23,30 @@ final class CommunityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModelAction()
         viewModel.process(.fetchPosts)
+    }
+}
+
+extension CommunityViewController {
+    private func bindViewModelAction() {
+        viewModel.actionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                switch action {
+                case .showLoading(let isLoading):
+                    if isLoading {
+                        self?.showLoadingView()
+                    } else {
+                        self?.hideLoadingView()
+                    }
+                case .didFetchPosts:
+                    self?.viewModel.posts.forEach {
+                        print("---------------------")
+                        print($0)
+                    }
+                }
+            }
+            .store(in: &cancellables)
     }
 }

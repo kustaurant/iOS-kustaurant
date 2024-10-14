@@ -13,6 +13,8 @@ protocol CommunityViewModelInput {
 }
 
 protocol CommunityViewModelOutput {
+    var actionPublisher: AnyPublisher<DefaultCommunityViewModel.Action, Never> { get }
+    var posts: [CommunityPostDTO] { get }
 }
 
 typealias CommunityViewModel = CommunityViewModelInput & CommunityViewModelOutput
@@ -21,10 +23,31 @@ extension DefaultCommunityViewModel {
     enum State {
         case initial, fetchPosts
     }
+    enum Action {
+        case showLoading(Bool), didFetchPosts
+    }
 }
 
 final class DefaultCommunityViewModel: CommunityViewModel {
     @Published var state: State = .initial
+    private let actionSubject: PassthroughSubject<DefaultCommunityViewModel.Action, Never> = .init()
+    var actionPublisher: AnyPublisher<DefaultCommunityViewModel.Action, Never> {
+        actionSubject.eraseToAnyPublisher()
+    }
+    
+    var posts: [CommunityPostDTO] = []
+    
+    private var currentPage = 0
+    private var currentCategory: CommunityPostCategory = .all
+    private var currentSortType: CommunityPostSortType = .popular
+    private var isFetching = false {
+        didSet {
+            Task { @MainActor in
+                actionSubject.send(.showLoading(isFetching))
+            }
+        }
+    }
+    
     private let communityUseCase: CommunityUseCases
     private var cancellables: Set<AnyCancellable> = .init()
     
@@ -54,17 +77,30 @@ extension DefaultCommunityViewModel {
 }
 
 extension DefaultCommunityViewModel {
+    private func handleError(_ error: Error) {
+        let errorLocalizedDescription: String
+        switch error {
+        case let networkError as NetworkError:
+            errorLocalizedDescription = networkError.localizedDescription
+        default:
+            errorLocalizedDescription = error.localizedDescription
+        }
+        Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
     private func fetchPosts() {
+        guard !isFetching else { return }
+        isFetching = true
         Task {
-            let result = await communityUseCase.fetchPosts(category: .all, page: 0, sort: .popular)
+            defer { isFetching = false }
+            let result = await communityUseCase.fetchPosts(category: currentCategory, page: currentPage, sort: currentSortType)
             switch result {
             case .success(let success):
-                success.forEach {
-                    print("====================")
-                    print($0)
-                }
+                currentPage += 1
+                posts = success
+                actionSubject.send(.didFetchPosts)
             case .failure(let failure):
-                Logger.error("커뮤니티 목록 Fetch Error : \(failure.localizedDescription)", category: .network)
+                handleError(failure)
             }
         }
     }
