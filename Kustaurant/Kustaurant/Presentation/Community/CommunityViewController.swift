@@ -23,8 +23,15 @@ final class CommunityViewController: UIViewController, LoadingDisplayable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         bindViewModelAction()
         viewModel.process(.fetchPosts)
+    }
+}
+
+extension CommunityViewController {
+    private func setupNavigationBar() {
+        title = "커뮤니티"
     }
 }
 
