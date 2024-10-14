@@ -21,5 +21,6 @@ final class CommunityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.process(.fetchPosts)
     }
 }

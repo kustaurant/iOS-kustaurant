@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CommunityRepository {
-    func getPosts(category: CommunityPostCategory, page: Int, sort: CommunityPostSortType) async -> Result<CommunityPostDTO, NetworkError>
+    func getPosts(category: CommunityPostCategory, page: Int, sort: CommunityPostSortType) async -> Result<[CommunityPostDTO], NetworkError>
 }

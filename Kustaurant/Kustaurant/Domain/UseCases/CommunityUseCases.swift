@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CommunityUseCases {
-    func fetchPosts(category: CommunityPostCategory, page: Int, sort: CommunityPostSortType) async -> Result<CommunityPostDTO, NetworkError>
+    func fetchPosts(category: CommunityPostCategory, page: Int, sort: CommunityPostSortType) async -> Result<[CommunityPostDTO], NetworkError>
 }
 
 final class DefaultCommunityUseCases {
@@ -24,7 +24,7 @@ extension DefaultCommunityUseCases: CommunityUseCases {
         category: CommunityPostCategory,
         page: Int,
         sort: CommunityPostSortType
-    ) async -> Result<CommunityPostDTO, NetworkError> {
+    ) async -> Result<[CommunityPostDTO], NetworkError> {
         await communityRepository.getPosts(category: category, page: page, sort: sort)
     }
     

@@ -20,7 +20,7 @@ extension DefaultCommunityRepository: CommunityRepository {
         category: CommunityPostCategory,
         page: Int,
         sort: CommunityPostSortType
-    ) async -> Result<CommunityPostDTO, NetworkError> {
+    ) async -> Result<[CommunityPostDTO], NetworkError> {
         let authInterceptor = AuthorizationInterceptor()
         let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
         
@@ -36,7 +36,7 @@ extension DefaultCommunityRepository: CommunityRepository {
         if let error = response.error {
             return .failure(error)
         }
-        guard let data: CommunityPostDTO = response.decode() else {
+        guard let data: [CommunityPostDTO] = response.decode() else {
             return .failure(.decodingFailed)
         }
         return .success(data)
