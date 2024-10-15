@@ -8,7 +8,15 @@
 import UIKit
 
 final class CommunityPostCell: UICollectionViewCell {
+    private let rankImageView: UIImageView = .init()
     private let titleLabel: UILabel = .init()
+    private let categoryLabel: PaddedLabel = .init()
+    private let bodyLabel: UILabel = .init()
+    private let userNicknameLabel: UILabel = .init()
+    private let timeAgoLabel: UILabel = .init()
+    private let likeButton: UIButton = .init()
+    private let commentsButton: UIButton = .init()
+    private let bottomLine: UIView = .init()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

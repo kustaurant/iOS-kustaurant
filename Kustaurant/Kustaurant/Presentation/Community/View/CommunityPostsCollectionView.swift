@@ -20,7 +20,7 @@ final class CommunityPostsCollectionView: UICollectionView {
 
 extension CommunityPostsCollectionView {
     private func setupCollectionView() {
-        backgroundColor = .systemPink.withAlphaComponent(0.3)
+        backgroundColor = .clear
         registerCell(ofType: CommunityPostCell.self)
     }
 }
