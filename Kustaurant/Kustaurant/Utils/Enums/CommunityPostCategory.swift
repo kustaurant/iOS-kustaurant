@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CommunityPostCategory: String {
+enum CommunityPostCategory: String, CaseIterable {
     case all = "전체"
     case free = "자유게시판"
     case column = "칼럼게시판"

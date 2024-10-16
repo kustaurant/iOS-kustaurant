@@ -21,10 +21,10 @@ typealias CommunityViewModel = CommunityViewModelInput & CommunityViewModelOutpu
 
 extension DefaultCommunityViewModel {
     enum State {
-        case initial, fetchPosts, fetchPostsNextPage
+        case initial, fetchPosts, fetchPostsNextPage, updateCategory(CommunityPostCategory), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType)
     }
     enum Action {
-        case showLoading(Bool), didFetchPosts
+        case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet
     }
 }
 
@@ -73,6 +73,14 @@ extension DefaultCommunityViewModel {
                     self?.fetchPosts()
                 case .fetchPostsNextPage:
                     self?.fetchPostsNextPage()
+                case .updateCategory(let category):
+                    self?.updateCategory(category)
+                case .updateSortType(let sortType):
+                    self?.updateSortType(sortType)
+                case .tappedBoardButton:
+                    self?.tappedBoardButton()
+                case .tappedSortTypeButton(let sortType):
+                    self?.tappedSortTypeButton(sortType)
                 }
             }
             .store(in: &cancellables)
@@ -89,6 +97,36 @@ extension DefaultCommunityViewModel {
             errorLocalizedDescription = error.localizedDescription
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
+    private func tappedSortTypeButton(_ sortType: CommunityPostSortType) {
+        guard !isFetching else { return }
+        updateSortType(sortType)
+    }
+    
+    private func tappedBoardButton() {
+        guard !isFetching else { return }
+        actionSubject.send(.presentActionSheet)
+    }
+    
+    private func updateSortType(_ sortType: CommunityPostSortType) {
+        currentSortType = sortType
+        currentPage = 0
+        isLastPage = false
+        posts.removeAll()
+        actionSubject.send(.changeSortType(sortType))
+        
+        fetchPosts()
+    }
+    
+    private func updateCategory(_ category: CommunityPostCategory) {
+        currentCategory = category
+        currentPage = 0
+        isLastPage = false
+        posts.removeAll()
+        actionSubject.send(.changeCategory(category))
+        
+        fetchPosts()
     }
     
     private func fetchPostsNextPage() {
