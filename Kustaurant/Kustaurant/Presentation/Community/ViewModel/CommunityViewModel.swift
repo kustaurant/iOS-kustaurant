@@ -21,10 +21,10 @@ typealias CommunityViewModel = CommunityViewModelInput & CommunityViewModelOutpu
 
 extension DefaultCommunityViewModel {
     enum State {
-        case initial, fetchPosts, fetchPostsNextPage, updateCategory(CommunityPostCategory), updateSortType(CommunityPostSortType)
+        case initial, fetchPosts, fetchPostsNextPage, updateCategory(CommunityPostCategory), updateSortType(CommunityPostSortType), tapBoardButton
     }
     enum Action {
-        case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType)
+        case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet
     }
 }
 
@@ -77,6 +77,8 @@ extension DefaultCommunityViewModel {
                     self?.updateCategory(category)
                 case .updateSortType(let sortType):
                     self?.updateSortType(sortType)
+                case .tapBoardButton:
+                    self?.tapBoardButton()
                 }
             }
             .store(in: &cancellables)
@@ -93,6 +95,11 @@ extension DefaultCommunityViewModel {
             errorLocalizedDescription = error.localizedDescription
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
+    private func tapBoardButton() {
+        guard !isFetching else { return }
+        actionSubject.send(.presentActionSheet)
     }
     
     private func updateSortType(_ sortType: CommunityPostSortType) {

@@ -8,7 +8,7 @@
 import UIKit
 
 final class CommunityRootView: UIView {
-    private let communityFilterView: CommunityFilterView = .init()
+    private(set) var communityFilterView: CommunityFilterView = .init()
     private(set) var postsCollectionView: CommunityPostsCollectionView = .init()
     
     override init(frame: CGRect) {

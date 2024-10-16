@@ -35,6 +35,7 @@ final class CommunityViewController: UIViewController, LoadingDisplayable {
         super.viewDidLoad()
         setupNavigationBar()
         bindViewModelAction()
+        bindFilterButtons()
         viewModel.process(.updateCategory(.all))
     }
 }
@@ -63,8 +64,30 @@ extension CommunityViewController {
                     self?.rootView.updateFilterView(category: category)
                 case .changeSortType(let sortType):
                     self?.rootView.updateFilterView(sortType: sortType)
+                case .presentActionSheet:
+                    self?.presentActionSheet()
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    private func bindFilterButtons() {
+        rootView.communityFilterView.boardButton.addAction(
+            UIAction { [weak self] _ in
+                self?.viewModel.process(.tapBoardButton)
+            }, for: .touchUpInside)
+    }
+    
+    private func presentActionSheet() {
+        let actionSheet = UIAlertController(title: "게시판 선택", message: nil, preferredStyle: .actionSheet)
+        CommunityPostCategory.allCases.forEach { [weak self] category in
+            let action = UIAlertAction(title: category.rawValue, style: .default) { [weak self] _ in
+                self?.viewModel.process(.updateCategory(category))
+            }
+            actionSheet.addAction(action)
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+        present(actionSheet, animated: true, completion: nil)
     }
 }

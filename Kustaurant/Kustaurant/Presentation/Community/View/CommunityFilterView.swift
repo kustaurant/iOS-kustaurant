@@ -8,9 +8,9 @@
 import UIKit
 
 final class CommunityFilterView: UIView {
-    private let boardButton: UIButton = .init()
-    private let popularButton: UIButton = .init()
-    private let recentButton: UIButton = .init()
+    private(set) var boardButton: UIButton = .init()
+    private(set) var popularButton: UIButton = .init()
+    private(set) var recentButton: UIButton = .init()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
