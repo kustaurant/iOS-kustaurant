@@ -35,7 +35,7 @@ final class CommunityViewController: UIViewController, LoadingDisplayable {
         super.viewDidLoad()
         setupNavigationBar()
         bindViewModelAction()
-        viewModel.process(.fetchPosts)
+        viewModel.process(.updateCategory(.all))
     }
 }
 
@@ -59,6 +59,8 @@ extension CommunityViewController {
                     }
                 case .didFetchPosts:
                     self?.postsCollectionViewHandler?.update()
+                case .changeCategory(let category):
+                    self?.rootView.updateFilterView(category)
                 }
             }
             .store(in: &cancellables)
