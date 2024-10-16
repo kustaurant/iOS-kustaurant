@@ -8,6 +8,7 @@
 import UIKit
 
 final class CommunityPostCell: UICollectionViewCell {
+    private let photoImageView: UIImageView = .init()
     private let rankImageView: UIImageView = .init()
     private let titleLabel: UILabel = .init()
     private let categoryLabel: PaddedLabel = .init()
@@ -34,15 +35,18 @@ final class CommunityPostCell: UICollectionViewCell {
         bodyLabel.text = model.postBody
         userNicknameLabel.text = model.user?.userNickname
         timeAgoLabel.text = model.timeAgo
-        loadImage(imageView: rankImageView, urlString: model.user?.rankImg, targetWidth: 16)
+        loadImage(rankImageView, urlString: model.user?.rankImg, targetWidth: 16)
+        loadImage(photoImageView, urlString: model.postPhotoImgUrl, targetWidth: 71)
         updateLikeButton(count: model.likeCount, isLiked: model.isLiked)
         updateCommentsButton(count: model.commentCount)
     }
-    
 }
 
 extension CommunityPostCell {
     private func setupStyle() {
+        photoImageView.layer.cornerRadius = 5
+        photoImageView.clipsToBounds = true
+        
         categoryLabel.backgroundColor = .gray100
         categoryLabel.textColor = .gray300
         categoryLabel.font = .Pretendard.medium11
@@ -89,13 +93,15 @@ extension CommunityPostCell {
         verticalStacView.spacing = 5
         verticalStacView.distribution = .fill
         
+        contentView.addSubview(photoImageView, autoLayout: [.top(24), .trailing(1), .width(71), .height(71)])
+        
         contentView.addSubview(categoryLabel, autoLayout: [.top(0), .leading(0)])
-        contentView.addSubview(verticalStacView, autoLayout: [.topNext(to: categoryLabel, constant: 8), .fillX(0)])
+        contentView.addSubview(verticalStacView, autoLayout: [.topNext(to: categoryLabel, constant: 8), .leading(0), .trailingNext(to: photoImageView, constant: 22)])
         contentView.addSubview(bottomLine, autoLayout: [.fillX(0), .bottom(0), .height(0.5)])
     }
     
     private func loadImage(
-        imageView: UIImageView,
+        _ imageView: UIImageView,
         urlString: String?,
         targetWidth: CGFloat?
     ) {
