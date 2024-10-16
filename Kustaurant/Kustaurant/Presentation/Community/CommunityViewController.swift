@@ -74,7 +74,15 @@ extension CommunityViewController {
     private func bindFilterButtons() {
         rootView.communityFilterView.boardButton.addAction(
             UIAction { [weak self] _ in
-                self?.viewModel.process(.tapBoardButton)
+                self?.viewModel.process(.tappedBoardButton)
+            }, for: .touchUpInside)
+        rootView.communityFilterView.recentButton.addAction(
+            UIAction { [weak self] _ in
+                self?.viewModel.process(.tappedSortTypeButton(.recent))
+            }, for: .touchUpInside)
+        rootView.communityFilterView.popularButton.addAction(
+            UIAction { [weak self] _ in
+                self?.viewModel.process(.tappedSortTypeButton(.popular))
             }, for: .touchUpInside)
     }
     
