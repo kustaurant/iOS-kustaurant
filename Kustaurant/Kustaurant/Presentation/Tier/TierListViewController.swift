@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class TierListViewController: UIViewController {
+final class TierListViewController: UIViewController, LoadingDisplayable {
     private var viewModel: TierListViewModel
     private var tierListTableViewHandler: TierListTableViewHandler?
     private var categoriesCollectionViewHandler: TierTopCategoriesCollectionViewHandler?
@@ -43,6 +43,11 @@ final class TierListViewController: UIViewController {
         super.viewDidLoad()
         setupBindings()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        hideLoadingView()
+    }
 }
 
 extension TierListViewController {
@@ -50,6 +55,7 @@ extension TierListViewController {
         bindtierRestaurants()
         bindCategories()
         bindCategoryButton()
+        bindActions()
     }
     
     private func bindCategories() {
@@ -74,6 +80,22 @@ extension TierListViewController {
         tierListView.topCategoriesView.categoryButton.addAction(UIAction { [weak self] _ in
             self?.viewModel.categoryButtonTapped()
         }, for: .touchUpInside)
+    }
+    
+    private func bindActions() {
+        viewModel.actionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                switch action {
+                case .showLoading(let isLoading):
+                    if isLoading {
+                        self?.showLoadingView(isBlocking: false)
+                    } else {
+                        self?.hideLoadingView()
+                    }
+                }
+            }
+            .store(in: &cancellables)
     }
 }
 
