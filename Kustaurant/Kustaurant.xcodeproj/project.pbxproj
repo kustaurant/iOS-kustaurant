@@ -2480,7 +2480,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2498,7 +2498,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.01;
 				NAVER_CLIENT_ID = KcDh1UMeecV5eijspQiP;
 				NAVER_CLIENT_SECRET = oYiOi36Xuw;
 				NAVER_LOGIN_URL_SCHEME = kustaurant.Kustaurant;
@@ -2528,7 +2528,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = E98D6ZNGDP;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2546,7 +2546,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.01;
 				NAVER_CLIENT_ID = KcDh1UMeecV5eijspQiP;
 				NAVER_CLIENT_SECRET = oYiOi36Xuw;
 				NAVER_LOGIN_URL_SCHEME = kustaurant.Kustaurant;
