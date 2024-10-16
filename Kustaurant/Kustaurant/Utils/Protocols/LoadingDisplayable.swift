@@ -6,38 +6,47 @@
 //
 
 import UIKit
+import Lottie
 
 protocol LoadingDisplayable {}
 
 extension LoadingDisplayable where Self: UIViewController {
-    func showLoadingView() {
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        guard windowScene?.windows.first?.viewWithTag(999) == nil,
-              let window = windowScene?.windows.first
+    func showLoadingView(isBlocking: Bool = true) {
+        guard let window = UIApplication.shared.connectedScenes
+            .compactMap({ ($0 as? UIWindowScene)?.windows.first })
+            .first(where: { $0.isKeyWindow })
         else { return }
 
+        guard window.viewWithTag(999) == nil else { return }
+        
         Task { @MainActor in
-            let spinner = UIActivityIndicatorView(style: .medium)
-            spinner.center = window.center
-            
-            let backgroundView = UIView(frame: window.bounds)
-            backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-            backgroundView.tag = 999
-            backgroundView.addSubview(spinner)
+            let spinner = LottieAnimationView(name: "lottie-loading")
+            spinner.loopMode = .loop
+            spinner.frame = window.bounds
+            spinner.contentMode = .scaleAspectFill
+            spinner.tag = 999
+            spinner.play()
 
-            window.addSubview(backgroundView)
-            spinner.startAnimating()
+            if isBlocking {
+                let backgroundView = UIView(frame: window.bounds)
+                backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+                backgroundView.tag = 998
+                backgroundView.addSubview(spinner, autoLayout: [.center(0), .width(100), .height(100)])
+                window.addSubview(backgroundView)
+            } else {
+                window.addSubview(spinner, autoLayout: [.center(0), .width(100), .height(100)])
+            }
         }
     }
     
     func hideLoadingView() {
+        guard let window = UIApplication.shared.connectedScenes
+            .compactMap({ ($0 as? UIWindowScene)?.windows.first })
+            .first(where: { $0.isKeyWindow })
+        else { return }
         Task { @MainActor in
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-            guard let window = windowScene?.windows.first,
-                  let loadingView = window.viewWithTag(999)
-            else { return }
-            
-            loadingView.removeFromSuperview()
+            window.viewWithTag(999)?.removeFromSuperview()
+            window.viewWithTag(998)?.removeFromSuperview()
         }
     }
 }
