@@ -17,15 +17,23 @@ protocol TierListViewModelInput {
     func categoryButtonTapped()
     func updateCategories(categories: [Category])
     func didTapRestaurant(restaurantId: Int)
+    
 }
 
 protocol TierListViewModelOutput {
     var categoriesPublisher: Published<[Category]>.Publisher { get }
     var tierRestaurants: [Restaurant] { get }
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
+    var actionPublisher: AnyPublisher<DefaultTierListViewModel.Action, Never> { get }
 }
 
 typealias TierListViewModel = TierListViewModelInput & TierListViewModelOutput & TierBaseViewModel
+
+extension DefaultTierListViewModel {
+    enum Action {
+        case showLoading(Bool)
+    }
+}
 
 final class DefaultTierListViewModel: TierListViewModel {
     private let tierUseCase: TierUseCases
@@ -34,6 +42,10 @@ final class DefaultTierListViewModel: TierListViewModel {
     @Published var categories: [Category]
     private var listPage = 1
     private var hasMoreData = true
+    private let actionSubject: PassthroughSubject<Action, Never> = .init()
+    var actionPublisher: AnyPublisher<Action, Never> {
+        actionSubject.eraseToAnyPublisher()
+    }
     
     // MARK: - Output
     var categoriesPublisher: Published<[Category]>.Publisher { $categories }
@@ -58,6 +70,14 @@ extension DefaultTierListViewModel {
         guard hasMoreData else { return }
         
         Task {
+            await MainActor.run {
+                actionSubject.send(.showLoading(true))
+            }
+            
+            defer {
+                actionSubject.send(.showLoading(false))
+            }
+            
             let cuisines = Category.extractCuisines(from: categories)
             let situations = Category.extractSituations(from: categories)
             let locations = Category.extractLocations(from: categories)

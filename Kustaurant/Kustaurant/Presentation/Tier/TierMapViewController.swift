@@ -9,7 +9,7 @@ import UIKit
 import CoreLocation
 import Combine
  
-final class TierMapViewController: UIViewController {
+final class TierMapViewController: UIViewController, LoadingDisplayable {
     private var viewModel: TierMapViewModel
     private var tierMapView = TierMapView()
     private var mapHandler: NMFMapViewHandler?
@@ -53,6 +53,11 @@ final class TierMapViewController: UIViewController {
         bottomSheetDidDismiss()
         viewModel.hideBottomSheet()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        hideLoadingView()
+    }
 }
 
 extension TierMapViewController {
@@ -60,6 +65,7 @@ extension TierMapViewController {
         bindMapRestaurants()
         bindCategories()
         bindCategoryButton()
+        bindActions()
     }
     
     private func bindMapRestaurants() {
@@ -83,6 +89,22 @@ extension TierMapViewController {
         tierMapView.topCategoriesView.categoryButton.addAction(UIAction { [weak self] _ in
             self?.viewModel.categoryButtonTapped()
         }, for: .touchUpInside)
+    }
+    
+    private func bindActions() {
+        viewModel.actionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                switch action {
+                case .showLoading(let isLoading):
+                    if isLoading {
+                        self?.showLoadingView(isBlocking: false)
+                    } else {
+                        self?.hideLoadingView()
+                    }
+                }
+            }
+            .store(in: &cancellables)
     }
 }
 
