@@ -5,7 +5,7 @@
 //  Created by 송우진 on 8/8/24.
 //
 
-import Foundation
+import Combine
 
 struct TierMapViewModelActions {
     let showTierCategory: ([Category]) -> Void
@@ -28,9 +28,17 @@ protocol TierMapViewModelOutput {
     var categoriesPublisher: Published<[Category]>.Publisher { get }
     var mapRestaurantsPublisher: Published<TierMapRestaurants?>.Publisher { get }
     var selectedRestaurant: Restaurant? { get }
+    var actionPublisher: AnyPublisher<DefaultTierMapViewModel.Action, Never> { get }
 }
 
 typealias TierMapViewModel = TierMapViewModelInput & TierMapViewModelOutput & TierBaseViewModel
+
+extension DefaultTierMapViewModel {
+    enum Action {
+        case showLoading(Bool)
+    }
+}
+
 
 final class DefaultTierMapViewModel: TierMapViewModel {
     
@@ -42,9 +50,12 @@ final class DefaultTierMapViewModel: TierMapViewModel {
     @Published var mapRestaurants: TierMapRestaurants?
     @Published var selectedRestaurant: Restaurant?
     
+    private let actionSubject: PassthroughSubject<Action, Never> = .init()
+    
     // MARK: Output
     var categoriesPublisher: Published<[Category]>.Publisher { $categories }
     var mapRestaurantsPublisher: Published<TierMapRestaurants?>.Publisher { $mapRestaurants }
+    var actionPublisher: AnyPublisher<Action, Never> { actionSubject.eraseToAnyPublisher() }
     
     // MARK: - Initialization
     init(
@@ -64,6 +75,14 @@ final class DefaultTierMapViewModel: TierMapViewModel {
 extension DefaultTierMapViewModel {
     func fetchTierMap() {
         Task {
+            await MainActor.run {
+                actionSubject.send(.showLoading(true))
+            }
+            
+            defer {
+                actionSubject.send(.showLoading(false))
+            }
+            
             let result = await tierUseCase.fetchTierMap(
                 cuisines: Category.extractCuisines(from: categories),
                 situations: Category.extractSituations(from: categories),

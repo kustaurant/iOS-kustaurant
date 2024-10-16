@@ -43,6 +43,11 @@ final class TierListViewController: UIViewController, LoadingDisplayable {
         super.viewDidLoad()
         setupBindings()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        hideLoadingView()
+    }
 }
 
 extension TierListViewController {

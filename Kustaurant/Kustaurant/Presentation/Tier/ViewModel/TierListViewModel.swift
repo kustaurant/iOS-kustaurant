@@ -17,13 +17,14 @@ protocol TierListViewModelInput {
     func categoryButtonTapped()
     func updateCategories(categories: [Category])
     func didTapRestaurant(restaurantId: Int)
-    var actionPublisher: AnyPublisher<DefaultTierListViewModel.Action, Never> { get }
+    
 }
 
 protocol TierListViewModelOutput {
     var categoriesPublisher: Published<[Category]>.Publisher { get }
     var tierRestaurants: [Restaurant] { get }
     var tierRestaurantsPublisher: Published<[Restaurant]>.Publisher { get }
+    var actionPublisher: AnyPublisher<DefaultTierListViewModel.Action, Never> { get }
 }
 
 typealias TierListViewModel = TierListViewModelInput & TierListViewModelOutput & TierBaseViewModel
