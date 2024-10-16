@@ -60,7 +60,9 @@ extension CommunityViewController {
                 case .didFetchPosts:
                     self?.postsCollectionViewHandler?.update()
                 case .changeCategory(let category):
-                    self?.rootView.updateFilterView(category)
+                    self?.rootView.updateFilterView(category: category)
+                case .changeSortType(let sortType):
+                    self?.rootView.updateFilterView(sortType: sortType)
                 }
             }
             .store(in: &cancellables)

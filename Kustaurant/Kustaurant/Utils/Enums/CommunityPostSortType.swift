@@ -7,6 +7,7 @@
 
 import Foundation
 
-enum CommunityPostSortType {
-    case recent, popular
+enum CommunityPostSortType: String {
+    case recent = "최신순"
+    case popular = "인기순"
 }

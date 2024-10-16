@@ -21,8 +21,11 @@ final class CommunityRootView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateFilterView(_ category: CommunityPostCategory) {
-        communityFilterView.update(category)
+    func updateFilterView(
+        category: CommunityPostCategory? = nil,
+        sortType: CommunityPostSortType? = nil
+    ) {
+        communityFilterView.update(category: category, sortType: sortType)
     }
 }
 
