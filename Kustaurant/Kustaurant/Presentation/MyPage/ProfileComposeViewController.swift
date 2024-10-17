@@ -47,11 +47,17 @@ class ProfileComposeViewController: UIViewController {
 extension ProfileComposeViewController {
     
     private func setupProfileImage() {
-        if 
-            let imgUrlString = viewModel.profileImgUrl,
-            let imgUrl = URL(string: imgUrlString) {
-            ImageCacheManager.shared.loadImage(from: imgUrl, targetWidth: 90, defaultImage: UIImage(named: "img_babycow")) { [weak self] image in
-                self?.profileComposeView.profileImageView.image = image
+        if let imgUrlString = viewModel.profileImgUrl,
+           let imgUrl = URL(string: imgUrlString) {
+            Task {
+                let image = await ImageCacheManager.shared.loadImage(
+                    from: imgUrl,
+                    targetSize: CGSize(width: 90, height: 90),
+                    defaultImage: UIImage(named: "img_babycow")
+                )
+                await MainActor.run {
+                    profileComposeView.profileImageView.image = image
+                }
             }
         }
     }

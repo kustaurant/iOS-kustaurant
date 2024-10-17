@@ -172,13 +172,7 @@ extension RestaurantDetailViewModel {
                 actionSubject.send(.didFetchEvaluation(isFavorite: isFavorite, evaluationCount: evaluationCount))
             }
             
-            if let url: URL = .init(string: detail?.restaurantImageURLString ?? "") {
-                ImageCacheManager.shared.loadImage(from: url) { [weak self] image in
-                    if let image {
-                        self?.actionSubject.send(.didFetchHeaderImage(image))
-                    }
-                }
-            }
+            loadImage(detail?.restaurantImageURLString)
             
             Task {
                 let reviews = await repository.fetchReviews(sort: .popular)
@@ -188,6 +182,20 @@ extension RestaurantDetailViewModel {
                 
                 if detail?.tabType == .review {
                     actionSubject.send(.didFetchReviews)
+                }
+            }
+        }
+    }
+    
+    private func loadImage(_ urlString: String?) {
+        guard let urlString,
+              let url = URL(string: urlString)
+        else { return }
+        Task {
+            let image = await ImageCacheManager.shared.loadImage(from: url)
+            await MainActor.run {
+                if let image {
+                    actionSubject.send(.didFetchHeaderImage(image))
                 }
             }
         }

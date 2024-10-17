@@ -68,14 +68,25 @@ extension MyPageTableViewHandler {
         headerView.profileButton.setTitle(userSavedRestaurants.nickname, for: .normal)
         headerView.myEvaluationCountLabel.text = String(describing: userSavedRestaurants.evaluationCount ?? 0)
         headerView.myFavoriteRestaurantCountLabel.text = String(describing: userSavedRestaurants.favoriteCount ?? 0)
-        if 
-            let imgUrlString = userSavedRestaurants.iconImgUrl,
-            let imgUrl = URL(string: imgUrlString) {
-            ImageCacheManager.shared.loadImage(from: imgUrl, targetWidth: 77, defaultImage: UIImage(named: "img_babycow")) { [weak self] image in
-                self?.headerView.profileImageView.image = image
+        loadImage(userSavedRestaurants.iconImgUrl)
+    }
+    
+    private func loadImage(_ urlString: String?) {
+        guard let urlString,
+              let url = URL(string: urlString)
+        else { return }
+        Task {
+            let image = await ImageCacheManager.shared.loadImage(
+                from: url,
+                targetSize: CGSize(width: 77, height: 77),
+                defaultImage: UIImage(named: "img_babycow")
+            )
+            await MainActor.run {
+                headerView.profileImageView.image = image
             }
         }
     }
+    
 }
 
 extension MyPageTableViewHandler: UITableViewDelegate {
