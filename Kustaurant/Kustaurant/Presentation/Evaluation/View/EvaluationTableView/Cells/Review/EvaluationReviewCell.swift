@@ -46,11 +46,20 @@ final class EvaluationReviewCell: UITableViewCell {
             kuTextView.textColor = .black
         }
         
-        if let imageUrlString = data.evaluationImgUrl,
-            let url = URL(string: imageUrlString)
-        {
-            ImageCacheManager.shared.loadImage(from: url, targetWidth: imageSize.width) { [weak self] image in
-                self?.kuImageView.image = image
+        loadImage(data.evaluationImgUrl)
+    }
+    
+    private func loadImage(_ urlString: String?) {
+        guard let urlString,
+              let url = URL(string: urlString)
+        else { return }
+        Task {
+            let image = await ImageCacheManager.shared.loadImage(
+                from: url,
+                targetSize: imageSize
+            )
+            await MainActor.run {
+                kuImageView.image = image
             }
         }
     }

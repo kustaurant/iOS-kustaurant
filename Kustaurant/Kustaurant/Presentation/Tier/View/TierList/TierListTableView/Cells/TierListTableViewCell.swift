@@ -131,13 +131,19 @@ extension TierListTableViewCell {
     }
     
     private func loadImage() {
-        if let urlString = model?.restaurantImgUrl,
-           let url = URL(string: urlString) {
-            ImageCacheManager.shared.loadImage(from: url, targetWidth: 55) { [weak self] image in
-                DispatchQueue.main.async {
-                    self?.restaurantImageView.image = image ?? UIImage(named: "img_dummy")
-                }
+        guard let urlString = model?.restaurantImgUrl,
+              let url = URL(string: urlString)
+        else { return }
+        Task {
+            let image = await ImageCacheManager.shared.loadImage(
+                from: url,
+                targetSize: CGSize(width: 55, height: 55),
+                defaultImage: UIImage(named: "img_dummy")
+            )
+            await MainActor.run {
+                restaurantImageView.image = image
             }
         }
     }
+
 }
