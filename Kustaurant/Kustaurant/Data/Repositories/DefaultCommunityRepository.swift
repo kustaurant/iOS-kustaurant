@@ -16,6 +16,21 @@ final class DefaultCommunityRepository {
 }
 
 extension DefaultCommunityRepository: CommunityRepository {
+    func getPostDetail(postId: Int) async -> Result<CommunityPostDTO, NetworkError> {
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + networkService.getCommunityPostDetailURL)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        guard let data: CommunityPostDTO = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        return .success(data)
+    }
+    
     func getPosts(
         category: CommunityPostCategory,
         page: Int,

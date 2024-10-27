@@ -144,6 +144,7 @@
 		58772FB12CBFA32E00F2C170 /* CommunityFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772FB02CBFA32E00F2C170 /* CommunityFilterView.swift */; };
 		58772FB42CBFCAAC00F2C170 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 58772FB32CBFCAAC00F2C170 /* Lottie */; };
 		58772FB62CBFCDF700F2C170 /* lottie-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 58772FB52CBFCDF700F2C170 /* lottie-loading.json */; };
+		58772FB82CCE881E00F2C170 /* CommunityPostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772FB72CCE881E00F2C170 /* CommunityPostDetailViewController.swift */; };
 		5884966A2C8ACAE900E21F64 /* EvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496692C8ACAE900E21F64 /* EvaluationRepository.swift */; };
 		5884966C2C8AD11D00E21F64 /* EvaluationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */; };
 		5884966E2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */; };
@@ -466,6 +467,7 @@
 		58772FAC2CBD333A00F2C170 /* CommunityPostsCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostsCollectionViewHandler.swift; sourceTree = "<group>"; };
 		58772FB02CBFA32E00F2C170 /* CommunityFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFilterView.swift; sourceTree = "<group>"; };
 		58772FB52CBFCDF700F2C170 /* lottie-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-loading.json"; sourceTree = "<group>"; };
+		58772FB72CCE881E00F2C170 /* CommunityPostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDetailViewController.swift; sourceTree = "<group>"; };
 		588496692C8ACAE900E21F64 /* EvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationRepository.swift; sourceTree = "<group>"; };
 		5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationDTO.swift; sourceTree = "<group>"; };
 		5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEvaluationRepository.swift; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 			isa = PBXGroup;
 			children = (
 				5841734C2C46829D001EC132 /* CommunityViewController.swift */,
+				58772FB72CCE881E00F2C170 /* CommunityPostDetailViewController.swift */,
 				58772FAB2CBD332200F2C170 /* Handler */,
 				58772FA32CBD2EF800F2C170 /* View */,
 				58772FA22CBD2EEC00F2C170 /* ViewModel */,
@@ -2202,6 +2205,7 @@
 				BA8EEF852C633E1A00FE6ABF /* OnboardingViewModel.swift in Sources */,
 				BAC273022C8C083B00F08F72 /* MyEvaluationViewModel.swift in Sources */,
 				BA0A89CF2C84109F000A724D /* NoticeBoardTableViewHandler.swift in Sources */,
+				58772FB82CCE881E00F2C170 /* CommunityPostDetailViewController.swift in Sources */,
 				58067CB92C4FC1A200889C92 /* DefaultTierRepository.swift in Sources */,
 				BA8EEF832C631ED300FE6ABF /* OnboardingView.swift in Sources */,
 				BA1CB3D32C7C405400DA6776 /* AuthorizationInterceptor.swift in Sources */,
