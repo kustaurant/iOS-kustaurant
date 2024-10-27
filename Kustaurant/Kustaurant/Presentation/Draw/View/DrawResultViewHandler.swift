@@ -79,12 +79,17 @@ extension DrawResultViewHandler {
                 return
             }
             
-            let defaultImage = UIImage(named: "icon_ku")
-            
-            ImageCacheManager.shared.loadImage(from: imgUrl, targetWidth: iv.bounds.width, defaultImage: defaultImage) { image in
-                iv.image = image
-                if idx == DrawResultViewHandler.rouletteCount - 1 {
-                    self.view.drawedRestaurantImageView.image = image
+            Task {
+                let image = await ImageCacheManager.shared.loadImage(
+                    from: imgUrl,
+                    targetSize: iv.bounds.size,
+                    defaultImage: UIImage(named: "icon_ku")
+                )
+                await MainActor.run {
+                    iv.image = image
+                    if idx == DrawResultViewHandler.rouletteCount - 1 {
+                        self.view.drawedRestaurantImageView.image = image
+                    }
                 }
             }
         }

@@ -34,24 +34,23 @@ extension HomeBannerCollectionViewCell {
     }
     
     private func loadImage(url: URL) {
-        ImageCacheManager.shared.loadImage(
-            from: url,
-            targetWidth: contentView.bounds.width,
-            defaultImage: nil) { [weak self] image in
-                Task {
-                    await MainActor.run {
-                        UIView.transition(
-                            with: self?.imageView ?? UIImageView(),
-                            duration: 0.25,
-                            options: .transitionCrossDissolve,
-                            animations: {
-                                self?.imageView.image = image
-                            },
-                            completion: nil
-                        )
-                    }
-                }
+        Task {
+            let image = await ImageCacheManager.shared.loadImage(
+                from: url,
+                targetSize: contentView.bounds.size
+            )
+            await MainActor.run {
+                UIView.transition(
+                    with: imageView,
+                    duration: 0.25,
+                    options: .transitionCrossDissolve,
+                    animations: {
+                        self.imageView.image = image
+                    },
+                    completion: nil
+                )
             }
+        }
     }
 }
 

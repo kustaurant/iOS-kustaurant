@@ -26,13 +26,7 @@ final class RestaurantDetailMenuCell: UITableViewCell {
     
     func update(item: RestaurantDetailCellItem) {
         guard let item = item as? RestaurantDetailMenu else { return }
-        
-        menuImageView.image = UIImage(named: "icon_menu_default")
-        if let urlString = item.imageURLString, let url = URL(string: urlString) {
-            ImageCacheManager.shared.loadImage(from: url, targetWidth: 94, completion: { [weak self] image in
-                self?.menuImageView.image = image
-            })
-        }
+        updateMenuImageView(item.imageURLString)
         titleLabel.text = item.title
         priceLabel.text = item.price
     }
@@ -70,5 +64,28 @@ extension RestaurantDetailMenuCell {
         
         contentView.addSubview(stackView, autoLayout: [.fillX(20), .top(0), .bottom(13)])
         menuImageView.autolayout([.width(94), .height(77)])
+    }
+    
+    private func updateMenuImageView(_ urlString: String?) {
+        let defaultMenuImage = UIImage(named: "icon_menu_default")
+        Task {
+            guard let urlString,
+                  let url = URL(string: urlString)
+            else {
+                await MainActor.run {
+                    menuImageView.image = defaultMenuImage
+                }
+                return
+            }
+            
+            let image = await ImageCacheManager.shared.loadImage(
+                from: url,
+                targetSize: CGSize(width: 94, height: 94),
+                defaultImage: defaultMenuImage
+            )
+            await MainActor.run {
+                menuImageView.image = image
+            }
+        }
     }
 }
