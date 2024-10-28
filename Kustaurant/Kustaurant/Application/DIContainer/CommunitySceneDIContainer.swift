@@ -31,6 +31,16 @@ final class CommunitySceneDIContainer: CommunityFlowCoordinatorDependencies {
         )
     }
     
+    func makeCommunityFlowCoordinator(navigationController: UINavigationController) -> CommunityFlowCoordinator {
+        CommunityFlowCoordinator(
+            dependencies: self,
+            navigationController: navigationController
+        )
+    }
+}
+
+// Main
+extension CommunitySceneDIContainer {
     func makeCommunityViewModel(actions: CommunityViewModelActions) -> CommunityViewModel {
         DefaultCommunityViewModel(
             communityUseCase: makeCommunityUseCase(),
@@ -43,19 +53,19 @@ final class CommunitySceneDIContainer: CommunityFlowCoordinatorDependencies {
             viewModel: makeCommunityViewModel(actions: actions)
         )
     }
-    
-    func makeCommunityFlowCoordinator(navigationController: UINavigationController) -> CommunityFlowCoordinator {
-        CommunityFlowCoordinator(
-            dependencies: self,
-            navigationController: navigationController
-        )
-    }
 }
 
 
 // Post Detail
 extension CommunitySceneDIContainer {
+    func makeCommunityPostDetailViewModel() -> CommunityPostDetailViewModel {
+        DefaultCommunityPostDetailViewModel(
+            communityUseCase: makeCommunityUseCase()
+        )
+    }
     func makeCommunityPostDetailViewController() -> CommunityPostDetailViewController {
-        CommunityPostDetailViewController()
+        CommunityPostDetailViewController(
+            viewModel: makeCommunityPostDetailViewModel()
+        )
     }
 }

@@ -145,6 +145,9 @@
 		58772FB42CBFCAAC00F2C170 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 58772FB32CBFCAAC00F2C170 /* Lottie */; };
 		58772FB62CBFCDF700F2C170 /* lottie-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 58772FB52CBFCDF700F2C170 /* lottie-loading.json */; };
 		58772FB82CCE881E00F2C170 /* CommunityPostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772FB72CCE881E00F2C170 /* CommunityPostDetailViewController.swift */; };
+		58772FBC2CCF4D5400F2C170 /* CommunityPostDetailRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772FBB2CCF4D5400F2C170 /* CommunityPostDetailRootView.swift */; };
+		58772FBE2CCF506200F2C170 /* CommunityPostDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772FBD2CCF506200F2C170 /* CommunityPostDetailTableView.swift */; };
+		58772FC02CCF511400F2C170 /* CommunityPostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58772FBF2CCF511400F2C170 /* CommunityPostDetailViewModel.swift */; };
 		5884966A2C8ACAE900E21F64 /* EvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496692C8ACAE900E21F64 /* EvaluationRepository.swift */; };
 		5884966C2C8AD11D00E21F64 /* EvaluationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */; };
 		5884966E2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */; };
@@ -468,6 +471,9 @@
 		58772FB02CBFA32E00F2C170 /* CommunityFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFilterView.swift; sourceTree = "<group>"; };
 		58772FB52CBFCDF700F2C170 /* lottie-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-loading.json"; sourceTree = "<group>"; };
 		58772FB72CCE881E00F2C170 /* CommunityPostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDetailViewController.swift; sourceTree = "<group>"; };
+		58772FBB2CCF4D5400F2C170 /* CommunityPostDetailRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDetailRootView.swift; sourceTree = "<group>"; };
+		58772FBD2CCF506200F2C170 /* CommunityPostDetailTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDetailTableView.swift; sourceTree = "<group>"; };
+		58772FBF2CCF511400F2C170 /* CommunityPostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDetailViewModel.swift; sourceTree = "<group>"; };
 		588496692C8ACAE900E21F64 /* EvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationRepository.swift; sourceTree = "<group>"; };
 		5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationDTO.swift; sourceTree = "<group>"; };
 		5884966D2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEvaluationRepository.swift; sourceTree = "<group>"; };
@@ -1179,6 +1185,7 @@
 			isa = PBXGroup;
 			children = (
 				58772F942CBC00C200F2C170 /* CommunityViewModel.swift */,
+				58772FBF2CCF511400F2C170 /* CommunityPostDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1186,10 +1193,8 @@
 		58772FA32CBD2EF800F2C170 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				58772FA42CBD2F0700F2C170 /* CommunityRootView.swift */,
-				58772FA62CBD2F5600F2C170 /* CommunityPostsCollectionView.swift */,
-				58772FB02CBFA32E00F2C170 /* CommunityFilterView.swift */,
-				58772FA82CBD2F8E00F2C170 /* Cell */,
+				58772FB92CCF4D1300F2C170 /* CommunityMain */,
+				58772FBA2CCF4D3200F2C170 /* CommunityPostDetail */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1208,6 +1213,26 @@
 				58772FAC2CBD333A00F2C170 /* CommunityPostsCollectionViewHandler.swift */,
 			);
 			path = Handler;
+			sourceTree = "<group>";
+		};
+		58772FB92CCF4D1300F2C170 /* CommunityMain */ = {
+			isa = PBXGroup;
+			children = (
+				58772FA42CBD2F0700F2C170 /* CommunityRootView.swift */,
+				58772FA62CBD2F5600F2C170 /* CommunityPostsCollectionView.swift */,
+				58772FB02CBFA32E00F2C170 /* CommunityFilterView.swift */,
+				58772FA82CBD2F8E00F2C170 /* Cell */,
+			);
+			path = CommunityMain;
+			sourceTree = "<group>";
+		};
+		58772FBA2CCF4D3200F2C170 /* CommunityPostDetail */ = {
+			isa = PBXGroup;
+			children = (
+				58772FBB2CCF4D5400F2C170 /* CommunityPostDetailRootView.swift */,
+				58772FBD2CCF506200F2C170 /* CommunityPostDetailTableView.swift */,
+			);
+			path = CommunityPostDetail;
 			sourceTree = "<group>";
 		};
 		588496682C8AC89B00E21F64 /* View */ = {
@@ -2020,6 +2045,7 @@
 				58067D482C5A027000889C92 /* TierCategoryCollectionViewHandler.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				BA8EEF8D2C6351D800FE6ABF /* KuPageControl.swift in Sources */,
+				58772FBC2CCF4D5400F2C170 /* CommunityPostDetailRootView.swift in Sources */,
 				5826A1ED2C772C4B0097256C /* TierMapBottomSheetView.swift in Sources */,
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				58772FB12CBFA32E00F2C170 /* CommunityFilterView.swift in Sources */,
@@ -2121,6 +2147,7 @@
 				584FA4CD2C6475DA008DDC19 /* TierMapUseCases.swift in Sources */,
 				58067C8D2C4A815000889C92 /* RestaurantDetailViewController.swift in Sources */,
 				58772F9F2CBC11DD00F2C170 /* CommunityPostSortType.swift in Sources */,
+				58772FBE2CCF506200F2C170 /* CommunityPostDetailTableView.swift in Sources */,
 				BA37E0B32C6A0CBF0092115B /* DrawResultViewHandler.swift in Sources */,
 				BA2D89722C770FED004E7B8E /* SearchUseCases.swift in Sources */,
 				58067C8F2C4A98EA00889C92 /* RestaurantDetailSceneDIContainer.swift in Sources */,
@@ -2263,6 +2290,7 @@
 				BA37E07F2C6742EF0092115B /* DrawResultViewController.swift in Sources */,
 				BAC55EC32C6F1FE200B3078F /* NaverLoginService.swift in Sources */,
 				CF54AD142C4289B800E0DE68 /* DownloadResponse.swift in Sources */,
+				58772FC02CCF511400F2C170 /* CommunityPostDetailViewModel.swift in Sources */,
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */,
 				58772F9D2CBC116300F2C170 /* CommunityPostCategory.swift in Sources */,
