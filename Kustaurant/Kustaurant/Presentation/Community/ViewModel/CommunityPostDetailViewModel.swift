@@ -9,6 +9,7 @@ import Combine
 
 protocol CommunityPostDetailViewModelInput {}
 protocol CommunityPostDetailViewModelOutput {
+    var detail: CommunityPostDetail {get}
     var post: CommunityPostDTO {get}
 }
 
@@ -25,6 +26,7 @@ final class DefaultCommunityPostDetailViewModel: CommunityPostDetailViewModel {
     @Published var state: State = .initial
     
     let post: CommunityPostDTO
+    let detail: CommunityPostDetail
     private let communityUseCase: CommunityUseCases
     private var cancellables: Set<AnyCancellable> = .init()
     
@@ -35,6 +37,7 @@ final class DefaultCommunityPostDetailViewModel: CommunityPostDetailViewModel {
     ) {
         self.communityUseCase = communityUseCase
         self.post = post
+        self.detail = CommunityPostDetail(post: post)
         bindState()
     }
 }
