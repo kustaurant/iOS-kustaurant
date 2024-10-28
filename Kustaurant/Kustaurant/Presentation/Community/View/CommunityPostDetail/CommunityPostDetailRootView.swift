@@ -8,7 +8,7 @@
 import UIKit
 
 final class CommunityPostDetailRootView: UIView {
-    private let tableView: CommunityPostDetailTableView = .init()
+    private(set) var tableView: CommunityPostDetailTableView = .init()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

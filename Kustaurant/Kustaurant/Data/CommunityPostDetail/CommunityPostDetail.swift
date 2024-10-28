@@ -18,4 +18,8 @@ actor CommunityPostDetail {
             .comment: []
         ]
     }
+    
+    func getCellItems(_ section: CommunityPostDetailSection) -> [CommunityPostDetailCellItem] {
+        items[section] ?? []
+    }
 }
