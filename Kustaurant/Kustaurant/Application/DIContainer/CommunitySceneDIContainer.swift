@@ -58,14 +58,15 @@ extension CommunitySceneDIContainer {
 
 // Post Detail
 extension CommunitySceneDIContainer {
-    func makeCommunityPostDetailViewModel() -> CommunityPostDetailViewModel {
+    func makeCommunityPostDetailViewModel(post: CommunityPostDTO) -> CommunityPostDetailViewModel {
         DefaultCommunityPostDetailViewModel(
+            post: post,
             communityUseCase: makeCommunityUseCase()
         )
     }
-    func makeCommunityPostDetailViewController() -> CommunityPostDetailViewController {
+    func makeCommunityPostDetailViewController(post: CommunityPostDTO) -> CommunityPostDetailViewController {
         CommunityPostDetailViewController(
-            viewModel: makeCommunityPostDetailViewModel()
+            viewModel: makeCommunityPostDetailViewModel(post: post)
         )
     }
 }

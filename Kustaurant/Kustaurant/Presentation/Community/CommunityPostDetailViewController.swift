@@ -32,6 +32,6 @@ final class CommunityPostDetailViewController: UIViewController {
 
 extension CommunityPostDetailViewController {
     private func setupNavigationBar() {
-        title = "자유게시판"
+        title = viewModel.post.postCategory ?? ""
     }
 }

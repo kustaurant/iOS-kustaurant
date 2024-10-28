@@ -9,7 +9,7 @@ import UIKit
 
 protocol CommunityFlowCoordinatorDependencies {
     func makeCommunityViewController(actions: CommunityViewModelActions) -> CommunityViewController
-    func makeCommunityPostDetailViewController() -> CommunityPostDetailViewController
+    func makeCommunityPostDetailViewController(post: CommunityPostDTO) -> CommunityPostDetailViewController
 }
 
 final class CommunityFlowCoordinator: Coordinator {
@@ -39,8 +39,8 @@ extension CommunityFlowCoordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
     
-    private func showPostDetail(postId: Int) {
-        let viewController = dependencies.makeCommunityPostDetailViewController()
+    private func showPostDetail(post: CommunityPostDTO) {
+        let viewController = dependencies.makeCommunityPostDetailViewController(post: post)
         navigationController.pushViewController(viewController, animated: true)
     }
 }

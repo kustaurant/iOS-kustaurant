@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 struct CommunityViewModelActions {
-    let showPostDetail: (Int) -> Void
+    let showPostDetail: (CommunityPostDTO) -> Void
 }
 
 protocol CommunityViewModelInput {
@@ -111,8 +111,7 @@ extension DefaultCommunityViewModel {
     }
     
     private func didSelectPostCell(_ post: CommunityPostDTO) {
-        guard let postId = post.postId else { return }
-        actions.showPostDetail(postId)
+        actions.showPostDetail(post)
     }
     
     private func tappedSortTypeButton(_ sortType: CommunityPostSortType) {
