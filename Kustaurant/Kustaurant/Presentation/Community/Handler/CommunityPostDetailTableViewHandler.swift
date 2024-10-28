@@ -37,7 +37,7 @@ extension CommunityPostDetailTableViewHandler {
     }
     
     private func applySnapShot() {
-        Task {
+        Task { @MainActor in
             let items = await self.viewModel.detail.getCellItems(.body).map({ $0 as? AnyHashable }).compactMap({ $0 })
             var snapShot = SnapShot()
             snapShot.appendSections([.body])

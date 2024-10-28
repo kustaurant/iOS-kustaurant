@@ -7,8 +7,10 @@
 
 import UIKit
 
-final class CommunityPostDetailBodyCell: UITableViewCell {
-    private let titleLabel: UILabel = .init()
+final class CommunityPostDetailBodyCell: DefaultTableViewCell {
+    private let rankImageView: UIImageView = .init()
+    private let userNicknameLabel: UILabel = .init()
+    private let timeAgoLabel: UILabel = .init()
     
     override init(
         style: UITableViewCell.CellStyle,
@@ -23,8 +25,11 @@ final class CommunityPostDetailBodyCell: UITableViewCell {
     }
     
     func update(_ body: CommunityPostDetailBody) {
-        print(body)
-        titleLabel.text = "HI"
+        userNicknameLabel.text = body.user?.userNickname
+        timeAgoLabel.text = body.timeAgo
+        Task {
+            await loadImage(rankImageView, urlString: body.user?.rankImg, targetSize: CGSize(width: 25, height: 24))
+        }
     }
 }
 
@@ -37,10 +42,23 @@ extension CommunityPostDetailBodyCell {
     private func setupStyle() {
         backgroundColor = .clear
         selectionStyle = .none
-        titleLabel.textColor = .systemBlue
+        rankImageView.contentMode = .scaleAspectFill
+        userNicknameLabel.font = .Pretendard.medium12
+        userNicknameLabel.textColor = .gray600
+        timeAgoLabel.textAlignment = .left
+        timeAgoLabel.font = .Pretendard.medium12
+        timeAgoLabel.textColor = .gray600
     }
     
     private func setupLayout() {
-        contentView.addSubview(titleLabel, autoLayout: [.fillX(26), .top(10), .bottom(10)])
+        let line = UIView()
+        line.backgroundColor = .gray75
+        
+        let userContainerView = UIView()
+        userContainerView.addSubview(rankImageView, autoLayout: [.leading(0), .fillY(0), .width(25), .height(24)])
+        userContainerView.addSubview(userNicknameLabel, autoLayout: [.fillY(0), .leadingNext(to: rankImageView, constant: 4)])
+        userContainerView.addSubview(line, autoLayout: [.leadingNext(to: userNicknameLabel, constant: 10), .fillY(0), .height(14), .width(1)])
+        userContainerView.addSubview(timeAgoLabel, autoLayout: [.leadingNext(to: line, constant: 10), .fillY(0)])
+        contentView.addSubview(userContainerView, autoLayout: [.top(30), .fillX(16), .bottom(0)])
     }
 }

@@ -18,7 +18,7 @@ final class CommunityPostDetailTableView: UITableView {
     }
     
     private func setup() {
-        backgroundColor = .systemPink.withAlphaComponent(0.3)
+        backgroundColor = .systemBackground
         separatorStyle = .none
         rowHeight = UITableView.automaticDimension
         

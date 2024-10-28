@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CommunityPostDetailBody: CommunityPostDetailCellItem {
+struct CommunityPostDetailBody: CommunityPostDetailCellItem, Hashable {
     let postTitle: String
     let postBody: String?
     let timeAgo: String
