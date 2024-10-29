@@ -29,6 +29,12 @@ final class CommunityPostCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        rankImageView.image = nil
+        photoImageView.image = nil
+    }
+    
     func update(_ model: CommunityPostDTO) {
         categoryLabel.text = model.postCategory
         titleLabel.text = model.postTitle

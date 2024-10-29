@@ -42,7 +42,7 @@ extension CommunityPostDetailTableViewHandler {
             var snapShot = SnapShot()
             snapShot.appendSections([.body])
             snapShot.appendItems(items, toSection: .body)
-            await dataSource.apply(snapShot, animatingDifferences: true)
+            await dataSource.apply(snapShot, animatingDifferences: false)
         }
     }
     
