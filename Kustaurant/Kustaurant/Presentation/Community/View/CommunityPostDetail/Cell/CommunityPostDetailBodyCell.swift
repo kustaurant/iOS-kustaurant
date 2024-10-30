@@ -14,6 +14,10 @@ final class CommunityPostDetailBodyCell: DefaultTableViewCell {
     private let titleLabel: UILabel = .init()
     private let photoImageView: UIImageView = .init()
     private let bodyLabel: UILabel = .init()
+    private let postVisitCountLabel: UILabel = .init()
+    private let commentCountLabel: UILabel = .init()
+    private var likeButton: UIButton = .init()
+    private var scrapButton: UIButton = .init()
     
     private let padding: CGFloat = 16
     private lazy var photoImageViewSize = {
@@ -24,6 +28,10 @@ final class CommunityPostDetailBodyCell: DefaultTableViewCell {
     
     private var photoImageViewTopConstraint: NSLayoutConstraint?
     private var photoImageViewHeightConstraint: NSLayoutConstraint?
+    
+    private enum ButtonType {
+        case like, scrap
+    }
     
     override init(
         style: UITableViewCell.CellStyle,
@@ -48,6 +56,11 @@ final class CommunityPostDetailBodyCell: DefaultTableViewCell {
         timeAgoLabel.text = model.timeAgo
         titleLabel.text = model.postTitle
         bodyLabel.text = model.postBody
+        postVisitCountLabel.text = "조회수 \(model.postVisitCount)"
+        commentCountLabel.text = "댓글 \(model.commentCount)"
+        updateButton(button: &likeButton, type: .like, count: model.likeCount, isLiked: model.isliked)
+        updateButton(button: &scrapButton, type: .scrap, count: model.scrapCount, isLiked: model.isScraped)
+        
         photoImageViewTopConstraint?.constant = (model.postPhotoImgUrl != nil) ? 11 : 0
         photoImageViewHeightConstraint?.constant = (model.postPhotoImgUrl != nil) ? photoImageViewSize.height : 0
         
@@ -82,6 +95,52 @@ extension CommunityPostDetailBodyCell {
         bodyLabel.numberOfLines = 0
         bodyLabel.font = .Pretendard.medium13
         bodyLabel.textColor = .gray800
+        postVisitCountLabel.font = .Pretendard.medium12
+        postVisitCountLabel.textColor = .gray800
+        commentCountLabel.font = .Pretendard.medium12
+        commentCountLabel.textColor = .gray800
+        updateButton(button: &scrapButton, type: .scrap)
+        updateButton(button: &likeButton, type: .like)
+    }
+    
+    private func updateButton(
+        button: inout UIButton,
+        type: ButtonType,
+        count: Int = 0,
+        isLiked: Bool = false,
+        isScraped: Bool = false
+    ) {
+        var configuration = UIButton.Configuration.filled()
+        configuration.cornerStyle = .capsule
+        configuration.baseBackgroundColor = .clear
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+        
+        let targetImage: UIImage?
+        let targetColor: UIColor
+        
+        switch type {
+        case .like:
+            targetColor = isLiked ? .mainGreen : .gray300
+            targetImage = UIImage(named: "icon_thumbs_up_deactivated")?.withTintColor(targetColor, renderingMode: .alwaysOriginal)
+        case .scrap:
+            targetColor = isScraped ? .mainGreen : .gray300
+            targetImage = UIImage(named: "icon_scrap")?.withTintColor(targetColor, renderingMode: .alwaysOriginal)
+        }
+
+        configuration.image = targetImage
+        configuration.imagePadding = 5
+        configuration.attributedTitle = AttributedString(
+            "\(count)",
+            attributes: AttributeContainer([
+                .font: UIFont.Pretendard.regular13,
+                .foregroundColor: targetColor
+            ])
+        )
+        button.configuration = configuration
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = targetColor.cgColor
+        button.layer.cornerRadius = 29/2
+        
     }
     
     private func setupLayout() {
@@ -97,16 +156,22 @@ extension CommunityPostDetailBodyCell {
         let contentContainerView = UIView()
         contentContainerView.addSubview(titleLabel, autoLayout: [.top(0), .fillX(0)])
         contentContainerView.addSubview(photoImageView, autoLayout: [.fillX(0)])
-        contentContainerView.addSubview(bodyLabel, autoLayout: [.topNext(to: photoImageView, constant: 15), .fillX(0)])
-        
+        contentContainerView.addSubview(bodyLabel, autoLayout: [.topNext(to: photoImageView, constant: 15), .fillX(0), .bottom(0)])
         photoImageViewTopConstraint = photoImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 11)
         photoImageViewTopConstraint?.isActive = true
         photoImageViewHeightConstraint = photoImageView.heightAnchor.constraint(equalToConstant: photoImageViewSize.height)
         photoImageViewHeightConstraint?.isActive = true
         
+        let spacer = UIView()
+        spacer.heightAnchor.constraint(equalToConstant: 5).isActive = true
         
+        let interactionContainer = UIView()
+        interactionContainer.addSubview(postVisitCountLabel, autoLayout: [.fillY(0), .leading(0)])
+        interactionContainer.addSubview(commentCountLabel, autoLayout: [.fillY(0), .leadingNext(to: postVisitCountLabel, constant: 9)])
+        interactionContainer.addSubview(scrapButton, autoLayout: [.trailing(0), .fillY(0), .height(29)])
+        interactionContainer.addSubview(likeButton, autoLayout: [.trailingNext(to: scrapButton, constant: 7), .fillY(0), .height(29)])
         
-        let stackView = UIStackView(arrangedSubviews: [userContainerView, contentContainerView])
+        let stackView = UIStackView(arrangedSubviews: [userContainerView, contentContainerView, spacer, interactionContainer])
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         stackView.spacing = 15

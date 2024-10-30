@@ -17,6 +17,9 @@ struct CommunityPostDetailBody: CommunityPostDetailCellItem, Hashable {
     let commentCount: Int
     let likeCount: Int
     let scrapCount: Int
+    let isScraped: Bool
+    let isliked: Bool
+    let isPostMine: Bool
     
     init(post: CommunityPostDTO) {
         let null = "NULL"
@@ -29,5 +32,8 @@ struct CommunityPostDetailBody: CommunityPostDetailCellItem, Hashable {
         commentCount = post.commentCount ?? 0
         likeCount = post.likeCount ?? 0
         scrapCount = post.scrapCount ?? 0
+        isScraped = post.isScraped ?? false
+        isliked = post.isLiked ?? false
+        isPostMine = post.isPostMine ?? false
     }
 }
