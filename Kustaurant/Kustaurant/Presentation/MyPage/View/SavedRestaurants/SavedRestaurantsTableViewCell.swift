@@ -98,15 +98,25 @@ extension SavedRestaurantsTableViewCell {
     }
     
     private func loadImage() {
-        if let urlString = model?.restaurantImgURL,
-           let url = URL(string: urlString) {
-            ImageCacheManager.shared.loadImage(from: url, targetWidth: 55, defaultImage: UIImage(named: "img_dummy")) { [weak self] image in
-                DispatchQueue.main.async {
-                    self?.restaurantImageView.image = image
+        Task {
+            let defaultImage = UIImage(named: "img_dummy")
+            guard let urlString = model?.restaurantImgURL,
+                  let url = URL(string: urlString)
+            else {
+                await MainActor.run {
+                    restaurantImageView.image = defaultImage
                 }
+                return
             }
-        } else {
-            restaurantImageView.image = UIImage(named: "img_dummy")
+            
+            let image = await ImageCacheManager.shared.loadImage(
+                from: url,
+                targetSize: CGSize(width: 55, height: 55),
+                defaultImage: defaultImage
+            )
+            await MainActor.run {
+                restaurantImageView.image = image
+            }
         }
     }
 }

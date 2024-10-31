@@ -11,36 +11,41 @@ public class ImageCacheManager {
     public static let shared = ImageCacheManager()
     private let cache = NSCache<NSString, UIImage>()
 
-    private init() {}
+    private init() {
+        let memoryCapacity = ProcessInfo.processInfo.physicalMemory
+        let cacheLimit = min(Int(memoryCapacity / 100), 100 * 1024 * 1024)
+        cache.totalCostLimit = cacheLimit
+        cache.evictsObjectsWithDiscardedContent = true
+    }
 
-    public func loadImage(from url: URL, targetWidth: CGFloat? = nil, defaultImage: UIImage? = nil, completion: @escaping (UIImage?) -> Void) {
+    
+    public func loadImage(
+        from url: URL,
+        targetSize: CGSize? = nil,
+        defaultImage: UIImage? = nil
+    ) async -> UIImage? {
         let cacheKey = url.absoluteString as NSString
-        
         if let cachedImage = cache.object(forKey: cacheKey) {
-            completion(cachedImage)
-            return
+            return cachedImage
         }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data,
-                  let image = UIImage(data: data),
-                  error == nil else {
-                DispatchQueue.main.async {
-                    completion(defaultImage)
-                }
-                return
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            guard let image = UIImage(data: data) else { return defaultImage }
+
+            var resizedImage: UIImage? = image
+            if let targetSize {
+                resizedImage = image.resized(to: targetSize)
             }
-            
-            let resizedImage: UIImage?
-            if let targetWidth {
-                resizedImage  = image.resized(to: targetWidth)
-            } else {
-                resizedImage = image
+
+            if let resizedImage = resizedImage,
+               let imageData = resizedImage.pngData()
+            {
+                let cost = imageData.count
+                cache.setObject(resizedImage, forKey: cacheKey, cost: cost)
             }
-            
-            DispatchQueue.main.async {
-                completion(resizedImage)
-            }
-        }.resume()
+            return resizedImage
+        } catch {
+            return defaultImage
+        }
     }
 }

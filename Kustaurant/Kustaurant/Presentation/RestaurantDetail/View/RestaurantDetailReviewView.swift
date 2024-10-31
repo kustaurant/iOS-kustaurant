@@ -104,13 +104,24 @@ final class RestaurantDetailReviewView: UIView {
         addSubview(mainStackView, autoLayout: [.fill(0)])
     }
     
-    func update(item: RestaurantDetailReview) {
-        let defaultImage = UIImage(systemName: "person.fill")
-        if let url = URL(string: item.profileImageURLString) {
-            ImageCacheManager.shared.loadImage(from: url, defaultImage: defaultImage) { [weak self] image in
-                self?.profileImageView.image = image
+    private func loadImage(_ urlString: String?) {
+        guard let urlString,
+              let url = URL(string: urlString)
+        else { return }
+        Task {
+            let image = await ImageCacheManager.shared.loadImage(
+                from: url,
+                targetSize: CGSize(width: 24, height: 24),
+                defaultImage: UIImage(systemName: "person.fill")
+            )
+            await MainActor.run {
+                profileImageView.image = image
             }
         }
+    }
+    
+    func update(item: RestaurantDetailReview) {
+        loadImage(item.profileImageURLString)
         nicknameLabel.text = item.nickname
         barView.backgroundColor = .Sementic.gray50
         timeLabel.text = item.time

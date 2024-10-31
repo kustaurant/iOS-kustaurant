@@ -129,15 +129,14 @@ extension TierMapBottomSheetView {
     
     private func loadImage() {
         guard let url = URL(string: restaurant?.restaurantImgUrl ?? "") else { return }
-        ImageCacheManager.shared.loadImage(
-            from: url,
-            targetWidth: 73,
-            defaultImage: UIImage(named: "img_dummy")
-        ) { [weak self] image in
-            Task {
-                await MainActor.run {
-                    self?.imageView.image = image
-                }
+        Task {
+            let image = await ImageCacheManager.shared.loadImage(
+                from: url,
+                targetSize: CGSize(width: 73, height: 73),
+                defaultImage: UIImage(named: "img_dummy")
+            )
+            await MainActor.run {
+                imageView.image = image
             }
         }
     }

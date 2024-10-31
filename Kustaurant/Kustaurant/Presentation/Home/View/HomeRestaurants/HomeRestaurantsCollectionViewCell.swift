@@ -41,12 +41,23 @@ extension HomeRestaurantsCollectionViewCell {
         partnershipInfoLabel.text = (restaurant.partnershipInfo == nil) ? "제휴 해당사항 없음" : "제휴 : \(restaurant.partnershipInfo!)"
         ratingLabel.text = String(describing: restaurant.restaurantScore ?? 0)
         
-        if let urlString = restaurant.restaurantImgUrl,
-           let url = URL(string: urlString) {
-            ImageCacheManager.shared.loadImage(from: url, targetWidth: bounds.width) { image in
-                DispatchQueue.main.async {
-                    self.restaurantImageView.image = image ?? UIImage(named: "img_dummy")
-                }
+        loadImage(restaurant.restaurantImgUrl)
+    }
+    
+    private func loadImage(_ urlString: String?) {
+        guard let urlString,
+              let url = URL(string: urlString)
+        else {
+            return
+        }
+        Task {
+            let image = await ImageCacheManager.shared.loadImage(
+                from: url,
+                targetSize: bounds.size,
+                defaultImage: UIImage(named: "img_dummy")
+            )
+            await MainActor.run {
+                restaurantImageView.image = image
             }
         }
     }
