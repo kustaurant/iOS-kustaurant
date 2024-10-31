@@ -29,16 +29,24 @@ final class CommunityPostCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        rankImageView.image = nil
+        photoImageView.image = nil
+    }
+    
     func update(_ model: CommunityPostDTO) {
         categoryLabel.text = model.postCategory
         titleLabel.text = model.postTitle
         bodyLabel.text = model.postBody
         userNicknameLabel.text = model.user?.userNickname
         timeAgoLabel.text = model.timeAgo
-        loadImage(rankImageView, urlString: model.user?.rankImg, targetWidth: 16)
-        loadImage(photoImageView, urlString: model.postPhotoImgUrl, targetWidth: 71)
-        updateLikeButton(count: model.likeCount, isLiked: model.isLiked)
+        updateLikeButton(count: model.likeCount, isLiked: model.isliked)
         updateCommentsButton(count: model.commentCount)
+        Task {
+            await loadImage(rankImageView, urlString: model.user?.rankImg, targetSize: CGSize(width: 16, height: 16))
+            await loadImage(photoImageView, urlString: model.postPhotoImgUrl, targetSize: CGSize(width: 71, height: 71))
+        }
     }
 }
 
@@ -103,13 +111,13 @@ extension CommunityPostCell {
     private func loadImage(
         _ imageView: UIImageView,
         urlString: String?,
-        targetWidth: CGFloat?
-    ) {
+        targetSize: CGSize?
+    ) async {
         guard let urlString,
               let url = URL(string: urlString)
         else { return }
-        
-        ImageCacheManager.shared.loadImage(from: url, targetWidth: targetWidth) { image in
+        let image = await ImageCacheManager.shared.loadImage(from: url, targetSize: targetSize)
+        await MainActor.run {
             imageView.image = image
         }
     }

@@ -16,6 +16,57 @@ final class DefaultCommunityRepository {
 }
 
 extension DefaultCommunityRepository: CommunityRepository {
+    func postCommunityPostScrapToggle(postId: Int) async -> Result<CommunityScrapStatus, NetworkError> {
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let urlBuilder = URLRequestBuilder(
+            url: networkService.appConfiguration.apiBaseURL + networkService.postCommunityPostScrapToggle(postId),
+            method: .post
+        )
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        guard let data: CommunityScrapStatus = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        return .success(data)
+    }
+    
+    func postCommunityPostLikeToggle(postId: Int) async -> Result<CommunityLikeStatus, NetworkError> {
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let urlBuilder = URLRequestBuilder(
+            url: networkService.appConfiguration.apiBaseURL + networkService.postCommunityPostLikeToggle(postId),
+            method: .post
+        )
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        guard let data: CommunityLikeStatus = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        return .success(data)
+    }
+    
+    func getPostDetail(postId: Int) async -> Result<CommunityPostDTO, NetworkError> {
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + networkService.getCommunityPostDetailURL(postId))
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        guard let data: CommunityPostDTO = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        return .success(data)
+    }
+    
     func getPosts(
         category: CommunityPostCategory,
         page: Int,

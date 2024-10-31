@@ -54,7 +54,7 @@ extension CommunityViewController {
                 switch action {
                 case .showLoading(let isLoading):
                     if isLoading {
-                        self?.showLoadingView()
+                        self?.showLoadingView(isBlocking: false)
                     } else {
                         self?.hideLoadingView()
                     }

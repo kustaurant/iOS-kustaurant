@@ -80,6 +80,7 @@ extension CommunityPostsCollectionViewHandler: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        Logger.info("\(viewModel.posts[indexPath.row])", category: .none)
+        let post = viewModel.posts[indexPath.row]
+        viewModel.process(.didSelectPostCell(post))
     }
 }

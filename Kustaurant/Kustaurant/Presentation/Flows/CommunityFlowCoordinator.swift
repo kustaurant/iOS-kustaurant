@@ -8,7 +8,8 @@
 import UIKit
 
 protocol CommunityFlowCoordinatorDependencies {
-    func makeCommunityViewController() -> CommunityViewController
+    func makeCommunityViewController(actions: CommunityViewModelActions) -> CommunityViewController
+    func makeCommunityPostDetailViewController(post: CommunityPostDTO) -> CommunityPostDetailViewController
 }
 
 final class CommunityFlowCoordinator: Coordinator {
@@ -26,7 +27,8 @@ final class CommunityFlowCoordinator: Coordinator {
 
 extension CommunityFlowCoordinator {
     func start() {
-        let viewController = dependencies.makeCommunityViewController()
+        let actions = CommunityViewModelActions(showPostDetail: showPostDetail)
+        let viewController = dependencies.makeCommunityViewController(actions: actions)
         let image = UIImage(named: TabBarPage.community.pageImageName() + "_off")?.withRenderingMode(.alwaysOriginal)
         let selectedImage = UIImage(named: TabBarPage.community.pageImageName() + "_on")?.withRenderingMode(.alwaysOriginal)
         viewController.tabBarItem = UITabBarItem(
@@ -35,5 +37,10 @@ extension CommunityFlowCoordinator {
             selectedImage: selectedImage
         )
         navigationController.pushViewController(viewController, animated: false)
+    }
+    
+    private func showPostDetail(post: CommunityPostDTO) {
+        let viewController = dependencies.makeCommunityPostDetailViewController(post: post)
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

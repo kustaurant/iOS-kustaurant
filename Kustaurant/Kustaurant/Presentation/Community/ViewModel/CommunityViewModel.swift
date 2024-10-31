@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+struct CommunityViewModelActions {
+    let showPostDetail: (CommunityPostDTO) -> Void
+}
+
 protocol CommunityViewModelInput {
     func process(_ state: DefaultCommunityViewModel.State)
 }
@@ -21,7 +25,7 @@ typealias CommunityViewModel = CommunityViewModelInput & CommunityViewModelOutpu
 
 extension DefaultCommunityViewModel {
     enum State {
-        case initial, fetchPosts, fetchPostsNextPage, updateCategory(CommunityPostCategory), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType)
+        case initial, fetchPosts, fetchPostsNextPage, updateCategory(CommunityPostCategory), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO)
     }
     enum Action {
         case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet
@@ -50,11 +54,16 @@ final class DefaultCommunityViewModel: CommunityViewModel {
     }
     
     private let communityUseCase: CommunityUseCases
+    private let actions: CommunityViewModelActions
     private var cancellables: Set<AnyCancellable> = .init()
     
     // MARK: - Initialization
-    init(communityUseCase: CommunityUseCases) {
+    init(
+        communityUseCase: CommunityUseCases,
+        actions: CommunityViewModelActions
+    ) {
         self.communityUseCase = communityUseCase
+        self.actions = actions
         bindState()
     }
 }
@@ -81,6 +90,8 @@ extension DefaultCommunityViewModel {
                     self?.tappedBoardButton()
                 case .tappedSortTypeButton(let sortType):
                     self?.tappedSortTypeButton(sortType)
+                case .didSelectPostCell(let post):
+                    self?.didSelectPostCell(post)
                 }
             }
             .store(in: &cancellables)
@@ -97,6 +108,10 @@ extension DefaultCommunityViewModel {
             errorLocalizedDescription = error.localizedDescription
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
+    private func didSelectPostCell(_ post: CommunityPostDTO) {
+        actions.showPostDetail(post)
     }
     
     private func tappedSortTypeButton(_ sortType: CommunityPostSortType) {

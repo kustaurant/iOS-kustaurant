@@ -8,6 +8,7 @@
 import UIKit
 
 final class CommunitySceneDIContainer: CommunityFlowCoordinatorDependencies {
+    
     struct Dependencies {
         let networkService: NetworkService
     }
@@ -30,22 +31,42 @@ final class CommunitySceneDIContainer: CommunityFlowCoordinatorDependencies {
         )
     }
     
-    func makeCommunityViewModel() -> CommunityViewModel {
-        DefaultCommunityViewModel(
-            communityUseCase: makeCommunityUseCase()
-        )
-    }
-    
-    func makeCommunityViewController() -> CommunityViewController {
-        CommunityViewController(
-            viewModel: makeCommunityViewModel()
-        )
-    }
-    
     func makeCommunityFlowCoordinator(navigationController: UINavigationController) -> CommunityFlowCoordinator {
         CommunityFlowCoordinator(
             dependencies: self,
             navigationController: navigationController
+        )
+    }
+}
+
+// Main
+extension CommunitySceneDIContainer {
+    func makeCommunityViewModel(actions: CommunityViewModelActions) -> CommunityViewModel {
+        DefaultCommunityViewModel(
+            communityUseCase: makeCommunityUseCase(),
+            actions: actions
+        )
+    }
+    
+    func makeCommunityViewController(actions: CommunityViewModelActions) -> CommunityViewController {
+        CommunityViewController(
+            viewModel: makeCommunityViewModel(actions: actions)
+        )
+    }
+}
+
+
+// Post Detail
+extension CommunitySceneDIContainer {
+    func makeCommunityPostDetailViewModel(post: CommunityPostDTO) -> CommunityPostDetailViewModel {
+        DefaultCommunityPostDetailViewModel(
+            post: post,
+            communityUseCase: makeCommunityUseCase()
+        )
+    }
+    func makeCommunityPostDetailViewController(post: CommunityPostDTO) -> CommunityPostDetailViewController {
+        CommunityPostDetailViewController(
+            viewModel: makeCommunityPostDetailViewModel(post: post)
         )
     }
 }
