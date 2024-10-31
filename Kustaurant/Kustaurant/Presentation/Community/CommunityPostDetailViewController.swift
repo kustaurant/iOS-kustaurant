@@ -37,6 +37,11 @@ final class CommunityPostDetailViewController: UIViewController, LoadingDisplaya
         bindViewModelAction()
         detailTableViewHandler?.update()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.process(.fetchPostDetail)
+    }
 }
 
 extension CommunityPostDetailViewController {
@@ -57,7 +62,8 @@ extension CommunityPostDetailViewController {
                     }
                 case .touchLikeButton:
                     self?.detailTableViewHandler?.update()
-                    
+                case .didFetchPostDetail:
+                    self?.detailTableViewHandler?.update()
                 }
             }
             .store(in: &cancellables)

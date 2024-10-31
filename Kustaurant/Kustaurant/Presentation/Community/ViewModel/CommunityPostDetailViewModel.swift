@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 protocol CommunityPostDetailViewModelInput {
     func process(_ state: DefaultCommunityPostDetailViewModel.State)
@@ -20,11 +21,11 @@ typealias CommunityPostDetailViewModel = CommunityPostDetailViewModelInput & Com
 
 extension DefaultCommunityPostDetailViewModel {
     enum State {
-        case initial, touchLikeButton
+        case initial, fetchPostDetail, touchLikeButton
     }
     
     enum Action {
-        case showLoading(Bool), touchLikeButton
+        case showLoading(Bool), didFetchPostDetail, touchLikeButton
     }
 }
 
@@ -34,12 +35,13 @@ final class DefaultCommunityPostDetailViewModel: CommunityPostDetailViewModel {
     
     // Output
     let post: CommunityPostDTO
-    let detail: CommunityPostDetail
+    var detail: CommunityPostDetail
     private let actionSubject: PassthroughSubject<Action, Never> = .init()
     var actionPublisher: AnyPublisher<Action, Never> {
         actionSubject.eraseToAnyPublisher()
     }
     
+    private var postId: Int { post.postId ?? 0 }
     private var isFetchingData: Bool = false
     private let communityUseCase: CommunityUseCases
     private var cancellables: Set<AnyCancellable> = .init()
@@ -66,6 +68,8 @@ extension DefaultCommunityPostDetailViewModel {
             .sink { [weak self] state in
                 switch state {
                 case .initial: break
+                case .fetchPostDetail:
+                    self?.fetchPostDetail()
                 case .touchLikeButton:
                     self?.updateLikeButton()
                 }
@@ -86,10 +90,23 @@ extension DefaultCommunityPostDetailViewModel {
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
     }
     
+    private func fetchPostDetail() {
+        Task {
+            actionSubject.send(.showLoading(true))
+            defer { actionSubject.send(.showLoading(false)) }
+            let result = await communityUseCase.fetchPostDetail(postId: postId)
+            switch result {
+            case .success(let success):
+                detail = CommunityPostDetail(post: success)
+                actionSubject.send(.didFetchPostDetail)
+            case .failure(let failure):
+                handleError(failure)
+            }
+        }
+    }
+    
     private func updateLikeButton() {
-        guard !isFetchingData,
-              let postId = post.postId
-        else { return }
+        guard !isFetchingData else { return }
         isFetchingData = true
         Task {
             defer { isFetchingData = false }

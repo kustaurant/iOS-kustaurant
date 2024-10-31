@@ -93,7 +93,6 @@ extension CommunityPostDetailBodyCell {
         photoImageView.contentMode = .scaleAspectFill
         photoImageView.clipsToBounds = true
         photoImageView.layer.cornerRadius = 10
-        photoImageView.layer.borderWidth = 1.0
         bodyLabel.numberOfLines = 0
         bodyLabel.font = .Pretendard.medium13
         bodyLabel.textColor = .gray800
