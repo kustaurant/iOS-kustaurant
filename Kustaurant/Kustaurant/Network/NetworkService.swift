@@ -17,4 +17,7 @@ final class NetworkService {
     func postCommunityPostLikeToggle(_ postId: Int) -> String {
         "/api/v1/auth/community/\(postId)/likes"
     }
+    func postCommunityPostScrapToggle(_ postId: Int) -> String {
+        "/api/v1/auth/community/\(postId)/scraps"
+    }
 }

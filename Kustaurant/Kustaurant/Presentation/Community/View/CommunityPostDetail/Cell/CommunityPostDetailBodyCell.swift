@@ -29,7 +29,8 @@ final class CommunityPostDetailBodyCell: DefaultTableViewCell {
     private var photoImageViewTopConstraint: NSLayoutConstraint?
     private var photoImageViewHeightConstraint: NSLayoutConstraint?
     
-    var likeButtoTouched: (() -> Void)?
+    var likeButtonTouched: (() -> Void)?
+    var scrapButtonTouched: (() -> Void)?
     
     private enum ButtonType {
         case like, scrap
@@ -62,7 +63,6 @@ final class CommunityPostDetailBodyCell: DefaultTableViewCell {
         commentCountLabel.text = "댓글 \(model.commentCount)"
         updateButton(button: &likeButton, type: .like, count: model.likeCount, isLiked: model.isliked)
         updateButton(button: &scrapButton, type: .scrap, count: model.scrapCount, isScraped: model.isScraped)
-        
         photoImageViewTopConstraint?.constant = (model.postPhotoImgUrl != nil) ? 11 : 0
         photoImageViewHeightConstraint?.constant = (model.postPhotoImgUrl != nil) ? photoImageViewSize.height : 0
         
@@ -105,7 +105,11 @@ extension CommunityPostDetailBodyCell {
         
         likeButton.addAction(
             UIAction { [weak self] _ in
-                self?.likeButtoTouched?()
+                self?.likeButtonTouched?()
+            } , for: .touchUpInside)
+        scrapButton.addAction(
+            UIAction { [weak self] _ in
+                self?.scrapButtonTouched?()
             } , for: .touchUpInside)
     }
     

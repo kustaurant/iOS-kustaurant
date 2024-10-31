@@ -21,11 +21,11 @@ typealias CommunityPostDetailViewModel = CommunityPostDetailViewModelInput & Com
 
 extension DefaultCommunityPostDetailViewModel {
     enum State {
-        case initial, fetchPostDetail, touchLikeButton
+        case initial, fetchPostDetail, touchLikeButton, touchScrapButton
     }
     
     enum Action {
-        case showLoading(Bool), didFetchPostDetail, touchLikeButton
+        case showLoading(Bool), didFetchPostDetail, touchLikeButton, touchScrapButton
     }
 }
 
@@ -72,6 +72,8 @@ extension DefaultCommunityPostDetailViewModel {
                     self?.fetchPostDetail()
                 case .touchLikeButton:
                     self?.updateLikeButton()
+                case .touchScrapButton:
+                    self?.updateScrapButton()
                 }
             }
             .store(in: &cancellables)
@@ -99,6 +101,22 @@ extension DefaultCommunityPostDetailViewModel {
             case .success(let success):
                 detail = CommunityPostDetail(post: success)
                 actionSubject.send(.didFetchPostDetail)
+            case .failure(let failure):
+                handleError(failure)
+            }
+        }
+    }
+    
+    private func updateScrapButton() {
+        guard !isFetchingData else { return }
+        isFetchingData = true
+        Task {
+            defer { isFetchingData = false }
+            let result = await communityUseCase.postDetailScrapToggle(postId: postId)
+            switch result {
+            case .success(let scrapStatus):
+                await detail.updateScrapButtonStatus(scrapStatus)
+                actionSubject.send(.touchScrapButton)
             case .failure(let failure):
                 handleError(failure)
             }

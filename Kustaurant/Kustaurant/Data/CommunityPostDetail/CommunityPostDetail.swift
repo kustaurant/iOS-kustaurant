@@ -24,6 +24,12 @@ actor CommunityPostDetail {
         body.updateLikeStatus(to: status)
         items[.body] = [body]
     }
+    
+    func updateScrapButtonStatus(_ status: CommunityScrapStatus) {
+        guard var body = items[.body]?.first as? CommunityPostDetailBody else { return }
+        body.updateScrapStatus(to: status)
+        items[.body] = [body]
+    }
  
     func getCellItems(_ section: CommunityPostDetailSection) -> [CommunityPostDetailCellItem] {
         items[section] ?? []

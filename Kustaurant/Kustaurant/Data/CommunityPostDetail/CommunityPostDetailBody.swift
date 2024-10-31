@@ -16,8 +16,8 @@ struct CommunityPostDetailBody: CommunityPostDetailCellItem, Hashable {
     let postVisitCount: Int
     let commentCount: Int
     var likeCount: Int
-    let scrapCount: Int
-    let isScraped: Bool
+    var scrapCount: Int
+    var isScraped: Bool
     var isliked: Bool
     let isPostMine: Bool
     
@@ -40,5 +40,10 @@ struct CommunityPostDetailBody: CommunityPostDetailCellItem, Hashable {
     mutating func updateLikeStatus(to newStatus: CommunityLikeStatus) {
         likeCount = newStatus.likeCount ?? likeCount
         isliked = newStatus.isLikeed()
+    }
+    
+    mutating func updateScrapStatus(to newStatus: CommunityScrapStatus) {
+        scrapCount = newStatus.scrapCount ?? scrapCount
+        isScraped = newStatus.isScrapped()
     }
 }
