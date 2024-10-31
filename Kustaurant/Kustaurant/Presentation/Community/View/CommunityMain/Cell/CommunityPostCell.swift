@@ -41,7 +41,7 @@ final class CommunityPostCell: UICollectionViewCell {
         bodyLabel.text = model.postBody
         userNicknameLabel.text = model.user?.userNickname
         timeAgoLabel.text = model.timeAgo
-        updateLikeButton(count: model.likeCount, isLiked: model.isLiked)
+        updateLikeButton(count: model.likeCount, isLiked: model.isliked)
         updateCommentsButton(count: model.commentCount)
         Task {
             await loadImage(rankImageView, urlString: model.user?.rankImg, targetSize: CGSize(width: 16, height: 16))

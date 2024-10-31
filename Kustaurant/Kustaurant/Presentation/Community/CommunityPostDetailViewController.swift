@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
-final class CommunityPostDetailViewController: UIViewController {
+final class CommunityPostDetailViewController: UIViewController, LoadingDisplayable {
     private var rootView = CommunityPostDetailRootView()
     private var viewModel: CommunityPostDetailViewModel
     private var detailTableViewHandler: CommunityPostDetailTableViewHandler?
+    private var cancellables: Set<AnyCancellable> = .init()
     
     init(viewModel: CommunityPostDetailViewModel) {
         self.viewModel = viewModel
@@ -32,7 +34,7 @@ final class CommunityPostDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        
+        bindViewModelAction()
         detailTableViewHandler?.update()
     }
 }
@@ -40,5 +42,24 @@ final class CommunityPostDetailViewController: UIViewController {
 extension CommunityPostDetailViewController {
     private func setupNavigationBar() {
         title = viewModel.post.postCategory ?? ""
+    }
+    
+    private func bindViewModelAction() {
+        viewModel.actionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                switch action {
+                case .showLoading(let isLoading):
+                    if isLoading {
+                        self?.showLoadingView(isBlocking: false)
+                    } else {
+                        self?.hideLoadingView()
+                    }
+                case .touchLikeButton:
+                    self?.detailTableViewHandler?.update()
+                    
+                }
+            }
+            .store(in: &cancellables)
     }
 }

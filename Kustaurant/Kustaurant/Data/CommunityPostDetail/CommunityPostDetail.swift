@@ -10,7 +10,7 @@ import Foundation
 actor CommunityPostDetail {
     typealias Items = [CommunityPostDetailSection: [CommunityPostDetailCellItem]]
     
-    private let items: Items
+    private var items: Items
     
     init(post: CommunityPostDTO) {
         self.items = [
@@ -19,7 +19,14 @@ actor CommunityPostDetail {
         ]
     }
     
+    func updatelikeButtonStatus(_ status: CommunityLikeStatus) {
+        guard var body = items[.body]?.first as? CommunityPostDetailBody else { return }
+        body.updateLikeStatus(to: status)
+        items[.body] = [body]
+    }
+ 
     func getCellItems(_ section: CommunityPostDetailSection) -> [CommunityPostDetailCellItem] {
         items[section] ?? []
     }
+    
 }

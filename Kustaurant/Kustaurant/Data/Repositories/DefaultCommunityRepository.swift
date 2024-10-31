@@ -16,10 +16,28 @@ final class DefaultCommunityRepository {
 }
 
 extension DefaultCommunityRepository: CommunityRepository {
+    func postCommunityPostLikeToggle(postId: Int) async -> Result<CommunityLikeStatus, NetworkError> {
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let urlBuilder = URLRequestBuilder(
+            url: networkService.appConfiguration.apiBaseURL + networkService.postCommunityPostLikeToggle(postId),
+            method: .post
+        )
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        guard let data: CommunityLikeStatus = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        return .success(data)
+    }
+    
     func getPostDetail(postId: Int) async -> Result<CommunityPostDTO, NetworkError> {
         let authInterceptor = AuthorizationInterceptor()
         let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
-        var urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + networkService.getCommunityPostDetailURL)
+        let urlBuilder = URLRequestBuilder(url: networkService.appConfiguration.apiBaseURL + networkService.getCommunityPostDetailURL(postId))
         let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
         let response = await request.responseAsync(with: urlBuilder)
         if let error = response.error {

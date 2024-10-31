@@ -29,6 +29,8 @@ final class CommunityPostDetailBodyCell: DefaultTableViewCell {
     private var photoImageViewTopConstraint: NSLayoutConstraint?
     private var photoImageViewHeightConstraint: NSLayoutConstraint?
     
+    var likeButtoTouched: (() -> Void)?
+    
     private enum ButtonType {
         case like, scrap
     }
@@ -59,7 +61,7 @@ final class CommunityPostDetailBodyCell: DefaultTableViewCell {
         postVisitCountLabel.text = "조회수 \(model.postVisitCount)"
         commentCountLabel.text = "댓글 \(model.commentCount)"
         updateButton(button: &likeButton, type: .like, count: model.likeCount, isLiked: model.isliked)
-        updateButton(button: &scrapButton, type: .scrap, count: model.scrapCount, isLiked: model.isScraped)
+        updateButton(button: &scrapButton, type: .scrap, count: model.scrapCount, isScraped: model.isScraped)
         
         photoImageViewTopConstraint?.constant = (model.postPhotoImgUrl != nil) ? 11 : 0
         photoImageViewHeightConstraint?.constant = (model.postPhotoImgUrl != nil) ? photoImageViewSize.height : 0
@@ -101,6 +103,11 @@ extension CommunityPostDetailBodyCell {
         commentCountLabel.textColor = .gray800
         updateButton(button: &scrapButton, type: .scrap)
         updateButton(button: &likeButton, type: .like)
+        
+        likeButton.addAction(
+            UIAction { [weak self] _ in
+                self?.likeButtoTouched?()
+            } , for: .touchUpInside)
     }
     
     private func updateButton(
@@ -140,7 +147,6 @@ extension CommunityPostDetailBodyCell {
         button.layer.borderWidth = 1.0
         button.layer.borderColor = targetColor.cgColor
         button.layer.cornerRadius = 29/2
-        
     }
     
     private func setupLayout() {

@@ -15,10 +15,10 @@ struct CommunityPostDetailBody: CommunityPostDetailCellItem, Hashable {
     let postPhotoImgUrl: String?
     let postVisitCount: Int
     let commentCount: Int
-    let likeCount: Int
+    var likeCount: Int
     let scrapCount: Int
     let isScraped: Bool
-    let isliked: Bool
+    var isliked: Bool
     let isPostMine: Bool
     
     init(post: CommunityPostDTO) {
@@ -33,7 +33,12 @@ struct CommunityPostDetailBody: CommunityPostDetailCellItem, Hashable {
         likeCount = post.likeCount ?? 0
         scrapCount = post.scrapCount ?? 0
         isScraped = post.isScraped ?? false
-        isliked = post.isLiked ?? false
+        isliked = post.isliked ?? false
         isPostMine = post.isPostMine ?? false
+    }
+    
+    mutating func updateLikeStatus(to newStatus: CommunityLikeStatus) {
+        likeCount = newStatus.likeCount ?? likeCount
+        isliked = newStatus.isLikeed()
     }
 }

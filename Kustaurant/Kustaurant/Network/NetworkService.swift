@@ -11,5 +11,10 @@ final class NetworkService {
     lazy var appConfiguration = AppConfiguration()
     
     let getCommunityPostsURL = "/api/v1/community/posts"
-    let getCommunityPostDetailURL = "/api/v1/community"
+    func getCommunityPostDetailURL(_ postId: Int) -> String {
+        "/api/v1/community/\(postId)"
+    }
+    func postCommunityPostLikeToggle(_ postId: Int) -> String {
+        "/api/v1/auth/community/\(postId)/likes"
+    }
 }

@@ -51,6 +51,9 @@ extension CommunityPostDetailTableViewHandler {
             let cell = tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailBodyCell
             if let item = itemIdentifier as? CommunityPostDetailBody {
                 cell.update(item)
+                cell.likeButtoTouched = { [weak self] in
+                    self?.viewModel.process(.touchLikeButton)
+                }
             }
             return cell
         }

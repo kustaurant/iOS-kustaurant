@@ -163,6 +163,7 @@
 		588496782C8AEB1800E21F64 /* EvaluationTableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588496772C8AEB1800E21F64 /* EvaluationTableViewHandler.swift */; };
 		5884967B2C8AEBC200E21F64 /* EvaluationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884967A2C8AEBC200E21F64 /* EvaluationSection.swift */; };
 		5884967E2C8AFEC700E21F64 /* EvaluationTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884967D2C8AFEC700E21F64 /* EvaluationTitleCell.swift */; };
+		58CC863A2CD27DBB002CE6EF /* CommunityLikeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CC86392CD27DBB002CE6EF /* CommunityLikeStatus.swift */; };
 		58D83A602C3A785800511AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A5F2C3A785800511AB9 /* AppDelegate.swift */; };
 		58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A612C3A785800511AB9 /* SceneDelegate.swift */; };
 		58D83A692C3A785A00511AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A682C3A785A00511AB9 /* Assets.xcassets */; };
@@ -496,6 +497,7 @@
 		588496772C8AEB1800E21F64 /* EvaluationTableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationTableViewHandler.swift; sourceTree = "<group>"; };
 		5884967A2C8AEBC200E21F64 /* EvaluationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationSection.swift; sourceTree = "<group>"; };
 		5884967D2C8AFEC700E21F64 /* EvaluationTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationTitleCell.swift; sourceTree = "<group>"; };
+		58CC86392CD27DBB002CE6EF /* CommunityLikeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityLikeStatus.swift; sourceTree = "<group>"; };
 		58D83A5C2C3A785800511AB9 /* Kustaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kustaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A5F2C3A785800511AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D83A612C3A785800511AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1435,6 +1437,7 @@
 				5884966B2C8AD11D00E21F64 /* EvaluationDTO.swift */,
 				BA45C2522C882A990033E146 /* CommentLikeStatus.swift */,
 				58772F962CBC057E00F2C170 /* CommunityPostDTO.swift */,
+				58CC86392CD27DBB002CE6EF /* CommunityLikeStatus.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2158,6 +2161,7 @@
 				BA57C7C12C731F270063F2FA /* MyPageViewModel.swift in Sources */,
 				585741072C909EAE0098BAB0 /* EvaluationRatingCell.swift in Sources */,
 				5841734D2C46829D001EC132 /* CommunityViewController.swift in Sources */,
+				58CC863A2CD27DBB002CE6EF /* CommunityLikeStatus.swift in Sources */,
 				CFE204582C5A121D00BCA87C /* UIView+AutoLayout.swift in Sources */,
 				BA37E07D2C663F7C0092115B /* DrawCuisineCollectionViewCell.swift in Sources */,
 				5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */,

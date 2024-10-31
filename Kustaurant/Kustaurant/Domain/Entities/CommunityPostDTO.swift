@@ -47,6 +47,6 @@ struct CommunityPostDTO: Codable, Hashable {
     let postVisitCount: Int?
     let scrapCount: Int?
     let isScraped: Bool?
-    let isLiked: Bool?
+    let isliked: Bool?
     let isPostMine: Bool?
 }
