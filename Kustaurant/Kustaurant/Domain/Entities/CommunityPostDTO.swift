@@ -15,7 +15,7 @@ struct CommunityPostDTO: Codable, Hashable {
         let rank: Int?
     }
     
-    struct PostComment: Codable, Hashable {
+    struct PostComment: CommunityPostDetailCellItem, Codable, Hashable {
         let commentId: Int?
         let commentBody: String?
         let status: String?

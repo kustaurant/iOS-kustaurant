@@ -23,5 +23,6 @@ final class CommunityPostDetailTableView: UITableView {
         rowHeight = UITableView.automaticDimension
         
         registerCell(ofType: CommunityPostDetailBodyCell.self)
+        registerCell(ofType: CommunityPostDetailCommentCell.self)
     }
 }

@@ -15,8 +15,8 @@ actor CommunityPostDetail {
     init(post: CommunityPostDTO) {
         self.items = [
             .body: [CommunityPostDetailBody(post: post)],
-            .comment: []
-        ]
+            .comment: post.postCommentList ?? []
+        ]  
     }
     
     func updatelikeButtonStatus(_ status: CommunityLikeStatus) {

@@ -39,17 +39,21 @@ extension CommunityPostDetailTableViewHandler {
     private func applySnapShot() {
         Task { @MainActor in
             let items = await self.viewModel.detail.getCellItems(.body).map({ $0 as? AnyHashable }).compactMap({ $0 })
+            let comments = await self.viewModel.detail.getCellItems(.comment).map({ $0 as? AnyHashable }).compactMap({ $0})
+            
             var snapShot = SnapShot()
-            snapShot.appendSections([.body])
+            snapShot.appendSections([.body, .comment])
             snapShot.appendItems(items, toSection: .body)
+            snapShot.appendItems(comments, toSection: .comment)
             await dataSource.apply(snapShot, animatingDifferences: false)
         }
     }
     
     private func setDataSource() -> DataSource {
         let dataSource: DataSource = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, itemIdentifier in
-            let cell = tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailBodyCell
+            
             if let item = itemIdentifier as? CommunityPostDetailBody {
+                let cell = tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailBodyCell
                 cell.update(item)
                 cell.likeButtonTouched = { [weak self] in
                     self?.viewModel.process(.touchLikeButton)
@@ -57,8 +61,16 @@ extension CommunityPostDetailTableViewHandler {
                 cell.scrapButtonTouched = { [weak self] in
                     self?.viewModel.process(.touchScrapButton)
                 }
+                return cell
             }
-            return cell
+            
+            if let item = itemIdentifier as? CommunityPostDTO.PostComment {
+                let cell = tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailCommentCell
+                cell.update(item)
+                return cell
+            }
+            
+            return UITableViewCell()
         }
         return dataSource
     }
