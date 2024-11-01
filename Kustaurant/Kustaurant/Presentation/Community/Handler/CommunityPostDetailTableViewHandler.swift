@@ -51,7 +51,6 @@ extension CommunityPostDetailTableViewHandler {
     
     private func setDataSource() -> DataSource {
         let dataSource: DataSource = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, itemIdentifier in
-            
             if let item = itemIdentifier as? CommunityPostDetailBody {
                 let cell = tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailBodyCell
                 cell.update(item)
@@ -84,4 +83,5 @@ extension CommunityPostDetailTableViewHandler: UITableViewDelegate {
     ) {
         Logger.info("\(indexPath)", category: .none)
     }
+    
 }

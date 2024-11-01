@@ -71,7 +71,7 @@ final class RestaurantDetailReviewView: UIView {
         reviewLabel.numberOfLines = 0
         
         commentsButton.setImage(UIImage(named: "icon_comment"), for: .normal)
-        menuEllipsisButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        menuEllipsisButton.setImage(UIImage(named: "icon_ellipsis"), for: .normal)
         menuEllipsisButton.tintColor = .Sementic.gray75
     }
     
