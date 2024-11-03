@@ -12,6 +12,7 @@ protocol CommunityUseCases {
     func fetchPostDetail(postId: Int) async -> Result<CommunityPostDTO, NetworkError>
     func postDetailLikeToggle(postId: Int) async -> Result<CommunityLikeStatus, NetworkError>
     func postDetailScrapToggle(postId: Int) async -> Result<CommunityScrapStatus, NetworkError>
+    func commentLikeToggle(commentId: Int) async -> Result<CommunityCommentStatus, NetworkError>
 }
 
 final class DefaultCommunityUseCases {
@@ -23,6 +24,10 @@ final class DefaultCommunityUseCases {
 }
 
 extension DefaultCommunityUseCases: CommunityUseCases {
+    func commentLikeToggle(commentId: Int) async -> Result<CommunityCommentStatus, NetworkError> {
+        await communityRepository.postCommunityCommentLikeToggle(commentId: commentId, action: .likes)
+    }
+    
     func postDetailScrapToggle(postId: Int) async -> Result<CommunityScrapStatus, NetworkError> {
         await communityRepository.postCommunityPostScrapToggle(postId: postId)
     }

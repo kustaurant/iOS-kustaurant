@@ -12,4 +12,5 @@ protocol CommunityRepository {
     func getPostDetail(postId: Int) async -> Result<CommunityPostDTO, NetworkError>
     func postCommunityPostLikeToggle(postId: Int) async -> Result<CommunityLikeStatus, NetworkError>
     func postCommunityPostScrapToggle(postId: Int) async -> Result<CommunityScrapStatus, NetworkError>
+    func postCommunityCommentLikeToggle(commentId: Int, action: CommentActionType) async -> Result<CommunityCommentStatus, NetworkError>
 }

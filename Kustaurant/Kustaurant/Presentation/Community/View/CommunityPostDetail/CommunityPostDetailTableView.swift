@@ -21,6 +21,7 @@ final class CommunityPostDetailTableView: UITableView {
         backgroundColor = .systemBackground
         separatorStyle = .none
         rowHeight = UITableView.automaticDimension
+        sectionHeaderTopPadding = 0
         
         registerCell(ofType: CommunityPostDetailBodyCell.self)
         registerCell(ofType: CommunityPostDetailCommentCell.self)

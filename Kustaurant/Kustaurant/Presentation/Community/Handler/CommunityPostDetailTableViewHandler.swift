@@ -38,12 +38,12 @@ extension CommunityPostDetailTableViewHandler {
     
     private func applySnapShot() {
         Task { @MainActor in
-            let items = await self.viewModel.detail.getCellItems(.body).map({ $0 as? AnyHashable }).compactMap({ $0 })
+            let body = await self.viewModel.detail.getCellItems(.body).map({ $0 as? AnyHashable }).compactMap({ $0 })
             let comments = await self.viewModel.detail.getCellItems(.comment).map({ $0 as? AnyHashable }).compactMap({ $0})
             
             var snapShot = SnapShot()
             snapShot.appendSections([.body, .comment])
-            snapShot.appendItems(items, toSection: .body)
+            snapShot.appendItems(body, toSection: .body)
             snapShot.appendItems(comments, toSection: .comment)
             await dataSource.apply(snapShot, animatingDifferences: false)
         }
@@ -66,6 +66,9 @@ extension CommunityPostDetailTableViewHandler {
             if let item = itemIdentifier as? CommunityPostDTO.PostComment {
                 let cell = tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailCommentCell
                 cell.update(item)
+                cell.likeButtonTouched = { [weak self] commentId in
+                    self?.viewModel.process(.touchCommentLikeButton(commentId))
+                }
                 return cell
             }
             
@@ -84,4 +87,23 @@ extension CommunityPostDetailTableViewHandler: UITableViewDelegate {
         Logger.info("\(indexPath)", category: .none)
     }
     
+    func tableView(
+        _ tableView: UITableView,
+        viewForHeaderInSection section: Int
+    ) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        view.heightAnchor.constraint(equalToConstant: 8).isActive = true
+        let stackview = UIStackView(arrangedSubviews: [view, UIView()])
+        stackview.spacing = 0
+        stackview.axis = .vertical
+        return stackview
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        heightForHeaderInSection section: Int
+    ) -> CGFloat {
+        (section == 0) ? 0 : 33
+    }
 }

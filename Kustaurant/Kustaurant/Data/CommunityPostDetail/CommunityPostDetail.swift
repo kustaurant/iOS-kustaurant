@@ -19,6 +19,19 @@ actor CommunityPostDetail {
         ]  
     }
     
+    func updateCommentLikeStatus(
+        id commentId: Int,
+        status: CommunityCommentStatus
+    ) {
+        guard let comments = items[.comment] else { return }
+        let list = comments.map({ $0 as? CommunityPostDTO.PostComment }).compactMap({ $0 })
+        guard let index = list.firstIndex(where: { $0.commentId == commentId }) else { return }
+
+        var model = list[index]
+        model.updateComment(to: status)
+        items[.comment]?[index] = model
+    }
+    
     func updatelikeButtonStatus(_ status: CommunityLikeStatus) {
         guard var body = items[.body]?.first as? CommunityPostDetailBody else { return }
         body.updateLikeStatus(to: status)

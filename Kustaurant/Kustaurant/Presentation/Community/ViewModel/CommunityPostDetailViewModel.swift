@@ -21,11 +21,11 @@ typealias CommunityPostDetailViewModel = CommunityPostDetailViewModelInput & Com
 
 extension DefaultCommunityPostDetailViewModel {
     enum State {
-        case initial, fetchPostDetail, touchLikeButton, touchScrapButton
+        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?)
     }
     
     enum Action {
-        case showLoading(Bool), didFetchPostDetail, touchLikeButton, touchScrapButton
+        case showLoading(Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton
     }
 }
 
@@ -74,6 +74,8 @@ extension DefaultCommunityPostDetailViewModel {
                     self?.updateLikeButton()
                 case .touchScrapButton:
                     self?.updateScrapButton()
+                case .touchCommentLikeButton(let commentId):
+                    self?.updateCommentLike(commentId)
                 }
             }
             .store(in: &cancellables)
@@ -90,6 +92,24 @@ extension DefaultCommunityPostDetailViewModel {
             errorLocalizedDescription = error.localizedDescription
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
+    private func updateCommentLike(_ commentId: Int?) {
+        guard let commentId,
+              !isFetchingData
+        else { return }
+        isFetchingData = true
+        Task {
+            defer { isFetchingData = false }
+            let result = await communityUseCase.commentLikeToggle(commentId: commentId)
+            switch result {
+            case .success(let success):
+                await detail.updateCommentLikeStatus(id: commentId, status: success)
+                actionSubject.send(.updateCommentActionButton)
+            case .failure(let failure):
+                handleError(failure)
+            }
+        }
     }
     
     private func fetchPostDetail() {

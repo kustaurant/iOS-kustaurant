@@ -16,6 +16,12 @@ final class CommunityPostDetailCommentCell: DefaultTableViewCell {
     private var likeButton: UIButton = .init()
     private var dislikeButton: UIButton = .init()
     private let commentsButton: UIButton = .init()
+    private var commentId: Int?
+    var likeButtonTouched: ((Int?) -> Void)?
+    var dislikeButtonTouched: (() -> Void)?
+    var commentsButtonTouched: (() -> Void)?
+    var ellipsisButtonTouched: (() -> Void)?
+    
     private enum ButtonType {
         case like, dislike
     }
@@ -38,6 +44,7 @@ final class CommunityPostDetailCommentCell: DefaultTableViewCell {
     }
     
     func update(_ data: CommunityPostDTO.PostComment) {
+        commentId = data.commentId
         userNicknameLabel.text = data.user?.userNickname
         timeAgoLabel.text = data.timeAgo
         bodyLabel.text = data.commentBody
@@ -71,8 +78,22 @@ extension CommunityPostDetailCommentCell {
         menuEllipsisButton.tintColor = .Sementic.gray75
         commentsButton.setImage(UIImage(named: "icon_comment"), for: .normal)
         
-        contentView.layer.borderWidth = 1.0
-        contentView.layer.borderColor = UIColor.red.cgColor
+        likeButton.addAction(
+            UIAction { [weak self] _ in
+                self?.likeButtonTouched?(self?.commentId)
+            } , for: .touchUpInside)
+        dislikeButton.addAction(
+            UIAction { [weak self] _ in
+                self?.dislikeButtonTouched?()
+            } , for: .touchUpInside)
+        commentsButton.addAction(
+            UIAction { [weak self] _ in
+                self?.commentsButtonTouched?()
+            } , for: .touchUpInside)
+        menuEllipsisButton.addAction(
+            UIAction { [weak self] _ in
+                self?.ellipsisButtonTouched?()
+            } , for: .touchUpInside)
     }
     
     private func updateButton(

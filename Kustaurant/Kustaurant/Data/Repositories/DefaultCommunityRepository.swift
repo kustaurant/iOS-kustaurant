@@ -16,6 +16,27 @@ final class DefaultCommunityRepository {
 }
 
 extension DefaultCommunityRepository: CommunityRepository {
+    func postCommunityCommentLikeToggle(
+        commentId: Int,
+        action: CommentActionType
+    ) async -> Result<CommunityCommentStatus, NetworkError> {
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let urlBuilder = URLRequestBuilder(
+            url: networkService.appConfiguration.apiBaseURL + networkService.postCommunityCommentLike(commentId, action),
+            method: .post
+        )
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        guard let data: CommunityCommentStatus = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        return .success(data)
+    }
+    
     func postCommunityPostScrapToggle(postId: Int) async -> Result<CommunityScrapStatus, NetworkError> {
         let authInterceptor = AuthorizationInterceptor()
         let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)

@@ -111,8 +111,6 @@ extension CommunityPostDetailBodyCell {
             UIAction { [weak self] _ in
                 self?.scrapButtonTouched?()
             } , for: .touchUpInside)
-        
-        contentView.layer.borderWidth = 1.0
     }
     
     private func updateButton(
@@ -186,7 +184,7 @@ extension CommunityPostDetailBodyCell {
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         stackView.spacing = 15
-        contentView.addSubview(stackView, autoLayout: [.top(29), .bottom(0), .fillX(padding)])
+        contentView.addSubview(stackView, autoLayout: [.top(29), .bottom(20), .fillX(padding)])
 
     }
 }
