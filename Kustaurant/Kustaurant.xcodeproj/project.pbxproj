@@ -112,6 +112,7 @@
 		584705A92CD497240010A95B /* CommunityPostDetailCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584705A82CD497240010A95B /* CommunityPostDetailCommentCell.swift */; };
 		584E82912CD7AEA200BCE9B1 /* CommentActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82902CD7AEA200BCE9B1 /* CommentActionType.swift */; };
 		584E82932CD7AFD300BCE9B1 /* CommunityCommentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82922CD7AFD300BCE9B1 /* CommunityCommentStatus.swift */; };
+		584E82952CD893AE00BCE9B1 /* MenuEllipsisButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82942CD893AE00BCE9B1 /* MenuEllipsisButton.swift */; };
 		584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */; };
 		584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */; };
 		584FA4C92C647442008DDC19 /* TierMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C82C647442008DDC19 /* TierMapView.swift */; };
@@ -452,6 +453,7 @@
 		584705A82CD497240010A95B /* CommunityPostDetailCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDetailCommentCell.swift; sourceTree = "<group>"; };
 		584E82902CD7AEA200BCE9B1 /* CommentActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentActionType.swift; sourceTree = "<group>"; };
 		584E82922CD7AFD300BCE9B1 /* CommunityCommentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityCommentStatus.swift; sourceTree = "<group>"; };
+		584E82942CD893AE00BCE9B1 /* MenuEllipsisButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEllipsisButton.swift; sourceTree = "<group>"; };
 		584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapRestaurants.swift; sourceTree = "<group>"; };
 		584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapViewModel.swift; sourceTree = "<group>"; };
 		584FA4C82C647442008DDC19 /* TierMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapView.swift; sourceTree = "<group>"; };
@@ -1840,6 +1842,7 @@
 				CFE2046C2C5E68B400BCA87C /* KuTabBar */,
 				585740FC2C8DE1160098BAB0 /* RestaurantInfoView.swift */,
 				58772FCF2CCFB3A500F2C170 /* DefaultTableViewCell.swift */,
+				584E82942CD893AE00BCE9B1 /* MenuEllipsisButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2356,6 +2359,7 @@
 				58772FC02CCF511400F2C170 /* CommunityPostDetailViewModel.swift in Sources */,
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */,
+				584E82952CD893AE00BCE9B1 /* MenuEllipsisButton.swift in Sources */,
 				58772F9D2CBC116300F2C170 /* CommunityPostCategory.swift in Sources */,
 				CFEC6F022C75FA2B00B4DAAB /* RestaurantDetailStretchyHeaderView.swift in Sources */,
 				BA494B4D2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift in Sources */,

@@ -11,7 +11,7 @@ final class CommunityPostDetailCommentCell: DefaultTableViewCell {
     private let rankImageView: UIImageView = .init()
     private let userNicknameLabel: UILabel = .init()
     private let timeAgoLabel: UILabel = .init()
-    private let menuEllipsisButton: UIButton = .init()
+    private let menuEllipsisButton: EllipsisMenuButton = .init()
     private let bodyLabel: UILabel = .init()
     private var likeButton: UIButton = .init()
     private var dislikeButton: UIButton = .init()
@@ -20,7 +20,8 @@ final class CommunityPostDetailCommentCell: DefaultTableViewCell {
     var likeButtonTouched: ((Int?) -> Void)?
     var dislikeButtonTouched: ((Int?) -> Void)?
     var commentsButtonTouched: (() -> Void)?
-    var ellipsisButtonTouched: (() -> Void)?
+    var ellipsisReportTouched: ((Int?) -> Void)?
+    var ellipsisDeleteTouched: ((Int?) -> Void)?
     
     private enum ButtonType {
         case like, dislike
@@ -50,6 +51,7 @@ final class CommunityPostDetailCommentCell: DefaultTableViewCell {
         bodyLabel.text = data.commentBody
         updateButton(button: &likeButton, type: .like, count: data.likeCount ?? 0, isActive: data.isLiked ?? false)
         updateButton(button: &dislikeButton, type: .dislike, count: data.dislikeCount ?? 0, isActive: data.isDisliked ?? false)
+        menuEllipsisButton.isMine = data.isCommentMine ?? false
         Task {
             await loadImage(rankImageView, urlString: data.user?.rankImg, targetSize: CGSize(width: 25, height: 24))
         }
@@ -60,6 +62,7 @@ extension CommunityPostDetailCommentCell {
     private func setupCell() {
         setupStyle()
         setupLayout()
+        setupBind()
     }
     
     private func setupStyle() {
@@ -74,10 +77,11 @@ extension CommunityPostDetailCommentCell {
         bodyLabel.numberOfLines = 0
         bodyLabel.font = .Pretendard.medium13
         bodyLabel.textColor = .gray800
-        menuEllipsisButton.setImage(UIImage(named: "icon_ellipsis"), for: .normal)
-        menuEllipsisButton.tintColor = .Sementic.gray75
-        commentsButton.setImage(UIImage(named: "icon_comment"), for: .normal)
         
+        commentsButton.setImage(UIImage(named: "icon_comment"), for: .normal)
+    }
+    
+    private func setupBind() {
         likeButton.addAction(
             UIAction { [weak self] _ in
                 self?.likeButtonTouched?(self?.commentId)
@@ -90,10 +94,14 @@ extension CommunityPostDetailCommentCell {
             UIAction { [weak self] _ in
                 self?.commentsButtonTouched?()
             } , for: .touchUpInside)
-        menuEllipsisButton.addAction(
-            UIAction { [weak self] _ in
-                self?.ellipsisButtonTouched?()
-            } , for: .touchUpInside)
+        
+        menuEllipsisButton.onDeleteAction = { [weak self] in
+            self?.ellipsisDeleteTouched?(self?.commentId)
+        }
+        
+        menuEllipsisButton.onReportAction = { [weak self] in
+            self?.ellipsisReportTouched?(self?.commentId)
+        }
     }
     
     private func updateButton(
@@ -130,7 +138,7 @@ extension CommunityPostDetailCommentCell {
         topContainerView.addSubview(userNicknameLabel, autoLayout: [.centerY(0), .leadingNext(to: rankImageView, constant: 4)])
         topContainerView.addSubview(line, autoLayout: [.leadingNext(to: userNicknameLabel, constant: 10), .centerY(0), .height(14), .width(1)])
         topContainerView.addSubview(timeAgoLabel, autoLayout: [.leadingNext(to: line, constant: 10), .centerY(0)])
-        topContainerView.addSubview(menuEllipsisButton, autoLayout: [.centerY(0), .trailing(0)])
+        topContainerView.addSubview(menuEllipsisButton, autoLayout: [.centerY(0), .trailing(0), .width(20)])
         
         let bottomContainerView = UIView()
         bottomContainerView.addSubview(likeButton, autoLayout: [.leading(0), .centerY(0)])

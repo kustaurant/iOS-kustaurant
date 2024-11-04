@@ -19,6 +19,16 @@ actor CommunityPostDetail {
         ]  
     }
     
+}
+
+extension CommunityPostDetail {
+    func deleteComment(id commentId: Int) {
+        guard let comments = items[.comment] else { return }
+        let list = comments.map({ $0 as? CommunityPostDTO.PostComment }).compactMap({ $0 })
+        guard let index = list.firstIndex(where: { $0.commentId == commentId }) else { return }
+        items[.comment]?.remove(at: index)
+    }
+    
     func updateCommentStatus(
         id commentId: Int,
         status: CommunityCommentStatus
@@ -26,7 +36,7 @@ actor CommunityPostDetail {
         guard let comments = items[.comment] else { return }
         let list = comments.map({ $0 as? CommunityPostDTO.PostComment }).compactMap({ $0 })
         guard let index = list.firstIndex(where: { $0.commentId == commentId }) else { return }
-
+        
         var model = list[index]
         model.updateComment(to: status)
         items[.comment]?[index] = model
@@ -47,5 +57,4 @@ actor CommunityPostDetail {
     func getCellItems(_ section: CommunityPostDetailSection) -> [CommunityPostDetailCellItem] {
         items[section] ?? []
     }
-    
 }

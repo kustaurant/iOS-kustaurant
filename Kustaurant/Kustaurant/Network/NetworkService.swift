@@ -27,4 +27,8 @@ final class NetworkService {
     ) -> String {
         "/api/v1/auth/community/comments/\(commentId)/\(String(describing: action))"
     }
+    
+    func deleteCommunityComment(_ commentId: Int) -> String {
+        "/api/v1/auth/community/comment/\(commentId)"
+    }
 }

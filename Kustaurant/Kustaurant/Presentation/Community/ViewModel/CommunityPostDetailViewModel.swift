@@ -21,11 +21,11 @@ typealias CommunityPostDetailViewModel = CommunityPostDetailViewModelInput & Com
 
 extension DefaultCommunityPostDetailViewModel {
     enum State {
-        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?)
+        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?)
     }
     
     enum Action {
-        case showLoading(Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton
+        case showLoading(Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment
     }
 }
 
@@ -77,6 +77,8 @@ extension DefaultCommunityPostDetailViewModel {
                     self?.updateCommentActions(commentId, action: .likes)
                 case .touchCommentDislikeButton(let commentId):
                     self?.updateCommentActions(commentId, action: .dislikes)
+                case .touchEllipsisDelete(let commentId):
+                    self?.deleteComment(commentId)
                 }
             }
             .store(in: &cancellables)
@@ -93,6 +95,24 @@ extension DefaultCommunityPostDetailViewModel {
             errorLocalizedDescription = error.localizedDescription
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
+    private func deleteComment(_ commentId: Int?) {
+        guard let commentId,
+              !isFetchingData
+        else { return }
+        isFetchingData = true
+        Task {
+            defer { isFetchingData = false }
+            let result = await communityUseCase.deleteComment(commentId: commentId)
+            switch result {
+            case .success(_):
+                await detail.deleteComment(id: commentId)
+                actionSubject.send(.deleteComment)
+            case .failure(let failure):
+                handleError(failure)
+            }
+        }
     }
     
     private func updateCommentActions(

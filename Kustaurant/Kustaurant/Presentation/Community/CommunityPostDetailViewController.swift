@@ -68,6 +68,8 @@ extension CommunityPostDetailViewController {
                     self?.detailTableViewHandler?.update()
                 case .updateCommentActionButton:
                     self?.detailTableViewHandler?.update()
+                case .deleteComment:
+                    self?.detailTableViewHandler?.update()
                 }
             }
             .store(in: &cancellables)

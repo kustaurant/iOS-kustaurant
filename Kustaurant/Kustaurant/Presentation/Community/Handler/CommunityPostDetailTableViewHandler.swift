@@ -72,11 +72,11 @@ extension CommunityPostDetailTableViewHandler {
                 cell.dislikeButtonTouched = { [weak self] commentId in
                     self?.viewModel.process(.touchCommentDislikeButton(commentId))
                 }
-                cell.commentsButtonTouched = { [weak self] in
-                    print("! COMMENTS")
+                cell.ellipsisReportTouched = { [weak self] commentId in
+                    print("신고하기")
                 }
-                cell.ellipsisButtonTouched = { [weak self] in
-                    print("! ELLIPSIS")
+                cell.ellipsisDeleteTouched = { [weak self] commentId in
+                    self?.viewModel.process(.touchEllipsisDelete(commentId))
                 }
                 return cell
             }

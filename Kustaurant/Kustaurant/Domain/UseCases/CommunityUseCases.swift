@@ -13,6 +13,7 @@ protocol CommunityUseCases {
     func postDetailLikeToggle(postId: Int) async -> Result<CommunityLikeStatus, NetworkError>
     func postDetailScrapToggle(postId: Int) async -> Result<CommunityScrapStatus, NetworkError>
     func commentActionToggle(commentId: Int, action: CommentActionType) async -> Result<CommunityCommentStatus, NetworkError>
+    func deleteComment(commentId: Int) async -> Result<Void, NetworkError>
 }
 
 final class DefaultCommunityUseCases {
@@ -24,6 +25,10 @@ final class DefaultCommunityUseCases {
 }
 
 extension DefaultCommunityUseCases: CommunityUseCases {
+    func deleteComment(commentId: Int) async -> Result<Void, NetworkError> {
+        await communityRepository.deleteCommunityComment(commentId: commentId)
+    }
+    
     func commentActionToggle(
         commentId: Int,
         action: CommentActionType

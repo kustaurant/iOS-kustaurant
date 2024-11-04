@@ -16,6 +16,21 @@ final class DefaultCommunityRepository {
 }
 
 extension DefaultCommunityRepository: CommunityRepository {
+    func deleteCommunityComment(commentId: Int) async -> Result<Void, NetworkError> {
+        let urlBuilder = URLRequestBuilder(
+            url: networkService.appConfiguration.apiBaseURL + networkService.deleteCommunityComment(commentId),
+            method: .delete
+        )
+        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        print(response.decodeString())
+
+        return .success(())
+    }
+    
     func postCommunityCommentLikeToggle(
         commentId: Int,
         action: CommentActionType
