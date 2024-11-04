@@ -15,20 +15,37 @@ struct CommunityPostDTO: Codable, Hashable {
         let rank: Int?
     }
     
-    struct PostComment: Codable, Hashable {
+    struct PostComment: CommunityPostDetailCellItem, Codable, Hashable {
         let commentId: Int?
         let commentBody: String?
         let status: String?
-        let likeCount: Int?
-        let dislikeCount: Int?
+        var likeCount: Int?
+        var dislikeCount: Int?
         let createdAt: String?
         let updatedAt: String?
         let repliesList: [String]?
         let timeAgo: String?
-        let isDisliked: Bool?
-        let isLiked: Bool?
+        var isDisliked: Bool?
+        var isLiked: Bool?
         let isCommentMine: Bool?
         let user: User?
+        
+        mutating func updateComment(to newStatus: CommunityCommentStatus) {
+            likeCount = newStatus.likeCount
+            dislikeCount = newStatus.dislikeCount
+            guard let status = newStatus.commentLikeStatus else { return }
+            switch status {
+            case .liked:
+                isLiked = true
+                isDisliked = false
+            case .disliked:
+                isLiked = false
+                isDisliked = true
+            case .none:
+                isLiked = false
+                isDisliked = false
+            }
+        }
     }
     
     let postId: Int?

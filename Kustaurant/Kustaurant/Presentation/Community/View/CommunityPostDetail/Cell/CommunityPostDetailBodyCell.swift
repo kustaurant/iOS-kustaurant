@@ -184,7 +184,7 @@ extension CommunityPostDetailBodyCell {
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         stackView.spacing = 15
-        contentView.addSubview(stackView, autoLayout: [.fillY(29), .fillX(padding)])
+        contentView.addSubview(stackView, autoLayout: [.top(29), .bottom(20), .fillX(padding)])
 
     }
 }

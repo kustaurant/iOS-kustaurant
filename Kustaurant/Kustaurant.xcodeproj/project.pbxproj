@@ -109,6 +109,10 @@
 		5841739A2C4A1040001EC132 /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584173992C4A1040001EC132 /* UILabel+Style.swift */; };
 		5841739C2C4A29C6001EC132 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841739B2C4A29C6001EC132 /* Tier.swift */; };
 		5841739E2C4A5EFA001EC132 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */; };
+		584705A92CD497240010A95B /* CommunityPostDetailCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584705A82CD497240010A95B /* CommunityPostDetailCommentCell.swift */; };
+		584E82912CD7AEA200BCE9B1 /* CommentActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82902CD7AEA200BCE9B1 /* CommentActionType.swift */; };
+		584E82932CD7AFD300BCE9B1 /* CommunityCommentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82922CD7AFD300BCE9B1 /* CommunityCommentStatus.swift */; };
+		584E82952CD893AE00BCE9B1 /* MenuEllipsisButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82942CD893AE00BCE9B1 /* MenuEllipsisButton.swift */; };
 		584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */; };
 		584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */; };
 		584FA4C92C647442008DDC19 /* TierMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C82C647442008DDC19 /* TierMapView.swift */; };
@@ -446,6 +450,10 @@
 		584173992C4A1040001EC132 /* UILabel+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		5841739B2C4A29C6001EC132 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
 		5841739D2C4A5EFA001EC132 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		584705A82CD497240010A95B /* CommunityPostDetailCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDetailCommentCell.swift; sourceTree = "<group>"; };
+		584E82902CD7AEA200BCE9B1 /* CommentActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentActionType.swift; sourceTree = "<group>"; };
+		584E82922CD7AFD300BCE9B1 /* CommunityCommentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityCommentStatus.swift; sourceTree = "<group>"; };
+		584E82942CD893AE00BCE9B1 /* MenuEllipsisButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEllipsisButton.swift; sourceTree = "<group>"; };
 		584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapRestaurants.swift; sourceTree = "<group>"; };
 		584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapViewModel.swift; sourceTree = "<group>"; };
 		584FA4C82C647442008DDC19 /* TierMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapView.swift; sourceTree = "<group>"; };
@@ -956,6 +964,7 @@
 				58067D492C5A1D6200889C92 /* CategoryType.swift */,
 				58772F9C2CBC116300F2C170 /* CommunityPostCategory.swift */,
 				58772F9E2CBC11DD00F2C170 /* CommunityPostSortType.swift */,
+				584E82902CD7AEA200BCE9B1 /* CommentActionType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1271,6 +1280,7 @@
 			isa = PBXGroup;
 			children = (
 				58772FCB2CCF694900F2C170 /* CommunityPostDetailBodyCell.swift */,
+				584705A82CD497240010A95B /* CommunityPostDetailCommentCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1441,6 +1451,7 @@
 				58772F962CBC057E00F2C170 /* CommunityPostDTO.swift */,
 				58CC86392CD27DBB002CE6EF /* CommunityLikeStatus.swift */,
 				58CC863B2CD3CD1F002CE6EF /* CommunityScrapStatus.swift */,
+				584E82922CD7AFD300BCE9B1 /* CommunityCommentStatus.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1831,6 +1842,7 @@
 				CFE2046C2C5E68B400BCA87C /* KuTabBar */,
 				585740FC2C8DE1160098BAB0 /* RestaurantInfoView.swift */,
 				58772FCF2CCFB3A500F2C170 /* DefaultTableViewCell.swift */,
+				584E82942CD893AE00BCE9B1 /* MenuEllipsisButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2094,12 +2106,14 @@
 				584173642C4791B0001EC132 /* HomeRestaurantsSection.swift in Sources */,
 				58772FB12CBFA32E00F2C170 /* CommunityFilterView.swift in Sources */,
 				584173982C4A07DC001EC132 /* UIFont+Pretendard.swift in Sources */,
+				584705A92CD497240010A95B /* CommunityPostDetailCommentCell.swift in Sources */,
 				58772FC92CCF5FA600F2C170 /* CommunityPostDetailBody.swift in Sources */,
 				CFEC6EEC2C6A2CDE00B4DAAB /* RestaurantDetailTabSectionHeaderView.swift in Sources */,
 				BA494B692C806A3F00EB2527 /* SavedRestaurantsView.swift in Sources */,
 				BA494B5D2C80244000EB2527 /* LoginStatus.swift in Sources */,
 				58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */,
 				BA494B472C7DD36A00EB2527 /* DefaultMyPageRepository.swift in Sources */,
+				584E82912CD7AEA200BCE9B1 /* CommentActionType.swift in Sources */,
 				5841731D2C46425C001EC132 /* HomeRestaurantLists.swift in Sources */,
 				BA2D896A2C76FC60004E7B8E /* SearchViewModel.swift in Sources */,
 				BAC55ECB2C6FA29B00B3078F /* NaverLoginRepository.swift in Sources */,
@@ -2178,6 +2192,7 @@
 				5884967B2C8AEBC200E21F64 /* EvaluationSection.swift in Sources */,
 				CFE2047C2C68AD4C00BCA87C /* RestaurantDetailTierInfoCell.swift in Sources */,
 				BA494B8E2C81A7E800EB2527 /* KuTextField.swift in Sources */,
+				584E82932CD7AFD300BCE9B1 /* CommunityCommentStatus.swift in Sources */,
 				584173312C465E96001EC132 /* HomeFlowCoordinator.swift in Sources */,
 				584FA4E42C708BA7008DDC19 /* HomeBannerCollectionViewHandler.swift in Sources */,
 				584173402C467BDD001EC132 /* TabBarPage.swift in Sources */,
@@ -2344,6 +2359,7 @@
 				58772FC02CCF511400F2C170 /* CommunityPostDetailViewModel.swift in Sources */,
 				CFE2045A2C5A129500BCA87C /* Ku.swift in Sources */,
 				584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */,
+				584E82952CD893AE00BCE9B1 /* MenuEllipsisButton.swift in Sources */,
 				58772F9D2CBC116300F2C170 /* CommunityPostCategory.swift in Sources */,
 				CFEC6F022C75FA2B00B4DAAB /* RestaurantDetailStretchyHeaderView.swift in Sources */,
 				BA494B4D2C7DECD800EB2527 /* UserSavedRestaurantsCount.swift in Sources */,

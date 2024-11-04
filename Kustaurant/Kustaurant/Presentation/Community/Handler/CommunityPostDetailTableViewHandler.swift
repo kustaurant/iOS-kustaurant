@@ -38,18 +38,21 @@ extension CommunityPostDetailTableViewHandler {
     
     private func applySnapShot() {
         Task { @MainActor in
-            let items = await self.viewModel.detail.getCellItems(.body).map({ $0 as? AnyHashable }).compactMap({ $0 })
+            let body = await self.viewModel.detail.getCellItems(.body).map({ $0 as? AnyHashable }).compactMap({ $0 })
+            let comments = await self.viewModel.detail.getCellItems(.comment).map({ $0 as? AnyHashable }).compactMap({ $0})
+            
             var snapShot = SnapShot()
-            snapShot.appendSections([.body])
-            snapShot.appendItems(items, toSection: .body)
+            snapShot.appendSections([.body, .comment])
+            snapShot.appendItems(body, toSection: .body)
+            snapShot.appendItems(comments, toSection: .comment)
             await dataSource.apply(snapShot, animatingDifferences: false)
         }
     }
     
     private func setDataSource() -> DataSource {
         let dataSource: DataSource = UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, itemIdentifier in
-            let cell = tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailBodyCell
             if let item = itemIdentifier as? CommunityPostDetailBody {
+                let cell = tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailBodyCell
                 cell.update(item)
                 cell.likeButtonTouched = { [weak self] in
                     self?.viewModel.process(.touchLikeButton)
@@ -57,8 +60,28 @@ extension CommunityPostDetailTableViewHandler {
                 cell.scrapButtonTouched = { [weak self] in
                     self?.viewModel.process(.touchScrapButton)
                 }
+                return cell
             }
-            return cell
+            
+            if let item = itemIdentifier as? CommunityPostDTO.PostComment {
+                let cell = tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailCommentCell
+                cell.update(item)
+                cell.likeButtonTouched = { [weak self] commentId in
+                    self?.viewModel.process(.touchCommentLikeButton(commentId))
+                }
+                cell.dislikeButtonTouched = { [weak self] commentId in
+                    self?.viewModel.process(.touchCommentDislikeButton(commentId))
+                }
+                cell.ellipsisReportTouched = { [weak self] commentId in
+                    print("신고하기")
+                }
+                cell.ellipsisDeleteTouched = { [weak self] commentId in
+                    self?.viewModel.process(.touchEllipsisDelete(commentId))
+                }
+                return cell
+            }
+            
+            return UITableViewCell()
         }
         return dataSource
     }
@@ -71,5 +94,25 @@ extension CommunityPostDetailTableViewHandler: UITableViewDelegate {
         didSelectRowAt indexPath: IndexPath
     ) {
         Logger.info("\(indexPath)", category: .none)
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        viewForHeaderInSection section: Int
+    ) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        view.heightAnchor.constraint(equalToConstant: 8).isActive = true
+        let stackview = UIStackView(arrangedSubviews: [view, UIView()])
+        stackview.spacing = 0
+        stackview.axis = .vertical
+        return stackview
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        heightForHeaderInSection section: Int
+    ) -> CGFloat {
+        (section == 0) ? 0 : 33
     }
 }
