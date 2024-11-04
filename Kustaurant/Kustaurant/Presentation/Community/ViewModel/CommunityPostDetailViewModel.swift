@@ -21,7 +21,7 @@ typealias CommunityPostDetailViewModel = CommunityPostDetailViewModelInput & Com
 
 extension DefaultCommunityPostDetailViewModel {
     enum State {
-        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?)
+        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?)
     }
     
     enum Action {
@@ -30,17 +30,15 @@ extension DefaultCommunityPostDetailViewModel {
 }
 
 final class DefaultCommunityPostDetailViewModel: CommunityPostDetailViewModel {
-    // Input
-    @Published var state: State = .initial
-    
     // Output
     let post: CommunityPostDTO
     var detail: CommunityPostDetail
-    private let actionSubject: PassthroughSubject<Action, Never> = .init()
     var actionPublisher: AnyPublisher<Action, Never> {
         actionSubject.eraseToAnyPublisher()
     }
     
+    @Published private var state: State = .initial
+    private let actionSubject: PassthroughSubject<Action, Never> = .init()
     private var postId: Int { post.postId ?? 0 }
     private var isFetchingData: Bool = false
     private let communityUseCase: CommunityUseCases
@@ -57,6 +55,7 @@ final class DefaultCommunityPostDetailViewModel: CommunityPostDetailViewModel {
         bindState()
     }
     
+    // Input
     func process(_ state: State) {
         self.state = state
     }
@@ -75,7 +74,9 @@ extension DefaultCommunityPostDetailViewModel {
                 case .touchScrapButton:
                     self?.updateScrapButton()
                 case .touchCommentLikeButton(let commentId):
-                    self?.updateCommentLike(commentId)
+                    self?.updateCommentActions(commentId, action: .likes)
+                case .touchCommentDislikeButton(let commentId):
+                    self?.updateCommentActions(commentId, action: .dislikes)
                 }
             }
             .store(in: &cancellables)
@@ -94,17 +95,20 @@ extension DefaultCommunityPostDetailViewModel {
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
     }
     
-    private func updateCommentLike(_ commentId: Int?) {
+    private func updateCommentActions(
+        _ commentId: Int?,
+        action: CommentActionType
+    ) {
         guard let commentId,
               !isFetchingData
         else { return }
         isFetchingData = true
         Task {
             defer { isFetchingData = false }
-            let result = await communityUseCase.commentLikeToggle(commentId: commentId)
+            let result = await communityUseCase.commentActionToggle(commentId: commentId, action: action)
             switch result {
             case .success(let success):
-                await detail.updateCommentLikeStatus(id: commentId, status: success)
+                await detail.updateCommentStatus(id: commentId, status: success)
                 actionSubject.send(.updateCommentActionButton)
             case .failure(let failure):
                 handleError(failure)

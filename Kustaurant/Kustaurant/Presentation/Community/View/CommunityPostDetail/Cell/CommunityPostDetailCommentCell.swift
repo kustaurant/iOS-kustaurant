@@ -18,7 +18,7 @@ final class CommunityPostDetailCommentCell: DefaultTableViewCell {
     private let commentsButton: UIButton = .init()
     private var commentId: Int?
     var likeButtonTouched: ((Int?) -> Void)?
-    var dislikeButtonTouched: (() -> Void)?
+    var dislikeButtonTouched: ((Int?) -> Void)?
     var commentsButtonTouched: (() -> Void)?
     var ellipsisButtonTouched: (() -> Void)?
     
@@ -84,7 +84,7 @@ extension CommunityPostDetailCommentCell {
             } , for: .touchUpInside)
         dislikeButton.addAction(
             UIAction { [weak self] _ in
-                self?.dislikeButtonTouched?()
+                self?.dislikeButtonTouched?(self?.commentId)
             } , for: .touchUpInside)
         commentsButton.addAction(
             UIAction { [weak self] _ in

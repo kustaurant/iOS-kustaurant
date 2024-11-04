@@ -19,7 +19,7 @@ actor CommunityPostDetail {
         ]  
     }
     
-    func updateCommentLikeStatus(
+    func updateCommentStatus(
         id commentId: Int,
         status: CommunityCommentStatus
     ) {

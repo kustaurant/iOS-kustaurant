@@ -69,6 +69,15 @@ extension CommunityPostDetailTableViewHandler {
                 cell.likeButtonTouched = { [weak self] commentId in
                     self?.viewModel.process(.touchCommentLikeButton(commentId))
                 }
+                cell.dislikeButtonTouched = { [weak self] commentId in
+                    self?.viewModel.process(.touchCommentDislikeButton(commentId))
+                }
+                cell.commentsButtonTouched = { [weak self] in
+                    print("! COMMENTS")
+                }
+                cell.ellipsisButtonTouched = { [weak self] in
+                    print("! ELLIPSIS")
+                }
                 return cell
             }
             
