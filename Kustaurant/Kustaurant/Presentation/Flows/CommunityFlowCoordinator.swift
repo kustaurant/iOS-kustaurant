@@ -10,6 +10,7 @@ import UIKit
 protocol CommunityFlowCoordinatorDependencies {
     func makeCommunityViewController(actions: CommunityViewModelActions) -> CommunityViewController
     func makeCommunityPostDetailViewController(post: CommunityPostDTO) -> CommunityPostDetailViewController
+    func makeCommunityPostWriteViewController() -> CommunityPostWriteViewController
 }
 
 final class CommunityFlowCoordinator: Coordinator {
@@ -48,8 +49,7 @@ extension CommunityFlowCoordinator {
     }
     
     private func showPostWrite() {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .systemPurple.withAlphaComponent(0.3)
+        let viewController = dependencies.makeCommunityPostWriteViewController()
         navigationController.pushViewController(viewController, animated: true)
     }
 }
