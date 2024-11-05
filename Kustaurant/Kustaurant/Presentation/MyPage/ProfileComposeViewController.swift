@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class ProfileComposeViewController: UIViewController {
+class ProfileComposeViewController: NavigationBarLeftBackButtonViewController {
     
     private let profileComposeView = ProfileComposeView()
     private var viewModel: ProfileComposeViewModel
@@ -27,7 +27,6 @@ class ProfileComposeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
         setupKeyboardEndGesture()
         setupProfileImage()
         textFieldHandler?.setupTextFields()
@@ -41,6 +40,11 @@ class ProfileComposeViewController: UIViewController {
     
     override func loadView() {
         view = profileComposeView
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        navigationItem.title = "프로필 편집"
     }
 }
 
@@ -60,21 +64,6 @@ extension ProfileComposeViewController {
                 }
             }
         }
-    }
-    
-    private func setupNavigationBar() {
-        let backImage = UIImage(named: "icon_back")
-        let backButtonView = UIImageView(image: backImage)
-        let backButton = UIBarButtonItem(customView: backButtonView)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonView.addGestureRecognizer(tapGesture)
-        backButtonView.isUserInteractionEnabled = true
-        navigationItem.title = "프로필 편집"
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
-    @objc private func backButtonTapped() {
-        viewModel.didTapBackButton()
     }
     
     private func setupKeyboardEndGesture() {

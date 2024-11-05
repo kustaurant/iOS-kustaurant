@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class DrawResultViewController: UIViewController, NavigationBarHideable {
+class DrawResultViewController: NavigationBarLeftBackButtonViewController, NavigationBarHideable {
     
     private var viewModel: DrawResultViewModel
     private let drawResultView = DrawResultView()
@@ -42,28 +42,20 @@ class DrawResultViewController: UIViewController, NavigationBarHideable {
         showNavigationBar(animated: false)
     }
     
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        let searchImage = UIImage(named: "icon_search")?.withRenderingMode(.alwaysOriginal)
+        let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(didTapSearchButton))
+        navigationItem.title = "랜덤 맛집 뽑기"
+        navigationItem.rightBarButtonItems = [searchButton]
+    }
+    
     override func loadView() {
         view = drawResultView
     }
 }
 
 extension DrawResultViewController {
-    
-    private func setupNavigationBar() {
-        let searchImage = UIImage(named: "icon_search")?.withRenderingMode(.alwaysOriginal)
-        let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(didTapSearchButton))
-        
-        let backImage = UIImage(named: "icon_back")
-        let backButtonView = UIImageView(image: backImage)
-        let backButton = UIBarButtonItem(customView: backButtonView)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonView.addGestureRecognizer(tapGesture)
-        backButtonView.isUserInteractionEnabled = true
-        
-        navigationItem.title = "랜덤 맛집 뽑기"
-        navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItems = [searchButton]
-    }
     
     private func bind() {
         drawResultView.resetCategoryButton.tapPublisher()
@@ -96,7 +88,7 @@ extension DrawResultViewController {
             .store(in: &cancellables)
     }
     
-    @objc private func backButtonTapped() {
+    private func backButtonTapped() {
         viewModel.didTapBackButton()
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class CommunityPostDetailViewController: UIViewController, LoadingDisplayable {
+final class CommunityPostDetailViewController: NavigationBarLeftBackButtonViewController, LoadingDisplayable {
     private var rootView = CommunityPostDetailRootView()
     private var viewModel: CommunityPostDetailViewModel
     private var detailTableViewHandler: CommunityPostDetailTableViewHandler?
@@ -33,9 +33,13 @@ final class CommunityPostDetailViewController: UIViewController, LoadingDisplaya
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
         bindViewModelAction()
         detailTableViewHandler?.update()
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        navigationItem.title = viewModel.post.postCategory ?? ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,11 +48,8 @@ final class CommunityPostDetailViewController: UIViewController, LoadingDisplaya
     }
 }
 
+
 extension CommunityPostDetailViewController {
-    private func setupNavigationBar() {
-        title = viewModel.post.postCategory ?? ""
-    }
-    
     private func bindViewModelAction() {
         viewModel.actionPublisher
             .receive(on: DispatchQueue.main)

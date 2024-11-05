@@ -113,6 +113,7 @@
 		584E82912CD7AEA200BCE9B1 /* CommentActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82902CD7AEA200BCE9B1 /* CommentActionType.swift */; };
 		584E82932CD7AFD300BCE9B1 /* CommunityCommentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82922CD7AFD300BCE9B1 /* CommunityCommentStatus.swift */; };
 		584E82952CD893AE00BCE9B1 /* MenuEllipsisButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82942CD893AE00BCE9B1 /* MenuEllipsisButton.swift */; };
+		584E82972CD9C48C00BCE9B1 /* NavigationBarLeftBackButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82962CD9C48C00BCE9B1 /* NavigationBarLeftBackButtonViewController.swift */; };
 		584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */; };
 		584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */; };
 		584FA4C92C647442008DDC19 /* TierMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C82C647442008DDC19 /* TierMapView.swift */; };
@@ -454,6 +455,7 @@
 		584E82902CD7AEA200BCE9B1 /* CommentActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentActionType.swift; sourceTree = "<group>"; };
 		584E82922CD7AFD300BCE9B1 /* CommunityCommentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityCommentStatus.swift; sourceTree = "<group>"; };
 		584E82942CD893AE00BCE9B1 /* MenuEllipsisButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEllipsisButton.swift; sourceTree = "<group>"; };
+		584E82962CD9C48C00BCE9B1 /* NavigationBarLeftBackButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarLeftBackButtonViewController.swift; sourceTree = "<group>"; };
 		584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapRestaurants.swift; sourceTree = "<group>"; };
 		584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapViewModel.swift; sourceTree = "<group>"; };
 		584FA4C82C647442008DDC19 /* TierMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapView.swift; sourceTree = "<group>"; };
@@ -1843,6 +1845,7 @@
 				585740FC2C8DE1160098BAB0 /* RestaurantInfoView.swift */,
 				58772FCF2CCFB3A500F2C170 /* DefaultTableViewCell.swift */,
 				584E82942CD893AE00BCE9B1 /* MenuEllipsisButton.swift */,
+				584E82962CD9C48C00BCE9B1 /* NavigationBarLeftBackButtonViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2378,6 +2381,7 @@
 				58772FA72CBD2F5600F2C170 /* CommunityPostsCollectionView.swift in Sources */,
 				BA494B572C7EE81000EB2527 /* MyPageTableViewSection.swift in Sources */,
 				5826A1E22C723BF80097256C /* TierCategoryReceivable.swift in Sources */,
+				584E82972CD9C48C00BCE9B1 /* NavigationBarLeftBackButtonViewController.swift in Sources */,
 				BA37E0832C674BE40092115B /* UIButton+Publisher.swift in Sources */,
 				5841733D2C4679FE001EC132 /* DrawSceneDIContainer.swift in Sources */,
 				BA45C2552C8832B10033E146 /* DefaultRestaurantDetailRepository.swift in Sources */,
