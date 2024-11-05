@@ -35,7 +35,7 @@ final class CommunityViewController: UIViewController, LoadingDisplayable {
         super.viewDidLoad()
         setupNavigationBar()
         bindViewModelAction()
-        bindFilterButtons()
+        bindButtons()
         viewModel.process(.updateCategory(.all))
     }
 }
@@ -71,7 +71,7 @@ extension CommunityViewController {
             .store(in: &cancellables)
     }
     
-    private func bindFilterButtons() {
+    private func bindButtons() {
         rootView.communityFilterView.boardButton.addAction(
             UIAction { [weak self] _ in
                 self?.viewModel.process(.tappedBoardButton)
@@ -84,6 +84,11 @@ extension CommunityViewController {
             UIAction { [weak self] _ in
                 self?.viewModel.process(.tappedSortTypeButton(.popular))
             }, for: .touchUpInside)
+        rootView.writeButton.addAction(
+            UIAction { [weak self] _ in
+                self?.viewModel.process(.tappedWriteButton)
+            }
+            , for: .touchUpInside)
     }
     
     private func presentActionSheet() {

@@ -10,6 +10,7 @@ import Combine
 
 struct CommunityViewModelActions {
     let showPostDetail: (CommunityPostDTO) -> Void
+    let showPostWrite: () -> Void
 }
 
 protocol CommunityViewModelInput {
@@ -25,7 +26,7 @@ typealias CommunityViewModel = CommunityViewModelInput & CommunityViewModelOutpu
 
 extension DefaultCommunityViewModel {
     enum State {
-        case initial, fetchPosts, fetchPostsNextPage, updateCategory(CommunityPostCategory), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO)
+        case initial, fetchPosts, fetchPostsNextPage, updateCategory(CommunityPostCategory), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO), tappedWriteButton
     }
     enum Action {
         case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet
@@ -91,7 +92,9 @@ extension DefaultCommunityViewModel {
                 case .tappedSortTypeButton(let sortType):
                     self?.tappedSortTypeButton(sortType)
                 case .didSelectPostCell(let post):
-                    self?.didSelectPostCell(post)
+                    self?.actions.showPostDetail(post)
+                case .tappedWriteButton:
+                    self?.actions.showPostWrite()
                 }
             }
             .store(in: &cancellables)
@@ -109,11 +112,7 @@ extension DefaultCommunityViewModel {
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
     }
-    
-    private func didSelectPostCell(_ post: CommunityPostDTO) {
-        actions.showPostDetail(post)
-    }
-    
+
     private func tappedSortTypeButton(_ sortType: CommunityPostSortType) {
         guard !isFetching else { return }
         updateSortType(sortType)
