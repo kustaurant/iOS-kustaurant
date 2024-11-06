@@ -11,6 +11,7 @@ import Combine
 final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewController {
     private var viewModel: CommunityPostWriteViewModel
     private var rootView = CommunityPostWriteRootView()
+    private let doneButton: KuSubmitButton = .init()
     private var cancellables = Set<AnyCancellable>()
     
     init(viewModel: CommunityPostWriteViewModel) {
@@ -33,6 +34,10 @@ final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewCon
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
+        doneButton.buttonTitle = "완료"
+        doneButton.size = .custom(.Pretendard.regular14, 0)
+        let doneButtonItem = UIBarButtonItem(customView: doneButton)
+        navigationItem.rightBarButtonItem = doneButtonItem
         navigationItem.title = "게시글 작성"
     }
 }
