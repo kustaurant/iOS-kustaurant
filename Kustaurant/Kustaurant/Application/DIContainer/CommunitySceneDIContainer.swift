@@ -70,3 +70,19 @@ extension CommunitySceneDIContainer {
         )
     }
 }
+
+
+// Write
+extension CommunitySceneDIContainer {
+    func makeCommunityPostWriteViewModel() -> CommunityPostWriteViewModel {
+        DefaultCommunityPostWriteViewModel(
+            communityUseCase: makeCommunityUseCase()
+        )
+    }
+    
+    func makeCommunityPostWriteViewController() -> CommunityPostWriteViewController {
+        CommunityPostWriteViewController(
+            viewModel: makeCommunityPostWriteViewModel()
+        )
+    }
+}

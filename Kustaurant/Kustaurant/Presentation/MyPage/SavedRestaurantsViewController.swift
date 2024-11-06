@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class SavedRestaurantsViewController: UIViewController, NavigationBarHideable {
+class SavedRestaurantsViewController: NavigationBarLeftBackButtonViewController, NavigationBarHideable {
     
     private let viewModel: SavedRestaurantsViewModel
     private var cancellables = Set<AnyCancellable>()
@@ -27,7 +27,6 @@ class SavedRestaurantsViewController: UIViewController, NavigationBarHideable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
         viewModel.getFavoriteRestaurants()
         bind()
     }
@@ -39,6 +38,11 @@ class SavedRestaurantsViewController: UIViewController, NavigationBarHideable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         showNavigationBar(animated: false)
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        navigationItem.title = "저장된 맛집"
     }
 }
 
@@ -55,20 +59,5 @@ extension SavedRestaurantsViewController {
                 }
             }
             .store(in: &cancellables)
-    }
-    
-    private func setupNavigationBar() {
-        let backImage = UIImage(named: "icon_back")
-        let backButtonView = UIImageView(image: backImage)
-        let backButton = UIBarButtonItem(customView: backButtonView)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonView.addGestureRecognizer(tapGesture)
-        backButtonView.isUserInteractionEnabled = true
-        navigationItem.title = "저장된 맛집"
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
-    @objc private func backButtonTapped() {
-        viewModel.didTapBackButton()
     }
 }

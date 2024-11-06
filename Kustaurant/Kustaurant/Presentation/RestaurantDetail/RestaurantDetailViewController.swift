@@ -68,6 +68,7 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         navigationController?.navigationBar.barTintColor = .white
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = searchButton
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     @objc private func didTapBackButton() {
@@ -386,5 +387,12 @@ extension RestaurantDetailViewController {
 extension RestaurantDetailViewController: EvaluationViewControllerDelegate {
     func evaluationDidUpdate() {
         viewModel.state = .fetch
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension RestaurantDetailViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
     }
 }
