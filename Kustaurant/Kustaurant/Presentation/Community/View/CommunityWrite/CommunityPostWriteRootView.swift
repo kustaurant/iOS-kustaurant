@@ -83,7 +83,7 @@ extension CommunityPostWriteRootView {
         let line = UIView()
         line.backgroundColor = .gray300
         addSubview(line, autoLayout: [.topNext(to: titleTextField, constant: 7), .fillX(20), .height(0.5)])
-        addSubview(contentTextView, autoLayout: [.topNext(to: line, constant: 25), .fillX(20), .bottom(0)])
+        addSubview(contentTextView, autoLayout: [.topNext(to: line, constant: 25), .fillX(20), .bottomKeyboard(10)])
     }
 }
 
