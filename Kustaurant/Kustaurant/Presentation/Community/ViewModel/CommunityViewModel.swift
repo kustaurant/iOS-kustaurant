@@ -26,7 +26,7 @@ typealias CommunityViewModel = CommunityViewModelInput & CommunityViewModelOutpu
 
 extension DefaultCommunityViewModel {
     enum State {
-        case initial, fetchPosts, fetchPostsNextPage, updateCategory(CommunityPostCategory?), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO), tappedWriteButton, newCreatePost, checkNewPost
+        case initial, fetchPostsNextPage, updateCategory(CommunityPostCategory?), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO), tappedWriteButton, newCreatePost, checkNewPost
     }
     enum Action {
         case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet, scrollToTop(Bool)
@@ -80,8 +80,6 @@ extension DefaultCommunityViewModel {
             .sink { [weak self] state in
                 switch state {
                 case .initial: break
-                case .fetchPosts:
-                    self?.fetchPosts()
                 case .fetchPostsNextPage:
                     self?.fetchPostsNextPage()
                 case .updateCategory(let category):
@@ -97,8 +95,7 @@ extension DefaultCommunityViewModel {
                 case .tappedWriteButton:
                     self?.actions.showPostWrite()
                 case .newCreatePost:
-                    self?.fetchPosts()
-                    self?.isNewCreatePost = true
+                    self?.newCreatePost()
                 case .checkNewPost:
                     self?.checkNewPost()
                 }
@@ -119,6 +116,13 @@ extension DefaultCommunityViewModel {
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
     }
     
+    private func newCreatePost() {
+        Task {
+            isNewCreatePost = true
+            await fetchPosts()
+        }
+    }
+    
     private func checkNewPost() {
         guard isNewCreatePost else { return }
         isNewCreatePost = false
@@ -136,53 +140,58 @@ extension DefaultCommunityViewModel {
     }
     
     private func updateSortType(_ sortType: CommunityPostSortType) {
-        currentSortType = sortType
-        initialisePosts()
-        actionSubject.send(.changeSortType(sortType))
-        
-        fetchPosts()
+        Task {
+            currentSortType = sortType
+            initialisePosts()
+            actionSubject.send(.changeSortType(sortType))
+            
+            await fetchPosts()
+            actionSubject.send(.scrollToTop(true))
+        }
     }
     
     private func updateCategory(_ category: CommunityPostCategory?) {
-        currentCategory = category ?? .all
-        initialisePosts()
-        actionSubject.send(.changeCategory(currentCategory))
-        
-        fetchPosts()
+        Task {
+            currentCategory = category ?? .all
+            initialisePosts()
+            actionSubject.send(.changeCategory(currentCategory))
+            
+            await fetchPosts()
+            actionSubject.send(.scrollToTop(true))
+        }
     }
     
     private func initialisePosts() {
         currentPage = 0
         isLastPage = false
         if !posts.isEmpty {
-            actionSubject.send(.scrollToTop(false))
             posts.removeAll()
         }
     }
     
     private func fetchPostsNextPage() {
         guard !isFetching && !isLastPage else { return }
-        fetchPosts()
+        Task {
+            await fetchPosts()
+        }
     }
     
-    private func fetchPosts() {
+    private func fetchPosts() async {
         guard !isFetching else { return }
         isFetching = true
-        Task {
-            defer { isFetching = false }
-            let result = await communityUseCase.fetchPosts(category: currentCategory, page: currentPage, sort: currentSortType)
-            switch result {
-            case .success(let success):
-                guard !success.isEmpty else {
-                    isLastPage = true
-                    return
-                }
-                currentPage += 1
-                posts += success
-                actionSubject.send(.didFetchPosts)
-            case .failure(let failure):
-                handleError(failure)
+        defer { isFetching = false }
+        let result = await communityUseCase.fetchPosts(category: currentCategory, page: currentPage, sort: currentSortType)
+        switch result {
+        case .success(let success):
+            guard !success.isEmpty else {
+                isLastPage = true
+                return
             }
+            currentPage += 1
+            posts += success
+            actionSubject.send(.didFetchPosts)
+        case .failure(let failure):
+            handleError(failure)
         }
     }
 }
