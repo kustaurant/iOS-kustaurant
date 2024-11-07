@@ -24,12 +24,28 @@ final class CommunityPostWriteRootView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func updateSelectBoardButtonTitle(_ title: String) {
+        selectBoardButton.configuration?.attributedTitle = AttributedString(
+            title,
+            attributes: AttributeContainer([
+                .font: UIFont.Pretendard.regular14,
+                .foregroundColor: UIColor.mainGreen
+            ])
+        )
+    }
 }
 
 extension CommunityPostWriteRootView {
     private func setupStyle() {
         backgroundColor = .systemBackground
         topBorder.backgroundColor = .gray100
+        configureSelectBoardButton()
+        configureTitleTextField()
+        configureContentTextView()
+    }
+    
+    private func configureSelectBoardButton() {
         var configuration = UIButton.Configuration.filled()
         configuration.cornerStyle = .capsule
         configuration.baseBackgroundColor = .clear
@@ -37,43 +53,35 @@ extension CommunityPostWriteRootView {
         configuration.imagePadding = 5
         configuration.image = UIImage(named: "icon_polygon")
         configuration.imagePlacement = .trailing
-        configuration.attributedTitle = AttributedString(
-            "게시판 선택",
-            attributes: AttributeContainer([
-                .font: UIFont.Pretendard.regular14,
-                .foregroundColor: UIColor.mainGreen
-            ])
-        )
         selectBoardButton.configuration = configuration
         selectBoardButton.layer.borderWidth = 1.0
         selectBoardButton.layer.borderColor = UIColor.mainGreen.cgColor
         selectBoardButton.layer.cornerRadius = 29/2
-        configureTitleTextField(titleTextField)
-        configureContentTextView(contentTextView)
+        updateSelectBoardButtonTitle("게시판 선택")
     }
     
-    private func configureTitleTextField(_ field: UITextField) {
-        field.delegate = self
+    private func configureTitleTextField() {
+        titleTextField.delegate = self
         let placeholderFont: UIFont = .Pretendard.bold17
         let placeholderColor: UIColor = .gray300
         let attributes: [NSAttributedString.Key: Any] = [
             .font: placeholderFont,
             .foregroundColor: placeholderColor,
         ]
-        field.attributedPlaceholder = NSAttributedString(string: "제목을 입력해주세요", attributes: attributes)
-        field.backgroundColor = .clear
-        field.font = .Pretendard.semiBold17
-        field.textColor = .textBlack
-        field.returnKeyType = .next
+        titleTextField.attributedPlaceholder = NSAttributedString(string: "제목을 입력해주세요", attributes: attributes)
+        titleTextField.backgroundColor = .clear
+        titleTextField.font = .Pretendard.semiBold17
+        titleTextField.textColor = .textBlack
+        titleTextField.returnKeyType = .next
     }
     
-    private func configureContentTextView(_ textView: UITextView) {
-        textView.delegate = self
-        textView.font = .Pretendard.regular13
-        textView.textColor = .gray300
-        textView.backgroundColor = .clear
-        textView.text = contentTextViewPlaceholderText
-        textView.textContainerInset = UIEdgeInsets.zero
+    private func configureContentTextView() {
+        contentTextView.delegate = self
+        contentTextView.font = .Pretendard.regular13
+        contentTextView.textColor = .gray300
+        contentTextView.backgroundColor = .clear
+        contentTextView.text = contentTextViewPlaceholderText
+        contentTextView.textContainerInset = UIEdgeInsets.zero
     }
     
     private func setupLayout() {

@@ -29,6 +29,7 @@ final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModelAction()
         setupMenu()
     }
     
@@ -39,6 +40,20 @@ final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewCon
         let doneButtonItem = UIBarButtonItem(customView: doneButton)
         navigationItem.rightBarButtonItem = doneButtonItem
         navigationItem.title = "게시글 작성"
+    }
+}
+
+extension CommunityPostWriteViewController {
+    private func bindViewModelAction() {
+        viewModel.actionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                switch action {
+                case .updateCategory(let category):
+                    self?.rootView.updateSelectBoardButtonTitle(category.rawValue)
+                }
+                
+            }.store(in: &cancellables)
     }
 }
 

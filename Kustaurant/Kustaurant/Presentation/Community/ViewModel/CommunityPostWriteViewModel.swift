@@ -11,7 +11,9 @@ import Combine
 protocol CommunityPostWriteViewModelInput {
     func process(_ state: DefaultCommunityPostWriteViewModel.State)
 }
-protocol CommunityPostWriteViewModelOutput {}
+protocol CommunityPostWriteViewModelOutput {
+    var actionPublisher: AnyPublisher<DefaultCommunityPostWriteViewModel.Action, Never> { get }
+}
 
 typealias CommunityPostWriteViewModel = CommunityPostWriteViewModelInput & CommunityPostWriteViewModelOutput
 
@@ -19,12 +21,22 @@ extension DefaultCommunityPostWriteViewModel {
     enum State {
         case initial, changeCategory(CommunityPostCategory)
     }
+    enum Action {
+        case updateCategory(CommunityPostCategory)
+    }
 }
 
 final class DefaultCommunityPostWriteViewModel: CommunityPostWriteViewModel {
     @Published private var state: State = .initial
     private let communityUseCase: CommunityUseCases
+    private let actionSubject: PassthroughSubject<Action, Never> = .init()
     private var cancellables: Set<AnyCancellable> = .init()
+    private var currentCategory: CommunityPostCategory = .all
+    
+    // Output
+    var actionPublisher: AnyPublisher<Action, Never> {
+        actionSubject.eraseToAnyPublisher()
+    }
     
     // MARK: - Initialization
     init(communityUseCase: CommunityUseCases) {
@@ -54,6 +66,7 @@ extension DefaultCommunityPostWriteViewModel {
 
 extension DefaultCommunityPostWriteViewModel {
     private func changeCategory(_ category: CommunityPostCategory) {
-        Logger.info(category.rawValue)
+        currentCategory = category
+        actionSubject.send(.updateCategory(category))
     }
 }
