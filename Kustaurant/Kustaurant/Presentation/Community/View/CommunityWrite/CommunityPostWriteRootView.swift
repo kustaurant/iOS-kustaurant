@@ -10,9 +10,9 @@ import UIKit
 final class CommunityPostWriteRootView: UIView {
     private let topBorder: UIView = .init()
     private(set) var selectBoardButton: UIButton = .init()
-    private let titleTextField: UITextField = .init()
+    private(set) var titleTextField: UITextField = .init()
+    private(set) var contentTextView: UITextView = .init()
     private let contentTextViewPlaceholderText = "내용을 입력해주세요.\n커뮤니티 이용 규칙에 의해 부적절한 게시물을 숨김, 삭제 처리될 수 있습니다."
-    private let contentTextView: UITextView = .init()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,6 +33,17 @@ final class CommunityPostWriteRootView: UIView {
                 .foregroundColor: UIColor.mainGreen
             ])
         )
+    }
+    
+    func updateContentTextView(_ text: String) {
+        if text == contentTextViewPlaceholderText {
+            contentTextView.text = nil
+            contentTextView.textColor = .black
+        }
+        if text.isEmpty {
+            contentTextView.text = contentTextViewPlaceholderText
+            contentTextView.textColor = .lightGray
+        }
     }
 }
 
@@ -61,7 +72,6 @@ extension CommunityPostWriteRootView {
     }
     
     private func configureTitleTextField() {
-        titleTextField.delegate = self
         let placeholderFont: UIFont = .Pretendard.bold17
         let placeholderColor: UIColor = .gray300
         let attributes: [NSAttributedString.Key: Any] = [
@@ -76,7 +86,6 @@ extension CommunityPostWriteRootView {
     }
     
     private func configureContentTextView() {
-        contentTextView.delegate = self
         contentTextView.font = .Pretendard.regular13
         contentTextView.textColor = .gray300
         contentTextView.backgroundColor = .clear
@@ -127,30 +136,5 @@ extension CommunityPostWriteRootView {
     
     @objc private func showPicker() {
         
-    }
-}
-
-// MARK: - UITextFieldDelegate
-extension CommunityPostWriteRootView: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        contentTextView.becomeFirstResponder()
-        return true
-    }
-}
-
-// MARK: - UITextViewDelegate
-extension CommunityPostWriteRootView: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == contentTextViewPlaceholderText {
-            textView.text = nil
-            textView.textColor = .black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = contentTextViewPlaceholderText
-            textView.textColor = .lightGray
-        }
     }
 }

@@ -30,6 +30,7 @@ final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewCon
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModelAction()
+        bindRootView()
         setupMenu()
     }
     
@@ -51,9 +52,16 @@ extension CommunityPostWriteViewController {
                 switch action {
                 case .updateCategory(let category):
                     self?.rootView.updateSelectBoardButtonTitle(category.rawValue)
+                case .changeStateDoneButton(let isComplete):
+                    self?.doneButton.buttonState = isComplete ? .on : .off
                 }
                 
             }.store(in: &cancellables)
+    }
+    
+    private func bindRootView() {
+        rootView.titleTextField.delegate = self
+        rootView.contentTextView.delegate = self
     }
 }
 
@@ -70,5 +78,39 @@ extension CommunityPostWriteViewController {
         let menu = UIMenu(title: "게시판 선택", children: actions)
         rootView.selectBoardButton.menu = menu
         rootView.selectBoardButton.showsMenuAsPrimaryAction = true
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension CommunityPostWriteViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        rootView.contentTextView.becomeFirstResponder()
+        return true
+    }
+    
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        let title = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
+        viewModel.process(.updateTitle(title))
+        return true
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension CommunityPostWriteViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        rootView.updateContentTextView(textView.text)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        rootView.updateContentTextView(textView.text)   
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        guard let content = textView.text else { return }
+        viewModel.process(.updateContent(content))
     }
 }

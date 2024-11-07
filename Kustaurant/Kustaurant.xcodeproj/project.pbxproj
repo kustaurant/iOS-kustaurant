@@ -117,6 +117,7 @@
 		584E82992CD9E4EF00BCE9B1 /* CommunityPostWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82982CD9E4EF00BCE9B1 /* CommunityPostWriteViewController.swift */; };
 		584E829B2CD9E54900BCE9B1 /* CommunityPostWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E829A2CD9E54900BCE9B1 /* CommunityPostWriteViewModel.swift */; };
 		584E829E2CD9E7DC00BCE9B1 /* CommunityPostWriteRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E829D2CD9E7DC00BCE9B1 /* CommunityPostWriteRootView.swift */; };
+		584E82A22CDC7FFF00BCE9B1 /* CommunityPostWriteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584E82A12CDC7FFF00BCE9B1 /* CommunityPostWriteData.swift */; };
 		584FA4C42C646FD2008DDC19 /* TierMapRestaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */; };
 		584FA4C62C6472D7008DDC19 /* TierMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */; };
 		584FA4C92C647442008DDC19 /* TierMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584FA4C82C647442008DDC19 /* TierMapView.swift */; };
@@ -462,6 +463,7 @@
 		584E82982CD9E4EF00BCE9B1 /* CommunityPostWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostWriteViewController.swift; sourceTree = "<group>"; };
 		584E829A2CD9E54900BCE9B1 /* CommunityPostWriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostWriteViewModel.swift; sourceTree = "<group>"; };
 		584E829D2CD9E7DC00BCE9B1 /* CommunityPostWriteRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostWriteRootView.swift; sourceTree = "<group>"; };
+		584E82A12CDC7FFF00BCE9B1 /* CommunityPostWriteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostWriteData.swift; sourceTree = "<group>"; };
 		584FA4C32C646FD2008DDC19 /* TierMapRestaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapRestaurants.swift; sourceTree = "<group>"; };
 		584FA4C52C6472D7008DDC19 /* TierMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapViewModel.swift; sourceTree = "<group>"; };
 		584FA4C82C647442008DDC19 /* TierMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMapView.swift; sourceTree = "<group>"; };
@@ -1063,7 +1065,7 @@
 		5841736C2C47BD16001EC132 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				58772FC12CCF5A2B00F2C170 /* CommunityPostDetail */,
+				584E829F2CDC7FC100BCE9B1 /* Community */,
 				588496792C8AEBA100E21F64 /* Evaluation */,
 				CFE2047F2C6A0FD700BCA87C /* ResraurantDetail */,
 				BA2D895D2C75A00C004E7B8E /* Dto */,
@@ -1154,6 +1156,23 @@
 				584E829D2CD9E7DC00BCE9B1 /* CommunityPostWriteRootView.swift */,
 			);
 			path = CommunityWrite;
+			sourceTree = "<group>";
+		};
+		584E829F2CDC7FC100BCE9B1 /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				584E82A02CDC7FCA00BCE9B1 /* CommunityPostWrite */,
+				58772FC12CCF5A2B00F2C170 /* CommunityPostDetail */,
+			);
+			path = Community;
+			sourceTree = "<group>";
+		};
+		584E82A02CDC7FCA00BCE9B1 /* CommunityPostWrite */ = {
+			isa = PBXGroup;
+			children = (
+				584E82A12CDC7FFF00BCE9B1 /* CommunityPostWriteData.swift */,
+			);
+			path = CommunityPostWrite;
 			sourceTree = "<group>";
 		};
 		584FA4C72C64742F008DDC19 /* TierMap */ = {
@@ -2424,6 +2443,7 @@
 				5826A1EB2C77267D0097256C /* NMFMapCameraManager.swift in Sources */,
 				58067CAC2C4FB72C00889C92 /* TierListView.swift in Sources */,
 				5826A1EF2C7892CC0097256C /* TierCategoryPopupView.swift in Sources */,
+				584E82A22CDC7FFF00BCE9B1 /* CommunityPostWriteData.swift in Sources */,
 				5841734F2C4682C8001EC132 /* CommunitySceneDIContainer.swift in Sources */,
 				588496752C8AE62600E21F64 /* EvaluationTableView.swift in Sources */,
 				580E98422CA69732004D6FE2 /* EvaluationReviewCell.swift in Sources */,

@@ -19,10 +19,10 @@ typealias CommunityPostWriteViewModel = CommunityPostWriteViewModelInput & Commu
 
 extension DefaultCommunityPostWriteViewModel {
     enum State {
-        case initial, changeCategory(CommunityPostCategory)
+        case initial, changeCategory(CommunityPostCategory), updateTitle(String), updateContent(String)
     }
     enum Action {
-        case updateCategory(CommunityPostCategory)
+        case updateCategory(CommunityPostCategory), changeStateDoneButton(Bool)
     }
 }
 
@@ -31,7 +31,7 @@ final class DefaultCommunityPostWriteViewModel: CommunityPostWriteViewModel {
     private let communityUseCase: CommunityUseCases
     private let actionSubject: PassthroughSubject<Action, Never> = .init()
     private var cancellables: Set<AnyCancellable> = .init()
-    private var currentCategory: CommunityPostCategory = .all
+    private let writeData: CommunityPostWriteData = .init()
     
     // Output
     var actionPublisher: AnyPublisher<Action, Never> {
@@ -58,6 +58,10 @@ extension DefaultCommunityPostWriteViewModel {
                 case .initial: break
                 case .changeCategory(let category):
                     self?.changeCategory(category)
+                case .updateTitle(let title):
+                    self?.updateTitle(title)
+                case .updateContent(let content):
+                    self?.updateContent(content)
                 }
             }
             .store(in: &cancellables)
@@ -66,7 +70,24 @@ extension DefaultCommunityPostWriteViewModel {
 
 extension DefaultCommunityPostWriteViewModel {
     private func changeCategory(_ category: CommunityPostCategory) {
-        currentCategory = category
-        actionSubject.send(.updateCategory(category))
+        Task {
+            await writeData.updateCategory(category)
+            actionSubject.send(.updateCategory(category))
+            await actionSubject.send(.changeStateDoneButton(writeData.isComplete))
+        }
+    }
+    
+    private func updateTitle(_ title: String) {
+        Task {
+            await writeData.updateTitle(title)
+            await actionSubject.send(.changeStateDoneButton(writeData.isComplete))
+        }
+    }
+    
+    private func updateContent(_ content: String) {
+        Task {
+            await writeData.updateContent(content)
+            await actionSubject.send(.changeStateDoneButton(writeData.isComplete))
+        }
     }
 }
