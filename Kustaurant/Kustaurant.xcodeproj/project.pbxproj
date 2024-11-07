@@ -1068,7 +1068,7 @@
 				584E829F2CDC7FC100BCE9B1 /* Community */,
 				588496792C8AEBA100E21F64 /* Evaluation */,
 				CFE2047F2C6A0FD700BCA87C /* ResraurantDetail */,
-				BA2D895D2C75A00C004E7B8E /* Dto */,
+				BA2D895D2C75A00C004E7B8E /* DTO */,
 				BA57C7BE2C7316380063F2FA /* ThirdPartyRepositories */,
 				BA57C7BD2C73162D0063F2FA /* InMemoryRepositories */,
 				584173742C47C2FE001EC132 /* Repositories */,
@@ -1513,13 +1513,13 @@
 			path = Logger;
 			sourceTree = "<group>";
 		};
-		BA2D895D2C75A00C004E7B8E /* Dto */ = {
+		BA2D895D2C75A00C004E7B8E /* DTO */ = {
 			isa = PBXGroup;
 			children = (
 				BA2D895E2C75A024004E7B8E /* NaverMeResponse.swift */,
 				BA2D89602C75A02A004E7B8E /* AccessTokenResponse.swift */,
 			);
-			path = Dto;
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		BA2D89642C76FC3C004E7B8E /* Search */ = {

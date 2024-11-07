@@ -16,6 +16,38 @@ final class DefaultCommunityRepository {
 }
 
 extension DefaultCommunityRepository: CommunityRepository {
+    func createPost(
+        title: String,
+        postCategory: String,
+        content: String,
+        imageFile: String?
+    ) async -> Result<CommunityPostDTO, NetworkError> {
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        var urlBuilder = URLRequestBuilder(
+            url: networkService.appConfiguration.apiBaseURL + networkService.postCommnunityPostCreateURL,
+            method: .post
+        )
+        var params: [String: String] = [
+            "title" : title,
+            "postCategory" : postCategory,
+            "content" : content
+        ]
+        if let imageFile {
+            params.updateValue("imageFile", forKey: imageFile)
+        }
+        urlBuilder.addQuery(parameter: params)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        guard let data: CommunityPostDTO = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        return .success(data)
+    }
+    
     func deleteCommunityComment(commentId: Int) async -> Result<Void, NetworkError> {
         let urlBuilder = URLRequestBuilder(
             url: networkService.appConfiguration.apiBaseURL + networkService.deleteCommunityComment(commentId),
@@ -26,7 +58,6 @@ extension DefaultCommunityRepository: CommunityRepository {
         if let error = response.error {
             return .failure(error)
         }
-        print(response.decodeString())
 
         return .success(())
     }

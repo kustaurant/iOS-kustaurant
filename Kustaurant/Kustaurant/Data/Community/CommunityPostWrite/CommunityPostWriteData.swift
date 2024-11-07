@@ -8,9 +8,9 @@
 import Foundation
 
 actor CommunityPostWriteData {
-    private var title: String?
-    private var content: String?
-    private var category: CommunityPostCategory = .all
+    private(set) var title: String?
+    private(set) var content: String?
+    private(set) var category: CommunityPostCategory = .all
     
     var isComplete: Bool {
         if let title = title, !title.isEmpty,

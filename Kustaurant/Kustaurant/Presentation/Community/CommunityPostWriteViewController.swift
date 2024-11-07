@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewController {
+final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewController, LoadingDisplayable {
     private var viewModel: CommunityPostWriteViewModel
     private var rootView = CommunityPostWriteRootView()
     private let doneButton: KuSubmitButton = .init()
@@ -39,6 +39,9 @@ final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewCon
         doneButton.buttonTitle = "완료"
         doneButton.size = .custom(.Pretendard.regular14, 0)
         let doneButtonItem = UIBarButtonItem(customView: doneButton)
+        doneButton.addAction(UIAction { [weak self] _ in
+            self?.viewModel.process(.tappedDoneButton)
+        }, for: .touchUpInside)
         navigationItem.rightBarButtonItem = doneButtonItem
         navigationItem.title = "게시글 작성"
     }
@@ -50,12 +53,19 @@ extension CommunityPostWriteViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 switch action {
+                case .showLoading(let isLoading):
+                    if isLoading {
+                        self?.showLoadingView()
+                    } else {
+                        self?.hideLoadingView()
+                    }
                 case .updateCategory(let category):
                     self?.rootView.updateSelectBoardButtonTitle(category.rawValue)
                 case .changeStateDoneButton(let isComplete):
                     self?.doneButton.buttonState = isComplete ? .on : .off
+                case .didCreatePost:
+                    self?.backButtonTapped()
                 }
-                
             }.store(in: &cancellables)
     }
     

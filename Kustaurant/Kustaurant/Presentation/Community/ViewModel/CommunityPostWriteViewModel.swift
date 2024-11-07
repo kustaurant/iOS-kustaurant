@@ -19,10 +19,10 @@ typealias CommunityPostWriteViewModel = CommunityPostWriteViewModelInput & Commu
 
 extension DefaultCommunityPostWriteViewModel {
     enum State {
-        case initial, changeCategory(CommunityPostCategory), updateTitle(String), updateContent(String)
+        case initial, changeCategory(CommunityPostCategory), updateTitle(String), updateContent(String), tappedDoneButton
     }
     enum Action {
-        case updateCategory(CommunityPostCategory), changeStateDoneButton(Bool)
+        case showLoading(Bool), updateCategory(CommunityPostCategory), changeStateDoneButton(Bool), didCreatePost
     }
 }
 
@@ -62,6 +62,8 @@ extension DefaultCommunityPostWriteViewModel {
                     self?.updateTitle(title)
                 case .updateContent(let content):
                     self?.updateContent(content)
+                case .tappedDoneButton:
+                    self?.createPost()
                 }
             }
             .store(in: &cancellables)
@@ -69,6 +71,21 @@ extension DefaultCommunityPostWriteViewModel {
 }
 
 extension DefaultCommunityPostWriteViewModel {
+    private func createPost() {
+        Task {
+            actionSubject.send(.showLoading(true))
+            defer { actionSubject.send(.showLoading(false)) }
+            guard await writeData.isComplete else { return }
+            let result = await communityUseCase.createPost(writeData)
+            switch result {
+            case .success(_):
+                actionSubject.send(.didCreatePost)
+            case .failure(let error):
+                Logger.error("Error in {\(#fileID)} : \(error.localizedDescription)")
+            }
+        }
+    }
+    
     private func changeCategory(_ category: CommunityPostCategory) {
         Task {
             await writeData.updateCategory(category)
