@@ -15,4 +15,5 @@ protocol CommunityRepository {
     func postCommunityCommentLikeToggle(commentId: Int, action: CommentActionType) async -> Result<CommunityCommentStatus, NetworkError>
     func deleteCommunityComment(commentId: Int) async -> Result<Void, NetworkError>
     func createPost(title: String, postCategory: String, content: String, imageFile: String?) async -> Result<CommunityPostDTO, NetworkError>
+    func uploadImage(imageData: Data?) async -> Result<String, NetworkError>
 }

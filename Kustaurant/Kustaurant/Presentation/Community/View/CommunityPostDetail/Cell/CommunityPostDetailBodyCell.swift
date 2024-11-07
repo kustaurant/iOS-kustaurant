@@ -90,7 +90,7 @@ extension CommunityPostDetailBodyCell {
         timeAgoLabel.textColor = .gray600
         titleLabel.font = .Pretendard.bold18
         titleLabel.textColor = .textBlack
-        photoImageView.contentMode = .scaleAspectFill
+        photoImageView.contentMode = .scaleAspectFit
         photoImageView.clipsToBounds = true
         photoImageView.layer.cornerRadius = 10
         bodyLabel.numberOfLines = 0

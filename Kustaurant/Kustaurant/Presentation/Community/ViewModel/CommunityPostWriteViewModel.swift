@@ -19,7 +19,7 @@ typealias CommunityPostWriteViewModel = CommunityPostWriteViewModelInput & Commu
 
 extension DefaultCommunityPostWriteViewModel {
     enum State {
-        case initial, changeCategory(CommunityPostCategory), updateTitle(String), updateContent(String), tappedDoneButton
+        case initial, changeCategory(CommunityPostCategory), updateTitle(String), updateContent(String), updateImageData(Data?),tappedDoneButton
     }
     enum Action {
         case showLoading(Bool), updateCategory(CommunityPostCategory), changeStateDoneButton(Bool), didCreatePost
@@ -64,6 +64,8 @@ extension DefaultCommunityPostWriteViewModel {
                     self?.updateContent(content)
                 case .tappedDoneButton:
                     self?.createPost()
+                case .updateImageData(let imageData):
+                    self?.updateImageData(imageData)
                 }
             }
             .store(in: &cancellables)
@@ -76,11 +78,23 @@ extension DefaultCommunityPostWriteViewModel {
             actionSubject.send(.showLoading(true))
             defer { actionSubject.send(.showLoading(false)) }
             guard await writeData.isComplete else { return }
-            let result = await communityUseCase.createPost(writeData)
-            switch result {
-            case .success(_):
-                actionSubject.send(.didCreatePost)
-            case .failure(let error):
+            do {
+                let upload = await communityUseCase.uploadImage(writeData)
+                switch upload {
+                case .success(let success):
+                    await writeData.updateImageFile(success)
+                case .failure(let failure):
+                    throw failure
+                }
+                
+                let create = await communityUseCase.createPost(writeData)
+                switch create {
+                case .success(_):
+                    actionSubject.send(.didCreatePost)
+                case .failure(let failure):
+                    throw failure
+                }
+            } catch {
                 Logger.error("Error in {\(#fileID)} : \(error.localizedDescription)")
             }
         }
@@ -105,6 +119,12 @@ extension DefaultCommunityPostWriteViewModel {
         Task {
             await writeData.updateContent(content)
             await actionSubject.send(.changeStateDoneButton(writeData.isComplete))
+        }
+    }
+    
+    private func updateImageData(_ data: Data?) {
+        Task {
+            await writeData.updateImageData(data)
         }
     }
 }

@@ -142,3 +142,22 @@ extension CommunityPostWriteViewController: UITextViewDelegate {
         viewModel.process(.updateContent(content))
     }
 }
+
+
+// MARK: ImagePicker
+extension CommunityPostWriteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+        picker.dismiss(animated: true, completion: nil)
+        let image = info[.originalImage] as? UIImage
+        rootView.updateImageView(image)
+        let imageData = image?.jpegData(compressionQuality: 1.0)
+        viewModel.process(.updateImageData(imageData))
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}

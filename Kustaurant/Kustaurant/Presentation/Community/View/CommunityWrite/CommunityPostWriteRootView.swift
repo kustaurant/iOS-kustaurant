@@ -12,6 +12,7 @@ final class CommunityPostWriteRootView: UIView {
     private(set) var selectBoardButton: UIButton = .init()
     private(set) var titleTextField: UITextField = .init()
     private(set) var contentTextView: UITextView = .init()
+    private let imageView: UIImageView = .init()
     private let contentTextViewPlaceholderText = "내용을 입력해주세요.\n커뮤니티 이용 규칙에 의해 부적절한 게시물을 숨김, 삭제 처리될 수 있습니다."
     
     override init(frame: CGRect) {
@@ -45,6 +46,10 @@ final class CommunityPostWriteRootView: UIView {
             contentTextView.textColor = .lightGray
         }
     }
+    
+    func updateImageView(_ image: UIImage?) {
+        imageView.image = image
+    }
 }
 
 extension CommunityPostWriteRootView {
@@ -54,6 +59,12 @@ extension CommunityPostWriteRootView {
         configureSelectBoardButton()
         configureTitleTextField()
         configureContentTextView()
+    }
+    
+    private func configureImageView() {
+        imageView.contentMode = .scaleToFill
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showPicker))
+        imageView.addGestureRecognizer(tapGesture)
     }
     
     private func configureSelectBoardButton() {
@@ -96,6 +107,9 @@ extension CommunityPostWriteRootView {
     private func setupLayout() {
         addSubview(topBorder, autoLayout: [.topSafeArea(constant: 0), .fillX(0), .height(1.5)])
         addSubview(selectBoardButton, autoLayout: [.topSafeArea(constant: 20), .leading(20), .height(29)])
+        
+        let imageViewSize: CGFloat = 60
+        addSubview(imageView, autoLayout: [.topSafeArea(constant: 20), .trailing(10), .width(imageViewSize), .height(imageViewSize)])
         addSubview(titleTextField, autoLayout: [.topNext(to: selectBoardButton, constant: 40), .fillX(20), .height(24)])
         let line = UIView()
         line.backgroundColor = .gray300
@@ -135,6 +149,10 @@ extension CommunityPostWriteRootView {
     }
     
     @objc private func showPicker() {
-        
+        guard let parentVC = parentViewController as? CommunityPostWriteViewController else { return }
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = parentVC
+        imagePickerController.sourceType = .photoLibrary
+        parentVC.present(imagePickerController, animated: true)
     }
 }

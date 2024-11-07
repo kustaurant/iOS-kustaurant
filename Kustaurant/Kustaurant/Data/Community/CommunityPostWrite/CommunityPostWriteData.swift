@@ -11,6 +11,8 @@ actor CommunityPostWriteData {
     private(set) var title: String?
     private(set) var content: String?
     private(set) var category: CommunityPostCategory = .all
+    private(set) var imageData: Data?
+    private(set) var imageFile: String?
     
     var isComplete: Bool {
         if let title = title, !title.isEmpty,
@@ -34,5 +36,13 @@ actor CommunityPostWriteData {
     
     func updateContent(_ content: String?) {
         self.content = content
+    }
+    
+    func updateImageFile(_ imageFile: String?) {
+        self.imageFile = imageFile
+    }
+    
+    func updateImageData(_ imageData: Data?) {
+        self.imageData = imageData
     }
 }

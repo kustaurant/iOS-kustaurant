@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 final class DefaultCommunityRepository {
     private let networkService: NetworkService
@@ -16,6 +17,38 @@ final class DefaultCommunityRepository {
 }
 
 extension DefaultCommunityRepository: CommunityRepository {
+    func uploadImage(imageData: Data?) async -> Result<String, NetworkError> {
+        return await withCheckedContinuation { continuation in
+            guard let imageData else { return continuation.resume(returning: .failure(.noData))}
+            guard let url = URL(string: networkService.appConfiguration.apiBaseURL + networkService.postCommunityPostUploadImage) else {
+                return continuation.resume(returning: .failure(.invalidURL))
+            }
+            guard let user: UserCredentials = KeychainStorage.shared.getValue(forKey: KeychainKey.userCredentials) else {
+                return continuation.resume(returning: .failure(.custom("userCredentials")))
+            }
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(user.accessToken)",
+                "Content-type": "multipart/form-data"
+            ]
+            let imageName = UUID().uuidString + ".jpg"
+            AF.upload(multipartFormData: { MultipartFormData in
+                MultipartFormData.append(imageData, withName: "image", fileName: imageName, mimeType: "image/jpg")
+            }, to: url, headers: headers).responseData { response in
+                switch response.result {
+                case .success(let data):
+                    if let decodedData = try? JSONDecoder().decode(String.self, from: data) {
+                        continuation.resume(returning: .success(decodedData))
+                    } else {
+                        continuation.resume(returning: .failure(.decodingFailed))
+                    }
+                    
+                case .failure(let error):
+                    continuation.resume(returning: .failure(.custom(error.localizedDescription)))
+                }
+            }
+        }
+    }
+    
     func createPost(
         title: String,
         postCategory: String,
@@ -34,7 +67,7 @@ extension DefaultCommunityRepository: CommunityRepository {
             "content" : content
         ]
         if let imageFile {
-            params.updateValue("imageFile", forKey: imageFile)
+            params["imageFile"] = imageFile
         }
         urlBuilder.addQuery(parameter: params)
         let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
