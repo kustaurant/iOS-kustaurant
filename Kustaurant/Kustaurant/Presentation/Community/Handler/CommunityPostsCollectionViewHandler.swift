@@ -32,6 +32,10 @@ final class CommunityPostsCollectionViewHandler: NSObject {
     func update() {
         applySnapShot()
     }
+    
+    func scrollToTop(animated: Bool) {
+        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: animated)
+    }
 }
 
 

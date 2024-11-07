@@ -26,10 +26,10 @@ typealias CommunityViewModel = CommunityViewModelInput & CommunityViewModelOutpu
 
 extension DefaultCommunityViewModel {
     enum State {
-        case initial, fetchPosts, fetchPostsNextPage, updateCategory(CommunityPostCategory), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO), tappedWriteButton
+        case initial, fetchPosts, fetchPostsNextPage, updateCategory(CommunityPostCategory?), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO), tappedWriteButton, newCreatePost, checkNewPost
     }
     enum Action {
-        case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet
+        case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet, scrollToTop(Bool)
     }
 }
 
@@ -42,6 +42,7 @@ final class DefaultCommunityViewModel: CommunityViewModel {
     
     var posts: [CommunityPostDTO] = []
     
+    private var isNewCreatePost = false
     private var isLastPage = false
     private var currentPage = 0
     private var currentCategory: CommunityPostCategory = .all
@@ -95,6 +96,11 @@ extension DefaultCommunityViewModel {
                     self?.actions.showPostDetail(post)
                 case .tappedWriteButton:
                     self?.actions.showPostWrite()
+                case .newCreatePost:
+                    self?.fetchPosts()
+                    self?.isNewCreatePost = true
+                case .checkNewPost:
+                    self?.checkNewPost()
                 }
             }
             .store(in: &cancellables)
@@ -112,6 +118,12 @@ extension DefaultCommunityViewModel {
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
     }
+    
+    private func checkNewPost() {
+        guard isNewCreatePost else { return }
+        isNewCreatePost = false
+        actionSubject.send(.scrollToTop(false))
+    }
 
     private func tappedSortTypeButton(_ sortType: CommunityPostSortType) {
         guard !isFetching else { return }
@@ -125,22 +137,27 @@ extension DefaultCommunityViewModel {
     
     private func updateSortType(_ sortType: CommunityPostSortType) {
         currentSortType = sortType
-        currentPage = 0
-        isLastPage = false
-        posts.removeAll()
+        initialisePosts()
         actionSubject.send(.changeSortType(sortType))
         
         fetchPosts()
     }
     
-    private func updateCategory(_ category: CommunityPostCategory) {
-        currentCategory = category
-        currentPage = 0
-        isLastPage = false
-        posts.removeAll()
-        actionSubject.send(.changeCategory(category))
+    private func updateCategory(_ category: CommunityPostCategory?) {
+        currentCategory = category ?? .all
+        initialisePosts()
+        actionSubject.send(.changeCategory(currentCategory))
         
         fetchPosts()
+    }
+    
+    private func initialisePosts() {
+        currentPage = 0
+        isLastPage = false
+        if !posts.isEmpty {
+            actionSubject.send(.scrollToTop(false))
+            posts.removeAll()
+        }
     }
     
     private func fetchPostsNextPage() {

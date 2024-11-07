@@ -23,7 +23,7 @@ class NavigationBarLeftBackButtonViewController: UIViewController {
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
-    @objc func backButtonTapped() {
+    @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
 }

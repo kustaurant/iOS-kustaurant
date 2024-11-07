@@ -8,7 +8,12 @@
 import UIKit
 import Combine
 
+protocol CommunityPostWriteDelegate: AnyObject {
+    func didCreatePost()
+}
+
 final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewController, LoadingDisplayable {
+    weak var delegate: CommunityPostWriteDelegate?
     private var viewModel: CommunityPostWriteViewModel
     private var rootView = CommunityPostWriteRootView()
     private let doneButton: KuSubmitButton = .init()
@@ -64,7 +69,7 @@ extension CommunityPostWriteViewController {
                 case .changeStateDoneButton(let isComplete):
                     self?.doneButton.buttonState = isComplete ? .on : .off
                 case .didCreatePost:
-                    self?.backButtonTapped()
+                    self?.didCreatePost()
                 }
             }.store(in: &cancellables)
     }
@@ -88,6 +93,19 @@ extension CommunityPostWriteViewController {
         let menu = UIMenu(title: "게시판 선택", children: actions)
         rootView.selectBoardButton.menu = menu
         rootView.selectBoardButton.showsMenuAsPrimaryAction = true
+    }
+    
+    private func didCreatePost() {
+        delegate?.didCreatePost()
+        presentAlert()
+    }
+    
+    private func presentAlert() {
+        let alert = UIAlertController(title: "게시글 작성 완료", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
 
