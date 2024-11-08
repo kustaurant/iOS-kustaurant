@@ -26,10 +26,10 @@ typealias CommunityViewModel = CommunityViewModelInput & CommunityViewModelOutpu
 
 extension DefaultCommunityViewModel {
     enum State {
-        case initial, fetchPostsNextPage, updateCategory(CommunityPostCategory?), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO), tappedWriteButton, newCreatePost, checkNewPost
+        case initial, fetchPostsNextPage, updateCategory(CommunityPostCategory?), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO), tappedWriteButton, newCreatePost, checkNewPost, deletePost(Int)
     }
     enum Action {
-        case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet, scrollToTop(Bool)
+        case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet, scrollToTop(Bool), reloadPosts
     }
 }
 
@@ -98,6 +98,8 @@ extension DefaultCommunityViewModel {
                     self?.newCreatePost()
                 case .checkNewPost:
                     self?.checkNewPost()
+                case .deletePost(let postId):
+                    self?.deletePost(postId)
                 }
             }
             .store(in: &cancellables)
@@ -114,6 +116,12 @@ extension DefaultCommunityViewModel {
             errorLocalizedDescription = error.localizedDescription
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
+    private func deletePost(_ postId: Int) {
+        guard let postIndex = posts.firstIndex(where: { $0.postId == postId }) else { return }
+        posts.remove(at: postIndex)
+        actionSubject.send(.reloadPosts)
     }
     
     private func newCreatePost() {

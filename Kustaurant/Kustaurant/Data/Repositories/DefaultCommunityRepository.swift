@@ -17,6 +17,21 @@ final class DefaultCommunityRepository {
 }
 
 extension DefaultCommunityRepository: CommunityRepository {
+    func deletePost(postId: Int) async -> Result<Void, NetworkError> {
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        let urlBuilder = URLRequestBuilder(
+            url: networkService.appConfiguration.apiBaseURL + networkService.deleteCommunityPost(postId),
+            method: .delete
+        )
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        return .success(())
+    }
+    
     func uploadImage(imageData: Data?) async -> Result<String, NetworkError> {
         return await withCheckedContinuation { continuation in
             guard let imageData else { return continuation.resume(returning: .failure(.noData))}

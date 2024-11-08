@@ -8,10 +8,16 @@
 import UIKit
 import Combine
 
+protocol CommunityPostDetailDelegate: AnyObject {
+    func didDeletePost(postId: Int)
+}
+
 final class CommunityPostDetailViewController: NavigationBarLeftBackButtonViewController, LoadingDisplayable {
+    weak var delegate: CommunityPostDetailDelegate?
     private var rootView = CommunityPostDetailRootView()
     private var viewModel: CommunityPostDetailViewModel
     private var detailTableViewHandler: CommunityPostDetailTableViewHandler?
+    private let menuEllipsisButton: UIButton = .init()
     private var cancellables: Set<AnyCancellable> = .init()
     
     init(viewModel: CommunityPostDetailViewModel) {
@@ -39,6 +45,11 @@ final class CommunityPostDetailViewController: NavigationBarLeftBackButtonViewCo
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
+        menuEllipsisButton.setImage(UIImage(named: "icon_ellipsis_black"), for: .normal)
+        menuEllipsisButton.isHidden = true
+        menuEllipsisButton.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
+        let rightBarButtonItem = UIBarButtonItem(customView: menuEllipsisButton)
+        navigationItem.rightBarButtonItem = rightBarButtonItem
         navigationItem.title = viewModel.post.postCategory ?? ""
     }
     
@@ -55,24 +66,59 @@ extension CommunityPostDetailViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 switch action {
-                case .showLoading(let isLoading):
+                case .showLoading(let isLoading, let isBlocking):
                     if isLoading {
-                        self?.showLoadingView(isBlocking: false)
+                        self?.showLoadingView(isBlocking: isBlocking)
                     } else {
                         self?.hideLoadingView()
                     }
                 case .touchLikeButton:
                     self?.detailTableViewHandler?.update()
                 case .didFetchPostDetail:
-                    self?.detailTableViewHandler?.update()
+                    self?.didFetchPostDetail()
                 case .touchScrapButton:
                     self?.detailTableViewHandler?.update()
                 case .updateCommentActionButton:
                     self?.detailTableViewHandler?.update()
                 case .deleteComment:
                     self?.detailTableViewHandler?.update()
+                case .showAlert(payload: let payload):
+                    self?.presentAlert(payload: payload)
+                case .deletePost:
+                    self?.deletePost()
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    private func deletePost() {
+        delegate?.didDeletePost(postId: viewModel.post.postId ?? 0)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func didFetchPostDetail() {
+        if viewModel.post.isPostMine ?? false {
+            menuEllipsisButton.isHidden = false
+            setupMenu()
+        }
+        detailTableViewHandler?.update()
+    }
+    
+    private func setupMenu() {
+        let deleteAction = UIAction(title: "삭제하기", image: UIImage(named: "icon_trash"), attributes: .destructive) { [weak self] _ in
+            self?.viewModel.process(.touchDeleteMenu)
+        }
+        let menu = UIMenu(title: "", children: [deleteAction])
+        menuEllipsisButton.menu = menu
+        menuEllipsisButton.showsMenuAsPrimaryAction = true
+    }
+    
+    private func presentAlert(payload: AlertPayload) {
+        let alert = UIAlertController(title: payload.title, message: payload.subtitle, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+            payload.onConfirm?()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
