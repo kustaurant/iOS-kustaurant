@@ -34,4 +34,8 @@ final class NetworkService {
     func deleteCommunityComment(_ commentId: Int) -> String {
         "/api/v1/auth/community/comment/\(commentId)"
     }
+    
+    func deleteCommunityPost(_ postId: Int) -> String {
+        "/api/v1/auth/community/\(postId)"
+    }
 }
