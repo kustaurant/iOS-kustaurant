@@ -14,6 +14,8 @@ protocol CommunityUseCases {
     func postDetailScrapToggle(postId: Int) async -> Result<CommunityScrapStatus, NetworkError>
     func commentActionToggle(commentId: Int, action: CommentActionType) async -> Result<CommunityCommentStatus, NetworkError>
     func deleteComment(commentId: Int) async -> Result<Void, NetworkError>
+    func uploadImage(_ data: CommunityPostWriteData) async -> Result<String, NetworkError>
+    func createPost(_ data: CommunityPostWriteData) async -> Result<CommunityPostDTO, NetworkError>
 }
 
 final class DefaultCommunityUseCases {
@@ -25,6 +27,27 @@ final class DefaultCommunityUseCases {
 }
 
 extension DefaultCommunityUseCases: CommunityUseCases {
+    func uploadImage(_ data: CommunityPostWriteData) async -> Result<String, NetworkError> {
+        let imageData = await data.imageData
+        return await communityRepository.uploadImage(imageData: imageData)
+    }
+    
+    func createPost(_ data: CommunityPostWriteData) async -> Result<CommunityPostDTO, NetworkError> {
+        guard 
+            let title = await data.title,
+            let content = await data.content
+        else {
+            return .failure(.custom("null data"))
+        }
+        let (category, imageFile) = await (data.category, data.imageFile)
+        return await communityRepository.createPost(
+            title: title,
+            postCategory: String(describing: category),
+            content: content,
+            imageFile: imageFile
+        )
+    }
+    
     func deleteComment(commentId: Int) async -> Result<Void, NetworkError> {
         await communityRepository.deleteCommunityComment(commentId: commentId)
     }

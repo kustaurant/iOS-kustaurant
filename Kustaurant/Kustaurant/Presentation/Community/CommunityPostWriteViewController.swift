@@ -8,7 +8,12 @@
 import UIKit
 import Combine
 
-final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewController {
+protocol CommunityPostWriteDelegate: AnyObject {
+    func didCreatePost()
+}
+
+final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewController, LoadingDisplayable {
+    weak var delegate: CommunityPostWriteDelegate?
     private var viewModel: CommunityPostWriteViewModel
     private var rootView = CommunityPostWriteRootView()
     private let doneButton: KuSubmitButton = .init()
@@ -29,6 +34,8 @@ final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModelAction()
+        bindRootView()
         setupMenu()
     }
     
@@ -37,8 +44,39 @@ final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewCon
         doneButton.buttonTitle = "완료"
         doneButton.size = .custom(.Pretendard.regular14, 0)
         let doneButtonItem = UIBarButtonItem(customView: doneButton)
+        doneButton.addAction(UIAction { [weak self] _ in
+            self?.viewModel.process(.tappedDoneButton)
+        }, for: .touchUpInside)
         navigationItem.rightBarButtonItem = doneButtonItem
         navigationItem.title = "게시글 작성"
+    }
+}
+
+extension CommunityPostWriteViewController {
+    private func bindViewModelAction() {
+        viewModel.actionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                switch action {
+                case .showLoading(let isLoading):
+                    if isLoading {
+                        self?.showLoadingView()
+                    } else {
+                        self?.hideLoadingView()
+                    }
+                case .updateCategory(let category):
+                    self?.rootView.updateSelectBoardButtonTitle(category.rawValue)
+                case .changeStateDoneButton(let isComplete):
+                    self?.doneButton.buttonState = isComplete ? .on : .off
+                case .didCreatePost:
+                    self?.didCreatePost()
+                }
+            }.store(in: &cancellables)
+    }
+    
+    private func bindRootView() {
+        rootView.titleTextField.delegate = self
+        rootView.contentTextView.delegate = self
     }
 }
 
@@ -55,5 +93,71 @@ extension CommunityPostWriteViewController {
         let menu = UIMenu(title: "게시판 선택", children: actions)
         rootView.selectBoardButton.menu = menu
         rootView.selectBoardButton.showsMenuAsPrimaryAction = true
+    }
+    
+    private func didCreatePost() {
+        delegate?.didCreatePost()
+        presentAlert()
+    }
+    
+    private func presentAlert() {
+        let alert = UIAlertController(title: "게시글 작성 완료", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension CommunityPostWriteViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        rootView.contentTextView.becomeFirstResponder()
+        return true
+    }
+    
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        let title = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
+        viewModel.process(.updateTitle(title))
+        return true
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension CommunityPostWriteViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        rootView.updateContentTextView(textView.text)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        rootView.updateContentTextView(textView.text)   
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        guard let content = textView.text else { return }
+        viewModel.process(.updateContent(content))
+    }
+}
+
+
+// MARK: ImagePicker
+extension CommunityPostWriteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+        picker.dismiss(animated: true, completion: nil)
+        let image = info[.originalImage] as? UIImage
+        rootView.updateImageView(image)
+        let imageData = image?.jpegData(compressionQuality: 1.0)
+        viewModel.process(.updateImageData(imageData))
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }

@@ -36,7 +36,12 @@ final class CommunityViewController: UIViewController, LoadingDisplayable {
         setupNavigationBar()
         bindViewModelAction()
         bindButtons()
-        viewModel.process(.updateCategory(.all))
+        viewModel.process(.updateCategory(nil))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.process(.checkNewPost)
     }
 }
 
@@ -66,6 +71,8 @@ extension CommunityViewController {
                     self?.rootView.updateFilterView(sortType: sortType)
                 case .presentActionSheet:
                     self?.presentActionSheet()
+                case .scrollToTop(let isAnimated):
+                    self?.postsCollectionViewHandler?.scrollToTop(animated: isAnimated)
                 }
             }
             .store(in: &cancellables)
@@ -102,5 +109,11 @@ extension CommunityViewController {
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
         present(actionSheet, animated: true, completion: nil)
+    }
+}
+
+extension CommunityViewController: CommunityPostWriteDelegate {
+    func didCreatePost() {
+        viewModel.process(.newCreatePost)
     }
 }

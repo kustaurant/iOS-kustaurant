@@ -40,6 +40,7 @@ extension CommunityFlowCoordinator {
             image: image,
             selectedImage: selectedImage
         )
+        
         navigationController.pushViewController(viewController, animated: false)
     }
     
@@ -50,6 +51,9 @@ extension CommunityFlowCoordinator {
     
     private func showPostWrite() {
         let viewController = dependencies.makeCommunityPostWriteViewController()
+        if let communityViewController = navigationController.viewControllers.compactMap({ $0 as? CommunityViewController }).first {
+            viewController.delegate = communityViewController
+        }
         navigationController.pushViewController(viewController, animated: true)
     }
 }
