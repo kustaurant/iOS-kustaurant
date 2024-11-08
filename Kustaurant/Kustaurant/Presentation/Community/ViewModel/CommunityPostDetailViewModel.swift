@@ -21,17 +21,17 @@ typealias CommunityPostDetailViewModel = CommunityPostDetailViewModelInput & Com
 
 extension DefaultCommunityPostDetailViewModel {
     enum State {
-        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?)
+        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?), touchDeleteMenu
     }
     
     enum Action {
-        case showLoading(Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment
+        case showLoading(Bool, Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment, showAlert(payload: AlertPayload), deletePost
     }
 }
 
 final class DefaultCommunityPostDetailViewModel: CommunityPostDetailViewModel {
     // Output
-    let post: CommunityPostDTO
+    var post: CommunityPostDTO
     var detail: CommunityPostDetail
     var actionPublisher: AnyPublisher<Action, Never> {
         actionSubject.eraseToAnyPublisher()
@@ -79,6 +79,15 @@ extension DefaultCommunityPostDetailViewModel {
                     self?.updateCommentActions(commentId, action: .dislikes)
                 case .touchEllipsisDelete(let commentId):
                     self?.deleteComment(commentId)
+                case .touchDeleteMenu:
+                    self?.actionSubject.send(.showAlert(
+                        payload: AlertPayload(
+                            title: "게시글 삭제",
+                            subtitle: "정말 삭제하시겠어요?",
+                            onConfirm: { [weak self]  in
+                                self?.deletePost()
+                            }))
+                    )
                 }
             }
             .store(in: &cancellables)
@@ -95,6 +104,25 @@ extension DefaultCommunityPostDetailViewModel {
             errorLocalizedDescription = error.localizedDescription
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
+    private func deletePost() {
+        guard !isFetchingData else { return }
+        isFetchingData = true
+        Task {
+            actionSubject.send(.showLoading(true, true))
+            defer {
+                actionSubject.send(.showLoading(false, true))
+                isFetchingData = false
+            }
+            let result = await communityUseCase.deletePost(postId: postId)
+            switch result {
+            case .success(_):
+                actionSubject.send(.deletePost)
+            case .failure(let failure):
+                handleError(failure)
+            }
+        }
     }
     
     private func deleteComment(_ commentId: Int?) {
@@ -138,12 +166,13 @@ extension DefaultCommunityPostDetailViewModel {
     
     private func fetchPostDetail() {
         Task {
-            actionSubject.send(.showLoading(true))
-            defer { actionSubject.send(.showLoading(false)) }
+            actionSubject.send(.showLoading(true, false))
+            defer { actionSubject.send(.showLoading(false, false)) }
             let result = await communityUseCase.fetchPostDetail(postId: postId)
             switch result {
             case .success(let success):
-                detail = CommunityPostDetail(post: success)
+                post = success
+                detail = CommunityPostDetail(post: post)
                 actionSubject.send(.didFetchPostDetail)
             case .failure(let failure):
                 handleError(failure)
