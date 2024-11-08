@@ -46,6 +46,9 @@ extension CommunityFlowCoordinator {
     
     private func showPostDetail(post: CommunityPostDTO) {
         let viewController = dependencies.makeCommunityPostDetailViewController(post: post)
+        if let communityViewController = navigationController.viewControllers.compactMap({ $0 as? CommunityViewController }).first {
+            viewController.delegate = communityViewController
+        }
         navigationController.pushViewController(viewController, animated: true)
     }
     

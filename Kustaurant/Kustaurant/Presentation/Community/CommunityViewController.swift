@@ -73,6 +73,8 @@ extension CommunityViewController {
                     self?.presentActionSheet()
                 case .scrollToTop(let isAnimated):
                     self?.postsCollectionViewHandler?.scrollToTop(animated: isAnimated)
+                case .reloadPosts:
+                    self?.postsCollectionViewHandler?.update()
                 }
             }
             .store(in: &cancellables)
@@ -115,5 +117,11 @@ extension CommunityViewController {
 extension CommunityViewController: CommunityPostWriteDelegate {
     func didCreatePost() {
         viewModel.process(.newCreatePost)
+    }
+}
+
+extension CommunityViewController: CommunityPostDetailDelegate {
+    func didDeletePost(postId: Int) {
+        viewModel.process(.deletePost(postId))
     }
 }

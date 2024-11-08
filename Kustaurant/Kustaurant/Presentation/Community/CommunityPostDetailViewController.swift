@@ -8,7 +8,12 @@
 import UIKit
 import Combine
 
+protocol CommunityPostDetailDelegate: AnyObject {
+    func didDeletePost(postId: Int)
+}
+
 final class CommunityPostDetailViewController: NavigationBarLeftBackButtonViewController, LoadingDisplayable {
+    weak var delegate: CommunityPostDetailDelegate?
     private var rootView = CommunityPostDetailRootView()
     private var viewModel: CommunityPostDetailViewModel
     private var detailTableViewHandler: CommunityPostDetailTableViewHandler?
@@ -87,6 +92,7 @@ extension CommunityPostDetailViewController {
     }
     
     private func deletePost() {
+        delegate?.didDeletePost(postId: viewModel.post.postId ?? 0)
         navigationController?.popViewController(animated: true)
     }
     
