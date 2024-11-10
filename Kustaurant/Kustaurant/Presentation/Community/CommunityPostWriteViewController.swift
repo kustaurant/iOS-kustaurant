@@ -45,7 +45,7 @@ final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewCon
         doneButton.size = .custom(.Pretendard.regular14, 0)
         let doneButtonItem = UIBarButtonItem(customView: doneButton)
         doneButton.addAction(UIAction { [weak self] _ in
-            self?.viewModel.process(.tappedDoneButton)
+            self?.submit()
         }, for: .touchUpInside)
         navigationItem.rightBarButtonItem = doneButtonItem
         navigationItem.title = "게시글 작성"
@@ -103,6 +103,11 @@ extension CommunityPostWriteViewController {
             payload.onConfirm?()
         }))
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func submit() {
+        rootView.dismissKeyboard()
+        viewModel.process(.tappedDoneButton)
     }
 }
 

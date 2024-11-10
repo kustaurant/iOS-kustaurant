@@ -130,7 +130,7 @@ extension CommunityPostWriteRootView {
         addGestureRecognizer(tapGesture)
     }
     
-    @objc private func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         endEditing(true)
     }
     
