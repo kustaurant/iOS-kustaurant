@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class TermsOfServiceViewController: UIViewController {
+class TermsOfServiceViewController: NavigationBarLeftBackButtonViewController {
     
     private let viewModel: PlainWebViewLoadViewModel
     private let termsOfServiceView = TermsOfServiceView()
@@ -24,13 +24,16 @@ class TermsOfServiceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        setupNavigationBar()
         setupWebView()
     }
     
     override func loadView() {
         view = termsOfServiceView
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        navigationItem.title = "이용약관"
     }
 }
 
@@ -42,21 +45,6 @@ extension TermsOfServiceViewController {
             let request = URLRequest(url: url)
             termsOfServiceView.webView.load(request)
         }
-    }
-    
-    private func setupNavigationBar() {
-        let backImage = UIImage(named: "icon_back")
-        let backButtonView = UIImageView(image: backImage)
-        let backButton = UIBarButtonItem(customView: backButtonView)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonView.addGestureRecognizer(tapGesture)
-        backButtonView.isUserInteractionEnabled = true
-        navigationItem.title = "이용약관"
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
-    @objc private func backButtonTapped() {
-        viewModel.didTapBackButton()
     }
 }
 

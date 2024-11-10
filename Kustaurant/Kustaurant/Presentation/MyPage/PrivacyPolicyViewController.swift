@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class PrivacyPolicyViewController: UIViewController {
+class PrivacyPolicyViewController: NavigationBarLeftBackButtonViewController {
     
     private let viewModel: PlainWebViewLoadViewModel
     private let privacyPolicyView = PrivacyPolicyView()
@@ -24,13 +24,16 @@ class PrivacyPolicyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        setupNavigationBar()
         setupWebView()
     }
     
     override func loadView() {
         view = privacyPolicyView
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        navigationItem.title = "개인정보처리방침"
     }
 }
 
@@ -42,21 +45,6 @@ extension PrivacyPolicyViewController {
             let request = URLRequest(url: url)
             privacyPolicyView.webView.load(request)
         }
-    }
-    
-    private func setupNavigationBar() {
-        let backImage = UIImage(named: "icon_back")
-        let backButtonView = UIImageView(image: backImage)
-        let backButton = UIBarButtonItem(customView: backButtonView)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonView.addGestureRecognizer(tapGesture)
-        backButtonView.isUserInteractionEnabled = true
-        navigationItem.title = "개인정보처리방침"
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
-    @objc private func backButtonTapped() {
-        viewModel.didTapBackButton()
     }
 }
 

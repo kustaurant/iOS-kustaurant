@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class NoticeBoardViewController: UIViewController {
+class NoticeBoardViewController: NavigationBarLeftBackButtonViewController {
     
     private let noticeBoardView = NoticeBoardView()
     private let viewModel: NoticeBoardViewModel
@@ -28,7 +28,6 @@ class NoticeBoardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupNavigationBar()
         tableViewHandler?.setupTableView()
         bind()
         viewModel.getNoticeList()
@@ -36,6 +35,11 @@ class NoticeBoardViewController: UIViewController {
     
     override func loadView() {
         view = noticeBoardView
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        navigationItem.title = "공지사항"
     }
 }
 
@@ -48,20 +52,5 @@ extension NoticeBoardViewController {
             self?.tableViewHandler?.reloadData()
         }
         .store(in: &cancellables)
-    }
-    
-    private func setupNavigationBar() {
-        let backImage = UIImage(named: "icon_back")
-        let backButtonView = UIImageView(image: backImage)
-        let backButton = UIBarButtonItem(customView: backButtonView)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonView.addGestureRecognizer(tapGesture)
-        backButtonView.isUserInteractionEnabled = true
-        navigationItem.title = "공지사항"
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
-    @objc private func backButtonTapped() {
-        viewModel.didTapBackButton()
     }
 }

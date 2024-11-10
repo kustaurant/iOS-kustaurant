@@ -10,7 +10,7 @@ import UIKit
 final class KuSubmitButton: UIButton {
     
     enum Size {
-        case large, medium
+        case large, medium, custom(UIFont, CGFloat)
         
         var font: UIFont {
             switch self {
@@ -18,6 +18,8 @@ final class KuSubmitButton: UIButton {
                 return .Pretendard.semiBold18
             case .medium:
                 return .Pretendard.semiBold16
+            case .custom(let font, _):
+                return font
             }
         }
         
@@ -27,6 +29,8 @@ final class KuSubmitButton: UIButton {
                 return 16
             case .medium:
                 return 8
+            case .custom(_, let padding):
+                return padding
             }
         }
     }
@@ -77,6 +81,12 @@ final class KuSubmitButton: UIButton {
         }
     }
     
+    var imagePlacement: NSDirectionalRectEdge = .leading {
+        didSet {
+            updateStyle()
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -122,7 +132,7 @@ extension KuSubmitButton {
     private func updateImage() {
         self.configuration?.image = image
         self.configuration?.imagePadding = size.imagePadding
-        self.configuration?.imagePlacement = .leading
+        self.configuration?.imagePlacement = imagePlacement
     }
     
     private func updateColors() {

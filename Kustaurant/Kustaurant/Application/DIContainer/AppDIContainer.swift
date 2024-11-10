@@ -37,7 +37,12 @@ final class AppDIContainer {
     }
     
     func makeCommunitySceneDIContainer() -> CommunitySceneDIContainer {
-        CommunitySceneDIContainer()
+        let dependecies = CommunitySceneDIContainer.Dependencies(
+            networkService: networkService
+        )
+        return CommunitySceneDIContainer(
+            dependencies: dependecies
+        )
     }
     
     func makeMyPageSceneDIContainer() -> MyPageSceneDIContainer {

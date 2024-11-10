@@ -12,7 +12,7 @@ protocol EvaluationViewControllerDelegate: AnyObject {
     func evaluationDidUpdate()
 }
 
-final class EvaluationViewController: UIViewController, NavigationBarHideable, LoadingDisplayable, Alertable {
+final class EvaluationViewController: NavigationBarLeftBackButtonViewController, NavigationBarHideable, LoadingDisplayable, Alertable {
     weak var delegate: EvaluationViewControllerDelegate?
     private let viewModel: EvaluationViewModel
     private let evaluationView = EvaluationView()
@@ -36,33 +36,18 @@ final class EvaluationViewController: UIViewController, NavigationBarHideable, L
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
         setupBindings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         showNavigationBar(animated: true)
     }
-}
-
-extension EvaluationViewController {
     
-    private func setupNavigationBar() {
-        let backImage = UIImage(named: "icon_back")
-        let backButtonView = UIImageView(image: backImage)
-        let backButton = UIBarButtonItem(customView: backButtonView)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonView.addGestureRecognizer(tapGesture)
-        backButtonView.isUserInteractionEnabled = true
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         navigationItem.title = "평가"
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
-    @objc private func backButtonTapped() {
-        viewModel.didTapBackButton()
     }
 }
-
 
 extension EvaluationViewController {
     private func setupBindings() {

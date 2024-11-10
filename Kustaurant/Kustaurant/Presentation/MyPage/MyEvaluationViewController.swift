@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class MyEvaluationViewController: UIViewController {
+class MyEvaluationViewController: NavigationBarLeftBackButtonViewController {
     
     private let myEvaluationView = MyEvaluationView()
     private let viewModel: MyEvaluationViewModel
@@ -28,7 +28,6 @@ class MyEvaluationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupNavigationBar()
         bind()
         tableViewHandler?.setupTableView()
         viewModel.getEvaluatedRestaurants()
@@ -36,6 +35,11 @@ class MyEvaluationViewController: UIViewController {
     
     override func loadView() {
         view = myEvaluationView
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        navigationItem.title = "내 평가"
     }
 }
 
@@ -52,20 +56,5 @@ extension MyEvaluationViewController {
                 }
             }
             .store(in: &cancellables)
-    }
-    
-    private func setupNavigationBar() {
-        let backImage = UIImage(named: "icon_back")
-        let backButtonView = UIImageView(image: backImage)
-        let backButton = UIBarButtonItem(customView: backButtonView)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonView.addGestureRecognizer(tapGesture)
-        backButtonView.isUserInteractionEnabled = true
-        navigationItem.title = "내 평가"
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
-    @objc private func backButtonTapped() {
-        viewModel.didTapBackButton()
     }
 }
