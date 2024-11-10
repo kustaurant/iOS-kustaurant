@@ -53,7 +53,7 @@ extension DefaultCommunityUseCases: CommunityUseCases {
         let (category, imageFile) = await (data.category, data.imageFile)
         let result = await communityRepository.createPost(
             title: title,
-            postCategory: String(describing: category),
+            postCategory: category.rawValue,
             content: content,
             imageFile: imageFile
         )
