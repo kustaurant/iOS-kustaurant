@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+struct CommunityPostWriteViewModelActions {
+    let pop: () -> Void
+}
+
 protocol CommunityPostWriteViewModelInput {
     func process(_ state: DefaultCommunityPostWriteViewModel.State)
 }
@@ -22,13 +26,14 @@ extension DefaultCommunityPostWriteViewModel {
         case initial, changeCategory(CommunityPostCategory), updateTitle(String), updateContent(String), updateImageData(Data?),tappedDoneButton
     }
     enum Action {
-        case showLoading(Bool), updateCategory(CommunityPostCategory), changeStateDoneButton(Bool), didCreatePost
+        case showLoading(Bool), updateCategory(CommunityPostCategory), changeStateDoneButton(Bool), didCreatePost, showAlert(payload: AlertPayload)
     }
 }
 
 final class DefaultCommunityPostWriteViewModel: CommunityPostWriteViewModel {
     @Published private var state: State = .initial
     private let communityUseCase: CommunityUseCases
+    private let actions: CommunityPostWriteViewModelActions
     private let actionSubject: PassthroughSubject<Action, Never> = .init()
     private var cancellables: Set<AnyCancellable> = .init()
     private let writeData: CommunityPostWriteData = .init()
@@ -39,8 +44,12 @@ final class DefaultCommunityPostWriteViewModel: CommunityPostWriteViewModel {
     }
     
     // MARK: - Initialization
-    init(communityUseCase: CommunityUseCases) {
+    init(
+        communityUseCase: CommunityUseCases,
+        actions: CommunityPostWriteViewModelActions
+    ) {
         self.communityUseCase = communityUseCase
+        self.actions = actions
         bindState()
     }
     
@@ -76,27 +85,35 @@ extension DefaultCommunityPostWriteViewModel {
     private func createPost() {
         Task {
             actionSubject.send(.showLoading(true))
-            defer { actionSubject.send(.showLoading(false)) }
             guard await writeData.isComplete else { return }
             do {
-                let upload = await communityUseCase.uploadImage(writeData)
-                switch upload {
-                case .success(let success):
-                    await writeData.updateImageFile(success)
-                case .failure(let failure):
-                    throw failure
+                if await writeData.imageData != nil {
+                    let uploadImageFile = try await communityUseCase.uploadImage(writeData)
+                    await writeData.updateImageFile(uploadImageFile.imgUrl)
                 }
-                
-                let create = await communityUseCase.createPost(writeData)
-                switch create {
-                case .success(_):
-                    actionSubject.send(.didCreatePost)
-                case .failure(let failure):
-                    throw failure
-                }
+                let _ = try await communityUseCase.createPost(writeData)
+                actionSubject.send(.showLoading(false))
+                actionSubject.send(.didCreatePost)
+                actionSubject.send(.showAlert(payload: AlertPayload(
+                    title: "게시글 작성 완료",
+                    subtitle: "",
+                    onConfirm: { [weak self] in
+                        self?.popAction()
+                    }
+                )))
             } catch {
-                Logger.error("Error in {\(#fileID)} : \(error.localizedDescription)")
+                actionSubject.send(.showLoading(false))
+                actionSubject.send(.showAlert(payload: AlertPayload(
+                    title: "게시글 작성 실패",
+                    subtitle: "다시 시도해주세요.",
+                    onConfirm: nil)))
             }
+        }
+    }
+    
+    private func popAction() {
+        Task { @MainActor in
+            actions.pop()
         }
     }
     

@@ -95,7 +95,7 @@ extension DefaultCommunityViewModel {
                 case .tappedWriteButton:
                     self?.actions.showPostWrite()
                 case .newCreatePost:
-                    self?.newCreatePost()
+                    self?.isNewCreatePost = true
                 case .checkNewPost:
                     self?.checkNewPost()
                 case .deletePost(let postId):
@@ -124,17 +124,14 @@ extension DefaultCommunityViewModel {
         actionSubject.send(.reloadPosts)
     }
     
-    private func newCreatePost() {
-        Task {
-            isNewCreatePost = true
-            await fetchPosts()
-        }
-    }
-    
     private func checkNewPost() {
         guard isNewCreatePost else { return }
         isNewCreatePost = false
-        actionSubject.send(.scrollToTop(false))
+        Task {
+            initialisePosts()
+            await self.fetchPosts()
+            actionSubject.send(.scrollToTop(false))
+        }
     }
 
     private func tappedSortTypeButton(_ sortType: CommunityPostSortType) {

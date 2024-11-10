@@ -20,6 +20,7 @@ final class CommunityPostDetailViewController: NavigationBarLeftBackButtonViewCo
     private let menuEllipsisButton: UIButton = .init()
     private var cancellables: Set<AnyCancellable> = .init()
     
+    
     init(viewModel: CommunityPostDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)

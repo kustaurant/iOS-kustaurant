@@ -45,7 +45,7 @@ final class CommunityPostWriteViewController: NavigationBarLeftBackButtonViewCon
         doneButton.size = .custom(.Pretendard.regular14, 0)
         let doneButtonItem = UIBarButtonItem(customView: doneButton)
         doneButton.addAction(UIAction { [weak self] _ in
-            self?.viewModel.process(.tappedDoneButton)
+            self?.submit()
         }, for: .touchUpInside)
         navigationItem.rightBarButtonItem = doneButtonItem
         navigationItem.title = "게시글 작성"
@@ -69,7 +69,9 @@ extension CommunityPostWriteViewController {
                 case .changeStateDoneButton(let isComplete):
                     self?.doneButton.buttonState = isComplete ? .on : .off
                 case .didCreatePost:
-                    self?.didCreatePost()
+                    self?.delegate?.didCreatePost()
+                case .showAlert(payload: let payload):
+                    self?.presentAlert(payload: payload)
                 }
             }.store(in: &cancellables)
     }
@@ -95,17 +97,17 @@ extension CommunityPostWriteViewController {
         rootView.selectBoardButton.showsMenuAsPrimaryAction = true
     }
     
-    private func didCreatePost() {
-        delegate?.didCreatePost()
-        presentAlert()
-    }
-    
-    private func presentAlert() {
-        let alert = UIAlertController(title: "게시글 작성 완료", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
+    private func presentAlert(payload: AlertPayload) {
+        let alert = UIAlertController(title: payload.title, message: payload.subtitle, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+            payload.onConfirm?()
         }))
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func submit() {
+        rootView.dismissKeyboard()
+        viewModel.process(.tappedDoneButton)
     }
 }
 

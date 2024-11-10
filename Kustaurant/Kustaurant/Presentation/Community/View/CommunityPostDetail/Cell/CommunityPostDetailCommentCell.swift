@@ -53,7 +53,10 @@ final class CommunityPostDetailCommentCell: DefaultTableViewCell {
         updateButton(button: &dislikeButton, type: .dislike, count: data.dislikeCount ?? 0, isActive: data.isDisliked ?? false)
         menuEllipsisButton.isMine = data.isCommentMine ?? false
         Task {
-            await loadImage(rankImageView, urlString: data.user?.rankImg, targetSize: CGSize(width: 25, height: 24))
+            let image = await loadImage(urlString: data.user?.rankImg, targetSize: CGSize(width: 25, height: 24))
+            await MainActor.run {
+                rankImageView.image = image
+            }
         }
     }
 }

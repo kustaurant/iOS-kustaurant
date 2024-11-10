@@ -24,7 +24,7 @@ public class ImageCacheManager {
         targetSize: CGSize? = nil,
         defaultImage: UIImage? = nil
     ) async -> UIImage? {
-        let cacheKey = url.absoluteString as NSString
+        let cacheKey = (url.absoluteString + String(describing: targetSize)) as NSString
         if let cachedImage = cache.object(forKey: cacheKey) {
             return cachedImage
         }

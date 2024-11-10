@@ -9,16 +9,13 @@ import UIKit
 
 class DefaultTableViewCell: UITableViewCell {
     func loadImage(
-        _ imageView: UIImageView,
         urlString: String?,
         targetSize: CGSize?
-    ) async {
+    ) async -> UIImage? {
         guard let urlString,
               let url = URL(string: urlString)
-        else { return }
+        else { return nil }
         let image = await ImageCacheManager.shared.loadImage(from: url, targetSize: targetSize)
-        await MainActor.run {
-            imageView.image = image
-        }
+        return image
     }
 }

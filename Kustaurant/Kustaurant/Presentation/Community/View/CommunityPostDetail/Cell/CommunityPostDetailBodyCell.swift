@@ -63,12 +63,17 @@ final class CommunityPostDetailBodyCell: DefaultTableViewCell {
         commentCountLabel.text = "댓글 \(model.commentCount)"
         updateButton(button: &likeButton, type: .like, count: model.likeCount, isLiked: model.isliked)
         updateButton(button: &scrapButton, type: .scrap, count: model.scrapCount, isScraped: model.isScraped)
+        
         photoImageViewTopConstraint?.constant = (model.postPhotoImgUrl != nil) ? 11 : 0
         photoImageViewHeightConstraint?.constant = (model.postPhotoImgUrl != nil) ? photoImageViewSize.height : 0
         
         Task {
-            await loadImage(rankImageView, urlString: model.user?.rankImg, targetSize: CGSize(width: 25, height: 24))
-            await loadImage(photoImageView, urlString: model.postPhotoImgUrl, targetSize: photoImageViewSize)
+            let rankImage = await loadImage(urlString: model.user?.rankImg, targetSize: CGSize(width: 25, height: 24))
+            let photoImage = await loadImage(urlString: model.postPhotoImgUrl, targetSize: nil)
+            await MainActor.run {
+                rankImageView.image = rankImage
+                photoImageView.image = photoImage
+            }
         }
     }
 }
