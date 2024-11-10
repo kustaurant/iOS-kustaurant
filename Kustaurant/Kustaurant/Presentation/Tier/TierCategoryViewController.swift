@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class TierCategoryViewController: UIViewController {
+final class TierCategoryViewController: NavigationBarLeftBackButtonViewController {
     private var viewModel: TierCategoryViewModel
     private var tierCategoryCollectionViewHandler: TierCategoryCollectionViewHandler?
     private var tierCategoryView = TierCategoryView()
@@ -36,17 +36,17 @@ final class TierCategoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         setupBinding()
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        navigationItem.title = "카테고리"
     }
 }
 
 // MARK: - Actions
 extension TierCategoryViewController {
-    @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     private func doneButtonTouched() {
         viewModel.updateTierCategories()
         navigationController?.popViewController(animated: true)
@@ -113,9 +113,6 @@ extension TierCategoryViewController {
 }
 
 extension TierCategoryViewController {
-    private func setupUI() {
-        setupNavigationBar()
-    }
     
     private func addPopup(categoryType: CategoryType) {
         let window = UIApplication.shared.connectedScenes
@@ -131,12 +128,5 @@ extension TierCategoryViewController {
         case .location:
             return
         }
-    }
-    
-    private func setupNavigationBar() {
-        let icon = UIImage(named: "icon_back")?.withRenderingMode(.alwaysOriginal)
-        let backButton = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem = backButton
-        navigationItem.title = "카테고리"
     }
 }

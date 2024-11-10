@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class FeedbackSubmittingViewController: UIViewController {
+class FeedbackSubmittingViewController: NavigationBarLeftBackButtonViewController {
     
     private let feedbackSubmittingView = FeedbackSubmittingView()
     private let viewModel: FeedbackSubmittingViewModel
@@ -25,7 +25,6 @@ class FeedbackSubmittingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
         setupTextView()
         setupKeyboardEndGesture()
         bind()
@@ -34,24 +33,14 @@ class FeedbackSubmittingViewController: UIViewController {
     override func loadView() {
         view = feedbackSubmittingView
     }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        navigationItem.title = "피드백 보내기"
+    }
 }
 
 extension FeedbackSubmittingViewController {
-    
-    private func setupNavigationBar() {
-        let backImage = UIImage(named: "icon_back")
-        let backButtonView = UIImageView(image: backImage)
-        let backButton = UIBarButtonItem(customView: backButtonView)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonView.addGestureRecognizer(tapGesture)
-        backButtonView.isUserInteractionEnabled = true
-        navigationItem.title = "피드백 보내기"
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
-    @objc private func backButtonTapped() {
-        viewModel.didTapBackButton()
-    }
     
     private func setupTextView() {
         feedbackSubmittingView.textView.delegate = self

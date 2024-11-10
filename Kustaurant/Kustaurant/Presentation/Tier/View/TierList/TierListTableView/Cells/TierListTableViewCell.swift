@@ -107,6 +107,7 @@ extension TierListTableViewCell {
         bindLabels()
         bindIcons()
         loadImage()
+        
     }
     
     private func bindLabels() {
