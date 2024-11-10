@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+struct CommunityPostWriteViewModelActions {
+    let pop: () -> Void
+}
+
 protocol CommunityPostWriteViewModelInput {
     func process(_ state: DefaultCommunityPostWriteViewModel.State)
 }
@@ -29,6 +33,7 @@ extension DefaultCommunityPostWriteViewModel {
 final class DefaultCommunityPostWriteViewModel: CommunityPostWriteViewModel {
     @Published private var state: State = .initial
     private let communityUseCase: CommunityUseCases
+    private let actions: CommunityPostWriteViewModelActions
     private let actionSubject: PassthroughSubject<Action, Never> = .init()
     private var cancellables: Set<AnyCancellable> = .init()
     private let writeData: CommunityPostWriteData = .init()
@@ -39,8 +44,12 @@ final class DefaultCommunityPostWriteViewModel: CommunityPostWriteViewModel {
     }
     
     // MARK: - Initialization
-    init(communityUseCase: CommunityUseCases) {
+    init(
+        communityUseCase: CommunityUseCases,
+        actions: CommunityPostWriteViewModelActions
+    ) {
         self.communityUseCase = communityUseCase
+        self.actions = actions
         bindState()
     }
     
@@ -97,6 +106,12 @@ extension DefaultCommunityPostWriteViewModel {
             } catch {
                 Logger.error("Error in {\(#fileID)} : \(error.localizedDescription)")
             }
+        }
+    }
+    
+    private func popAction() {
+        Task { @MainActor in
+            actions.pop()
         }
     }
     

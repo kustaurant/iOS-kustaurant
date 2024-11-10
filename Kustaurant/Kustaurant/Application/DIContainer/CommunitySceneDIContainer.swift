@@ -74,15 +74,19 @@ extension CommunitySceneDIContainer {
 
 // Write
 extension CommunitySceneDIContainer {
-    func makeCommunityPostWriteViewModel() -> CommunityPostWriteViewModel {
+    
+    func makeCommunityPostWriteViewModel(actions: CommunityPostWriteViewModelActions) -> CommunityPostWriteViewModel {
         DefaultCommunityPostWriteViewModel(
-            communityUseCase: makeCommunityUseCase()
+            communityUseCase: makeCommunityUseCase(),
+            actions: actions
         )
     }
     
-    func makeCommunityPostWriteViewController() -> CommunityPostWriteViewController {
+    func makeCommunityPostWriteViewController(actions: CommunityPostWriteViewModelActions) -> CommunityPostWriteViewController {
         CommunityPostWriteViewController(
-            viewModel: makeCommunityPostWriteViewModel()
+            viewModel: makeCommunityPostWriteViewModel(
+                actions: actions
+            )
         )
     }
 }

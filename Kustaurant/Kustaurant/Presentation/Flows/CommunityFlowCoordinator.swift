@@ -10,7 +10,7 @@ import UIKit
 protocol CommunityFlowCoordinatorDependencies {
     func makeCommunityViewController(actions: CommunityViewModelActions) -> CommunityViewController
     func makeCommunityPostDetailViewController(post: CommunityPostDTO) -> CommunityPostDetailViewController
-    func makeCommunityPostWriteViewController() -> CommunityPostWriteViewController
+    func makeCommunityPostWriteViewController(actions: CommunityPostWriteViewModelActions) -> CommunityPostWriteViewController
 }
 
 final class CommunityFlowCoordinator: Coordinator {
@@ -53,10 +53,19 @@ extension CommunityFlowCoordinator {
     }
     
     private func showPostWrite() {
-        let viewController = dependencies.makeCommunityPostWriteViewController()
+        let actions = CommunityPostWriteViewModelActions(
+            pop: popAnimated
+        )
+        let viewController = dependencies.makeCommunityPostWriteViewController(
+            actions: actions
+        )
         if let communityViewController = navigationController.viewControllers.compactMap({ $0 as? CommunityViewController }).first {
             viewController.delegate = communityViewController
         }
         navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func popAnimated() {
+        pop(animated: true)
     }
 }
