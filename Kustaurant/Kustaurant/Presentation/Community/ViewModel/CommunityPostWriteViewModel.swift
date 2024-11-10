@@ -26,7 +26,7 @@ extension DefaultCommunityPostWriteViewModel {
         case initial, changeCategory(CommunityPostCategory), updateTitle(String), updateContent(String), updateImageData(Data?),tappedDoneButton
     }
     enum Action {
-        case showLoading(Bool), updateCategory(CommunityPostCategory), changeStateDoneButton(Bool), didCreatePost
+        case showLoading(Bool), updateCategory(CommunityPostCategory), changeStateDoneButton(Bool), didCreatePost, showAlert(payload: AlertPayload)
     }
 }
 
@@ -94,8 +94,19 @@ extension DefaultCommunityPostWriteViewModel {
                 let _ = try await communityUseCase.createPost(writeData)
                 actionSubject.send(.showLoading(false))
                 actionSubject.send(.didCreatePost)
+                actionSubject.send(.showAlert(payload: AlertPayload(
+                    title: "게시글 작성 완료",
+                    subtitle: "",
+                    onConfirm: { [weak self] in
+                        self?.popAction()
+                    }
+                )))
             } catch {
                 actionSubject.send(.showLoading(false))
+                actionSubject.send(.showAlert(payload: AlertPayload(
+                    title: "게시글 작성 실패",
+                    subtitle: "다시 시도해주세요.",
+                    onConfirm: nil)))
             }
         }
     }
