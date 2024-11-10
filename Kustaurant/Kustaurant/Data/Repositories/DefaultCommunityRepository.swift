@@ -32,7 +32,7 @@ extension DefaultCommunityRepository: CommunityRepository {
         return .success(())
     }
     
-    func uploadImage(imageData: Data?) async -> Result<String, NetworkError> {
+    func uploadImage(imageData: Data?) async -> Result<UploadImageResponse, NetworkError> {
         return await withCheckedContinuation { continuation in
             guard let imageData else { return continuation.resume(returning: .failure(.noData))}
             guard let url = URL(string: networkService.appConfiguration.apiBaseURL + networkService.postCommunityPostUploadImage) else {
@@ -51,12 +51,11 @@ extension DefaultCommunityRepository: CommunityRepository {
             }, to: url, headers: headers).responseData { response in
                 switch response.result {
                 case .success(let data):
-                    if let decodedData = try? JSONDecoder().decode(String.self, from: data) {
+                    if let decodedData = try? JSONDecoder().decode(UploadImageResponse.self, from: data) {
                         continuation.resume(returning: .success(decodedData))
                     } else {
                         continuation.resume(returning: .failure(.decodingFailed))
                     }
-                    
                 case .failure(let error):
                     continuation.resume(returning: .failure(.custom(error.localizedDescription)))
                 }
