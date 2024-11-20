@@ -20,15 +20,14 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
     private var tabCancellable: AnyCancellable?
     private var cancellables: Set<AnyCancellable> = .init()
     
-    private var accessoryViewHandler: RestaurantDetailAccessoryViewHandler?
+    private var accessoryViewHandler: CommentAccessoryViewHandler?
     
     init(viewModel: RestaurantDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.accessoryViewHandler = RestaurantDetailAccessoryViewHandler(
+        accessoryViewHandler = CommentAccessoryViewHandler(
             viewController: self,
-            accessoryView: commentAccessoryView,
-            viewModel: viewModel
+            accessoryView: commentAccessoryView
         )
     }
     
@@ -42,7 +41,6 @@ final class RestaurantDetailViewController: UIViewController, NavigationBarHidea
         bind()
         setupTableView()
         setupLayout()
-        accessoryViewHandler?.setupAccessoryView()
         setupNavigationBar()
     }
     

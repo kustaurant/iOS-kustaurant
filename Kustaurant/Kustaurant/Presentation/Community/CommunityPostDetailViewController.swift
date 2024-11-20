@@ -17,9 +17,9 @@ final class CommunityPostDetailViewController: NavigationBarLeftBackButtonViewCo
     private var rootView = CommunityPostDetailRootView()
     private var viewModel: CommunityPostDetailViewModel
     private var detailTableViewHandler: CommunityPostDetailTableViewHandler?
+    private var accessoryViewHandler: CommentAccessoryViewHandler?
     private let menuEllipsisButton: UIButton = .init()
     private var cancellables: Set<AnyCancellable> = .init()
-    
     
     init(viewModel: CommunityPostDetailViewModel) {
         self.viewModel = viewModel
@@ -28,10 +28,18 @@ final class CommunityPostDetailViewController: NavigationBarLeftBackButtonViewCo
             tableView: rootView.tableView,
             viewModel: viewModel
         )
+        accessoryViewHandler = CommentAccessoryViewHandler(
+            viewController: self,
+            accessoryView: rootView.commentAccessoryView
+        )
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        accessoryViewHandler?.unregisterAccessoryView()
     }
     
     override func loadView() {
@@ -87,6 +95,7 @@ extension CommunityPostDetailViewController {
                 case .deletePost:
                     self?.deletePost()
                 case .showKeyboard:
+                    self?.accessoryViewHandler?.showKeyboard(commentId: 0)
                 }
             }
             .store(in: &cancellables)
