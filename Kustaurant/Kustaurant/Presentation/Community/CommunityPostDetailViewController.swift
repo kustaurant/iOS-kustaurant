@@ -47,7 +47,6 @@ final class CommunityPostDetailViewController: NavigationBarLeftBackButtonViewCo
     override func setupNavigationBar() {
         super.setupNavigationBar()
         menuEllipsisButton.setImage(UIImage(named: "icon_ellipsis_black"), for: .normal)
-        menuEllipsisButton.isHidden = true
         menuEllipsisButton.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
         let rightBarButtonItem = UIBarButtonItem(customView: menuEllipsisButton)
         navigationItem.rightBarButtonItem = rightBarButtonItem
@@ -87,6 +86,7 @@ extension CommunityPostDetailViewController {
                     self?.presentAlert(payload: payload)
                 case .deletePost:
                     self?.deletePost()
+                case .showKeyboard:
                 }
             }
             .store(in: &cancellables)
@@ -98,10 +98,7 @@ extension CommunityPostDetailViewController {
     }
     
     private func didFetchPostDetail() {
-        if viewModel.post.isPostMine ?? false {
-            menuEllipsisButton.isHidden = false
-            setupMenu()
-        }
+        setupMenu()
         detailTableViewHandler?.update()
     }
     
@@ -109,7 +106,14 @@ extension CommunityPostDetailViewController {
         let deleteAction = UIAction(title: "삭제하기", image: UIImage(named: "icon_trash"), attributes: .destructive) { [weak self] _ in
             self?.viewModel.process(.touchDeleteMenu)
         }
-        let menu = UIMenu(title: "", children: [deleteAction])
+        let writeCommentAction = UIAction(title: "댓글작성") { [weak self] _ in
+            self?.viewModel.process(.touchWriteCommentMenu)
+        }
+        var childrenActions: [UIMenuElement] = [writeCommentAction]
+        if viewModel.post.isPostMine ?? false {
+            childrenActions.insert(deleteAction, at: 0)
+        }
+        let menu = UIMenu(title: "", children: childrenActions)
         menuEllipsisButton.menu = menu
         menuEllipsisButton.showsMenuAsPrimaryAction = true
     }

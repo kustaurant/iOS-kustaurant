@@ -21,11 +21,11 @@ typealias CommunityPostDetailViewModel = CommunityPostDetailViewModelInput & Com
 
 extension DefaultCommunityPostDetailViewModel {
     enum State {
-        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?), touchDeleteMenu
+        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?), touchDeleteMenu, touchWriteCommentMenu
     }
     
     enum Action {
-        case showLoading(Bool, Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment, showAlert(payload: AlertPayload), deletePost
+        case showLoading(Bool, Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment, showAlert(payload: AlertPayload), deletePost, showKeyboard
     }
 }
 
@@ -88,6 +88,8 @@ extension DefaultCommunityPostDetailViewModel {
                                 self?.deletePost()
                             }))
                     )
+                case .touchWriteCommentMenu:
+                    self?.actionSubject.send(.showKeyboard)
                 }
             }
             .store(in: &cancellables)
