@@ -1,5 +1,5 @@
 //
-//  CommentAccessoryViewHandler.swift
+//  RestaurantDetailCommentTextFieldHandler.swift
 //  Kustaurant
 //
 //  Created by peppermint100 on 9/5/24.
@@ -13,28 +13,29 @@ struct CommentPayload {
     let comment: String?
 }
 
-final class CommentAccessoryViewHandler: NSObject {
+final class RestaurantDetailAccessoryViewHandler: NSObject {
     
-    private let viewController: UIViewController
+    private let viewController: RestaurantDetailViewController
     private let accessoryView: CommentAccessoryView
+    private let viewModel: RestaurantDetailViewModel
     
     private var text = ""
     private var commentId: Int?
     
     init(
-        viewController: UIViewController,
-        accessoryView: CommentAccessoryView
+        viewController: RestaurantDetailViewController,
+        accessoryView: CommentAccessoryView,
+        viewModel: RestaurantDetailViewModel
     ) {
         self.viewController = viewController
         self.accessoryView = accessoryView
-        super.init()
-        setupAccessoryView()
+        self.viewModel = viewModel
     }
 }
 
-extension CommentAccessoryViewHandler: UIGestureRecognizerDelegate {
+extension RestaurantDetailAccessoryViewHandler: UIGestureRecognizerDelegate {
 
-    private func setupAccessoryView() {
+    func setupAccessoryView() {
         accessoryView.textField.delegate = self
         hideKeyboard()
         setupKeyboardEndGesture()
@@ -86,7 +87,7 @@ extension CommentAccessoryViewHandler: UIGestureRecognizerDelegate {
     }
 }
 
-extension CommentAccessoryViewHandler: UITextFieldDelegate {
+extension RestaurantDetailAccessoryViewHandler: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let currentText = textField.text as NSString? {

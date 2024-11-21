@@ -21,11 +21,11 @@ typealias CommunityPostDetailViewModel = CommunityPostDetailViewModelInput & Com
 
 extension DefaultCommunityPostDetailViewModel {
     enum State {
-        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?), touchDeleteMenu, touchWriteCommentMenu
+        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?), touchDeleteMenu, touchWriteCommentMenu, tapSendButtonInAccessory(payload: CommentPayload?)
     }
     
     enum Action {
-        case showLoading(Bool, Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment, showAlert(payload: AlertPayload), deletePost, showKeyboard
+        case showLoading(Bool, Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment, showAlert(payload: AlertPayload), deletePost, showKeyboard(CommentPayload)
     }
 }
 
@@ -43,6 +43,14 @@ final class DefaultCommunityPostDetailViewModel: CommunityPostDetailViewModel {
     private var isFetchingData: Bool = false
     private let communityUseCase: CommunityUseCases
     private var cancellables: Set<AnyCancellable> = .init()
+    
+    struct CommentPayload {
+        let id: Int?
+        let type: DataType
+        enum DataType {
+            case post, comment
+        }
+    }
     
     // MARK: - Initialization
     init(
@@ -89,7 +97,11 @@ extension DefaultCommunityPostDetailViewModel {
                             }))
                     )
                 case .touchWriteCommentMenu:
-                    self?.actionSubject.send(.showKeyboard)
+                    self?.actionSubject.send(.showKeyboard(
+                        CommentPayload(id: self?.postId, type: .post)
+                    ))
+                case .tapSendButtonInAccessory(payload: let payload):
+                    self?.writeComment(payload: payload)
                 }
             }
             .store(in: &cancellables)
@@ -106,6 +118,11 @@ extension DefaultCommunityPostDetailViewModel {
             errorLocalizedDescription = error.localizedDescription
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
+    private func writeComment(payload: CommentPayload?) {
+        print("==================")
+        print(payload)
     }
     
     private func deletePost() {

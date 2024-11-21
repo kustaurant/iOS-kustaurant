@@ -181,6 +181,7 @@
 		58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */; };
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
+		58E2CF032CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2CF022CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift */; };
 		58E611332CA2B6640068922F /* EvaluationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E611322CA2B6640068922F /* EvaluationData.swift */; };
 		58F4CC182CA2BDA80042EDA8 /* LoadingDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */; };
 		BA0A89CD2C840DEB000A724D /* NoticeBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */; };
@@ -225,7 +226,7 @@
 		BA45C2512C881ABB0033E146 /* NaverMapExternalLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45C2502C881ABB0033E146 /* NaverMapExternalLinkService.swift */; };
 		BA45C2532C882A990033E146 /* CommentLikeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45C2522C882A990033E146 /* CommentLikeStatus.swift */; };
 		BA45C2552C8832B10033E146 /* DefaultRestaurantDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45C2542C8832B10033E146 /* DefaultRestaurantDetailRepository.swift */; };
-		BA45C2572C897B6D0033E146 /* CommentAccessoryViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45C2562C897B6D0033E146 /* CommentAccessoryViewHandler.swift */; };
+		BA45C2572C897B6D0033E146 /* RestaurantDetailAccessoryViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45C2562C897B6D0033E146 /* RestaurantDetailAccessoryViewHandler.swift */; };
 		BA45C2592C8984520033E146 /* CommentAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45C2582C8984520033E146 /* CommentAccessoryView.swift */; };
 		BA45C25C2C8AD3D40033E146 /* KuStarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45C25B2C8AD3D40033E146 /* KuStarRatingView.swift */; };
 		BA494B452C7DD2DA00EB2527 /* MyPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */; };
@@ -529,6 +530,7 @@
 		58D83A722C3A785A00511AB9 /* KustaurantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KustaurantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		58E2CF022CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDetailAccessoryHandler.swift; sourceTree = "<group>"; };
 		58E611322CA2B6640068922F /* EvaluationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationData.swift; sourceTree = "<group>"; };
 		58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDisplayable.swift; sourceTree = "<group>"; };
 		70969EAC2D84033B4B6EDBD6 /* Pods-Kustaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.release.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.release.xcconfig"; sourceTree = "<group>"; };
@@ -576,7 +578,7 @@
 		BA45C2502C881ABB0033E146 /* NaverMapExternalLinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapExternalLinkService.swift; sourceTree = "<group>"; };
 		BA45C2522C882A990033E146 /* CommentLikeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLikeStatus.swift; sourceTree = "<group>"; };
 		BA45C2542C8832B10033E146 /* DefaultRestaurantDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRestaurantDetailRepository.swift; sourceTree = "<group>"; };
-		BA45C2562C897B6D0033E146 /* CommentAccessoryViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAccessoryViewHandler.swift; sourceTree = "<group>"; };
+		BA45C2562C897B6D0033E146 /* RestaurantDetailAccessoryViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailAccessoryViewHandler.swift; sourceTree = "<group>"; };
 		BA45C2582C8984520033E146 /* CommentAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAccessoryView.swift; sourceTree = "<group>"; };
 		BA45C25B2C8AD3D40033E146 /* KuStarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuStarRatingView.swift; sourceTree = "<group>"; };
 		BA494B442C7DD2DA00EB2527 /* MyPageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRepository.swift; sourceTree = "<group>"; };
@@ -734,6 +736,7 @@
 			isa = PBXGroup;
 			children = (
 				58067C8C2C4A815000889C92 /* RestaurantDetailViewController.swift */,
+				BA45C2562C897B6D0033E146 /* RestaurantDetailAccessoryViewHandler.swift */,
 				CFEC6EED2C6A544C00B4DAAB /* View */,
 				CFEC6EEE2C6A545F00B4DAAB /* ViewModel */,
 			);
@@ -1279,6 +1282,7 @@
 			children = (
 				58772FAC2CBD333A00F2C170 /* CommunityPostsCollectionViewHandler.swift */,
 				58772FCD2CCF69F500F2C170 /* CommunityPostDetailTableViewHandler.swift */,
+				58E2CF022CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -1884,7 +1888,6 @@
 				58772FCF2CCFB3A500F2C170 /* DefaultTableViewCell.swift */,
 				584E82942CD893AE00BCE9B1 /* MenuEllipsisButton.swift */,
 				584E82962CD9C48C00BCE9B1 /* NavigationBarLeftBackButtonViewController.swift */,
-				BA45C2562C897B6D0033E146 /* CommentAccessoryViewHandler.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2244,6 +2247,7 @@
 				5826A1D82C7231060097256C /* TierBaseView.swift in Sources */,
 				58067D862C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift in Sources */,
 				BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */,
+				58E2CF032CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift in Sources */,
 				BAB69AC32C71DBB500C20F0B /* KeyChainStorage.swift in Sources */,
 				584FA4E22C708A12008DDC19 /* HomeBannerCollectionViewCell.swift in Sources */,
 				58067CAA2C4FAE2A00889C92 /* TierListViewModel.swift in Sources */,
@@ -2282,7 +2286,7 @@
 				BA37772C2C85B15D004F68F5 /* EvaluationFloatingView.swift in Sources */,
 				CFE204602C5A706D00BCA87C /* UITableView+.swift in Sources */,
 				BA494B512C7DEF9B00EB2527 /* EvaluatedRestaurant.swift in Sources */,
-				BA45C2572C897B6D0033E146 /* CommentAccessoryViewHandler.swift in Sources */,
+				BA45C2572C897B6D0033E146 /* RestaurantDetailAccessoryViewHandler.swift in Sources */,
 				BAB69AC52C71DC0B00C20F0B /* UserDefaultsKey.swift in Sources */,
 				584173732C47C2BA001EC132 /* HomeRepository.swift in Sources */,
 				58067D512C5B379800889C92 /* KuSubmitButton.swift in Sources */,
