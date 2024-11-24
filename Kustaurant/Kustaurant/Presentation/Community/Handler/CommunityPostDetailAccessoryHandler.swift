@@ -44,9 +44,14 @@ extension CommunityPostDetailAccessoryHandler {
         hideKeyboard()
         accessoryView.sendButton.addAction(
             UIAction { [weak self] _ in
-                self?.viewModel.process(.tapSendButtonInAccessory(payload: self?.payload))
-                self?.hideKeyboard()
+                self?.sendWriteComment()
             }
             , for: .touchUpInside)
+    }
+    
+    private func sendWriteComment() {
+        payload?.content = accessoryView.textField.text
+        viewModel.process(.tapSendButtonInAccessory(payload: payload))
+        hideKeyboard()
     }
 }

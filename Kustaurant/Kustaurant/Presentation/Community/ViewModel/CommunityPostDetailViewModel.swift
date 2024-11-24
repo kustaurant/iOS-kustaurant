@@ -8,6 +8,20 @@
 import Combine
 import Foundation
 
+enum CommunityPostDetailError: Error, Equatable {
+    case nullPostId
+    case nullPostContent
+    
+    var localizedDescription: String {
+        switch self {
+        case .nullPostId:
+            return "Null Post ID"
+        case .nullPostContent:
+            return "Null Post Content"
+        }
+    }
+}
+
 protocol CommunityPostDetailViewModelInput {
     func process(_ state: DefaultCommunityPostDetailViewModel.State)
 }
@@ -25,7 +39,7 @@ extension DefaultCommunityPostDetailViewModel {
     }
     
     enum Action {
-        case showLoading(Bool, Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment, showAlert(payload: AlertPayload), deletePost, showKeyboard(CommentPayload)
+        case showLoading(Bool, Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment, showAlert(payload: AlertPayload), deletePost, showKeyboard(CommentPayload), didWriteComment
     }
 }
 
@@ -47,6 +61,7 @@ final class DefaultCommunityPostDetailViewModel: CommunityPostDetailViewModel {
     struct CommentPayload {
         let id: Int?
         let type: DataType
+        var content: String? = nil
         enum DataType {
             case post, comment
         }
@@ -121,8 +136,32 @@ extension DefaultCommunityPostDetailViewModel {
     }
     
     private func writeComment(payload: CommentPayload?) {
-        print("==================")
-        print(payload)
+        guard !isFetchingData else { return }
+        isFetchingData = true
+        Task {
+            actionSubject.send(.showLoading(true, true))
+            defer {
+                actionSubject.send(.showLoading(false, true))
+                isFetchingData = false
+            }
+            do {
+                guard let postId = payload?.id else {
+                    throw CommunityPostDetailError.nullPostId
+                }
+                guard let content = payload?.content else {
+                    throw CommunityPostDetailError.nullPostContent
+                }
+                let result = await communityUseCase.writeComment(postId: postId, parentCommentId: nil, content: content)
+                switch result {
+                case .success(_):
+                    actionSubject.send(.didWriteComment)
+                case .failure(let failure):
+                    throw failure
+                }
+            } catch {
+                handleError(error)
+            }
+        }
     }
     
     private func deletePost() {

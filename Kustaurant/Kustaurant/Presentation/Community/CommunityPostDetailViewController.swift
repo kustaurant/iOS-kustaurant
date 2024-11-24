@@ -39,10 +39,6 @@ final class CommunityPostDetailViewController: NavigationBarLeftBackButtonViewCo
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-//        accessoryViewHandler?.unregisterAccessoryView()
-    }
-    
     override func loadView() {
         view = rootView
     }
@@ -97,6 +93,8 @@ extension CommunityPostDetailViewController {
                     self?.deletePost()
                 case .showKeyboard(let comment):
                     self?.accessoryViewHandler?.showKeyboard(comment)
+                case .didWriteComment:
+                    self?.viewModel.process(.fetchPostDetail)
                 }
             }
             .store(in: &cancellables)
