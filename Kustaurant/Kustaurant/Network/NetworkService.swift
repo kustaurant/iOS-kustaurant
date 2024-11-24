@@ -13,7 +13,7 @@ final class NetworkService {
     let getCommunityPostsURL = "/api/v1/community/posts"
     let postCommnunityPostCreateURL = "/api/v1/auth/community/posts/create"
     let postCommunityPostUploadImage = "/api/v1/auth/community/posts/image"
-    
+    let postCommunityPostWriteComment = "/api/v1/auth/community/comments"
     func getCommunityPostDetailURL(_ postId: Int) -> String {
         "/api/v1/community/\(postId)"
     }
@@ -38,4 +38,5 @@ final class NetworkService {
     func deleteCommunityPost(_ postId: Int) -> String {
         "/api/v1/auth/community/\(postId)"
     }
+    
 }
