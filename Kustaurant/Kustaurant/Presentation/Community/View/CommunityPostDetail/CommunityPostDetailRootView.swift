@@ -9,7 +9,7 @@ import UIKit
 
 final class CommunityPostDetailRootView: UIView {
     private(set) var tableView: CommunityPostDetailTableView = .init()
-    
+    private(set) var commentAccessoryView: CommentAccessoryView = .init()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupStyle()
@@ -28,5 +28,6 @@ extension CommunityPostDetailRootView {
     
     private func setupLayout() {
         addSubview(tableView, autoLayout: [.fill(0)])
+        addSubview(commentAccessoryView, autoLayout: [.fillX(0), .height(68), .bottomKeyboard(0)])
     }
 }

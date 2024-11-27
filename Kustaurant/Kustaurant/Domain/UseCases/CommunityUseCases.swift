@@ -17,6 +17,7 @@ protocol CommunityUseCases {
     func uploadImage(_ data: CommunityPostWriteData) async throws -> UploadImageResponse
     func createPost(_ data: CommunityPostWriteData) async throws -> CommunityPostDTO
     func deletePost(postId: Int) async -> Result<Void, NetworkError>
+    func writeComment(postId: Int, parentCommentId: Int?, content: String) async -> Result<CommunityPostDTO.PostComment, NetworkError>
 }
 
 final class DefaultCommunityUseCases {
@@ -28,6 +29,18 @@ final class DefaultCommunityUseCases {
 }
 
 extension DefaultCommunityUseCases: CommunityUseCases {
+    func writeComment(
+        postId: Int,
+        parentCommentId: Int?,
+        content: String
+    ) async -> Result<CommunityPostDTO.PostComment, NetworkError> {
+        var parentCommentIdString: String? = nil
+        if let parentCommentId {
+            parentCommentIdString = String(parentCommentId)
+        }
+        return await communityRepository.writeComment(postId: String(postId), parentCommentId: parentCommentIdString, content: content)
+    }
+    
     func deletePost(postId: Int) async -> Result<Void, NetworkError> {
         await communityRepository.deletePost(postId: postId)
     }

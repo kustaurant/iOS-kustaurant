@@ -8,6 +8,20 @@
 import Combine
 import Foundation
 
+enum CommunityPostDetailError: Error, Equatable {
+    case nullPostId
+    case nullPostContent
+    
+    var localizedDescription: String {
+        switch self {
+        case .nullPostId:
+            return "Null Post ID"
+        case .nullPostContent:
+            return "Null Post Content"
+        }
+    }
+}
+
 protocol CommunityPostDetailViewModelInput {
     func process(_ state: DefaultCommunityPostDetailViewModel.State)
 }
@@ -21,11 +35,11 @@ typealias CommunityPostDetailViewModel = CommunityPostDetailViewModelInput & Com
 
 extension DefaultCommunityPostDetailViewModel {
     enum State {
-        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?), touchDeleteMenu
+        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?), touchDeleteMenu, touchWriteCommentMenu, tapSendButtonInAccessory(payload: CommentPayload?)
     }
     
     enum Action {
-        case showLoading(Bool, Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment, showAlert(payload: AlertPayload), deletePost
+        case showLoading(Bool, Bool), didFetchPostDetail, touchLikeButton, touchScrapButton, updateCommentActionButton, deleteComment, showAlert(payload: AlertPayload), deletePost, showKeyboard(CommentPayload), didWriteComment
     }
 }
 
@@ -43,6 +57,15 @@ final class DefaultCommunityPostDetailViewModel: CommunityPostDetailViewModel {
     private var isFetchingData: Bool = false
     private let communityUseCase: CommunityUseCases
     private var cancellables: Set<AnyCancellable> = .init()
+    
+    struct CommentPayload {
+        let id: Int?
+        let type: DataType
+        var content: String? = nil
+        enum DataType {
+            case post, comment
+        }
+    }
     
     // MARK: - Initialization
     init(
@@ -88,6 +111,12 @@ extension DefaultCommunityPostDetailViewModel {
                                 self?.deletePost()
                             }))
                     )
+                case .touchWriteCommentMenu:
+                    self?.actionSubject.send(.showKeyboard(
+                        CommentPayload(id: self?.postId, type: .post)
+                    ))
+                case .tapSendButtonInAccessory(payload: let payload):
+                    self?.writeComment(payload: payload)
                 }
             }
             .store(in: &cancellables)
@@ -104,6 +133,35 @@ extension DefaultCommunityPostDetailViewModel {
             errorLocalizedDescription = error.localizedDescription
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
+    private func writeComment(payload: CommentPayload?) {
+        guard !isFetchingData else { return }
+        isFetchingData = true
+        Task {
+            actionSubject.send(.showLoading(true, true))
+            defer {
+                actionSubject.send(.showLoading(false, true))
+                isFetchingData = false
+            }
+            do {
+                guard let postId = payload?.id else {
+                    throw CommunityPostDetailError.nullPostId
+                }
+                guard let content = payload?.content else {
+                    throw CommunityPostDetailError.nullPostContent
+                }
+                let result = await communityUseCase.writeComment(postId: postId, parentCommentId: nil, content: content)
+                switch result {
+                case .success(_):
+                    actionSubject.send(.didWriteComment)
+                case .failure(let failure):
+                    throw failure
+                }
+            } catch {
+                handleError(error)
+            }
+        }
     }
     
     private func deletePost() {

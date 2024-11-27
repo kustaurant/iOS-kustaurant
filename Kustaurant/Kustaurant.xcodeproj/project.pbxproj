@@ -181,6 +181,7 @@
 		58D83A6C2C3A785A00511AB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D83A6A2C3A785A00511AB9 /* LaunchScreen.storyboard */; };
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
+		58E2CF032CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2CF022CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift */; };
 		58E611332CA2B6640068922F /* EvaluationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E611322CA2B6640068922F /* EvaluationData.swift */; };
 		58F4CC182CA2BDA80042EDA8 /* LoadingDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */; };
 		BA0A89CD2C840DEB000A724D /* NoticeBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */; };
@@ -529,6 +530,7 @@
 		58D83A722C3A785A00511AB9 /* KustaurantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KustaurantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		58E2CF022CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDetailAccessoryHandler.swift; sourceTree = "<group>"; };
 		58E611322CA2B6640068922F /* EvaluationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationData.swift; sourceTree = "<group>"; };
 		58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDisplayable.swift; sourceTree = "<group>"; };
 		70969EAC2D84033B4B6EDBD6 /* Pods-Kustaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.release.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.release.xcconfig"; sourceTree = "<group>"; };
@@ -1280,6 +1282,7 @@
 			children = (
 				58772FAC2CBD333A00F2C170 /* CommunityPostsCollectionViewHandler.swift */,
 				58772FCD2CCF69F500F2C170 /* CommunityPostDetailTableViewHandler.swift */,
+				58E2CF022CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -2244,6 +2247,7 @@
 				5826A1D82C7231060097256C /* TierBaseView.swift in Sources */,
 				58067D862C60847E00889C92 /* HomeRestaurantsCollectionViewHandler.swift in Sources */,
 				BA57C7B62C721A680063F2FA /* AppleLoginService.swift in Sources */,
+				58E2CF032CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift in Sources */,
 				BAB69AC32C71DBB500C20F0B /* KeyChainStorage.swift in Sources */,
 				584FA4E22C708A12008DDC19 /* HomeBannerCollectionViewCell.swift in Sources */,
 				58067CAA2C4FAE2A00889C92 /* TierListViewModel.swift in Sources */,

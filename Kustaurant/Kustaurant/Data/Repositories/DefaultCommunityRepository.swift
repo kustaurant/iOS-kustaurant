@@ -17,6 +17,35 @@ final class DefaultCommunityRepository {
 }
 
 extension DefaultCommunityRepository: CommunityRepository {
+    func writeComment(
+        postId: String,
+        parentCommentId: String?,
+        content: String
+    ) async -> Result<CommunityPostDTO.PostComment, NetworkError> {
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
+        var urlBuilder = URLRequestBuilder(
+            url: networkService.appConfiguration.apiBaseURL + networkService.postCommunityPostWriteComment,
+            method: .post
+        )
+        var params: [String: String] = [
+            "content" : content,
+            "postId" : postId
+        ]
+        if let parentCommentId {
+            params["parentCommentId"] = parentCommentId
+        }
+        urlBuilder.addQuery(parameter: params)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
+        let response = await request.responseAsync(with: urlBuilder)
+        if let error = response.error {
+            return .failure(error)
+        }
+        guard let data: CommunityPostDTO.PostComment = response.decode() else {
+            return .failure(.decodingFailed)
+        }
+        return .success(data)
+    }
     func deletePost(postId: Int) async -> Result<Void, NetworkError> {
         let authInterceptor = AuthorizationInterceptor()
         let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
