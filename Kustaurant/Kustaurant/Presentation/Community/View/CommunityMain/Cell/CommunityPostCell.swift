@@ -38,10 +38,8 @@ final class CommunityPostCell: UICollectionViewCell {
     func update(_ model: CommunityPostDTO) {
         categoryLabel.text = model.postCategory
         titleLabel.text = model.postTitle
-        if let attributedString = (model.postBody ?? "").htmlToAttributedString() {
+        if let attributedString = (model.postBody ?? "").htmlToAttributedStringIgnoringFirstImage() {
             bodyLabel.attributedText = attributedString
-        } else {
-            bodyLabel.text = model.postBody
         }
         userNicknameLabel.text = model.user?.userNickname
         timeAgoLabel.text = model.timeAgo
