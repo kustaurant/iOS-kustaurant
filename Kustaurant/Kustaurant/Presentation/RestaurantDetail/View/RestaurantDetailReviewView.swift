@@ -25,7 +25,7 @@ final class RestaurantDetailReviewView: UIView {
     private let nicknameLabel: UILabel = .init()
     private let barView: UIView = .init()
     private let timeLabel: UILabel = .init()
-    private let menuEllipsisButton: UIButton = .init()
+    private let menuEllipsisButton: EllipsisMenuButton = .init()
     
     private let photoImageView: UIImageView = .init()
     private let reviewLabel: UILabel = .init()
@@ -45,10 +45,21 @@ final class RestaurantDetailReviewView: UIView {
         super.init(frame: .zero)
         setupStyle()
         setupLayout()
+        setupBind()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupBind() {
+        menuEllipsisButton.onDeleteAction = { [weak self] in
+            self?.deleteTapSubject.send()
+        }
+        
+        menuEllipsisButton.onReportAction = { [weak self] in
+            self?.reportTapSubject.send()
+        }
     }
     
     private func setupStyle() {
@@ -71,8 +82,6 @@ final class RestaurantDetailReviewView: UIView {
         reviewLabel.numberOfLines = 0
         
         commentsButton.setImage(UIImage(named: "icon_comment"), for: .normal)
-        menuEllipsisButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        menuEllipsisButton.tintColor = .Sementic.gray75
     }
     
     private func setupLayout() {
@@ -141,7 +150,7 @@ final class RestaurantDetailReviewView: UIView {
         dislikeButtonWidthConstraint?.constant = dislikeButton.intrinsicContentSize.width
         
         updateButtonConfiguration(likeCount: item.likeCount, dislikeCount: item.dislikeCount, likeStatus: item.likeStatus)
-        setupMenuEllipsisButton(with: item)
+        menuEllipsisButton.isMine = item.isCommentMine
         layoutIfNeeded()
     }
     
@@ -199,25 +208,5 @@ extension RestaurantDetailReviewView {
     
     func deleteActionTapPublisher() -> AnyPublisher<Void, Never> {
         return deleteTapSubject.eraseToAnyPublisher()
-    }
-    
-    private func setupMenuEllipsisButton(with item: RestaurantDetailReview) {
-        var actions: [UIAction] = []
-        
-        let reportAction = UIAction(title: "신고하기", image: UIImage(named: "icon_shield")) { [weak self] _ in
-            self?.reportTapSubject.send()
-        }
-        actions.append(reportAction)
-        
-        if item.isCommentMine {
-            let deleteAction = UIAction(title: "삭제하기", image: UIImage(named: "icon_trash"), attributes: .destructive) { [weak self] _ in
-                self?.deleteTapSubject.send()
-            }
-            actions.append(deleteAction)
-        }
-        
-        let menu = UIMenu(title: "", children: actions)
-        menuEllipsisButton.menu = menu
-        menuEllipsisButton.showsMenuAsPrimaryAction = true
     }
 }
