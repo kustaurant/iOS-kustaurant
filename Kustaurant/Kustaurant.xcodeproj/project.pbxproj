@@ -182,6 +182,7 @@
 		58D83A772C3A785A00511AB9 /* KustaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83A762C3A785A00511AB9 /* KustaurantTests.swift */; };
 		58D83AFD2C463AE200511AB9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D83AFC2C463AE200511AB9 /* Restaurant.swift */; };
 		58E2CF032CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2CF022CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift */; };
+		58E2CF052CF76BDC00D4571F /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2CF042CF76BDC00D4571F /* String+.swift */; };
 		58E611332CA2B6640068922F /* EvaluationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E611322CA2B6640068922F /* EvaluationData.swift */; };
 		58F4CC182CA2BDA80042EDA8 /* LoadingDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */; };
 		BA0A89CD2C840DEB000A724D /* NoticeBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0A89CC2C840DEB000A724D /* NoticeBoardViewModel.swift */; };
@@ -531,6 +532,7 @@
 		58D83A762C3A785A00511AB9 /* KustaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KustaurantTests.swift; sourceTree = "<group>"; };
 		58D83AFC2C463AE200511AB9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		58E2CF022CEF149800D4571F /* CommunityPostDetailAccessoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostDetailAccessoryHandler.swift; sourceTree = "<group>"; };
+		58E2CF042CF76BDC00D4571F /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		58E611322CA2B6640068922F /* EvaluationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationData.swift; sourceTree = "<group>"; };
 		58F4CC172CA2BDA80042EDA8 /* LoadingDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDisplayable.swift; sourceTree = "<group>"; };
 		70969EAC2D84033B4B6EDBD6 /* Pods-Kustaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kustaurant.release.xcconfig"; path = "Target Support Files/Pods-Kustaurant/Pods-Kustaurant.release.xcconfig"; sourceTree = "<group>"; };
@@ -1062,6 +1064,7 @@
 				BA37E0822C674BE40092115B /* UIButton+Publisher.swift */,
 				BA37E0862C675FF40092115B /* UIStackView+AutoLayout.swift */,
 				BA494B912C81C01800EB2527 /* UITextField+.swift */,
+				58E2CF042CF76BDC00D4571F /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2389,6 +2392,7 @@
 				CFE2046E2C5E68C500BCA87C /* KuTabBarCollectionView.swift in Sources */,
 				584173812C48C967001EC132 /* HomeRestaurantsCollectionViewCell.swift in Sources */,
 				CFE2047A2C68A3B700BCA87C /* RestaurantDetailCommentCell.swift in Sources */,
+				58E2CF052CF76BDC00D4571F /* String+.swift in Sources */,
 				CFE204522C5A0D7900BCA87C /* UICollectionView+.swift in Sources */,
 				58D83A622C3A785800511AB9 /* SceneDelegate.swift in Sources */,
 				5884966E2C8AD4FB00E21F64 /* DefaultEvaluationRepository.swift in Sources */,
