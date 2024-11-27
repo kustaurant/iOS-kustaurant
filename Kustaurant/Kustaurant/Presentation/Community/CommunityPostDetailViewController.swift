@@ -114,6 +114,7 @@ extension CommunityPostDetailViewController {
         let deleteAction = UIAction(title: "삭제하기", image: UIImage(named: "icon_trash"), attributes: .destructive) { [weak self] _ in
             self?.viewModel.process(.touchDeleteMenu)
         }
+        /*
         let writeCommentAction = UIAction(title: "댓글작성") { [weak self] _ in
             self?.viewModel.process(.touchWriteCommentMenu)
         }
@@ -121,7 +122,10 @@ extension CommunityPostDetailViewController {
         if viewModel.post.isPostMine ?? false {
             childrenActions.insert(deleteAction, at: 0)
         }
+         */
+        let childrenActions: [UIMenuElement] = [deleteAction]
         let menu = UIMenu(title: "", children: childrenActions)
+        menuEllipsisButton.isHidden = !(viewModel.post.isPostMine ?? false)
         menuEllipsisButton.menu = menu
         menuEllipsisButton.showsMenuAsPrimaryAction = true
     }
