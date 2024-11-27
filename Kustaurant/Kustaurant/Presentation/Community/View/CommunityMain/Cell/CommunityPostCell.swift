@@ -38,7 +38,11 @@ final class CommunityPostCell: UICollectionViewCell {
     func update(_ model: CommunityPostDTO) {
         categoryLabel.text = model.postCategory
         titleLabel.text = model.postTitle
-        bodyLabel.text = model.postBody
+        if let attributedString = (model.postBody ?? "").htmlToAttributedString() {
+            bodyLabel.attributedText = attributedString
+        } else {
+            bodyLabel.text = model.postBody
+        }
         userNicknameLabel.text = model.user?.userNickname
         timeAgoLabel.text = model.timeAgo
         updateLikeButton(count: model.likeCount, isLiked: model.isliked)
