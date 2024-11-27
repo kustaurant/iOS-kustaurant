@@ -58,7 +58,11 @@ final class CommunityPostDetailBodyCell: DefaultTableViewCell {
         userNicknameLabel.text = model.user?.userNickname
         timeAgoLabel.text = model.timeAgo
         titleLabel.text = model.postTitle
-        bodyLabel.text = model.postBody
+        if let attributedString = (model.postBody ?? "").htmlToAttributedString() {
+            bodyLabel.attributedText = attributedString
+        } else {
+            bodyLabel.text = model.postBody
+        }
         postVisitCountLabel.text = "조회수 \(model.postVisitCount)"
         commentCountLabel.text = "댓글 \(model.commentCount)"
         updateButton(button: &likeButton, type: .like, count: model.likeCount, isLiked: model.isliked)
