@@ -83,6 +83,7 @@ extension CommunityPostWriteViewController {
 }
 
 extension CommunityPostWriteViewController {
+    
     private func setupMenu() {
         var actions: [UIAction] = []
         CommunityPostCategory.allCases.forEach { category in
@@ -106,6 +107,7 @@ extension CommunityPostWriteViewController {
     }
     
     private func submit() {
+        viewModel.process(.updateTitle(rootView.titleTextField.text ?? ""))
         rootView.dismissKeyboard()
         viewModel.process(.tappedDoneButton)
     }
@@ -136,7 +138,7 @@ extension CommunityPostWriteViewController: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        rootView.updateContentTextView(textView.text)   
+        rootView.updateContentTextView(textView.text)
     }
     
     func textViewDidChange(_ textView: UITextView) {
