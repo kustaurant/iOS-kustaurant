@@ -78,6 +78,9 @@ extension CommunityPostDetailTableViewHandler {
                 cell.ellipsisDeleteTouched = { [weak self] commentId in
                     self?.viewModel.process(.touchEllipsisDelete(commentId))
                 }
+                cell.commentsButtonTouched = { [weak self] commentId in
+                    self?.viewModel.process(.touchReplyButton(commentId: commentId))
+                }
                 return cell
             }
             
