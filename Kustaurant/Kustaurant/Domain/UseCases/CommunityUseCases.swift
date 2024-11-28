@@ -9,7 +9,7 @@ import Foundation
 
 protocol CommunityUseCases {
     func fetchPosts(category: CommunityPostCategory, page: Int, sort: CommunityPostSortType) async -> Result<[CommunityPostDTO], NetworkError>
-    func fetchPostDetail(postId: Int) async -> Result<CommunityPostDTO, NetworkError>
+    func fetchPostDetail(postId: Int) async throws -> CommunityPostDTO
     func postDetailLikeToggle(postId: Int) async -> Result<CommunityLikeStatus, NetworkError>
     func postDetailScrapToggle(postId: Int) async -> Result<CommunityScrapStatus, NetworkError>
     func commentActionToggle(commentId: Int, action: CommentActionType) async -> Result<CommunityCommentStatus, NetworkError>
@@ -97,8 +97,29 @@ extension DefaultCommunityUseCases: CommunityUseCases {
         await communityRepository.postCommunityPostLikeToggle(postId: postId)
     }
     
-    func fetchPostDetail(postId: Int) async -> Result<CommunityPostDTO, NetworkError> {
-        await communityRepository.getPostDetail(postId: postId)
+    func fetchPostDetail(postId: Int) async throws -> CommunityPostDTO {
+        let result = await communityRepository.getPostDetail(postId: postId)
+        switch result {
+        case .success(let success):
+            var returnData = success
+            
+            let flatList = (success.postCommentList ?? []).flatMap { comment -> [CommunityPostDTO.PostComment] in
+                var commentWithFlag = comment
+                commentWithFlag.isReply = false // 댓글
+                
+                let repliesWithFlag = (comment.repliesList ?? []).map { reply -> CommunityPostDTO.PostComment in
+                    var replyWithFlag = reply
+                    replyWithFlag.isReply = true // 대댓글
+                    return replyWithFlag
+                }
+                return [commentWithFlag] + repliesWithFlag
+            }
+            
+            returnData.postCommentList = flatList
+            return returnData
+        case .failure(let failure):
+            throw failure
+        }
     }
     
     func fetchPosts(

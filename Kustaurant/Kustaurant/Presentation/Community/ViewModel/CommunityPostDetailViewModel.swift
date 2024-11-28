@@ -228,14 +228,12 @@ extension DefaultCommunityPostDetailViewModel {
         Task {
             actionSubject.send(.showLoading(true, false))
             defer { actionSubject.send(.showLoading(false, false)) }
-            let result = await communityUseCase.fetchPostDetail(postId: postId)
-            switch result {
-            case .success(let success):
-                post = success
+            do {
+                post = try await communityUseCase.fetchPostDetail(postId: postId)
                 detail = CommunityPostDetail(post: post)
                 actionSubject.send(.didFetchPostDetail)
-            case .failure(let failure):
-                handleError(failure)
+            } catch {
+                handleError(error)
             }
         }
     }
