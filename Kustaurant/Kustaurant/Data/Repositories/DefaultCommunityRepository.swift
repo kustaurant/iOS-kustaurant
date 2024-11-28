@@ -125,11 +125,13 @@ extension DefaultCommunityRepository: CommunityRepository {
     }
     
     func deleteCommunityComment(commentId: Int) async -> Result<Void, NetworkError> {
+        let authInterceptor = AuthorizationInterceptor()
+        let authRetrier = AuthorizationRetrier(interceptor: authInterceptor, networkService: networkService)
         let urlBuilder = URLRequestBuilder(
             url: networkService.appConfiguration.apiBaseURL + networkService.deleteCommunityComment(commentId),
             method: .delete
         )
-        let request = Request(session: URLSession.shared, interceptor: nil, retrier: nil)
+        let request = Request(session: URLSession.shared, interceptor: authInterceptor, retrier: authRetrier)
         let response = await request.responseAsync(with: urlBuilder)
         if let error = response.error {
             return .failure(error)
