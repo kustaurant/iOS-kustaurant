@@ -14,7 +14,7 @@ struct CommunityPostDTO: Codable, Hashable {
         let evaluationCount: Int?
         let rank: Int?
     }
-    
+
     struct PostComment: CommunityPostDetailCellItem, Codable, Hashable {
         let commentId: Int?
         let commentBody: String?
@@ -23,7 +23,7 @@ struct CommunityPostDTO: Codable, Hashable {
         var dislikeCount: Int?
         let createdAt: String?
         let updatedAt: String?
-        let repliesList: [String]?
+        let repliesList: [PostComment]?
         let timeAgo: String?
         var isDisliked: Bool?
         var isLiked: Bool?
@@ -47,7 +47,6 @@ struct CommunityPostDTO: Codable, Hashable {
             }
         }
     }
-    
     let postId: Int?
     let postTitle: String?
     let postBody: String?
