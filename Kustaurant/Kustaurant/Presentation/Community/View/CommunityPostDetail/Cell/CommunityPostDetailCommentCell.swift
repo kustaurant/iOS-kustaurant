@@ -19,7 +19,7 @@ final class CommunityPostDetailCommentCell: DefaultTableViewCell {
     private var commentId: Int?
     var likeButtonTouched: ((Int?) -> Void)?
     var dislikeButtonTouched: ((Int?) -> Void)?
-    var commentsButtonTouched: (() -> Void)?
+    var commentsButtonTouched: ((Int?) -> Void)?
     var ellipsisReportTouched: ((Int?) -> Void)?
     var ellipsisDeleteTouched: ((Int?) -> Void)?
     
@@ -95,7 +95,7 @@ extension CommunityPostDetailCommentCell {
             } , for: .touchUpInside)
         commentsButton.addAction(
             UIAction { [weak self] _ in
-                self?.commentsButtonTouched?()
+                self?.commentsButtonTouched?(self?.commentId)
             } , for: .touchUpInside)
         
         menuEllipsisButton.onDeleteAction = { [weak self] in
