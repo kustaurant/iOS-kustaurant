@@ -25,5 +25,6 @@ final class CommunityPostDetailTableView: UITableView {
         
         registerCell(ofType: CommunityPostDetailBodyCell.self)
         registerCell(ofType: CommunityPostDetailCommentCell.self)
+        registerCell(ofType: CommunityPostDetailReplyCell.self)
     }
 }
