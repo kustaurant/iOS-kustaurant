@@ -75,6 +75,8 @@ extension CommunityViewController {
                     self?.postsCollectionViewHandler?.scrollToTop(animated: isAnimated)
                 case .reloadPosts:
                     self?.postsCollectionViewHandler?.update()
+                case .endRefreshing:
+                    self?.postsCollectionViewHandler?.endRefreshing()
                 }
             }
             .store(in: &cancellables)
