@@ -84,6 +84,8 @@ class DefaultCommunityPostDetailCommentCell: DefaultTableViewCell {
         updateButton(button: &likeButton, type: .like, count: data.likeCount ?? 0, isActive: data.isLiked ?? false)
         updateButton(button: &dislikeButton, type: .dislike, count: data.dislikeCount ?? 0, isActive: data.isDisliked ?? false)
         menuEllipsisButton.isMine = data.isCommentMine ?? false
+        menuEllipsisButton.isHidden = !(data.isCommentMine ?? false)
+        menuEllipsisButton.isReportHidden = true
         Task {
             let image = await loadImage(urlString: data.user?.rankImg, targetSize: CGSize(width: 25, height: 24))
             await MainActor.run {
