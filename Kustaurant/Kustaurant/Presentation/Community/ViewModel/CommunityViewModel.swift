@@ -26,10 +26,10 @@ typealias CommunityViewModel = CommunityViewModelInput & CommunityViewModelOutpu
 
 extension DefaultCommunityViewModel {
     enum State {
-        case initial, fetchPostsNextPage, updateCategory(CommunityPostCategory?), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO), tappedWriteButton, newCreatePost, checkNewPost, deletePost(Int)
+        case initial, fetchPostsNextPage, updateCategory(CommunityPostCategory?), updateSortType(CommunityPostSortType), tappedBoardButton, tappedSortTypeButton(CommunityPostSortType), didSelectPostCell(CommunityPostDTO), tappedWriteButton, newCreatePost, checkNewPost, deletePost(Int), refreshData
     }
     enum Action {
-        case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet, scrollToTop(Bool), reloadPosts
+        case showLoading(Bool), didFetchPosts, changeCategory(CommunityPostCategory), changeSortType(CommunityPostSortType), presentActionSheet, scrollToTop(Bool), reloadPosts, endRefreshing
     }
 }
 
@@ -100,6 +100,8 @@ extension DefaultCommunityViewModel {
                     self?.checkNewPost()
                 case .deletePost(let postId):
                     self?.deletePost(postId)
+                case .refreshData:
+                    self?.refreshData()
                 }
             }
             .store(in: &cancellables)
@@ -116,6 +118,14 @@ extension DefaultCommunityViewModel {
             errorLocalizedDescription = error.localizedDescription
         }
         Logger.error("Error in {\(#fileID)} : \(errorLocalizedDescription)")
+    }
+    
+    private func refreshData() {
+        Task {
+            initialisePosts()
+            await fetchPosts()
+            actionSubject.send(.endRefreshing)
+        }
     }
     
     private func deletePost(_ postId: Int) {
