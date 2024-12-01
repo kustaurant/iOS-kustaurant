@@ -64,7 +64,9 @@ extension CommunityPostDetailTableViewHandler {
             }
             
             if let item = itemIdentifier as? CommunityPostDTO.PostComment {
-                let cell = tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailCommentCell
+                let cell = item.isReply ?
+                    tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailReplyCell :
+                    tableView.dequeueReusableCell(for: indexPath) as CommunityPostDetailCommentCell
                 cell.update(item)
                 cell.likeButtonTouched = { [weak self] commentId in
                     self?.viewModel.process(.touchCommentLikeButton(commentId))
@@ -72,11 +74,16 @@ extension CommunityPostDetailTableViewHandler {
                 cell.dislikeButtonTouched = { [weak self] commentId in
                     self?.viewModel.process(.touchCommentDislikeButton(commentId))
                 }
+                /*
                 cell.ellipsisReportTouched = { [weak self] commentId in
                     print("신고하기")
                 }
+                 */
                 cell.ellipsisDeleteTouched = { [weak self] commentId in
                     self?.viewModel.process(.touchEllipsisDelete(commentId))
+                }
+                cell.commentsButtonTouched = { [weak self] commentId in
+                    self?.viewModel.process(.touchReplyButton(commentId: commentId))
                 }
                 return cell
             }

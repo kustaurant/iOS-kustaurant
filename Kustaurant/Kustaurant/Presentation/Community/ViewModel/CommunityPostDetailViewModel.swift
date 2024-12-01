@@ -35,7 +35,7 @@ typealias CommunityPostDetailViewModel = CommunityPostDetailViewModelInput & Com
 
 extension DefaultCommunityPostDetailViewModel {
     enum State {
-        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?), touchDeleteMenu, touchWriteCommentMenu, tapSendButtonInAccessory(payload: CommentPayload?)
+        case initial, fetchPostDetail, touchLikeButton, touchScrapButton, touchCommentLikeButton(Int?), touchCommentDislikeButton(Int?), touchEllipsisDelete(Int?), touchDeleteMenu, touchWriteCommentMenu, tapSendButtonInAccessory(payload: CommentPayload?), touchReplyButton(commentId: Int?)
     }
     
     enum Action {
@@ -117,6 +117,10 @@ extension DefaultCommunityPostDetailViewModel {
                     ))
                 case .tapSendButtonInAccessory(payload: let payload):
                     self?.writeComment(payload: payload)
+                case .touchReplyButton(commentId: let commentId):
+                    self?.actionSubject.send(.showKeyboard(
+                        CommentPayload(id: commentId, type: .comment)
+                    ))
                 }
             }
             .store(in: &cancellables)
@@ -145,13 +149,11 @@ extension DefaultCommunityPostDetailViewModel {
                 isFetchingData = false
             }
             do {
-                guard let postId = payload?.id else {
-                    throw CommunityPostDetailError.nullPostId
-                }
                 guard let content = payload?.content else {
                     throw CommunityPostDetailError.nullPostContent
                 }
-                let result = await communityUseCase.writeComment(postId: postId, parentCommentId: nil, content: content)
+                let parentCommentId = (payload?.type == .comment) ? payload?.id : nil
+                let result = await communityUseCase.writeComment(postId: postId, parentCommentId: parentCommentId, content: content)
                 switch result {
                 case .success(_):
                     actionSubject.send(.didWriteComment)
@@ -226,14 +228,12 @@ extension DefaultCommunityPostDetailViewModel {
         Task {
             actionSubject.send(.showLoading(true, false))
             defer { actionSubject.send(.showLoading(false, false)) }
-            let result = await communityUseCase.fetchPostDetail(postId: postId)
-            switch result {
-            case .success(let success):
-                post = success
+            do {
+                post = try await communityUseCase.fetchPostDetail(postId: postId)
                 detail = CommunityPostDetail(post: post)
                 actionSubject.send(.didFetchPostDetail)
-            case .failure(let failure):
-                handleError(failure)
+            } catch {
+                handleError(error)
             }
         }
     }

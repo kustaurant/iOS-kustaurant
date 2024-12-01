@@ -172,7 +172,7 @@ extension CommunityPostDetailBodyCell {
         userContainerView.addSubview(timeAgoLabel, autoLayout: [.leadingNext(to: line, constant: 10), .fillY(0)])
         
         let contentContainerView = UIView()
-        contentContainerView.addSubview(titleLabel, autoLayout: [.top(0), .fillX(0)])
+        contentContainerView.addSubview(titleLabel, autoLayout: [.top(0), .fillX(0), .height(35)])
         contentContainerView.addSubview(photoImageView, autoLayout: [.fillX(0)])
         contentContainerView.addSubview(bodyLabel, autoLayout: [.topNext(to: photoImageView, constant: 15), .fillX(0), .bottom(0)])
         photoImageViewTopConstraint = photoImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 11)

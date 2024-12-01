@@ -16,6 +16,11 @@ final class EllipsisMenuButton: UIButton {
             setupMenu()
         }
     }
+    var isReportHidden: Bool = false {
+        didSet {
+            setupMenu(isReportHidden: true)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,13 +39,16 @@ extension EllipsisMenuButton {
         tintColor = .Sementic.gray75
     }
     
-    private func setupMenu() {
+    private func setupMenu(isReportHidden: Bool = false) {
         var actions: [UIAction] = []
         
-        let reportAction = UIAction(title: "신고하기", image: UIImage(named: "icon_shield")) { [weak self] _ in
-            self?.onReportAction?()
+        if !isReportHidden {
+            let reportAction = UIAction(title: "신고하기", image: UIImage(named: "icon_shield")) { [weak self] _ in
+                self?.onReportAction?()
+            }
+            actions.append(reportAction)
         }
-        actions.append(reportAction)
+        
         
         if isMine {
             let deleteAction = UIAction(title: "삭제하기", image: UIImage(named: "icon_trash"), attributes: .destructive) { [weak self] _ in

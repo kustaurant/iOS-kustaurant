@@ -1,14 +1,14 @@
 //
-//  CommunityPostDetailCommentCell.swift
+//  CommunityPostDetailReplyCell.swift
 //  Kustaurant
 //
-//  Created by 송우진 on 11/1/24.
+//  Created by 송우진 on 11/29/24.
 //
 
 import UIKit
 
-final class CommunityPostDetailCommentCell: DefaultCommunityPostDetailCommentCell {
-    private let commentsButton: UIButton = .init()
+final class CommunityPostDetailReplyCell: DefaultCommunityPostDetailCommentCell {
+    private let returnIconImageView: UIImageView = .init()
     
     override init(
         style: UITableViewCell.CellStyle,
@@ -24,23 +24,20 @@ final class CommunityPostDetailCommentCell: DefaultCommunityPostDetailCommentCel
     
     override func setupStyle() {
         super.setupStyle()
-        commentsButton.setImage(UIImage(named: "icon_comment"), for: .normal)
-    }
-    
-    override func setupBind() {
-        super.setupBind()
-        commentsButton.addAction(
-            UIAction { [weak self] _ in
-                self?.commentsButtonTouched?(self?.commentId)
-            } , for: .touchUpInside)
+        returnIconImageView.image = UIImage(named: "icon_return_right")
+//        contentView.backgroundColor = .red.withAlphaComponent(0.3)
     }
 }
 
-extension CommunityPostDetailCommentCell {
+extension CommunityPostDetailReplyCell {
     private func setupLayout() {
         let line = UIView()
         line.backgroundColor = .gray75
+        
         let stackContaierView = UIView()
+        stackContaierView.backgroundColor = .gray100
+        stackContaierView.layer.cornerRadius = 6
+        
         let topContainerView = UIView()
         topContainerView.addSubview(rankImageView, autoLayout: [.leading(0), .fillY(0), .width(25), .height(24)])
         topContainerView.addSubview(userNicknameLabel, autoLayout: [.centerY(0), .leadingNext(to: rankImageView, constant: 4)])
@@ -50,15 +47,17 @@ extension CommunityPostDetailCommentCell {
         
         let bottomContainerView = UIView()
         bottomContainerView.addSubview(likeButton, autoLayout: [.leading(0), .centerY(0)])
-        bottomContainerView.addSubview(dislikeButton, autoLayout: [.leadingNext(to: likeButton, constant: 12), .centerY(0)])
-        bottomContainerView.addSubview(commentsButton, autoLayout: [.leadingNext(to: dislikeButton, constant: 12), .width(14), .height(15), .fillY(0)])
+        bottomContainerView.addSubview(dislikeButton, autoLayout: [.leadingNext(to: likeButton, constant: 12), .fillY(0)])
         
         let stackView = UIStackView(arrangedSubviews: [topContainerView, bodyLabel, bottomContainerView])
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         stackView.spacing = 11
+        stackView.backgroundColor = .gray100
         
-        stackContaierView.addSubview(stackView, autoLayout: [.top(0), .fillX(0), .bottom(22)])
-        contentView.addSubview(stackContaierView, autoLayout: [.fillY(0), .fillX(20)])
+        stackContaierView.addSubview(stackView, autoLayout: [.top(12), .bottom(14), .leading(10), .trailing(15)])
+        
+        contentView.addSubview(returnIconImageView, autoLayout: [.leading(20), .top(0), .width(14), .height(12)])
+        contentView.addSubview(stackContaierView, autoLayout: [.top(0), .bottom(12), .leadingNext(to: returnIconImageView, constant: 6), .trailing(20)])
     }
 }

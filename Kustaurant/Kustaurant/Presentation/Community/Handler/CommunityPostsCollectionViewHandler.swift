@@ -15,6 +15,7 @@ final class CommunityPostsCollectionViewHandler: NSObject {
         case main
     }
     
+    private let refreshControl = UIRefreshControl()
     private let collectionView: UICollectionView
     private let viewModel: CommunityViewModel
     private lazy var dataSource: DataSource = setDataSource()
@@ -36,13 +37,22 @@ final class CommunityPostsCollectionViewHandler: NSObject {
     func scrollToTop(animated: Bool) {
         collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: animated)
     }
+    
+    func endRefreshing() {
+        refreshControl.endRefreshing()
+    }
 }
-
 
 extension CommunityPostsCollectionViewHandler {
     private func configureCollectionView() {
         collectionView.collectionViewLayout = setCompositinalLayout()
         collectionView.delegate = self
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc private func refreshData() {
+        viewModel.process(.refreshData)
     }
     
     private func applySnapShot() {
